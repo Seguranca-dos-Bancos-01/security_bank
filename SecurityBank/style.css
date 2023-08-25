@@ -9,9 +9,17 @@ body {
     grid-template-rows: 50px 50px;  
 } */
 
+.teste {
+    width: 100%;
+    height: 10vh;
+    background: url(./img/Group\ 2.jpg);
+    background-size: cover;
+}
+
 .fundo {
     width: 100%;
     height: 100vh;
+    background-color: #fff;
 }
 
 /* NAVBAR */
