@@ -1,13 +1,16 @@
 <!DOCTYPE html>
-<html lang="pt-br">
-  <head>
-    <meta charset="UTF-8" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<html lang="en">
 
-    <title>AquaTech | Cadastro</title>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Bank | Cadastro</title>
+    <link rel="stylesheet" href="../public/css/home.css">
+    <link rel="stylesheet" href="css/navBar.css">
+</head>
 
-    <script src="./js/sessao.js"></script>
+<body>
+       
 
     <link rel="icon" href="./assets/icon/favicon2.ico" />
     <link rel="stylesheet" href="./css/estilo.css" />
@@ -19,43 +22,47 @@
   </head>
 
   <body onload="listar()">
-    <!--header inicio-->
-    <div class="header">
-      <div class="container">
-        <h1 class="titulo">AquaTech</h1>
-        <ul class="navbar">
-          <li>
-            <a href="index.html">Inicial</a>
-          </li>
-          <li>
-            <a href="simulador.html">Simulador</a>
-          </li>
-          <li>|</li>
-          <li>
-            <a href="login.html">Login</a>
-          </li>
-          <li class="agora">
-            <a href="#">Cadastro</a>
-          </li>
-        </ul>
-      </div>
-    </div>
-    <!--header fim-->
+   <!-- Início NavBar -->
+    <div class="fundoRoxo"></div>
+        <div class="fundo">
+            <div class="nav">
+                <img src="../public/assets/logo.png" alt="" class="logo">
+                <div class="navBar">
+                    <a href="index.html">Home</a>
+                    <a href="login.html">Login</a>
+                    <a href="cadastro.html">Cadastro</a>
+                    <a href="">Sobre nós</a>
+                    <a href="">Contato</a>
+                    <a href="">Nossos serviços</a>
+                    <div class="user">
+                        <img src="../public/assets/user.png" alt="user">
+                        <a href="cadastro.html"><div class="nav-cadastro">Faça seu cadastro ➔</div></a>
+                    </div>
+                  </div>
+                </div>
+                <!--fim navBar-->
 
-    <div class="login">
-      <div class="alerta_erro">
-        <div class="card_erro" id="cardErro">
-          <span id="mensagem_erro"></span>
-        </div>
-      </div>
-      <div class="container">
-        <div class="card card-cadastro">
-          <h2>Bem-vindo!</h2>
-          <div class="formulario">
-            <!--
-                         Para inserir mais um campo, copie uma das inputs abaixo.
-                         Assim que inserir vá para o script abaixo.
-                     -->
+                <div class="login">
+                  <div class="boasVindas">
+                  <div class="banner">
+                    <h1>Olá</h1>
+                    <br><br>
+                    <h3>Boas vindas à Security</h3>
+                  
+                  <div class="alerta_erro">
+                    <div class="card_erro" id="cardErro">
+                      <span id="mensagem_erro"></span>
+                    </div>
+                  </div>
+                    <div class="container">
+                      <div class="card card-cadastro">
+                        <h2>Vamos começar!</h2>
+                        
+                        <div class="formulario">
+                          <!--
+                            Para inserir mais um campo, copie uma das inputs abaixo.
+                            Assim que inserir vá para o script abaixo.
+                          -->
 
             <div class="campo">
               <span>Nome:</span>
@@ -76,15 +83,20 @@
             <div class="campo">
               <span>Empresa:</span>
               <select name="empresas" id="listaEmpresas">
-                <option selected>Selecione uma empresa</option>
+                <option selected>c6 Bank</option>
+                <option selected>Nubank</option>
+                <option selected>Inter</option>
+                <option selected>PayPal</option>
+                <option selected>PicPay</option>
+                <option selected>Escolha a Empresa</option>
               </select>
             </div>
             <div class="campo">
               <span>Confirmação da Senha:</span>
               <input
-                id="confirmacao_senha_input"
-                type="password"
-                placeholder="******"
+              id="confirmacao_senha_input"
+              type="password"
+              placeholder="******"
               />
             </div>
             <button class="botao" onclick="cadastrar()">Cadastrar</button>
@@ -92,21 +104,23 @@
           <div id="div_aguardar" class="loading-div">
             <img src="./assets/circle-loading.gif" id="loading-gif" />
           </div>
-
-          <div id="div_erros_login"></div>
         </div>
+        <div id="div_erros_login"></div>
       </div>
     </div>
+  </div>
+</div>
 
     <!--footer inicio-->
     <div class="footer">
       <div class="container">
-        <h4>Feito com amor por aluno &hearts; SPTech &copy; 2023</h4>
+        <h4>Copyright feito por Security Bank - SPTech &copy; 2023</h4>
         <span class="version">v1.0.0</span>
       </div>
     </div>
     <!--footer fim-->
   </body>
+
 </html>
 
 <script>
