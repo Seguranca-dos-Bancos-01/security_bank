@@ -9,68 +9,6 @@ body {
     grid-template-rows: 50px 50px;  
 } */
 
-.teste {
-    width: 100%;
-    height: 10vh;
-    background: url(./img/Group\ 2.jpg);
-    background-size: cover;
-}
-
-.fundo {
-    width: 100%;
-    height: 100vh;
-    background-color: #fff;
-}
-
-/* NAVBAR */
-
-.nav {
-    display: flex;
-    align-items: center;
-    justify-content: space-evenly;
-    width: 100%;
-    height: 150px;
-}
-
-.navBar {
-    display: flex;
-    width: 110vh;
-    height: auto;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.logo {
-    width: 40vh;
-    height: 40vh;
-}
-
-a {
-    text-decoration: none;
-    font-weight: bold;
-    color: #444444;
-}
-
-.user {
-    display: flex;
-    width: 30vh;
-    height: auto;
-    align-items: center;
-    justify-content: space-evenly;
-}
-
-.nav-button {
-  background: none;
-  border-radius: 999px;
-  color: #444444;
-  cursor: pointer;
-  font-weight: 600;
-  line-height: 24px;
-  padding: 8px 18px;
-  width: fit-content;
-  border: 2px solid #444444;
-}
-
 .banner {
     display: flex;
     height: 80vh;

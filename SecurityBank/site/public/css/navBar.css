@@ -1,0 +1,63 @@
+.fundoRoxo {
+    width: 100%;
+    height: 10vh;
+    background: url(../assets/header.jpg);
+    background-size: cover;
+}
+
+.fundo {
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+}
+
+/* NAVBAR */
+
+.nav {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 150px;
+}
+
+.navBar {
+    display: flex;
+    width: 110vh;
+    height: auto;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.logo {
+    width: 40vh;
+    height: 40vh;
+}
+
+a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #444444;
+}
+
+.user {
+    display: flex;
+    width: 30vh;
+    height: auto;
+    align-items: center;    
+    position: relative;
+    left: 1.5rem;
+}
+
+.nav-button {  
+  text-align: center;
+  border-radius: 2rem;
+  color: #444444;
+  cursor: pointer;  
+  line-height: 1.2rem;
+  padding: 0.5rem;
+  width: 11rem;
+  border: 2px solid #444444;
+  position: relative;
+  left: 0.1rem;
+}
