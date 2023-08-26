@@ -40,8 +40,10 @@ aside h4 {
 article {
     display: flex;
     align-items: center;
-    width: 50%;
-    height: 100vh;
+    width: 50vw;
+    height: 80vh;
+    position: relative;
+    top: 5rem;
 }
 
 .banner-button {
