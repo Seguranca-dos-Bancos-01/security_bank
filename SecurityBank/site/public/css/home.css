@@ -83,8 +83,6 @@ a {
     width: 100%;
 }
 
-
-
 aside {
     display: flex;
     flex-direction: column;
@@ -114,6 +112,13 @@ article {
     height: 100vh;
 }
 
+.btn-func {
+    display: flex;
+    width: 75%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
 .banner-button {
     background-color: #EDEAF9;
     border-radius: 5px;
@@ -125,6 +130,18 @@ article {
     padding: 8px 10px;
     width: fit-content;
     border: none;
+}
+
+.btn-player {
+    width: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: medium;
+    color: #333333;
 }
 
 aside .nav-button {
@@ -212,4 +229,109 @@ aside .nav-button {
     font-family: 'Inter';
     color: #444444;
     font-weight: bold;
+}
+
+.sobre-nos {
+    display: flex;
+    background-color: #fff;
+    padding: 60px 0;
+    align-items: center;
+    justify-content: center;
+
+}
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+    flex-direction: row;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+}
+
+.imagem-sobre-nos {
+    background: url(img/imgSobre-Nos.png);
+    background-size: cover;
+    width: 80%;
+    height: 700px;
+    margin: 0 40px auto;
+    position: relative;
+    right: 20vh;
+}
+
+.texto-sobre-nos {
+    width: 60%;
+    margin-bottom: 30%;
+    right: 5%;
+    position: relative;
+    margin-top: 30%;
+}
+
+.texto-sobre-nos h2 {
+    font-size: 40px;
+    font-weight: bold;
+    margin-bottom: 10px;
+    font-family: 'Poppins', sans-serif;
+    text-align: center;
+    left: 15%;
+    position: relative;
+}
+
+.texto-sobre-nos p {
+    font-size: 22px;
+    color: #444444;
+    line-height: 2.0;
+    text-align: justify;
+    width: 140%;
+    margin: 30px 0 auto;
+    font-family: 'Inter';
+
+}
+
+.sobre-nos-button {
+    background-color: #EDEAF9;
+    border-radius: 5px;
+    color: #6953D3;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: 500;
+    line-height: 24px;
+    font-size: 20px;
+    font-family: 'Inter';
+    padding: 8px 10px;
+    width: fit-content;
+    border: none;
+    margin-bottom: 12%;
+
+}
+
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 5%;
+    position: relative;
+    right: 40%;
+    left: 0%;
+    top: 5vh;
+}
+
+.item img {
+    width: 7vh;
+    height: 7vh;
+    margin-right: 10%;
+    margin-top: 2vh
+}
+
+.item p {
+    font-size: 18px;
+    font-family: 'Inter';
+    color: #444444;
+    font-weight: bold;
+    margin-left: 2vh;
 }
