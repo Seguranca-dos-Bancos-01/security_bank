@@ -26,7 +26,6 @@
                 <div class="navBar">
                     <a href="index.html">Home</a>
                     <a href="login.html">Login</a>
-                    <a href="cadastro.html">Cadastro</a>
                     <a href="">Sobre nós</a>
                     <a href="">Contato</a>
                     <a href="">Nossos serviços</a>
@@ -76,6 +75,13 @@
               <input id="senha_input" type="password" placeholder="******" />
             </div>
             <div class="campo">
+              <span>Confirmação da Senha:</span>
+              <input
+              id="confirmacao_senha_input"
+              type="password"
+              placeholder="******"/>
+            </div>
+            <div class="campo">
               <span>Empresa:</span>
               <select name="empresas" id="listaEmpresas">
                 <option selected>c6 Bank</option>
@@ -85,14 +91,6 @@
                 <option selected>PicPay</option>
                 <option selected>Escolha a Empresa</option>
               </select>
-            </div>
-            <div class="campo">
-              <span>Confirmação da Senha:</span>
-              <input
-              id="confirmacao_senha_input"
-              type="password"
-              placeholder="******"
-              />
             </div>
             <button class="botao" onclick="cadastrar()">Cadastrar</button>
           </div>
