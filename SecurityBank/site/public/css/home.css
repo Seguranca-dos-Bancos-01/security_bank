@@ -67,11 +67,11 @@ a {
 
 .nav-button {
     background: none;
-    border-radius: 999px;
+    border-radius: 9vh;
     color: #444444;
     cursor: pointer;
     font-weight: 600;
-    line-height: 24px;
+    line-height: 3vh;
     padding: 8px 18px;
     width: fit-content;
     border: 2px solid #444444;
