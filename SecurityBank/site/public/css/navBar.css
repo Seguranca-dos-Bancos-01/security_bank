@@ -5,6 +5,8 @@ body {
     margin: 0;
     font-family: 'Inter', sans-serif;
 }
+
+
 .fundoRoxo {
     width: 100%;
     height: 10vh;
@@ -88,4 +90,36 @@ a {
     padding: 8px 18px;
     width: fit-content;
     border: 2px solid #444444;
+}
+
+
+
+
+.footer {
+    height: 30vh;
+    width: 100%;
+    /* background-color: rgba(105, 83, 211, 0.53); */
+    color: #fff;
+    background-color: rgba(105, 83, 211, 0.53);
+  }
+
+.container_footer{
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-direction: center;
+    width: 100%;
+    padding-top: 3vh;
+}
+  
+
+.version {
+    font-size: 12px;
+    font-weight: 800;
+}
+ 
+.logo_footer_cadastro{
+    width: 55vh;
+    height: 15vh;
 }
