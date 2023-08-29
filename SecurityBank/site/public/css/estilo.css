@@ -115,7 +115,7 @@ body {
 
 .login {
   height: var(--tamanho-login);
-  background-image: url('');
+  background-image: href="../assets/imgs/ondas.png";
   background-size: cover;
 }
 
@@ -126,9 +126,9 @@ body {
 }
 
 .card {
-  width: 40%;
-  background-color: #e5e5e5;
-  border-radius: 30px;
+  width: 30%;
+  background-color: #e4e4e4;
+  border-radius: 60px;
   display: flex;
   align-items: center;
   justify-content: space-evenly;
@@ -191,7 +191,7 @@ body {
   cursor: pointer;
   font-family: "Barlow", sans-serif;
   border: 0;
-  border-radius: 5px;
+  border-radius: 10px;
   font-weight: 600;
   font-size: 18px;
   color: #ffffff;
@@ -240,12 +240,15 @@ body {
 .footer {
   height: var(--tamanho-footer);
   width: 100%;
-  background-color: #8573DB;
+  background-color: #6f00ff;
   color: #fff;
 }
 
 .footer h4 {
-  margin: 0;
+  margin: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .footer .container {
@@ -270,6 +273,12 @@ body {
   height: var(--tamanho-simulador);
 }
 
-.boasVindas{
-  
+.container_footer{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: center;
+    width: 20%;
+    height: 20%;
+    background-color: #6f00ff;
 }

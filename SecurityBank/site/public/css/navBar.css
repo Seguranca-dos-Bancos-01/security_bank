@@ -63,7 +63,7 @@ a {
 
 .navBar a:hover{
     color: #6953D3;
-    text-decoration: underline;
+    transition: 0.5s;
 }
 
 .nav-cadastro {  
