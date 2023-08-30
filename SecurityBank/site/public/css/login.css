@@ -28,7 +28,8 @@ input {
     align-self: center;
     padding: 2rem;
     border-radius: 1.5rem;
-    box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);    
+    box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514); 
+    border: #8473db90 0.1rem solid;   
     position: relative;
     top: 13rem;
     right: 16rem;
@@ -125,7 +126,7 @@ input {
     width: 17rem;
     position: fixed;
     border-radius: 1rem;
-    border: #ff0000 3px solid;
+    border: #8573DB 3px solid;
     padding: 1rem;
     margin-right: 10rem;
     margin-top: 7rem;
