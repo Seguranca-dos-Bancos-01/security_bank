@@ -68,17 +68,17 @@ a {
     transition: 0.5s;
 }
 
-.nav-cadastro {  
+.nav-button {
     background: none;
-    border-radius: 999px;
+    border-radius: 9vh;
     color: #444444;
     cursor: pointer;
     font-weight: 600;
-    line-height: 24px;
-    padding: 8px 18px;
+    line-height: 3vh;
+    padding: 0.6rem;
     width: fit-content;
     border: 2px solid #444444;
-}
+} 
 
 .footer {
     height: 30vh;
