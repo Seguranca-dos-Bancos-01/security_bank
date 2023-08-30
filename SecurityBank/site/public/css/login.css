@@ -12,7 +12,7 @@ input {
 }
 
 .container {
-    height: 100vh;
+    height: 50vh;
     width: 100%;    
     display: flex;
     justify-content: center;
@@ -30,7 +30,7 @@ input {
     border-radius: 1.5rem;
     box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);    
     position: relative;
-    top: 3rem;
+    top: 13rem;
     right: 16rem;
     z-index: 999;
 }
@@ -39,16 +39,26 @@ input {
     background-color: #8573DB;
     color: white;
     font-weight: bold;
-    height: 3rem;
-    width: 20rem;
+    height: 2.2rem;
+    width: 21rem;
     border-radius: 10px;
     border-style: none;
     position: relative;
-    left: 0.5rem;
+    left: 0.3rem;
     top: 0.5rem;
 }
 
-.container input, .container button{
+.card h5{
+  position: relative;
+  left:0.7rem;
+  top:0.5rem;
+}
+
+.card a{
+  color: #8573DB;
+}
+
+.container input{
     margin-bottom: 3rem;
 }
 
@@ -74,19 +84,20 @@ input {
 .ondasFundo img{
     background-size: cover;
     width: 98.7vw;
-    height: 15rem;    
+    height: 20rem; 
+          
 }
 
 .tituloLogin img{  
     background-size: cover;
     background-position: 100%;
-    width: 20vw;
+    width: 22vw;
     height: 13rem;
     position: relative;
-    top: 12rem;
-    left: 63rem;
-}  
-  
+    top: 24rem;
+    left: 55rem;
+}    
+
 /* Inicio mensagens */
 .loading-div {
     width: 50px;
