@@ -2,10 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
 
 
-body {
-    margin: 0;
-    font-family: 'Inter', sans-serif;
-}
 
 /* .responsividade {  
     display: grid;  
@@ -30,7 +26,7 @@ body {
 
 /* NAVBAR */
 
-.nav {
+/* .nav {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
@@ -67,23 +63,21 @@ a {
 
 .nav-button {
     background: none;
-    border-radius: 999px;
+    border-radius: 9vh;
     color: #444444;
     cursor: pointer;
     font-weight: 600;
-    line-height: 24px;
-    padding: 8px 18px;
+    line-height: 3vh;
+    padding: 0.6rem;
     width: fit-content;
     border: 2px solid #444444;
-}
+} */
 
 .banner {
     display: flex;
     height: 80vh;
     width: 100%;
 }
-
-
 
 aside {
     display: flex;
@@ -114,6 +108,13 @@ article {
     height: 100vh;
 }
 
+.btn-func {
+    display: flex;
+    width: 75%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
 .banner-button {
     background-color: #EDEAF9;
     border-radius: 5px;
@@ -125,6 +126,18 @@ article {
     padding: 8px 10px;
     width: fit-content;
     border: none;
+}
+
+.btn-player {
+    width: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: medium;
+    color: #333333;
 }
 
 aside .nav-button {
@@ -208,6 +221,74 @@ aside .nav-button {
 .tempo p,
 .cliente p,
 .projeto p {
+    font-size: 18px;
+    font-family: 'Inter';
+    color: #444444;
+    font-weight: bold;
+}
+
+.sobre-nos {
+    display: flex;
+    background-color: #fff;
+}
+
+.imagem-sobre-nos {
+    background: url(../assets/imgSobre-Nos.png);
+    background-size: cover;
+    width: 50%;
+    height: 700px;
+}
+
+.texto-sobre-nos {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 700px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.texto-sobre-nos span {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: #333333;
+}
+
+.texto-sobre-nos p {
+    font-size: 20px;
+    color: #4444449a;
+    text-align: justify;
+    width: 60%;
+}
+
+.sobre-nos-button {
+    background-color: #EDEAF9;
+    border-radius: 5px;
+    color: #6953D3;
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 24px;
+    font-size: 20px;
+    padding: 8px 10px;
+    width: fit-content;
+    border: none;
+}
+
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+.item img {
+    width: 7vh;
+    height: 7vh;
+}
+
+.item p {
     font-size: 18px;
     font-family: 'Inter';
     color: #444444;

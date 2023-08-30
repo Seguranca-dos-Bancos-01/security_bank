@@ -1,0 +1,40 @@
+.titulo{
+    font-size: 50px;
+    font-weight: bold;
+    text-align: center;
+    margin-top: 10vh;
+}
+.subtitulo{
+    font-size: 30px;
+    text-align: center;
+    margin-top: 3vh;
+}
+
+.linha1{
+    width: 40%;
+    height: 3vh;
+    display: flex;
+    margin-left: 30%;
+    margin-right: 30%;
+    justify-content: space-between;
+    margin-top: 3vh;
+}
+.placeholder{
+    width: 30vh;
+    margin-left: 2vh;
+
+}
+.linha2{
+    width: 40%;
+    height: 5vh;
+    display: flex;
+    margin-left: 30%;
+    margin-right: 30%;
+    justify-content: space-between;
+}
+.dados{
+    width: 30vh;
+    background-color: rgba(152, 122, 235, 0.945);
+    border-radius: 30px;
+    border-color: aliceblue;
+}
