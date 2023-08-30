@@ -1,0 +1,145 @@
+body {
+    margin: 0%;
+    padding: 0%;
+    background-color: white;
+}
+
+input {
+    width: 100%;
+    background-color: whitesmoke;
+    border-style: none;
+    border-bottom: solid 1px black;
+}
+
+.container {
+    height: 130vh;
+    width: 100%;
+    background-image:url(../Imagem/Login.jpg);
+    background-size: cover;
+    background-position: 100%;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+}
+
+.card {
+    display: flex;
+    background-color: whitesmoke;
+    width: 30vw;
+    height: 65vh;
+    flex-direction: column;
+    align-self: center;
+    padding: 2rem;
+    border-radius: 1.5rem;
+    box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);    
+    position: relative;
+    bottom: 5rem;
+    right: 17rem;
+    z-index: 999;
+}
+
+.buttonlogin {
+    background-color: #8573DB;
+    color: white;
+    font-weight: bold;
+    height: 3rem;
+    width: 20rem;
+    border-radius: 10px;
+    border-style: none;
+    position: relative;
+    left: 2.5rem;
+    top: 0.5rem;
+}
+
+.container input, .container button{
+    margin-bottom: 3rem;
+}
+
+.buttonlogin:hover{
+    background-color: #062180;
+    transform: scale(1.05);
+    transition: 0.20s ease-in-out;
+}
+
+.titulo{
+    position: relative;
+    left: 7rem;
+    top: 1rem;
+    margin-bottom: 5rem;
+    font-size: 1.5rem;    
+}
+
+.card:hover{    
+    transform: scale(1.05);
+    transition: 0.20s ease-in-out;
+}
+
+.ondasFundo{
+    background-image: url(../assets/ondas.png);
+    background-size: cover;
+    width: 98.7vw;
+    height: 90vh;
+    position: relative;
+    bottom: 5rem;
+}
+
+.tituloLogin{
+    background-image: url(../assets/bolinhaLogin.png);
+    background-size: cover;
+    background-position: 100%;
+    width: 20vw;
+    height: 131vh;
+    position: relative;
+    top: 3rem;
+    left: 60rem;
+}
+  
+  
+/* Inicio mensagens */
+.loading-div {
+    width: 50px;
+    display: none;
+  }
+  
+  .loading-div img {
+    height: 50px;
+    width: 50px;
+  }
+  
+  #div_erros_login {
+    display: none
+  }
+  
+  .alerta_erro {
+    display: flex;
+    justify-content: flex-end;
+  }
+  
+  .card_erro {
+    display: none;
+    background-color: whitesmoke;
+    color: black;
+    width: 17rem;
+    position: fixed;
+    border-radius: 1rem;
+    border: #ff0000 3px solid;
+    padding: 1rem;
+    margin-right: 10rem;
+    margin-top: 7rem;
+    z-index: 999;
+  }
+  
+  .card_erro #mensagem_erro {
+    font-weight: 500;
+    font-size: 20px;
+  }
+  
+  .simulador {
+    color: white;
+  }
+  
+  .simulador .container {
+    flex-direction: column;
+    overflow: scroll;
+    height: var(--tamanho-simulador);
+  }
