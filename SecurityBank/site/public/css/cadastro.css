@@ -91,7 +91,7 @@ color: #8573DB;
         
 }
 
-.tituloLogin img{  
+.tituloLogin {  
   background-size: cover;
   background-position: 100%;
   width: 25vw;
