@@ -32,9 +32,7 @@
           <a href="">Nossos serviços</a>
           <div class="user">
             <img src="../public/assets/user.png" alt="user">
-            <a href="cadastro.html">
-              <button class="nav-button"><a href="./cadastro.html">Faça seu cadastro ➔</a></button>
-            </a>
+            <a href="cadastro.html"><button class="nav-button">Faça seu cadastro ➔</button></a>
           </div>
         </div>
       </div>
@@ -47,30 +45,43 @@
       </div>
       <div class="pagina">
         <div class="container">
-          <div class="tituloLogin"><img src="../public/assets/boasvindas_cadastro-removebg-preview.png" alt="Login"></div>
+          <div class="tituloCadastro"><img src="../public/assets/boasvindas_cadastro-removebg-preview.png" alt="Cadastro">
+          </div>
           <div class="card">
             <form>
               <h1 class="titulo">Vamos Começar</h1>
               <h3 class="subtitulo">A segurança que seu banco precisa!</h3>
-              <div class="email">
-                <label class="label" for="email">Nome</label>
-                <input class="input" type="email" id="email_input" name="email" />
+              <div class="inputBox">
+                <input class="input" type="text" id="nome_input" name="nome" required="required" />
+                <span>Nome</span>
               </div>
-              <div class="senha">
-                <label class="label" for="senha">Email</label>
-                <input class="input" type="password" id="senha_input" name="senha" />
+              <div class="inputBox">
+                <input class="input" type="email" id="email_input" name="email" required="required" />
+                <span>Email</span>
               </div>
-              <div class="senha">
-                <label class="label" for="senha">Senha</label>
-                <input class="input" type="password" id="senha_input" name="senha" />
+              <div class="inputBox">
+                <input class="input" type="text" id="cpf_input" name="cpf" required="required" />
+                <span>CPF</span>
               </div>
-              <div class="senha">
-                <label class="label" for="senha">CNPJ</label>
-                <input class="input" type="password" id="senha_input" name="senha" />
+              <div class="inputBox">
+                <input class="input" type="text" id="telefone_input" name="telefone" required="required" />
+                <span>Telefone para contato</span>
               </div>
-              <div class="senha">
-                <label class="label" for="senha">Senha</label>
-                <input class="input" type="password" id="senha_input" name="senha" />
+              <div class="inputBox">
+                <input class="input" type="text" id="nomeEmpresa_input" name="nomeEmpresa" required="required" />
+                <span>Nome Empresa</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="text" id="cnpj_input" name="cnpj" required="required" />
+                <span>CNPJ</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="password" id="senha_input" name="senha" required="required">
+                <span>Senha</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="password" id="confirmacao_senha_input" name="confirmacaoSenha" required="required" />
+                <span>Confirmar Senha</span>
               </div>
             </form>
             <button class="buttonlogin" onclick="cadastrar()">Cadastrar</button>
