@@ -56,9 +56,10 @@ a {
 
 .user {
     display: flex;
-    width: 15vw;
+    width: 13vw;
     height: 10vh;
-    align-items: center;    
+    align-items: center;
+    justify-content: space-evenly;    
     position: relative;
     left: 1rem;
 }
@@ -76,7 +77,7 @@ a {
     font-weight: 600;
     line-height: 3vh;
     padding: 0.6rem;
-    width: fit-content;
+    width: 10rem;
     border: 2px solid #444444;
 } 
 

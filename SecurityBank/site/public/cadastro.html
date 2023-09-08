@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security Bank | Cadastro</title>
   <link rel="stylesheet" href="css/navBar.css">
+  <link rel="shortcut icon" href="assets/logoEscudo.png" type="image/x-icon">
 </head>
 
 <body>
@@ -31,83 +32,65 @@
           <a href="">Nossos serviços</a>
           <div class="user">
             <img src="../public/assets/user.png" alt="user">
-            <a href="cadastro.html">
-              <button class="nav-button"><a href="./cadastro.html">Faça seu cadastro ➔</a></button>
-            </a>
+            <a href="cadastro.html"><button class="nav-button">Faça seu cadastro ➔</button></a>
           </div>
         </div>
       </div>
       <!--fim navBar-->
 
-      <div class="login">
-        <div class="banner">
-          <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-              <span id="mensagem_erro"></span>
-            </div>
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
+        </div>
+      </div>
+      <div class="pagina">
+        <div class="container">
+          <div class="tituloCadastro"><img src="../public/assets/boasvindas_cadastro-removebg-preview.png" alt="Cadastro">
           </div>
-          <div class="img_cadastro">
-            <img src="../public/assets/boasvindas_cadastro-removebg-preview.png"></a>
+          <div class="card">
+            <form>
+              <h1 class="titulo">Vamos Começar</h1>
+              <h3 class="subtitulo">A segurança que seu banco precisa!</h3>
+              <div class="inputBox">
+                <input class="input" type="text" id="nome_input" name="nome" required="required" />
+                <span>Nome</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="email" id="email_input" name="email" required="required" />
+                <span>Email</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="text" id="cpf_input" name="cpf" required="required" />
+                <span>CPF</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="text" id="telefone_input" name="telefone" required="required" />
+                <span>Telefone para contato</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="text" id="nomeEmpresa_input" name="nomeEmpresa" required="required" />
+                <span>Nome Empresa</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="text" id="cnpj_input" name="cnpj" required="required" />
+                <span>CNPJ</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="password" id="senha_input" name="senha" required="required">
+                <span>Senha</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="password" id="confirmacao_senha_input" name="confirmacaoSenha" required="required" />
+                <span>Confirmar Senha</span>
+              </div>
+            </form>
+            <button class="buttonlogin" onclick="cadastrar()">Cadastrar</button>
           </div>
-          <div class="container">
-            <div class="card card-cadastro">
-              <h2>Vamos começar!</h2>
-              <h6>A segurança que seu banco precisa!</h6>
-
-              <div class="formulario">
-                <!--
-                            Para inserir mais um campo, copie uma das inputs abaixo.
-                            Assim que inserir vá para o script abaixo.
-                          -->
-
-                <div class="campo">
-                  <span>Nome:</span>
-                  <input id="nome_input" type="text" placeholder="Seu nome" />
-                </div>
-                <div class="campo">
-                  <span>E-mail:</span>
-                  <input id="email_input" type="text" placeholder="meuemail@provedor.com" />
-                </div>
-                <div class="campo">
-                  <span>Senha:</span>
-                  <input id="senha_input" type="password" placeholder="******" />
-                </div>
-                <div class="campo">
-                  <span>Confirmação da Senha:</span>
-                  <input id="confirmacao_senha_input" type="password" placeholder="******" />
-                </div>
-                <div class="campo">
-                  <span>Empresa:</span>
-                  <select name="empresas" id="listaEmpresas">
-                    <option selected>c6 Bank</option>
-                    <option selected>Nubank</option>
-                    <option selected>Inter</option>
-                    <option selected>PayPal</option>
-                    <option selected>PicPay</option>
-                    <option selected>Escolha a Empresa</option>
-                  </select>
-                </div>
-                <button class="botao" onclick="cadastrar()">Cadastrar</button>
-              </div>
-              <div id="div_aguardar" class="loading-div">
-                <img src="./assets/circle-loading.gif" id="loading-gif" />
-              </div>
-            </div>
-            <div id="div_erros_login"></div>
+          <div class="ondasFundo">
+            <img src="../public/assets/ondasLogin.png" alt="Ondas">
           </div>
         </div>
       </div>
-    </div>
-
-    <!--footer inicio-->
-    <div class="footer">
-      <div class="container_footer">
-        <img src="../public/assets/logofooter.png" class="logo_footer_cadastro">
-        <h4>&copy; 2023 Copyrights by SecurityBank. All Rights Reserved.</h4>
-        <span class="version">v1.0.0</span>
-      </div>
-    </div>
-    <!--footer fim-->
   </body>
 
 </html>
