@@ -7,57 +7,95 @@
     <title>Fale conosco</title>
     <link rel="stylesheet" href="../public/css/navBar.css">
     <link rel="stylesheet" href="../public/css/faleconosco.css">
+    <link rel="stylesheet" href="css/responsividade.css">
+    <script defer src="js/navBar.js"></script>
 </head>
 
 <body>
     <!-- Início NavBar -->
     <div class="fundoRoxo"></div>
-    <div class="fundo">
-        <div class="nav">
-            <img src="../public/assets/logo.png" alt="" class="logo">
-            <div class="navBar">
-                <a href="index.html">Home</a>
-                <a href="login.html">Login</a>
-                <a href="cadastro.html">Cadastro</a>
-                <a href="">Sobre nós</a>
-                <a href="">Contato</a>
-                <a href="">Nossos serviços</a>
-                <div class="user">
-                    <img src="../public/assets/user.png" alt="user">
-                    <button class="nav-button"><a href="./cadastro.html">Faça seu cadastro ➔</a></button>
-                </div>
+    <header class="header">
+        <nav class="nav">
+        <a href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></a>
+        <button class="hamburger"></button>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
+                <li><a href="faleconosco.html">Fale Conosco</a></li>
+            </ul>
+            <div class="user">
+                <img src="../public/assets/user.png" alt="user">
+                <a href="cadastro.html"><button class="nav-button">Faça seu cadastro ➔</button></a>
             </div>
-        </div>
-        <!-- Fim NavBar -->
+        </nav>
+    </header>
+    <!-- Fim NavBar -->
         <div class="content">
             <div class="titulo">Fale Conosco</div>
             <div class="subtitulo">Alguma dúvida ou sugestão? Entre em contato conosco!</div>
-            
+
             <div
-                style="background: url(../public/assets/ondas.png); width: 100%; height: 80vh; background-size: cover;">
+                style="background: url(../public/assets/ondas.png); width: 100%; height: 115vh; background-size: cover;">
 
                 <div class="entrada">
                     <span class="linha1">
                         <span class="placeholder">Nome:</span>
                         <span class="placeholder">E-mail:</span>
                     </span>
-                   
+
                     <span class="linha2">
                         <input class="dados" type="text">
                         <input class="dados" type="text">
                     </span>
+
+                    <span class="linha3">
+                        <span class="placeholder">Mensagem:</span>
+                    </span>
+
+                    <span class="linha4">
+                        <input class="mensagem" type="text">
+                    </span>
+
+                    <span class="linha5">
+                        <button class="botao">Enviar</button>
+                    </span>
+                </div>
+
+                <div class="contato">
+                    <div class="fundo2">
+                        <div class="separa">
+                            <div class="info">
+                                <span class="b1"><img class="iconscontato" src="../public/assets/imgs/chamada-telefonica.png" alt=""></span>
+                                <span class="t">TELEFONE</span>
+                                <span class="d">(00) 12345-6789</span>
+                            </div>
+                            <div class="info">
+                                <span class="b2"><img class="iconscontato" src="../public/assets/imgs/envelope.png" alt=""></span>
+                                <span class="t">E-MAIL</span>
+                                <span class="d">securitybank@email.com</span>
+                            </div>
+                            <div class="info">
+                                <span class="b3"><img class="iconscontato" src="../public/assets/imgs/pasta.png" alt=""></span>
+                                <span class="t">ENDEREÇO</span>
+                                <span class="d">Rua Haddock Lobo, 595 - Bela Vista, São Paulo</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="footer">
+                    <div class="container_footer">
+                        <img src="../public/assets/logofooter.png" class="logo_footer_cadastro">
+                        <span class="logotext">Melhor monitoramento de hardware para o seu negócio!</span>
+                        <span class="linha"></span>
+                        <h4 class="direitos">&copy; 2023 Copyrights by SecurityBank. All Rights Reserved.</h4>
+                    </div>
                 </div>
             </div>
         </div>
 
 
-        <div class="footer">
-            <div class="container_footer">
-              <img src="../public/assets/logofooter.png" class="logo_footer_cadastro">
-              <h4>&copy; 2023 Copyrights by SecurityBank. All Rights Reserved.</h4>
-              <span class="version">v1.0.0</span>
-            </div>
-          </div>
 
 </body>
 
