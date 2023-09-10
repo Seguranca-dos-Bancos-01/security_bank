@@ -1,0 +1,160 @@
+/* Início NavBar */
+@media only screen and (max-width: 1420px) {
+    .header {
+        padding: 0 50px;
+        width: 92.3%;
+    }
+}
+
+@media only screen and (max-width: 1200px) {
+    .header {
+        padding: 0 30px;
+        width: 95%;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    .header{
+        width: 85%;
+        background: transparent;
+        padding-inline: 16px;
+    }
+
+    .logo {
+        width: 50vw;
+        height: fit-content;
+        margin-left: 1rem;
+    }
+
+    .fundoRoxo {
+        width: 100%;
+        height: 10vh;
+        background: url(../assets/header.jpg);
+        background-size: cover;
+    } 
+
+    /* Fim NavBar */
+
+    /* Início Login */
+    .container {
+        height: 40vh;
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+    }
+
+    .titulo {
+        margin-bottom: 3rem;
+        font-size: 1.5rem;
+    }
+
+    .ondasFundo img {
+        background-size: cover;
+        width: 100%;
+        height: 10rem;        
+    }
+
+    .fundoBolinha h1 {
+        width: 10rem;
+        position: relative;
+        top: 5rem;
+        left: 4rem;
+    }
+
+    .fundoBolinha img {
+        background-size: cover;
+        background-position: 100%;
+        width: 50vw;
+        height: fit-content;
+        position: relative;
+        top: 11rem;
+        left: 1rem;
+    }
+
+    .card {
+        display: flex;
+        background-color: whitesmoke;
+        width: 55vw;
+        flex-direction: column;
+        align-self: center;
+        padding: 5rem 4rem 5rem 2rem;
+        border-radius: 1.5rem;
+        box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
+        border: #8473db90 0.1rem solid;
+        position: relative;
+        top: 10rem;
+        left: 0rem;
+        z-index: 2;
+        text-align: center;
+    }
+
+    .inputBox {
+        position: relative;
+        width: 15rem;
+        text-align: start;
+        align-self: center;
+    }
+
+    .inputBox input {
+        width: 100%;
+        padding: 0.7rem;
+        background: whitesmoke;
+        outline: none;
+        border: 1px solid black;
+        font-size: 1em;
+        border-radius: 0.6rem;
+    }
+
+    .inputBox span {
+        position: absolute;
+        left: 0;
+        padding: 10px;
+        pointer-events: none;
+        font-size: 0.9rem;
+        color: black;
+        text-transform: uppercase;
+        transition: 0.5s;
+        position: relative;
+        bottom: 2rem;
+        z-index: 1;
+    }
+
+    .inputBox input:valid~span,
+    .inputBox input:focus~span {
+        color: white;
+        background-color: #8573DB;
+        transform: translateX(10px) translateY(-7px);
+        font-size: 0.85em;
+        padding: 0 10px;
+        position: relative;
+        bottom: 3.3rem;
+        left: 1rem;
+        border-radius: 0.3rem;
+    }
+
+    .buttonlogin {
+        background-color: #8573DB;
+        color: white;
+        font-weight: bold;
+        height: 2.2rem;
+        width: 15rem;
+        border-radius: 10px;
+        border-style: none;
+        position: relative;
+        left: 0.3rem;
+        top: 0.5rem;
+    }
+
+    .card h5 {
+        position: relative;
+        top: 2rem;
+        left: 1rem;        
+    }
+
+    .card a {
+        color: #8573DB;
+    }
+}
+
+/* Fim Login */
