@@ -12,7 +12,7 @@ body {
   flex-direction: column;
 }
 
-.card {
+.cardCadastro {
   display: flex;
   background-color: whitesmoke;
   width: 31vw;
@@ -26,10 +26,9 @@ body {
   position: relative;
   top: 23rem;
   left: 18rem;
-  z-index: 999;  
+  z-index: 2;  
   text-align: center;
 }
-
 
 .inputBox {
   position: relative;
@@ -89,7 +88,7 @@ body {
 }
 
 
-.card a{
+.cardCadastro a{
 color: #8573DB;
 }
 
@@ -109,7 +108,7 @@ color: #8573DB;
   color: #333333;
 }
 
-.card:hover{    
+.cardCadastro:hover{    
   transform: scale(1.05);
   transition: 0.20s ease-in-out;
 }
@@ -127,8 +126,8 @@ color: #8573DB;
   width: 25vw;
   height: 13rem;
   position: relative;
-  top: 33rem;
-  left: 10rem;
+  top: 30rem;
+  left: 5rem;
 }    
 
 /* Inicio mensagens */
@@ -179,3 +178,139 @@ color: #8573DB;
   overflow: scroll;
   height: var(--tamanho-simulador);
 }
+
+
+/* Início Responsividade */
+@media (max-width: 600px){
+  .header {
+    width: 85%;
+    background: transparent;
+    padding-inline: 16px;
+}
+
+.logo {
+    width: 50vw;
+    height: fit-content;
+    margin-left: 1rem;
+}
+
+.fundoRoxo {
+  width: 100%;
+  height: 10vh;
+  background: url(../assets/header.jpg);
+  background-size: cover;
+}
+
+  /* Início Cadastro */
+  .tituloCadastro img {
+    width: 75vw;
+    height: fit-content;
+    position: relative;
+    bottom: 18rem;
+    right: 4rem;
+}
+
+.cardCadastro {
+  display: flex;
+  background-color: whitesmoke;
+  width: 55vw;
+  flex-direction: column;
+  align-self: center;
+  padding: 4rem 7rem 2rem 0rem;
+  border-radius: 1.5rem;
+  box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
+  border: #8473db90 0.1rem solid;
+  position: relative;
+  top: 14rem;
+  left: 0rem;
+  z-index: 2;
+  text-align: center;
+}
+.inputBox {
+  position: relative;
+  width: 15rem;
+  text-align: start;
+  align-self: center;
+}
+
+.inputBox input {
+  width: 100%;
+  padding: 0.7rem;
+  background: whitesmoke;
+  outline: none;
+  border: 1px solid black;
+  font-size: 1em;
+  border-radius: 0.6rem;
+  /* position: relative;
+  right: 1.5rem; */
+}
+
+.inputBox span { 
+  padding: 10px;
+  pointer-events: none;
+  font-size: 0.9rem;
+  color: black;
+  text-transform: uppercase;
+  transition: 0.5s; 
+  z-index: 1;
+}
+  
+  .buttonlogin {
+    background-color: #8573DB;
+    color: white;
+    font-weight: bold;
+    height: 3rem;
+    border-radius: 10px;
+    border-style: none;
+    position: relative;    
+    left: 3.5rem;
+    margin: 1rem;
+  }
+  
+  
+  .cardCadastro a{
+  color: #8573DB;
+  }
+  
+  .buttonlogin:hover{
+    background-color: #062180;
+    transform: scale(1.05);
+    transition: 0.20s ease-in-out;
+  }
+  
+  .titulo{
+    font-size: 1.5rem;
+    position: relative;
+    left: 3rem;    
+  }
+  
+  .subtitulo {
+    font-size: 1rem;  
+    margin-bottom: 3rem;
+    color: #333333;
+    position: relative;
+    left: 3rem; 
+  }
+  
+  .cardCadastro:hover{    
+    transform: scale(1.05);
+    transition: 0.20s ease-in-out;
+  }
+  
+  .ondasFundo img {
+    background-size: cover;
+    width: 100%;
+    height: 10rem;
+}
+  
+  .tituloCadastro {  
+    background-size: cover;
+    background-position: 100%;
+    width: 25vw;
+    height: 13rem;
+    position: relative;
+    top: 30rem;
+    left: 5rem;
+  }    
+/* Fim Cadastro */
+} 

@@ -14,7 +14,7 @@
 }
 
 @media only screen and (max-width: 600px) {
-    .header{
+    .header {
         width: 85%;
         background: transparent;
         padding-inline: 16px;
@@ -23,7 +23,8 @@
     .logo {
         width: 50vw;
         height: fit-content;
-        margin-left: 1rem;
+        margin-left: 1rem;  
+        padding-block: 1rem;      
     }
 
     .fundoRoxo {
@@ -31,7 +32,7 @@
         height: 10vh;
         background: url(../assets/header.jpg);
         background-size: cover;
-    } 
+    }
 
     /* Fim NavBar */
 
@@ -52,7 +53,7 @@
     .ondasFundo img {
         background-size: cover;
         width: 100%;
-        height: 10rem;        
+        height: 10rem;
     }
 
     .fundoBolinha h1 {
@@ -62,7 +63,17 @@
         left: 4rem;
     }
 
-    .fundoBolinha img {
+    .fundoBolinha{
+        background-size: cover;
+        background-position: 100%;
+        width: 50vw;
+        height: fit-content;
+        /* position: relative;
+        top: 11rem;
+        left: 1rem; */
+    }
+
+    .fundoBolinha img{
         background-size: cover;
         background-position: 100%;
         width: 50vw;
@@ -70,6 +81,7 @@
         position: relative;
         top: 11rem;
         left: 1rem;
+        align-items: center;
     }
 
     .card {
@@ -149,12 +161,13 @@
     .card h5 {
         position: relative;
         top: 2rem;
-        left: 1rem;        
+        left: 1rem;
     }
 
     .card a {
         color: #8573DB;
     }
-}
 
-/* Fim Login */
+
+    /* Fim Login */    
+}

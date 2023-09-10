@@ -102,6 +102,7 @@ body {
 }
 
 @media (max-width: 768px) {
+    
     .user {
         display: none;
     }
@@ -179,18 +180,18 @@ body {
     }
 }
 
+.nav .nav-list  a:hover{
+    color: #8473db;   
+    transition: 0.3s;
+}
+
 .footer {
     /* height: 30vh; */
     width: 100%;
     /* background-color: rgba(105, 83, 211, 0.53); */
     color: #fff;
-<<<<<<< HEAD
-    background-color: rgba(105, 83, 211, 0.53);
-}
-=======
     /* background-color: rgba(105, 83, 211, 0.53); */
   }
->>>>>>> 9448cc146a0b3ebf2a1c9e854b825fba04b68ede
 
 .container_footer {
     display: flex;
@@ -210,13 +211,6 @@ body {
     color: black;
     text-shadow: 3px 2px 3px rgb(93, 93, 93);
 }
-<<<<<<< HEAD
-
-.logo_footer_cadastro {
-    width: 55vh;
-    height: 15vh;
-}
-=======
  
 .logo_footer_cadastro{
     width: 33vh;
@@ -239,4 +233,3 @@ margin-top: 10vh;
     color: black;
 
 }
->>>>>>> 9448cc146a0b3ebf2a1c9e854b825fba04b68ede
