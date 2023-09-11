@@ -198,12 +198,9 @@ body {
     .container_footer {
         display: flex;
         flex-direction: column;
+        width: 100%;
         align-items: center;
         justify-content: center;
-        flex-direction: center;
-        width: 100%;
-        padding-top: 3vh;
-        height: 35vh;
     }
     
     
@@ -235,10 +232,9 @@ body {
         margin-top: 1vh;
         text-align: center;
         font-size: 12px;
-        width: 50vh;
+        width: 100%;
         color: black;
         position: relative;
-        left: 1rem;
         top: 2rem;
     }
 }
@@ -258,8 +254,6 @@ body {
     justify-content: center;
     flex-direction: center;
     width: 100%;
-    padding-top: 3vh;
-    height: 40vh;
 }
 
 
@@ -292,8 +286,6 @@ body {
     margin-top: 1vh;
     text-align: center;
     font-size: 12px;
-    width: 50vh;
+    width: 100%;
     color: black;
-    position: relative;
-    left: 1rem;
 }
