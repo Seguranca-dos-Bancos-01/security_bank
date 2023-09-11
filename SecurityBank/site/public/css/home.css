@@ -98,7 +98,8 @@ aside .nav-button {
     font-size: large;
     font-weight: 700;
     line-height: 30px;
-    padding: 10px 20px;
+    padding: 1rem;
+    width: 13rem;
     border: none;
 }
 
@@ -293,7 +294,7 @@ aside .nav-button {
 .article1 {
     display: flex;
     align-items: center;
-    justify-content: center;
+    justify-content: space-evenly;
     flex-direction: column;
     width: 50%;
     height: 100vh;
