@@ -25,7 +25,7 @@ body {
   border: #8473db90 0.1rem solid;   
   position: relative;
   top: 23rem;
-  left: 18rem;
+  left: 20rem;
   z-index: 2;  
   text-align: center;
 }
@@ -181,6 +181,20 @@ color: #8573DB;
 
 
 /* Início Responsividade */
+@media only screen and (max-width: 1420px) {
+  .header {
+      padding: 0 50px;
+      width: 92.3%;
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  .header {
+      padding: 0 30px;
+      width: 95%;
+  }
+}
+
 @media (max-width: 600px){
   .header {
     width: 85%;
@@ -214,9 +228,10 @@ color: #8573DB;
   display: flex;
   background-color: whitesmoke;
   width: 55vw;
+  height: fit-content;
   flex-direction: column;
   align-self: center;
-  padding: 4rem 7rem 2rem 0rem;
+  padding: 4rem 7rem 0rem 0rem;
   border-radius: 1.5rem;
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
   border: #8473db90 0.1rem solid;
@@ -262,26 +277,15 @@ color: #8573DB;
     height: 3rem;
     border-radius: 10px;
     border-style: none;
-    position: relative;    
+    position: relative;      
     left: 3.5rem;
-    margin: 1rem;
   }
-  
-  
-  .cardCadastro a{
-  color: #8573DB;
-  }
-  
-  .buttonlogin:hover{
-    background-color: #062180;
-    transform: scale(1.05);
-    transition: 0.20s ease-in-out;
-  }
+
   
   .titulo{
     font-size: 1.5rem;
     position: relative;
-    left: 3rem;    
+    left: 3.5rem;    
   }
   
   .subtitulo {
@@ -289,28 +293,15 @@ color: #8573DB;
     margin-bottom: 3rem;
     color: #333333;
     position: relative;
-    left: 3rem; 
-  }
-  
-  .cardCadastro:hover{    
-    transform: scale(1.05);
-    transition: 0.20s ease-in-out;
-  }
+    left: 3.5rem; 
+  }  
+
   
   .ondasFundo img {
     background-size: cover;
     width: 100%;
     height: 10rem;
-}
+}  
   
-  .tituloCadastro {  
-    background-size: cover;
-    background-position: 100%;
-    width: 25vw;
-    height: 13rem;
-    position: relative;
-    top: 30rem;
-    left: 5rem;
-  }    
 /* Fim Cadastro */
 } 

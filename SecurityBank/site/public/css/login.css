@@ -100,7 +100,7 @@ body {
 .buttonlogin:hover {
   background-color: #062180;
   transform: scale(1.05);
-  transition: 0.20s ease-in-out;
+  transition: 0.2s ease-in-out;
 }
 
 .titulo {  

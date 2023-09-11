@@ -46,7 +46,7 @@ body {
 
 .nav-list {
     display: flex;
-    gap: 32px;
+    gap: 7rem;
 }
 
 .nav-list a {
@@ -95,6 +95,8 @@ body {
     padding: 0.6rem;
     width: 10rem;
     border: 2px solid #444444;
+    position: relative;
+    bottom: 0.2rem;
 }
 
 .cadastroMobile {
@@ -102,13 +104,15 @@ body {
 }
 
 @media (max-width: 768px) {
-    
+
     .user {
         display: none;
     }
+
     .cadastroMobile {
         display: block;
     }
+
     .hamburger {
         display: block;
         z-index: 5;
@@ -178,11 +182,65 @@ body {
         transform: rotate(-135deg);
         top: -7px;
     }
-}
 
-.nav .nav-list  a:hover{
-    color: #8473db;   
-    transition: 0.3s;
+    .nav .nav-list a:hover {
+        color: #8473db;
+        transition: 0.3s;
+    }
+
+    .logo_footer_cadastro{
+        width: 35vw;
+        height: 8vh;        
+        position: relative;
+        top: 2rem;
+        left: 1rem;
+    }
+    .container_footer {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        flex-direction: center;
+        width: 100%;
+        padding-top: 3vh;
+        height: 35vh;
+    }
+    
+    
+    .direitos {    
+        font-size: 12px;
+        font-weight: 800;
+        color: black;
+        text-shadow: 3px 2px 3px rgb(93, 93, 93);
+        position: relative;
+        left: 1rem;
+    }
+    
+    .logo_footer_cadastro {
+        width: 33vh;
+        height: 8vh;
+        margin-top: 10vh;
+        position: relative;
+        left: 1rem;
+    }
+    
+    .linha {
+        height: 1px;
+        width: 100%;
+        background-color: black;
+        margin-top: 4vh;
+    }
+    
+    .logotext {
+        margin-top: 1vh;
+        text-align: center;
+        font-size: 12px;
+        width: 50vh;
+        color: black;
+        position: relative;
+        left: 1rem;
+        top: 2rem;
+    }
 }
 
 .footer {
@@ -191,7 +249,7 @@ body {
     /* background-color: rgba(105, 83, 211, 0.53); */
     color: #fff;
     /* background-color: rgba(105, 83, 211, 0.53); */
-  }
+}
 
 .container_footer {
     display: flex;
@@ -201,35 +259,41 @@ body {
     flex-direction: center;
     width: 100%;
     padding-top: 3vh;
+    height: 40vh;
 }
 
 
 .direitos {
-    
+
     font-size: 12px;
     font-weight: 800;
     color: black;
     text-shadow: 3px 2px 3px rgb(93, 93, 93);
-}
- 
-.logo_footer_cadastro{
-    width: 33vh;
-    height: 8vh;
-margin-top: 10vh;
+    position: relative;
+    left: 1rem;
 }
 
-.linha{
+.logo_footer_cadastro {
+    width: 33vh;
+    height: 8vh;
+    margin-top: 10vh;
+    position: relative;
+    left: 1rem;
+}
+
+.linha {
     height: 1px;
     width: 100%;
     background-color: black;
     margin-top: 4vh;
 }
 
-.logotext{
+.logotext {
     margin-top: 1vh;
     text-align: center;
     font-size: 12px;
     width: 50vh;
     color: black;
-
+    position: relative;
+    left: 1rem;
 }
