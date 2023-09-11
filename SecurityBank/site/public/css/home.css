@@ -430,3 +430,14 @@ aside .nav-button {
     height: 30vh;
     border-radius: 999%;
 }
+
+/* FOOTER */
+
+.footer {
+    background: url(../assets/ondas.png);
+    background-size: cover;
+}
+
+.direitos {
+    text-shadow: none;
+}
