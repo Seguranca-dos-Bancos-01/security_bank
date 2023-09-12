@@ -41,22 +41,22 @@
             <div class="linha1">
                 <div class="linha2">
                     <span class="placeholder">Nome:</span>
-                    <input class="dados" type="text">
+                    <input id="ipt_nome" class="dados" type="text">
                 </div>
 
                 <div class="linha2">
                     <span class="placeholder">Email:</span>
-                    <input class="dados" type="text">
+                    <input id="ipt_email" class="dados" type="text">
                 </div>
             </div>
 
             <div class="linha3">
                 <span class="placeholder">Mensagem:</span>
-                <input class="mensagem" type="text">
+                <input id="ipt_mensagem" class="mensagem" type="text">
             </div>
 
             <div class="linha5">
-                <button class="botao">Enviar</button>
+                <button onclick="enviar()" class="botao">Enviar</button>
             </div>
         </div>
 
@@ -100,3 +100,12 @@
 </body>
 
 </html>
+
+<script>
+    function enviar() {
+        var email = "SC.contato.2023@gmail.com";
+        var assunto = `Olá, meu nome é ` + ipt_nome.value;
+        var corpo = ipt_mensagem.value;
+        window.open("mailto:" + email + "?subject=" + assunto + "&body=" + corpo);
+}
+</script>
