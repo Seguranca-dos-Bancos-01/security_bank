@@ -87,7 +87,7 @@ article {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: medium;
+    font-size: large;
     color: #333333;
 }
 
@@ -189,6 +189,10 @@ aside .nav-button {
     background-size: cover;
     width: 50%;
     height: 700px;
+}
+
+.imagem-sobre-nos img {        
+   display: none;
 }
 
 .texto-sobre-nos {
@@ -356,8 +360,7 @@ aside .nav-button {
     cursor: pointer;
     font-size: medium;
     font-weight: 500;
-    font-size: 20px;
-    padding: 1rem;
+    font-size: 20px;   
     border: none;
     height: 7vh;
     width: 13vw;

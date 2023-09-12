@@ -36,23 +36,22 @@
 
         <div class="banner">
             <aside>
-                <button class="banner-button">Entre em contato conosco</button>
+                <button class="banner-button" onclick="abaFaleConosco()">Entre em contato conosco</button>
                 <div>
                     <h1>A segurança que seu banco precisa!</h1>
                     <h4>Melhor monitoramento de Hardware para seu negócio!</h4>
                 </div>
                 <div class="btn-func">
-                    <button class="nav-button">Faça um orçamento</button>
-                    <button class="btn-player"><img src="./assets/Player.png" alt="">Ver simulação</button>
-                    <!-- <button></button>
-                        <button></button> -->
+                    <button class="nav-button" onclick="abaCadastro()">Faça um orçamento</button>
+                    <button class="btn-player" onclick="abaCadastro()"><img src="./assets/Player.png"
+                            alt="">Cadastre-se</button>
                 </div>
             </aside>
             <article>
                 <img src="./assets/zyro-image.png" alt="" width="100%">
             </article>
         </div>
-        <div style="background: url(../public/assets/ondas.png); width: 100%; height: 100vh; background-size: cover;">
+        <div style="background: url(../public/assets/ondas.png); width: 100%; height: 128vh; background-size: cover;">
             <div class="center-vertical">
                 <div class="linha-divisoria"></div>
                 <div class="Nossos-Diferenciais">
@@ -84,9 +83,9 @@
         </div>
 
         <div class="sobre-nos">
-            <div class="imagem-sobre-nos"></div>
+            <div class="imagem-sobre-nos"><img src="assets/imgAleatoria.png" alt=""></div>
             <div class="texto-sobre-nos">
-                <button class="sobre-nos-button">Conheça um pouco mais sobre nós.</button>
+                <button class="sobre-nos-button" onclick="abaCadastro()">Conheça um pouco mais sobre nós.</button>
                 <span>Sobre Nós</span>
                 <p>Nós somos uma empresa de tecnologia composta por uma equipe de 6 pessoas, nós monitoramos o
                     hardware da sua empresa, te deixando informado sobre aquilo que é necessário, para se caso
@@ -144,7 +143,7 @@
                         -webkit-text-fill-color: transparent;">Serviços</span></h2>
                 <p> Serviços que nossa empresa oferece: </p>
                 <ul>
-                    <li> Dois Servidores </li>
+                    <li> Notificações de Alerta </li>
                     <li> <b> Monitoramento 24/7</b> </li>
                     <li> Dashboards </li>
                 </ul>
@@ -153,7 +152,8 @@
         </div>
 
         <div class="redes">
-            <h2>Nós estamos nas <span style="color: #A14EEE">redes sociais</span> mais <span style="color: #A14EEE">importantes</span> para a área!</h2>
+            <h2>Nós estamos nas <span style="color: #A14EEE">redes sociais</span> mais <span
+                    style="color: #A14EEE">importantes</span> para a área!</h2>
 
             <div class="sociais">
                 <a href=""><img src="./assets/Whatsapp.png" alt=""></a>
@@ -195,3 +195,12 @@
 </body>
 
 </html>
+
+<script>
+    function abaFaleConosco() {
+        window.location = "faleconosco.html";
+    }
+    function abaCadastro() {
+        window.location = "cadastro.html";
+    }
+</script>
