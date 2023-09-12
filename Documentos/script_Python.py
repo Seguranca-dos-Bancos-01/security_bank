@@ -7,13 +7,19 @@ def monitorar_recursos(intervalo):
         uso_disco = psutil.disk_usage('/').percent
         uso_memoria = psutil.virtual_memory().percent
         rede = psutil.net_io_counters()
-        entrada = rede[4]
-        saida = rede[5]
+        entradaBytes = rede[0]
+        saidaBytes = rede[1]
+        entradaPacotes = rede[2]
+        saidaPacotes = rede[3]
+        errin = rede[4]
+        errout = rede[5]
         
         print(f"Uso da CPU: {uso_cpu}%")
         print(f"Uso do Disco: {uso_disco}%")
         print(f"Uso da Memória: {uso_memoria}%")
-        print(f'Errin:{entrada}\nErrout:{saida}')
+        print(f"Entrada de Bytes: {entradaBytes}\nSaída de Bytes: {saidaBytes}")
+        print(f"Entrada de Pacotes: {entradaPacotes}\nSaída de Pacotes: {saidaPacotes}")
+        print(f'Errin:{errin}\nErrout:{errout}')
         print("=" * 40)     
 
         time.sleep(intervalo)
