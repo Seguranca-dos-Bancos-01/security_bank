@@ -444,3 +444,7 @@ aside .nav-button {
 .direitos {
     text-shadow: none;
 }
+
+.container_footer {
+    height: 40vh;
+}
