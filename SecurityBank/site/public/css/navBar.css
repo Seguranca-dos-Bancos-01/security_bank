@@ -128,7 +128,8 @@ body {
     font-weight: 800;
     color: black;
     text-shadow: 3px 2px 3px rgb(93, 93, 93);
-    
+    position: relative;
+    top: 1rem;
 }
 
 .logo_footer_cadastro {
@@ -234,55 +235,8 @@ body {
     .nav.active .hamburger::after {
         transform: rotate(-135deg);
         top: -7px;
-    }
-
-    
-
-    .footer {   
-        width: 100%;   
-        color: #fff;    
-    }
-    
-    .container_footer {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        flex-direction: center;
-        width: 100%;
-    }
-    
-    
-    .direitos {
-        font-size: 12px;
-        font-weight: 800;
-        color: black;
-        text-shadow: 3px 2px 3px rgb(93, 93, 93);
-        
-    }
-    
-    .logo_footer_cadastro {
-        width: 33vh;
-        height: 8vh;
-        margin-top: 10vh;
-        position: relative;
-        left: 1rem;
-    }
-    
-    .linha {
-        height: 1px;
-        width: 100%;
-        background-color: black;
-        margin-top: 4vh;
-    }
-    
-    .logotext {
-        margin-top: 1vh;
-        text-align: center;
-        font-size: 12px;
-        width: 100%;
-        color: black;
-    }
+    }   
+   
 }
 
 

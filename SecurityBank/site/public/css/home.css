@@ -401,9 +401,10 @@ aside .nav-button {
 }
 
 .nossa-equipe h2 {
+    font-size: 4vh;
     position: relative;
-    top: 3rem;
-    left: 3rem;
+    top: 7rem;
+    left: 4rem;
     width: 5rem;
 }
 
@@ -411,27 +412,31 @@ aside .nav-button {
     display: flex;
     justify-content: space-evenly;
     position: relative;
-    right: 5rem;
+    right: 2rem;
+    padding: 5rem;
 }
 
 .rostos1 {
     display: flex;
     justify-content: space-evenly;
-    width: 95vw;
-    position: relative;
-    left: 3rem;
+    width: 80vw;
+    position: relative;    
+    bottom: 3rem;
+    gap: 5rem;
 }
 
 .rostos img {
     width: 15vw;
-    height: 30vh;
+    height: fit-content;
     border-radius: 999%;
 }
 
 .rostos1 img {
     width: 15vw;
-    height: 30vh;
+    height: fit-content;
     border-radius: 999%;
+    position: relative;
+    left: 15rem;
 }
 
 /* FOOTER */
@@ -447,4 +452,25 @@ aside .nav-button {
 
 .container_footer {
     height: 40vh;
+}
+
+@media (Max-width: 768px) {
+    .footer{
+        position: relative;
+        top: 15rem;
+    }
+    .container_footer {
+        height: 33vh;
+        position: relative;        
+    }
+
+    .logo_footer_cadastro {
+        position: relative;
+        top: 1rem;
+    }
+
+    .logotext {
+        position: relative;
+        top: 1rem;
+    }
 }
