@@ -5,7 +5,8 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Security Bank | Cadastro</title>
-  <link rel="stylesheet" href="css/navBar.css">
+  <link rel="stylesheet" href="css/navBar.css">  
+  <script defer src="js/navBar.js"></script>
   <link rel="shortcut icon" href="assets/logoEscudo.png" type="image/x-icon">
 </head>
 
@@ -19,24 +20,25 @@
   </head>
 
   <body onload="listar()">
-    <!-- Início NavBar -->
-    <div class="fundoRoxo"></div>
-    <div class="fundo">
-      <div class="nav">
-        <img src="../public/assets/logo.png" class="logo">
-        <div class="navBar">
-          <a href="index.html">Home</a>
-          <a href="login.html">Login</a>
-          <a href="">Sobre nós</a>
-          <a href="">Contato</a>
-          <a href="">Nossos serviços</a>
-          <div class="user">
-            <img src="../public/assets/user.png" alt="user">
-            <a href="cadastro.html"><button class="nav-button">Faça seu cadastro ➔</button></a>
-          </div>
-        </div>
-      </div>
-      <!--fim navBar-->
+     <!-- Início NavBar -->
+     <div class="fundoRoxo"></div>
+     <header class="header">
+         <nav class="nav">
+         <a href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></a>
+         <button class="hamburger"></button>
+             <ul class="nav-list">
+                 <li><a href="index.html">Home</a></li>
+                 <li><a href="login.html">Login</a></li>
+                 <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
+                 <li><a href="faleconosco.html">Fale Conosco</a></li>
+             </ul>
+             <div class="user">
+                 <img src="../public/assets/user.png" alt="user">
+                 <a href="cadastro.html"><button class="nav-button">Faça seu cadastro ➔</button></a>
+             </div>
+         </nav>
+     </header>
+     <!-- Fim NavBar -->
 
       <div class="alerta_erro">
         <div class="card_erro" id="cardErro">
@@ -47,9 +49,9 @@
         <div class="container">
           <div class="tituloCadastro"><img src="../public/assets/boasvindas_cadastro-removebg-preview.png" alt="Cadastro">
           </div>
-          <div class="card">
+          <div class="cardCadastro">
             <form>
-              <h1 class="titulo">Vamos Começar</h1>
+              <h1 class="titulo">Vamos Começar!</h1>
               <h3 class="subtitulo">A segurança que seu banco precisa!</h3>
               <div class="inputBox">
                 <input class="input" type="text" id="nome_input" name="nome" required="required" />

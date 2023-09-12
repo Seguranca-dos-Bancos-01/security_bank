@@ -5,13 +5,13 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-
     <title>Security Bank | Login</title>
-
     <script src="./js/sessao.js"></script>
+    <script defer src="js/navBar.js"></script>
     <link rel="shortcut icon" href="assets/logoEscudo.png" type="image/x-icon">
     <link rel="stylesheet" href="./css/login.css">
     <link rel="stylesheet" href="css/navBar.css">
+    <link rel="stylesheet" href="css/responsividade.css">
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -21,62 +21,62 @@
 <body>
     <!-- Início NavBar -->
     <div class="fundoRoxo"></div>
-    <div class="fundo">
-        <div class="nav">
-            <img src="../public/assets/logo.png" alt="" class="logo">
-            <div class="navBar">
-                <a href="index.html">Home</a>
-                <a href="login.html">Login</a>
-                <a href="">Sobre nós</a>
-                <a href="">Contato</a>
-                <a href="">Nossos serviços</a>
-                <div class="user">
-                    <img src="../public/assets/user.png" alt="user">
-                    <a href="cadastro.html"><button class="nav-button">Faça seu cadastro ➔</button></a>
-                </div>
+    <header class="header">
+        <nav class="nav">
+        <a href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></a>
+        <button class="hamburger"></button>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="login.html">Login</a></li>
+                <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
+                <li><a href="faleconosco.html">Fale Conosco</a></li>
+            </ul>
+            <div class="user">
+                <img src="../public/assets/user.png" alt="user">
+                <a href="cadastro.html"><button class="nav-button">Faça seu cadastro ➔</button></a>
             </div>
+        </nav>
+    </header>
+    <!-- Fim NavBar -->
+    <!-- Início Login -->
+    <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+            <span id="mensagem_erro"></span>
         </div>
-        <!-- Fim NavBar -->
-        <!-- Início Login -->
-        <div class="alerta_erro">
-            <div class="card_erro" id="cardErro">
-                <span id="mensagem_erro"></span>
-            </div>
-        </div>
-        <div class="pagina">
-            <div class="container">
-                <div class="fundoBolinha"><img src="../public/assets/bolinhaLogin.png" alt="Login">
+    </div>
+    <div class="pagina">
+        <div class="container">
+            <div class="fundoBolinha"><img src="../public/assets/bolinhaLogin.png" alt="Login">
                 <h1>Login</h1>
-                </div>
-                <div class="card">
-                    <form>
-                        <h1 class="titulo">Faça Seu Login</h1>
-                        <div class="inputBox">
-                            <input class="input" type="text" id="email_input" name="email" required="required" />
-                            <span>Email</span>
-                        </div>
-                        <div class="inputBox">
-                            <input class="input" type="password" id="senha_input" name="senha" required="required">
-                            <span>Senha</span>
-                        </div>
-                    </form>
-                    <button class="buttonlogin" onclick="entrar()">Login</button>
-                    <h5>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></h5>
-                </div>
-                <div class="ondasFundo"><img src="../public/assets/ondasLogin.png" alt="Ondas"></div>
-                <!--footer inicio-->
-                <!--footer fim-->
             </div>
+            <div class="card">
+                <form>
+                    <h1 class="titulo">Faça Seu Login</h1>
+                    <div class="inputBox">
+                        <input class="input" type="text" id="email_input" name="email" required="required" />
+                        <span>Email</span>
+                    </div>
+                    <div class="inputBox">
+                        <input class="input" type="password" id="senha_input" name="senha" required="required">
+                        <span>Senha</span>
+                    </div>
+                </form>
+                <button class="buttonlogin" onclick="entrar()">Login</button>
+                <h5>Não tem uma conta? <a href="cadastro.html">Cadastre-se</a></h5>
+            </div>
+            <div class="ondasFundo"><img src="../public/assets/ondasLogin.png" alt="Ondas"></div>
+            <!--footer inicio-->
+            <!--footer fim-->
         </div>
-        <!-- Fim Login -->
-        <div id="div_aguardar" class="loading-div"></div>
-        <div id="div_erros_login"></div>
+    </div>
+    <!-- Fim Login -->
+    <div id="div_aguardar" class="loading-div"></div>
+    <div id="div_erros_login"></div>
 
 
 </body>
 
 </html>
-
 <script>
 
     function entrar() {

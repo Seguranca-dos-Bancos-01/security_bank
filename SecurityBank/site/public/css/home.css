@@ -38,7 +38,7 @@ aside {
     width: 50%;
     height: 80vh;
     padding: 1% 8%;
-}
+}   
 
 aside h1 {
     font-size: 7vh;
@@ -56,7 +56,7 @@ article {
     display: flex;
     align-items: center;
     width: 50%;
-    height: 100vh;
+    height: 80vh;
 }
 
 .btn-func {
@@ -87,7 +87,7 @@ article {
     background: none;
     border: none;
     cursor: pointer;
-    font-size: medium;
+    font-size: large;
     color: #333333;
 }
 
@@ -98,7 +98,8 @@ aside .nav-button {
     font-size: large;
     font-weight: 700;
     line-height: 30px;
-    padding: 10px 20px;
+    padding: 1rem;
+    width: 13rem;
     border: none;
 }
 
@@ -184,10 +185,14 @@ aside .nav-button {
 }
 
 .imagem-sobre-nos {
-    background: url(../assets/imgSobre-Nos.png);
+    background: url(../assets/imgAleatoria.png);
     background-size: cover;
     width: 50%;
     height: 700px;
+}
+
+.imagem-sobre-nos img {        
+   display: none;
 }
 
 .texto-sobre-nos {
@@ -244,4 +249,198 @@ aside .nav-button {
     font-family: 'Inter';
     color: #444444;
     font-weight: bold;
+}
+
+.como-fazemos {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+}
+
+.article1 h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    width: 80%;
+}
+
+.article1 p {
+    font-size: 1.5rem;
+    color: #444444;
+    text-align: justify;
+    width: 80%;
+}
+
+.como-vera {
+    background-color: rgba(168, 128, 255, 0.5);
+    width: 80%;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+
+.como-vera h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6953D3;
+}
+
+.como-vera p {
+    font-size: 1.5rem;
+    color: white;
+    font-family: 'Inter';
+    line-height: 2.0;
+    text-align: justify;
+    width: 100%;
+}
+
+.article1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 50%;
+    height: 100vh;
+}
+
+.aside1 {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100vh;
+    padding: 0;
+}
+
+.nossos-servicos {
+    display: flex;
+    background-color: #fff;
+}
+
+.imagem-nossos-servicos {
+    display: flex;
+    width: 50%;
+    height: 100vh;
+    align-items: center;
+}
+
+.texto-nossos-servicos {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 100vh;
+    align-items: start;
+    justify-content: space-evenly;
+}
+
+.texto-nossos-servicos h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: center;
+    margin-bottom: 0;
+}
+
+.texto-nossos-servicos p {
+    font-size: 1.5rem;
+    color: #444444;
+    margin-top: 0;
+}
+
+.texto-nossos-servicos ul li {
+    font-size: 1.5rem;
+    color: #444444;
+    text-align: justify;
+    width: 100%;
+}
+
+.nossos-servicos-button {
+    background-color: #6953D3;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: 500;
+    font-size: 20px;   
+    border: none;
+    height: 7vh;
+    width: 13vw;
+}
+
+.redes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80vh;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #F9F4F4;
+    background-image: url(../assets/header_4_bubble\ 1.png);
+}
+
+.sociais {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.Linkedin {
+    display: flex;
+    align-items: end;
+    cursor: pointer;
+}
+
+.nossa-equipe {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: url(../assets/contact_globe\ 1.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    justify-content: space-evenly;
+}
+
+.nossa-equipe h2 {
+    position: relative;
+    top: 3rem;
+    left: 3rem;
+    width: 5rem;
+}
+
+.rostos {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    right: 5rem;
+}
+
+.rostos1 {
+    display: flex;
+    justify-content: space-evenly;
+    width: 95vw;
+    position: relative;
+    left: 3rem;
+}
+
+.rostos img {
+    width: 15vw;
+    height: 30vh;
+    border-radius: 999%;
+}
+
+.rostos1 img {
+    width: 15vw;
+    height: 30vh;
+    border-radius: 999%;
+}
+
+/* FOOTER */
+
+.footer {
+    background: url(../assets/ondas.png);
+    background-size: cover;
+}
+
+.direitos {
+    text-shadow: none;
 }
