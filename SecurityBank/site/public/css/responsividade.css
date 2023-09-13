@@ -278,7 +278,7 @@
     .linha3 .placeholder {
         width: 80vw;
         position: relative;
-        top: 1rem;
+        top: 1.5rem;
     }
 
     .mensagem {
@@ -286,6 +286,7 @@
         height: 20vh;
         border-radius: 1rem;
         position: relative;
+        top: 0.5rem;
         right: 2.3rem;
     }
 

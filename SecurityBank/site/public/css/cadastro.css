@@ -19,7 +19,7 @@ body {
   height: auto;
   flex-direction: column;
   align-self: center;
-  padding: 2rem;
+  padding: 3rem 0rem 3rem 0rem;
   border-radius: 1.5rem;
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514); 
   border: #8473db90 0.1rem solid;   
