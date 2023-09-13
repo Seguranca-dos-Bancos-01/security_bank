@@ -30,11 +30,19 @@ body {
   text-align: center;
 }
 
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  /* position: relative;
+  right: 2.5rem; */
+}
+
 .inputBox {
   position: relative;
   width: 20rem;
   text-align: start;
-  left: 2rem;
+  right: 0.5rem;
 }
 
 .inputBox input {
@@ -295,6 +303,7 @@ color: #8573DB;
   width: 15rem;
   text-align: start;
   align-self: center;
+  left: 2.8rem;
 }
 
 .inputBox input {

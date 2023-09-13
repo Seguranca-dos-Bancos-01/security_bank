@@ -107,6 +107,7 @@
         width: 15rem;
         text-align: start;
         align-self: center;
+        left: 1.3rem;
     }
 
     .inputBox input {
@@ -155,19 +156,19 @@
         border-radius: 10px;
         border-style: none;
         position: relative;
-        left: 0.3rem;
+        left: 1.5rem;
         top: 0.5rem;
     }
 
     .card h1 {
         position: relative;
-        left: 1rem;
+        left: 1.8rem;
     }
 
     .card h5 {
         position: relative;
         top: 2rem;
-        left: 1rem;
+        left: 1.5rem;
     }
 
     .card a {
