@@ -103,6 +103,60 @@ body {
     display: none;
 }
 
+.nav .nav-list a:hover {
+    color: #8473db;
+    transition: 0.3s;
+}
+
+.footer {   
+    width: 100%;   
+    color: #fff;    
+}
+
+.container_footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-direction: center;
+    width: 100%;
+}
+
+
+.direitos {
+    font-size: 12px;
+    font-weight: 800;
+    color: black;
+    text-shadow: 3px 2px 3px rgb(93, 93, 93);
+    position: relative;
+    top: 1rem;
+}
+
+.logo_footer_cadastro {
+    width: 33vh;
+    height: 8vh;
+    margin-top: 10vh;
+    position: relative;
+    left: 1rem;
+}
+
+.linha {
+    height: 1px;
+    width: 100%;
+    background-color: black;
+    margin-top: 4vh;
+}
+
+.logotext {
+    margin-top: 1vh;
+    text-align: center;
+    font-size: 12px;
+    width: 100%;
+    color: black;
+}
+
+
+
 @media (max-width: 768px) {
 
     .user {
@@ -181,111 +235,9 @@ body {
     .nav.active .hamburger::after {
         transform: rotate(-135deg);
         top: -7px;
-    }
-
-    .nav .nav-list a:hover {
-        color: #8473db;
-        transition: 0.3s;
-    }
-
-    .logo_footer_cadastro{
-        width: 35vw;
-        height: 8vh;        
-        position: relative;
-        top: 2rem;
-        left: 1rem;
-    }
-    .container_footer {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        align-items: center;
-        justify-content: center;
-    }
-    
-    
-    .direitos {    
-        font-size: 12px;
-        font-weight: 800;
-        color: black;
-        text-shadow: 3px 2px 3px rgb(93, 93, 93);
-        position: relative;
-        left: 1rem;
-    }
-    
-    .logo_footer_cadastro {
-        width: 33vh;
-        height: 8vh;
-        margin-top: 10vh;
-        position: relative;
-        left: 1rem;
-    }
-    
-    .linha {
-        height: 1px;
-        width: 100%;
-        background-color: black;
-        margin-top: 4vh;
-    }
-    
-    .logotext {
-        margin-top: 1vh;
-        text-align: center;
-        font-size: 12px;
-        width: 100%;
-        color: black;
-        position: relative;
-        top: 2rem;
-    }
-}
-
-.footer {
-    /* height: 30vh; */
-    width: 100%;
-    /* background-color: rgba(105, 83, 211, 0.53); */
-    color: #fff;
-    /* background-color: rgba(105, 83, 211, 0.53); */
-}
-
-.container_footer {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    flex-direction: center;
-    width: 100%;
+    }   
+   
 }
 
 
-.direitos {
-
-    font-size: 12px;
-    font-weight: 800;
-    color: black;
-    text-shadow: 3px 2px 3px rgb(93, 93, 93);
-    position: relative;
-    left: 1rem;
-}
-
-.logo_footer_cadastro {
-    width: 33vh;
-    height: 8vh;
-    margin-top: 10vh;
-    position: relative;
-    left: 1rem;
-}
-
-.linha {
-    height: 1px;
-    width: 100%;
-    background-color: black;
-    margin-top: 4vh;
-}
-
-.logotext {
-    margin-top: 1vh;
-    text-align: center;
-    font-size: 12px;
-    width: 100%;
-    color: black;
-}
+   

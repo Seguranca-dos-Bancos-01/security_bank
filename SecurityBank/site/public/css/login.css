@@ -19,15 +19,25 @@ body {
   width: 27vw;
   flex-direction: column;
   align-self: center;
-  padding: 5rem 1rem 5rem 2rem;
+  padding: 5rem 1rem 5rem 1rem;
   border-radius: 1.5rem;
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
   border: #8473db90 0.1rem solid;
   position: relative;
-  top: 13rem;
+  top: 20rem;
   right: 16rem;
   z-index: 2;
   text-align: center;
+  align-items: center;
+}
+
+form {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  width: 100%;
+  position: relative;
+  right: 0.5rem;
 }
 
 .inputBox {
@@ -117,13 +127,14 @@ body {
   background-size: cover;
   width: 98.7vw;
   height: 20rem;
-
+  position: relative;
+  top: 14rem;
 }
 
 .fundoBolinha h1 {
   width: 10rem;
   position: relative;
-  top: 15rem;
+  top: 21rem;
   left: 62rem;
 }
 
@@ -133,7 +144,7 @@ body {
   width: 25vw;
   height: fit-content;
   position: relative;
-  top: 24rem;
+  top: 30rem;
   left: 55rem;
 }
 
@@ -184,4 +195,36 @@ body {
   flex-direction: column;
   overflow: scroll;
   height: var(--tamanho-simulador);
+}
+
+.container_footer {
+  height: 33vh;
+  position: relative;        
+}
+
+.logo_footer_cadastro {
+  position: relative;
+  top: 1rem;
+}
+
+.logotext {
+  position: relative;
+  top: 1rem;
+}
+
+@media (Max-width: 768px) {  
+  .container_footer {
+      height: 33vh;
+      position: relative;        
+  }
+
+  .logo_footer_cadastro {
+      position: relative;
+      top: 1rem;
+  }
+
+  .logotext {
+      position: relative;
+      top: 1rem;
+  }
 }
