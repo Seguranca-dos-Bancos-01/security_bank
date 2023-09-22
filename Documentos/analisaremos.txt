@@ -1,5 +1,0 @@
-Ver os a memória usada
-frequencia da cpu
-porcentagem da cpu
-porcentagem do disco
-qual das cpu's está sendo usada
