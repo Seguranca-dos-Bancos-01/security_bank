@@ -17,7 +17,7 @@ body {
 .fundoRoxo {
     width: 100%;
     height: 10vh;
-    background: url(../assets/header.jpg);
+   background-color: #6953D3;
     background-size: cover;
 }
 
@@ -46,7 +46,7 @@ body {
 
 .nav-list {
     display: flex;
-    gap: 7rem;
+    gap: 2rem;
 }
 
 .nav-list a {
@@ -88,15 +88,16 @@ body {
 .nav-button {
     background: none;
     border-radius: 9vh;
-    color: #444444;
+    color: #8473db;
     cursor: pointer;
     font-weight: 600;
-    line-height: 3vh;
+    line-height: 2vh;
     padding: 0.6rem;
-    width: 10rem;
-    border: 2px solid #444444;
+    width: 5rem;
+    border: 2px solid #8473db;
     position: relative;
     bottom: 0.2rem;
+  
 }
 
 .cadastroMobile {
@@ -155,7 +156,10 @@ body {
     color: black;
 }
 
-
+.btn-baixo{
+    display: flex;
+    
+}
 
 @media (max-width: 768px) {
 
