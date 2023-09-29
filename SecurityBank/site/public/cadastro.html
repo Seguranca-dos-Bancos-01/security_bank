@@ -83,6 +83,7 @@
               </div>
             </form>
             <button class="buttonlogin" onclick="cadastrar()">Cadastrar</button>
+            <span class="loginDireto">Ja tem uma conta?</span>
           </div>
           <div class="ondasFundo">
             <img src="../public/assets/ondasLogin.png" alt="Ondas">
@@ -111,15 +112,15 @@
     var emailVar = email_input.value;
     var senhaVar = senha_input.value;
     var confirmacaoSenhaVar = confirmacao_senha_input.value;
-    var empresaVar = listaEmpresas.value;
+    var empresaVar = nomeEmpresa_input.value;
     var cpfVar = cpf_input.value;
-    var telefoneVar = telefone_input;
+    var telefoneVar = telefone_input.value;
     if (
       nomeVar == "" ||
       emailVar == "" ||
       senhaVar == "" ||
       confirmacaoSenhaVar == "" ||
-      empresaVar == "" || cpfVar == ""
+      empresaVar == "" || cpfVar == ""|| telefoneVar == ""
     ) {
       cardErro.style.display = "block";
       mensagem_erro.innerHTML =
@@ -146,7 +147,7 @@
         empresaServer: empresaVar,
         cpfServer: cpfVar,
         confServer: confirmacaoSenhaVar,
-        telefoneServer: telefone_input
+        telefoneServer: telefoneVar,
       }),
     })
       .then(function (resposta) {
@@ -176,21 +177,21 @@
     return false;
   }
 
-  function listar() {
-    fetch("/empresas/listar", {
-      method: "GET",
-    })
-      .then(function (resposta) {
-        resposta.json().then((empresas) => {
-          empresas.forEach((empresa) => {
-            listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
-          });
-        });
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-      });
-  }
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
 
   function sumirMensagem() {
     cardErro.style.display = "none";
