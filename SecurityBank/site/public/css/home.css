@@ -124,6 +124,9 @@ aside .nav-button {
     text-align: center;
     padding-top: 20px;
     position: relative;
+    width: 100%;
+    /* height: 200vh; */
+    
 }
 
 
@@ -135,50 +138,45 @@ aside .nav-button {
     font-size: 5vh;
     font-weight: bold;
     color: #333333;
+    
 }
 
 .conteudo {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
+    justify-content: space-around;
     margin-top: 20px;
 }
 
+.Planobasico {
+    width: 50vh;
+    height: 70vh;
+    background-color: #6853d367;
+    border-radius: 5vh;
+    border: solid 1vh #6953D3;
+   
+}
 
-
-.seguranca,
-.foco,
-.cliente,
-.tempo,
-.projeto {
+.plano_basico_texto_icone {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 50%;
-    margin-left: 10%;
 }
 
-.seguranca img,
-.foco img,
-.tempo img,
-.cliente img,
-.projeto img {
-    height: 20vh;
-    width: 20vh;
-    margin-bottom: 17px;
+.Planobasico .h1 {
+    color:  #6953D3;
 }
 
-.seguranca p,
-.foco p,
-.tempo p,
-.cliente p,
-.projeto p {
-    font-size: 18px;
-    font-family: 'Inter';
-    color: #444444;
-    font-weight: bold;
+.planoPremium {
+    width: 50vh;
+    height: 85vh;
+    background-color: #961ff9;
+    border-radius: 5vh;
 }
 
+.texto_planos > h4{
+    /* width: 80%; */
+    height: 5vh;
+    text-align: left;
+}
 .sobre-nos {
     display: flex;
     background-color: #fff;
