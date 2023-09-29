@@ -25,7 +25,7 @@ body {
   border: #8473db90 0.1rem solid;
   position: relative;
   top: 20rem;
-  right: 16rem;
+  /* right: 16rem; */
   z-index: 2;
   text-align: center;
   align-items: center;
@@ -134,8 +134,9 @@ form {
 .fundoBolinha h1 {
   width: 10rem;
   position: relative;
-  top: 21rem;
-  left: 62rem;
+  top: 17rem;
+  left: 52rem;
+  font-size: 8vh;
 }
 
 .fundoBolinha img {
@@ -145,7 +146,7 @@ form {
   height: fit-content;
   position: relative;
   top: 30rem;
-  left: 55rem;
+  left: 45rem;
 }
 
 /* Inicio mensagens */

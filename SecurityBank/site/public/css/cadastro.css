@@ -24,8 +24,8 @@ body {
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514); 
   border: #8473db90 0.1rem solid;   
   position: relative;
-  top: 23rem;
-  left: 20rem;
+  top: 20rem;
+  
   z-index: 2;  
   text-align: center;
 }
@@ -132,11 +132,11 @@ color: #8573DB;
 .tituloCadastro {  
   background-size: cover;
   background-position: 100%;
-  width: 25vw;
-  height: 13rem;
+  width: 30vw;
+  height: 23rem;
   position: relative;
-  top: 30rem;
-  left: 5rem;
+  top: 20rem;
+  left: 43rem;
 }    
 
 /* Inicio mensagens */
@@ -264,14 +264,11 @@ color: #8573DB;
     height: fit-content;
     margin-left: 1rem;
 }
-
 .fundoRoxo {
   width: 100%;
-  height: 10vh;
   background: url(../assets/header.jpg);
   background-size: cover;
 }
-
   /* Início Cadastro */
   .tituloCadastro img {
     width: 75vw;
