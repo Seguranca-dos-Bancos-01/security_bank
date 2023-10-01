@@ -431,15 +431,16 @@ aside .nav-button {
     background-repeat: no-repeat;
     background-position: right;
     justify-content: space-evenly;
+    background-color: rgba(0,0,0,0.1);
 }
 
-.nossa-equipe h2 {
+/* .nossa-equipe h2 {
     font-size: 4vh;
     position: relative;
     top: 7rem;
     left: 4rem;
     width: 5rem;
-}
+} */
 
 .rostos {
     display: flex;
@@ -506,4 +507,99 @@ aside .nav-button {
         position: relative;
         top: 1rem;
     }
+}
+
+/* Banner nossa equipe */
+
+.bannerEquipe {
+    height: 60vh;
+    background-color: #bf73004a;
+}
+
+.tituloBannerEquipe {
+    text-align: center;
+    font-size: 2rem;
+    color: #BF7300;
+    padding: 5vh 0vh;
+}
+
+#destaqueEquipe {
+    color: #764701;
+}
+
+.blocoBannerEquipe {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.cardBannerEquipe2{
+    width: 20%;
+    height: 50vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    text-align: center;
+
+}
+.cardBannerEquipe {
+    width: 20%;
+    height: 50vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    text-align: center;
+}
+.cardBannerEquipe3{
+    width: 20%;
+    height: 50vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    text-align: center;
+
+}
+
+.imgBannerEquipe {
+    height: 20vh;
+    width: 20vh;
+    border-radius: 100%;
+}
+.subtituloBannerEquipe {
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #063940;
+}
+
+.textoBannerEquipe {
+    color: #3E838C;
+}
+
+.setaBannerEquipe {
+    height: 10vh;
+}
+
+.botaoSeta {
+    border: none;
+    background-color: #bf730000;
+    cursor: pointer;
+}
+.inove{
+width: 40%;
+
+}
+.nossa-equipe h2{
+    width: 100vh;
+    margin-left:50vh;
+    text-align: center;
+    margin-top: 0vh;
+    font-size: 5vh;
 }

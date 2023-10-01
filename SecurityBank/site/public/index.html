@@ -242,20 +242,35 @@
         </div>
 
         <div class="nossa-equipe">
-            <h2> Nossa <span style="background: linear-gradient(90deg, #6953D3 0%, #8566F1 33.33%, #A14EEE 66.67%, #F98085 100%);
+            <h2> Conheça nossa <br><span style="background: linear-gradient(90deg, #6953D3 0%, #8566F1 33.33%, #A14EEE 66.67%, #F98085 100%);
                 background-clip: text;
                 -webkit-background-clip: text;
-                -webkit-text-fill-color: transparent;">Equipe</span></h2>
-            <div class="rostos">
-                <img src="./assets/christian.jpg" alt="">
-                <img src="./assets/tiago.jpg" alt="">
-                <img src="./assets/livia.jpg" alt="">
-            </div>
-            <div class="rostos1">
-                <img src="./assets/guilherme.jpg" alt="">
-                <img src="./assets/eduardo.jpg" alt="">
-                <img src="./assets/isabel.jpg" alt="">
-            </div>
+                -webkit-text-fill-color: transparent;">Equipe de desenvolvimento</span></h2>
+                 <div class="blocoBannerEquipe" id="equipe">
+                    <button onclick="equipe1()" class="botaoSeta"><img class="setaBannerEquipe" src="assets/esquerda.png" alt=""></button>
+                    <div id="card1Equipe" class="cardBannerEquipe">
+                        <img src="assets/pedro_pauloIMG.jpeg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Pedro Paulo</p>
+                            <p class="textoBannerEquipe">Analista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card2Equipe" class="cardBannerEquipe2">
+                        <img src="assets/natalia.png" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Natália Russo</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card3Equipe" class="cardBannerEquipe3">
+                        <img src="assets/marchi.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Gustavo Marchi</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+                   <button class="botaoSeta" onclick="equipe2()"><img class="setaBannerEquipe" src="assets/direita.png" alt=""></button> 
+                </div>
         </div>
 
         <footer class="footer">
@@ -278,5 +293,63 @@
     }
     function abaCadastro() {
         window.location = "cadastro.html";
+    }
+</script>
+<script>
+    function equipe2() {
+        equipe.innerHTML = `
+        <button onclick="equipe1()" class="botaoSeta"><img class="setaBannerEquipe" src="assets/esquerda.png" alt=""></button>
+        <div id="card1Equipe" class="cardBannerEquipe">
+                        <img src="assets/schiavo.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Gabriel Schiavo</p>
+                            <p class="textoBannerEquipe">Analista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card2Equipe" class="cardBannerEquipe2">
+                        <img src="assets/marcela.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Marcela Custódio</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card3Equipe" class="cardBannerEquipe3">
+                        <img src="assets/bernardo.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Bernardo Rocha</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+           <button class="botaoSeta" onclick="equipe1()"><img class="setaBannerEquipe" src="assets/direita.png" alt=""></button>
+        `
+    }
+
+
+    function equipe1() {
+        equipe.innerHTML = `
+        <button onclick="equipe2()" class="botaoSeta"><img class="setaBannerEquipe" src="assets/esquerda.png" alt=""></button>
+        <div id="card1Equipe" class="cardBannerEquipe">
+                        <img src="assets/pedro_pauloIMG.jpeg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Pedro Paulo</p>
+                            <p class="textoBannerEquipe">Analista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card2Equipe" class="cardBannerEquipe2">
+                        <img src="assets/natalia.png" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Natália Russo</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card3Equipe" class="cardBannerEquipe3">
+                        <img src="assets/marchi.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Gustavo Marchi</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+           <button class="botaoSeta" onclick="equipe2()"><img class="setaBannerEquipe" src="assets/direita.png" alt=""></button>
+        `
     }
 </script>
