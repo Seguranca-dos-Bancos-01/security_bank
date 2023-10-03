@@ -123,7 +123,7 @@ aside .nav-button {
 
 .Nossos-Diferenciais {
     text-align: center;
-    padding-top: 20px;
+    padding-top: 20vh;
     position: relative;
 
 }
@@ -138,7 +138,7 @@ aside .nav-button {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
-    /* margin-top: 20px; */
+    margin-top: 10vh;
 }
 
 .Planobasico {
@@ -154,12 +154,19 @@ aside .nav-button {
     display:  flex;
     width: 100%;
     height: 30px;
+    margin-left: 5vh;
+    
+}
+
+.TxtIndidualPlano > h4 {
+    
 }
 
 
 .TxtIndidualPlano > img{
-    width: 15%;
-    height: 30px;
+    width: 16%;
+    height: 4vh;
+    
 }
 
 .plano_basico_texto_icone {
@@ -181,6 +188,7 @@ aside .nav-button {
 
 .planoPremium > h1{
   color: white;
+  margin-bottom: 5vh;
 }
 
 .bloco_plano_basico{
@@ -188,11 +196,13 @@ aside .nav-button {
 }
 
 .bloco_plano_Premium {
-    margin-top: 6vh;
+    margin-top: 11vh;
+    
 }
 
 .Planobasico > h1{
     color: #6953D3;
+    margin-bottom: 5vh;
 }
 
 .texto_planos > h4{
