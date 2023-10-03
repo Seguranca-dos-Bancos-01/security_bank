@@ -116,7 +116,7 @@
   position: relative;
   top: 0;
   left: 20%;
-  background-color: #e7e7e7;
+  background-color: #FAFBFF;
   height: 100vh;
   overflow: auto;
 }
@@ -295,22 +295,45 @@ canvas {
   flex-direction: column;
   align-items: center;
   justify-content: center;
-  background-color: rgba(105, 83, 211, 0.10);
+  background-color: rgba(105, 83, 211, 0.1);
   width: 128px;
   height: 38px;
   margin-top: -20px;
+  border-radius: 10px;
 }
 .TipoAcesso span{
   display: flex;
 }
 .opcao{
-  font-size: 15px;
+  font-size: 20px;
 }
 .opcoes{
-  font-size: 14px;
+  font-size: 18px;
   margin-top: -10px;
+  font-weight: 500;
 }
+
+.opcoes a span {
+  margin-left: 5px;
+}
+
+.opcoes a img {
+  width: 20px;
+  height: 20px;
+}
+
 .linha{
-  border-bottom: solid 3px #000F53;
+  border-bottom: solid 1px #000F53;
   width: 236px;
+}
+
+.localizacao {
+  background-color: rgba(0, 15, 83, 0.19);
+  border-radius: 10px;
+  width: 220px;
+  height: 40px;
+  display: flex;
+  justify-content: flex-start;
+  align-items: center;
+  padding: 0px 10px;
 }
