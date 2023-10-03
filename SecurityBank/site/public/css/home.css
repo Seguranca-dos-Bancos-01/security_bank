@@ -588,9 +588,11 @@ aside .nav-button {
 }
 
 .botaoSeta {
-    border: none;
-    background-color: #bf730000;
-    cursor: pointer;
+    background-color: #6953D3;
+    width: 4vh;
+    height: 2vh;
+    border-radius: 20px;
+    border: none
 }
 .inove{
 width: 40%;
@@ -600,6 +602,15 @@ width: 40%;
     width: 100vh;
     margin-left:50vh;
     text-align: center;
-    margin-top: 0vh;
+    margin-top: 5vh;
     font-size: 5vh;
+    margin-bottom: 7vh;
+}
+.botoes{
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+}
+.botoes button{
+    margin: 1vh;
 }

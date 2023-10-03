@@ -247,7 +247,6 @@
                 -webkit-background-clip: text;
                 -webkit-text-fill-color: transparent;">Equipe de desenvolvimento</span></h2>
                  <div class="blocoBannerEquipe" id="equipe">
-                    <button onclick="equipe1()" class="botaoSeta"><img class="setaBannerEquipe" src="assets/esquerda.png" alt=""></button>
                     <div id="card1Equipe" class="cardBannerEquipe">
                         <img src="assets/pedro_pauloIMG.jpeg" alt="" class="imgBannerEquipe">
                         <div>
@@ -269,7 +268,10 @@
                             <p class="textoBannerEquipe">Análista de Sistemas</p>
                         </div>
                     </div>
-                   <button class="botaoSeta" onclick="equipe2()"><img class="setaBannerEquipe" src="assets/direita.png" alt=""></button> 
+                </div>
+                <div class="botoes">
+                    <button class="botaoSeta" onclick="equipe1()"></button>
+                    <button onclick="equipe2()" class="botaoSeta"></button> 
                 </div>
         </div>
 
@@ -298,7 +300,6 @@
 <script>
     function equipe2() {
         equipe.innerHTML = `
-        <button onclick="equipe1()" class="botaoSeta"><img class="setaBannerEquipe" src="assets/esquerda.png" alt=""></button>
         <div id="card1Equipe" class="cardBannerEquipe">
                         <img src="assets/schiavo.jpg" alt="" class="imgBannerEquipe">
                         <div>
@@ -307,27 +308,25 @@
                         </div>
                     </div>
                     <div  id="card2Equipe" class="cardBannerEquipe2">
-                        <img src="assets/marcela.jpg" alt="" class="imgBannerEquipe">
+                        <img src="assets/Marcela.jpg" alt="" class="imgBannerEquipe">
                         <div>
-                            <p class="subtituloBannerEquipe">Marcela Custódio</p>
+                            <p class="subtituloBannerEquipe">Marcela Greco</p>
                             <p class="textoBannerEquipe">Análista de Sistemas</p>
                         </div>
                     </div>
                     <div  id="card3Equipe" class="cardBannerEquipe3">
-                        <img src="assets/bernardo.jpg" alt="" class="imgBannerEquipe">
+                        <img src="assets/Bernardo.jpg" alt="" class="imgBannerEquipe">
                         <div>
                             <p class="subtituloBannerEquipe">Bernardo Rocha</p>
                             <p class="textoBannerEquipe">Análista de Sistemas</p>
                         </div>
                     </div>
-           <button class="botaoSeta" onclick="equipe1()"><img class="setaBannerEquipe" src="assets/direita.png" alt=""></button>
         `
     }
 
 
     function equipe1() {
         equipe.innerHTML = `
-        <button onclick="equipe2()" class="botaoSeta"><img class="setaBannerEquipe" src="assets/esquerda.png" alt=""></button>
         <div id="card1Equipe" class="cardBannerEquipe">
                         <img src="assets/pedro_pauloIMG.jpeg" alt="" class="imgBannerEquipe">
                         <div>
@@ -349,7 +348,6 @@
                             <p class="textoBannerEquipe">Análista de Sistemas</p>
                         </div>
                     </div>
-           <button class="botaoSeta" onclick="equipe2()"><img class="setaBannerEquipe" src="assets/direita.png" alt=""></button>
         `
     }
 </script>
