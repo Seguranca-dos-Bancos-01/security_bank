@@ -97,7 +97,15 @@ body {
     border: 2px solid #8473db;
     position: relative;
     bottom: 0.2rem;
+    cursor: pointer;
+    transition: 0.5s;
   
+}
+
+.nav-button:hover {
+    background-color: #8473db;
+    color: white;
+    
 }
 
 .cadastroMobile {
