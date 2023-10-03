@@ -103,12 +103,12 @@ aside .nav-button {
     border: none;
 }
 
-.center-vertical {
+/* .center-vertical {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-}
+} */
 
 /* .linha-divisoria {
     position: absolute;
@@ -120,14 +120,12 @@ aside .nav-button {
     z-index: 1;
 } */
 
+
 .Nossos-Diferenciais {
     text-align: center;
     padding-top: 20px;
     position: relative;
-    width: 100%;
-    /* height: 200vh; */
-    margin-top: 60vh;
-    
+
 }
 
 .plano_roxo {
@@ -135,16 +133,6 @@ aside .nav-button {
 }
 
 
-
-.Nossos-Diferenciais h1 {
-    /* margin-top: 5%; */
-    margin-bottom: 5%;
-    font-family: 'Inter' sans-serif;
-    font-size: 5vh;
-    font-weight: bold;
-    color: #333333;
-    
-}
 
 .conteudo {
     display: flex;
@@ -218,7 +206,7 @@ aside .nav-button {
 }
 
 .imagem-sobre-nos {
-    background: url(../assets/imgAleatoria.png);
+    background: url(SecurityBank/site/public/assets/imgs/tablet.png);
     background-size: cover;
     width: 50%;
     height: 700px;
@@ -227,6 +215,7 @@ aside .nav-button {
 .imagem-sobre-nos img {        
    display: none;
 }
+
 
 .texto-sobre-nos {
     display: flex;
@@ -263,6 +252,7 @@ aside .nav-button {
     width: fit-content;
     border: none;
 }
+
 
 
 .item {
@@ -358,30 +348,33 @@ aside .nav-button {
 }
 
 .texto-nossos-servicos {
-    display: flex;
+     display: flex;
     flex-direction: column;
-    width: 50%;
+
     height: 100vh;
     align-items: start;
+    text-align: justify;
     justify-content: space-evenly;
+    margin-left: 10vh; 
+
+    font-size: 20px;
+    color: #4444449a;
+    text-align: justify;
+    width: 60%;
 }
 
 .texto-nossos-servicos h2 {
+    display: flex;
+    flex-direction: column;
     font-size: 2.5rem;
     font-weight: bold;
-    text-align: center;
+    text-align: justify;
     margin-bottom: 0;
-}
-
-.texto-nossos-servicos p {
-    font-size: 1.5rem;
-    color: #444444;
-    margin-top: 0;
+    color: black;
 }
 
 .texto-nossos-servicos ul li {
-    font-size: 1.5rem;
-    color: #444444;
+    color: #561183;
     text-align: justify;
     width: 100%;
 }
@@ -398,7 +391,6 @@ aside .nav-button {
     height: 7vh;
     width: 13vw;
 }
-
 .redes {
     display: flex;
     flex-direction: column;
