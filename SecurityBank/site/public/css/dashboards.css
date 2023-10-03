@@ -1,9 +1,6 @@
 /* pagina mural */
-
-*,
-body {
-  font-family: "Exo 2", sans-serif;
-}
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
 
 .label-captura {
   display: flex;
@@ -44,7 +41,7 @@ body {
   width: 100%;
   /* color: #E6005A; */
   border: 3px solid #e6005a;
-  background-color: white;
+  background-color: #FAFBFF;
   border-radius: 5px;
 }
 
@@ -56,7 +53,7 @@ body {
   font-weight: 600;
   font-size: 18px;
   padding: 10px 15px;
-  color: white;
+  color: #FAFBFF;
   background-color: #e6005a;
   width: 120px;
 }
@@ -69,7 +66,7 @@ body {
   font-weight: 600;
   font-size: 14px;
   padding: 5px 8px;
-  color: white;
+  color: #FAFBFF;
   background-color: #e6005a;
   width: 80px;
 }
@@ -94,7 +91,7 @@ body {
 }
 
 .div-results .feed-container {
-  background-color: #212124;
+  background-color: #FAFBFF;
   border-radius: 5px;
   margin-bottom: 80px;
 }
@@ -111,7 +108,7 @@ body {
 /* pagina graficos */
 
 .dash-header {
-  background-color: #212124;
+  background-color: #FAFBFF;
 }
 
 .dash {
@@ -119,7 +116,7 @@ body {
   position: relative;
   top: 0;
   left: 20%;
-  background-color: #161618;
+  background-color: #e7e7e7;
   height: 100vh;
   overflow: auto;
 }
@@ -178,7 +175,7 @@ body {
   text-align: center;
   height: 180px;
   justify-content: right;
-  background-color: #212124;
+  background-color: #ffffff;
   font-size: 20px;
 }
 
@@ -275,4 +272,45 @@ body {
 canvas {
   width: 100% !important;
   height: 100% !important;
+}
+.header-left{
+  background-color: #ffffff;
+  display: flex;
+  flex-direction: column;
+  align-items: start;
+  padding-left: 35px;
+  border: none;
+}
+.logo img{
+  width: 197px;
+  height: 46px;
+}
+
+.hello h3, span{
+  color: #000F53;
+  margin-right: 0px;
+}
+.TipoAcesso{
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: rgba(105, 83, 211, 0.10);
+  width: 128px;
+  height: 38px;
+  margin-top: -20px;
+}
+.TipoAcesso span{
+  display: flex;
+}
+.opcao{
+  font-size: 15px;
+}
+.opcoes{
+  font-size: 14px;
+  margin-top: -10px;
+}
+.linha{
+  border-bottom: solid 3px #000F53;
+  width: 236px;
 }

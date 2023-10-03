@@ -8,8 +8,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>AquaTech | Dashboards</title>
 
-    <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/dashboards.css">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -31,34 +31,63 @@
 
     <div class="janela">
         <div class="header-left">
-            <h1>AquaTech</h1>
-
-            <div class="hello">
-                <h3>Olá, <span id="b_usuario">usuário</span>!</h3>
+            <div class="logo">
+                <img src="../public/assets/logofooter.png" alt="">
             </div>
 
-            <div class="btn-nav-white">
-                <a href="./cards.html">
-                    <h3>Aquários</h3>
+            <div class="opcao">
+                <span>Olá,<b>Nome ADM</b></span>
+            </div>
+
+            <div class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/home.png" alt="">
+                    <span>Home</span>
                 </a>
             </div>
-
-            <div class="btn-nav">
-
-                <h3>Gráficos</h3>
-
-            </div>
-
-            <div class="btn-nav-white">
-                <a href="./mural.html">
-                    <h3>Mural de Avisos</h3>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/servdores.png" alt="">
+                    <span>Servidores</span>
                 </a>
             </div>
-
-            <div class="btn-logout" onclick="limparSessao()">
-                <h3>Sair</h3>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/alertas.png" alt="">
+                    <span>Alertas</span>
+                </a>
             </div>
-
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/controlecontas.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/logout.png" alt="" onclick="limparSessao()">
+                    <span>Logout</span>
+                </a>
+            </div>
         </div>
 
         <div class="dash">
