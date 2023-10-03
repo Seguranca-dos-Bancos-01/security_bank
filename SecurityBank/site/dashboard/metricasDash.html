@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../public/assets/logoEscudo.png" type="image/x-icon">
 
-    <title>Security Bank | Suporte</title>
+    <title>Security Bank | Métricas</title>
 
     <link rel="stylesheet" href="../public/css/style.css">
     <link rel="stylesheet" href="../public/css/dashboards.css">
-    <link rel="stylesheet" href="../public/css/suporteDash.css">
+    <link rel="stylesheet" href="../public/css/metricasDash.css">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -70,14 +70,14 @@
                     <span>Controle de acesso</span>
                 </a>
             </div>
-            <div class="opcoes localizacao">
-                <a href="">
+            <div class="opcoes">
+                <a href="suporteDash.html">
                     <img src="../public/assets/imgs/ajuda.png" alt="">
                     <span>Ajuda</span>
                 </a>
             </div>
-            <div class="opcoes">
-                <a href="metricasDash.html">
+            <div class="opcoes localizacao">
+                <a href="">
                     <img src="../public/assets/imgs/metricas.png" alt="">
                     <span>Métricas</span>
                 </a>
@@ -102,22 +102,74 @@
             </div>
             <div id="graficos">
             </div>
-            <h1 class="tituloSuporte">Suporte da Aplicação</h1>
-            <div class="opcoesSuporte">
-                <a href="" class="linkSuporteOpcoes">
-                <div class="opcaohelpDesk">
-                    <h2 class="tituloOpcoes">Suporte Avançado</h2>
-                    <p class="textoOpcoes">Problemas e mal funcionamento da plataforma.</p>
-                </div>
-                </a>
-                <a href="" class="linkSuporteOpcoes">
-                    <div class="opcaofaleConosco">
-                        <h2 class="tituloOpcoes">Dúvidas e Contato</h2>
-                        <p class="textoOpcoes">Ajuda para utilizar a plataforma ou entrar em contato.</p>
+            <h1 class="tituloMetricas">Métricas</h1>
+            <h3 class="descricaoMetricas">Métricas utilizadas na análise dos dados captados e para a geração de alertas/cenários.</h3>
+            <div class="linhaAnaliseMetricas">
+                <h2 class="tituloAnalise">Análise de Porcentagem de Uso da CPU</h2>
+                <div class="opcoesMetricas">
+                    <div class="opcaoMetrica estavel">
+                        <span class="tituloEstado">Estável</span>
+                        <span class="porcentagem">50% - 70%</span>
                     </div>
-                </a>
+                    <div class="opcaoMetrica atencao">
+                        <span class="tituloEstado">Atenção</span>
+                        <span class="porcentagem">70% - 85%</span>
+                    </div>
+                    <div class="opcaoMetrica emergencia">
+                        <span class="tituloEstado">Emergência</span>
+                        <span class="porcentagem">85% - 95%</span>
+                    </div>
+                    <div class="opcaoMetrica urgencia">
+                        <span class="tituloEstado">Urgência</span>
+                        <span class="porcentagem">< 95%</span>
+                    </div>
+                </div>
             </div>
-            <h3 class="observacaoSuporte">Estamos disponíveis para te auxiliar a fazer a melhor utilização da plataforma <span style="color: #6953D3;">Security Bank</span>.</h3>
+
+            <div class="linhaAnaliseMetricas">
+                <h2 class="tituloAnalise">Análise de Porcentagem de Uso do Disco</h2>
+                <div class="opcoesMetricas">
+                    <div class="opcaoMetrica estavel">
+                        <span class="tituloEstado">Estável</span>
+                        <span class="porcentagem">10% - 35%</span>
+                    </div>
+                    <div class="opcaoMetrica atencao">
+                        <span class="tituloEstado">Atenção</span>
+                        <span class="porcentagem">35% - 55%</span>
+                    </div>
+                    <div class="opcaoMetrica emergencia">
+                        <span class="tituloEstado">Emergência</span>
+                        <span class="porcentagem">55% - 90%</span>
+                    </div>
+                    <div class="opcaoMetrica urgencia">
+                        <span class="tituloEstado">Urgência</span>
+                        <span class="porcentagem">< 90%</span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="linhaAnaliseMetricas">
+                <h2 class="tituloAnalise">Análise de Porcentagem de Uso da Memória RAM</h2>
+                <div class="opcoesMetricas">
+                    <div class="opcaoMetrica estavel">
+                        <span class="tituloEstado">Estável</span>
+                        <span class="porcentagem">70% - 80%</span>
+                    </div>
+                    <div class="opcaoMetrica atencao">
+                        <span class="tituloEstado">Atenção</span>
+                        <span class="porcentagem">80% - 90%</span>
+                    </div>
+                    <div class="opcaoMetrica emergencia">
+                        <span class="tituloEstado">Emergência</span>
+                        <span class="porcentagem">90% - 95%</span>
+                    </div>
+                    <div class="opcaoMetrica urgencia">
+                        <span class="tituloEstado">Urgência</span>
+                        <span class="porcentagem">< 95%</span>
+                    </div>
+                </div>
+            </div>
+
         </div>
     </div>
 

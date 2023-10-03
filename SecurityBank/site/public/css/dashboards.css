@@ -311,6 +311,14 @@ canvas {
   font-size: 18px;
   margin-top: -10px;
   font-weight: 500;
+  cursor: pointer;
+  transition: 0.5s;
+}
+
+.opcoes:hover {
+  cursor: pointer;
+  -webkit-transform: scale(1.1);
+  transform: scale(1.1);
 }
 
 .opcoes a span {
