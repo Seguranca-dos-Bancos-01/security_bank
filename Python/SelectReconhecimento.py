@@ -39,16 +39,30 @@ for (x, y, w, h) in faces:
     # Converte os pontos faciais em um vetor de características
     face_descriptor = face_recognizer.compute_face_descriptor(imagem, shape)
     
-    # Converte o vetor de características em uma string para armazenamento no banco de dados
+    # Converte o vetor de características em uma string para comparação
     face_descriptor_str = ','.join(map(str, face_descriptor))
     
-    # Insira os dados no banco de dados
-    nome = 'Nome_da_pessoa'  # Substitua pelo nome da pessoa
-    sql = "INSERT INTO reconhecimento_facial (nome, vetor_caracteristicas) VALUES (%s, %s)"
-    val = (nome, face_descriptor_str)
-    cursor.execute(sql, val)
-    conexao.commit()
-
+    # Consulta SQL para buscar registros no banco de dados com características semelhantes
+    sql = "SELECT nome, vetor_caracteristicas FROM reconhecimento_facial"
+    cursor.execute(sql)
+    
+    # Recupera todos os resultados da consulta
+    resultados = cursor.fetchall()
+    
+    # Loop para comparar vetores de características
+    for resultado in resultados:
+        nome, vetor_armazenado_str = resultado
+        vetor_armazenado = list(map(float, vetor_armazenado_str.split(',')))
+        
+        # Aqui você pode implementar a lógica para comparar os vetores de características,
+        # por exemplo, usando uma métrica de distância como a distância euclidiana.
+        # Se a distância for menor que um limite, você pode considerar o rosto como reconhecido.
+        # Lembre-se de implementar sua própria lógica de reconhecimento aqui.
+        
+        # Se o rosto for reconhecido, você pode imprimir o nome da pessoa
+        if reconhecido:
+            print(f"Rosto reconhecido como {nome}")
+            
 # Feche o cursor e a conexão
 cursor.close()
 conexao.close()
