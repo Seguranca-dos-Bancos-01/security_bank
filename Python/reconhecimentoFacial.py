@@ -1,13 +1,13 @@
 import cv2
 import dlib
 
-# Inicializa o detector de rosto do OpenCV
+
 face_cascade = cv2.CascadeClassifier('caminho_para_o_classificador_haar.xml')
 
-# Inicializa o detector de pontos faciais do dlib
+
 predictor = dlib.shape_predictor('shape_predictor_68_face_landmarks.dat')
 
-# Inicializa o reconhecedor facial do dlib
+
 face_recognizer = dlib.face_recognition_model_v1('dlib_face_recognition_resnet_model_v1.dat')
 
 # Carrega uma imagem de teste
