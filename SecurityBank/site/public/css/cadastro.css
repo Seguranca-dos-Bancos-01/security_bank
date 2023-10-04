@@ -24,7 +24,7 @@ body {
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514); 
   border: #8473db90 0.1rem solid;   
   position: relative;
-  top: 20rem;
+  top: 24rem;
   
   z-index: 2;  
   text-align: center;
@@ -135,8 +135,8 @@ color: #8573DB;
   width: 30vw;
   height: 23rem;
   position: relative;
-  top: 20rem;
-  left: 43rem;
+  top: 22rem;
+  left: 31rem;
 }    
 
 /* Inicio mensagens */
@@ -367,12 +367,16 @@ color: #8573DB;
   height: 30vh;
   position: relative;        
 }
-
+.loginDireto{
+  color: #062180;
+}
 .logo_footer_cadastro {
   position: relative;
   top: 1rem;
 }
-
+h2{
+  right: 10rem;
+}
 .logotext {
   position: relative;
   top: 1rem;

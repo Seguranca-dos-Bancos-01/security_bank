@@ -12,6 +12,9 @@ body {
   justify-content: center;
   flex-direction: column;
 }
+.LoginTittle{
+  font-size: 3rem;
+}
 
 .card {
   display: flex;
@@ -24,7 +27,7 @@ body {
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
   border: #8473db90 0.1rem solid;
   position: relative;
-  top: 20rem;
+  top: 24rem;
   /* right: 16rem; */
   z-index: 2;
   text-align: center;
@@ -131,22 +134,15 @@ form {
   top: 14rem;
 }
 
-.fundoBolinha h1 {
-  width: 10rem;
-  position: relative;
-  top: 17rem;
-  left: 52rem;
-  font-size: 8vh;
-}
-
-.fundoBolinha img {
+.fundoTittle {
   background-size: cover;
   background-position: 100%;
   width: 25vw;
   height: fit-content;
   position: relative;
-  top: 30rem;
-  left: 45rem;
+  top: 23rem;
+  left: 37.5rem;
+  
 }
 
 /* Inicio mensagens */
