@@ -122,9 +122,10 @@ aside .nav-button {
 
 
 .Nossos-Diferenciais {
-    text-align: center;
+    text-align: left;
     padding-top: 20vh;
     position: relative;
+    padding: 15vh;
 
 }
 
@@ -137,8 +138,8 @@ aside .nav-button {
 .conteudo {
     display: flex;
     align-items: center;
-    justify-content: space-evenly;
-    margin-top: 10vh;
+    justify-content: space-around;
+    margin-top: 20vh;
 }
 
 .Planobasico {
@@ -147,7 +148,8 @@ aside .nav-button {
     background-color: #6853d367;
     border-radius: 5vh;
     border: solid 1vh #6953D3;
-   
+   color: #961ff9;
+   box-shadow: #00000083 10px 10px 10px; 
 }
 
 .TxtIndidualPlano{
@@ -155,8 +157,37 @@ aside .nav-button {
     width: 100%;
     height: 30px;
     margin-left: 5vh;
+    align-items: center;
     
 }
+.TxtIndidualPlanoBasico{
+    display:  flex;
+    width: 100%;
+    height: 4vh;
+    margin-left: 2.25vh;
+    align-items: center;
+    margin-top: 0.5vh;
+}
+
+.TxtIndidualPlanoBasico h4 {
+    margin-left: -2vh;
+    /* margin-top: 1vh; */
+}
+
+
+.TxtIndidualPlanoX {
+    display:  flex;
+    width: 100%;
+    height: 30px;
+    margin-left: 5vh;
+}
+
+.TxtIndidualPlanoX > img{
+    width: 4vh;
+    height: 4vh;
+    
+}
+
 
 .TxtIndidualPlano > h4 {
     
@@ -164,8 +195,8 @@ aside .nav-button {
 
 
 .TxtIndidualPlano > img{
-    width: 16%;
-    height: 4vh;
+    width: 7vh;
+    height: 7vh;
     
 }
 
@@ -179,10 +210,13 @@ aside .nav-button {
 }
 
 .planoPremium {
-    width: 50vh;
+    width: 55vh;
     height: 85vh;
     background-color: #961ff9;
     border-radius: 5vh;
+    color:#ffffff;
+    box-shadow: #00000083 10px 10px 10px; 
+
 }
 
 
@@ -193,6 +227,7 @@ aside .nav-button {
 
 .bloco_plano_basico{
  margin-top: 4vh;
+
 }
 
 .bloco_plano_Premium {
@@ -216,14 +251,98 @@ aside .nav-button {
 }
 
 .imagem-sobre-nos {
-    background: url(SecurityBank/site/public/assets/imgs/tablet.png);
+    background: url(../assets/imgs/tablet.png);
     background-size: cover;
     width: 50%;
-    height: 700px;
+    height: 850px;
 }
 
 .imagem-sobre-nos img {        
    display: none;
+  
+
+}
+
+.seguranca{
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.seguranca  > img{
+      margin-left: 5vh;
+      margin-top: 5vh;
+}
+
+.seguranca > p{
+    margin-left: 7vh;
+}
+ 
+.discoicon {
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.discoicon > img{
+    margin-left: 6vh;
+    margin-top: 6vh;
+}
+
+.discoicon > p{
+  margin-left: 6vh;
+}
+
+.ramicon {
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.ramicon > img{
+    margin-left: 6vh;
+    margin-top: 2vh;
+}
+
+.ramicon > p{
+  margin-left: 6vh;
+}
+
+
+.redeicon {
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.redeicon> img{
+    margin-left: 6vh;
+    margin-top: 5vh;
+}
+
+.redeicon > p{
+  margin-left: 6vh;
+}
+
+.cabo {
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.cabo> img{
+    margin-left: 6.5vh;
+    margin-top: 4.5vh;
+  
+}
+
+.cabo > p{
+  margin-left: 7.5vh;
 }
 
 
@@ -276,6 +395,7 @@ aside .nav-button {
     width: 7vh;
     height: 7vh;
 }
+    
 
 .item p {
     font-size: 18px;
