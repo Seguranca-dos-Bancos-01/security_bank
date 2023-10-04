@@ -13,6 +13,34 @@ body {
     text-decoration: none;
 }
 
+header a{
+    display: inline-block;
+    position: relative;
+    color: #6953D3;
+    cursor: pointer;
+    transition: 0.4s all ease;
+}
+
+header a:hover{
+    color: #6953D3;
+    transition: 0.4s all ease;
+}
+header a::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #6953D3;
+    transform-origin: bottom right;
+    transition: transform 0.5s ease-out;
+}
+header a:hover::after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
 
 .fundoRoxo {
     width: 100%;

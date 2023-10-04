@@ -23,24 +23,23 @@
      <!-- Início NavBar -->
      <div class="fundoRoxo"></div>
      <header class="header">
-         <nav class="nav">
-         <a href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></a>
-         <button class="hamburger"></button>
-         <ul class="nav-list">
-          <li><a href="index.html">Home</a></li>
-          <li><a href="#planos">Planos</a></li>
-          <li><a href="#sobrenos">Sobre nós</a></li>
-          <li><a href="faleconosco.html">Fale Conosco</a></li>
-          <li><a href="#nossosservicos">Nossos serviços</a></li>
-          <li><a href="login.html"></a></li>
-          <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
-      </ul>
-             <div class="user">
-                 <img src="../public/assets/user.png" alt="user">
-                 <a href="cadastro.html"><button class="nav-button">Faça seu cadastro ➔</button></a>
-             </div>
-         </nav>
-     </header>
+      <nav class="nav">
+          <span href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></span>
+          <button class="hamburger"></button>
+          <ul class="nav-list">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#planos">Planos</a></li>
+              <li><a href="#sobrenos">Sobre nós</a></li>
+              <li><a href="faleconosco.html">Fale Conosco</a></li>
+              <li><a href="#nossosservicos">Nossos serviços</a></li>
+              <li><a href="login.html"></a></li>
+              <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
+          </ul>
+          <div class="user">
+             <button id="Cad"class="nav-button">Login</button>
+          </div>
+      </nav>
+  </header>
      <!-- Fim NavBar -->
 
       <div class="alerta_erro">
@@ -107,6 +106,10 @@
 </html>
 
 <script>
+ document.getElementById("Cad").onclick = function () {
+        location.href = "./login.html";
+    };
+
   function cadastrar() {
     
 

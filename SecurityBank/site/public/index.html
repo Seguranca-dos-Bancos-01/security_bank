@@ -18,7 +18,7 @@
         <div class="fundoRoxo"></div>
         <header class="header">
             <nav class="nav">
-                <a href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></a>
+                <span href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></span>
                 <button class="hamburger"></button>
                 <ul class="nav-list">
                     <li><a href="index.html">Home</a></li>
@@ -30,7 +30,7 @@
                     <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
                 </ul>
                 <div class="user">
-                    <a href="login.html"><button class="nav-button">Login</button></a>
+                    <button id="Cad" class="nav-button">Login</button>
                 </div>
             </nav>
         </header>
@@ -318,6 +318,10 @@
 </html>
 
 <script>
+ document.getElementById("Cad").onclick = function () {
+        location.href = "./login.html";
+    };
+
     function abaFaleConosco() {
         window.location = "faleconosco.html";
     }
