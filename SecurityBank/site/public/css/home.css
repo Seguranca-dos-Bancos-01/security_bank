@@ -122,11 +122,19 @@ aside .nav-button {
 
 
 .Nossos-Diferenciais {
-    text-align: left;
-    padding-top: 20vh;
+    text-align: center;
+    padding-top: 10vh;
     position: relative;
-    padding: 15vh;
+    padding: 20vh;
 
+}
+.Nossos-DiferenciaisA {
+    background: url(../assets/ONDASSS.png);
+     background-size: cover;
+    margin-left: auto;
+    padding: 15vh;
+    padding-top: 10vh;
+   
 }
 
 .plano_roxo {
@@ -186,6 +194,7 @@ aside .nav-button {
     width: 4vh;
     height: 4vh;
     
+    
 }
 
 
@@ -216,13 +225,14 @@ aside .nav-button {
     border-radius: 5vh;
     color:#ffffff;
     box-shadow: #00000083 10px 10px 10px; 
+  
 
 }
 
 
 .planoPremium > h1{
   color: white;
-  margin-bottom: 5vh;
+  margin-bottom: 10vh;
 }
 
 .bloco_plano_basico{
@@ -441,7 +451,7 @@ aside .nav-button {
 
 .como-vera p {
     font-size: 1.5rem;
-    color: white;
+    color: rgb(245, 240, 240);
     font-family: 'Inter';
     line-height: 2.0;
     text-align: justify;
@@ -528,7 +538,7 @@ aside .nav-button {
     height: 80vh;
     align-items: center;
     justify-content: space-evenly;
-    background-color: #F9F4F4;
+    background-color: #f1eeee;
     background-image: url(../assets/header_4_bubble\ 1.png);
 }
 
