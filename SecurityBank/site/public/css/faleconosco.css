@@ -10,9 +10,9 @@
     font-size: 50px;
     font-weight: bold;
     text-align: center;
-    margin-top: 5vh;
-
-    text-shadow: 3px 2px 3px rgb(155, 155, 155);
+    margin-top: 3vh;
+color: #6953D3;
+   
 }
 
 .subtituloFaleConosco {
@@ -30,41 +30,47 @@
     justify-content: space-evenly;
 }
 
-.linha1 {
-    display: flex;
-    width: 100%;
-    height: 8vh;
-    justify-content: space-evenly;
-    align-items: center;
-    margin-top: 5vh;
-}
-
-.placeholder {
-    width: 33vh;
-    position: relative;
-    right: 1.6rem;
-}
-
-.linha2 {
+.linhaemail {
     width: 30vw;
-    height: 8vh;
+    height: 18vh;
     display: flex;
     justify-content: space-between;
     flex-direction: column;
     align-items: center;
+    position: relative;
+}
+
+.placeholder {
+    width: 65vh;
+    position: relative;
+    right: 1.6rem;
+    margin-bottom: 2vh;
+    margin-top: 2vh;
+}
+
+.linhanome {
+    width: 30vw;
+    height: 18vh;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+    align-items: center;
+ margin-top: 20vh;
+margin-bottom: 10vh;
 }
 
 .dados {
-    width: 20vw;
+    width: 35vw;
     height: 2.3rem;
     background-color: #CDC6ED;
     border-radius: 30px;
     border: 2px solid #CDC6ED;
+
 }
 
 .linha3 {
     width: 100%;
-    height: 35vh;
+    height: 30vh;
     display: flex;    
     margin-top: 3vh;
     align-items: center;
@@ -95,13 +101,14 @@
 .botao {
     width: 100%;
     height: 2.5rem;
-    background-color: rgba(152, 122, 235, 0.945);
-    border: rgba(152, 122, 235, 0.945) 2px solid;
+    background-color:#6953D3;
+    border:#6953D3;
     border-radius: 40px;
     color: white;
     font-size: 17px;
     position: relative;
     top: 1rem;
+    margin-bottom: 5vh;
 }
 
 .botao:hover {
@@ -141,13 +148,13 @@
 
 .contato {
     width: 100%;
-    height: 35vh;
+ 
     display: flex;
     flex-direction: column;
     justify-content: space-evenly;
     align-items: center;
     position: relative;
-    top: 3rem;    
+    top: 5rem;    
 }
 
 .fundo2 {
@@ -159,6 +166,7 @@
     display: flex;
     flex-direction: column;
     align-items: center;
+    margin-top: 30vh;
 
 }
 
