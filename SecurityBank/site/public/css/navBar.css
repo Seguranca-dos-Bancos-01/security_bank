@@ -197,7 +197,8 @@ header a:hover::after{
     
 }
 
-@media (max-width: 768px) {
+/* NavBar Responsiva */
+@media screen and (max-width:800px){
 
     .user {
         display: none;
@@ -214,10 +215,9 @@ header a:hover::after{
 
     .nav-list {
         position: fixed;
-        top: 0;
         left: 0;
         width: 100vw;
-        height: 30vh;
+        height: 45vh;
         background: #8473db;
         clip-path: circle(30px at 90% -15%);
         transition: 1s ease-out;
@@ -276,7 +276,9 @@ header a:hover::after{
         transform: rotate(-135deg);
         top: -7px;
     }   
-   
+
+    /* Fim NavBar */
+    
 }
 
 

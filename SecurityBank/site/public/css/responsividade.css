@@ -1,897 +1,951 @@
-/* Início NavBar */
-@media only screen and (max-width: 1420px) {
-    .header {
-        padding: 0 50px;
-        width: 92.3%;
-    }
-}
+@media  screen and (max-width: 800px) {
 
-@media only screen and (max-width: 1200px) {
-    .header {
-        padding: 0 30px;
-        width: 95%;
-    }
-}
-
-@media only screen and (max-width: 600px) {
-
-    .header {
-        width: 85%;
-        background: transparent;
-        padding-inline: 16px;
-    }
-
-    .logo {
-        width: 50vw;
-        height: fit-content;
-        margin-left: 1rem;
-        padding-block: 1rem;
-    }
-
-    .fundoRoxo {
-        width: 100%;
-        height: 10vh;
-        background: url(../assets/header.jpg);
-        background-size: cover;
-    }
-
-    /* Fim NavBar */
-
-    /* Início Login */
-    .container {
-        height: 40vh;
-        width: 100%;
+    /* Início Central */
+    
+        .header {
+            width: 85%;
+            background: transparent;
+            padding-inline: 16px;
+        }
+    
+        .logo {
+            width: 50vw;
+            height: fit-content;
+            margin-left: 1rem;
+            padding-block: 1rem;
+        }
+    /* Fim Central */
+    
+    
+        /* Início Login */
+    
+        .LoginTittle{
+         display: none;
+          }
+    
+        .container {
+            height: 40vh;
+            width: 100%;
+            display: flex;
+            justify-content: center;
+            flex-direction: column;
+        }
+    
+        .titulo {
+            margin-bottom: 3rem;
+            font-size: 1.5rem;
+        }
+    
+        .ondasFundo img {
+            background-size: cover;
+            width: 100%;
+            height: 15rem;
+            position: relative;
+            top: 15.5rem;
+        }
+    
+        .fundoBolinha h1 {
+            width: 10rem;
+            position: relative;
+            top: 17.5rem;
+            left: 4rem;
+            font-size: 1.5rem;
+        }
+    
+        .fundoBolinha {
+            background-size: cover;
+            background-position: 100%;
+            width: 30vw;
+            height: fit-content;
+        }
+    
+        .fundoBolinha img {
+            background-size: cover;
+            background-position: 100%;
+            width: 50vw;
+            height: fit-content;
+            position: relative;
+            top: 23rem;
+            left: 1rem;
+            align-items: center;
+        }
+    
+        .card {
+            display: flex;
+            background-color: whitesmoke;
+            width: 55vw;
+            flex-direction: column;
+            align-self: center;
+            padding: 5rem 5rem 5rem 2rem;
+            border-radius: 1.5rem;
+            box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
+            border: #8473db90 0.1rem solid;
+            position: relative;
+            top: 22rem;
+            left: 0rem;
+            z-index: 2;
+            text-align: center;
+        }
+    
+        .inputBox {
+            position: relative;
+            width: 15rem;
+            text-align: start;
+            align-self: center;
+            left: 1.3rem;
+        }
+    
+        .inputBox input {
+            width: 100%;
+            padding: 0.7rem;
+            background: whitesmoke;
+            outline: none;
+            border: 1px solid black;
+            font-size: 1em;
+            border-radius: 0.6rem;
+        }
+    
+        .inputBox span {
+            position: absolute;
+            left: 0;
+            padding: 10px;
+            pointer-events: none;
+            font-size: 0.9rem;
+            color: black;
+            text-transform: uppercase;
+            transition: 0.5s;
+            position: relative;
+            bottom: 2rem;
+            z-index: 1;
+        }
+    
+        .inputBox input:valid~span,
+        .inputBox input:focus~span {
+            color: white;
+            background-color: #8573DB;
+            transform: translateX(10px) translateY(-7px);
+            font-size: 0.85em;
+            padding: 0 10px;
+            position: relative;
+            bottom: 3.3rem;
+            left: 1rem;
+            border-radius: 0.3rem;
+        }
+    
+        .buttonlogin {
+            background-color: #8573DB;
+            color: white;
+            font-weight: bold;
+            height: 2.2rem;
+            width: 15rem;
+            border-radius: 10px;
+            border-style: none;
+            position: relative;
+            left: 1.5rem;
+            top: 0.5rem;
+        }
+    
+        .card h1 {
+            position: relative;
+            left: 1.8rem;
+        }
+    
+        .card h5 {
+            position: relative;
+            top: 2rem;
+            left: 1.5rem;
+        }
+    
+        .card a {
+            color: #8573DB;
+        }
+    
+    
+        /* Fim Login */
+    
+    
+        /* Início Fale Conosco */
+    
+        .content {
+            display: flex;
+            width: 100%;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+    
+        .tituloFaleConosco {
+            font-size: 3rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 2vh;
+            text-shadow: 3px 2px 3px rgb(155, 155, 155);
+        }
+    
+        .subtituloFaleConosco {
+            font-size: 1.1rem;
+            font-weight: bold;
+            text-align: center;
+            margin-top: 3vh;
+            padding-inline: 3rem;
+        }
+    
+        .entrada {
+            height: 50vh;
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: space-evenly;
+        }
+    
+        .linha1 {
+            display: flex;
+            width: 100%;
+            height: 8vh;
+            justify-content: space-evenly;
+            flex-direction: column;
+            align-items: center;
+            margin-top: 5vh;
+            gap: 1rem;
+        }
+    
+        .linha2 .placeholder {
+            width: 3vw;
+            position: relative;
+            right: 9rem;
+            top: 1vh;
+        }
+    
+        .linha2 {
+            width: 30vw;
+            height: 8vh;
+            display: flex;
+            justify-content: space-between;
+            flex-direction: column;
+            align-items: center;
+        }
+    
+        .linha2 input {
+            width: 80vw;
+            position: relative;
+            top: 2vh;
+            border-radius: 1rem;
+        }
+    
+        .dados {
+            width: 35vw;
+            height: 2.3rem;
+            background-color: #CDC6ED;
+            border-radius: 30px;
+            border: 2px solid #CDC6ED;
+        }
+    
+        .linha3 {
+            width: 100%;
+            height: 35vh;
+            display: flex;
+            margin-top: 3vh;
+            align-items: end;
+            flex-direction: column;
+            position: relative;
+            top: 3vh;
+        }
+    
+        .linha3 input {
+            width: 80vw;
+            height: 20vh;
+            display: flex;
+            margin-top: 3vh;
+            align-items: center;
+            flex-direction: column;
+        }
+    
+        .linha3 .placeholder {
+            width: 80vw;
+            position: relative;
+            top: 1.5rem;
+        }
+    
+        .mensagem {
+            width: 80vw;
+            height: 20vh;
+            border-radius: 1rem;
+            position: relative;
+            top: 0.5rem;
+            right: 2.3rem;
+        }
+    
+        .linha5 {
+            display: flex;
+            width: 40%;
+            height: 5vh;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            top: 1vh;
+        }
+    
+        .botao {
+            width: 100%;
+            height: 2.5rem;
+            background-color: rgba(152, 122, 235, 0.945);
+            border: rgba(152, 122, 235, 0.945) 2px solid;
+            border-radius: 40px;
+            color: white;
+            font-size: 17px;
+        }
+    
+        .waves {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 85vh;
+            justify-content: space-evenly;
+            align-items: center;
+            background: url(../assets/ondas.png);
+            background-size: cover;
+        }
+    
+        .contato {
+            width: 100%;
+            height: 35vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: space-evenly;
+            align-items: center;
+            position: relative;
+            top: 3rem;
+        }
+    
+        .fundo2 {
+            display: flex;
+            flex-direction: column;
+            width: 80vw;
+            height: 75vh;
+            background-color: #CDC6ED;
+            border-radius: 1rem;
+            border-color: rgba(152, 122, 235, 0.945);
+            align-items: center;
+        }
+    
+        .separa {
+            display: flex;
+            flex-direction: column;
+            width: 100%;
+            height: 52vh;
+            align-items: center;
+            justify-content: space-between;
+            margin-top: 3vh;
+          
+         
+        }
+      
+        .t {
+            text-align: center;
+            font-size: 17px;
+            font-weight: bold;
+            width: 15vh;
+         
+            
+        }
+    
+        .d {
+            margin-top: 0.5vh;
+            text-align: center;
+            font-size: 17px;
+            width: 25vh;
+       
+        }
+    
+        /* Fim Fale Conosco */
+    
+    
+        /* Início Home */
+    
+    
+        
+        /* .nav-list {
+            position: fixed;
+        
+            width: 100vw;
+            
+            background: #8473db;
+            clip-path: circle(30px at 90% -15%);
+            transition: 1s ease-out;
+            flex-direction: column;
+            justify-content: space-around;
+            align-items: center;
+            gap: 0;
+            pointer-events: none;
+            z-index: 3;
+            border-radius: 0 0 2rem 2rem;
+        } */
+    
+        aside {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: space-evenly;
+            width: 30%;
+            height: 50vh;
+            padding: 1% 8%;
+        }  
+    
+    
+        .btn-func {
+            margin-top: 10vh;
+            display: flex;
+            width: 75%;
+            align-items: center;
+            justify-content: space-evenly;
+        
+        }
+    
+        .btn-baixo{
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            display: none;
+        }
+    
+        
+        
+         .Planobasico {
+            max-width: 40vh;
+            max-height: 50vh;
+            background-color: #6853d367;
+            border-radius: 5vh;
+            border: solid 1vh #6953D3;
+           
+        }
+        
+        .TxtIndidualPlano{
+            display:  flex;
+            width: 100%;
+            height: 30px; 
+    
+        }
+    
+    
+        .planoPremium {
+            max-width: 45vh;
+            max-height: 55vh;
+            background-color: #961ff9;
+            border-radius: 5vh;
+        }
+    
+    
+    
+        .sobre-nos {
+            margin-top: 20vh;
+            display: flex;
+            background-color: #fff;
+        }
+        
+        .sobre-nos-button {
+            background-color: #EDEAF9;
+            border-radius: 5px;
+            color: #6953D3;
+            cursor: pointer;
+            font-weight: 500;
+            line-height: 24px;
+            font-size: 20px;
+            padding: 8px 10px;
+            width: fit-content;
+            border: none;
+        }
+    
+      .img_1{
+        display: none;
+      }
+      
+     .center-vertical{
         display: flex;
+        align-items: center;
         justify-content: center;
-        flex-direction: column;
-    }
+        height: 100vh;
+        margin-top: 10vh;
+        display: none;
+      } 
 
-    .titulo {
-        margin-bottom: 3rem;
-        font-size: 1.5rem;
-    }
-
-    .ondasFundo img {
-        background-size: cover;
-        width: 100%;
-        height: 15rem;
-        position: relative;
-        top: 15.5rem;
-    }
-
-    .fundoBolinha h1 {
-        width: 10rem;
-        position: relative;
-        top: 17.5rem;
-        left: 4rem;
-        font-size: 1.5rem;
-    }
-
-    .fundoBolinha {
-        background-size: cover;
-        background-position: 100%;
-        width: 30vw;
-        height: fit-content;
-    }
-
-    .fundoBolinha img {
-        background-size: cover;
-        background-position: 100%;
-        width: 50vw;
-        height: fit-content;
-        position: relative;
-        top: 23rem;
-        left: 1rem;
-        align-items: center;
-    }
-
-    .card {
-        display: flex;
-        background-color: whitesmoke;
-        width: 55vw;
-        flex-direction: column;
-        align-self: center;
-        padding: 5rem 5rem 5rem 2rem;
-        border-radius: 1.5rem;
-        box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
-        border: #8473db90 0.1rem solid;
-        position: relative;
-        top: 22rem;
-        left: 0rem;
-        z-index: 2;
+    
+     .Nossos-Diferenciais{
+      
         text-align: center;
-    }
-
-    .inputBox {
+        padding-top: 10vh;
         position: relative;
-        width: 15rem;
-        text-align: start;
-        align-self: center;
-        left: 1.3rem;
+        padding: 20vh;
+        display: none;
+     }
+     
+    .imagem-nossos-servicos{
+        display: none;
     }
-
-    .inputBox input {
-        width: 100%;
-        padding: 0.7rem;
-        background: whitesmoke;
-        outline: none;
-        border: 1px solid black;
-        font-size: 1em;
-        border-radius: 0.6rem;
-    }
-
-    .inputBox span {
-        position: absolute;
-        left: 0;
-        padding: 10px;
-        pointer-events: none;
-        font-size: 0.9rem;
-        color: black;
-        text-transform: uppercase;
-        transition: 0.5s;
-        position: relative;
-        bottom: 2rem;
-        z-index: 1;
-    }
-
-    .inputBox input:valid~span,
-    .inputBox input:focus~span {
-        color: white;
-        background-color: #8573DB;
-        transform: translateX(10px) translateY(-7px);
-        font-size: 0.85em;
-        padding: 0 10px;
-        position: relative;
-        bottom: 3.3rem;
-        left: 1rem;
-        border-radius: 0.3rem;
-    }
-
-    .buttonlogin {
-        background-color: #8573DB;
-        color: white;
-        font-weight: bold;
-        height: 2.2rem;
-        width: 15rem;
-        border-radius: 10px;
-        border-style: none;
-        position: relative;
-        left: 1.5rem;
-        top: 0.5rem;
-    }
-
-    .card h1 {
-        position: relative;
-        left: 1.8rem;
-    }
-
-    .card h5 {
-        position: relative;
-        top: 2rem;
-        left: 1.5rem;
-    }
-
-    .card a {
-        color: #8573DB;
-    }
-
-
-    /* Fim Login */
-
-
-    /* Início Fale Conosco */
-
-    .content {
-        display: flex;
-        width: 100%;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-    }
-
-    .tituloFaleConosco {
-        font-size: 3rem;
-        font-weight: bold;
+    .nossa-equipe h2{
+        width: 100vh;
+        margin-left:10vh;
         text-align: center;
-        margin-top: 2vh;
-        text-shadow: 3px 2px 3px rgb(155, 155, 155);
-    }
-
-    .subtituloFaleConosco {
-        font-size: 1.1rem;
-        font-weight: bold;
-        text-align: center;
-        margin-top: 3vh;
-        padding-inline: 3rem;
-    }
-
-    .entrada {
-        height: 50vh;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: space-evenly;
-    }
-
-    .linha1 {
-        display: flex;
-        width: 100%;
-        height: 8vh;
-        justify-content: space-evenly;
-        flex-direction: column;
-        align-items: center;
         margin-top: 5vh;
-        gap: 1rem;
-    }
-
-    .linha2 .placeholder {
-        width: 3vw;
-        position: relative;
-        right: 9rem;
-        top: 1vh;
-    }
-
-    .linha2 {
-        width: 30vw;
-        height: 8vh;
-        display: flex;
-        justify-content: space-between;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .linha2 input {
-        width: 80vw;
-        position: relative;
-        top: 2vh;
-        border-radius: 1rem;
-    }
-
-    .dados {
-        width: 35vw;
-        height: 2.3rem;
-        background-color: #CDC6ED;
-        border-radius: 30px;
-        border: 2px solid #CDC6ED;
-    }
-
-    .linha3 {
-        width: 100%;
-        height: 35vh;
-        display: flex;
-        margin-top: 3vh;
-        align-items: end;
-        flex-direction: column;
-        position: relative;
-        top: 3vh;
-    }
-
-    .linha3 input {
-        width: 80vw;
-        height: 20vh;
-        display: flex;
-        margin-top: 3vh;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .linha3 .placeholder {
-        width: 80vw;
-        position: relative;
-        top: 1.5rem;
-    }
-
-    .mensagem {
-        width: 80vw;
-        height: 20vh;
-        border-radius: 1rem;
-        position: relative;
-        top: 0.5rem;
-        right: 2.3rem;
-    }
-
-    .linha5 {
-        display: flex;
-        width: 40%;
-        height: 5vh;
-        align-items: center;
-        justify-content: center;
-        position: relative;
-        top: 1vh;
-    }
-
-    .botao {
-        width: 100%;
-        height: 2.5rem;
-        background-color: rgba(152, 122, 235, 0.945);
-        border: rgba(152, 122, 235, 0.945) 2px solid;
-        border-radius: 40px;
-        color: white;
-        font-size: 17px;
-    }
-
-    .waves {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 85vh;
-        justify-content: space-evenly;
-        align-items: center;
-        background: url(../assets/ondas.png);
-        background-size: cover;
-    }
-
-    .contato {
-        width: 100%;
-        height: 35vh;
-        display: flex;
-        flex-direction: column;
-        justify-content: space-evenly;
-        align-items: center;
-        position: relative;
-        top: 3rem;
-    }
-
-    .fundo2 {
-        display: flex;
-        flex-direction: column;
-        width: 80vw;
-        height: 75vh;
-        background-color: #CDC6ED;
-        border-radius: 1rem;
-        border-color: rgba(152, 122, 235, 0.945);
-        align-items: center;
-    }
-
-    .separa {
-        display: flex;
-        flex-direction: column;
-        width: 100%;
-        height: 50vh;
-        align-items: center;
-        justify-content: space-between;
-        margin-top: 3vh;
-    }
-
-    .t {
-        text-align: center;
-        font-size: 15px;
-        font-weight: bold;
-        width: 15vh;
-        margin-top: 0.5vh;
-    }
-
-    .d {
-        margin-top: 0.5vh;
-        text-align: center;
-        font-size: 10px;
-        width: 25vh;
-    }
-
-    /* Fim Fale Conosco */
-
-
-    /* Início Home */
-
-    .fundo {
-        width: 100%;
-        height: 100vh;
-        background-color: #fff;
-
-    }
-
-    /* Início Banner */
-    .banner {
-        display: flex;
-        height: 80vh;
-        width: 100vw;
-    }
-
-    .banner-button {
-        position: relative;
-        bottom: 3vh;
-    }
-
-    aside {
-        display: flex;
-        flex-direction: column;
-        align-items: start;
-        justify-content: space-evenly;
-        padding: 0 0 0 3rem;
-        width: 70vw;
-        height: 80vh;
-        position: relative;
-        bottom: 5vh;
-    }
-
-    aside h1 {
         font-size: 5vh;
-        padding: 0rem;
-        position: relative;
-        bottom: 5vh;
+        margin-bottom: 7vh;
     }
+    
+    
+        /* Início Banner */
+        .banner {
+            display: flex;
+            height: 80vh;
+            width: 100vw;
+        }
+    
+        .banner-button {
+            position: relative;
+            bottom: 3vh;
+        }
+    
+        aside {
+            display: flex;
+            flex-direction: column;
+            align-items: start;
+            justify-content: space-evenly;
+            padding: 0 0 0 3rem;
+            width: 70vw;
+            height: 80vh;
+            position: relative;
+            bottom: 5vh;
+        }
+    
+        aside h1 {
+            font-size: 5vh;
+            padding: 0rem;
+            position: relative;
+            bottom: 5vh;
+        }
+    
+        aside h4 {
+            position: relative;
+            top: 0rem;
+            padding: 0;
+        }
+    
+        article {
+            width: 50vw;
+            height: fit-content;
+            position: relative;
+            top: 50vh;
+            right: 45vw;
+        }
+    
+        article img {
+            width: 70vw;
+            position: relative;
+            right: 20vw;
+        }
+    
+        .btn-func {
+            display: flex;
+            width: 100vw;
+            align-items: center;
+            justify-content: space-around;
+            gap: 0.5rem;
+            position: relative;
+            top: 30vh;
+            right: 13vw;
+        }
+    
+        aside .nav-button {
+            padding: 0.1rem;
+            width: 18rem;
+            height: 6rem;
+            position: relative;
+            left: 7rem;
+            padding-block: 1rem;
+        }
+    
+        .btn-player {
+            position: relative;
+            bottom: 0.3rem;
+            right: 0.2rem;
+            padding-block: 1rem;
+        }
+    
+        /* Fim Banner */
+    
+         /* Início Nossos Diferenciais */
 
-    aside h4 {
-        position: relative;
-        top: 0rem;
-        padding: 0;
+         
+        /* .seguranca,
+        .foco,
+        .cliente,
+        .tempo,
+        .projeto {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            width: 50vw;
+            margin-left: 0;
+            position: relative;
+            left: 1.2rem;
+        } */
+    
+        /* .seguranca img,
+        .foco img,
+        .tempo img,
+        .cliente img,
+        .projeto img {
+            height: fit-content;
+            width: 25vw;
+            margin-bottom: 17px;
+        }
+    
+        .seguranca p,
+        .foco p,
+        .tempo p,
+        .cliente p,
+        .projeto p {
+            font-size: 1rem;
+            font-family: 'Inter';
+            color: #444444;
+            font-weight: bold;
+        } */
+    
+        /* Fim Nossos Diferenciais */
+    
+     
+        /* Início Sobre Nós */
+        .sobre-nos {
+            display: flex;
+            background-color: #fff;
+            height: 135vh;
+            width: 100vw;
+        }
+    
+        .imagem-sobre-nos {
+            background: #fff;
+            width: 50vw;
+            height: 10vh;
+         
+        }
+    
+        .imagem-sobre-nos img {
+            display: block;
+            background: #fff;
+            width: 80vw;
+            height: fit-content;
+            position: relative;
+            top: 110vh;
+            left: 3.5rem;
+        }
+    
+        .texto-sobre-nos {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            align-items: center;
+            justify-content: space-evenly;
+            position: relative;
+            top: 15vh;
+            right: 20vw;
+        }
+    
+        .texto-sobre-nos span {
+            font-size: 4vh;
+            position: relative;
+            bottom: 7rem;
+            right: 1rem;
+        }
+    
+        .texto-sobre-nos p {
+            font-size: 20px;
+            color: #4444449a;
+            text-align: justify;
+            width: 130%;
+            position: relative;
+            bottom: 6rem;
+            right: 1rem;
+        }
+    
+        .sobre-nos-button {
+            margin-top: 10vh;
+            border-radius: 1rem;
+            font-weight: 500;
+            line-height: 24px;
+            font-size: 20px;
+            padding-block: 16px;
+            width: fit-content;
+            border: none;
+            position: relative;
+            bottom: 15vh;
+            right: 2vh;
+        }
+    
+    
+        .item {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            width: 100%;
+            position: relative;
+        }
+    
+        .item img {
+            width: 7vh;
+            height: 7vh;
+            position: relative;
+            bottom: 5.7rem;
+            right: 2.8rem;
+        }
+    
+        .item p {
+            font-size: 18px;
+            font-family: 'Inter';
+            color: #444444;
+            font-weight: bold;
+        }
+    
+        /* Fim Sobre Nós  */
+    
+    
+        /* Início Nossos Serviços */
+        /* .como-fazemos {
+            display: flex;
+            width: 100%;
+            height: 100vh;
+            background-color: transparent;
+            position: relative;
+            bottom: 25rem;
+        }
+    
+        .article1 h2 {
+            font-size: 4vh;
+            font-weight: bold;
+            width: 80%;
+            position: relative;
+            left: 0.6rem;
+            bottom: 2rem;
+        }
+    
+        .article1 p {
+            font-size: 20px;
+            color: #444444;
+            text-align: justify;
+            width: 90vw;
+            position: relative;
+            right: 0.7rem;
+            bottom: 2rem;
+        }
+    
+        .como-vera {
+            background-color: rgba(168, 128, 255, 0.5);
+            width: 80%;
+            border-radius: 2.5rem;
+            padding: 0rem 1rem 0rem 2rem;
+            overflow: hidden;
+            text-align: justify;
+            font-size: 20px;
+            position: relative;
+            right: 0.5rem;
+            bottom: 2.5rem;
+        }
+    
+    
+        .como-vera h2 {
+            font-size: 2rem;
+            position: relative;
+            bottom: 50vh;
+        }
+    
+        .como-vera p {
+            font-size: 20px;
+            color: white;
+            font-family: 'Inter';
+            line-height: 2.0;
+            text-align: justify;
+            width: 100%;
+        }
+    
+        .article1 {
+            display: flex;
+            align-items: center;
+            justify-content: space-evenly;
+            flex-direction: column;
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            left: 2rem;
+        }
+    
+        .aside1 {
+            display: flex;
+            align-items: center;
+            width: 50%;
+            height: 10vh;
+            padding: 0;
+            position: relative;
+            top: 150vh;
+            right: 65vw;
+        }
+    
+        .aside1 img {
+            width: 85vw;
+            height: fit-content;
+        } */
+    
+        /* FIM SOBRE NÓS */
+    
+         .nossos-servicos {
+            background: transparent;
+            position: relative;
+            margin-left: 25vh;
+        } 
+    
+    
+         .texto-nossos-servicos {
+            display: flex;
+            flex-direction: column;
+            width: 100vw;
+            height: 50vh;
+            align-items: start;
+            justify-content: space-evenly;
+            position: relative;
+            bottom: 15vh;
+        } 
+    
+         .texto-nossos-servicos h2 {
+            font-size: 4vh;
+            font-weight: bold;
+            text-align: center;
+            margin-bottom: 0;
+            position: relative;
+            bottom: 15vh;
+           
+        }
+    
+        .texto-nossos-servicos p {
+            margin-top: 0;
+            text-align: justify;
+            width: 65vw;
+            position: relative;
+            bottom: 75vh;
+        } 
+    
+        .texto-nossos-servicos ul li {
+            text-align: justify;
+            position: relative;
+            margin-top: 2rem;
+        } 
+    
+        .nossos-servicos-button {
+            border-radius: 1rem;
+            height: 7vh;
+            width: 45vw;
+            padding-block: 1rem;
+            position: relative;
+            top: 2rem;
+        } 
+    
+        .mobile-btn {
+            position: relative;
+            bottom: 43vh;
+            width: 35vw;
+        } 
+    
+        /* Fim Nossos Serviços */
+    
+    
+        /* Início Redes */
+    
+        /* .redes {
+            width: 100vw;
+            height: 100vh;
+            position: relative;
+            top: 75vh;
+        }
+    
+        .redes h2 {
+            width: 83%;
+            font-size: 3vh;
+            position: relative;
+            left: 1.3rem;
+        }
+    
+        .sociais {
+            width: 40%;
+            flex-direction: column;
+        } */
+    
+        /* Fim Redes  */
+    
+    
+        /* Início Nossa Equipe */
+    
+        .nossa-equipe {
+            display: flex;
+            flex-direction: column;
+      
+            height: 160vh;
+            background: url(../assets/contact_globe\ 1.png);
+            background-repeat: no-repeat;
+            justify-content: space-evenly;
+            position: relative;
+            top: 80vh;
+        }
+    .blocoBannerEquipe{
+        width: 92%;
     }
-
-    article {
-        width: 50vw;
-        height: fit-content;
-        position: relative;
-        top: 50vh;
-        right: 45vw;
+        .nossa-equipe h2 {
+            position: relative;
+            width: 60vw;
+            font-size: 4vh;
+        }
+    
+        .rostos {
+            position: relative;
+            flex-direction: column;
+            padding: 0;
+            width: 90%;
+            gap: 2rem;
+        }
+    
+        .rostos1 {
+            display: flex;
+            justify-content: space-evenly;
+            flex-direction: column;
+            width: 90%;
+            position: relative;
+            right: 9rem;
+            gap: 2rem;
+            bottom: 5rem;
+        }
+    
+        .rostos img {
+            width: 45vw;
+            height: fit-content;
+            position: relative;        
+            left: 8rem;
+        }
+    
+        .rostos1 img {
+            width: 45vw;
+            height: fit-content;
+            position: relative;        
+            z-index: 6;
+        }
+    
+        .botoes {
+        margin-top: 5vh;
+        }
+        /* FOOTER */
+    
+        .logo_footer_cadastro{
+            margin-top: 0;
+        }
+       
+        .container_footer{
+            margin-top: 10vh;
+        }
+    
+        /* Fim Home  */
     }
-
-    article img {
-        width: 70vw;
-        position: relative;
-        right: 20vw;
-    }
-
-    .btn-func {
-        display: flex;
-        width: 100vw;
-        align-items: center;
-        justify-content: space-around;
-        gap: 0.5rem;
-        position: relative;
-        top: 30vh;
-        right: 13vw;
-    }
-
-    aside .nav-button {
-        padding: 0.1rem;
-        width: 12rem;
-        position: relative;
-        left: 1rem;
-        padding-block: 1rem;
-    }
-
-    .btn-player {
-        position: relative;
-        bottom: 0.3rem;
-        right: 0.2rem;
-        padding-block: 1rem;
-    }
-
-    /* Fim Banner */
-
-    /* Início Nossos Diferenciais */
-    .center-vertical {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-    }
-
-    .linha-divisoria {
-        position: absolute;
-        width: 95vw;
-        height: 1px;
-        background-color: #444444;
-        top: 135%;
-        transform: translateY(-50%);
-        z-index: 1;
-    }
-
-    .Nossos-Diferenciais {
-        text-align: center;
-        flex-direction: column;
-        padding-top: 20px;
-        position: relative;
-        height: 20vh;
-    }
-
-
-
-    .Nossos-Diferenciais h1 {
-        margin-top: 0;
-        margin-bottom: 0;
-        font-family: 'Inter' sans-serif;
-        font-size: 4vh;
-        font-weight: bold;
-        color: #333333;
-        position: relative;
-        bottom: 12vh;
-        left: 0.4rem;
-    }
-
-    .conteudo {
-        display: flex;
-        align-items: center;
-        justify-content: space-around;
-        margin-top: 0;
-        flex-direction: column;
-        position: relative;
-        bottom: 6vh;
-        right: 2.5vw;
-        gap: 0.5rem;
-    }
-
-    .seguranca,
-    .foco,
-    .cliente,
-    .tempo,
-    .projeto {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 50vw;
-        margin-left: 0;
-        position: relative;
-        left: 1.2rem;
-    }
-
-    .seguranca img,
-    .foco img,
-    .tempo img,
-    .cliente img,
-    .projeto img {
-        height: fit-content;
-        width: 25vw;
-        margin-bottom: 17px;
-    }
-
-    .seguranca p,
-    .foco p,
-    .tempo p,
-    .cliente p,
-    .projeto p {
-        font-size: 1rem;
-        font-family: 'Inter';
-        color: #444444;
-        font-weight: bold;
-    }
-
-    /* Fim Nossos Diferenciais */
-
-
-    /* Início Sobre Nós */
-    .sobre-nos {
-        display: flex;
-        background-color: #fff;
-        height: 135vh;
-        width: 100vw;
-    }
-
-    .imagem-sobre-nos {
-        background: #fff;
-        width: 50vw;
-        height: 10vh;
-    }
-
-    .imagem-sobre-nos img {
-        display: block;
-        background: #fff;
-        width: 75vw;
-        height: fit-content;
-        position: relative;
-        top: 100vh;
-        left: 3.5rem;
-    }
-
-    .texto-sobre-nos {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-        height: 100vh;
-        align-items: center;
-        justify-content: space-evenly;
-        position: relative;
-        top: 15vh;
-        right: 20vw;
-    }
-
-    .texto-sobre-nos span {
-        font-size: 4vh;
-        position: relative;
-        bottom: 7rem;
-        right: 1rem;
-    }
-
-    .texto-sobre-nos p {
-        font-size: 20px;
-        color: #4444449a;
-        text-align: justify;
-        width: 130%;
-        position: relative;
-        bottom: 6rem;
-        right: 1rem;
-    }
-
-    .sobre-nos-button {
-        border-radius: 1rem;
-        font-weight: 500;
-        line-height: 24px;
-        font-size: 20px;
-        padding-block: 16px;
-        width: fit-content;
-        border: none;
-        position: relative;
-        bottom: 15vh;
-        right: 25vw;
-    }
-
-
-    .item {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        width: 100%;
-        position: relative;
-    }
-
-    .item img {
-        width: 7vh;
-        height: 7vh;
-        position: relative;
-        bottom: 5.7rem;
-        right: 2.8rem;
-    }
-
-    .item p {
-        font-size: 18px;
-        font-family: 'Inter';
-        color: #444444;
-        font-weight: bold;
-    }
-
-    /* Fim Sobre Nós  */
-
-
-    /* Início Nossos Serviços */
-    .como-fazemos {
-        display: flex;
-        width: 100%;
-        height: 100vh;
-        background-color: transparent;
-        position: relative;
-        bottom: 25rem;
-    }
-
-    .article1 h2 {
-        font-size: 4vh;
-        font-weight: bold;
-        width: 80%;
-        position: relative;
-        left: 0.6rem;
-        bottom: 2rem;
-    }
-
-    .article1 p {
-        font-size: 20px;
-        color: #444444;
-        text-align: justify;
-        width: 90vw;
-        position: relative;
-        right: 0.7rem;
-        bottom: 2rem;
-    }
-
-    .como-vera {
-        background-color: rgba(168, 128, 255, 0.5);
-        width: 80%;
-        border-radius: 2.5rem;
-        padding: 0rem 1rem 0rem 2rem;
-        overflow: hidden;
-        text-align: justify;
-        font-size: 20px;
-        position: relative;
-        right: 0.5rem;
-        bottom: 2.5rem;
-    }
-
-
-    .como-vera h2 {
-        font-size: 2rem;
-        position: relative;
-        bottom: 50vh;
-    }
-
-    .como-vera p {
-        font-size: 20px;
-        color: white;
-        font-family: 'Inter';
-        line-height: 2.0;
-        text-align: justify;
-        width: 100%;
-    }
-
-    .article1 {
-        display: flex;
-        align-items: center;
-        justify-content: space-evenly;
-        flex-direction: column;
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        left: 2rem;
-    }
-
-    .aside1 {
-        display: flex;
-        align-items: center;
-        width: 50%;
-        height: 10vh;
-        padding: 0;
-        position: relative;
-        top: 150vh;
-        right: 65vw;
-    }
-
-    .aside1 img {
-        width: 85vw;
-        height: fit-content;
-    }
-
-    /* FIM SOBRE NÓS */
-
-    .nossos-servicos {
-        background: transparent;
-        position: relative;
-        top: 10rem;
-    }
-
-    .imagem-nossos-servicos {
-        display: flex;
-        width: 100vw;
-        height: 10vh;
-        align-items: center;
-    }
-
-    .imagem-nossos-servicos img {
-        width: 85vw;
-        height: fit-content;
-        position: relative;
-        top: 77vh;
-        right: 5vw;
-    }
-
-    .texto-nossos-servicos {
-        display: flex;
-        flex-direction: column;
-        width: 100vw;
-        height: 50vh;
-        align-items: start;
-        justify-content: space-evenly;
-        position: relative;
-        right: 17rem;
-    }
-
-    .texto-nossos-servicos h2 {
-        font-size: 4vh;
-        font-weight: bold;
-        text-align: center;
-        margin-bottom: 0;
-        position: relative;
-        bottom: 39vh;
-        right: 2.5rem;
-    }
-
-    .texto-nossos-servicos p {
-        font-size: 1.5rem;
-        margin-top: 0;
-        text-align: justify;
-        width: 65vw;
-        position: relative;
-        right: 2rem;
-        bottom: 35vh;
-    }
-
-    .texto-nossos-servicos ul li {
-        text-align: justify;
-        width: 100%;
-        position: relative;
-        right: 2rem;
-        bottom: 32vh;
-        margin-top: 1rem;
-    }
-
-    .nossos-servicos-button {
-        border-radius: 1rem;
-        height: 7vh;
-        width: 45vw;
-        padding-block: 1rem;
-        position: relative;
-        top: 1rem;
-    }
-
-    .mobile-btn {
-        position: relative;
-        bottom: 43vh;
-        width: 35vw;
-    }
-
-    /* Fim Nossos Serviços */
-
-
-    /* Início Redes */
-
-    .redes {
-        width: 100vw;
-        height: 100vh;
-        position: relative;
-        top: 75vh;
-    }
-
-    .redes h2 {
-        width: 83%;
-        font-size: 3vh;
-        position: relative;
-        left: 1.3rem;
-    }
-
-    .sociais {
-        width: 40%;
-        flex-direction: column;
-    }
-
-    /* Fim Redes  */
-
-
-    /* Início Nossa Equipe */
-
-    .nossa-equipe {
-        display: flex;
-        flex-direction: column;
-        width: 80vw;
-        height: 230vh;
-        background: url(../assets/contact_globe\ 1.png);
-        background-repeat: no-repeat;
-        background-position: right;
-        justify-content: space-evenly;
-        position: relative;
-        top: 60vh;
-    }
-
-    .nossa-equipe h2 {
-        position: relative;
-        top: 5rem;
-        left: 5.3rem;
-        width: 60vw;
-        font-size: 4vh;
-    }
-
-    .rostos {
-        position: relative;
-        flex-direction: column;
-        padding: 0;
-        width: 90%;
-        gap: 2rem;
-    }
-
-    .rostos1 {
-        display: flex;
-        justify-content: space-evenly;
-        flex-direction: column;
-        width: 90%;
-        position: relative;
-        right: 9rem;
-        gap: 2rem;
-        bottom: 5rem;
-    }
-
-    .rostos img {
-        width: 45vw;
-        height: fit-content;
-        position: relative;        
-        left: 8rem;
-    }
-
-    .rostos1 img {
-        width: 45vw;
-        height: fit-content;
-        position: relative;        
-        z-index: 6;
-    }
-
-    /* FOOTER */
-
-   
-
-    /* Fim Home  */
-}

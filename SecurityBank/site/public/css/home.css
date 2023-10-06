@@ -517,6 +517,7 @@ aside .nav-button {
     color: #561183;
     text-align: justify;
     width: 100%;
+    list-style: disc;
 }
 
 .nossos-servicos-button {
