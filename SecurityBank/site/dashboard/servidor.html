@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../public/assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Painel Geral</title>
+
+    <link rel="stylesheet" href="../public/css/style.css">
+    <link rel="stylesheet" href="../public/css/dashboards.css">
+    <link rel="stylesheet" href="../public/css/servidorDash.css">
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+</head>
+
+<!-- <body onload=" atualizarFeed()"> -->
+
+<body>
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../public/assets/logofooter.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá,<b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes localizacao">
+                <a href="">
+                    <img src="../public/assets/imgs/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/servdores.png" alt="">
+                    <span>Servidores</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/alertas.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/controlecontas.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../public/assets/imgs/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../public/assets/imgs/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../public/assets/imgs/logout.png" alt="" onclick="limparSessao()">
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+            <div class="btns-dash" id="btnAquario">
+                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+            </div>
+            <div id="graficos">
+            </div>
+
+            <h1 class="tituloServidor">Adicionar um Servidor</h1>
+
+            <div class="blocoAdicao">
+                <h2 class="subtituloServidor">Cadastre um Servidor</h2>
+
+                <span class="camposServidor">Apelido Fantasia</span><br>
+                <input class="inputServidor" type="text"><br>
+
+                <span class="camposServidor">Sistema Operacional</span><br>
+                <input class="inputServidor" type="text"><br>
+
+                <span class="camposServidor">CPF do Responsável Legal</span><br>
+                <input class="inputServidor" type="text"><br>
+
+                <span class="camposServidor">Endereço IP</span><br>
+                <input class="inputServidor" type="text">
+
+                <h2 class="subtituloServidor">Especificações de Hardware</h2>
+
+                <div class="linhaServidor">
+                    <div class="camposPotencia">
+                        <span class="camposServidor">Potência Máxima da CPU</span><br>
+                        <select class="selectServidor" name="potenciacpu">
+                            <option value="">X</option>
+                            <option value="">Y</option>
+                            <option value="">Y</option>
+                        </select><br>
+                    </div>
+                    <div class="camposPotencia">
+                        <span class="camposServidor">Potência Máxima do Disco</span> <br>
+                        <select class="selectServidor" name="potenciadisco">
+                            <option value="">X</option>
+                            <option value="">Y</option>
+                            <option value="">Y</option>
+                        </select><br>
+                    </div>
+                </div>
+
+                <div class="camposPotencia">
+                    <span class="camposServidor">Potência Máxima da Memória RAM</span><br>
+                    <select class="selectServidor" name="potenciaram">
+                        <option value="">X</option>
+                        <option value="">Y</option>
+                        <option value="">Y</option>
+                    </select><br>
+
+                </div>
+                <div class="linhaServidor">
+                    <div class="camposData">
+                        <span class="camposServidor">Data de Compra</span><br>
+                        <input class="inputServidor" type="date"><br>
+                    </div>
+                    <div class="camposData">
+                        <span class="camposServidor">Data Validade do Servidor</span><br>
+                        <input class="inputServidor" type="date">
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+    nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+</script>

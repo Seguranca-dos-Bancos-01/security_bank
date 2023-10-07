@@ -1,0 +1,75 @@
+/* pagina mural */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
+
+
+/*SUPORTE*/
+
+.tituloServidor {
+  margin-left: 80px;
+  color: #000F53;
+  font-family: Poppins, sans-serif;
+
+}
+
+.blocoAdicao {
+  margin-left: 80px;
+  width: 80%;
+  height: fit-content;
+  background-color: white;
+  border-radius: 20px;
+  margin-bottom: 50px;
+}
+
+.subtituloServidor {
+  color: #FF847F;
+  font-size: 20px;
+  font-weight: 600;
+  padding: 30px;
+}
+
+.camposServidor {
+  padding: 20px 40px;
+  color: #000F53;
+font-size: 18px;
+
+}
+
+.inputServidor {
+  margin: 10px 30px;
+  background-color: rgba(0, 15, 83, 0.12);
+  border-radius: 10px;
+  border: none;
+  width: 90%;
+}
+
+.linhaServidor {
+  width: 90%;
+display: flex;
+justify-content: space-around;
+align-items: center;
+}
+
+.camposPotencia {
+  text-align: start;
+  width: 440px;
+}
+
+.selectServidor {
+  margin: 10px 30px;
+  background-color: rgba(0, 15, 83, 0.12);
+  border-radius: 10px;
+  border: none;
+  width: 90%;
+  height: 36px;
+  text-align: center;
+  color: #000F53;
+  
+}
+
+.camposData {
+  width: 440px;
+  margin-top: 30px;
+  margin-bottom: 30px;
+  
+}
