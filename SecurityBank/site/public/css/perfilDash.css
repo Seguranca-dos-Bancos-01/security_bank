@@ -5,37 +5,50 @@
 
 /*SUPORTE*/
 
-.tituloServidor {
+.tituloPerfil {
   margin-left: 80px;
   color: #000F53;
   font-family: Poppins, sans-serif;
 
 }
 
-.blocoAdicao {
+.blocoInformacoes {
   margin-left: 80px;
   width: 80%;
   height: fit-content;
   background-color: white;
   border-radius: 20px;
   margin-bottom: 50px;
+ padding-bottom: 50px;
+
 }
 
-.subtituloServidor {
-  color: #FF847F;
+.blocoHeaderPerfil {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 10px 50px 0 30px;
+}
+
+.imgEditarPerfil {
+  border: none;
+  background-color: white;
+}
+
+.subtituloPerfil {
+  color: #000F53;
   font-size: 20px;
   font-weight: 600;
-  padding: 30px;
 }
 
-.camposServidor {
+.camposPerfil {
   padding: 20px 40px;
   color: #000F53;
 font-size: 18px;
 
 }
 
-.inputServidor {
+.inputPerfil {
   margin: 10px 30px;
   background-color: rgba(0, 15, 83, 0.12);
   border-radius: 10px;
@@ -44,33 +57,29 @@ font-size: 18px;
   text-align: start;
 }
 
-.linhaServidor {
-  width: 90%;
-display: flex;
-justify-content: space-around;
-align-items: center;
+.bloco2 {
+  border: 2px solid #000F53;
+  width: 80%;
+  border-radius: 20px;
+  height: 120px;
+  margin: auto;
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
-.camposPotencia {
-  text-align: start;
-  width: 440px;
+.bloco3 {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  width: 50%;
+  height: 30px;
+ 
 }
 
-.selectServidor {
-  margin: 10px 30px;
-  background-color: rgba(0, 15, 83, 0.12);
-  border-radius: 10px;
-  border: none;
-  width: 90%;
-  height: 36px;
-  text-align: center;
-  color: #000F53;
-  
-}
-
-.camposData {
-  width: 440px;
-  margin-top: 30px;
-  margin-bottom: 30px;
-  
+#empresaNome, #nivelAcesso {
+  font-weight: 600;
+  font-size: 20px;
+  margin-top: 15px;
 }
