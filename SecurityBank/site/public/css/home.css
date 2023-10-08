@@ -608,7 +608,7 @@ aside .nav-button {
 
 /* FOOTER */
 
-.footer {
+/* .footer {
     background: url(../assets/ondas.png);
     background-size: cover;
 }
@@ -640,7 +640,90 @@ aside .nav-button {
         position: relative;
         top: 1rem;
     }
+} */
+
+
+.rodape{
+    width: 100%;
+    height: 100%;
+    background-color: #000F53;
+    display: flex;
+    justify-content: center;
+    justify-content: space-evenly;
+    color: white;
+    align-items: center;
 }
+
+.rodape_contato{
+    width: 50vh;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    color: white;
+    font-size: 2vh;
+    margin-top: 3vh;
+}
+
+.rodape_contato h1{
+    font-size: 5vh;
+}
+.rodape_contato h3{
+    margin-top: 6vh;
+  
+}
+
+.rodape_contato h4{
+    margin-bottom: 2vh;
+   
+}
+
+.rodape_links{
+    margin-top: 3vh;
+    width: 50vh;
+    height: 50vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    font-size: 2vh;
+    margin-top: 3vh;
+    position: relative;
+    left: 10vh;
+    }
+
+.rodape_links h3{
+    margin-top: 3vh;
+  
+}
+
+.rodape_links a {
+    text-decoration: none;
+    color: white;
+}
+
+    .rodape_redes{
+        margin-top: 3vh;
+        width: 50vh;
+        height: 50vh;
+        margin-top: 3vh;
+        font-size: 2vh;
+        position: relative;
+        left: 10vh;
+    }
+
+    .rodape_redes h3{
+        font-size: 2vh;
+        margin-top: 3vh;
+    }
+   
+    .rodape_direitos{
+        background-color: #000F53;
+        align-items: center;
+        display: flex;
+        justify-content: center;
+        color: white;
+        font-size: 2vh;
+    }
 
 /* Banner nossa equipe */
 

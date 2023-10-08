@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="../public/css/navBar.css">
     <link rel="stylesheet" href="../public/css/faleconosco.css">
     <link rel="stylesheet" href="css/responsividade.css">
+    <link rel="stylesheet" href="css/home.css">
     <script defer src="js/navBar.js"></script>
     <link rel="shortcut icon" href="assets/logoEscudo.png" type="image/x-icon">
 </head>
@@ -40,17 +41,17 @@
         <div class="subtituloFaleConosco">Alguma dúvida ou sugestão? Entre em contato conosco!</div>
 
         <div class="entrada">
-           
-                <div class="linhanome">
-                    <span class="placeholder">Nome:</span>
-                    <input id="ipt_nome" class="dados" type="text">
-                </div>
 
-                <div class="linhaemail">
-                    <span class="placeholder">Email:</span>
-                    <input id="ipt_email" class="dados" type="text">
-                </div>
-          
+            <div class="linhanome">
+                <span class="placeholder">Nome:</span>
+                <input id="ipt_nome" class="dados" type="text">
+            </div>
+
+            <div class="linhaemail">
+                <span class="placeholder">Email:</span>
+                <input id="ipt_email" class="dados" type="text">
+            </div>
+
 
             <div class="linha3">
                 <span class="placeholder">Mensagem:</span>
@@ -62,7 +63,7 @@
             </div>
         </div>
 
-        <div class="waves">
+   =
             <div class="contato">
                 <div class="fundo2">
                     <div class="separa">
@@ -88,23 +89,52 @@
                 </div>
             </div>
 
-            <div class="footer">
-                <div class="container_footer">
-                    <img src="../public/assets/logofooter.png" class="logo_footer_cadastro">
-                    <span class="logotext">Melhor monitoramento de hardware para o seu negócio!</span>
-                    <span class="linha"></span>
-                    <h4 class="direitos">&copy; 2023 Copyrights by SecurityBank. All Rights Reserved.</h4>
+            <div class="rodape">
+
+                <div class="rodape_contato">
+
+                    <h1>Security Bank</h1>
+                    <h4>TECH & SOLUTIONS</h4>
+
+                    <h3>Telefone: (11) 4002-8922</h3>
+                    <h3>E-mail: SC.contato.2023@gmail.com</h3>
+                    <h3>Endereço: Rua Haddock Loobo, 595
+                        Cerqueira César, São Paulo - SP,
+                        01414-001</h3>
+                </div>
+
+                <div class="rodape_links">
+
+                    <h2>Links</h2>
+                    <h3><a href="home.html">Home</a></h3>
+                    <h3><a href="home.html">Nossos Serviços</a></h3>
+                    <h3><a href="home.html">Sobre Nós</a></h3>
+                    <h3><a href="faleconosco.html">Fale Conosco</a></h3>
+                    <h3><a href="cadastro.html">Cadastro</a></h3>
+                    <h3><a href="login.html">Login</a></h3>
+                </div>
+
+                <div class="rodape_redes">
+                    <h2>Redes Sociais</h2>
+                    <h3>Instagram</h3>
+                    <h3>Linkedln</h3>
                 </div>
             </div>
+
+          
+
+
         </div>
 
     </div>
+    <div class="rodape_direitos"> &copy;  2023 copyrights by SecurityBank. All Rights Reserved</div>
+
 </body>
 
 </html>
 
 <script>
- document.getElementById("Cad").onclick = function () {
+    document.getElementById("Cad").onclick = function () {
         location.href = "./login.html";
     };
     function enviar() {
@@ -112,5 +142,5 @@
         var assunto = `Olá, meu nome é ` + ipt_nome.value;
         var corpo = ipt_mensagem.value;
         window.open("mailto:" + email + "?subject=" + assunto + "&body=" + corpo);
-}
+    }
 </script>
