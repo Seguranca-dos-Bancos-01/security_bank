@@ -89,7 +89,6 @@
 .div-results {
   width: 100%;
 }
-
 .div-results .feed-container {
   background-color: #FAFBFF;
   border-radius: 5px;
@@ -112,10 +111,8 @@
 }
 
 .dash {
-  width: 80%;
-  position: relative;
-  top: 0;
-  left: 20%;
+  width: 100%;
+  height: 100%;
   background-color: #FAFBFF;
   height: 100vh;
   overflow: auto;
@@ -344,4 +341,14 @@ canvas {
   justify-content: flex-start;
   align-items: center;
   padding: 0px 10px;
+}
+.rodape{
+  width: 100%;
+  height: 100%;
+  background-color: #000F53;
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  color: #ffffff;
+  align-items: center;
 }

@@ -244,7 +244,6 @@ input {
 }
 
 .header-left {
-  position: fixed;
   top: 0;
   left: 0;
   z-index: 999;
@@ -384,4 +383,40 @@ input {
   50%  {transform: rotate(25deg)}
   75%  {transform: rotate(-25deg)}
   100% {transform: rotate(25deg)}
+}
+.rodapeDash{
+  width: 100%;
+  height: 100%;
+  background-color: #000F53;
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  color: #ffffff;
+  align-items: center;
+  flex-direction: column;
+}
+.itens{
+  display: flex;
+  justify-content: space-around;
+  margin-top: 50px;
+  width: 100%;
+  margin-bottom: 40px;
+}
+.blocos{
+  display: flex;
+  flex-direction: column;
+}
+.blocos span{
+  color: #ffffff;
+  margin-top: 10px;
+  margin-bottom: 10px;
+}
+.blocos h4{
+  margin-top: -25px;
+}
+.blocos h1{
+  margin-top: 0;
+}
+.direitos{
+  margin-bottom: 30px;
 }
