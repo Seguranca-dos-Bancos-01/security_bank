@@ -124,9 +124,9 @@ color: #8573DB;
 .ondasFundo img{
   background-size: cover;
   width: 98.7vw;
-  height: 30rem; 
+  height: 20rem; 
   position: relative;
-  top: 3rem;
+  bottom: 45vh;
 }
 
 .tituloCadastro {  
@@ -188,39 +188,87 @@ color: #8573DB;
   height: var(--tamanho-simulador);
 }
 
-.footer {   
-  width: 100%;   
-  color: #fff;  
-  position: relative;
-  top: 20rem;  
+.rodape{
+  width: 100%;
+  height: 100%;
+  background-color: #000F53;
+  display: flex;
+  justify-content: center;
+  justify-content: space-evenly;
+  color: white;
+  align-items: center;
 }
 
-.container_footer {
+.rodape_contato{
+  width: 50vh;
+  height: 50vh;
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  flex-direction: center;
-  width: 100%;
+  justify-content: start;
+  color: white;
+  font-size: 2vh;
+  margin-top: 3vh;
 }
 
+.rodape_contato h1{
+  font-size: 5vh;
+}
+.rodape_contato h3{
+  margin-top: 6vh;
 
-.direitos {
-  font-size: 12px;
-  font-weight: 800;
-  color: black;
-  text-shadow: 3px 2px 3px rgb(93, 93, 93);
+}
+
+.rodape_contato h4{
+  margin-bottom: 2vh;
+ 
+}
+
+.rodape_links{
+  margin-top: 3vh;
+  width: 50vh;
+  height: 50vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+  font-size: 2vh;
+  margin-top: 3vh;
   position: relative;
-  top: 1rem;
+  left: 10vh;
+  }
+
+.rodape_links h3{
+  margin-top: 3vh;
+
 }
 
-.logo_footer_cadastro {
-  width: 33vh;
-  height: 8vh;
-  margin-top: 10vh;
-  position: relative;
-  left: 1rem;
+.rodape_links a {
+  text-decoration: none;
+  color: white;
 }
+
+  .rodape_redes{
+      margin-top: 3vh;
+      width: 50vh;
+      height: 50vh;
+      margin-top: 3vh;
+      font-size: 2vh;
+      position: relative;
+      left: 10vh;
+  }
+
+  .rodape_redes h3{
+      font-size: 2vh;
+      margin-top: 3vh;
+  }
+ 
+  .rodape_direitos{
+      background-color: #000F53;
+      align-items: center;
+      display: flex;
+      justify-content: center;
+      color: white;
+      font-size: 2vh;
+  }
 
 .linha {
   height: 1px;
