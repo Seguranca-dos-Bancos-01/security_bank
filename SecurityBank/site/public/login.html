@@ -32,7 +32,7 @@
                 <li><a href="#sobrenos">Sobre nós</a></li>
                 <li><a href="faleconosco.html">Fale Conosco</a></li>
                 <li><a href="#nossosservicos">Nossos serviços</a></li>
-                <li><a href="login.html"></a></li>
+                <li><a href="./login.html"></a></li>
                 <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
             </ul>
             <div class="user">
@@ -134,10 +134,10 @@
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
-                    
-                        window.location = "./dashboard/dashboard.html";
-                    100; // apenas para exibir o loading
-
+                    setTimeout(function (){
+                        window.location = "../dashboard/dashboard.html";
+                    }, 1000
+                    );
                 });
 
             } else {
