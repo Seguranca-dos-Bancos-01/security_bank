@@ -19,12 +19,12 @@
     rel="stylesheet" />
   </head>
 
-  <body>
+  <body onload="listar()">
      <!-- Início NavBar -->
      <div class="fundoRoxo"></div>
      <header class="header">
       <nav class="nav">
-          <span href="index.html"><img src="./assets/logo.png" alt="" class="logo"></span>
+          <span href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></span>
           <button class="hamburger"></button>
           <ul class="nav-list">
               <li><a href="index.html">Home</a></li>
@@ -89,7 +89,7 @@
             <a href="login.html" class="loginDireto">Ja tem uma conta?</a>
           </div>
           <div class="ondasFundo">
-            <img src="./assets/ondasLogin.png" alt="Ondas">
+            <img src="../public/assets/ondasLogin.png" alt="Ondas">
           </div>
         </div>
         <footer class="footer">
@@ -111,8 +111,6 @@
     };
 
   function cadastrar() {
-    
-
     //Recupere o valor da nova input pelo nome do id
     // Agora vá para o método fetch logo abaixo
     var nomeVar = nome_input.value;
@@ -133,7 +131,7 @@
       mensagem_erro.innerHTML =
         "(Mensagem de erro para todos os campos em branco)";
 
-      
+      finalizarAguardar();
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -184,21 +182,21 @@
     return false;
   }
 
-  // function listar() {
-  //   fetch("/empresas/listar", {
-  //     method: "GET",
-  //   })
-  //     .then(function (resposta) {
-  //       resposta.json().then((empresas) => {
-  //         empresas.forEach((empresa) => {
-  //           listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
-  //         });
-  //       });
-  //     })
-  //     .catch(function (resposta) {
-  //       console.log(`#ERRO: ${resposta}`);
-  //     });
-  // }
+  function listar() {
+    fetch("/empresas/listar", {
+      method: "GET",
+    })
+      .then(function (resposta) {
+        resposta.json().then((empresas) => {
+          empresas.forEach((empresa) => {
+            listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+          });
+        });
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+      });
+  }
 
   function sumirMensagem() {
     cardErro.style.display = "none";

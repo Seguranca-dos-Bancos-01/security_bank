@@ -105,7 +105,7 @@
             return false;
         }
         else {
-            setInterval(sumirMensagem, 3000)
+            
         }
 
         console.log("FORM LOGIN: ", emailVar);
@@ -134,9 +134,9 @@
                     sessionStorage.ID_USUARIO = json.id;
                     sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
-                    setTimeout(function () {
-                        window.location = "./dashboard/cards.html";
-                    }, 1000); // apenas para exibir o loading
+                    
+                        window.location = "./dashboard/dashboard.html";
+                    100; // apenas para exibir o loading
 
                 });
 
@@ -157,8 +157,5 @@
         return false;
     }
 
-    function sumirMensagem() {
-        cardErro.style.display = "none"
-    }
 
 </script>
