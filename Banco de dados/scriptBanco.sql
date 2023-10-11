@@ -34,7 +34,7 @@ razaoSocial varchar (45),
 sigla varchar (10),
 responsavelLegal varchar(45)
 ) auto_increment = 400 ;
-
+insert into banco(nomeFantasia, cnpj, razaoSocial, sigla, responsavelLegal) values('bla', '12345678901234','blabla', '1bla', 'pedrao');
 
 CREATE TABLE escalonamentoFuncionarios(
 idEscalonamento int primary key auto_increment,
@@ -96,4 +96,6 @@ constraint pkComposta primary key (idRegistros, fkServidor,fkBanco, fkEspecifica
  foreign key (fkEspecificacoes) references especificacoes (idEspecificacoes),
  foreign key (fkComponentes) references componentes (idComponentes)
 ) auto_increment = 900 ;
+
+
 

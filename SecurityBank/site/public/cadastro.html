@@ -19,12 +19,12 @@
     rel="stylesheet" />
   </head>
 
-  <body onload="listar()">
+  <body>
      <!-- Início NavBar -->
      <div class="fundoRoxo"></div>
      <header class="header">
       <nav class="nav">
-          <span href="index.html"><img src="../public/assets/logo.png" alt="" class="logo"></span>
+          <span href="index.html"><img src="./assets/logo.png" alt="" class="logo"></span>
           <button class="hamburger"></button>
           <ul class="nav-list">
               <li><a href="index.html">Home</a></li>
@@ -89,12 +89,12 @@
             <a href="login.html" class="loginDireto">Ja tem uma conta?</a>
           </div>
           <div class="ondasFundo">
-            <img src="../public/assets/ondasLogin.png" alt="Ondas">
+            <img src="./assets/ondasLogin.png" alt="Ondas">
           </div>
         </div>
         <footer class="footer">
           <div class="container_footer">
-              <img src="../public/assets/logofooter.png" class="logo_footer_cadastro">
+              <img src="./assets/logofooter.png" class="logo_footer_cadastro">
               <span class="logotext">Melhor monitoramento de hardware para o seu negócio!</span>
               <span class="linha"></span>
               <h4 class="direitos">&copy; 2023 Copyrights by SecurityBank. All Rights Reserved.</h4>
@@ -133,7 +133,7 @@
       mensagem_erro.innerHTML =
         "(Mensagem de erro para todos os campos em branco)";
 
-      finalizarAguardar();
+      
       return false;
     } else {
       setInterval(sumirMensagem, 5000);
@@ -171,14 +171,14 @@
           }, "2000");
 
           limparFormulario();
-          finalizarAguardar();
+          
         } else {
           throw "Houve um erro ao tentar realizar o cadastro!";
         }
       })
       .catch(function (resposta) {
         console.log(`#ERRO: ${resposta}`);
-        finalizarAguardar();
+        
       });
 
     return false;
