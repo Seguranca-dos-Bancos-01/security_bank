@@ -1,0 +1,76 @@
+/* pagina mural */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
+
+
+.tituloMetricas {
+  margin-left: 80px;
+  color: #000F53;
+  font-family: Poppins, sans-serif;
+}
+
+.descricaoMetricas {
+  margin-left: 80px;
+  color: rgba(0, 0, 0, 0.25);
+  font-family: Poppins, sans-serif;
+  font-size: 20px;
+  font-weight: 500;
+}
+
+.linhaAnaliseMetricas {
+  margin-left: 80px;
+  padding-top: 30px;
+  width: 80%;
+}
+
+.tituloAnalise {
+  color: #000F53;
+  font-weight: 600;
+}
+
+.opcoesMetricas {
+  width: 100%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+
+}
+
+.opcaoMetrica {
+  width: 150px;
+  height: 120px;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  background-color: blueviolet;
+}
+
+.tituloEstado {
+  font-size: 25px;
+  color: white;
+  padding-bottom: 20px;
+}
+
+.porcentagem {
+  font-size: 18px;
+  color: white;
+  font-weight: 600;
+}
+
+.estavel {
+  background-color: rgb(138, 198, 47);
+}
+
+.atencao {
+  background-color: #F79042;
+}
+
+.emergencia {
+  background-color: #FF847F;
+}
+
+.urgencia {
+  background-color: #812DC9;
+}

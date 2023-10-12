@@ -1,0 +1,748 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
+
+
+
+/* .responsividade {  
+    display: grid;  
+    grid-template-columns: 1fr 1fr 1fr;  
+    grid-template-rows: 50px 50px;  
+} */
+
+.teste {
+    width: 100%;
+    height: 10vh;
+    background: url(./assets/Group\ 2.jpg);
+    background-size: cover;
+
+}
+
+.fundo {
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+
+}
+
+.banner {
+    display: flex;
+    height: 80vh;
+    width: 100%;
+}
+
+aside {
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    justify-content: space-evenly;
+    width: 50%;
+    height: 80vh;
+    padding: 1% 8%;
+}   
+
+aside h1 {
+    font-size: 7vh;
+    font-weight: bold;
+    color: #333333;
+}
+
+aside h4 {
+    font-size: x-large;
+    font-weight: bold;
+    color: #333333af;
+}
+
+article {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 80vh;
+}
+
+.btn-func {
+    display: flex;
+    width: 75%;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.banner-button {
+    background-color: #EDEAF9;
+    border-radius: 5px;
+    color: #6953D3;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: 500;
+    line-height: 24px;
+    padding: 8px 10px;
+    width: fit-content;
+    border: none;
+}
+
+.btn-player {
+    width: 25vh;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: large;
+    color: #333333;
+}
+
+aside .nav-button {
+    background-color: #6953D3;
+    color: #fff;
+    cursor: pointer;
+    font-size: large;
+    font-weight: 700;
+    line-height: 20px;
+    padding: 1rem;
+    width: 50rem;
+    border: none;
+}
+
+/* .center-vertical {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+} */
+
+/* .linha-divisoria {
+    position: absolute;
+    width: 90%;
+    height: 1px;
+    background-color: #444444;
+    top: 140%;
+    transform: translateY(-50%);
+    z-index: 1;
+} */
+
+
+.Nossos-Diferenciais {
+    text-align: center;
+    padding-top: 10vh;
+    position: relative;
+    padding: 20vh;
+
+}
+.Nossos-DiferenciaisA {
+    background: url(../assets/ONDASSS.png);
+     background-size: cover;
+    margin-left: auto;
+    padding: 15vh;
+    padding-top: 10vh;
+   
+}
+
+.plano_roxo {
+    color: #6953D3;
+}
+
+
+
+.conteudo {
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin-top: 20vh;
+}
+
+.Planobasico {
+    width: 50vh;
+    height: 70vh;
+    background-color: #6853d367;
+    border-radius: 5vh;
+    border: solid 1vh #6953D3;
+   color: #961ff9;
+   box-shadow: #00000083 10px 10px 10px; 
+}
+
+.TxtIndidualPlano{
+    display:  flex;
+    width: 100%;
+    height: 30px;
+    margin-left: 5vh;
+    align-items: center;
+    
+}
+.TxtIndidualPlanoBasico{
+    display:  flex;
+    width: 100%;
+    height: 4vh;
+    margin-left: 2.25vh;
+    align-items: center;
+    margin-top: 0.5vh;
+}
+
+.TxtIndidualPlanoBasico h4 {
+    margin-left: -2vh;
+    /* margin-top: 1vh; */
+}
+
+
+.TxtIndidualPlanoX {
+    display:  flex;
+    width: 100%;
+    height: 30px;
+    margin-left: 5vh;
+}
+
+.TxtIndidualPlanoX > img{
+    width: 4vh;
+    height: 4vh;
+    
+    
+}
+
+
+.TxtIndidualPlano > h4 {
+    
+}
+
+
+.TxtIndidualPlano > img{
+    width: 7vh;
+    height: 7vh;
+    
+}
+
+.plano_basico_texto_icone {
+    display: flex;
+}
+
+.Planobasico .h1 {
+    color:  #6953D3;
+    margin-bottom: 10vh;
+}
+
+.planoPremium {
+    width: 55vh;
+    height: 85vh;
+    background-color: #961ff9;
+    border-radius: 5vh;
+    color:#ffffff;
+    box-shadow: #00000083 10px 10px 10px; 
+  
+
+}
+
+
+.planoPremium > h1{
+  color: white;
+  margin-bottom: 10vh;
+}
+
+.bloco_plano_basico{
+ margin-top: 4vh;
+
+}
+
+.bloco_plano_Premium {
+    margin-top: 11vh;
+    
+}
+
+.Planobasico > h1{
+    color: #6953D3;
+    margin-bottom: 5vh;
+}
+
+.texto_planos > h4{
+    /* width: 80%; */
+    height: 5vh;
+    text-align: left;
+}
+.sobre-nos {
+    display: flex;
+    background-color: #fff;
+}
+
+.imagem-sobre-nos {
+    background: url(../assets/imgs/tablet.png);
+    background-size: cover;
+    width: 50%;
+    height: 850px;
+}
+
+.imagem-sobre-nos img {        
+   display: none;
+  
+
+}
+
+.seguranca{
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.seguranca  > img{
+      margin-left: 5vh;
+      margin-top: 5vh;
+}
+
+.seguranca > p{
+    margin-left: 7vh;
+}
+ 
+.discoicon {
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.discoicon > img{
+    margin-left: 6vh;
+    margin-top: 6vh;
+}
+
+.discoicon > p{
+  margin-left: 6vh;
+}
+
+.ramicon {
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.ramicon > img{
+    margin-left: 6vh;
+    margin-top: 2vh;
+}
+
+.ramicon > p{
+  margin-left: 6vh;
+}
+
+
+.redeicon {
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.redeicon> img{
+    margin-left: 6vh;
+    margin-top: 5vh;
+}
+
+.redeicon > p{
+  margin-left: 6vh;
+}
+
+.cabo {
+    background-color: rgba(214, 134, 238, 0.267);
+    border-radius: 80vh;
+    width: 20vh;
+    height: 20vh;
+}
+
+.cabo> img{
+    margin-left: 6.5vh;
+    margin-top: 4.5vh;
+  
+}
+
+.cabo > p{
+  margin-left: 7.5vh;
+}
+
+
+.texto-sobre-nos {
+    display: flex;
+    flex-direction: column;
+    width: 50%;
+    height: 700px;
+    align-items: center;
+    justify-content: space-evenly;
+}
+
+.texto-sobre-nos span {
+    font-size: 40px;
+    font-weight: bold;
+    text-align: center;
+    color: #333333;
+}
+
+.texto-sobre-nos p {
+    font-size: 20px;
+    color: #4444449a;
+    text-align: justify;
+    width: 60%;
+}
+
+.sobre-nos-button {
+    background-color: #EDEAF9;
+    border-radius: 5px;
+    color: #6953D3;
+    cursor: pointer;
+    font-weight: 500;
+    line-height: 24px;
+    font-size: 20px;
+    padding: 8px 10px;
+    width: fit-content;
+    border: none;
+}
+
+
+
+.item {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    width: 80%;
+}
+
+.item img {
+    width: 7vh;
+    height: 7vh;
+}
+    
+
+.item p {
+    font-size: 18px;
+    font-family: 'Inter';
+    color: #444444;
+    font-weight: bold;
+}
+
+.como-fazemos {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+    background-color: #fff;
+}
+
+.article1 h2 {
+    font-size: 2.5rem;
+    font-weight: bold;
+    width: 80%;
+}
+
+.article1 p {
+    font-size: 1.5rem;
+    color: #444444;
+    text-align: justify;
+    width: 80%;
+}
+
+.como-vera {
+    background-color: rgba(168, 128, 255, 0.5);
+    width: 80%;
+    border-radius: 2.5rem;
+    overflow: hidden;
+    padding: 1rem;
+}
+
+
+.como-vera h2 {
+    font-size: 2rem;
+    font-weight: bold;
+    color: #6953D3;
+}
+
+.como-vera p {
+    font-size: 1.5rem;
+    color: rgb(245, 240, 240);
+    font-family: 'Inter';
+    line-height: 2.0;
+    text-align: justify;
+    width: 100%;
+}
+
+.article1 {
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    flex-direction: column;
+    width: 50%;
+    height: 100vh;
+}
+
+.aside1 {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    height: 100vh;
+    padding: 0;
+}
+
+.nossos-servicos {
+    display: flex;
+    background-color: #fff;
+}
+
+.imagem-nossos-servicos {
+    display: flex;
+    width: 50%;
+    height: 100vh;
+    align-items: center;
+}
+
+.texto-nossos-servicos {
+     display: flex;
+    flex-direction: column;
+
+    height: 100vh;
+    align-items: start;
+    text-align: justify;
+    justify-content: space-evenly;
+    margin-left: 10vh; 
+
+    font-size: 20px;
+    color: #4444449a;
+    text-align: justify;
+    width: 60%;
+}
+
+.texto-nossos-servicos h2 {
+    display: flex;
+    flex-direction: column;
+    font-size: 2.5rem;
+    font-weight: bold;
+    text-align: justify;
+    margin-bottom: 0;
+    color: black;
+}
+
+.texto-nossos-servicos ul li {
+    color: #561183;
+    text-align: justify;
+    width: 100%;
+}
+
+.nossos-servicos-button {
+    background-color: #6953D3;
+    border-radius: 50px;
+    color: #fff;
+    cursor: pointer;
+    font-size: medium;
+    font-weight: 500;
+    font-size: 20px;   
+    border: none;
+    height: 7vh;
+    width: 13vw;
+}
+.redes {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 80vh;
+    align-items: center;
+    justify-content: space-evenly;
+    background-color: #f1eeee;
+    background-image: url(../assets/header_4_bubble\ 1.png);
+}
+
+.sociais {
+    display: flex;
+    width: 100%;
+    justify-content: space-evenly;
+}
+
+.Linkedin {
+    display: flex;
+    align-items: end;
+    cursor: pointer;
+}
+
+.nossa-equipe {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    height: 100vh;
+    background: url(../assets/contact_globe\ 1.png);
+    background-repeat: no-repeat;
+    background-position: right;
+    justify-content: space-evenly;
+    background-color: rgba(0,0,0,0.1);
+}
+
+/* .nossa-equipe h2 {
+    font-size: 4vh;
+    position: relative;
+    top: 7rem;
+    left: 4rem;
+    width: 5rem;
+} */
+
+.rostos {
+    display: flex;
+    justify-content: space-evenly;
+    position: relative;
+    right: 2rem;
+    padding: 5rem;
+}
+
+.rostos1 {
+    display: flex;
+    justify-content: space-evenly;
+    width: 80vw;
+    position: relative;    
+    bottom: 3rem;
+    gap: 5rem;
+}
+
+.rostos img {
+    width: 15vw;
+    height: fit-content;
+    border-radius: 999%;
+}
+
+.rostos1 img {
+    width: 15vw;
+    height: fit-content;
+    border-radius: 999%;
+    position: relative;
+    left: 15rem;
+}
+
+/* FOOTER */
+
+.footer {
+    background: url(../assets/ondas.png);
+    background-size: cover;
+}
+
+.direitos {
+    text-shadow: none;
+}
+
+.container_footer {
+    height: 40vh;
+}
+
+@media (Max-width: 768px) {
+    .footer{
+        position: relative;
+        top: 15rem;
+    }
+    .container_footer {
+        height: 33vh;
+        position: relative;        
+    }
+
+    .logo_footer_cadastro {
+        position: relative;
+        top: 1rem;
+    }
+
+    .logotext {
+        position: relative;
+        top: 1rem;
+    }
+}
+
+/* Banner nossa equipe */
+
+.bannerEquipe {
+    height: 60vh;
+    background-color: #bf73004a;
+}
+
+.tituloBannerEquipe {
+    text-align: center;
+    font-size: 2rem;
+    color: #BF7300;
+    padding: 5vh 0vh;
+}
+
+#destaqueEquipe {
+    color: #764701;
+}
+
+.blocoBannerEquipe {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.cardBannerEquipe2{
+    width: 20%;
+    height: 50vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    text-align: center;
+
+}
+.cardBannerEquipe {
+    width: 20%;
+    height: 50vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    text-align: center;
+}
+.cardBannerEquipe3{
+    width: 20%;
+    height: 50vh;
+    background-color: #ffffff;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    text-align: center;
+
+}
+
+.imgBannerEquipe {
+    height: 20vh;
+    width: 20vh;
+    border-radius: 100%;
+}
+.subtituloBannerEquipe {
+    font-weight: 500;
+    font-size: 1.3rem;
+    color: #063940;
+}
+
+.textoBannerEquipe {
+    color: #3E838C;
+}
+
+.setaBannerEquipe {
+    height: 10vh;
+}
+
+.botaoSeta {
+    background-color: #6953D3;
+    width: 4vh;
+    height: 2vh;
+    border-radius: 20px;
+    border: none
+}
+.inove{
+width: 40%;
+
+}
+.nossa-equipe h2{
+    width: 100vh;
+    margin-left:50vh;
+    text-align: center;
+    margin-top: 5vh;
+    font-size: 5vh;
+    margin-bottom: 7vh;
+}
+.botoes{
+    display: flex;
+    margin: auto;
+    justify-content: space-around;
+}
+.botoes button{
+    margin: 1vh;
+}

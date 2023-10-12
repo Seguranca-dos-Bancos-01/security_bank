@@ -1,0 +1,58 @@
+
+.fundo{
+ 
+}
+
+.boxAdicionarServico {
+    background-color: #f08080;
+    height: 10vh;
+    width: 100vh;
+    border-radius: 30px;
+   margin-left: 30vh;
+}
+.fundoContas{
+    background-color: #e0e0e0;
+    height: 60vh;
+    width: 140vh;
+    margin-left: 10vh;
+    border-radius: 20px;
+   
+}
+.adicione{
+    font-size: 25px;
+    display: center;
+    margin-left: 8vh;
+    padding-top: 2.5vh;
+    color: #ffff;
+}
+.TittleContas{
+    margin-left: 6vh;
+    padding-top: 6vh;
+    color: rgb(62, 62, 168);
+}
+.linhaSu{
+    display: flex;
+    justify-content: space-evenly;
+    color: rgb(62, 62, 168);
+
+}
+.SubtittleContas{
+    padding-right: -100vh;
+    margin-left: -50vh;
+}
+.emailControle{
+    font-size: 4vh;
+    margin-left: 3vh;
+}
+.nivelAcesso{
+    font-size: 4vh;
+    margin-left: 30vh
+}
+
+.linhaEspacamento{
+        border-bottom: solid 1px #000F53;
+        width: 130vh;
+        margin-top: 3vh;
+        margin-left: 5vh;
+      }
+

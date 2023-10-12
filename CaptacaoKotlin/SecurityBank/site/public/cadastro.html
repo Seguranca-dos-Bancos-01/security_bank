@@ -1,0 +1,204 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Security Bank | Cadastro</title>
+  <link rel="stylesheet" href="css/navBar.css">  
+  <script defer src="js/navBar.js"></script>
+  <link rel="shortcut icon" href="assets/logoEscudo.png" type="image/x-icon">
+</head>
+
+<body>
+  <link rel="icon" href="./assets/logo.png" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" />
+  <link rel="stylesheet" href="css/cadastro.css">
+  <link
+    href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet" />
+  </head>
+
+  <body onload="listar()">
+     <!-- Início NavBar -->
+     <div class="fundoRoxo"></div>
+     <header class="header">
+      <nav class="nav">
+          <span href="index.html"><img src="./assets/logo.png" alt="" class="logo"></span>
+          <button class="hamburger"></button>
+          <ul class="nav-list">
+              <li><a href="index.html">Home</a></li>
+              <li><a href="#planos">Planos</a></li>
+              <li><a href="#sobrenos">Sobre nós</a></li>
+              <li><a href="#nossosservicos">Nossos serviços</a></li>
+              <li><a href="faleconosco.html">Fale Conosco</a></li>
+              <li><a href="login.html"></a></li>
+              <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
+          </ul>
+          <div class="user">
+              <button id="Cad" class="nav-button">Login</button>
+          </div>
+      </nav>
+  </header>
+     <!-- Fim NavBar -->
+
+      <div class="alerta_erro">
+        <div class="card_erro" id="cardErro">
+          <span id="mensagem_erro"></span>
+        </div>
+      </div>
+      <div class="pagina">
+        <div class="container">
+          <div class="tituloCadastro">
+            <h2>Ola,<br> Bem vindos ao Secure Bank</h2>
+          </div>
+          <div class="cardCadastro">
+            <form>
+              <h1 class="titulo">Vamos Começar!</h1>
+              <h3 class="subtitulo">A segurança que seu banco precisa!</h3>
+              <div class="inputBox">
+                <input class="input" type="text" id="nome_input" name="nome" required="required" />
+                <span>Nome</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="email" id="email_input" name="email" required="required" />
+                <span>Email</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="password" id="senha_input" name="senha" required="required">
+                <span>Senha</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="password" id="confirmacao_senha_input" name="confirmacaoSenha" required="required" />
+                <span>Confirmar Senha</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="text" id="cpf_input" name="cpf" required="required" />
+                <span>CPF</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="text" id="telefone_input" name="telefone" required="required" />
+                <span>Telefone para contato</span>
+              </div>
+              <div class="inputBox">
+                <input class="input" type="text" id="nomeEmpresa_input" name="nomeEmpresa" required="required" />
+                <span class="codigoSpan">Codigo de identificação da empresa</span>
+              </div>
+            </form>
+            <button class="buttonlogin" onclick="cadastrar()">Cadastrar</button>
+            <a href="login.html" class="loginDireto">Ja tem uma conta?</a>
+          </div>
+          <div class="ondasFundo">
+            <img src="./assets/ondasLogin.png" alt="Ondas">
+          </div>
+        </div>
+        <footer class="footer">
+          <div class="container_footer">
+              <img src="./assets/logofooter.png" class="logo_footer_cadastro">
+              <span class="logotext">Melhor monitoramento de hardware para o seu negócio!</span>
+              <span class="linha"></span>
+              <h4 class="direitos">&copy; 2023 Copyrights by SecurityBank. All Rights Reserved.</h4>
+          </div>
+      </footer>
+      </div>
+  </body>
+
+</html>
+
+<script>
+ document.getElementById("Cad").onclick = function () {
+        location.href = "./login.html";
+    };
+
+  function cadastrar() {
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var nomeVar = nome_input.value;
+    var emailVar = email_input.value;
+    var senhaVar = senha_input.value;
+    var confirmacaoSenhaVar = confirmacao_senha_input.value;
+    var empresaVar = nomeEmpresa_input.value;
+    var cpfVar = cpf_input.value;
+    var telefoneVar = telefone_input.value;
+    if (
+      nomeVar == "" ||
+      emailVar == "" ||
+      senhaVar == "" ||
+      confirmacaoSenhaVar == "" ||
+      empresaVar == "" || cpfVar == ""|| telefoneVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrar", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        nomeServer: nomeVar,
+        emailServer: emailVar,
+        senhaServer: senhaVar,
+        empresaServer: empresaVar,
+        cpfServer: cpfVar,
+        confServer: confirmacaoSenhaVar,
+        telefoneServer: telefoneVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          finalizarAguardar();
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        finalizarAguardar();
+      });
+
+    return false;
+  }
+
+  // function listar() {
+  //   fetch("/empresas/listar", {
+  //     method: "GET",
+  //   })
+  //     .then(function (resposta) {
+  //       resposta.json().then((empresas) => {
+  //         empresas.forEach((empresa) => {
+  //           listaEmpresas.innerHTML += `<option value='${empresa.id}'>${empresa.cnpj}</option>`;
+  //         });
+  //       });
+  //     })
+  //     .catch(function (resposta) {
+  //       console.log(`#ERRO: ${resposta}`);
+  //     });
+  // }
+
+  function sumirMensagem() {
+    cardErro.style.display = "none";
+  }
+</script>

@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fale conosco</title>
+    <link rel="stylesheet" href="./css/navBar.css">
+    <link rel="stylesheet" href="./css/faleconosco.css">
+    <link rel="stylesheet" href="./css/responsividade.css">
+    <script defer src="js/navBar.js"></script>
+    <link rel="shortcut icon" href="assets/logoEscudo.png" type="image/x-icon">
+</head>
+
+<body>
+    <!-- Início NavBar -->
+    <div class="fundoRoxo"></div>
+    <header class="header">
+        <nav class="nav">
+            <span href="index.html"><img src="./assets/logo.png" alt="" class="logo"></span>
+            <button class="hamburger"></button>
+            <ul class="nav-list">
+                <li><a href="index.html">Home</a></li>
+                <li><a href="index.html">Planos</a></li>
+                <li><a href="index.html">Sobre nós</a></li>
+                <li><a href="index.html">Nossos serviços</a></li>
+                <li><a href="faleconosco.html">Fale Conosco</a></li>
+                <li><a href="login.html"></a></li>
+                <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
+            </ul>
+            <div class="user">
+                <button id="Cad" class="nav-button">Login</button>
+            </div>
+        </nav>
+    </header>
+    <!-- Fim NavBar -->
+    <!-- Início Fale Conosco -->
+    <div class="content">
+        <div class="tituloFaleConosco">Fale Conosco</div>
+        <div class="subtituloFaleConosco">Alguma dúvida ou sugestão? Entre em contato conosco!</div>
+
+        <div class="entrada">
+            <div class="linha1">
+                <div class="linha2">
+                    <span class="placeholder">Nome:</span>
+                    <input id="ipt_nome" class="dados" type="text">
+                </div>
+
+                <div class="linha2">
+                    <span class="placeholder">Email:</span>
+                    <input id="ipt_email" class="dados" type="text">
+                </div>
+            </div>
+
+            <div class="linha3">
+                <span class="placeholder">Mensagem:</span>
+                <input id="ipt_mensagem" class="mensagem" type="text">
+            </div>
+
+            <div class="linha5">
+                <button onclick="enviar()" class="botao">Enviar</button>
+            </div>
+        </div>
+
+        <div class="waves">
+            <div class="contato">
+                <div class="fundo2">
+                    <div class="separa">
+                        <div class="infoTelefone">
+                            <span class="b1"><img class="iconscontato"
+                                    src="./assets/imgs/chamada-telefonica.png" alt=""></span>
+                            <span class="t">TELEFONE</span>
+                            <span class="d">(00) 12345-6789</span>
+                        </div>
+                        <div class="infoEmail">
+                            <span class="b2"><img class="iconscontato" src="./assets/imgs/envelope.png"
+                                    alt=""></span>
+                            <span class="t">E-MAIL</span>
+                            <span class="d">securitybank@email.com</span>
+                        </div>
+                        <div class="infoLocalicao">
+                            <span class="b3"><img class="iconscontato" src="./assets/imgs/pasta.png"
+                                    alt=""></span>
+                            <span class="t">ENDEREÇO</span>
+                            <span class="d">Rua Haddock Lobo, 595 - Bela Vista, São Paulo</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer">
+                <div class="container_footer">
+                    <img src="./assets/logofooter.png" class="logo_footer_cadastro">
+                    <span class="logotext">Melhor monitoramento de hardware para o seu negócio!</span>
+                    <span class="linha"></span>
+                    <h4 class="direitos">&copy; 2023 Copyrights by SecurityBank. All Rights Reserved.</h4>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</body>
+
+</html>
+
+<script>
+ document.getElementById("Cad").onclick = function () {
+        location.href = "./login.html";
+    };
+    function enviar() {
+        var email = "SC.contato.2023@gmail.com";
+        var assunto = `Olá, meu nome é ` + ipt_nome.value;
+        var corpo = ipt_mensagem.value;
+        window.open("mailto:" + email + "?subject=" + assunto + "&body=" + corpo);
+}
+</script>

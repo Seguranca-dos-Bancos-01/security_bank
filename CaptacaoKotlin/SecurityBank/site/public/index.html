@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Bank | Home</title>
+    <link rel="stylesheet" href="./css/navBar.css">
+    <link rel="stylesheet" href="./css/home.css">
+    <link rel="stylesheet" href="./css/responsividade.css">
+    <script defer src="js/navBar.js"></script>
+    <link rel="shortcut icon" href="assets/logoEscudo.png" type="image/x-icon">
+</head>
+
+<body>
+    <div class="responsividade">
+        <!-- Início NavBar -->
+        <div class="fundoRoxo"></div>
+        <header class="header">
+            <nav class="nav">
+                <span href="index.html"><img src="./assets/logo.png" alt="" class="logo"></span>
+                <button class="hamburger"></button>
+                <ul class="nav-list">
+                    <li><a href="index.html">Home</a></li>
+                    <li><a href="#planos">Planos</a></li>
+                    <li><a href="#sobrenos">Sobre nós</a></li>
+                    <li><a href="#nossosservicos">Nossos serviços</a></li>
+                    <li><a href="faleconosco.html">Fale Conosco</a></li>
+                    <li><a href="login.html"></a></li>
+                    <li class="cadastroMobile"><a href="cadastro.html">Cadastre-se</a></li>
+                </ul>
+                <div class="user">
+                    <button id="Cad" class="nav-button">Login</button>
+                </div>
+            </nav>
+        </header>
+        <!-- Fim NavBar -->
+
+        <div class="banner">
+            <aside>
+                <button class="banner-button" onclick="abaFaleConosco()">Entre em contato conosco</button>
+                <div>
+                    <h1>A segurança que seu banco precisa!</h1>
+                    <h4>Melhor monitoramento de Hardware para seu negócio!</h4>
+                </div>
+                <div class="btn-func">
+                    <button class="nav-button" onclick="abaCadastro()">Faça um orçamento</button>
+                    <button class="btn-player" onclick="abaCadastro()"><img src="" alt=""></button>
+                </div>
+                <div class="btn-baixo">
+                    <button class="btn-player"><img src="./assets/Group 4.png" alt="">Segurança total</button>
+                    <button class="btn-player"><img src="./assets/Group 3.png" alt="">Confiança</button>
+                    <button class="btn-player"><img src="./assets/Group 5.png" alt="">Credibilidade</button>
+
+                </div>
+            </aside>
+            <article>
+                <img src="./assets/Homeimg1.png" alt="" width="100%">
+            </article>
+        </div>
+        <div style="background: url(../public/assets/ondas.png); width: 100%; height: 140vh; background-size: cover;">
+            <div class="center-vertical">
+                <div class="linha-divisoria"></div> 
+                <div class="Nossos-Diferenciais" id="planos">
+                    <h1>Escolha o <span class="plano_roxo">seu Plano</span></h1>
+                    <div class="conteudo">
+                        <div class="Planobasico">
+                        <div class="bloco_plano_basico"></div>
+                            <h1>Plano Básico</h1>
+                            <div class="TxtIndidualPlanoBasico">
+                                <img src="assets/image 13.png" alt="">
+                                <h4>Escalonamento de 5 contas</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoBasico">
+                                <img src="assets/image 13.png" alt="">
+                                <h4>Monitoramento 24h</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoBasico">
+                                <img src="assets/image 13.png" alt="">
+                                <h4>Notificações e Alertas</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoBasico">
+                                <img src="assets/image 13.png" alt="">
+                                <h4>Dados na nuvem AWS</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoBasico">
+                                <img src="assets/image 13.png" alt="">
+                                <h4>Painel de gráficos</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoBasico">
+                                <img src="assets/image 13.png" alt="" >
+                                <h4>Download da API no servidor</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoX">
+                                <img src="assets/icone_x.png" alt="">
+                                <h4>Métricas de análise</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoX">
+                                <img src="assets/icone_x.png" alt="">
+                                <h4>Dashboard Avançada</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoX">
+                                <img src="assets/icone_x.png" alt="">
+                                <h4>Reconhecimento facial</h4>
+                            </div>
+                            <div class="TxtIndidualPlanoX">
+                                <img src="assets/icone_x.png" alt="">
+                                <h4>Controle de validade do servidor</h4>
+                            </div>
+                        
+                        </div>
+                        <div class="planoPremium">
+                            <div class="bloco_plano_Premium"></div>
+                            <h1>Plano Premium</h1>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Escalonamento de 5 contas</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Monitoramento 24h</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Notificações e Alertas</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Dados na nuvem AWS</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Painel de gráficos</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Download da API no servidor</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Métricas de análise</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Dashboard Avançada</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Reconhecimento facial</h4>
+                            </div>
+                            <div class="TxtIndidualPlano">
+                                <img src="assets/check_branco.png" alt="">
+                                <h4>Controle de validade do servidor</h4>
+                            </div>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div> 
+
+        <div class="sobre-nos" id="sobrenos">
+            <div class="imagem-sobre-nos"><img src="assets/imgs/tablet.png" alt=""></div>
+            <div class="texto-sobre-nos">
+                <button class="sobre-nos-button" onclick="abaCadastro()">Conheça um pouco mais sobre nós</button>
+                <span>Sobre Nós</span>
+                <p>Nós somos uma empresa de tecnologia composta por uma equipe de 6 pessoas, nós monitoramos o
+                    hardware da sua empresa, te deixando informado sobre aquilo que é necessário, para se caso
+                    aconteça uma falha, nós estaremos ali para poder te ajudar.</p>
+                <div class="item">
+                    <div class="tecnologia">
+                        <img src="./assets/Group 3.png">
+                    </div>
+                    <p>Tecnologia em Primeiro Lugar.</p>
+                </div>
+                <div class="item">
+                    <div class="automacao">
+                        <img src="./assets/Group 4.png">
+                    </div>
+                    <p>Automação nos painéis de controle.</p>
+                </div>
+                <div class="item">
+                    <div class="dashboard">
+                        <img src="./assets/Group 5.png">
+                    </div>
+                    <p>Dashboards em Tempo Real.</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="como-fazemos">
+            <article class="article1">
+                <h2>Como Fazemos a <span style="color: #A14EEE">Segurança</span></h2>
+                <p> Nós vamos monitorar o hardware da sua empresa em uma escala de 24/7 para que não haja nenhum
+                    tipo de falha que atrapalhe o dia a dia da empresa e sua infraesturutura.</p>
+                <div class="como-vera">
+                    <h2>Como você verá?</h2>
+                    <p>Aqui no nosso site mesmo, você irá fazer seu cadastro, fazer login e nos contratar.
+                        Dessa forma, você terá acesso aos nossos painéis de controle (Dashboards) e poderá verificar
+                        o
+                        estado dos seus softwares e hardwares.</p>
+                </div>
+            </article>
+
+            <aside class="aside1">
+                <img src="../public/assets/imgSobre-Nos.png" alt="imgAleatoria" width="100%">
+            </aside>
+        </div> -->
+        <div class="nossos-servicos" id="nossosservicos">
+
+            <article class="texto-nossos-servicos">
+                <!-- <a href="./cadastro.html"><button class="sobre-nos-button mobile-btn">Cadastre-se</button></a> -->
+                <h2> Nossos <span style="background: linear-gradient(90deg, #6953D3 0%, #8566F1 33.33%, #A14EEE 66.67%, #F98085 100%);
+                        background-clip: text;
+                        -webkit-background-clip: text;
+                        -webkit-text-fill-color: transparent;">Serviços</span></h2>
+                        <li>Aqui no nosso site mesmo, você irá fazer seu cadastro, fazer login e nos contratar. Dessa forma, você terá acesso aos nossos painéis de controle (Dashboards) e poderá verificar o estado dos seus softwares e hardwares.</li>
+                <ul>
+                    <li> <b>Alertas</b> </li>
+                    <li> <b> Monitoramento 24/7</b> </li>
+                    <li> <b>Dashboards (Painéis de controle) </b></li>
+                </ul>
+                <a href="./faleconosco.html"><button class="nossos-servicos-button">Entre em contato</button></a>
+            </article>
+            <aside class="imagem-nossos-servicos">
+                <img src="assets/imgs/dashboard.png" alt="" width="130%">
+            </aside>
+            
+        </div>
+
+        <div class="center-vertical"> 
+            <div class="Nossos-DiferenciaisA"> <h1>O que <span class="plano_roxo">será monitorado?</span></h1>
+                
+                <div class="conteudo">
+                    <div class="seguranca">
+                        <img src="assets/imgs/cpu.png">
+                        <p>CPU</p>
+                    </div>
+                    <div class="discoicon">
+                        <img src="assets/imgs/disco.png">
+                        <p>Disco</p>
+                    </div>
+                    <div class="ramicon">
+                        <img src="assets/imgs/ram.png">
+                        <p>Memória RAM</p>
+                    </div>
+                    <div class="redeicon">
+                        <img src="assets/imgs/rede.png">
+                        <p>Rede</p> 
+                    </div>
+                    <div class="cabo">
+                        <img src="assets/imgs/usb.png">
+                        <p>USB</p>
+                        
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div class="redes">
+            <h2>Nós estamos nas <span style="color: #A14EEE">redes sociais</span> mais <span
+                    style="color: #A14EEE">importantes</span> para a área!</h2>
+
+            <div class="sociais">
+                <a href=""><img src="./assets/Whatsapp.png" alt=""></a>
+                <a href=""><img src="./assets/GitHub.png" alt=""></a>
+                <a class="Linkedin"><img src="./assets/Linkedin.png" alt=""></a>
+                <a href=""><img src="./assets/Instagram.png" alt=""></a>
+                <a href=""><img src="./assets/Outlook.png" alt=""></a>
+            </div>
+        </div> -->
+
+        <div class="nossa-equipe">
+            <h2> Conheça nossa <br><span style="background: linear-gradient(90deg, #6953D3 0%, #8566F1 33.33%, #A14EEE 66.67%, #F98085 100%);
+                background-clip: text;
+                -webkit-background-clip: text;
+                -webkit-text-fill-color: transparent;">Equipe de desenvolvimento</span></h2>
+                 <div class="blocoBannerEquipe" id="equipe">
+                    <div id="card1Equipe" class="cardBannerEquipe">
+                        <img src="assets/pedro_pauloIMG.jpeg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Pedro Paulo</p>
+                            <p class="textoBannerEquipe">Analista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card2Equipe" class="cardBannerEquipe2">
+                        <img src="assets/natalia.png" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Natália Russo</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card3Equipe" class="cardBannerEquipe3">
+                        <img src="assets/marchi.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Gustavo Marchi</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="botoes">
+                    <button class="botaoSeta" onclick="equipe1()"></button>
+                    <button onclick="equipe2()" class="botaoSeta"></button> 
+                </div>
+        </div>
+
+        <footer class="footer">
+            <div class="container_footer">
+                <img src="../public/assets/logofooter.png" class="logo_footer_cadastro">
+                <span class="logotext">Melhor monitoramento de hardware para o seu negócio!</span>
+                <span class="linha"></span>
+                <h4 class="direitos">&copy; 2023 Copyrights by SecurityBank. All Rights Reserved.</h4>
+            </div>
+        </footer>
+    </div>
+
+</body>
+
+</html>
+
+<script>
+ document.getElementById("Cad").onclick = function () {
+        location.href = "./login.html";
+    };
+
+    function abaFaleConosco() {
+        window.location = "faleconosco.html";
+    }
+    function abaCadastro() {
+        window.location = "cadastro.html";
+    }
+</script>
+<script>
+    function equipe2() {
+        equipe.innerHTML = `
+        <div id="card1Equipe" class="cardBannerEquipe">
+                        <img src="assets/schiavo.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Gabriel Schiavo</p>
+                            <p class="textoBannerEquipe">Analista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card2Equipe" class="cardBannerEquipe2">
+                        <img src="assets/Marcela.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Marcela Greco</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card3Equipe" class="cardBannerEquipe3">
+                        <img src="assets/Bernardo.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Bernardo Rocha</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+        `
+    }
+
+
+    function equipe1() {
+        equipe.innerHTML = `
+        <div id="card1Equipe" class="cardBannerEquipe">
+                        <img src="assets/pedro_pauloIMG.jpeg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Pedro Paulo</p>
+                            <p class="textoBannerEquipe">Analista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card2Equipe" class="cardBannerEquipe2">
+                        <img src="assets/natalia.png" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Natália Russo</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+                    <div  id="card3Equipe" class="cardBannerEquipe3">
+                        <img src="assets/marchi.jpg" alt="" class="imgBannerEquipe">
+                        <div>
+                            <p class="subtituloBannerEquipe">Gustavo Marchi</p>
+                            <p class="textoBannerEquipe">Análista de Sistemas</p>
+                        </div>
+                    </div>
+        `
+    }
+</script>
