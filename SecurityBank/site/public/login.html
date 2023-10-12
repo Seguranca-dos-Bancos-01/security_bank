@@ -89,9 +89,9 @@
 
 </html>
 <script>
- document.getElementById("Cad").onclick = function () {
-        location.href = "./login.html";
-    };
+//  document.getElementById("Cad").onclick = function () {
+//         location.href = "./login.html";
+//     };
     function entrar() {
         aguardar();
 
@@ -131,11 +131,16 @@
                     console.log(JSON.stringify(json));
                     sessionStorage.EMAIL_USUARIO = json.email;
                     sessionStorage.NOME_USUARIO = json.nome;
-                    sessionStorage.ID_USUARIO = json.id;
+                    sessionStorage.CPF_USUARIO = json.cpf;
+                    sessionStorage.ID_USUARIO = json.idFuncionarios;
+                    sessionStorage.SENHA_USUARIO = json.senha;
+                    sessionStorage.FKESCALA_USUARIO = json.fkEscalonamento;
+                    sessionStorage.FKBANCO_USUARIO = json.fkBanco;
+                    sessionStorage.TELEFONE_USUARIO = json.telefone;
                     sessionStorage.AQUARIOS = JSON.stringify(json.aquarios)
 
                     setTimeout(function (){
-                        window.location = "../dashboard/dashboard.html";
+                        window.location = "index.html";
                     }, 1000
                     );
                 });
