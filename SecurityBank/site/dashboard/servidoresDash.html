@@ -8,11 +8,10 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../public/assets/logoEscudo.png" type="image/x-icon">
 
-    <title>Security Bank | Métricas</title>
+    <title>Security Bank | Painel Geral</title>
 
     <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/dashboards.css">
-    <link rel="stylesheet" href="../public/css/metricasDash.css">
+    <link rel="stylesheet" href="../public/css/servidoresDash.css"">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -106,89 +105,92 @@
         </div>
 
         <div class="dash">
-            <div id="alerta">
-            </div>
-
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-            </div>
-            <div id="graficos">
-            </div>
-            <h1 class="tituloMetricas">Métricas</h1>
-            <h3 class="descricaoMetricas">Métricas utilizadas na análise dos dados captados e para a geração de alertas/cenários.</h3>
-            <div class="linhaAnaliseMetricas">
-                <h2 class="tituloAnalise">Análise de Porcentagem de Uso da CPU</h2>
-                <div class="opcoesMetricas">
-                    <div class="opcaoMetrica estavel">
-                        <span class="tituloEstado">Estável</span>
-                        <span class="porcentagem">50% - 70%</span>
+                <div class="Nome">
+                    <h2>Servidor XX1</h2>
+                </div>
+                <div class="kpi">
+                    <div class="blocoKpi">
+                        <div class="img">
+                            <img src="../public/assets/imgs/kpi.png" alt="">
+                        </div>
+                        <div class="info">
+                            <span>SITUAÇÃO</span>
+                            <span class="Situacao">Estável</span>
+                        </div>
                     </div>
-                    <div class="opcaoMetrica atencao">
-                        <span class="tituloEstado">Atenção</span>
-                        <span class="porcentagem">70% - 85%</span>
+                    <div class="blocoKpi">
+                        <div class="img">
+                            <img src="../public/assets/imgs/kpi.png" alt="">
+                        </div>
+                        <div class="info">
+                            <span>VALIDADE</span>
+                            <span class="Situacao">231 dias</span>
+                        </div>
                     </div>
-                    <div class="opcaoMetrica emergencia">
-                        <span class="tituloEstado">Emergência</span>
-                        <span class="porcentagem">85% - 95%</span>
-                    </div>
-                    <div class="opcaoMetrica urgencia">
-                        <span class="tituloEstado">Urgência</span>
-                        <span class="porcentagem">< 95%</span>
+                    <div class="blocoKpi">
+                        <div class="img">
+                            <img src="../public/assets/imgs/kpi.png" alt="">
+                        </div>
+                        <div class="info">
+                            <span>REDE</span>
+                            <span class="Situacao">Ativa</span>
+                        </div>
                     </div>
                 </div>
-            </div>
-
-            <div class="linhaAnaliseMetricas">
-                <h2 class="tituloAnalise">Análise de Porcentagem de Uso do Disco</h2>
-                <div class="opcoesMetricas">
-                    <div class="opcaoMetrica estavel">
-                        <span class="tituloEstado">Estável</span>
-                        <span class="porcentagem">10% - 35%</span>
+                <div class="Dados">
+                    <div class="ultimosAlertas">
+                        <h3>Ultimos Alertas</h3>
+                        <div class="cardAlertas">
+                            <h4>CPU em Emergência</h4>
+                            <span>29/09/2023 as 13h45</span>
+                        </div>
+                        <div class="cardAlertas">
+                            <h4>CPU em Alerta</h4>
+                            <span>12/08/2023 as 21h32</span>
+                        </div>
+                        <div class="cardAlertas">
+                            <h4>Disco em análise</h4>
+                            <span>10/05/2023 as 10h09</span>
+                        </div>
                     </div>
-                    <div class="opcaoMetrica atencao">
-                        <span class="tituloEstado">Atenção</span>
-                        <span class="porcentagem">35% - 55%</span>
+                    <div class="visaoGeral">
+                        <h2>Visão gerao do servidor</h2>
                     </div>
-                    <div class="opcaoMetrica emergencia">
-                        <span class="tituloEstado">Emergência</span>
-                        <span class="porcentagem">55% - 90%</span>
-                    </div>
-                    <div class="opcaoMetrica urgencia">
-                        <span class="tituloEstado">Urgência</span>
-                        <span class="porcentagem">< 90%</span>
-                    </div>
-                </div>
-            </div>
-
-            <div class="linhaAnaliseMetricas">
-                <h2 class="tituloAnalise">Análise de Porcentagem de Uso da Memória RAM</h2>
-                <div class="opcoesMetricas">
-                    <div class="opcaoMetrica estavel">
-                        <span class="tituloEstado">Estável</span>
-                        <span class="porcentagem">70% - 80%</span>
-                    </div>
-                    <div class="opcaoMetrica atencao">
-                        <span class="tituloEstado">Atenção</span>
-                        <span class="porcentagem">80% - 90%</span>
-                    </div>
-                    <div class="opcaoMetrica emergencia">
-                        <span class="tituloEstado">Emergência</span>
-                        <span class="porcentagem">90% - 95%</span>
-                    </div>
-                    <div class="opcaoMetrica urgencia">
-                        <span class="tituloEstado">Urgência</span>
-                        <span class="porcentagem">< 95%</span>
+                    <div class="USBs">
+                        <h2>Entradas USB</h2>
                     </div>
                 </div>
-            </div>
-
+                <div class="graficos">
+                    <h3>Visão detalhada dos componentes</h3>
+                </div>
         </div>
+    </div>
+    <div class="rodapeDash">
+        <div     class="itens">
+            <div class="blocos">
+                <h1>Security Bank</h1>
+                <h4>TECH & SOLUTIONS</h4>
+            </div>
+            <div class="blocos">
+                <span><b>Telefone:</b>(11)40028922</span>
+                <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+            </div>
+            <div class="blocos">
+                <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                Cerqueira César, São Paulo - SP,<br>
+                01414-001</span>
+            </div>
+        </div>
+        <div class="direitos">&copy;  2023 copyrights by SecurityBank. All Rights Reserved</div>
     </div>
 
 
 </body>
 
 </html>
+<footer>
+    
+</footer>
 
 <script>
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
