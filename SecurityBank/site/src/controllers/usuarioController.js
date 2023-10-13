@@ -74,6 +74,58 @@ function cadastrar(req, res) {
     }
 }
 
+function cadastrarServidor(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var apelidoServidor = req.body.apelidoServidorServer;
+    var soServidor = req.body.soServidorServer;
+    var cpfRespServidor =req.body.cpfRespServidorServer;
+    var ipServidor = req.body.ipServidorServer
+    var cpuServidor = req.body.cpuServidorServer;
+    var discoServidor = req.body.discoServidorServer;
+    var ramServidor = req.body.ramServidorServer;
+    var compraServidor = req.body.compraServidorServer;
+    var validadeServidor = req.body.validadeServidorServer;
+    
+    // Faça as validações dos valores
+    if (apelidoServidor == undefined) {
+        res.status(400).send("Seu apelidoServidor está undefined!");
+    } else if (soServidor == undefined) {
+        res.status(400).send("Seu soServidor está undefined!");
+    } else if (cpfRespServidor == undefined) {
+        res.status(400).send("Sua cpfRespServidor está undefined!");
+    } else if (ipServidor == undefined) {
+        res.status(400).send("Sua ipServidor está undefined!");
+    } else if (cpuServidor == undefined) {
+        res.status(400).send("Seu cpuServidor está undefined!");
+    } else if (discoServidor == undefined) {
+        res.status(400).send("Sua discoServidor está undefined!");
+    } else if (ramServidor == undefined) {
+        res.status(400).send("Seu ramServidor está undefined!");
+    } else if (compraServidor == undefined) {
+        res.status(400).send("Seu compraServidor está undefined!");
+    }  else if (validadeServidor == undefined) {
+        res.status(400).send("Seu validadeServidor está undefined!");
+    }  else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        usuarioModel.cadastrarServidor(apelidoServidor, soServidor, cpfRespServidor, ipServidor, cpuServidor, discoServidor, ramServidor, compraServidor, validadeServidor)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
 function atualizarPerfil(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nomePerfil = req.body.nomePerfilServer;
@@ -120,5 +172,6 @@ function atualizarPerfil(req, res) {
 module.exports = {
     autenticar,
     cadastrar,
-    atualizarPerfil
+    atualizarPerfil,
+    cadastrarServidor
 }

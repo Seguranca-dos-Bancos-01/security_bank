@@ -121,32 +121,32 @@
                 <h2 class="subtituloServidor">Cadastre um Servidor</h2>
 
                 <span class="camposServidor">Apelido Fantasia</span><br>
-                <input class="inputServidor" type="text"><br>
+                <input id="apelidoServidor" class="inputServidor" type="text"><br>
 
                 <span class="camposServidor">Sistema Operacional</span><br>
-                <input class="inputServidor" type="text"><br>
+                <input id="soServidor" class="inputServidor" type="text"><br>
 
                 <span class="camposServidor">CPF do Responsável Legal</span><br>
-                <input class="inputServidor" type="text"><br>
+                <input id="cpfRespServidor" class="inputServidor" type="text"><br>
 
                 <span class="camposServidor">Endereço IP</span><br>
-                <input class="inputServidor" type="text">
+                <input id="ipServidor" class="inputServidor" type="text">
 
                 <h2 class="subtituloServidor">Especificações de Hardware</h2>
 
                 <div class="linhaServidor">
                     <div class="camposPotencia">
                         <span class="camposServidor">Potência Máxima da CPU</span><br>
-                        <select class="selectServidor" name="potenciacpu">
-                            <option value="">X</option>
+                        <select id="cpuServidor" class="selectServidor" name="potenciacpu">
+                            <option value="" default>X</option>
                             <option value="">Y</option>
                             <option value="">Y</option>
                         </select><br>
                     </div>
                     <div class="camposPotencia">
                         <span class="camposServidor">Potência Máxima do Disco</span> <br>
-                        <select class="selectServidor" name="potenciadisco">
-                            <option value="">X</option>
+                        <select id="discoServidor" class="selectServidor" name="potenciadisco">
+                            <option value="" default>X</option>
                             <option value="">Y</option>
                             <option value="">Y</option>
                         </select><br>
@@ -155,8 +155,8 @@
 
                 <div class="camposPotencia">
                     <span class="camposServidor">Potência Máxima da Memória RAM</span><br>
-                    <select class="selectServidor" name="potenciaram">
-                        <option value="">X</option>
+                    <select id="ramServidor" class="selectServidor" name="potenciaram">
+                        <option value="" default>X</option>
                         <option value="">Y</option>
                         <option value="">Y</option>
                     </select><br>
@@ -165,12 +165,16 @@
                 <div class="linhaServidor">
                     <div class="camposData">
                         <span class="camposServidor">Data de Compra</span><br>
-                        <input class="inputServidor" type="date"><br>
+                        <input id="compraServidor" class="inputServidor" type="date"><br>
                     </div>
                     <div class="camposData">
                         <span class="camposServidor">Data Validade do Servidor</span><br>
-                        <input class="inputServidor" type="date">
+                        <input id="validadeServidor" class="inputServidor" type="date">
                     </div>
+                </div>
+                <div id="divBotoesServidor">
+                    <button onclick="cadastrarServidor()" class="botaoServidor" style="background-color: #FF847F">Adicionar Servidor</button>
+                    <button onclick="limparForm()" class="botaoServidor" style="background-color: #000F53; margin-left: 20px;">Limpar Formulário</button>
                 </div>
             </div>
 
@@ -184,4 +188,92 @@
 
 <script>
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function limparForm() {
+        document.getElementById('apelidoServidor').value = "";
+        document.getElementById('soServidor').value = "";
+        document.getElementById('cpfRespServidor').value = "";
+        document.getElementById('ipServidor').value = "";
+        document.getElementById('cpuServidor').value = "";
+        document.getElementById('discoServidor').value = "";
+        document.getElementById('ramServidor').value = "";
+        document.getElementById('compraServidor').value = "";
+        document.getElementById('validadeServidor').value = "";
+
+    }
+
+    function cadastrarServidor() {
+    //Recupere o valor da nova input pelo nome do id
+    // Agora vá para o método fetch logo abaixo
+    var apelidoServidorVar = apelidoServidor.value;
+    var soServidorVar = soServidor.value;
+    var cpfRespServidorVar = cpfRespServidor.value;
+    var ipServidorVar = ipServidor.value;
+    var cpuServidorVar = cpuServidor.value;
+    var discoServidorVar = discoServidor.value;
+    var ramServidorVar = ramServidor.value;
+    var compraServidorVar = compraServidor.value;
+    var validadeServidorVar = validadeServidor.value;
+    if (
+        apelidoServidorVar == "" ||soServidorVar == "" ||
+        cpfRespServidorVar == "" ||
+        ipServidorVar == "" ||
+        cpuServidorVar == ""|| discoServidorVar == ""|| ramServidorVar == ""|| compraServidorVar == ""|| validadeServidorVar == ""
+    ) {
+      cardErro.style.display = "block";
+      mensagem_erro.innerHTML =
+        "(Mensagem de erro para todos os campos em branco)";
+
+      finalizarAguardar();
+      return false;
+    } else {
+      setInterval(sumirMensagem, 5000);
+    }
+
+    // Enviando o valor da nova input
+    fetch("/usuarios/cadastrarServidor", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        apelidoServidorServer: apelidoServidorVar,
+        soServidorServer: soServidorVar,
+        cpfRespServidorServer: cpfRespServidorVar,
+        ipServidorServer: ipServidorVar,
+        cpuServidorServer: cpuServidorVar,
+        discoServidorServer: discoServidorVar,
+        ramServidorServer: ramServidorVar,
+        compraServidorServer: compraServidorVar,
+        validadeServidorServer: validadeServidorVar,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        
+      });
+
+    return false;
+  }
 </script>
