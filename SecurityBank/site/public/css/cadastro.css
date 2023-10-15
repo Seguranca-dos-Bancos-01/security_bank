@@ -12,6 +12,11 @@ body {
   flex-direction: column;
 }
 
+h2{
+  position: relative;
+  bottom: 35vh;
+}
+
 .cardCadastro {
   display: flex;
   background-color: whitesmoke;
@@ -24,7 +29,7 @@ body {
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514); 
   border: #8473db90 0.1rem solid;   
   position: relative;
-  top: 25rem;
+top: 23vh;
   
   z-index: 2;  
   text-align: center;
@@ -197,6 +202,7 @@ color: #8573DB;
   justify-content: space-evenly;
   color: white;
   align-items: center;
+  margin-top: 45vh;
 }
 
 .rodape_contato{
@@ -231,9 +237,15 @@ color: #8573DB;
   flex-direction: column;
   justify-content: start;
   font-size: 2vh;
+  color: white;
   margin-top: 3vh;
   position: relative;
   left: 10vh;
+  }
+
+  .rodape_links h2 {
+    position: relative;
+    top: 1vh;
   }
 
 .rodape_links h3{
@@ -251,9 +263,14 @@ color: #8573DB;
       width: 50vh;
       height: 50vh;
       margin-top: 3vh;
+      color: white;
       font-size: 2vh;
       position: relative;
       left: 10vh;
+  }
+  .rodape_redes h2 {
+    position: relative;
+    top: 1vh;
   }
 
   .rodape_redes h3{
