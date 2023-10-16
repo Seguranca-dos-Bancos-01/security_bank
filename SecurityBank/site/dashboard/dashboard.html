@@ -10,10 +10,11 @@
 
     <title>Security Bank | Painel Geral</title>
 
-    <link rel="stylesheet" href="../public/css/style.css">
-    <link rel="stylesheet" href="../public/css/dashboards.css">
-    <script src="../js/sessao.js"></script>
-    <script src="./../js/alerta.js"></script>
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/PainelGeral.css">
+    <script src="./js/sessao.js"></script>
+    <script src="./js/alerta.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -34,7 +35,7 @@
     <div class="janela">
         <div class="header-left">
             <div class="logo">
-                <img src="../public/assets/logofooter.png" alt="">
+                <img src="../assets/logofooter.png" alt="">
             </div>
 
             <div class="opcao">
@@ -46,51 +47,39 @@
             </div>
 
             <div class="opcoes localizacao">
-                <a href="">
-                    <img src="../public/assets/imgs/home.png" alt="">
+                <a href="./dashboard.html">
+                    <img src="../assets/imgs/home.png" alt="">
                     <span>Home</span>
                 </a>
             </div>
             <div class="opcoes">
-                <a href="servidoresDash.html">
-                    <img src="../public/assets/imgs/servdores.png" alt="">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
                     <span>Servidores</span>
                 </a>
             </div>
             <div class="opcoes">
-                <a href="">
-                    <img src="../public/assets/imgs/alertas.png" alt="">
+                <a href="./edicao-aviso.html">
+                    <img src="../assets/imgs/alertas.png" alt="">
                     <span>Alertas</span>
                 </a>
             </div>
             <div class="opcoes">
-                <a href="perfil.html">
-                    <img src="../public/assets/imgs/perfil.png" alt="">
-                    <span>Perfil</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../public/assets/imgs/controlecontas.png" alt="">
+                <a href="./GerenciarAcesso.html">
+                    <img src="../assets/imgs/controlecontas.png" alt="">
                     <span>Controle de acesso</span>
                 </a>
             </div>
             <div class="opcoes">
-                <a href="suporteDash.html">
-                    <img src="../public/assets/imgs/ajuda.png" alt="">
+                <a href="./suporteDash.html">
+                    <img src="../assets/imgs/ajuda.png" alt="">
                     <span>Ajuda</span>
                 </a>
             </div>
             <div class="opcoes">
-                <a href="metricasDash.html">
-                    <img src="../public/assets/imgs/metricas.png" alt="">
+                <a href="./metricasDash.html">
+                    <img src="../assets/imgs/metricas.png" alt="">
                     <span>Métricas</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="recFacial.html">
-                    <img src="../public/assets/imgs/recFacial.png" alt="">
-                    <span>Reconhecimento Facial</span>
                 </a>
             </div>
             <div class="linha">
@@ -98,49 +87,44 @@
             </div>
             <div class="opcoes">
                 <a href="">
-                    <img src="../public/assets/imgs/logout.png" alt="" onclick="limparSessao()">
+                    <img src="../assets/imgs/logout.png" alt="" onclick="limparSessao()">
                     <span>Logout</span>
                 </a>
             </div>
         </div>
 
         <div class="dash">
-            <div id="alerta">
+            <div class="barra1">
+                <div class="CPU">
+                </div>
+                <div class="RAM">
+                </div>
+                <div class="DISCO">
+                </div>
             </div>
 
-            <div class="btns-dash" id="btnAquario">
-                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+            <div class="UltimoAlerta">
             </div>
-            <div id="graficos">
+            <div class="ServiidorEmergencia">
+
             </div>
-        </div>
-    </div>
-    <div class="rodapeDash">
-        <div     class="itens">
-            <div class="blocos">
-                <h1>Security Bank</h1>
-                <h4>TECH & SOLUTIONS</h4>
+            <div class="VisaoGeralServidores">
+
             </div>
-            <div class="blocos">
-                <span><b>Telefone:</b>(11)40028922</span>
-                <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+            <div class="barra2">
+
             </div>
-            <div class="blocos">
-                <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
-                Cerqueira César, São Paulo - SP,<br>
-                01414-001</span>
+            <div class="Historico">
+                <div id="graficos">
+                </div>      
             </div>
         </div>
-        <div class="direitos">&copy;  2023 copyrights by SecurityBank. All Rights Reserved</div>
     </div>
 
 
 </body>
 
 </html>
-<footer>
-    
-</footer>
 
 <script>
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
@@ -178,18 +162,18 @@
         }
     }
 
-    function alterarTitulo(idAquario) {
-        var tituloAquario = document.getElementById(`tituloAquario${idAquario}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
+    function alterarTitulo(idServidor) {
+        var tituloAquario = document.getElementById(`tituloAquario${idServidor}`)
+        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idServidor).descricao;
         tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
     }
 
-    function exibirAquario(idAquario) {
+    function exibirAquario(idServidor) {
         let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
 
         for (i = 0; i < todosOsGraficos.length; i++) {
             // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idAquario) {
+            if (todosOsGraficos[i].id != idServidor) {
                 let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
                 if (elementoAtual.classList.contains("display-block")) {
                     elementoAtual.classList.remove("display-block")
@@ -206,12 +190,12 @@
         }
 
         // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idAquario}`)
+        let graficoExibir = document.getElementById(`grafico${idServidor}`)
         graficoExibir.classList.remove("display-none")
         graficoExibir.classList.add("display-block")
 
         // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idAquario}`)
+        let btnExibir = document.getElementById(`btnAquario${idServidor}`)
         btnExibir.classList.remove("btn-white")
         btnExibir.classList.add("btn-pink")
     }
@@ -227,21 +211,21 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function obterDadosGrafico(idAquario) {
+    function obterDadosGrafico(idServidor) {
 
-        alterarTitulo(idAquario)
+        alterarTitulo(idServidor)
 
         if (proximaAtualizacao != undefined) {
             clearTimeout(proximaAtualizacao);
         }
 
-        fetch(`/medidas/ultimas/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/medidas/ultimas/${idServidor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (resposta) {
                     console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idAquario);
+                    plotarGrafico(resposta, idServidor);
 
                 });
             } else {
@@ -256,7 +240,7 @@
     // Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
     // Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
     // A função *plotarGrafico* também invoca a função *atualizarGrafico*
-    function plotarGrafico(resposta, idAquario) {
+    function plotarGrafico(resposta, idServidor) {
 
         console.log('iniciando plotagem do gráfico...');
 
@@ -267,19 +251,27 @@
         let dados = {
             labels: labels,
             datasets: [{
-                label: 'Umidade',
+                label: 'CPU',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(75, 192, 192)',
                 tension: 0.1
             },
             {
-                label: 'Temperatura',
+                label: 'RAM',
                 data: [],
                 fill: false,
                 borderColor: 'rgb(199, 52, 52)',
                 tension: 0.1
-            }]
+            },
+            {
+                label: 'DISCO',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(199, 52, 52)',
+                tension: 0.1
+            }
+        ]
         };
 
         console.log('----------------------------------------------')
@@ -310,11 +302,11 @@
 
         // Adicionando gráfico criado em div na tela
         let myChart = new Chart(
-            document.getElementById(`myChartCanvas${idAquario}`),
+            document.getElementById(`myChartCanvas${idServidor}`),
             config
         );
 
-        setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+        setTimeout(() => atualizarGrafico(idServidor, dados, myChart), 2000);
     }
 
 
@@ -323,21 +315,21 @@
 
     //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
     //     Para ajustar o "select", ajuste o comando sql em src/models
-    function atualizarGrafico(idAquario, dados, myChart) {
+    function atualizarGrafico(idServidor, dados, myChart) {
 
 
 
-        fetch(`/medidas/tempo-real/${idAquario}`, { cache: 'no-store' }).then(function (response) {
+        fetch(`/medidas/tempo-real/${idServidor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
 
-                    obterdados(idAquario);
+                    obterdados(idServidor);
                     // alertar(novoRegistro, idAquario);
                     console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                     console.log(`Dados atuais do gráfico:`);
                     console.log(dados);
 
-                    let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
+                    let avisoCaptura = document.getElementById(`avisoCaptura${idServidor}`)
                     avisoCaptura.innerHTML = ""
 
 
@@ -365,12 +357,12 @@
                     }
 
                     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+                    proximaAtualizacao = setTimeout(() => atualizarGrafico(idServidor, dados, myChart), 2000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-                proximaAtualizacao = setTimeout(() => atualizarGrafico(idAquario, dados, myChart), 2000);
+                proximaAtualizacao = setTimeout(() => atualizarGrafico(idServidor, dados, myChart), 2000);
             }
         })
             .catch(function (error) {

@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../public/assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Métricas</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/GerenciarAcesso.css">
+    <link rel="stylesheet" href="../css/controle.css">
+    <script src="./js/sessao.js"></script>
+    <script src="./js/alerta.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+</head>
+
+<!-- <body onload=" atualizarFeed()"> -->
+
+<body>
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logofooter.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá,<b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes">
+                <a href="./dashboard.html">
+                    <img src="../assets/imgs/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Servidores</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="./edicao-aviso.html">
+                    <img src="../assets/imgs/alertas.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes localizacao">
+                <a href="./GerenciarAcesso.html">
+                    <img src="../assets/imgs/controlecontas.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="./suporteDash.html">
+                    <img src="../assets/imgs/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="./metricasDash.html">
+                    <img src="../assets/imgs/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/logout.png" alt="" onclick="limparSessao()">
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+            <div class="btns-dash" id="btnAquario">
+                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+            </div>
+            <div id="graficos">
+            </div>
+<div class="ativoDesativo">
+    <div class="blocoCpu">
+        <div class="bolaVerde"></div>
+    <img src="" alt=""> 
+    <span class="legCPU">CPU</span>
+</div>
+<div class="blocoDisco">
+    <div class="bolaVerde"></div> 
+    <img src="" alt=""> 
+    <span class="legDisco">Disco</span>
+</div>
+<div class="blocoRAM">
+    <div class="bolaVerde"></div>
+    <img src="" alt=""> 
+    <span class="legRAM">RAM</span>
+</div>
+<div class="blocoRede">
+    <div class="bolaVerde"></div>
+    <img src="" alt=""> 
+    <span class="legREDE">Rede</span>
+</div>
+<div class="blocoUsb">
+    <div class="bolaVerde"></div>
+    <img src="" alt="">
+    <span class="legUSB">USB</span>
+</div>
+</div>
+<div class="fundo">
+<div onclick="adicionar()" class="boxAdicionarServico">
+    <n class="adicione">Adicione um Servico ao Monitoramento</n>
+    <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG">
+</div>
+
+<div class="fundoContas">
+<h1 class="TittleContas">Contas Administradas</h1>
+<div class="linhaSu">
+    <h2 class="SubtittleContas">Conta</h2>
+    <h2 class="SubtittleNivel">Nivel Acesso</h2>
+</div>
+    <div class="espaco">
+      <div class="dadosUsuarios">
+        <a class="emailControle">Teste@gmailpedrao.com</a>
+        <span class="nivelAcesso">1</span>
+        <div class="imgsContas">
+        <img src="../assets/🦆 icon _Edit_.png" alt="" class="alterar">
+        <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar">
+    </div>
+      </div>
+      <div class="linhaEspacamento"><span></span></div>  
+    </div>
+
+<div class="cabecario"></div>
+</div>
+</body>
+</html>
+
+<script>
+    nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+function adicionar(){
+    window.location="metricasDash.html"
+}
+    
+
+</script>

@@ -1,0 +1,112 @@
+.fundo{
+ 
+}
+
+.boxAdicionarServico {
+    background-color: #f08080;
+    height: 16vh;
+    width: 120vh;
+    border-radius: 30px;
+    margin-left: 10vh;
+   
+}
+.boxAdicionarServico:hover{
+    cursor: pointer;
+    -webkit-transform: scale(0.98);
+    transform: scale(0.98);
+}
+.fundoContas{
+    background-color: #e0e0e0;
+    height: 60vh;
+    width: 120vh;
+    margin-left: 10vh;
+    border-radius: 20px;
+   
+}
+.adicione{
+    font-size: 2rem;
+    font-weight: bolder;
+    
+    /* padding-top: 2.5vh; */
+    
+    color: #ffff;
+}
+
+.dadosUsuarios{
+    display: flex;
+    margin-left: 2vh;
+    
+}
+.TittleContas{
+    margin-left: 6vh;
+    padding-top: 6vh;
+    color: rgb(62, 62, 168);
+}
+.linhaSu{
+    display: flex;
+    justify-content: space-evenly;
+    color: rgb(62, 62, 168);
+
+}
+.SubtittleContas{
+    padding-right: -100vh;
+    margin-left: -40vh;
+}
+.SubtittleNivel{}
+.emailControle{
+    font-size: 4vh;
+    margin-left: 3vh;
+}
+.nivelAcesso{
+    font-size: 4vh;
+    margin-left: 20vh
+}
+
+.linhaEspacamento{
+        border-bottom: solid 1px #000F53;
+        width: 110vh;
+        margin-top: 3vh;
+        margin-left: 5vh;
+      }
+
+.addIMG{
+display: center;
+
+}
+.ativoDesativo{
+    display: flex;
+    justify-content: space-evenly;
+    width: 80vh;
+    margin-left: 30vh;
+    margin-bottom: 2vh;
+}
+.bolaVerde{
+    background-color: #2DF5B9;
+    width: 12vh;
+    height: 12vh;
+    border-radius: 360px;
+}
+.legCPU{
+    margin-left: 3.3vh;
+    
+}
+.legRAM{
+    margin-left: 3.3vh;
+}
+.legDisco{
+    margin-left: 3vh;
+}
+.legREDE{
+    margin-left: 3.3vh;
+}
+.legUSB{
+    margin-left: 3.3vh;
+}
+.imgsContas{
+    justify-content: space-between;
+    width: 50vh;
+    margin-left: 20vh;
+}
+.deletar{
+    margin-left: 10vh;
+}
