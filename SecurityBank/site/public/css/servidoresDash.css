@@ -440,9 +440,30 @@ canvas {
     font-size: 16px;
     padding-left: 10px;
 }
-.graficos{
+.blocoGraficos{
     margin-top: 10px;
     margin-left: 20px;
     color: #000F53;
     font-size: 16px;
+    display: flex;
+    flex-direction: column;
+  
+}
+.graficos{
+  display: flex;
+}
+.grafico{
+  background-color: #6953D31A;
+  width: 300px;
+  margin: auto;
+  border-radius: 10px;
+  padding-left: 10px;
+  padding-right: 10px;
+  padding-bottom: 10px;
+  display: flex;
+  flex-direction: column;
+}
+.grafico img{
+  width: 200px;
+  margin: auto;
 }
