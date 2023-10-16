@@ -15,8 +15,9 @@ body {
 .LoginTittle{
   font-size: 3rem;
   position: relative;
+  left: 11vh;
   top: 25vh;
-  margin-top: 40vh;
+  margin-top: 60vh;
 }
 
 .card {
@@ -133,7 +134,7 @@ form {
 .ondasFundo img {
   background-size: cover;
   width: 98.7vw;
-  height: 20rem;
+  height: 25rem;
   position: relative;
   top: 14rem;
 }
@@ -222,7 +223,7 @@ form {
   justify-content: space-evenly;
   color: white;
   align-items: center;
-  margin-top: 75vh;
+  margin-top: 15vh;
   position: relative;
   top: 20vh;
 }
@@ -344,7 +345,8 @@ form {
        box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
        border: #8473db90 0.1rem solid;
        position: relative;
-       top: 45rem;
+       bottom: 35vh;
+     
        left: 0rem;
        z-index: 2;
        text-align: center;
@@ -435,7 +437,7 @@ form {
     color: white;
     align-items: center;
     position: relative;
-    top: 20vh;
+    margin-top: 60vh;
   }
   
   .rodape_contato{
@@ -515,5 +517,15 @@ form {
       bottom: 1vh;
       margin-top: 20vh;
     }
+
+     
+  .ondasFundo img {
+    background-size: cover;
+    width: 100%;
+    height: 15rem;
+    position: relative;
+    top: 14rem;
+    display: none;
+}  
   
 }
