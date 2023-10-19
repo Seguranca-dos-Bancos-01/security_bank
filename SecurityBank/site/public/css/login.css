@@ -18,6 +18,7 @@ body {
   left: 11vh;
   top: 25vh;
   margin-top: 60vh;
+  margin-bottom: 30px;
 }
 
 .card {
@@ -126,17 +127,17 @@ form {
   font-size: 1.5rem;
 }
 
-.card:hover {
+/* .card:hover {
   transform: scale(1.05);
   transition: 0.20s ease-in-out;
-}
+} */
 
 .ondasFundo img {
   background-size: cover;
-  width: 98.7vw;
+  width: 99vw;
   height: 25rem;
   position: relative;
-  top: 14rem;
+  top: 17rem;
 }
 
 .fundoTittle {

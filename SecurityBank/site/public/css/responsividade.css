@@ -504,7 +504,7 @@ right: 21vh;
          /* Início Nossos Diferenciais */
 
          
-        /* .seguranca,
+        .seguranca,
         .foco,
         .cliente,
         .tempo,
@@ -516,9 +516,9 @@ right: 21vh;
             margin-left: 0;
             position: relative;
             left: 1.2rem;
-        } */
+        }
     
-        /* .seguranca img,
+        .seguranca img,
         .foco img,
         .tempo img,
         .cliente img,
@@ -527,7 +527,6 @@ right: 21vh;
             width: 25vw;
             margin-bottom: 17px;
         }
-    
         .seguranca p,
         .foco p,
         .tempo p,
@@ -537,7 +536,7 @@ right: 21vh;
             font-family: 'Inter';
             color: #444444;
             font-weight: bold;
-        } */
+        }
     
         /* Fim Nossos Diferenciais */
     
