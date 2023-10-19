@@ -2,6 +2,9 @@ from mysql.connector import connect
 import psutil
 import time
 from datetime import datetime
+import platform
+import subprocess
+import re
 
 def mysql_connection(host, user, passwd, database=None):
     connection = connect(
@@ -12,24 +15,99 @@ def mysql_connection(host, user, passwd, database=None):
     )
     return connection
 
-connection = mysql_connection('localhost', 'root', 'Pedroca12@', 'SecurityBank')
+connection = mysql_connection('localhost', 'pedro', 'pedro0610', 'SecurityBank')
 
-#cursor1 = connection.cursor()
-#IDCPU = psutil.cpu_times()  
+cursor1 = connection.cursor()
+IDCPU = psutil.cpu_times()  
 
-#print(IDCPU)
+print(IDCPU)
 
-#Ident = "INSERT INTO componente(nome, modelo) VALUES (%s, 'CPU')" 
 
-#cursor1.execute(Ident, (IDCPU))  
 
-#selID = "SELECT idComponente FROM componente WHERE idComponente = %s" 
 
-#cursor1.execute(selID, (IDCPU,)) 
 
-#connection.commit()
+# Informações da CPU
+cpu_info = {}
+cpu_info['Nome'] = platform.processor()
+cpu_info['Arquitetura'] = platform.architecture()[0]
+cpu_info['Palavra'] = platform.architecture()[0]
+cpu_info['Frequencia'] = psutil.cpu_freq().current
+cpu_info['Núcleos Físicos'] = psutil.cpu_count(logical=False)
+cpu_info['Núcleos Lógicos'] = psutil.cpu_count(logical=True)
 
-#cursor1.close()
+print("Informações da CPU:")
+for key, value in cpu_info.items():
+    print(f"{key}: {value}")
+
+# Informações da memória
+mem = psutil.virtual_memory()
+mem_info = {}
+mem_info['Total'] = mem.total
+mem_info['Disponível'] = mem.available
+mem_info['Porcentagem de Uso'] = mem.percent
+mem_info['Usada'] = mem.used
+mem_info['Livre'] = mem.free
+
+print("\nInformações da Memória:")
+
+cmd = "/usr/sbin/system_profiler SPMemoryDataType | grep 'Serial Number' | awk '{print $3}'"
+result = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+serial_numbers = result.stdout.strip().split('\n')
+
+# Mostra os números de série dos módulos de memória RAM
+print("Números de Série dos Módulos de Memória RAM:")
+for i, serial_number in enumerate(serial_numbers, start=1):
+    print(f"Módulo {i}: {serial_number}")
+for key, value in mem_info.items():
+    print(f"{key}: {value}")
+
+
+
+
+partitions = psutil.disk_partitions()
+for partition in partitions:
+    print("\nDispositivo:", partition.device)
+    print("Ponto de montagem:", partition.mountpoint)
+    try:
+        partition_usage = psutil.disk_usage(partition.mountpoint)
+        print("Total de espaço:", partition_usage.total)
+        print("Espaço usado:", partition_usage.used)
+        print("Espaço livre:", partition_usage.free)
+        print("Porcentagem de uso:", partition_usage.percent)
+    except PermissionError:
+
+        continue
+
+
+
+
+Ident = "INSERT INTO componentes(nome, modelo) VALUES ('bla', 'CPU')"  
+
+cursor1.execute(Ident)
+
+selID = "SELECT nome FROM componentes WHERE idComponentes = 1"
+from_db = []
+def read_query(connection, query):
+    cursor = connection.cursor()
+    result = None
+    try:
+        cursor1.execute(selID)
+        result = cursor1.fetchall()
+        return result
+    except Error as err:
+        print(f"Error: '{err}'")
+results = read_query(connection, selID)
+for result in results:
+    result = list(result)
+    from_db.append(result)
+    print(from_db)
+
+
+# cursor1.execute(selID)  
+
+
+
+print()
 
 while True:
     memoria = psutil.virtual_memory()[2]
