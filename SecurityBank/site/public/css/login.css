@@ -226,8 +226,10 @@ form {
   margin-top: 15vh;
   position: relative;
   top: 20vh;
-}
 
+}.rodape h3{
+  color: #ffffffaf
+}
 .rodape_contato{
   width: 50vh;
   height: 50vh;
@@ -272,7 +274,7 @@ form {
 
 .rodape_links a {
   text-decoration: none;
-  color: white;
+  color: #ffffffaf;
 }
 
   .rodape_redes{

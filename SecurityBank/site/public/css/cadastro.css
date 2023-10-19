@@ -204,7 +204,9 @@ color: #8573DB;
   align-items: center;
   margin-top: 45vh;
 }
-
+.rodape h3{
+  color: #ffffffaf  ;
+}
 .rodape_contato{
   width: 50vh;
   height: 50vh;
@@ -221,7 +223,6 @@ color: #8573DB;
 }
 .rodape_contato h3{
   margin-top: 6vh;
-
 }
 
 .rodape_contato h4{
@@ -255,7 +256,7 @@ color: #8573DB;
 
 .rodape_links a {
   text-decoration: none;
-  color: white;
+  color: #ffffffaf;
 }
 
   .rodape_redes{

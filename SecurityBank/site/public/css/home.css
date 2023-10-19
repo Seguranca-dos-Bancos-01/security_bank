@@ -156,7 +156,7 @@ aside .nav-button {
     background-color: #6853d367;
     border-radius: 5vh;
     border: solid 1vh #6953D3;
-   color: #961ff9;
+   color: #6953D3;
    box-shadow: #00000083 10px 10px 10px; 
 }
 
@@ -654,6 +654,10 @@ aside .nav-button {
     color: white;
     align-items: center;
 }
+.rodape h3{
+    color: #ffffffaf
+}
+
 
 .rodape_contato{
     width: 50vh;
@@ -699,7 +703,7 @@ aside .nav-button {
 
 .rodape_links a {
     text-decoration: none;
-    color: white;
+    color: #ffffffaf;
 }
 
     .rodape_redes{
@@ -722,7 +726,7 @@ aside .nav-button {
         align-items: center;
         display: flex;
         justify-content: center;
-        color: white;
+        color: #ffffffaf;
         font-size: 2vh;
     }
 
