@@ -12,24 +12,24 @@ def mysql_connection(host, user, passwd, database=None):
     )
     return connection
 
-connection = mysql_connection('localhost', 'pedro', 'pedro0610', 'SecurityBank')
+connection = mysql_connection('localhost', 'root', 'Pedroca12@', 'SecurityBank')
 
-cursor1 = connection.cursor()
-IDCPU = psutil.cpu_times()  # Correção aqui
+#cursor1 = connection.cursor()
+#IDCPU = psutil.cpu_times()  
 
-print(IDCPU)
+#print(IDCPU)
 
-Ident = "INSERT INTO componente(nome, modelo) VALUES (%s, 'CPU')"  # Correção aqui
+#Ident = "INSERT INTO componente(nome, modelo) VALUES (%s, 'CPU')" 
 
-cursor1.execute(Ident, (IDCPU))  # Correção aqui
+#cursor1.execute(Ident, (IDCPU))  
 
-selID = "SELECT idComponente FROM componente WHERE idComponente = %s"  # Correção aqui
+#selID = "SELECT idComponente FROM componente WHERE idComponente = %s" 
 
-cursor1.execute(selID, (IDCPU,))  # Correção aqui
+#cursor1.execute(selID, (IDCPU,)) 
 
-connection.commit()
+#connection.commit()
 
-cursor1.close()
+#cursor1.close()
 
 while True:
     memoria = psutil.virtual_memory()[2]

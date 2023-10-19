@@ -12,14 +12,15 @@
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboards.css">
-    <link rel="stylesheet" href="../css/PainelGeral.css">
-    <script src="./js/sessao.js"></script>
-    <script src="./js/alerta.js"></script>
+   
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
+        <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 
     <!-- scripts do Chart.js - 2022-1 -->
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
@@ -131,10 +132,9 @@
 
     let proximaAtualizacao;
 
-    window.onload = exibirAquariosDoUsuario();
 
     function exibirAquariosDoUsuario() {
-        var aquarios = JSON.parse(sessionStorage.AQUARIOS);
+        var aquarios = JSON.parse(sessionStorage.banco);
         aquarios.forEach(item => {
             document.getElementById("btnAquario").innerHTML += `
             <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
@@ -149,7 +149,7 @@
                         <canvas id="myChartCanvas${item.id}"></canvas>
                     </div>
                     <div class="label-captura">
-                        <p id="avisoCaptura${item.id}" style="color: white"></p>
+                        <p id="avisoCaptura${item.id}" style="color: black"></p>
                     </div>
                 </div>
             `
@@ -162,43 +162,43 @@
         }
     }
 
-    function alterarTitulo(idServidor) {
-        var tituloAquario = document.getElementById(`tituloAquario${idServidor}`)
-        var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idServidor).descricao;
-        tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    }
+    // function alterarTitulo(idServidor) {
+    //     var tituloAquario = document.getElementById(`tituloAquario${idServidor}`)
+    //     var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idServidor).descricao;
+    //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
+    // }
 
-    function exibirAquario(idServidor) {
-        let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
+    // function exibirAquario(idServidor) {
+    //     let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
 
-        for (i = 0; i < todosOsGraficos.length; i++) {
-            // exibindo - ou não - o gráfico
-            if (todosOsGraficos[i].id != idServidor) {
-                let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-                if (elementoAtual.classList.contains("display-block")) {
-                    elementoAtual.classList.remove("display-block")
-                }
-                elementoAtual.classList.add("display-none")
+    //     for (i = 0; i < todosOsGraficos.length; i++) {
+    //         // exibindo - ou não - o gráfico
+    //         if (todosOsGraficos[i].id != idServidor) {
+    //             let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
+    //             if (elementoAtual.classList.contains("display-block")) {
+    //                 elementoAtual.classList.remove("display-block")
+    //             }
+    //             elementoAtual.classList.add("display-none")
 
-                // alterando estilo do botão
-                let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-                if (btnAtual.classList.contains("btn-pink")) {
-                    btnAtual.classList.remove("btn-pink")
-                }
-                btnAtual.classList.add("btn-white")
-            }
-        }
+    //             // alterando estilo do botão
+    //             let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
+    //             if (btnAtual.classList.contains("btn-pink")) {
+    //                 btnAtual.classList.remove("btn-pink")
+    //             }
+    //             btnAtual.classList.add("btn-white")
+    //         }
+    //     }
 
-        // exibindo - ou não - o gráfico
-        let graficoExibir = document.getElementById(`grafico${idServidor}`)
-        graficoExibir.classList.remove("display-none")
-        graficoExibir.classList.add("display-block")
+    //     // exibindo - ou não - o gráfico
+    //     let graficoExibir = document.getElementById(`grafico${idServidor}`)
+    //     graficoExibir.classList.remove("display-none")
+    //     graficoExibir.classList.add("display-block")
 
-        // alterando estilo do botão
-        let btnExibir = document.getElementById(`btnAquario${idServidor}`)
-        btnExibir.classList.remove("btn-white")
-        btnExibir.classList.add("btn-pink")
-    }
+    //     // alterando estilo do botão
+    //     let btnExibir = document.getElementById(`btnAquario${idServidor}`)
+    //     btnExibir.classList.remove("btn-white")
+    //     btnExibir.classList.add("btn-pink")
+    // }
 
     // O gráfico é construído com três funções:
     // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez

@@ -153,8 +153,11 @@ function entrar() {
             console.log("JSON response:", json);
             sessionStorage.setItem("EMAIL_USUARIO", json.email);
             sessionStorage.setItem("NOME_USUARIO", json.nome);
-            sessionStorage.setItem("ID_USUARIO", json.id);
+            sessionStorage.setItem("ID_USUARIO", json.idFuncionarios);
+            sessionStorage.setItem("telefone_USUARIO", json.telefone);
+            sessionStorage.setItem("senha_USUARIO", json.senha);
             sessionStorage.setItem("banco", JSON.stringify(json.banco));
+
             window.location.href = "./dashboard/dashboard.html";
         })
         .catch(error => {

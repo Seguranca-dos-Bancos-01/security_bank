@@ -24,11 +24,16 @@ function autenticar(req, res) {
                             .then((resultadoBanco) => {
                                 if (resultadoBanco.length > 0) {
                                     res.json({
-                                        id: resultadoAutenticar[0].id,
+                                        id: resultadoAutenticar[0].idFuncionarios,
                                         email: resultadoAutenticar[0].email,
                                         nome: resultadoAutenticar[0].nome,
+                                        telefone: resultadoAutenticar[0].telefone,
                                         senha: resultadoAutenticar[0].senha,
-                                        banco: resultadoBanco
+                                        banco: resultadoBanco,
+                                        bancoA: resultadoBanco[0].apelido,
+                                        bancoSO: resultadoBanco[0].sistemaOperacional,
+                                        bancoR: resultadoBanco[0].responsavelLegal,
+                                        bancoIP: resultadoBanco[0].enderecoIP
                                     });
                                 } else {
                                     res.status(204).json({ banco: [] });
