@@ -233,10 +233,10 @@ input {
 
 /* PAGINA DOS GRÁFICOS */
 
-.janela {
+/* .janela {
   display: flex;
-  width: 100vw;
-}
+  width: 111.5vw;
+} */
 
 .header-left a {
   text-decoration: none;

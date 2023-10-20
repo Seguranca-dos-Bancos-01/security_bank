@@ -83,3 +83,35 @@ font-size: 18px;
   font-size: 20px;
   margin-top: 15px;
 }
+.rodapeDash{
+  width: 89.8%;
+  height: 100%;
+  background-color: #000F53;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: space-evenly;
+  color: #ffffff;
+  align-items: center;
+  padding-left: 150px;
+}
+.itens{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.blocos span{
+  color: #ffffff;
+}
+.tipos{
+    display: flex;
+    justify-content: space-around;
+}
+.tipo {
+    font-size: 22px;
+    color: #000F53;
+}
+.direitos{
+  padding-bottom: 20px;
+}

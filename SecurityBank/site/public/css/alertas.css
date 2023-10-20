@@ -111,11 +111,12 @@
 }
 
 .dash {
-  width: 100%;
+  width: 89.85%;
   height: 100%;
   background-color: #FAFBFF;
   height: 100vh;
   overflow: auto;
+  padding-left: 150px;
 }
 
 .regua {
@@ -270,17 +271,21 @@ canvas {
   width: 100% !important;
   height: 100% !important;
 }
+.Nome h2{
+  margin-left: 30px;
+}
 .header-left{
   background-color: #ffffff;
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding-left: 35px;
+  padding-left: 10px;
   border: none;
+  width: 150px;
 }
 .logo img{
-  width: 197px;
-  height: 46px;
+  width: 130px;
+  height: 35px;
 }
 
 .hello h3, span{
@@ -295,18 +300,19 @@ canvas {
   background-color: rgba(105, 83, 211, 0.1);
   width: 128px;
   height: 38px;
-  margin-top: -20px;
   border-radius: 10px;
 }
 .TipoAcesso span{
   display: flex;
+  /* margin-top: -30px; */
 }
 .opcao{
-  font-size: 20px;
+  font-size: 15px;
+  /* margin-top: -30px; */
 }
 .opcoes{
-  font-size: 18px;
-  margin-top: -10px;
+  font-size: 12px;
+  /* margin-top: -30px; */
   font-weight: 500;
   cursor: pointer;
   transition: 0.5s;
@@ -323,34 +329,47 @@ canvas {
 }
 
 .opcoes a img {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
+  /* margin-top: -30px; */
 }
 
 .linha{
   border-bottom: solid 1px #000F53;
-  width: 236px;
+  width: 140px;
 }
 
 .localizacao {
   background-color: rgba(0, 15, 83, 0.19);
   border-radius: 10px;
-  width: 220px;
+  width: 120px;
   height: 40px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 0px 10px;
+  /* margin-top: -30px; */
 }
-.rodape{
-  width: 100%;
+.rodapeDash{
+  width: 89.8%;
   height: 100%;
   background-color: #000F53;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   justify-content: space-evenly;
   color: #ffffff;
   align-items: center;
+  padding-left: 150px;
+}
+.itens{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.blocos span{
+  color: #ffffff;
 }
 .tipos{
     display: flex;
@@ -359,6 +378,9 @@ canvas {
 .tipo {
     font-size: 22px;
     color: #000F53;
+}
+.direitos{
+  padding-bottom: 20px;
 }
 .alerta{
     display: flex;
