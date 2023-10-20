@@ -22,44 +22,71 @@ IDCPU = psutil.cpu_times()
 
 print(IDCPU)
 
+connection = mysql_connection('localhost', 'pedro', 'pedro0610', 'SecurityBank')
+mycursor1 = connection.cursor()
+mycursor2 = connection.cursor()
+mycursor3 = connection.cursor()
+mycursor4 = connection.cursor()
 
+# Executar consultas
+mycursor1.execute("SELECT idServidor FROM servidor WHERE apelido = 'teste'")
+result1 = mycursor1.fetchall()
+id_servidor_vetor1 = [x[0] for x in result1]
+print(id_servidor_vetor1)
 
+mycursor2.execute("SELECT idBanco FROM banco WHERE nomeFantasia = 'bla'")
+result2 = mycursor2.fetchall()
+id_servidor_vetor2 = [x[0] for x in result2]
+print(id_servidor_vetor2)
+
+mycursor3.execute("SELECT idEspecificacoes FROM especificacoes WHERE dataValidade = '2024-01-01'")
+result3 = mycursor3.fetchall()
+id_servidor_vetor3 = [x[0] for x in result3]
+print(id_servidor_vetor3)
+
+mycursor4.execute("SELECT idPlano FROM planoContratado WHERE tipo = 1")
+result4 = mycursor4.fetchall()
+id_servidor_vetor4 = [x[0] for x in result4]
+print(id_servidor_vetor4)
 
 
 # Informações da CPU
 cpu_info = {}
 cpu_info['Nome'] = platform.processor()
-cpu_info['Arquitetura'] = platform.architecture()[0]
-cpu_info['Palavra'] = platform.architecture()[0]
-cpu_info['Frequencia'] = psutil.cpu_freq().current
-cpu_info['Núcleos Físicos'] = psutil.cpu_count(logical=False)
-cpu_info['Núcleos Lógicos'] = psutil.cpu_count(logical=True)
+#cpu_info['Arquitetura'] = platform.architecture()[0]
+#cpu_info['Palavra'] = platform.architecture()[0]
+#cpu_info['Frequencia'] = psutil.cpu_freq().current
+#cpu_info['Núcleos Físicos'] = psutil.cpu_count(logical=False)
+#cpu_info['Núcleos Lógicos'] = psutil.cpu_count(logical=True)
 
 print("Informações da CPU:")
 for key, value in cpu_info.items():
     print(f"{key}: {value}")
 
 # Informações da memória
-mem = psutil.virtual_memory()
-mem_info = {}
-mem_info['Total'] = mem.total
-mem_info['Disponível'] = mem.available
-mem_info['Porcentagem de Uso'] = mem.percent
-mem_info['Usada'] = mem.used
-mem_info['Livre'] = mem.free
+#mem = psutil.virtual_memory()
+#mem_info = {}
+#mem_info['Total'] = mem.total
+#mem_info['Disponível'] = mem.available
+#mem_info['Porcentagem de Uso'] = mem.percent
+#mem_info['Usada'] = mem.used
+#mem_info['Livre'] = mem.free
 
 print("\nInformações da Memória:")
 
 cmd = "/usr/sbin/system_profiler SPMemoryDataType | grep 'Serial Number' | awk '{print $3}'"
 result = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
 serial_numbers = result.stdout.strip().split('\n')
-
+nomeMemoria =[]
 # Mostra os números de série dos módulos de memória RAM
 print("Números de Série dos Módulos de Memória RAM:")
 for i, serial_number in enumerate(serial_numbers, start=1):
     print(f"Módulo {i}: {serial_number}")
-for key, value in mem_info.items():
-    print(f"{key}: {value}")
+    if i == 1:  # Verifica se é a primeira volta do loop
+        nomeMemoria.append(serial_number)
+    print(nomeMemoria)
+#for key, value in mem_info.items():
+ #   print(f"{key}: {value}")
 
 
 
