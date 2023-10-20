@@ -281,12 +281,14 @@ aside .nav-button {
 }
 
 .seguranca  > img{
-      margin-left: 5vh;
-      margin-top: 5vh;
+      margin-left: 4vh;
+      margin-top: 4vh;
 }
 
 .seguranca > p{
     margin-left: 7vh;
+    margin-top: -1px;
+    font-size: 15px;
 }
  
 .discoicon {
@@ -303,41 +305,51 @@ aside .nav-button {
 
 .discoicon > p{
   margin-left: 6vh;
+  font-size: 15px;
 }
 
 .ramicon {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(214, 134, 238, 0.267);
     border-radius: 80vh;
     width: 20vh;
     height: 20vh;
+    align-items: center;
 }
 
 .ramicon > img{
-    margin-left: 6vh;
-    margin-top: 2vh;
+    /* margin-left: 6vh; */
+    margin-top: 3vh;
 
 
 }
 
 .ramicon > p{
-  margin-left: 6vh;
+    /* margin-left: 6vh;   */
+    margin-top: 3px;
+    font-size: 14px;
 }
 
-
 .redeicon {
+    display: flex;
+    flex-direction: column;
     background-color: rgba(214, 134, 238, 0.267);
     border-radius: 80vh;
     width: 20vh;
     height: 20vh;
+    align-items: center;
 }
 
 .redeicon> img{
-    margin-left: 6vh;
+    /* margin-left: 6vh; */
     margin-top: 5vh;
 }
 
 .redeicon > p{
   margin-left: 6vh;
+  font-size: 15px;
+  margin-left: 5px;
 }
 
 .cabo {
@@ -355,6 +367,7 @@ aside .nav-button {
 
 .cabo > p{
   margin-left: 7.5vh;
+  font-size: 15px;
 }
 
 

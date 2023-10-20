@@ -1,4 +1,4 @@
-/* pagina mural */
+pagina mural
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
 
@@ -9,7 +9,7 @@
 
 .dash-right .avisos {
   width: 100%;
-  /* border: 3px solid pink; */
+   border: 3px solid pink; 
   color: rgb(216, 216, 216);
   font-family: "Exo 2", sans-serif;
 }
@@ -39,7 +39,7 @@
 
 .dash-right .avisos .div-form textarea {
   width: 100%;
-  /* color: #E6005A; */
+   color: #E6005A; 
   border: 3px solid #e6005a;
   background-color: #FAFBFF;
   border-radius: 5px;
@@ -104,18 +104,18 @@
   margin-left: 30px;
 }
 
-/* pagina graficos */
 
 .dash-header {
   background-color: #FAFBFF;
 }
 
 .dash {
-  width: 100%;
+  width: 89.85%;
   height: 100%;
-  background-color: #f4f4f4;
+  background-color: #FAFBFF;
   height: 100vh;
   overflow: auto;
+  padding-left: 150px;
 }
 
 .regua {
@@ -271,20 +271,21 @@ canvas {
   height: 100% !important;
 }
 .header-left{
-  background-color: #ffffff;
+  background-color: #010e46;
   display: flex;
   flex-direction: column;
   align-items: start;
-  padding-left: 35px;
+  padding-left: 10px;
   border: none;
+  width: 180px;
 }
 .logo img{
-  width: 197px;
-  height: 46px;
+  width: 130px;
+  height: 35px;
 }
 
 .hello h3, span{
-  color: #000F53;
+  color: white;
   margin-right: 0px;
 }
 .TipoAcesso{
@@ -295,18 +296,19 @@ canvas {
   background-color: rgba(105, 83, 211, 0.1);
   width: 128px;
   height: 38px;
-  margin-top: -20px;
   border-radius: 10px;
 }
 .TipoAcesso span{
   display: flex;
+  /* margin-top: -30px; */
 }
 .opcao{
-  font-size: 20px;
+  font-size: 15px;
+  /* margin-top: -30px; */
 }
 .opcoes{
-  font-size: 18px;
-  margin-top: -10px;
+  font-size: 12px;
+  /* margin-top: -30px; */
   font-weight: 500;
   cursor: pointer;
   transition: 0.5s;
@@ -323,41 +325,65 @@ canvas {
 }
 
 .opcoes a img {
-  width: 20px;
-  height: 20px;
+  width: 16px;
+  height: 16px;
+  /* margin-top: -30px; */
 }
 
 .linha{
   border-bottom: solid 1px #000F53;
-  width: 236px;
+  width: 140px;
 }
 
 .localizacao {
   background-color: rgba(0, 15, 83, 0.19);
   border-radius: 10px;
-  width: 220px;
+  width: 120px;
   height: 40px;
   display: flex;
   justify-content: flex-start;
   align-items: center;
   padding: 0px 10px;
+  /* margin-top: -30px; */
 }
 .rodapeDash{
-  width: 100%;
+  width: 89.8%;
   height: 100%;
   background-color: #000F53;
   display: flex;
+  flex-direction: column;
   justify-content: center;
   justify-content: space-evenly;
   color: #ffffff;
   align-items: center;
+  padding-left: 150px;
+}
+.itens{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.blocos span{
+  color: #ffffff;
+}
+.tipos{
+    display: flex;
+    justify-content: space-around;
+}
+.tipo {
+    font-size: 22px;
+    color: #000F53;
+}
+.direitos{
+  padding-bottom: 20px;
 }
 .Nome{
-    margin-left: 20px;
+    margin-left: 50px;
     margin-top: 10px;
 }
 .kpi{
-    margin-left: 20px;
+    margin-left: 50px;
     display: flex;
     background-color: #ffffff;
     justify-content: space-around;
@@ -442,7 +468,7 @@ canvas {
 }
 .blocoGraficos{
     margin-top: 10px;
-    margin-left: 20px;
+    margin-left: 50px;
     color: #000F53;
     font-size: 16px;
     display: flex;
@@ -466,4 +492,5 @@ canvas {
 .grafico img{
   width: 200px;
   margin: auto;
+ 
 }

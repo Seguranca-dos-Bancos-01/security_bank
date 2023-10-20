@@ -29,8 +29,8 @@ h2{
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514); 
   border: #8473db90 0.1rem solid;   
   position: relative;
-top: 45vh;
-  
+  top: 45vh;
+
   z-index: 2;  
   text-align: center;
   transition: 0.20s ease-in-out;

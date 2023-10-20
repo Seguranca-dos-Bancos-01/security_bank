@@ -80,7 +80,7 @@ function cadastrar(req, res) {
     } else if (conf == undefined) {
         res.status(400).send("Sua confirmação de senha está undefined!");
     } else if (telefone == undefined) {
-        res.status(400).send("Seu telefoe está undefined!");
+        res.status(400).send("Seu telefone está undefined!");
     } else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js

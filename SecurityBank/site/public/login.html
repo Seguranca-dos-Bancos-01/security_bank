@@ -143,13 +143,18 @@ function entrar() {
             })
         })
         
-        .then(json => {
+        .then(
+           
+            json => {
             console.log("JSON response:", json);
-            sessionStorage.setItem("EMAIL_USUARIO", json.email);
-            sessionStorage.setItem("NOME_USUARIO", json.nome);
             sessionStorage.setItem("ID_USUARIO", json.idFuncionarios);
+            sessionStorage.setItem("NOME_USUARIO", json.nome);
+            sessionStorage.setItem("EMAIL_USUARIO", json.email);
             sessionStorage.setItem("telefone_USUARIO", json.telefone);
             sessionStorage.setItem("senha_USUARIO", json.senha);
+            sessionStorage.setItem("fkBanco", json.fkBanco);
+            sessionStorage.setItem("fkEscalonamento", json.fkEscalonamento);
+            sessionStorage.setItem("fkPlano", json.fkPlano);
             sessionStorage.setItem("banco", JSON.stringify(json.banco));
 
             window.location.href = "./dashboard/dashboard.html";
