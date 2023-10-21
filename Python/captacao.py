@@ -22,37 +22,47 @@ IDCPU = psutil.cpu_times()
 
 print(IDCPU)
 
-connection = mysql_connection('localhost', 'pedro', 'pedro0610', 'SecurityBank')
 mycursor1 = connection.cursor()
 mycursor2 = connection.cursor()
 mycursor3 = connection.cursor()
 mycursor4 = connection.cursor()
 
-# Executar consultas
+valores_id = []
+
+
 mycursor1.execute("SELECT idServidor FROM servidor WHERE apelido = 'teste'")
 result1 = mycursor1.fetchall()
 id_servidor_vetor1 = [x[0] for x in result1]
-print(id_servidor_vetor1)
+valores_id.extend(id_servidor_vetor1)
+fkServidor = valores_id[0]
+
 
 mycursor2.execute("SELECT idBanco FROM banco WHERE nomeFantasia = 'bla'")
 result2 = mycursor2.fetchall()
-id_servidor_vetor2 = [x[0] for x in result2]
-print(id_servidor_vetor2)
+id_banco_vetor2 = [x[0] for x in result2]
+valores_id.extend(id_banco_vetor2)
+fkBanco = valores_id[1]
+
 
 mycursor3.execute("SELECT idEspecificacoes FROM especificacoes WHERE dataValidade = '2024-01-01'")
 result3 = mycursor3.fetchall()
-id_servidor_vetor3 = [x[0] for x in result3]
-print(id_servidor_vetor3)
+id_esp_vetor3 = [x[0] for x in result3]
+valores_id.extend(id_esp_vetor3)
+fkEspec = valores_id[2]
 
 mycursor4.execute("SELECT idPlano FROM planoContratado WHERE tipo = 1")
 result4 = mycursor4.fetchall()
-id_servidor_vetor4 = [x[0] for x in result4]
-print(id_servidor_vetor4)
+id_plano_vetor4 = [x[0] for x in result4]
+valores_id.extend(id_plano_vetor4)
+fkPlano = valores_id[3]
 
 
-# Informações da CPU
+
+
+
 cpu_info = {}
 cpu_info['Nome'] = platform.processor()
+nomeCPU = cpu_info['Nome']
 #cpu_info['Arquitetura'] = platform.architecture()[0]
 #cpu_info['Palavra'] = platform.architecture()[0]
 #cpu_info['Frequencia'] = psutil.cpu_freq().current
@@ -77,64 +87,110 @@ print("\nInformações da Memória:")
 cmd = "/usr/sbin/system_profiler SPMemoryDataType | grep 'Serial Number' | awk '{print $3}'"
 result = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
 serial_numbers = result.stdout.strip().split('\n')
-nomeMemoria =[]
+nomeMemoria = None
 # Mostra os números de série dos módulos de memória RAM
 print("Números de Série dos Módulos de Memória RAM:")
 for i, serial_number in enumerate(serial_numbers, start=1):
     print(f"Módulo {i}: {serial_number}")
     if i == 1:  # Verifica se é a primeira volta do loop
-        nomeMemoria.append(serial_number)
+        nomeMemoria = serial_number
     print(nomeMemoria)
 #for key, value in mem_info.items():
  #   print(f"{key}: {value}")
 
 
-
-
 partitions = psutil.disk_partitions()
+first_device_name = None
+percentages = []
 for partition in partitions:
-    print("\nDispositivo:", partition.device)
-    print("Ponto de montagem:", partition.mountpoint)
-    try:
-        partition_usage = psutil.disk_usage(partition.mountpoint)
-        print("Total de espaço:", partition_usage.total)
-        print("Espaço usado:", partition_usage.used)
-        print("Espaço livre:", partition_usage.free)
-        print("Porcentagem de uso:", partition_usage.percent)
-    except PermissionError:
+    if  first_device_name == None:
+        first_device_name = partition.device
+  #  print("\nDispositivo:", partition.device)
+    #print("Ponto de montagem:", partition.mountpoint)
+    #try:
+       # partition_usage = psutil.disk_usage(partition.mountpoint)
+       # print("Total de espaço:", partition_usage.total)
+     #   print("Espaço usado:", partition_usage.used)
+   #     print("Espaço livre:", partition_usage.free)
+      #  print("Porcentagem de uso:", partition_usage.percent)
+    #    percentages.append(partition_usage.percent)
+  #  except PermissionError:
+     #   continue
 
-        continue
-
-
-
-
-Ident = "INSERT INTO componentes(nome, modelo) VALUES ('bla', 'CPU')"  
-
-cursor1.execute(Ident)
-
-selID = "SELECT nome FROM componentes WHERE idComponentes = 1"
-from_db = []
-def read_query(connection, query):
-    cursor = connection.cursor()
-    result = None
-    try:
-        cursor1.execute(selID)
-        result = cursor1.fetchall()
-        return result
-    except Error as err:
-        print(f"Error: '{err}'")
-results = read_query(connection, selID)
-for result in results:
-    result = list(result)
-    from_db.append(result)
-    print(from_db)
+#print("\nNome do primeiro dispositivo:", first_device_name)
+#print("Porcentagens de uso de todas as partições:", percentages)
 
 
-# cursor1.execute(selID)  
+print('\n')
+print(first_device_name)
+print(nomeCPU)
+print(nomeMemoria)
+print(fkServidor, fkBanco, fkEspec, fkPlano)
 
 
+mycursor1Comp = connection.cursor()
+mycursor2Comp = connection.cursor()
+mycursor3Comp = connection.cursor()
+mycursor4Comp = connection.cursor()
 
-print()
+componentesID = []
+
+queryC1 = "INSERT INTO componentes(nome, modelo, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp) VALUES (%s, 'CPU', %s, %s, %s, %s)"
+valuesC1 = (nomeCPU, fkServidor, fkBanco, fkEspec, fkPlano)
+mycursor1Comp.execute(queryC1, valuesC1)
+connection.commit()
+
+queryC2 = "INSERT INTO componentes(nome, modelo, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp) VALUES (%s, 'RAM', %s, %s, %s, %s)"
+valuesC2 = (nomeMemoria, fkServidor, fkBanco, fkEspec, fkPlano)
+mycursor2Comp.execute(queryC2, valuesC2)
+connection.commit()
+
+queryC3 = "INSERT INTO componentes(nome, modelo, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp) VALUES (%s, 'DISCO', %s, %s, %s, %s)"
+valuesC3 = (first_device_name, fkServidor, fkBanco, fkEspec, fkPlano)
+mycursor3Comp.execute(queryC3, valuesC3)
+connection.commit()
+ 
+queryC4 = "INSERT INTO componentes(nome, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp) VALUES ('Rede', %s, %s, %s, %s)"
+valuesC4 = (fkServidor, fkBanco, fkEspec, fkPlano)
+mycursor4Comp.execute(queryC4, valuesC4)
+connection.commit()
+
+mycursor1CompS = connection.cursor()
+mycursor2CompS = connection.cursor()
+mycursor3CompS = connection.cursor()
+mycursor4CompS = connection.cursor()
+
+idCPU = None
+idMemoria = None
+idDisco = None
+idNet = None
+mycursor1CompS.execute("SELECT idComponentes FROM componentes WHERE nome = %s", (nomeCPU,))
+result1 = mycursor1CompS.fetchall()
+id_componente_vetor1 = [x[0] for x in result1]
+idCPU = id_componente_vetor1[0]
+
+mycursor2CompS.execute("SELECT idComponentes FROM componentes WHERE nome = %s", (nomeMemoria,))
+result2 = mycursor2CompS.fetchall()
+id_componente_vetor2 = [x[0] for x in result2]
+idMemoria = id_componente_vetor2[0]
+
+mycursor3CompS.execute("SELECT idComponentes FROM componentes WHERE nome = %s", (first_device_name,))
+result3 = mycursor3CompS.fetchall()
+id_componente_vetor3 = [x[0] for x in result3]
+idDisco = id_componente_vetor3[0]
+
+mycursor4CompS.execute("SELECT idComponentes FROM componentes WHERE nome = 'Rede'")
+result4 = mycursor4CompS.fetchall()
+id_componente_vetor4 = [x[0] for x in result4]
+idInternet = id_componente_vetor4[0]
+
+
+print(idCPU)
+print(idMemoria)
+print(idDisco)
+print(idInternet)
+print(fkServidor, fkBanco, fkEspec, fkPlano)
+
 
 while True:
     memoria = psutil.virtual_memory()[2]
@@ -161,16 +217,14 @@ while True:
     sele = "Select"
 
     ins = [cpu, memoria, disco, statusRede]
-    componentes = [1, 2, 3, 4]
+    componentes = [idCPU, idMemoria, idDisco, idInternet]
     cursor = connection.cursor()
 
     for i in range(len(ins)):
         dado = ins[i]
-        componente = componentes[i]
 
-        query = "INSERT INTO registros(dataHorario, porcentagemConsumo, fkServidor, fkBanco, fkComponentes) VALUES (%s, %s, %s, %s, %s)"
-
-        cursor.execute(query, (horarioFormatado, dado, 1, 1, componente))
+        query = "INSERT INTO registros (dataHorario, DadosCaptados, fkComponentesRegistros, fkServidorReg, fkBancoReg, fkEspecificacoesReg, fkPlanoReg) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (horarioFormatado, dado, componentes[i], fkServidor, fkBanco, fkEspec, fkPlano))
 
         connection.commit()
 
