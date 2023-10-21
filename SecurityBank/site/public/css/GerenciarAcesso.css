@@ -10,7 +10,7 @@
 
 .boxAdicionarServico {
     background-color: #f08080;
-    height: 16vh;
+    height: 12vh;
     border-radius: 30px;
     width: 90%; 
     display: flex;
@@ -32,8 +32,8 @@
    
 }
 .adicione{
-    font-size: 25px;
-    font-weight: bolder;
+    font-size: 20px;
+    font-weight: 600;
     /* padding-top: 2.5vh; */
     color: #ffff;
 }
@@ -55,7 +55,7 @@
     margin-left: 6vh;
     color: rgb(62, 62, 168);
     font-weight: 500;
-    font-size: 25px;
+    font-size: 20px;
 }
 .linhaSu{
     display: flex;
@@ -67,17 +67,17 @@
     /* padding-right: -100vh;
     margin-left: -40vh; */
     font-weight: 500;
-    font-size: 20px;
+    font-size: 15px;
 }
 
 .emailControle{
     font-weight: 500;
-    font-size: 20px;
+    font-size: 15px;
     color: black;
 }
 .nivelAcesso{
     font-weight: 500;
-    font-size: 20px;
+    font-size: 15px;
     color: black;
 }
 
@@ -95,7 +95,7 @@
 
 .addIMG{
 display: center;
-
+width: 45px;
 }
 .ativoDesativo{
     display: flex;
