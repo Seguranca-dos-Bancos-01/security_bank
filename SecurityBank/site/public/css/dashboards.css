@@ -113,11 +113,11 @@
 }
 
 .dash {
-  width: 89.85%;
+  width: 84.85%;
   background-color: #FAFBFF;
-  height: 100vh;
+  height: fit-content;
   overflow: auto;
-  padding-left: 200px;
+  padding-left: 230px;
 }
 
 .regua {
@@ -347,4 +347,209 @@ canvas {
     margin-right: 5%;
     border-radius: 10px;
     margin-top: 10px;
+}
+
+.Nome h2 {
+  margin-left: 80px;
+  color: #000F53;
+  font-family: Poppins, sans-serif;
+}
+
+.kpi{
+  margin-left: 50px;
+  display: flex;
+  background-color: #ffffff;
+  justify-content: space-around;
+  margin-right: 20px;
+  border-radius: 20px;
+  padding: 5px;
+  height: 90px;
+  filter: drop-shadow(0px 10px 60px rgba(226, 236, 249, 0.50));
+}
+.blocoKpi img{
+  background-color: #A293DE;
+  padding: 5px;
+  border-radius: 100px;
+  width: 30px;
+}
+.blocoKpi{
+  display: flex;
+  align-items: center;
+}
+.infotitulo{
+  color: #ACACAC;
+  font-size: 12px;
+  margin-left: 10px;
+  display: flex;
+}
+.info .Situacao{
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
+  margin-left: 10px;
+  display: flex;
+}
+
+.infoBarra .SituacaoBarra{
+  font-size: 20px;
+  font-weight: 600;
+  display: flex;
+}
+.infoBarra span {
+  color: #ACACAC;
+  font-size: 12px;
+  margin-left: 10px;
+  display: flex;
+}
+
+.infoBarra {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  margin: 10px 0;
+  
+}
+
+#numeroServidores {
+  color: #5E1A8D;
+}
+
+#alertaHoras {
+  color: #FF847F;
+}
+
+#InstaveisServidores {
+  color: #36D000;
+}
+
+.textinhoAlerta {
+  color: #FF847F;
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: 10px;
+  display: flex;
+}
+
+.textinhoEstavel {
+  color: #36D000;
+  font-weight: 500;
+  font-size: 12px;
+  margin-left: 10px;
+  display: flex;
+}
+
+.dadosGraficos {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+.barraInformativa {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  border-radius: 15px;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.15);
+
+}
+
+.Historico {
+  width: 90%;
+  margin: 20px auto;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-around;
+  background-color: white;
+  border-radius: 20px;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+.blocoalertasLateralDash {
+  width: 50%;
+  height: 40vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.UltimoAlerta {
+  width: 100%;
+  height: 20vh;
+  background-color: #6953D3;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+.tituloUltimoAlerta {
+  align-self: flex-start;
+  margin: 0 20px;
+}
+
+.tituloHistorico {
+  align-self: flex-start;
+  margin: 10px 20px;
+  color: #5c6bc0;
+}
+
+#TituloAlerta {
+  font-weight: 500;
+}
+
+#dataAlerta {
+  font-size: 13px;
+}
+
+.ServidorEmergencia {
+  width: 100%;
+  height: 19vh;
+  background-color: #5E1A8D;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+.tituloServidorEmergencia {
+  align-self: flex-start;
+  margin: 0 20px;
+}
+
+#nomeServidorEmergencia {
+  margin-bottom: 20px;
+  font-weight: 500;
+}
+
+.VisaoGeralServidores {
+  width: 50%;
+  height: 40vh;
+  margin: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  align-items: center;
+  border-radius: 20px;
+
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+.tituloVisaoGeral {
+  align-self: flex-start;
+  margin: 20px 20px;
+  color: black;
+  font-weight: 600;
 }

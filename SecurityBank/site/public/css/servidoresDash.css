@@ -324,7 +324,9 @@ canvas {
     margin-right: 20px;
     border-radius: 20px;
     padding: 5px;
-    height: 70px;
+    height: 90px;
+  filter: drop-shadow(0px 10px 60px rgba(226, 236, 249, 0.50));
+
 }
 .blocoKpi img{
     background-color: #A293DE;
@@ -343,7 +345,7 @@ canvas {
     display: flex;
 }
 .info .Situacao{
-    color: #36D000;
+    color: black;
     font-size: 20px;
     font-weight: 600;
 }
@@ -362,6 +364,7 @@ canvas {
     color: #FFFFFF;
     margin-top: 10px;
     margin-left: 20px;
+    box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
 }
 .ultimosAlertas span{
     color: #FFFFFF
@@ -394,6 +397,7 @@ canvas {
     margin-top: 10px;
     width: 550px;
     border-radius: 10px;
+    box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.136);
 }
 .visaoGeral h2{
     font-size: 16px;
@@ -406,6 +410,7 @@ canvas {
     width: 250px;
     margin-top: 10px;
     border-radius: 10px;
+    box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
 }
 .USBs h2{
     font-size: 16px;
@@ -434,6 +439,7 @@ canvas {
   padding-bottom: 10px;
   display: flex;
   flex-direction: column;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
 }
 .grafico img{
   width: 200px;

@@ -144,27 +144,74 @@
         </div>
 
         <div class="dash">
-            <div class="barra1">
-                <div class="CPU">
+            <div class="Nome">
+                <h2>Painel Geral</h2>
+            </div>
+            <div class="kpi">
+                <div class="blocoKpi">
+                    <div class="img">
+                        <img src="../assets/imgs/kpi.png" alt="">
+                    </div>
+                    <div class="info">
+                        <span class="infotitulo">CPU</span>
+                        <span class="Situacao" id="cpuServidores">80%</span>
+                        <span class="textinhoAlerta"> ↓ Alerta</span>
+                    </div>
                 </div>
-                <div class="RAM">
+                <div class="blocoKpi">
+                    <div class="img">
+                        <img src="../assets/imgs/kpi.png" alt="">
+                    </div>
+                    <div class="info">
+                        <span class="infotitulo">MEMÓRIA RAM</span>
+                        <span class="Situacao" id="ramServidores">90%</span>
+                        <span class="textinhoAlerta"> ↓ Alerta</span>
+                    </div>
                 </div>
-                <div class="DISCO">
+                <div class="blocoKpi">
+                    <div class="img">
+                        <img src="../assets/imgs/kpi.png" alt="">
+                    </div>
+                    <div class="info">
+                        <span class="infotitulo">DISCO</span>
+                        <span class="Situacao" id="discoServidores">50%</span>
+                        <span class="textinhoEstavel"> ↑ Estável</span>
+                    </div>
                 </div>
             </div>
-
-            <div class="UltimoAlerta">
+            <div class="dadosGraficos">
+                <div class="blocoalertasLateralDash">
+                    <div class="UltimoAlerta">
+                        <span class="tituloUltimoAlerta">Último Alerta</span>
+                        <span id="TituloAlerta">Servidor XX1 está superaquecendo</span>
+                        <span id="dataAlerta">29/09/2023 as 13h45</span>
+                    </div>
+                    <div class="ServidorEmergencia">
+                        <span class="tituloServidorEmergencia">Servidor em Emergência</span>
+                        <span id="nomeServidorEmergencia">Nenhum servidor</span>
+                    </div>
+                </div>
+                <div class="VisaoGeralServidores">
+                    <span class="tituloVisaoGeral">Visão Geral Servidores</span>
+                </div>
             </div>
-            <div class="ServiidorEmergencia">
-
-            </div>
-            <div class="VisaoGeralServidores">
-
-            </div>
-            <div class="barra2">
-
+            <div class="barraInformativa">
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="numeroServidores">23</span>
+                    <span>Servidores Monitorados</span>
+                </div>
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="alertaHoras">10</span>
+                    <span >Alertas em 24 horas</span>
+                </div>
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="InstaveisServidores">0</span>
+                    <span >Servidores Instáveis</span>
+                </div>
             </div>
             <div class="Historico">
+                <span class="tituloHistorico">Histórico dos Servidores</span>
+
                 <div id="graficos">
                     <div class="graph">
                         <canvas id="myChartCanvas"></canvas>
