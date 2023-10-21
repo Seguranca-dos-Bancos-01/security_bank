@@ -1,7 +1,10 @@
-pagina mural
+
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
 
+* {
+  font-family: Poppins, sans-serif;
+}
 .label-captura {
   display: flex;
   justify-content: center;
@@ -110,12 +113,12 @@ pagina mural
 }
 
 .dash {
-  width: 89.85%;
+  width: 84.85%;
   height: 100%;
   background-color: #FAFBFF;
   height: 100vh;
   overflow: auto;
-  padding-left: 150px;
+  padding-left: 230px;
 }
 
 .regua {
@@ -270,82 +273,7 @@ canvas {
   width: 100% !important;
   height: 100% !important;
 }
-.header-left{
-  background-color: #010e46;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding-left: 10px;
-  border: none;
-  width: 180px;
-}
-.logo img{
-  width: 130px;
-  height: 35px;
-}
 
-.hello h3, span{
-  color: white;
-  margin-right: 0px;
-}
-.TipoAcesso{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(105, 83, 211, 0.1);
-  width: 128px;
-  height: 38px;
-  border-radius: 10px;
-}
-.TipoAcesso span{
-  display: flex;
-  /* margin-top: -30px; */
-}
-.opcao{
-  font-size: 15px;
-  /* margin-top: -30px; */
-}
-.opcoes{
-  font-size: 12px;
-  /* margin-top: -30px; */
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.opcoes:hover {
-  cursor: pointer;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-.opcoes a span {
-  margin-left: 5px;
-}
-
-.opcoes a img {
-  width: 16px;
-  height: 16px;
-  /* margin-top: -30px; */
-}
-
-.linha{
-  border-bottom: solid 1px #000F53;
-  width: 140px;
-}
-
-.localizacao {
-  background-color: rgba(0, 15, 83, 0.19);
-  border-radius: 10px;
-  width: 120px;
-  height: 40px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0px 10px;
-  /* margin-top: -30px; */
-}
 .rodapeDash{
   width: 89.8%;
   height: 100%;
@@ -382,6 +310,12 @@ canvas {
     margin-left: 50px;
     margin-top: 10px;
 }
+
+.Nome h2 {
+  margin-left: 80px;
+  color: #000F53;
+  font-family: Poppins, sans-serif;
+}
 .kpi{
     margin-left: 50px;
     display: flex;
@@ -390,6 +324,7 @@ canvas {
     margin-right: 20px;
     border-radius: 20px;
     padding: 5px;
+    height: 70px;
 }
 .blocoKpi img{
     background-color: #A293DE;
@@ -399,6 +334,7 @@ canvas {
 }
 .blocoKpi{
     display: flex;
+    align-items: center;
 }
 .info span{
     color: #ACACAC;
@@ -409,8 +345,13 @@ canvas {
 .info .Situacao{
     color: #36D000;
     font-size: 20px;
+    font-weight: 600;
+}
+#validadeServidor {
+  color: black;
 }
 .Dados{
+  margin-top: 20px;
     display: flex;
     justify-content: space-around;
 }
@@ -427,6 +368,7 @@ canvas {
 }
 .ultimosAlertas h3{
     font-size: 13px;
+    font-weight: 400;
 }
 .cardAlertas{
     background-color: #4E1C99;
@@ -440,31 +382,35 @@ canvas {
 .cardAlertas h4{
     margin: 3px;
     margin-bottom: 10px;
-    font-size: 20px;
+    font-size: 18px;
+    font-weight: 600;
 }
 .cardAlertas span{
     margin-bottom: 5px;
+    font-size: 14px;
 }
 .visaoGeral{
     background-color: #FFFFFF;
     margin-top: 10px;
-    width: 350px;
+    width: 550px;
     border-radius: 10px;
 }
 .visaoGeral h2{
     font-size: 16px;
-    padding-left: 10px;
+    padding-left: 20px;
+    font-weight: 600;
 }
 .USBs{
     background-color: #000F53;
     color: #ffffff;
-    width: 200px;
+    width: 250px;
     margin-top: 10px;
     border-radius: 10px;
 }
 .USBs h2{
     font-size: 16px;
     padding-left: 10px;
+    font-weight: 600;
 }
 .blocoGraficos{
     margin-top: 10px;
@@ -493,4 +439,15 @@ canvas {
   width: 200px;
   margin: auto;
  
+}
+
+.subtituloServidoresGraficos {
+  display: flex;
+  margin-top: 20px;
+}
+
+.textoGraficosSubtitulo {
+  margin-left: 10px;
+  color: #ACACAC;
+  font-weight: 500;
 }

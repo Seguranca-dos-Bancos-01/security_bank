@@ -39,7 +39,7 @@
     /* margin-top: -30px; */
   }
   .opcoes{
-    font-size: 16px;
+    font-size: 14px;
     /* margin-top: -30px; */
     font-weight: 500;
     cursor: pointer;
@@ -75,7 +75,7 @@
   .localizacao {
     background-color: rgba(0, 15, 83, 0.19);
     border-radius: 10px;
-    width: 160px;
+    width: 170px;
     height: 40px;
     display: flex;
     justify-content: flex-start;

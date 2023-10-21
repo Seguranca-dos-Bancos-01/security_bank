@@ -11,7 +11,8 @@
     <title>Security Bank | Painel Geral</title>
 
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/servidoresDash.css"">
+    <link rel="stylesheet" href="../css/servidoresDash.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
 
@@ -34,7 +35,7 @@
     <div class="janela">
         <div class="header-left">
             <div class="logo">
-                <img src="../assets/logofooter.png" alt="">
+                <img src="../assets/logoBranca.png" alt="">
             </div>
 
             <div class="opcao">
@@ -45,21 +46,21 @@
                 <span>Administrador</span>
             </div>
 
-            <div class="opcoes localizacao">
+            <div class="opcoes">
                 <a href="dashboard.html">
-                    <img src="../assets/imgs/home.png" alt="">
+                    <img src="../assets/home.png" alt="">
                     <span>Home</span>
                 </a>
             </div>
-            <div class="opcoes">
+            <div class="opcoes   localizacao">
                 <a href="servidoresDash.html">
-                    <img src="../assets/imgs/servdores.png" alt="">
+                    <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
+                    <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
                 </a>
             </div>
@@ -95,31 +96,31 @@
             </div> -->
             <div class="opcoes">
                 <a href="alertas.html">
-                    <img src="../assets/imgs/alertas.png" alt="">
+                    <img src="../assets/alerta.png" alt="">
                     <span>Alertas</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="perfil.html">
-                    <img src="../assets/imgs/perfil.png" alt="">
+                    <img src="../assets/perfil.png" alt="">
                     <span>Perfil</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="GerenciarAcesso.html">
-                    <img src="../assets/imgs/controlecontas.png" alt="">
+                    <img src="../assets/controle.png" alt="">
                     <span>Controle de acesso</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="suporteDash.html">
-                    <img src="../assets/imgs/ajuda.png" alt="">
+                    <img src="../assets/ajuda.png" alt="">
                     <span>Ajuda</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="metricasDash.html">
-                    <img src="../assets/imgs/metricas.png" alt="">
+                    <img src="../assets/metricas.png" alt="">
                     <span>Métricas</span>
                 </a>
             </div>
@@ -134,7 +135,7 @@
             </div>
             <div class="opcoes">
                 <a href="../index.html">
-                    <img src="../assets/imgs/logout.png" alt="" onclick="limparSessao()">
+                    <img src="../assets/logout.png" alt="" onclick="limparSessao()">
                     <span>Logout</span>
                 </a>
             </div>
@@ -147,29 +148,29 @@
                 <div class="kpi">
                     <div class="blocoKpi">
                         <div class="img">
-                            <img src="../public/assets/imgs/kpi.png" alt="">
+                            <img src="../assets/imgs/kpi.png" alt="">
                         </div>
                         <div class="info">
                             <span>SITUAÇÃO</span>
-                            <span class="Situacao">Estável</span>
+                            <span class="Situacao" id="situacaoServidor">Estável</span>
                         </div>
                     </div>
                     <div class="blocoKpi">
                         <div class="img">
-                            <img src="../public/assets/imgs/kpi.png" alt="">
+                            <img src="../assets/imgs/kpi.png" alt="">
                         </div>
                         <div class="info">
                             <span>VALIDADE</span>
-                            <span class="Situacao">231 dias</span>
+                            <span class="Situacao" id="validadeServidor">231 dias</span>
                         </div>
                     </div>
                     <div class="blocoKpi">
                         <div class="img">
-                            <img src="../public/assets/imgs/kpi.png" alt="">
+                            <img src="../assets/imgs/kpi.png" alt="">
                         </div>
                         <div class="info">
                             <span>REDE</span>
-                            <span class="Situacao">Ativa</span>
+                            <span class="Situacao" id="redeServidor">Ativa</span>
                         </div>
                     </div>
                 </div>
@@ -190,14 +191,17 @@
                         </div>
                     </div>
                     <div class="visaoGeral">
-                        <h2>Visão gerao do servidor</h2>
+                        <h2>Visão Geral do Servidor</h2>
                     </div>
                     <div class="USBs">
                         <h2>Entradas USB</h2>
                     </div>
                 </div>
                 <div class="blocoGraficos">
-                    <h3>Visão detalhada dos componentes</h3>
+                    <div class="subtituloServidoresGraficos">
+                        <h3>Visão Detalhada dos Componentes</h3>
+                        <h3 class="textoGraficosSubtitulo">Gráficos</h3>
+                    </div>
                     <div class="graficos">
                         <div class="grafico">
                             <h5>Histórico de uso do Disco</h5>
