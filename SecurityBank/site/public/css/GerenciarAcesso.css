@@ -1,14 +1,19 @@
 .fundo{
- 
+ width: 90%;
+ display: flex;
+ flex-direction: column;
+ align-items: center;
 }
 
 .boxAdicionarServico {
     background-color: #f08080;
     height: 16vh;
-    width: 120vh;
     border-radius: 30px;
-    margin-left: 10vh;
-   
+    width: 90%; 
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    transition: 0.5s;
 }
 .boxAdicionarServico:hover{
     cursor: pointer;
@@ -16,31 +21,38 @@
     transform: scale(0.98);
 }
 .fundoContas{
-    background-color: #e0e0e0;
+    background-color: #ffffff;
     height: 60vh;
-    width: 120vh;
-    margin-left: 10vh;
+    width: 90%;
     border-radius: 20px;
+    margin: 30px 0;
    
 }
 .adicione{
-    font-size: 2rem;
+    font-size: 25px;
     font-weight: bolder;
-    
     /* padding-top: 2.5vh; */
-    
     color: #ffff;
+}
+
+.espaco {
+    width: 100%;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
 }
 
 .dadosUsuarios{
     display: flex;
-    margin-left: 2vh;
-    
+    justify-content: space-evenly;
+    width: 100%;
+    margin-top: 20px;
 }
 .TittleContas{
     margin-left: 6vh;
-    padding-top: 6vh;
     color: rgb(62, 62, 168);
+    font-weight: 500;
+    font-size: 25px;
 }
 .linhaSu{
     display: flex;
@@ -49,22 +61,31 @@
 
 }
 .SubtittleContas{
-    padding-right: -100vh;
-    margin-left: -40vh;
+    /* padding-right: -100vh;
+    margin-left: -40vh; */
+    font-weight: 500;
+    font-size: 20px;
 }
-.SubtittleNivel{}
+
 .emailControle{
-    font-size: 4vh;
-    margin-left: 3vh;
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
 }
 .nivelAcesso{
-    font-size: 4vh;
-    margin-left: 20vh
+    font-weight: 500;
+    font-size: 20px;
+    color: black;
+}
+
+.imgEdicaoGerenciar {
+    width: 25px;
+
 }
 
 .linhaEspacamento{
-        border-bottom: solid 1px #000F53;
-        width: 110vh;
+        border-bottom: solid 1px #000f532e;
+        width: 90%;
         margin-top: 3vh;
         margin-left: 5vh;
       }
@@ -76,37 +97,67 @@ display: center;
 .ativoDesativo{
     display: flex;
     justify-content: space-evenly;
-    width: 80vh;
-    margin-left: 30vh;
-    margin-bottom: 2vh;
+    align-items: center;
+    width: 90%;
+    height: 30vh;
+    /* margin-left: 30vh;
+    margin-bottom: 2vh; */
 }
 .bolaVerde{
     background-color: #2DF5B9;
     width: 12vh;
     height: 12vh;
     border-radius: 360px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
-.legCPU{
+.legComponentes{
     margin-left: 3.3vh;
-    
+    color: #000F53;
+    font-size: 20px;
 }
-.legRAM{
-    margin-left: 3.3vh;
-}
-.legDisco{
-    margin-left: 3vh;
-}
-.legREDE{
-    margin-left: 3.3vh;
-}
-.legUSB{
-    margin-left: 3.3vh;
-}
+
 .imgsContas{
+    display: flex;
     justify-content: space-between;
-    width: 50vh;
-    margin-left: 20vh;
+    width: 180px;
+    padding: 0 30px ;
 }
 .deletar{
     margin-left: 10vh;
+}
+
+.headerGerenciar {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 90%;
+}
+
+.tituloGerenciar {
+    margin-left: 80px;
+    color: #000F53;
+    font-family: Poppins, sans-serif;
+  
+}
+
+.divPlanoUsuario {
+    background-color: #000F53;
+    border-radius: 20px;
+    width: 300px;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 20px;
+    font-weight: 500;
+}
+
+.dashGerenciar {
+    width: 84.85%;
+    background-color: #FAFBFF;
+    height: 100vh;
+    overflow: auto;
+    padding-left: 230px;
 }

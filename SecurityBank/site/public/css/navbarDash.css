@@ -1,0 +1,85 @@
+.header-left{
+    background-color: #5c6bc0;
+    display: flex;
+    flex-direction: column;
+    align-items: start;
+    padding-left: 30px;
+    border: none;
+    width: 200px;
+  }
+  .logo img{
+    width: 180px;
+    /* height: 35px; */
+  }
+  
+  .hello h3, span{
+    color: white;
+    margin-right: 0px;
+  }
+  .TipoAcesso{
+    font-size: 14px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    
+    background-color: rgba(0, 15, 83, 0.19);
+    width: 128px;
+    height: 38px;
+    border-radius: 10px;
+    margin: 0 0 10px 0;
+  }
+  .TipoAcesso span{
+    display: flex;
+    /* margin-top: -30px; */
+  }
+  .opcao{
+    font-size: 18px;
+    margin: 10px 0 5px 0;
+    /* margin-top: -30px; */
+  }
+  .opcoes{
+    font-size: 16px;
+    /* margin-top: -30px; */
+    font-weight: 500;
+    cursor: pointer;
+    /* transition: 0.5s; */
+  }
+  
+  /* .opcoes:hover {
+    cursor: pointer;
+    -webkit-transform: scale(1.1);
+    transform: scale(1.1);
+  } */
+  
+  .opcoes a span {
+    margin-left: 5px;
+    transition: 0.5s;
+  }
+  
+  /* .opcoes a span:hover {
+   color: #5c6bc0;
+  } */
+  
+  .opcoes a img {
+    width: 16px;
+    height: 16px;
+    /* margin-top: -30px; */
+  }
+  
+  .linha{
+    border-bottom: solid 1px rgba(0, 15, 83, 0.49);
+    width: 180px;
+  }
+  
+  .localizacao {
+    background-color: rgba(0, 15, 83, 0.19);
+    border-radius: 10px;
+    width: 160px;
+    height: 40px;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    padding: 0px 10px;
+    /* margin-top: -30px; */
+  }

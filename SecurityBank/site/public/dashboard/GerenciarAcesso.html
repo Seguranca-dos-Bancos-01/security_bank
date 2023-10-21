@@ -11,9 +11,9 @@
     <title>Security Bank | Métricas</title>
 
     <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
     <link rel="stylesheet" href="../css/dashboards.css">
     <link rel="stylesheet" href="../css/GerenciarAcesso.css">
-    <link rel="stylesheet" href="../css/controle.css">
     <script src="./js/sessao.js"></script>
     <script src="./js/alerta.js"></script>
 
@@ -36,7 +36,7 @@
     <div class="janela">
         <div class="header-left">
             <div class="logo">
-                <img src="../assets/logofooter.png" alt="">
+                <img src="../assets/logoBranca.png" alt="">
             </div>
 
             <div class="opcao">
@@ -47,21 +47,21 @@
                 <span>Administrador</span>
             </div>
 
-            <div class="opcoes localizacao">
+            <div class="opcoes">
                 <a href="dashboard.html">
-                    <img src="../assets/imgs/home.png" alt="">
+                    <img src="../assets/home.png" alt="">
                     <span>Home</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="servidoresDash.html">
-                    <img src="../assets/imgs/servdores.png" alt="">
+                    <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
+                    <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
                 </a>
             </div>
@@ -97,31 +97,31 @@
             </div> -->
             <div class="opcoes">
                 <a href="alertas.html">
-                    <img src="../assets/imgs/alertas.png" alt="">
+                    <img src="../assets/alerta.png" alt="">
                     <span>Alertas</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="perfil.html">
-                    <img src="../assets/imgs/perfil.png" alt="">
+                    <img src="../assets/perfil.png" alt="">
                     <span>Perfil</span>
                 </a>
             </div>
-            <div class="opcoes">
+            <div class="opcoes localizacao">
                 <a href="GerenciarAcesso.html">
-                    <img src="../assets/imgs/controlecontas.png" alt="">
+                    <img src="../assets/controle.png" alt="">
                     <span>Controle de acesso</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="suporteDash.html">
-                    <img src="../assets/imgs/ajuda.png" alt="">
+                    <img src="../assets/ajuda.png" alt="">
                     <span>Ajuda</span>
                 </a>
             </div>
             <div class="opcoes">
                 <a href="metricasDash.html">
-                    <img src="../assets/imgs/metricas.png" alt="">
+                    <img src="../assets/metricas.png" alt="">
                     <span>Métricas</span>
                 </a>
             </div>
@@ -136,13 +136,13 @@
             </div>
             <div class="opcoes">
                 <a href="../index.html">
-                    <img src="../assets/imgs/logout.png" alt="" onclick="limparSessao()">
+                    <img src="../assets/logout.png" alt="" onclick="limparSessao()">
                     <span>Logout</span>
                 </a>
             </div>
         </div>
 
-        <div class="dash">
+        <div class="dashGerenciar">
             <div id="alerta">
             </div>
 
@@ -151,68 +151,82 @@
             </div>
             <div id="graficos">
             </div>
-<div class="ativoDesativo">
-    <div class="blocoCpu">
-        <div class="bolaVerde"></div>
-    <img src="" alt=""> 
-    <span class="legCPU">CPU</span>
-</div>
-<div class="blocoDisco">
-    <div class="bolaVerde"></div> 
-    <img src="" alt=""> 
-    <span class="legDisco">Disco</span>
-</div>
-<div class="blocoRAM">
-    <div class="bolaVerde"></div>
-    <img src="" alt=""> 
-    <span class="legRAM">RAM</span>
-</div>
-<div class="blocoRede">
-    <div class="bolaVerde"></div>
-    <img src="" alt=""> 
-    <span class="legREDE">Rede</span>
-</div>
-<div class="blocoUsb">
-    <div class="bolaVerde"></div>
-    <img src="" alt="">
-    <span class="legUSB">USB</span>
-</div>
-</div>
-<div class="fundo">
-<div onclick="adicionar()" class="boxAdicionarServico">
-    <n class="adicione">Adicione um Servico ao Monitoramento</n>
-    <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG">
-</div>
+            <div class="headerGerenciar">
+                <h1 class="tituloGerenciar">Controle de Acesso</h1>
+                <div class="divPlanoUsuario"><span id="planoUsuario">Plano Premium</span></div>
+            </div>
+            <div class="ativoDesativo">
+                <div class="blocoCpu">
+                    <div class="bolaVerde">
+                        <img src="../assets/checkComponentes.png" class="imgComponentes" alt="">
+                    </div>
+                    <span class="legComponentes">CPU</span>
+                </div>
+                <div class="blocoDisco">
+                    <div class="bolaVerde">
+                        <img src="../assets/checkComponentes.png" class="imgComponentes" alt="">
+                    </div>
+                    <span class="legComponentes">Disco</span>
+                </div>
+                <div class="blocoRAM">
+                    <div class="bolaVerde">
+                        <img src="../assets/checkComponentes.png" class="imgComponentes" alt="">
+                    </div>
+                    <span class="legComponentes">RAM</span>
+                </div>
+                <div class="blocoRede">
+                    <div class="bolaVerde">
+                        <img src="../assets/checkComponentes.png" class="imgComponentes" alt="">
+                    </div>
+                    <span class="legComponentes">Rede</span>
+                </div>
+                <div class="blocoUsb">
+                    <div class="bolaVerde">
+                        <img src="../assets/checkComponentes.png" class="imgComponentes" alt="">
+                    </div>
+                    <span class="legComponentes">USB</span>
+                </div>
+            </div>
 
-<div class="fundoContas">
-<h1 class="TittleContas">Contas Administradas</h1>
-<div class="linhaSu">
-    <h2 class="SubtittleContas">Conta</h2>
-    <h2 class="SubtittleNivel">Nivel Acesso</h2>
-</div>
-    <div class="espaco">
-      <div class="dadosUsuarios">
-        <a class="emailControle">Teste@gmailpedrao.com</a>
-        <span class="nivelAcesso">1</span>
-        <div class="imgsContas">
-        <img src="../assets/🦆 icon _Edit_.png" alt="" class="alterar">
-        <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar">
-    </div>
-      </div>
-      <div class="linhaEspacamento"><span></span></div>  
-    </div>
+            <div class="fundo">
+                <div onclick="adicionar()" class="boxAdicionarServico">
+                    <n class="adicione">Adicione um Servidor ao Monitoramento</n>
+                    <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG">
+                </div>
 
-<div class="cabecario"></div>
-</div>
+                <div class="fundoContas">
+                    <h1 class="TittleContas">Contas Administradas</h1>
+                    <div class="linhaSu">
+                        <h2 class="SubtittleContas">Conta</h2>
+                        <h2 class="SubtittleContas">Nivel Acesso</h2>
+                        <h2 class="SubtittleContas">Edição</h2>
+                    </div>
+                    <div class="espaco">
+                        <div class="dadosUsuarios">
+                            <a class="emailControle">Teste@gmailpedrao.com</a>
+                            <span class="nivelAcesso">1</span>
+                            <div class="imgsContas">
+                                <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar">
+                                <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Delete_.png" alt="" class="deletar">
+                            </div>
+                        </div>
+                        <div class="linhaEspacamento"><span></span></div>
+                    </div>
+
+                    <div class="cabecario"></div>
+                </div>
+            </div>
+        </div>
 </body>
+
 </html>
 
 <script>
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
 
-function adicionar(){
-    window.location="metricasDash.html"
-}
-    
+    function adicionar() {
+        window.location = "servidor.html"
+    }
+
 
 </script>

@@ -112,11 +112,10 @@
 
 .dash {
   width: 89.85%;
-  height: 100%;
   background-color: #FAFBFF;
   height: 100vh;
   overflow: auto;
-  padding-left: 150px;
+  padding-left: 200px;
 }
 
 .regua {
@@ -274,82 +273,7 @@ canvas {
 .Nome h2{
   margin-left: 30px;
 }
-.header-left{
-  background-color: #010e46;
-  display: flex;
-  flex-direction: column;
-  align-items: start;
-  padding-left: 10px;
-  border: none;
-  width: 180px;
-}
-.logo img{
-  width: 130px;
-  height: 35px;
-}
 
-.hello h3, span{
-  color: white;
-  margin-right: 0px;
-}
-.TipoAcesso{
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  justify-content: center;
-  background-color: rgba(105, 83, 211, 0.1);
-  width: 128px;
-  height: 38px;
-  border-radius: 10px;
-}
-.TipoAcesso span{
-  display: flex;
-  /* margin-top: -30px; */
-}
-.opcao{
-  font-size: 15px;
-  /* margin-top: -30px; */
-}
-.opcoes{
-  font-size: 12px;
-  /* margin-top: -30px; */
-  font-weight: 500;
-  cursor: pointer;
-  transition: 0.5s;
-}
-
-.opcoes:hover {
-  cursor: pointer;
-  -webkit-transform: scale(1.1);
-  transform: scale(1.1);
-}
-
-.opcoes a span {
-  margin-left: 5px;
-}
-
-.opcoes a img {
-  width: 16px;
-  height: 16px;
-  /* margin-top: -30px; */
-}
-
-.linha{
-  border-bottom: solid 1px #000F53;
-  width: 140px;
-}
-
-.localizacao {
-  background-color: rgba(0, 15, 83, 0.19);
-  border-radius: 10px;
-  width: 120px;
-  height: 40px;
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
-  padding: 0px 10px;
-  /* margin-top: -30px; */
-}
 .rodapeDash{
   width: 89.8%;
   height: 100%;
