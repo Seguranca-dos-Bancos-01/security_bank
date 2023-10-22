@@ -13,7 +13,7 @@
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/dashboards.css">
     <link rel="stylesheet" href="../css/navbarDash.css">
-   
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
 
@@ -197,8 +197,8 @@
                         <div class="graph2">
                             <canvas id="myChartCanvas2"></canvas>
                         </div>
+                    </div>
                 </div>
-            </div>
             <div class="barraInformativa">
                 <div class="infoBarra">
                     <span class="SituacaoBarra" id="numeroServidores">23</span>
@@ -215,11 +215,8 @@
             </div>
             <div class="Historico">
                 <span class="tituloHistorico">Histórico dos Servidores</span>
+                <canvas id="myChartsegundo"></canvas>
 
-                <div id="graficos">
-                    <div class="graph">
-                        <canvas id="myChartCanvas"></canvas>
-                    </div>
                 </div>      
             </div>
         </div>
@@ -549,40 +546,100 @@ if(nivel == 1){
 
 
 
+    idUsuario2 = sessionStorage.ID_USUARIO;
+console.log(idUsuario2);
 
+document.addEventListener("DOMContentLoaded", function() {
+    obterDadosGrafico2(idUsuario2);
+});
 
+function obterDadosGrafico2(idUsuario2) {
 
+    if (sessionStorage.ID_USUARIO) {
+    let idUsuario2 = sessionStorage.ID_USUARIO;
+    console.log(idUsuario2);
 
+    document.addEventListener("DOMContentLoaded", function() {
+        obterDadosGrafico2(idUsuario2);
+    });
+} else {
+    console.error("ID do usuário não encontrada no sessionStorage.");
+}
 
-   function obterDadosGrafico2(idUsuario2) {
+function buscarUltimasMedidas2(req, res) {
 
-// alterarTitulo(idResposta)
+    const limite_linhas = 7;
 
-// if (proximaAtualizacao != undefined) {
-//     clearTimeout(proximaAtualizacao);
-// // }
+    var idUsuario2 = req.params.idUsuario2;
 
-fetch(`/medidas/ultimas2/${sessionStorage.ID_USUARIO}`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (resposta) {
-            console.log(`Dados recebidos: GRaIFCO 2 ${JSON.stringify(resposta)}`);
-            resposta.reverse();
+    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
 
-            plotarGrafico2(resposta, idUsuario2);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-    }
-})
-    .catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    medidaModel.buscarUltimasMedidas2(idUsuario2, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
     });
 }
 
 
-function plotarGrafico2(resposta, idUsuario2) {
+function buscarMedidasEmTempoReal2(req, res) {
 
-console.log('iniciando plotagem do gráfico...');
+    var idUsuario2 = req.params.idUsuario2;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarMedidasEmTempoReal2(idUsuario2).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+    fetch(`/medidas/ultimas2/${idUsuario2}`, { cache: 'no-store' }).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(resposta) {
+                console.log(`Dados recebidos: GRaIFCO 2 ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico2(resposta, idUsuario2);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    }).catch(function(error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+function plotarGrafico2(resposta, idUsuario2) {
+    console.log('iniciando plotagem do gráfico...');
+
+    const cores = ['#FF847F', '#A6E22E', '#66D9EF', '#AE81FF', '#F92672'];
+
+// Mapear os valores únicos de statuss
+const statussUnicos = [...new Set(resposta.map(item => item.statuss))];
+
+// Atribuir cores para cada valor de statuss
+const coresPorStatuss = {};
+statussUnicos.forEach((status, index) => {
+  coresPorStatuss[status] = cores[index % cores.length];
+});
 
 // Criando estrutura para plotar gráfico - labels
 let labels = [];
@@ -595,7 +652,7 @@ label: 'Número de Tentativas',
 data: [],
 fill: false,
 backgroundColor: [
-'#5d91d4e3'
+'#FF847F', '#7CFC00'
 ],
 tension: 0.1
 }]
@@ -608,8 +665,8 @@ console.log(resposta)
 // Inserindo valores recebidos em estrutura para plotar o gráfico
 for (i2 = 0; i2 < resposta.length; i2++) {
 var registro = resposta[i2];
-labels.push(registro.mes);
-dados2.datasets[0].data.push(registro.tentativas);
+labels.push(registro.statuss);
+dados2.datasets[0].data.push(registro.num);
 }
 
 console.log('----------------------------------------------')
@@ -620,72 +677,59 @@ console.log('Dados:')
 console.log(dados2.datasets)
 console.log('----------------------------------------------')
 
-// Criando estrutura para plotar gráfico - config
-const config = {
-type: 'bar',
+    const config = {
+type: 'pie',
 data: dados2,
 };
 
 // Adicionando gráfico criado em div na tela
 let myChart2 = new Chart(
-document.getElementById('myChartsegundo'),
+document.getElementById('myChartCanvas2'),
 config
 );
 
 
-setTimeout(() => atualizarGrafico2(idUsuario2, dados2, myChart2), 2000);
+    // Defina a próxima atualização de acordo com a sua lógica, se necessário
+    // setTimeout(() => atualizarGrafico2(idUsuario2, dados2, myChart2), 2000);
 }
 
 function atualizarGrafico2(idUsuario2, dados2, myChart2) {
+    fetch(`/medidas/tempo-real2/${idUsuario2}`, { cache: 'no-store' }).then(function(response) {
+        if (response.ok) {
+            response.json().then(function(novoRegistro2) {
 
+                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro2)}`);
+                console.log(`Dados atuais do gráfico:`);
+                console.log(dados2);
 
+                if (novoRegistro2[0].momento_grafico == dados2.labels[dados2.labels.length - 1]) {
+                    console.log("---------------------------------------------------------------");
+                    console.log("Como não há dados novos para captura, o gráfico não atualizará.");
+                    console.log("Horário do novo dado capturado:");
+                    console.log(novoRegistro2[0].tentativas);
+                    console.log("Horário do último dado capturado:");
+                    console.log(dados2.labels[dados2.labels.length - 1]);
+                    console.log("---------------------------------------------------------------");
+                } else {
+                    if (dados2.labels.length >= 7) {
+                        dados2.labels.shift(); // apagar o primeiro
+                        dados2.datasets[0].data.shift(); // apagar o primeiro de umidade
+                    }
+                    dados2.labels.push(novoRegistro2[0].statuss); // incluir um novo momento
+                    dados2.datasets[0].data.push(novoRegistro2[0].num); // incluir uma nova medida de umidade
 
-fetch(`/medidas/tempo-real2/${idUsuario2}`, { cache: 'no-store' }).then(function (response) {
-    if (response.ok) {
-        response.json().then(function (novoRegistro2) {
-
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro2)}`);
-            console.log(`Dados atuais do gráfico:`);
-            console.log(dados2);
-
-            // let avisoCaptura = document.getElementById(`avisoCaptura${idUsuario}`)
-            // avisoCaptura.innerHTML = ""
-
-
-            if (novoRegistro2[0].momento_grafico == dados2.labels[dados2.labels.length - 1]) {
-    console.log("---------------------------------------------------------------")
-    console.log("Como não há dados novos para captura, o gráfico não atualizará.")
-    // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
-    console.log("Horário do novo dado capturado:")
-    console.log(novoRegistro2[0].tentativas)
-    console.log("Horário do último dado capturado:")
-    console.log(dados2.labels[dados2.labels.length - 1])
-    console.log("---------------------------------------------------------------")
-} else {
-    // tirando e colocando valores no gráfico
-    if(dados2.labels.length >= 7){
-        dados2.labels.shift(); // apagar o primeiro
-        dados2.datasets[0].data.shift();  // apagar o primeiro de umidade
-    }
-    dados2.labels.push(novoRegistro2[0].statuss); // incluir um novo momento
-    dados2.datasets[0].data.push(novoRegistro2[0].num); // incluir uma nova medida de umidade
-
-    myChart2.update();
-}
-
-            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-            // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
-        });
-    } else {
-        console.error('Nenhum dado encontrado ou erro na API');
-        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-        // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
-    }
-})
-    .catch(function (error) {
+                    myChart2.update();
+                }
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    }).catch(function(error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 
+    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+    // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
 }
 
 
