@@ -143,22 +143,34 @@ function entrar() {
             })
         })
         
-        .then(
-           
-            json => {
-            console.log("JSON response:", json);
-            sessionStorage.setItem("ID_USUARIO", json.idFuncionarios);
-            sessionStorage.setItem("NOME_USUARIO", json.nome);
-            sessionStorage.setItem("EMAIL_USUARIO", json.email);
-            sessionStorage.setItem("telefone_USUARIO", json.telefone);
-            sessionStorage.setItem("senha_USUARIO", json.senha);
-            sessionStorage.setItem("fkBanco", json.fkBanco);
-            sessionStorage.setItem("fkEscalonamento", json.fkEscalonamento);
-            sessionStorage.setItem("fkPlano", json.fkPlano);
-            sessionStorage.setItem("banco", JSON.stringify(json.banco));
+        .then(function (resposta) {
+    console.log("ESTOU NO THEN DO entrar()!")
+    if (resposta.ok) {
+    resposta.json().then(data => {
+        console.log("Resposta JSON:", data);
 
-            window.location.href = "./dashboard/dashboard.html";
-        })
+        sessionStorage.ID_USUARIO = data.idFuncionarios;
+        sessionStorage.EMAIL_USUARIO = data.email;
+        sessionStorage.NOME_USUARIO = data.nome;
+        sessionStorage.TELEFONE_USUARIO = data.telefone;
+        sessionStorage.SENHA_USUARIO = data.senha;
+        sessionStorage.FKBANCO = data.fkBanco;
+        sessionStorage.FKESCALONAMENTO = data.fkEscalonamento;
+        sessionStorage.BANCO = JSON.stringify(data.banco);
+
+        window.location.href = "./dashboard/dashboard.html";
+    }).catch(error => {
+        console.error("Erro ao processar JSON:", error);
+    });
+} else {
+    console.error("Houve um erro ao tentar realizar o login!");
+    resposta.text().then(texto => {
+        console.error(texto);
+        finalizarAguardar(texto);
+    }).catch(error => {
+        console.error("Erro ao obter texto da resposta:", error);
+    });
+}})
         .catch(error => {
             console.error("Error:", error);
             finalizarAguardar(error);
