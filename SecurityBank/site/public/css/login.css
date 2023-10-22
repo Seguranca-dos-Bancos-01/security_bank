@@ -347,10 +347,7 @@ form {
        border-radius: 1.5rem;
        box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
        border: #8473db90 0.1rem solid;
-       position: relative;
-       bottom: 35vh;
-     
-       left: 0rem;
+       margin-top: 10vh;
        z-index: 2;
        text-align: center;
    }
@@ -453,33 +450,32 @@ form {
     font-size: 2vh;
     margin-top: 3vh;
     position: relative;
-    bottom: 40vh;
-    left: 10vh;
+    bottom: 3vh;
+    left: 5vh;
   }
   
   .rodape_contato h1{
-    font-size: 5vh;
+    font-size: 3vh;
     
   }
   .rodape_contato h3{
-    margin-top: 6vh;
-  
+    margin-top: 1vh;
+    font-size: 2vh;
   }
   
   .rodape_contato h4{
-    margin-bottom: 2vh;
-   
+    margin-bottom: 1vh;
+    font-size: 2vh;
   }
   
   .rodape_links{
-    margin-top: 3vh;
+ 
     width: 50vh;
     height: 50vh;
     display: flex;
     flex-direction: column;
     justify-content: start;
     font-size: 2vh;
-    margin-top: 3vh;
     position: relative;
     left: 10vh;
     }
@@ -501,12 +497,22 @@ form {
         margin-top: 3vh;
         font-size: 2vh;
         position: relative;
-        left: 10vh;
+        top: 30vh;
+        
+        
+    }
+
+    .rodape_redes h2{
+      position: relative;
+      right: 35vh;
+
     }
   
     .rodape_redes h3{
         font-size: 2vh;
         margin-top: 3vh;
+        position: relative;
+        right: 35vh;
     }
    
     .rodape_direitos{

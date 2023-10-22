@@ -261,3 +261,339 @@ margin-bottom: 5vh;
     width: 5vh;
     height: 5vh;
 }
+
+@media screen and (max-width: 800px){
+
+         .header {
+            width: 85%;
+            background: transparent;
+            padding-inline: 16px;
+        }
+    
+        .logo {
+            width: 50vw;
+            height: fit-content;
+            margin-left: 1rem;
+            padding-block: 1rem;
+        }
+
+    
+    .content {
+        display: flex;
+        width: 100%;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+    .tituloFaleConosco {
+        font-size: 3rem;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 2vh;
+        text-shadow: 3px 2px 3px rgb(155, 155, 155);
+    }
+
+    .subtituloFaleConosco {
+        font-size: 1.1rem;
+        font-weight: bold;
+        text-align: center;
+        margin-top: 3vh;
+        padding-inline: 3rem;
+    }
+
+    .entrada {
+        height: 50vh;
+        width: 100%;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: space-evenly;
+    }
+
+
+    .linhanome .placeholder {
+        width: 3vw;
+        position: relative;
+        right: 9rem;
+      bottom: 3vh;
+    }
+
+    .linhanome {
+        width: 30vw;
+        height: 8vh;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .linhanome input {
+        width: 80vw;
+        position: relative;
+        border-radius: 1rem;
+        bottom: 3vh;
+    }
+
+
+    .linhaemail .placeholder {
+        width: 3vw;
+        position: relative;
+        right: 9rem;
+        bottom: 3vh;
+    }
+
+    .linhaemail {
+        width: 30vw;
+        height: 8vh;
+        display: flex;
+        justify-content: space-between;
+        flex-direction: column;
+        align-items: center;
+        bottom: 6vh;
+    }
+
+    .linhaemail input {
+        width: 80vw;
+        position: relative;
+        bottom: 3vh;
+        border-radius: 1rem;
+    }
+
+    .dados {
+        width: 35vw;
+        height: 2.3rem;
+        background-color: #CDC6ED;
+        border-radius: 30px;
+        border: 2px solid #CDC6ED;
+    }
+
+    .linha3 {
+        width: 100%;
+        height: 25vh;
+        display: flex;
+        align-items: end;
+        flex-direction: column;
+        position: relative;
+        bottom: 12vh;
+    }
+
+    .linha3 input {
+        width: 80vw;
+        height: 20vh;
+        display: flex;
+        margin-top: 3vh;
+        align-items: center;
+        flex-direction: column;
+        bottom: 3vh;
+    }
+
+    .linha3 .placeholder {
+        width: 80vw;
+        position: relative;
+        top: 1.5rem;
+    }
+
+    .mensagem {
+        width: 80vw;
+        height: 20vh;
+        border-radius: 1rem;
+        position: relative;
+        top: 0.5rem;
+        right: 2.3rem;
+    }
+
+    .linha5 {
+        display: flex;
+        width: 40%;
+        height: 5vh;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        top: 1vh;
+    }
+
+    .botao {
+        width: 100%;
+        height: 2.5rem;
+        background-color: rgba(152, 122, 235, 0.945);
+        border: rgba(152, 122, 235, 0.945) 2px solid;
+        border-radius: 40px;
+        color: white;
+        font-size: 17px;
+        position: relative;
+        bottom: 6vh;
+    }
+
+    .waves {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 85vh;
+        justify-content: space-evenly;
+        align-items: center;
+        background: url(../assets/ondas.png);
+        background-size: cover;
+    }
+
+    .contato {
+        width: 100%;
+        height: 35vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-evenly;
+        align-items: center;
+        position: relative;
+        top: 3rem;
+    }
+
+    .fundo2 {
+        display: flex;
+        flex-direction: column;
+        width: 80vw;
+        height: 75vh;
+        background-color: #CDC6ED;
+        border-radius: 1rem;
+        border-color: rgba(152, 122, 235, 0.945);
+        align-items: center;
+    }
+
+    .separa {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+        height: 52vh;
+        align-items: center;
+        justify-content: space-between; 
+     
+    }
+  
+    .t {
+        text-align: center;
+        font-size: 17px;
+        font-weight: bold;
+        width: 15vh;
+     
+        
+    }
+
+    .d {
+        margin-top: 0.5vh;
+        text-align: center;
+        font-size: 17px;
+        width: 25vh;
+   
+    }
+
+
+    .rodape{
+      max-width: 100vh;
+      height: 100vh;
+        background-color: #000F53;
+        display: flex;
+        justify-content: center;
+        justify-content: space-evenly;
+        color: white;
+        align-items: center;
+      position: relative;
+      top: 20vh;
+    }
+
+   
+    
+     .rodape_contato{
+        width: 50vh;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        color: white;
+        font-size: 2vh;
+        position: relative;
+    left: 10vh;
+
+    } 
+    
+    .rodape_contato h1{
+        font-size: 3vh;
+        position: relative;
+        bottom: 3vh;
+    }
+    .rodape_contato h3{
+        margin-top: 2vh;
+       
+    }
+    
+    .rodape_contato h4{
+        margin-bottom: 2vh;
+   
+    }
+    
+    .rodape_links{
+        
+        width: 50vh;
+        height: 50vh;
+        display: flex;
+        flex-direction: column;
+        justify-content: start;
+        font-size: 2vh;
+       
+        position: relative;
+       top: 4vh;
+        }
+    
+        
+    .rodape_links h3{
+        margin-top: 3vh;
+        position: relative;
+        right: 20vh;
+      
+    }
+    
+    .rodape_links h2{
+        margin-top: 3vh;
+        position: relative;
+        right: 20vh;
+      
+    }
+    
+    .rodape_links a {
+        text-decoration: none;
+        color: white;
+    }
+    
+        .rodape_redes{
+            margin-top: 3vh;
+            width: 50vh;
+            height: 50vh;
+            margin-top: 3vh;
+            font-size: 2vh;
+            position: relative;
+            top: 60vh;
+           
+        }
+    
+        .rodape_redes h2{
+            position: relative;
+            right: 30vh;
+        }
+    
+        .rodape_redes h3{
+            font-size: 2vh;
+            margin-top: 3vh;
+            position: relative;
+            right: 30vh;
+        }
+       
+        .rodape_direitos{
+            background-color: #000F53;
+            align-items: center;
+            display: flex;
+            justify-content: center;
+            color: white;
+            font-size: 2vh;
+        }
+           
+
+
+}
