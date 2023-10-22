@@ -1,20 +1,31 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidas(idAquario, limite_linhas) {
+function buscarUltimasMedidas(idServidor, limite_linhas) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top ${limite_linhas}
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,  
-                        momento,
-                        FORMAT(momento, 'HH:mm:ss') as momento_grafico
-                    from medida
-                    where fk_aquario = ${idAquario}
-                    order by id desc`;
+        instrucaoSql = `SELECT
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    LIMIT 0, 50;
+    
+    `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select*from registros`;
+        instrucaoSql = `SELECT
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    LIMIT 0, 50;
+    
+    `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -24,21 +35,33 @@ function buscarUltimasMedidas(idAquario, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idAquario) {
+function buscarMedidasEmTempoReal(idServidor) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 1
-        dht11_temperatura as temperatura, 
-        dht11_umidade as umidade,  
-                        CONVERT(varchar, momento, 108) as momento_grafico, 
-                        fk_aquario 
-                        from medida where fk_aquario = ${idAquario} 
-                    order by id desc`;
+        instrucaoSql = `SELECT
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    LIMIT 0, 50;
+    
+    `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select*From registros;`;
+        instrucaoSql = `SELECT
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    LIMIT 0, 50;
+    
+    `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return

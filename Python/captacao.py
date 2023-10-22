@@ -15,7 +15,7 @@ def mysql_connection(host, user, passwd, database=None):
     )
     return connection
 
-connection = mysql_connection('localhost', 'pedro', 'pedro0610', 'SecurityBank')
+connection = mysql_connection('localhost', 'root', 'Pedroca12@', 'SecurityBank')
 
 cursor1 = connection.cursor()
 IDCPU = psutil.cpu_times()  
