@@ -37,7 +37,7 @@ razaoSocial varchar (45),
 sigla varchar (10),
 responsavelLegal varchar(45)
 ) ;
-insert into banco(nomeFantasia, cnpj, razaoSocial, sigla, responsavelLegal) values('bla', '12345678901234','blabla', '1bla', 'pedrao');
+
 
 CREATE TABLE escalonamentoFuncionarios(
 idEscalonamento int primary key auto_increment,
@@ -49,8 +49,8 @@ CREATE TABLE funcionarios(
 idFuncionarios int auto_increment,
 nome varchar (45),
 email varchar (45),
-cpf CHAR(11),
-telefone varchar (11),
+cpf CHAR(14),
+telefone varchar (16),
 senha varchar (45),
 fkBanco int,
 fkEscalonamento int,
@@ -78,24 +78,36 @@ constraint pkComposta primary key (idServidor,fkBanco, fkEspecificacoes, fkPlano
  foreign key (fkEspecificacoes) references especificacoes (idEspecificacoes),
  foreign key (fkPlano) references planoContratado (idPlano)
 ) ;
-
-CREATE TABLE componentes(
-idComponentes int primary key auto_increment,
-nome varchar (90),
-modelo varchar (45)
-) ;
+CREATE TABLE componentes (
+    idComponentes INT AUTO_INCREMENT,
+    nome VARCHAR(90),
+    modelo VARCHAR(45),
+    fkServidorComp INT,
+    fkBancoComp INT,
+    fkEspecificacoesComp INT,
+    fkPlanoComp INT,
+    PRIMARY KEY (idComponentes),
+    CONSTRAINT fk_servidor_comp FOREIGN KEY (fkServidorComp) REFERENCES servidor(idServidor),
+    CONSTRAINT fk_banco_comp FOREIGN KEY (fkBancoComp) REFERENCES banco(idBanco),
+    CONSTRAINT fk_especificacoes_comp FOREIGN KEY (fkEspecificacoesComp) REFERENCES especificacoes(idEspecificacoes),
+    CONSTRAINT fk_plano_comp FOREIGN KEY (fkPlanoComp) REFERENCES planoContratado(idPlano)
+);
 drop table registros;
-CREATE TABLE registros(
-idRegistros int  auto_increment,
-dataHorario datetime,
-porcentagemConsumo double,
-fkServidor int,
-fkBanco int,
-fkComponentes int,
-constraint pkComposta primary key (idRegistros, fkServidor,fkBanco, fkComponentes),
- foreign key (fkServidor) references servidor (idServidor),
- foreign key (fkBanco) references banco (idBanco),
- foreign key (fkComponentes) references componentes (idComponentes)
+CREATE TABLE registros (
+    idRegistros INT AUTO_INCREMENT,
+    dataHorario DATETIME,
+    dadosCaptados DOUBLE,
+    fkServidorReg INT,
+    fkBancoReg INT,
+    fkEspeciReg INT,
+    fkPlanoReg INT,
+    fkComponentesReg INT,
+    PRIMARY KEY (idRegistros, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg),
+    FOREIGN KEY (fkServidorReg) REFERENCES servidor (idServidor),
+    FOREIGN KEY (fkBancoReg) REFERENCES banco (idBanco),
+    FOREIGN KEY (fkEspeciReg) REFERENCES especificacoes (idEspecificacoes),
+    FOREIGN KEY (fkPlanoReg) REFERENCES planoContratado(idPlano),
+    FOREIGN KEY (fkComponentesReg) REFERENCES componentes (idComponentes)
 );
 
 INSERT INTO planoContratado(tipo) VALUES (1);
@@ -114,7 +126,8 @@ INSERT INTO especificacoes(potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco, dat
 INSERT INTO especificacoes(potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco, dataCompra, dataValidade) VALUES (2.5, 8, 250, '2021-06-15', '2023-06-15');
 
 -- Inserindo dados na tabela banco
-INSERT INTO banco(nomeFantasia, cnpj, razaoSocial, sigla, responsavelLegal) VALUES('bla', '12345678901234','blabla', '1bla', 'pedrao');
+INSERT INTO banco(nomeFantasia, cnpj, razaoSocial, sigla, responsavelLegal) 
+VALUES('bla', '12345678901234','blabla', '1bla', 'pedrao');
 
 -- Inserindo dados na tabela escalonamentoFuncionarios
 INSERT INTO escalonamentoFuncionarios(cargo, nívelAcesso) VALUES ('Gerente', 3);
@@ -123,18 +136,11 @@ INSERT INTO escalonamentoFuncionarios(cargo, nívelAcesso) VALUES ('Técnico', 2
 -- Inserindo dados na tabela funcionarios
 INSERT INTO funcionarios(nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('João', 'joao@email.com', '12345678901', '11999999999', '123456', 1, 1);
 INSERT INTO funcionarios(nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('Maria', 'maria@email.com', '98765432101', '11888888888', '654321', 1, 2);
-
+select*from banco;
 -- Inserindo dados na tabela servidor
-INSERT INTO servidor(apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus, fkLocalizacaoMatriz, fkEspecificacoes, fkPlano) VALUES ('Servidor A', 'Linux', 'Fulano', '192.168.0.1', 1, 1, 1, 1, 1);
+INSERT INTO servidor(apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus, fkLocalizacaoMatriz, fkEspecificacoes, fkPlano) 
+VALUES ('teste', 'Linux', 'Fulano', '192.168.0.1', 1, 1, 1, 1, 1);
 INSERT INTO servidor(apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus, fkLocalizacaoMatriz, fkEspecificacoes, fkPlano) VALUES ('Servidor B', 'Windows', 'Beltrano', '192.168.0.2', 1, 2, 2, 2, 2);
-
--- Inserindo dados na tabela componentes
-INSERT INTO componentes(nome, modelo) VALUES ('Placa de Rede', 'Modelo A');
-INSERT INTO componentes(nome, modelo) VALUES ('Disco Rígido', 'Modelo B');
-
--- Inserindo dados na tabela registros
-INSERT INTO registros(dataHorario, porcentagemConsumo, fkServidor, fkBanco, fkComponentes) VALUES ('2023-10-15 12:00:00', 50.0, 1, 1, 1, 1);
-INSERT INTO registros(dataHorario, porcentagemConsumo, fkServidor, fkBanco, fkComponentes) VALUES ('2023-10-16 14:30:00', 75.0, 2, 1, 2, 2);
 
 -- Consultando os dados inseridos nas tabelas
 SELECT * FROM planoContratado;
@@ -146,6 +152,7 @@ SELECT * FROM escalonamentoFuncionarios;
 SELECT * FROM funcionarios;
 SELECT * FROM servidor;
 SELECT * FROM componentes;
+desc registros;
 SELECT * FROM registros where fkservidor =1;
 select 
          as cpu, 

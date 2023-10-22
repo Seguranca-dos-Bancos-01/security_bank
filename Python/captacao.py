@@ -223,8 +223,8 @@ while True:
     for i in range(len(ins)):
         dado = ins[i]
 
-        query = "INSERT INTO registros (dataHorario, DadosCaptados, fkComponentesRegistros, fkServidorReg, fkBancoReg, fkEspecificacoesReg, fkPlanoReg) VALUES (%s, %s, %s, %s, %s, %s, %s)"
-        cursor.execute(query, (horarioFormatado, dado, componentes[i], fkServidor, fkBanco, fkEspec, fkPlano))
+        query = "INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        cursor.execute(query, (horarioFormatado, dado, fkServidor, fkBanco, fkEspec, fkPlano,  componentes[i]))
 
         connection.commit()
 
