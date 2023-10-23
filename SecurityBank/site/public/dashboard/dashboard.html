@@ -32,7 +32,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body onload="percentCPU(),percentRAM(),percentDISK()">
+<body onload="percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia()">
 
     <div class="janela">
         <div class="header-left">
@@ -201,15 +201,15 @@
                 </div>
             <div class="barraInformativa">
                 <div class="infoBarra">
-                    <span class="SituacaoBarra" id="numeroServidores">23</span>
+                    <span class="SituacaoBarra" id="numeroServidores"></span>
                     <span>Servidores Monitorados</span>
                 </div>
                 <div class="infoBarra">
-                    <span class="SituacaoBarra" id="alertaHoras">10</span>
+                    <span class="SituacaoBarra" id="alertaHoras"></span>
                     <span >Alertas em 24 horas</span>
                 </div>
                 <div class="infoBarra">
-                    <span class="SituacaoBarra" id="InstaveisServidores">0</span>
+                    <span class="SituacaoBarra" id="InstaveisServidores"></span>
                     <span >Servidores Instáveis</span>
                 </div>
             </div>
@@ -356,6 +356,166 @@ function percentCPU(idUsuarioCPU) {
 
 
 
+    function QtdServidor(idUsuarioServer) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
+
+
+        fetch(`/medidas/ultimasQTD/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); exibirDadosQTD(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
+            });
+         } 
+         
+         function exibirDadosQTD(response) { console.log('Exibindo dados retornados:')
+         for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+           var dado= registro.qtd;
+
+        }
+        console.log(dado)
+        console.log(response[0])
+
+        var cpuServidores = document.getElementById('numeroServidores');
+    cpuServidores.innerHTML = `${dado}`;
+        
+    
+    } 
+    
+    function alerta24(idUsuarioServer) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
+
+
+        fetch(`/medidas/ultimas24h/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); exibir24h(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
+            });
+         } 
+         
+         function exibir24h(response) { console.log('Exibindo dados retornados:')
+         for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+           var dado= registro.Al;
+
+
+        }
+        console.log(dado)
+        console.log(response[0])
+
+        var cpuServidores = document.getElementById('alertaHoras');
+    cpuServidores.innerHTML = `${dado}`;
+        
+    
+    } 
+    function sInstaveis(idUsuarioServer) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
+
+
+        fetch(`/medidas/sInstaveis/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); MostrarsInstaveis(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
+            });
+         } 
+         
+         function MostrarsInstaveis(response) { console.log('Exibindo dados retornados:')
+         for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+           var dado= registro.qtdS;
+
+
+        }
+        console.log(dado)
+        console.log(response[0])
+
+        var cpuServidores = document.getElementById('InstaveisServidores');
+    cpuServidores.innerHTML = `${dado}`;
+        
+    
+    } 
+
+    function UltimosAlertas(idUsuarioServer) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
+
+
+        fetch(`/medidas/UltimoAlerta/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); MostrarsUltimosAlertas(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
+            });
+         } 
+         
+         function MostrarsUltimosAlertas(response) { console.log('Exibindo dados retornados:')
+         for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+           var dado= registro.numBanco;
+           var desc = registro.descr
+           var horario = registro.hr
+
+        }
+        console.log(dado)
+        console.log(desc)
+        console.log(response[0])
+
+        var cpuServidores = document.getElementById('TituloAlerta');
+    cpuServidores.innerHTML = `O servidor ${dado}, ${desc}`;
+    var mostraHorario = document.getElementById('dataAlerta');
+    mostraHorario.innerHTML = `${horario}`; 
+    
+    } 
+
+
+    function ServerEmergencia(idUsuarioServer) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
+
+
+        fetch(`/medidas/ServerEmergencia/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); MostrarServerEmergencia(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
+            });
+         } 
+         
+         function MostrarServerEmergencia(response) { console.log('Exibindo dados retornados:')
+         for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+           var dado= registro.qtdE;
+
+
+        }
+        console.log(dado)
+    
+
+        var cpuServidores = document.getElementById('nomeServidorEmergencia');
+    cpuServidores.innerHTML = `${dado} servidores`;
+    
+    } 
 
 
 

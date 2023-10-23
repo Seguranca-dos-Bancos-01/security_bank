@@ -14,6 +14,22 @@ router.get("/ultimasPercentRAM/:idUsuario", function (req, res) {
 router.get("/ultimasPercentDISK/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasDISK(req, res);
 });
+router.get("/ultimasQTD/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasQTD(req, res);
+});
+router.get("/ultimas24h/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidas24h(req, res);
+});
+router.get("/sInstaveis/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasInstaveis(req, res);
+});
+router.get("/UltimoAlerta/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasUltimoAlerta(req, res);
+});
+router.get("/ServerEmergencia/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasServidorEmergencia(req, res);
+});
+
 
 
 router.get("/ultimas/:idServidor", function (req, res) {

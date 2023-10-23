@@ -5,11 +5,11 @@ function buscarUltimasMedidasCPU(idServidor, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadosCaptados from registros where fkComponentesReg =1 order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados from registros where fkComponentesReg =1 and fkBancoReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as asd from registros where fkComponentesReg =1 order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados as asd from registros where fkComponentesReg =1 and fkBancoReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else {
@@ -25,11 +25,11 @@ function buscarUltimasMedidasRAM(idServidor, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =2 order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =2 and fkBancoReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =2 order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =2 and fkBancoReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else {
@@ -46,11 +46,11 @@ function buscarUltimasMedidasDISK(idServidor, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadosCaptados as sda from registros where fkComponentesReg =3 order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados as sda from registros where fkComponentesReg =3 and fkBancoReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as sda from registros where fkComponentesReg =3 order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados as sda from registros where fkComponentesReg =3 and fkBancoReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else {
@@ -61,6 +61,114 @@ function buscarUltimasMedidasDISK(idServidor, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+function buscarUltimasMedidasQTD(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select idServidor AS qtd from servidor where fkBanco = 1 order by idServidor desc  limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select idServidor AS qtd from servidor where fkBanco = 1 order by idServidor desc  limit 1;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidas24h(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT IFNULL((SELECT idAlertas FROM Alertas WHERE dataRegistro  >= NOW()  and fkBancoAlertas   = 1 - INTERVAL 1 DAY ORDER BY idAlertas DESC LIMIT 1), 0) AS Al;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT IFNULL((SELECT idAlertas FROM Alertas WHERE dataRegistro  >= NOW()  and fkBancoAlertas   = 1 - INTERVAL 1 DAY ORDER BY idAlertas DESC LIMIT 1), 0) AS Al;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function buscarUltimasMedidasInstaveis(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT IFNULL((SELECT idServidor FROM servidor JOIN statusMaquina ON fkStatus = idStatus WHERE nome = 'Instavel' and fkBanco = 1 ORDER BY idServidor DESC LIMIT 1), 0) AS qtdS;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT IFNULL((SELECT idServidor FROM servidor JOIN statusMaquina ON fkStatus = idStatus WHERE nome = 'Instavel' and fkBanco = 1 ORDER BY idServidor DESC LIMIT 1), 0) AS qtdS;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasUltimoAlerta(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT IFNULL(fkServidorAlertas, 0) AS numBanco,  IFNULL(descricaoAlerta, 'Nenhum') AS descr, IFNULL(dataRegistro, 'Sem Alertas') hr FROM Alertas WHERE fkBancoAlertas = 1 UNION ALL SELECT 0, 'Nenhum', 'Sem Alertas' WHERE NOT EXISTS (
+            SELECT 1
+            FROM Alertas
+            WHERE fkBancoAlertas = 1
+        );
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT IFNULL(fkServidorAlertas, 0) AS numBanco,  IFNULL(descricaoAlerta, 'Nenhum') AS descr, IFNULL(dataRegistro, 'Sem Alertas') hr FROM Alertas WHERE fkBancoAlertas = 1 UNION ALL SELECT 0, 'Nenhum', 'Sem Alertas' WHERE NOT EXISTS (
+            SELECT 1
+            FROM Alertas
+            WHERE fkBancoAlertas = 1
+        );
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasServidorEmergencia(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT IFNULL((SELECT idServidor FROM servidor JOIN statusMaquina ON fkStatus = idStatus WHERE nome = 'Emergencia' and fkBanco = 1 ORDER BY idServidor DESC LIMIT 1), 0) AS qtdE;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT IFNULL((SELECT idServidor FROM servidor JOIN statusMaquina ON fkStatus = idStatus WHERE nome = 'Emergencia' and fkBanco = 1 ORDER BY idServidor DESC LIMIT 1), 0) AS qtdE;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 
 
 
@@ -187,4 +295,9 @@ module.exports = {
     buscarUltimasMedidasCPU,
     buscarUltimasMedidasRAM,
     buscarUltimasMedidasDISK,
+    buscarUltimasMedidasQTD,
+    buscarUltimasMedidas24h,
+    buscarUltimasMedidasInstaveis,
+    buscarUltimasMedidasUltimoAlerta,
+    buscarUltimasMedidasServidorEmergencia
 }
