@@ -312,6 +312,230 @@ function buscarMedidasEmTempoReal2(idUsuario2) {
 
 
 
+
+
+function buscarUltimasMedidasServidores(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS proc, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 1 
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS proc, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 1 
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealServidores(idServidor) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS proc, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 1 
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS proc, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 1 
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+
+function buscarUltimasMedidasServidores2(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS ram, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 2 
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS ram, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 2 
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealServidores2(idServidor) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS ram, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 2
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS ram, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 2
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+function buscarUltimasMedidasServidores3(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS DISK, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 3 
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS DISK, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 3 
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealServidores3(idServidor) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS DISK, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 2
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT dadosCaptados AS DISK, 
+               dataHorario AS horario 
+        FROM registros 
+        JOIN Componentes ON fkComponentesReg = idComponentes
+        WHERE fkComponentesReg = 2
+        ORDER BY idRegistros DESC 
+        LIMIT 10;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
@@ -326,4 +550,10 @@ module.exports = {
     buscarUltimasMedidasUltimoAlerta,
     buscarUltimasMedidasServidorEmergencia,
     buscarUltimasMedidasSelectContas,
+    buscarMedidasEmTempoRealServidores,
+    buscarUltimasMedidasServidores,
+    buscarMedidasEmTempoRealServidores2,
+    buscarUltimasMedidasServidores2,
+    buscarMedidasEmTempoRealServidores3,
+    buscarUltimasMedidasServidores3,
 }

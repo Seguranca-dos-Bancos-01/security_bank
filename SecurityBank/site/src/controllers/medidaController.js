@@ -173,6 +173,43 @@ function buscarUltimasMedidasSelectContas(req, res) {
 
 
 
+function buscarUltimasMedidasServidores(req, res) {
+    const limite_linhas = 50;
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasServidores(idServidor, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarMedidasEmTempoRealServidores(req, res) {
+    var idServidor = req.params.idServidor;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.buscarMedidasEmTempoRealServidores(idServidor).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
 function buscarUltimasMedidas(req, res) {
     const limite_linhas = 50;
     var idServidor = req.params.idServidor;
@@ -249,6 +286,90 @@ function buscarMedidasEmTempoReal2(req, res) {
     });
 }
 
+
+
+
+
+
+
+
+
+
+function buscarUltimasMedidasServidores2(req, res) {
+    const limite_linhas = 50;
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasServidores(idServidor, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarMedidasEmTempoRealServidores2(req, res) {
+    var idServidor = req.params.idServidor;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.buscarMedidasEmTempoRealServidores(idServidor).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+function buscarUltimasMedidasServidores3(req, res) {
+    const limite_linhas = 50;
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasServidores(idServidor, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarMedidasEmTempoRealServidores3(req, res) {
+    var idServidor = req.params.idServidor;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.buscarMedidasEmTempoRealServidores(idServidor).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
@@ -262,6 +383,11 @@ module.exports = {
     buscarUltimasMedidasInstaveis,
     buscarUltimasMedidasUltimoAlerta,
     buscarUltimasMedidasServidorEmergencia,
-    buscarUltimasMedidasSelectContas
-
+    buscarUltimasMedidasSelectContas,
+    buscarUltimasMedidasServidores,
+    buscarMedidasEmTempoRealServidores,
+    buscarUltimasMedidasServidores2,
+    buscarMedidasEmTempoRealServidores2,
+    buscarUltimasMedidasServidores3,
+    buscarMedidasEmTempoRealServidores3,
 };

@@ -35,6 +35,34 @@ router.get("/SelectContas/:idUsuario", function (req, res) {
 
 
 
+router.get("/ultimasServidores/:idServidor", function (req, res) {
+    medidaController.buscarUltimasMedidasServidores(req, res);
+});
+
+router.get("/tempo-realServidores/:idServidor", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealServidores(req, res);
+})
+
+router.get("/ultimasServidores2/:idServidor", function (req, res) {
+    medidaController.buscarUltimasMedidasServidores2(req, res);
+});
+
+router.get("/tempo-realServidores2/:idServidor", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealServidores2(req, res);
+})
+
+router.get("/ultimasServidores3/:idServidor", function (req, res) {
+    medidaController.buscarUltimasMedidasServidores3(req, res);
+});
+
+router.get("/tempo-realServidores3/:idServidor", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealServidores3(req, res);
+})
+
+
+
+
+
 
 router.get("/ultimas/:idServidor", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
