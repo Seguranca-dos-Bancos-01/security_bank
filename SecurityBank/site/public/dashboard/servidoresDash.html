@@ -192,6 +192,9 @@
                     </div>
                     <div class="visaoGeral">
                         <h2>Visão Geral do Servidor</h2>
+                        <div class="graph">
+                            <canvas id="myChart4"></canvas>
+                        </div>
                     </div>
                     <div class="USBs">
                         <h2>Entradas USB</h2>
@@ -351,24 +354,22 @@ function plotarGrafico(resposta, idUsuario) {
 
     let myChart = new Chart(document.getElementById('myChartsegundo'), config);
 
-    atualizarGrafico(idServidor, dados, myChart);
+    atualizarGrafico(idUsuario, dados, myChart);
 }
 
-function atualizarGrafico(idServidor, dados, myChart) {
-    fetch(`/medidas/tempo-realServidores/${idServidor}`, { cache: 'no-store' }).then(function (response) {
+function atualizarGrafico(idUsuario, dados, myChart) {
+    fetch(`/medidas/tempo-realServidores/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (novoRegistro) {
                 console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                 console.log('Dados atuais do gráfico:');
                 console.log(dados);
 
-                let avisoCaptura = document.getElementById(`avisoCaptura${idServidor}`);
-                avisoCaptura.innerHTML = '';
 
                 if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
                     console.log('---------------------------------------------------------------');
                     console.log('Como não há dados novos para captura, o gráfico não atualizará.');
-                    avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+
                     console.log('Horário do novo dado capturado:');
                     console.log(novoRegistro[0].horario);
                     console.log('Horário do último dado capturado:');
@@ -385,21 +386,15 @@ function atualizarGrafico(idServidor, dados, myChart) {
                     myChart.update();
                 }
 
-                proximaAtualizacao = setTimeout(
-                    function() {
-                        obterDadosGrafico(idServidor);
-                    },
-                    2000
-                );
+                proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico(idUsuario);
+            }, 20000);
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
-            proximaAtualizacao = setTimeout(
-                function() {
-                    obterDadosGrafico(idServidor);
-                },
-                2000
-            );
+            proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico(idUsuario);
+            }, 20000);
         }
     })
     .catch(function (error) {
@@ -478,7 +473,7 @@ function plotarGrafico2(resposta, idUsuario) {
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             labels.push(registro.horario);
-            dados.datasets[0].data.push(registro.proc);
+            dados.datasets[0].data.push(registro.ram);
            
         }
 
@@ -495,26 +490,25 @@ function plotarGrafico2(resposta, idUsuario) {
         data: dados
     };
 
-    let myChart = new Chart(document.getElementById('myChartTerceiro'), config);
+    let myChart2 = new Chart(document.getElementById('myChartTerceiro'), config);
 
-    atualizarGrafico2(idServidor, dados, myChart);
+    atualizarGrafico2(idUsuario, dados, myChart2);
 }
 
-function atualizarGrafico2(idServidor, dados, myChart) {
-    fetch(`/medidas/tempo-realServidores2/${idServidor}`, { cache: 'no-store' }).then(function (response) {
+function atualizarGrafico2(idUsuario, dados, myChart2) {
+    fetch(`/medidas/tempo-realServidores2/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (novoRegistro) {
                 console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                 console.log('Dados atuais do gráfico:');
                 console.log(dados);
 
-                let avisoCaptura = document.getElementById(`avisoCaptura${idServidor}`);
-                avisoCaptura.innerHTML = '';
+               
 
                 if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
                     console.log('---------------------------------------------------------------');
                     console.log('Como não há dados novos para captura, o gráfico não atualizará.');
-                    avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+                  
                     console.log('Horário do novo dado capturado:');
                     console.log(novoRegistro[0].horario);
                     console.log('Horário do último dado capturado:');
@@ -525,27 +519,21 @@ function atualizarGrafico2(idServidor, dados, myChart) {
                     dados.labels.push(novoRegistro[0].momento_grafico);
 
                     dados.datasets[0].data.shift();
-                    dados.datasets[0].data.push(novoRegistro[0].RAM);
+                    dados.datasets[0].data.push(novoRegistro[0].ram);
 
 
-                    myChart.update();
+                    myChart2.update();
                 }
 
-                proximaAtualizacao = setTimeout(
-                    function() {
-                        obterDadosGrafico2(idServidor);
-                    },
-                    2000
-                );
+                proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico2(idUsuario);
+            }, 20000);
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
-            proximaAtualizacao = setTimeout(
-                function() {
-                    obterDadosGrafico2(idServidor);
-                },
-                2000
-            );
+            proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico2(idUsuario);
+            }, 20000);
         }
     })
     .catch(function (error) {
@@ -605,7 +593,7 @@ function plotarGrafico3(resposta, idUsuario) {
         labels: labels,
         datasets: [
             {
-                label: 'CPU',
+                label: 'Disco',
                 data: [],
                 fill: false,
                 borderColor: '#6953D3',
@@ -622,7 +610,7 @@ function plotarGrafico3(resposta, idUsuario) {
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             labels.push(registro.horario);
-            dados.datasets[0].data.push(registro.proc);
+            dados.datasets[0].data.push(registro.DISK);
            
         }
 
@@ -639,26 +627,24 @@ function plotarGrafico3(resposta, idUsuario) {
         data: dados
     };
 
-    let myChart = new Chart(document.getElementById('myChart'), config);
+    let myChart3 = new Chart(document.getElementById('myChart'), config);
 
-    atualizarGrafico3(idServidor, dados, myChart);
+    atualizarGrafico3(idUsuario, dados, myChart);
 }
 
-function atualizarGrafico3(idServidor, dados, myChart) {
-    fetch(`/medidas/tempo-realServidores3/${idServidor}`, { cache: 'no-store' }).then(function (response) {
+function atualizarGrafico3(idUsuario, dados, myChart3) {
+    fetch(`/medidas/tempo-realServidores3/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (novoRegistro) {
                 console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                 console.log('Dados atuais do gráfico:');
                 console.log(dados);
 
-                let avisoCaptura = document.getElementById(`avisoCaptura${idServidor}`);
-                avisoCaptura.innerHTML = '';
 
                 if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
                     console.log('---------------------------------------------------------------');
                     console.log('Como não há dados novos para captura, o gráfico não atualizará.');
-                    avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+                   
                     console.log('Horário do novo dado capturado:');
                     console.log(novoRegistro[0].horario);
                     console.log('Horário do último dado capturado:');
@@ -672,29 +658,192 @@ function atualizarGrafico3(idServidor, dados, myChart) {
                     dados.datasets[0].data.push(novoRegistro[0].DISK);
 
 
-                    myChart.update();
+                    myChart3.update();
                 }
 
-                proximaAtualizacao = setTimeout(
-                    function() {
-                        obterDadosGrafico3(idServidor);
-                    },
-                    2000
-                );
+                proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico3(idUsuario);
+            }, 20000);
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
-            proximaAtualizacao = setTimeout(
-                function() {
-                    obterDadosGrafico3(idServidor);
-                },
-                2000
-            );
+            proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico3(idUsuario);
+            }, 20000);
         }
     })
     .catch(function (error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
-  
+
+document.addEventListener("DOMContentLoaded", function () {
+    obterDadosGrafico4(idUsuario);
+});
+
+function obterDadosGrafico4(idUsuario) {
+    if (sessionStorage.ID_USUARIO) {
+        let idUsuario = sessionStorage.ID_USUARIO;
+        console.log(idUsuario);
+
+        document.addEventListener("DOMContentLoaded", function () {
+            obterDadosGrafico4(idUsuario);
+        });
+    } else {
+        console.error("ID do usuário não encontrada no sessionStorage.");
+    }
+
+    fetch(`/medidas/ultimasServidores4/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico4(resposta, idUsuario);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    }).catch(function (error) {
+        console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+    });
+}
+
+function plotarGrafico4(resposta, idUsuario) {
+    console.log('Iniciando plotagem do gráfico...');
+
+    const cores = ['#6953D3', '#B22222', '#FFFF00', '#7FFF00', '#FF1493'];
+
+    // Mapear os valores únicos de statuss
+    const statussUnicos = [...new Set(resposta.map(item => item.statuss))];
+
+    // Atribuir cores para cada valor de statuss
+    const coresPorStatuss = {};
+    statussUnicos.forEach((status, index) => {
+        coresPorStatuss[status] = cores[index % cores.length];
+    });
+    let labels = [];
+
+    let dados = {
+        labels: labels,
+        datasets: [
+            {
+                label: 'CPU',
+                data: [],
+                backgroundColor: '#6953D3',
+            },
+            {
+                label: 'RAM',
+                data: [],
+                backgroundColor: '#B22222',
+            },
+            {
+                label: 'DISCO',
+                data: [],
+                backgroundColor: '#FFFF00',
+            },
+            {
+                label: 'REDE',
+                data: [],
+                backgroundColor: '#7FFF00',
+            },
+            {
+                label: 'USB',
+                data: [],
+                backgroundColor: '#FF1493',
+            }
+        ]
+    };
+
+    console.log('----------------------------------------------');
+    console.log('Estes dados foram recebidos pela função "obterDadosGrafico4" e passados para "plotarGrafico4":');
+    console.log(resposta);
+
+    // Inserindo valores recebidos em estrutura para plotar o gráfico
+    for (let i = 0; i < resposta.length; i++) {
+        const registro = resposta[i];
+        labels.push(registro.horario);
+        dados.datasets[0].data.push(registro.proc);
+        dados.datasets[1].data.push(registro.RAM);
+        dados.datasets[2].data.push(registro.DISK);
+        dados.datasets[3].data.push(registro.REDE);
+        dados.datasets[4].data.push(registro.PORTA);
+    }
+
+    console.log('----------------------------------------------');
+    console.log('O gráfico será plotado com os respectivos valores:');
+    console.log('Labels:');
+    console.log(labels);
+    console.log('Dados:');
+    console.log(dados.datasets);
+    console.log('----------------------------------------------');
+
+    const config = {
+        type: 'bar',
+        data: dados,
+        options: {
+            indexAxis: 'y'
+        }
+    };
+
+    let myChart4 = new Chart(document.getElementById('myChart4'), config);
+
+    atualizarGrafico4(idUsuario, dados, myChart4);
+}
+
+function atualizarGrafico4(idUsuario, dados, myChart4) {
+    fetch(`/medidas/tempo-realServidores4/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (novoRegistro) {
+                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                console.log('Dados atuais do gráfico:');
+                console.log(dados);
+
+
+                if (novoRegistro[0].horario === dados.labels[dados.labels.length - 1]) {
+                    console.log('---------------------------------------------------------------');
+                    console.log('Como não há novos dados para captura, o gráfico não será atualizado.');
+                  
+                    console.log('Horário do novo dado capturado:');
+                    console.log(novoRegistro[0].horario);
+                    console.log('Horário do último dado capturado:');
+                    console.log(dados.labels[dados.labels.length - 1]);
+                    console.log('---------------------------------------------------------------');
+                } else {
+                    dados.labels.shift();
+                    dados.labels.push(novoRegistro[0].momento_grafico);
+                    dados.datasets[0].data.shift();
+                    dados.datasets[0].data.push(novoRegistro[0].cpu);
+
+                    dados.datasets[1].data.shift();
+                    dados.datasets[1].data.push(novoRegistro[1].RAM);
+
+                    dados.datasets[2].data.shift();
+                    dados.datasets[2].data.push(novoRegistro[2].DISK);
+
+                    dados.datasets[3].data.shift();
+                    dados.datasets[3].data.push(novoRegistro[3].REDE);
+
+                    dados.datasets[4].data.shift();
+                    dados.datasets[4].data.push(novoRegistro[4].PORTA);
+
+                    myChart.update();
+                }
+
+                proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico4(idUsuario);
+            }, 20000);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+            proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico4(idUsuario);
+            }, 20000);
+        }
+    }).catch(function (error) {
+        console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+    });
+}
+
+
 </script>

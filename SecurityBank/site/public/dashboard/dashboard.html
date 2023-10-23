@@ -551,18 +551,18 @@ function percentCPU(idUsuarioCPU) {
     //     }
     // }
 
-    // function alterarTitulo(idServidor) {
-    //     var tituloAquario = document.getElementById(`tituloAquario${idServidor}`)
-    //     var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idServidor).descricao;
+    // function alterarTitulo(idUsuario) {
+    //     var tituloAquario = document.getElementById(`tituloAquario${idUsuario}`)
+    //     var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idUsuario).descricao;
     //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
     // }
 
-    // function exibirAquario(idServidor) {
+    // function exibirAquario(idUsuario) {
     //     let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
 
     //     for (i = 0; i < todosOsGraficos.length; i++) {
     //         // exibindo - ou não - o gráfico
-    //         if (todosOsGraficos[i].id != idServidor) {
+    //         if (todosOsGraficos[i].id != idUsuario) {
     //             let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
     //             if (elementoAtual.classList.contains("display-block")) {
     //                 elementoAtual.classList.remove("display-block")
@@ -579,12 +579,12 @@ function percentCPU(idUsuarioCPU) {
     //     }
 
     //     // exibindo - ou não - o gráfico
-    //     let graficoExibir = document.getElementById(`grafico${idServidor}`)
+    //     let graficoExibir = document.getElementById(`grafico${idUsuario}`)
     //     graficoExibir.classList.remove("display-none")
     //     graficoExibir.classList.add("display-block")
 
     //     // alterando estilo do botão
-    //     let btnExibir = document.getElementById(`btnAquario${idServidor}`)
+    //     let btnExibir = document.getElementById(`btnAquario${idUsuario}`)
     //     btnExibir.classList.remove("btn-white")
     //     btnExibir.classList.add("btn-pink")
     // }
@@ -710,24 +710,23 @@ function plotarGrafico(resposta, idUsuario) {
 
     let myChart = new Chart(document.getElementById('myChartsegundo'), config);
 
-    atualizarGrafico(idServidor, dados, myChart);
+    atualizarGrafico(idUsuario, dados, myChart);
 }
 
-function atualizarGrafico(idServidor, dados, myChart) {
-    fetch(`/medidas/tempo-real/${idServidor}`, { cache: 'no-store' }).then(function (response) {
+function atualizarGrafico(idUsuario, dados, myChart) {
+    fetch(`/medidas/tempo-real/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
         if (response.ok) {
             response.json().then(function (novoRegistro) {
                 console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
                 console.log('Dados atuais do gráfico:');
                 console.log(dados);
 
-                let avisoCaptura = document.getElementById(`avisoCaptura${idServidor}`);
-                avisoCaptura.innerHTML = '';
+        
 
                 if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
                     console.log('---------------------------------------------------------------');
                     console.log('Como não há dados novos para captura, o gráfico não atualizará.');
-                    avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará.";
+                   
                     console.log('Horário do novo dado capturado:');
                     console.log(novoRegistro[0].horario);
                     console.log('Horário do último dado capturado:');
@@ -749,18 +748,17 @@ function atualizarGrafico(idServidor, dados, myChart) {
                     myChart.update();
                 }
 
-                proximaAtualizacao = setTimeout(
-                    function() {
-                        obterDadosGrafico(idServidor);
-                    },
-                    2000
-                );
+                proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico4(idUsuario);
+            }, 20000);
+
+                
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
             proximaAtualizacao = setTimeout(
                 function() {
-                    obterDadosGrafico(idServidor);
+                    obterDadosGrafico(idUsuario);
                 },
                 2000
             );
@@ -860,10 +858,6 @@ function buscarMedidasEmTempoReal2(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-
-
-
-
 
     fetch(`/medidas/ultimas2/${idUsuario2}`, { cache: 'no-store' }).then(function(response) {
         if (response.ok) {
@@ -973,17 +967,29 @@ function atualizarGrafico2(idUsuario2, dados2, myChart2) {
                     dados2.datasets[0].data.push(novoRegistro2[0].num); // incluir uma nova medida de umidade
 
                     myChart2.update();
+
+                    proximaAtualizacao = setTimeout( ()=>{
+                        buscarUltimasMedidas2(idUsuario2);
+            }, 20000);
+
+
                 }
             });
         } else {
             console.error('Nenhum dado encontrado ou erro na API');
+
+            proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico2(idUsuario2);
+            }, 20000);
         }
     }).catch(function(error) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 
     // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
-    proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+    proximaAtualizacao = setTimeout( ()=>{
+ obterDadosGrafico2(idUsuario);
+            }, 20000);
 }
 
 

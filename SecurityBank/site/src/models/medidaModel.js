@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarUltimasMedidasCPU(idServidor, limite_linhas) {
+function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -20,7 +20,7 @@ function buscarUltimasMedidasCPU(idServidor, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function buscarUltimasMedidasRAM(idServidor, limite_linhas) {
+function buscarUltimasMedidasRAM(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -41,7 +41,7 @@ function buscarUltimasMedidasRAM(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarUltimasMedidasDISK(idServidor, limite_linhas) {
+function buscarUltimasMedidasDISK(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -61,7 +61,7 @@ function buscarUltimasMedidasDISK(idServidor, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function buscarUltimasMedidasQTD(idServidor, limite_linhas) {
+function buscarUltimasMedidasQTD(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -82,7 +82,7 @@ function buscarUltimasMedidasQTD(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarUltimasMedidas24h(idServidor, limite_linhas) {
+function buscarUltimasMedidas24h(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -102,7 +102,7 @@ function buscarUltimasMedidas24h(idServidor, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-function buscarUltimasMedidasInstaveis(idServidor, limite_linhas) {
+function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -122,7 +122,7 @@ function buscarUltimasMedidasInstaveis(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarUltimasMedidasUltimoAlerta(idServidor, limite_linhas) {
+function buscarUltimasMedidasUltimoAlerta(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -149,7 +149,7 @@ function buscarUltimasMedidasUltimoAlerta(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarUltimasMedidasServidorEmergencia(idServidor, limite_linhas) {
+function buscarUltimasMedidasServidorEmergencia(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -170,7 +170,7 @@ function buscarUltimasMedidasServidorEmergencia(idServidor, limite_linhas) {
 
 
 
-function buscarUltimasMedidasSelectContas(idServidor, limite_linhas) {
+function buscarUltimasMedidasSelectContas(idUsuario, limite_linhas) {
 
     let instrucaoSql = '';
 
@@ -197,29 +197,31 @@ function buscarUltimasMedidasSelectContas(idServidor, limite_linhas) {
 
 
 
-function buscarUltimasMedidas(idServidor, limite_linhas) {
+function buscarUltimasMedidas(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3) AS disco,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
-    FROM registros
+    FROM registros 
     JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE fkComponentesReg = 1
     LIMIT 0, 50;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3) AS disco,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
-    FROM registros
+    FROM registros 
     JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE fkComponentesReg = 1
     LIMIT 0, 50;
     
     `;
@@ -232,30 +234,31 @@ function buscarUltimasMedidas(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoReal(idServidor) {
+function buscarMedidasEmTempoReal(idUsuario) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3) AS disco,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
-    FROM registros
+    FROM registros 
     JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE fkComponentesReg = 1
     LIMIT 0, 50;
-    
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3) AS disco,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
-    FROM registros
+    FROM registros 
     JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE fkComponentesReg = 1
     LIMIT 0, 50;
     
     `;
@@ -314,7 +317,7 @@ function buscarMedidasEmTempoReal2(idUsuario2) {
 
 
 
-function buscarUltimasMedidasServidores(idServidor, limite_linhas) {
+function buscarUltimasMedidasServidores(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -349,7 +352,7 @@ function buscarUltimasMedidasServidores(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoRealServidores(idServidor) {
+function buscarMedidasEmTempoRealServidores(idUsuario) {
 
     instrucaoSql = ''
 
@@ -388,7 +391,7 @@ function buscarMedidasEmTempoRealServidores(idServidor) {
 
 
 
-function buscarUltimasMedidasServidores2(idServidor, limite_linhas) {
+function buscarUltimasMedidasServidores2(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -423,7 +426,7 @@ function buscarUltimasMedidasServidores2(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoRealServidores2(idServidor) {
+function buscarMedidasEmTempoRealServidores2(idUsuario) {
 
     instrucaoSql = ''
 
@@ -461,7 +464,7 @@ function buscarMedidasEmTempoRealServidores2(idServidor) {
 
 
 
-function buscarUltimasMedidasServidores3(idServidor, limite_linhas) {
+function buscarUltimasMedidasServidores3(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
@@ -496,7 +499,7 @@ function buscarUltimasMedidasServidores3(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoRealServidores3(idServidor) {
+function buscarMedidasEmTempoRealServidores3(idUsuario) {
 
     instrucaoSql = ''
 
@@ -531,6 +534,93 @@ function buscarMedidasEmTempoRealServidores3(idServidor) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+
+
+function buscarUltimasMedidasServidores4(idUsuario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+    
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+    
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealServidores4(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+    
+    
+    `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 
 
 
@@ -556,4 +646,6 @@ module.exports = {
     buscarUltimasMedidasServidores2,
     buscarMedidasEmTempoRealServidores3,
     buscarUltimasMedidasServidores3,
+    buscarMedidasEmTempoRealServidores4,
+    buscarUltimasMedidasServidores4,
 }

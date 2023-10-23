@@ -2,11 +2,11 @@ var medidaModel = require("../models/medidaModel");
 
 function buscarUltimasMedidasCPU(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasCPU(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasCPU(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -20,11 +20,11 @@ function buscarUltimasMedidasCPU(req, res) {
 }
 function buscarUltimasMedidasRAM(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasRAM(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasRAM(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -38,11 +38,11 @@ function buscarUltimasMedidasRAM(req, res) {
 }
 function buscarUltimasMedidasDISK(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasDISK(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasDISK(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -57,11 +57,11 @@ function buscarUltimasMedidasDISK(req, res) {
 
 function buscarUltimasMedidasQTD(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasQTD(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasQTD(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -76,11 +76,11 @@ function buscarUltimasMedidasQTD(req, res) {
 
 function buscarUltimasMedidas24h(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidas24h(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidas24h(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -94,11 +94,11 @@ function buscarUltimasMedidas24h(req, res) {
 }
 function buscarUltimasMedidasInstaveis(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasInstaveis(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasInstaveis(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -113,11 +113,11 @@ function buscarUltimasMedidasInstaveis(req, res) {
 
 function buscarUltimasMedidasUltimoAlerta(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasUltimoAlerta(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasUltimoAlerta(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -131,11 +131,11 @@ function buscarUltimasMedidasUltimoAlerta(req, res) {
 }
 function buscarUltimasMedidasServidorEmergencia(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasServidorEmergencia(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasServidorEmergencia(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -152,11 +152,11 @@ function buscarUltimasMedidasServidorEmergencia(req, res) {
 
 function buscarUltimasMedidasSelectContas(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasSelectContas(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasSelectContas(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -175,11 +175,11 @@ function buscarUltimasMedidasSelectContas(req, res) {
 
 function buscarUltimasMedidasServidores(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasServidores(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasServidores(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -193,9 +193,9 @@ function buscarUltimasMedidasServidores(req, res) {
 }
 
 function buscarMedidasEmTempoRealServidores(req, res) {
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
     console.log(`Recuperando medidas em tempo real`);
-    medidaModel.buscarMedidasEmTempoRealServidores(idServidor).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoRealServidores(idUsuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -212,11 +212,11 @@ function buscarMedidasEmTempoRealServidores(req, res) {
 
 function buscarUltimasMedidas(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidas(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidas(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -230,9 +230,9 @@ function buscarUltimasMedidas(req, res) {
 }
 
 function buscarMedidasEmTempoReal(req, res) {
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
     console.log(`Recuperando medidas em tempo real`);
-    medidaModel.buscarMedidasEmTempoReal(idServidor).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoReal(idUsuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -297,11 +297,11 @@ function buscarMedidasEmTempoReal2(req, res) {
 
 function buscarUltimasMedidasServidores2(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasServidores(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasServidores2(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -315,9 +315,9 @@ function buscarUltimasMedidasServidores2(req, res) {
 }
 
 function buscarMedidasEmTempoRealServidores2(req, res) {
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
     console.log(`Recuperando medidas em tempo real`);
-    medidaModel.buscarMedidasEmTempoRealServidores(idServidor).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoRealServidores2(idUsuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -334,11 +334,11 @@ function buscarMedidasEmTempoRealServidores2(req, res) {
 
 function buscarUltimasMedidasServidores3(req, res) {
     const limite_linhas = 50;
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarUltimasMedidasServidores(idServidor, limite_linhas).then(function (resultado) {
+    medidaModel.buscarUltimasMedidasServidores3(idUsuario, limite_linhas).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -352,9 +352,9 @@ function buscarUltimasMedidasServidores3(req, res) {
 }
 
 function buscarMedidasEmTempoRealServidores3(req, res) {
-    var idServidor = req.params.idServidor;
+    var idUsuario = req.params.idUsuario;
     console.log(`Recuperando medidas em tempo real`);
-    medidaModel.buscarMedidasEmTempoRealServidores(idServidor).then(function (resultado) {
+    medidaModel.buscarMedidasEmTempoRealServidores3(idUsuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -367,6 +367,43 @@ function buscarMedidasEmTempoRealServidores3(req, res) {
     });
 }
 
+
+
+
+function buscarUltimasMedidasServidores4(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasServidores4(idUsuario, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarMedidasEmTempoRealServidores4(req, res) {
+    var idUsuario = req.params.idUsuario;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.buscarMedidasEmTempoRealServidores4(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 
 
@@ -390,4 +427,7 @@ module.exports = {
     buscarMedidasEmTempoRealServidores2,
     buscarUltimasMedidasServidores3,
     buscarMedidasEmTempoRealServidores3,
+    buscarUltimasMedidasServidores4,
+    buscarMedidasEmTempoRealServidores4,
+    
 };
