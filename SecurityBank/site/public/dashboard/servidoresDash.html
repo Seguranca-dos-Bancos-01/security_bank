@@ -712,45 +712,45 @@ function obterDadosGrafico4(idUsuario) {
 function plotarGrafico4(resposta, idUsuario) {
     console.log('Iniciando plotagem do gráfico...');
 
-    const cores = ['#6953D3', '#B22222', '#FFFF00', '#7FFF00', '#FF1493'];
-
-    // Mapear os valores únicos de statuss
-    const statussUnicos = [...new Set(resposta.map(item => item.statuss))];
-
-    // Atribuir cores para cada valor de statuss
-    const coresPorStatuss = {};
-    statussUnicos.forEach((status, index) => {
-        coresPorStatuss[status] = cores[index % cores.length];
-    });
     let labels = [];
 
     let dados = {
         labels: labels,
         datasets: [
             {
-                label: 'CPU',
+                axis: 'y',
+                label: 'proc',
                 data: [],
                 backgroundColor: '#6953D3',
+                borderColor: 'rgb(75, 192, 192)'
             },
             {
+                axis: 'y',
                 label: 'RAM',
                 data: [],
                 backgroundColor: '#B22222',
+                borderColor: 'rgb(75, 192, 192)'
             },
             {
+                axis: 'y',
                 label: 'DISCO',
                 data: [],
                 backgroundColor: '#FFFF00',
+                borderColor: 'rgb(75, 192, 192)'
             },
             {
+                axis: 'y',
                 label: 'REDE',
                 data: [],
                 backgroundColor: '#7FFF00',
+                borderColor: 'rgb(75, 192, 192)'
             },
             {
+                axis: 'y',
                 label: 'USB',
                 data: [],
                 backgroundColor: '#FF1493',
+                borderColor: 'rgb(75, 192, 192)'
             }
         ]
     };
@@ -765,9 +765,9 @@ function plotarGrafico4(resposta, idUsuario) {
         labels.push(registro.horario);
         dados.datasets[0].data.push(registro.proc);
         dados.datasets[1].data.push(registro.RAM);
-        dados.datasets[2].data.push(registro.DISK);
-        dados.datasets[3].data.push(registro.REDE);
-        dados.datasets[4].data.push(registro.PORTA);
+        dados.datasets[2].data.push(registro.disco);
+        dados.datasets[3].data.push(registro.rede);
+        dados.datasets[4].data.push(registro.porta);
     }
 
     console.log('----------------------------------------------');
@@ -778,18 +778,20 @@ function plotarGrafico4(resposta, idUsuario) {
     console.log(dados.datasets);
     console.log('----------------------------------------------');
 
-    const config = {
+    const config4 = {
         type: 'bar',
         data: dados,
         options: {
-            indexAxis: 'y'
-        }
+    indexAxis: 'y',
+  }
+       
     };
 
-    let myChart4 = new Chart(document.getElementById('myChart4'), config);
+    let myChart4 = new Chart(document.getElementById('myChart4'), config4);
 
-    atualizarGrafico4(idUsuario, dados, myChart4);
+    setTimeout(() => atualizarGrafico4(idUsuario, dados, myChart4))
 }
+
 
 function atualizarGrafico4(idUsuario, dados, myChart4) {
     fetch(`/medidas/tempo-realServidores4/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
@@ -810,24 +812,23 @@ function atualizarGrafico4(idUsuario, dados, myChart4) {
                     console.log(dados.labels[dados.labels.length - 1]);
                     console.log('---------------------------------------------------------------');
                 } else {
-                    dados.labels.shift();
-                    dados.labels.push(novoRegistro[0].momento_grafico);
+                    
                     dados.datasets[0].data.shift();
-                    dados.datasets[0].data.push(novoRegistro[0].cpu);
+                    dados.datasets[0].data.push(novoRegistro[0].proc);
 
                     dados.datasets[1].data.shift();
                     dados.datasets[1].data.push(novoRegistro[1].RAM);
 
                     dados.datasets[2].data.shift();
-                    dados.datasets[2].data.push(novoRegistro[2].DISK);
+                    dados.datasets[2].data.push(novoRegistro[2].disco);
 
                     dados.datasets[3].data.shift();
-                    dados.datasets[3].data.push(novoRegistro[3].REDE);
+                    dados.datasets[3].data.push(novoRegistro[3].rede);
 
                     dados.datasets[4].data.shift();
-                    dados.datasets[4].data.push(novoRegistro[4].PORTA);
+                    dados.datasets[4].data.push(novoRegistro[4].porta);
 
-                    myChart.update();
+                    myChart4.update();
                 }
 
                 proximaAtualizacao = setTimeout( ()=>{
