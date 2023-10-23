@@ -54,6 +54,19 @@
     width: 100%;
     margin-top: 20px;
 }
+
+/* .edicaoGerenciamentoContas {
+    width: 150px;
+} */
+
+.botaoEditarAcesso {
+    background-color: rgb(62, 62, 168);
+    border: none;
+    border-radius: 10px;
+    color: white;
+    padding: 5px 10px;
+}
+
 .TittleContas{
     margin-left: 6vh;
     color: rgb(62, 62, 168);
