@@ -20,4 +20,9 @@ router.post("/atualizarPerfil", function (req, res) {
     usuarioController.atualizarPerfil(req, res);
 });
 
+router.post("/atualizarAcesso", function (req, res) {
+    usuarioController.atualizarNivelAcesso(req, res);
+});
+
+
 module.exports = router;

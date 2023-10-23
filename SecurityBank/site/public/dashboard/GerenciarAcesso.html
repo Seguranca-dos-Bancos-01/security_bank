@@ -14,8 +14,8 @@
     <link rel="stylesheet" href="../css/navbarDash.css">
     <link rel="stylesheet" href="../css/dashboards.css">
     <link rel="stylesheet" href="../css/GerenciarAcesso.css">
-    <script src="./js/sessao.js"></script>
-    <script src="./js/alerta.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -31,7 +31,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body>
+<body onload="ContasAdministradas()">
 
     <div class="janela">
         <div class="header-left">
@@ -191,7 +191,7 @@
             <div class="fundo">
                 <div onclick="adicionar()" class="boxAdicionarServico">
                     <n class="adicione">Adicione um Servidor ao Monitoramento</n>
-                    <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG">
+                    <!-- <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG"> -->
                 </div>
 
                 <div class="fundoContas">
@@ -201,14 +201,17 @@
                         <h2 class="SubtittleContas">Nivel Acesso</h2>
                         <h2 class="SubtittleContas">Edição</h2>
                     </div>
-                    <div class="espaco">
-                        <div class="dadosUsuarios">
-                            <a class="emailControle">Teste@gmailpedrao.com</a>
-                            <span class="nivelAcesso">1</span>
+                    <div id="colocar"class="espaco">
+                        <div id="dadosMostrar" class="dadosUsuarios">
+                            <a id="MostrarEmail"class="emailControle">0000</a>
+                            <span id="MostrarNivel" class="nivelAcesso">0</span>
+                            
+                            <button onclick="EditarAcesso(i)">Editar</button><button onclick="ExcluirConta()">Excluir</button>
                             <div class="imgsContas">
-                                <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar">
-                                <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar">
+                                <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
+                                <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
                             </div>
+                            <span>Editar</span>
                         </div>
                         <div class="linhaEspacamento"><span></span></div>
                     </div>
@@ -222,11 +225,142 @@
 </html>
 
 <script>
+var vetorNivel = []
+var vetorEmail = []
+
+
+
+
+    idUsuario = sessionStorage.ID_USUARIO;
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+
 
     function adicionar() {
         window.location = "servidor.html"
     }
 
+
+    function ContasAdministradas(idUsuarioServer) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
+
+
+        fetch(`/medidas/SelectContas/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); MostrarsUltimosAlertas(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
+            });
+         } 
+         
+         function MostrarsUltimosAlertas(response) { console.log('Exibindo dados retornados:')
+         var dadosMostrar = document.getElementById('colocar');
+dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+
+
+for (var i = 0; i < response.length; i++) {
+    var registro = response[i];
+    var email = registro.mail;
+    var nivel = registro.Esca;
+    vetorNivel.push(nivel); // Adiciona o valor de 'nivel' ao vetor
+    vetorEmail.push(email); // Adiciona o valor de 'email' ao vetor
+console.log(vetorEmail)
+console.log(vetorNivel)
+    var elemento = document.createElement('div');
+    elemento.classList.add('dadosUsuarios');
+    var conteudo = `
+        <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}</a>
+        <span id="MostrarNivel${i}" class="nivelAcesso">${vetorNivel[i]}</span>
+        <input id="novoValor${i}" type="text">
+        <button onclick="editarAcesso(${i})">Editar</button><button>Excluir</button>
+        <div class="imgsContas">
+            <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
+            <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
+        </div>
+    `;
+    elemento.innerHTML = conteudo;
+    dadosMostrar.appendChild(elemento);
+
+    if (i !== response.length - 1) {
+        var linhaEspacamento = document.createElement('div');
+        linhaEspacamento.classList.add('linhaEspacamento');
+        linhaEspacamento.innerHTML = '<span></span>';
+        dadosMostrar.appendChild(linhaEspacamento);
+    }}}
+
+
+console.log(vetorEmail)
+
+
+
+function editarAcesso(i) {
+    window.editarAcesso = function(i) {
+    var novoValorInput = document.getElementById('novoValor' + i);
+    var novoNivel = novoValorInput.value;
+    if (novoNivel !== '') {
+        console.log(vetorNivel)
+        vetorNivel[i] = novoNivel; // Atualiza o vetor com o novo valor de nível
+        console.log(vetorNivel)
+        // Atualiza o conteúdo da div correspondente
+        var divNivel = document.getElementById('MostrarNivel' + i);
+        divNivel.textContent = novoNivel; // Atualiza o texto da div de nível com o novo valor
+
+        // Limpa o valor do input após a edição
+        novoValorInput.value = '';
+    }
+var email = vetorEmail[i]
+
+    fetch("/usuarios/atualizarAcesso", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        NovoNivel: novoNivel,
+        Email: email,
+      }),
+    })
+      .then(function (resposta) {
+        console.log("resposta: ", resposta);
+
+        if (resposta.ok) {
+          cardErro.style.display = "block";
+
+          mensagem_erro.innerHTML =
+            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+          setTimeout(() => {
+            window.location = "login.html";
+          }, "2000");
+
+          limparFormulario();
+          
+        } else {
+          throw "Houve um erro ao tentar realizar o cadastro!";
+        }
+      })
+      .catch(function (resposta) {
+        console.log(`#ERRO: ${resposta}`);
+        
+      });
+
+    }
+
+
+
+
+}
+    
+    
+  
+
+
+    
 
 </script>

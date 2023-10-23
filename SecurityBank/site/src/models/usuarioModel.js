@@ -51,10 +51,27 @@ function atualizarPerfil(nomePerfil, emailPerfil, cpfPerfil, telefonePerfil, sen
     return database.executar(instrucao);
 }
 
+function atualizarNivelAcesso(NovoNivel, Email) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", NovoNivel, Email);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    UPDATE funcionarios AS f1
+    JOIN (SELECT idFuncionarios FROM funcionarios WHERE email = '${Email}') AS f2
+    ON f1.idFuncionarios = f2.idFuncionarios
+    SET f1.fkEscalonamento = ${NovoNivel};
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
 
 module.exports = {
     autenticar,
     cadastrar, 
     atualizarPerfil,
-    cadastrarServidor
+    cadastrarServidor,
+    atualizarNivelAcesso,
+
 };
