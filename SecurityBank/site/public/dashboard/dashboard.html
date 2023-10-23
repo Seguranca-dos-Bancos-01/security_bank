@@ -32,7 +32,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body>
+<body onload="percentCPU(),percentRAM(),percentDISK()">
 
     <div class="janela">
         <div class="header-left">
@@ -254,105 +254,110 @@
 
     let proximaAtualizacao;
 
-function permissionamento(){
-// var nivel = sessionStorage. ;
-
-if(nivel == 1){
-
-}else{
-
-}
 
 
-function percentCPU(idUsuarioCPU) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
-        console.log(idUsuario);
+function percentCPU(idUsuarioCPU) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
 
-        document.addEventListener("DOMContentLoaded", function () {
-            obterDadosGrafico(idUsuario);
-        });
-    } else {
-        console.error("ID do usuário não encontrada no sessionStorage.");
-    }
 
-    fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
-                resposta.reverse();
-
-                plotarGrafico(resposta, idUsuario);
+        fetch(`/medidas/ultimasPercentCPU/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); exibirDadosCPU(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
             });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
+         } 
+         
+         function exibirDadosCPU(response) { console.log('Exibindo dados retornados:')
+         for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+           var dado= registro.asd;
+
         }
-    }).catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-}
+        console.log(dado)
+        console.log(response[0])
+
+        var cpuServidores = document.getElementById('cpuServidores');
+    cpuServidores.innerHTML = `${dado}%`;
+        
+    
+    } 
+    
 
 
-function percentRAM(idUsuarioRAM) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
-        console.log(idUsuario);
+    function percentRAM(idUsuarioRAM) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
 
-        document.addEventListener("DOMContentLoaded", function () {
-            obterDadosGrafico(idUsuario);
-        });
-    } else {
-        console.error("ID do usuário não encontrada no sessionStorage.");
-    }
 
-    fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
-                resposta.reverse();
-
-                plotarGrafico(resposta, idUsuario);
+        fetch(`/medidas/ultimasPercentRAM/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); exibirDadosRAM(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
             });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
+         } 
+         
+         function exibirDadosRAM(response) { console.log('Exibindo dados retornados:')
+         for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+           var dadoRAM= registro.ads;
+
         }
-    }).catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-}
+       
+        console.log(response[0])
+
+        var RAMServidores = document.getElementById('ramServidores');
+        RAMServidores.innerHTML = `${dadoRAM}%`;
+        
+    
+    } 
 
 
-function percentDISCO(idUsuarioDISCO) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
-        console.log(idUsuario);
+    
+    function percentDISK(idUsuarioDISK) { 
+    if (sessionStorage.ID_USUARIO) { 
+        let idUsuario = sessionStorage.ID_USUARIO; 
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
+        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
 
-        document.addEventListener("DOMContentLoaded", function () {
-            obterDadosGrafico(idUsuario);
-        });
-    } else {
-        console.error("ID do usuário não encontrada no sessionStorage.");
-    }
 
-    fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-        if (response.ok) {
-            response.json().then(function (resposta) {
-                console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
-                resposta.reverse();
-
-                plotarGrafico(resposta, idUsuario);
+        fetch(`/medidas/ultimasPercentDISK/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) { if (response.ok) { response.json()
+            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+             response.reverse(); exibirDadosDISK(response); }); } else
+              { console.error('Nenhum dado encontrado ou erro na API'); } })
+              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
             });
-        } else {
-            console.error('Nenhum dado encontrado ou erro na API');
+         } 
+         
+         function exibirDadosDISK(response) { console.log('Exibindo dados retornados:')
+         for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+           var dadoRAM= registro.sda;
+
         }
-    }).catch(function (error) {
-        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-    });
-}
+       
+        console.log(response[0])
+
+        var DISKServidores = document.getElementById('discoServidores');
+        DISKServidores.innerHTML = `${dadoRAM}%`;
+        
+    
+    } 
 
 
 
-}
+
+
+
 
 
 

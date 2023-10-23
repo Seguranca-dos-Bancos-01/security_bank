@@ -1,4 +1,64 @@
 var medidaModel = require("../models/medidaModel");
+
+function buscarUltimasMedidasCPU(req, res) {
+    const limite_linhas = 50;
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasCPU(idServidor, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+function buscarUltimasMedidasRAM(req, res) {
+    const limite_linhas = 50;
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasRAM(idServidor, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+function buscarUltimasMedidasDISK(req, res) {
+    const limite_linhas = 50;
+    var idServidor = req.params.idServidor;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasDISK(idServidor, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
 function buscarUltimasMedidas(req, res) {
     const limite_linhas = 50;
     var idServidor = req.params.idServidor;
@@ -80,4 +140,7 @@ module.exports = {
     buscarMedidasEmTempoReal,
     buscarUltimasMedidas2,
     buscarMedidasEmTempoReal2,
+    buscarUltimasMedidasCPU,
+    buscarUltimasMedidasRAM,
+    buscarUltimasMedidasDISK,
 };

@@ -1,5 +1,69 @@
 var database = require("../database/config");
 
+function buscarUltimasMedidasCPU(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select dadosCaptados from registros where fkComponentesReg =1 order by idRegistros desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select dadosCaptados as asd from registros where fkComponentesReg =1 order by idRegistros desc limit 1;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+function buscarUltimasMedidasRAM(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =2 order by idRegistros desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =2 order by idRegistros desc limit 1;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasDISK(idServidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select dadosCaptados as sda from registros where fkComponentesReg =3 order by idRegistros desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select dadosCaptados as sda from registros where fkComponentesReg =3 order by idRegistros desc limit 1;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
 function buscarUltimasMedidas(idServidor, limite_linhas) {
 
     instrucaoSql = ''
@@ -119,5 +183,8 @@ module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoReal,
     buscarUltimasMedidas2,
-    buscarMedidasEmTempoReal2
+    buscarMedidasEmTempoReal2,
+    buscarUltimasMedidasCPU,
+    buscarUltimasMedidasRAM,
+    buscarUltimasMedidasDISK,
 }
