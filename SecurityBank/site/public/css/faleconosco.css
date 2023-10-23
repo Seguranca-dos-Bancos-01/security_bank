@@ -623,6 +623,7 @@ margin-bottom: 5vh;
         font-size: 2vh;
         position: relative;
        left: 10vh;
+       bottom: 3vh;
        
         }
       
@@ -642,14 +643,12 @@ margin-bottom: 5vh;
             height: 50vh;
             margin-top: 3vh;
             font-size: 2vh;
-           
-            
             
         }
     
         .rodape_redes h2{
           position: relative;
-          right: 30vh;
+          right: 32vh;
           top: 32vh;
     
         }
@@ -658,7 +657,7 @@ margin-bottom: 5vh;
             font-size: 2vh;
             margin-top: 3vh;
             position: relative;
-            right: 30vh;
+            right: 32vh;
             color:  #ffffffaf;
             top: 32vh;
         }
