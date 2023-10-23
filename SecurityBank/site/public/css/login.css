@@ -284,8 +284,7 @@ form {
       height: 50vh;
       margin-top: 3vh;
       font-size: 2vh;
-      position: relative;
-      left: 10vh;
+     
   }
 
   .rodape_redes h3{
@@ -315,7 +314,7 @@ form {
 }
 
 .logo {
-    width: 20vh;
+    width: 40vh;
     height: fit-content;
     margin-left: 1rem;
   
@@ -426,7 +425,6 @@ form {
    }
 
   
-
    .rodape{
     width: 100%;
     height: 100vh;
@@ -461,6 +459,7 @@ form {
   .rodape_contato h3{
     margin-top: 1vh;
     font-size: 2vh;
+    color:  #ffffffaf;
   }
   
   .rodape_contato h4{
@@ -487,7 +486,7 @@ form {
   
   .rodape_links a {
     text-decoration: none;
-    color: white;
+    color:  #ffffffaf;
   }
   
     .rodape_redes{
@@ -496,23 +495,22 @@ form {
         height: 50vh;
         margin-top: 3vh;
         font-size: 2vh;
-        position: relative;
-        top: 30vh;
-        
         
     }
 
     .rodape_redes h2{
       position: relative;
-      right: 35vh;
-
+      right: 30vh;
+      top: 30vh;
     }
   
     .rodape_redes h3{
         font-size: 2vh;
         margin-top: 3vh;
         position: relative;
-        right: 35vh;
+        right: 30vh;
+        color:  #ffffffaf;
+        top: 30vh;
     }
    
     .rodape_direitos{
@@ -536,5 +534,4 @@ form {
     top: 14rem;
     display: none;
 }  
-  
 }
