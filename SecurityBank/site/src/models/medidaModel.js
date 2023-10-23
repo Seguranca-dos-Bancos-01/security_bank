@@ -168,24 +168,6 @@ function buscarUltimasMedidasServidorEmergencia(idServidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarUltimasMedidasServidorEmergencia(idServidor, limite_linhas) {
-
-    instrucaoSql = ''
-
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select email as mail, fkEscalonamento as Esca from funcionarios  where fkBanco =1;
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select email as mail, fkEscalonamento as Esca from funcionarios  where fkBanco =1;
-    `;
-    } else {
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
-    }
-
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql);
-}
 
 
 
@@ -318,5 +300,5 @@ module.exports = {
     buscarUltimasMedidas24h,
     buscarUltimasMedidasInstaveis,
     buscarUltimasMedidasUltimoAlerta,
-    buscarUltimasMedidasServidorEmergencia
+    buscarUltimasMedidasServidorEmergencia,
 }
