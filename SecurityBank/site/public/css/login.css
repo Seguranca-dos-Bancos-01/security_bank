@@ -314,9 +314,10 @@ form {
 }
 
 .logo {
-    width: 40vh;
+    width: 60vh;
     height: fit-content;
     margin-left: 1rem;
+
   
 }
   .LoginTittle{
@@ -346,7 +347,7 @@ form {
        border-radius: 1.5rem;
        box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514);
        border: #8473db90 0.1rem solid;
-       margin-top: 10vh;
+       margin-top: 13vh;
        z-index: 2;
        text-align: center;
    }
