@@ -206,7 +206,7 @@
                             <a id="MostrarEmail"class="emailControle">0000</a>
                             <span id="MostrarNivel" class="nivelAcesso">0</span>
                             
-                            <button onclick="EditarAcesso(i)">Editar</button><button onclick="ExcluirConta()">Excluir</button>
+                            <button onclick="EditarAcesso(i)">Editar</button><button onclick="ExcluirConta(i)">Excluir</button>
                             <div class="imgsContas">
                                 <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
                                 <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
@@ -276,7 +276,7 @@ console.log(vetorNivel)
         <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}</a>
         <span id="MostrarNivel${i}" class="nivelAcesso">${vetorNivel[i]}</span>
         <input id="novoValor${i}" type="text">
-        <button onclick="editarAcesso(${i})">Editar</button><button>Excluir</button>
+        <button onclick="editarAcesso(${i})">Editar</button><button onclick="excluirConta(${i})">Excluir</button>
         <div class="imgsContas">
             <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
             <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
@@ -356,7 +356,71 @@ var email = vetorEmail[i]
 
 
 }
-    
+function excluirConta(i) {
+    if (i > -1) {
+        var email = vetorEmail[i];
+        var nivel = vetorNivel[i]
+        fetch("/usuarios/excluirConta", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                Nivel:nivel,
+                Email: email,
+                
+            }),
+        })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                // Removendo os valores do vetor
+                vetorNivel.splice(i, 1);
+                vetorEmail.splice(i, 1);
+                // Atualizando a lista
+                atualizarLista();
+            } else {
+                throw new Error("Erro ao excluir a conta.");
+            }
+        })
+        .catch(function (erro) {
+            console.error("Houve um erro ao tentar excluir a conta:", erro);
+        });
+    }
+}
+
+function atualizarLista() {
+    var dadosMostrar = document.getElementById('colocar');
+    dadosMostrar.innerHTML = '';
+
+    for (var i = 0; i < vetorNivel.length; i++) {
+        var elemento = document.createElement('div');
+        elemento.classList.add('dadosUsuarios');
+        var conteudo = `
+            <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}</a>
+            <span id="MostrarNivel${i}" class="nivelAcesso">${vetorNivel[i]}</span>
+            <input id="novoValor${i}" type="text">
+            <button onclick="editarAcesso(${i})">Editar</button><button onclick="excluirConta(${i})">Excluir</button>
+            <div class="imgsContas">
+                <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
+                <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
+            </div>
+        `;
+        elemento.innerHTML = conteudo;
+        dadosMostrar.appendChild(elemento);
+
+        if (i !== vetorNivel.length - 1) {
+            var linhaEspacamento = document.createElement('div');
+            linhaEspacamento.classList.add('linhaEspacamento');
+            linhaEspacamento.innerHTML = '<span></span>';
+            dadosMostrar.appendChild(linhaEspacamento);
+        }
+    }
+}
+
+
+
+
+
     
   
 

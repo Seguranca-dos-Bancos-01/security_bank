@@ -24,4 +24,8 @@ router.post("/atualizarAcesso", function (req, res) {
     usuarioController.atualizarNivelAcesso(req, res);
 });
 
+router.post("/excluirConta", function (req, res) {
+    usuarioController.excluirConta(req, res);
+});
+
 module.exports = router;

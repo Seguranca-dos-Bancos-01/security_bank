@@ -70,11 +70,27 @@ function atualizarNivelAcesso(NovoNivel, Email) {
     return database.executar(instrucao);
 }
 
+
+function excluirConta(NovoNivel, Email) {
+    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", NovoNivel, Email);
+    
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    DELETE FROM funcionarios
+WHERE email = '${Email}' AND fkEscalonamento = ${NovoNivel};
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
 module.exports = {
     autenticar,
     cadastrar, 
     atualizarPerfil,
     cadastrarServidor,
     atualizarNivelAcesso,
+    excluirConta,
 
 };
