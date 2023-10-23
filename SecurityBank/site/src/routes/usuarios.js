@@ -24,5 +24,4 @@ router.post("/atualizarAcesso", function (req, res) {
     usuarioController.atualizarNivelAcesso(req, res);
 });
 
-
 module.exports = router;

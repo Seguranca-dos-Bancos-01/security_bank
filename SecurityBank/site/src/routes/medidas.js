@@ -30,8 +30,9 @@ router.get("/ServerEmergencia/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasServidorEmergencia(req, res);
 });
 router.get("/SelectContas/:idUsuario", function (req, res) {
-    medidaController.buscarUltimasMedidasServidorEmergencia(req, res);
+    medidaController.buscarUltimasMedidasSelectContas(req, res);
 });
+
 
 
 

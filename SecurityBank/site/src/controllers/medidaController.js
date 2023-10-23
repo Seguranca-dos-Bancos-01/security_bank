@@ -148,6 +148,8 @@ function buscarUltimasMedidasServidorEmergencia(req, res) {
     });
 }
 
+
+
 function buscarUltimasMedidasSelectContas(req, res) {
     const limite_linhas = 50;
     var idServidor = req.params.idServidor;
@@ -166,8 +168,6 @@ function buscarUltimasMedidasSelectContas(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
-
-
 
 
 
@@ -262,6 +262,6 @@ module.exports = {
     buscarUltimasMedidasInstaveis,
     buscarUltimasMedidasUltimoAlerta,
     buscarUltimasMedidasServidorEmergencia,
-    buscarUltimasMedidasSelectContas,
+    buscarUltimasMedidasSelectContas
 
 };

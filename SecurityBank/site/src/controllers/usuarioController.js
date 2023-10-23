@@ -199,6 +199,8 @@ function atualizarPerfil(req, res) {
     }
 }
 
+
+
 function atualizarNivelAcesso(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nivelAcesso = req.body.NovoNivel;
