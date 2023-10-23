@@ -545,7 +545,7 @@ canvas {
   background-color: white;
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   border-radius: 20px;
 
@@ -554,7 +554,7 @@ canvas {
 
 .tituloVisaoGeral {
   align-self: flex-start;
-  margin: 20px 20px;
+  margin: 20px 20px 0px 20px; 
   color: black;
   font-weight: 600;
 }

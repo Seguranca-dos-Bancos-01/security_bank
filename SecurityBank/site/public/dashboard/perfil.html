@@ -154,7 +154,7 @@
             <div class="blocoInformacoes">
                 <div class="blocoHeaderPerfil">
                     <h2 class="subtituloPerfil">Dados Cadastrados</h2>
-                    <div id="botoesEdicao"><button class="imgEditarPerfil" onclick="editarPerfil()"><img src="../public/assets/imgs/editarAdm.png" alt=""></button></div>
+                    <div id="botoesEdicao"><button class="imgEditarPerfil" onclick="editarPerfil()"><img src="../assets/imgs/editarAdm.png" alt=""></button></div>
                 </div>
 
                 <span class="camposPerfil">Nome Completo</span><br>
@@ -222,7 +222,7 @@
     
 
     function editarPerfil() {
-        botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="salvarPerfil()"><img src="../public/assets/imgs/salvarConta (2).png" alt=""></button'
+        botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="salvarPerfil()"><img src="../assets/imgs/salvarConta (2).png" alt=""></button'
         document.querySelector("#nomeFuncionario").disabled = false;
         document.querySelector("#cpfFuncionario").disabled = false;
         document.querySelector("#telefoneFuncionario").disabled = false;
@@ -231,7 +231,7 @@
     }
 
     function salvarPerfil() {
-        botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="editarPerfil()"><img src="../public/assets/imgs/editarAdm.png" alt=""></button>'
+        botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="editarPerfil()"><img src="../assets/imgs/editarAdm.png" alt=""></button>'
         document.querySelector("#nomeFuncionario").disabled = true;
         document.querySelector("#cpfFuncionario").disabled = true;
         document.querySelector("#telefoneFuncionario").disabled = true;
