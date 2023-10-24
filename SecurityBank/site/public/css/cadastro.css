@@ -1,3 +1,205 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
+
+* {
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+body {
+    margin: 0;
+    font-family: 'Inter', sans-serif;
+    text-decoration: none;
+}
+
+header a{
+    display: inline-block;
+    position: relative;
+    color: #6953D3;
+    cursor: pointer;
+    transition: 0.4s all ease;
+}
+
+header a:hover{
+    color: #6953D3;
+    transition: 0.4s all ease;
+}
+header a::after{
+    content: '';
+    position: absolute;
+    width: 100%;
+    transform: scaleX(0);
+    height: 2px;
+    bottom: -5px;
+    left: 0;
+    background-color: #6953D3;
+    transform-origin: bottom right;
+    transition: transform 0.5s ease-out;
+}
+header a:hover::after{
+    transform: scaleX(1);
+    transform-origin: bottom left;
+}
+
+.fundoRoxo {
+    width: 100%;
+    height: 10vh;
+   background-color: #6953D3;
+    background-size: cover;
+}
+
+.fundo {
+    width: 100%;
+    height: 100vh;
+    background-color: whitesmoke;
+}
+
+/* NAVBAR */
+
+.nav {
+    max-width: 1280px;
+    height: 20vh;
+    margin-inline: auto;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    list-style: none;
+}
+
+.logo {
+    width: 20vw;
+    height: fit-content;
+}
+
+.nav-list {
+    display: flex;
+    gap: 2rem;
+}
+
+.nav-list a {
+    font-size: 18px;
+    color: black;
+    padding-block: 16px;
+    text-decoration: none;
+}
+
+.hamburger {
+    display: none;
+    border: none;
+    background: none;
+    border-top: 3px solid black;
+    cursor: pointer;
+}
+
+.hamburger::before,
+.hamburger::after {
+    content: "";
+    display: block;
+    width: 30px;
+    height: 3px;
+    background-color: black;
+    margin-top: 5px;
+    border-radius: 1rem;
+    position: relative;
+    transition: 0.5s;
+}
+
+.user {
+    display: flex;
+    width: 13vw;
+    height: 10vh;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.nav-button {
+    background: none;
+    border-radius: 9vh;
+    color: #8473db;
+    cursor: pointer;
+    font-weight: 600;
+    line-height: 2vh;
+    padding: 0.6rem;
+    width: 5rem;
+    border: 2px solid #8473db;
+    position: relative;
+    bottom: 0.2rem;
+    cursor: pointer;
+    transition: 0.5s;
+  
+}
+
+.nav-button:hover {
+    background-color: #8473db;
+    color: white;
+    
+}
+
+.cadastroMobile {
+    display: none;
+}
+
+.nav .nav-list a:hover {
+    color: #8473db;
+    transition: 0.3s;
+}
+
+.footer {   
+    width: 100%;   
+    color: #fff;    
+}
+
+.container_footer {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    flex-direction: center;
+    width: 100%;
+    margin-top: 10vh;
+}
+
+
+.direitos {
+    font-size: 12px;
+    font-weight: 800;
+    color: black;
+    text-shadow: 3px 2px 3px rgb(93, 93, 93);
+    position: relative;
+    top: 1rem;
+}
+
+.logo_footer_cadastro {
+    width: 33vh;
+    height: 8vh;
+    margin-top: 10vh;
+    position: relative;
+    left: 1rem;
+}
+
+.linha {
+    height: 1px;
+    width: 100%;
+    background-color: black;
+    margin-top: 4vh;
+}
+
+.logotext {
+    margin-top: 1vh;
+    text-align: center;
+    font-size: 12px;
+    width: 100%;
+    color: black;
+}
+
+.btn-baixo{
+    display: flex;
+    
+}
+
+
+
 body {
   margin: 0%;
   padding: 0%;
@@ -29,7 +231,7 @@ h2{
   box-shadow: 0.1rem 0px 1rem 0.1rem rgba(0, 0, 0, 0.514); 
   border: #8473db90 0.1rem solid;   
   position: relative;
-  top: 45vh;
+  top: 55vh;
 
   z-index: 2;  
   text-align: center;
@@ -215,7 +417,8 @@ color: #8573DB;
   justify-content: start;
   color: white;
   font-size: 2vh;
-  margin-top: 3vh;
+ position: relative;
+top: 5vh;
 }
 
 .rodape_contato h1{
@@ -253,6 +456,7 @@ color: #8573DB;
   margin-top: 3vh;
   position: relative;
   left: 10vh;
+  top: 3vh;
   }
 
   .rodape_links h2 {
@@ -278,6 +482,7 @@ color: #8573DB;
       color: white;
       font-size: 2vh;
       position: relative;
+      top: 3vh;
     
   }
   .rodape_redes h2 {
@@ -318,6 +523,33 @@ color: #8573DB;
 
 @media screen and (max-width: 800px){
 
+  
+.nav-button {
+  background: none;
+  border-radius: 9vh;
+  color: #8473db;
+  cursor: pointer;
+  font-weight: 600;
+  line-height: 2vh;
+  padding: 0.6rem;
+  width: 5rem;
+  border: 2px solid #8473db;
+  position: relative;
+  bottom: 0.2rem;
+  cursor: pointer;
+  transition: 0.5s;
+display: none;
+}
+
+
+  
+.fundoRoxo {
+  width: 104%;
+  height: 10vh;
+ background-color: #6953D3;
+  background-size: cover;
+}
+
 
 .header {
   width: 85%;
@@ -328,8 +560,89 @@ color: #8573DB;
 .logo {
   width: 50vw;
   height: fit-content;
+  position: relative;
+  top: 27vh;
 
 }
+
+.hamburger {
+  display: block;
+    z-index: 5;
+    position: relative;
+    left: 40vh;
+    bottom: 10vh;
+}
+
+
+.nav-list {
+  position: fixed;
+  left: 0;
+  width: 100vw;
+  height: 45vh;
+  background: #8473db;
+  clip-path: circle(30px at 90% -15%);
+  transition: 1s ease-out;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  gap: 0;
+  pointer-events: none;
+  z-index: 3;
+  border-radius: 0 0 2rem 2rem;
+  position: relative;
+  bottom: 6vh;
+
+
+}
+
+
+.nav-list a {
+  font-size: 1.5rem;
+  opacity: 0;
+}
+
+.nav-list li:nth-child(1) a {
+  transition: 0.5s 0.2s;
+}
+
+.nav-list li:nth-child(2) a {
+  transition: 0.5s 0.4s;
+}
+
+.nav-list li:nth-child(3) a {
+  transition: 0.5s 0.6s;
+}
+
+.nav-list li:nth-child(4) a {
+  transition: 0.5s 0.8s;
+}
+
+/* estilos active */
+.nav.active .nav-list {
+  clip-path: circle(2500px at 90% 15%);
+  pointer-events: all;
+}
+
+.nav.active .nav-list a {
+  opacity: 1;
+}
+
+.nav.active .hamburger {
+  position: relative;
+  top: 26px;
+  right: 10px;
+  border-top-color: transparent;
+}
+
+.nav.active .hamburger::before {
+  transform: rotate(135deg);
+}
+  
+.nav.active .hamburger::after {
+  transform: rotate(-135deg);
+  top: -7px;
+  
+}   
 
 
   /* Início Cadastro */
@@ -436,7 +749,7 @@ display: none;
 }
 
 .rodape{
-  width: 100%;
+  width: 104%;
   height: 60vh;
   background-color: #000F53;
   display: flex;
@@ -444,8 +757,6 @@ display: none;
   justify-content: space-evenly;
   color: white;
   align-items: center;
-  position: relative;
-  margin-top: 20vh;
 }
 
 .rodape_contato{
@@ -511,7 +822,7 @@ margin-top: 2vh;
 
   .rodape_redes h1{
     position: relative;
-
+     top: 20vh;
   }
 
   .rodape_redes h3{
@@ -531,6 +842,7 @@ margin-top: 2vh;
       color: white;
       font-size: 2vh;
       position: relative;
+      width: 104%;
 
    } 
 /* Fim Cadastro */
