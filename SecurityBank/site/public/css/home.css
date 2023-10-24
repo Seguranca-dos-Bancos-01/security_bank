@@ -184,13 +184,14 @@ aside .nav-button {
     margin-left: 2.25vh;
     align-items: center;
     margin-top: 0.5vh;
- 
+    position: relative;
+   
 }
 
 .TxtIndidualPlanoBasico h4 {
     margin-left: -2vh;
-    margin-top: 1vh;
-
+   margin-bottom: 1vh;
+   
 }
 
 
@@ -199,13 +200,14 @@ aside .nav-button {
     width: 100%;
     height: 30px;
     margin-left: 5vh;
-    
+    margin-top: 1vh;
 }
 
 .TxtIndidualPlanoX > img{
     width: 4vh;
     height: 4vh;
-    
+    position: relative;
+    bottom: 1vh;
     
 }
 
