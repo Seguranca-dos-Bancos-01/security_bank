@@ -312,11 +312,17 @@ form {
     background: transparent;
     padding-inline: 16px;
 }
-
-.logo {
-    width: 60vh;
-    height: fit-content;
-    margin-left: 1rem;
+  .nav span{
+    width: 30vh;
+    height: 20vh;
+}
+.nav img{
+  width: 20vh;
+}
+  .logo {
+      width: 100vh;
+    /* height: fit-content; */
+    /* margin-left: 1rem; */
 
   
 }

@@ -102,13 +102,13 @@ aside .nav-button {
     width: 50rem;
     border: none;
 }
-/* 
-/* .center-vertical {
+ 
+.center-vertical {
     display: flex;
     align-items: center;
     justify-content: center;
     height: 100vh;
-} */ */
+} 
 
 /* .linha-divisoria {
     position: absolute;
@@ -120,7 +120,7 @@ aside .nav-button {
     z-index: 1;
 } */
 
-
+.center
 
 .Nossos-DiferenciaisA {
     background: url(../assets/ONDASSS.png);
@@ -129,6 +129,14 @@ aside .nav-button {
     padding: 15vh;
     padding-top: 10vh;
    
+}
+.imagemDiferenciais{
+    background: url(../assets/ondas.png); 
+    width: 100%; 
+    height: 140vh; 
+    background-size: cover;
+    position: relative;
+    bottom: 11vh;
 }
 
 .plano_roxo {
@@ -155,9 +163,8 @@ aside .nav-button {
    text-align: center;
    padding-top: 7vh;
    margin-top: 20vh; 
+   right: 45vh;
  position: relative;
- left: 20vh;
- 
  
 }
 
@@ -234,8 +241,8 @@ aside .nav-button {
     text-align: center;
    padding-top: 3vh;
    position: relative;
-  left: 130vh;
-  bottom: 85vh;
+   top: 15vh;
+   right: 10vh;
 } 
 
 
@@ -859,4 +866,16 @@ width: 40%;
 }
 .botoes button{
     margin: 1vh;
+}
+.escolha{
+    position: relative;
+    top: 10vh;
+    margin-left: 100px;
+    margin-bottom: 400vh;
+}
+.center-horizontal{
+    padding-bottom: 30vh;
+}
+.center-horizontal h1{
+    margin-bottom: 30vh;
 }
