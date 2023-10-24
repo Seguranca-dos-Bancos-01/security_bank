@@ -113,12 +113,12 @@
 }
 
 .dash {
-  width: 84.85%;
+  width: 84.86%;
   height: 100%;
   background-color: #FAFBFF;
   height: 100vh;
   overflow: auto;
-  padding-left: 230px;
+  padding-left: 229px;
 }
 
 .regua {
@@ -275,8 +275,8 @@ canvas {
 }
 
 .rodapeDash{
-  width: 89.8%;
-  height: 100%;
+  width: 100%;
+  height: 50v h;
   background-color: #000F53;
   display: flex;
   flex-direction: column;
@@ -284,7 +284,6 @@ canvas {
   justify-content: space-evenly;
   color: #ffffff;
   align-items: center;
-  padding-left: 150px;
 }
 .itens{
   display: flex;
@@ -428,6 +427,7 @@ canvas {
 }
 .graficos{
   display: flex;
+  margin-bottom: 10vh;
 }
 .grafico{
   background-color: #6953D31A;

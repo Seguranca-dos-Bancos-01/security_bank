@@ -130,6 +130,10 @@ aside .nav-button {
     padding-top: 10vh;
    
 }
+.Nossos-DiferenciaisA h1{
+    position: relative;
+    left: 10vh;
+}
 .imagemDiferenciais{
     background: url(../assets/ondas.png); 
     width: 100%; 

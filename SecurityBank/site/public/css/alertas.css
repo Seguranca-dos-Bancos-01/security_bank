@@ -113,7 +113,7 @@
 }
 
 .dash {
-  width: 89.85%;
+  /* width: 89.85%; */
   height: 100%;
   background-color: #FAFBFF;
   height: 100vh;
@@ -280,7 +280,7 @@ canvas {
 }
 
 .rodapeDash{
-  width: 89.8%;
+  width: 90.1%;
   height: 100%;
   background-color: #000F53;
   display: flex;

@@ -7,7 +7,37 @@
  flex-direction: column;
  align-items: center;
 }
-
+.rodapeDash{
+    width: 179.4vh;
+    height: 30vh;
+    background-color: #000F53;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+    color: #ffffff;
+    align-items: center;
+  }
+  .itens{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 100%;
+  }
+  .blocos span{
+    color: #ffffff;
+  }
+  .tipos{
+      display: flex;
+      justify-content: space-around;
+  }
+  .tipo {
+      font-size: 22px;
+      color: #000F53;
+  }
+  .direitos{
+    padding-bottom: 20px;
+  }
 .boxAdicionarServico {
     background-color: #f08080;
     height: 12vh;
@@ -176,7 +206,7 @@ width: 45px;
 }
 
 .dashGerenciar {
-    width: 84.85%;
+    width: 85%;
     background-color: #FAFBFF;
     height: 100vh;
     overflow: auto;
