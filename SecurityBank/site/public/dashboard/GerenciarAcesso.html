@@ -300,8 +300,8 @@ console.log(vetorNivel)
     var conteudo = `
         <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}</a>
         <span id="MostrarNivel${i}" class="nivelAcesso">${vetorNivel[i]}</span>
-        <input id="novoValor${i}" type="text">
         <div class="edicaoGerenciamentoContas">
+         <input class="inputContas" id="novoValor${i}" type="text">
         <button class="botaoEditarAcesso" onclick="editarAcesso(${i})">Editar</button>
         <button class="botaoEditarAcesso" onclick="excluirConta(${i})">Excluir</button>
         </div> 
@@ -426,13 +426,15 @@ function atualizarLista() {
         var conteudo = `
             <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}</a>
             <span id="MostrarNivel${i}" class="nivelAcesso">${vetorNivel[i]}</span>
-            <input id="novoValor${i}" type="text">
-            <button onclick="editarAcesso(${i})">Editar</button><button onclick="excluirConta(${i})">Excluir</button>
-            <div class="imgsContas">
-                <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
-                <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
+            <div class="edicaoGerenciamentoContas">
+            <input class="inputContas" id="novoValor${i}" type="text">
+            <button class="botaoEditarAcesso" onclick="editarAcesso(${i})">Editar</button>
+            <button class="botaoEditarAcesso" onclick="excluirConta(${i})">Excluir</button>
             </div>
         `;
+        // <div class="imgsContas">
+        //         <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
+        //         <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
         elemento.innerHTML = conteudo;
         dadosMostrar.appendChild(elemento);
 

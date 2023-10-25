@@ -416,6 +416,9 @@ canvas {
     padding-left: 10px;
     font-weight: 600;
 }
+.USBs span{
+  padding-left: 10px;
+}
 .blocoGraficos{
     margin-top: 10px;
     margin-left: 50px;
@@ -456,4 +459,62 @@ canvas {
   margin-left: 10px;
   color: #ACACAC;
   font-weight: 500;
+}
+
+.barrasMae {
+  width: 100%;
+  height: fit-content;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
+
+.barraCPUuso {
+  height: 5vh;
+  width: 80%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 12px 0;
+}
+
+.barraCPUuso span {
+  color: #000F53;
+  margin: 0 10px;
+}
+
+.barraCinza {
+  height: 4vh;
+  width: 80%;
+  background-color: #6953D31A;
+  border-radius: 20px;
+}
+
+.barracoloridaCPU {
+  height: 100%;
+  width: 30%;
+  background-color: #F79042;
+  border-radius: 20px;
+}
+
+.barracoloridaRAM {
+  height: 100%;
+  width: 70%;
+  background-color: #FF847F;
+  border-radius: 20px;
+}
+
+.barracoloridaDisco {
+  height: 100%;
+  width: 20%;
+  background-color: #8ac62f;
+  border-radius: 20px;
+}
+
+.barracoloridaRede {
+  height: 100%;
+  width: 100%;
+  background-color: #8ac62f;
+  border-radius: 20px;
 }
