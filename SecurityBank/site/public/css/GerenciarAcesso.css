@@ -57,7 +57,7 @@
 }
 .fundoContas{
     background-color: #ffffff;
-    height: 60vh;
+    height: fit-content;
     width: 90%;
     border-radius: 20px;
     margin: 30px 0;
@@ -80,9 +80,10 @@
 
 .dadosUsuarios{
     display: flex;
-    justify-content: space-evenly;
+    justify-content: space-around;
     width: 100%;
     margin-top: 20px;
+    padding-left: 50px;
 }
 
 /* .edicaoGerenciamentoContas {
@@ -211,4 +212,8 @@ width: 45px;
     height: 100vh;
     overflow: auto;
     padding-left: 230px;
+}
+
+.inputContas {
+    width: 50px;
 }
