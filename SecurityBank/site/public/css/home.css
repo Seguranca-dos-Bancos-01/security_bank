@@ -132,7 +132,8 @@ aside .nav-button {
 }
 .Nossos-DiferenciaisA h1{
     position: relative;
-    left: 10vh;
+    top: 10vh;
+    margin-left: 80vh;
 }
 .imagemDiferenciais{
     background: url(../assets/ondas.png); 
@@ -216,9 +217,9 @@ aside .nav-button {
 }
 
 
-.TxtIndidualPlano > h4 {
+/* .TxtIndidualPlano > h4 {
     
-}
+} */
 
 
 .TxtIndidualPlano > img{
@@ -745,7 +746,7 @@ aside .nav-button {
 
     .rodape_redes{
         margin-top: 3vh;
-        width: 50vh;
+        /* width: 50vh; */
         height: 50vh;
         margin-top: 3vh;
         font-size: 2vh;
@@ -858,8 +859,8 @@ width: 40%;
 
 }
 .nossa-equipe h2{
-    width: 100vh;
-    margin-left:50vh;
+    /* width: 100vh;
+    margin-left:50vh; */
     text-align: center;
     margin-top: 5vh;
     font-size: 5vh;
