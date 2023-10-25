@@ -1,21 +1,24 @@
-from mysql.connector import connect
+import mysql.connector 
 import psutil
 import time
 from datetime import datetime
 import platform
 import subprocess
 import re
+import pymysql
+import wmi
 
-def mysql_connection(host, user, passwd, database=None):
-    connection = connect(
-        host=host,
-        user=user,
-        passwd=passwd,
-        database=database
-    )
-    return connection
+#def mysql_connection(host, user, passwd, database=None):
+ #   connection = connect(
+  #      host=host,
+   #     user=user,
+    #    passwd=passwd,
+     #   database=database
+    #)
+    #return connection
 
-connection = mysql_connection('localhost', 'root', 'Pedroca12@', 'SecurityBank')
+config ={"user": "root","password":"justin123","host":"localhost","database":"SecurityBank"}
+connection = pymysql.connect(**config)
 
 cursor1 = connection.cursor()
 IDCPU = psutil.cpu_times()  
@@ -84,20 +87,32 @@ for key, value in cpu_info.items():
 
 print("\nInformações da Memória:")
 
-cmd = "/usr/sbin/system_profiler SPMemoryDataType | grep 'Serial Number' | awk '{print $3}'"
-result = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
-serial_numbers = result.stdout.strip().split('\n')
+#cmd = "/usr/sbin/system_profiler SPMemoryDataType | grep 'Serial Number' | awk '{print $3}'"
+c = wmi.WMI()
+#result = subprocess.run(cmd, shell=True, check=True, capture_output=True, text=True)
+#serial_numbers = result.stdout.strip().split('\n')
 nomeMemoria = None
 # Mostra os números de série dos módulos de memória RAM
 print("Números de Série dos Módulos de Memória RAM:")
-for i, serial_number in enumerate(serial_numbers, start=1):
-    print(f"Módulo {i}: {serial_number}")
-    if i == 1:  # Verifica se é a primeira volta do loop
-        nomeMemoria = serial_number
-    print(nomeMemoria)
+#for i, serial_number in enumerate(serial_numbers, start=1):
+  #  print(f"Módulo {i}: {serial_number}")
+   # if i == 1:  # Verifica se é a primeira volta do loop
+   #     nomeMemoria = serial_number
+   # print(nomeMemoria)
 #for key, value in mem_info.items():
  #   print(f"{key}: {value}")
+#----------------------------------
 
+memory_modules = c.Win32_PhysicalMemory()
+memoria_info = []
+
+for i, memory in enumerate(memory_modules, start=1):
+    serial_number = memory.SerialNumber
+    memoria_info.append(f"Módulo {i}: Número de Série: {serial_number}")
+    if i == 1:
+        nomeMemoria = memory.SerialNumber
+        print(nomeMemoria)
+#------------------------------------
 
 partitions = psutil.disk_partitions()
 first_device_name = None
@@ -141,7 +156,7 @@ mycursor1Comp.execute(queryC1, valuesC1)
 connection.commit()
 
 queryC2 = "INSERT INTO componentes(nome, modelo, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp) VALUES (%s, 'RAM', %s, %s, %s, %s)"
-valuesC2 = (nomeMemoria, fkServidor, fkBanco, fkEspec, fkPlano)
+valuesC2 = ("Ram", fkServidor, fkBanco, fkEspec, fkPlano)
 mycursor2Comp.execute(queryC2, valuesC2)
 connection.commit()
 
@@ -169,7 +184,7 @@ result1 = mycursor1CompS.fetchall()
 id_componente_vetor1 = [x[0] for x in result1]
 idCPU = id_componente_vetor1[0]
 
-mycursor2CompS.execute("SELECT idComponentes FROM componentes WHERE nome = %s", (nomeMemoria,))
+mycursor2CompS.execute("SELECT idComponentes FROM componentes WHERE nome = %s", ("Ram",))
 result2 = mycursor2CompS.fetchall()
 id_componente_vetor2 = [x[0] for x in result2]
 idMemoria = id_componente_vetor2[0]

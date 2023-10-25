@@ -25,11 +25,11 @@ function buscarUltimasMedidasRAM(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =2 and fkBancoReg = 1 order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =38 and fkBancoReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =2 and fkBancoReg = 1 order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg =38 and fkBancoReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else {
@@ -204,7 +204,7 @@ function buscarUltimasMedidas(idUsuario, limite_linhas) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 38 and fkBancoReg = 1) AS RAM,
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
     FROM registros 
@@ -216,7 +216,7 @@ function buscarUltimasMedidas(idUsuario, limite_linhas) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 38 and fkBancoReg = 1) AS RAM,
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
     FROM registros 
@@ -241,7 +241,7 @@ function buscarMedidasEmTempoReal(idUsuario) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 38 and fkBancoReg = 1) AS RAM,
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
     FROM registros 
@@ -253,7 +253,7 @@ function buscarMedidasEmTempoReal(idUsuario) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 38 and fkBancoReg = 1) AS RAM,
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
     FROM registros 
@@ -546,7 +546,7 @@ function buscarUltimasMedidasServidores4(idUsuario, limite_linhas) {
         instrucaoSql = `
         SELECT
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 38 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
@@ -560,7 +560,7 @@ function buscarUltimasMedidasServidores4(idUsuario, limite_linhas) {
         instrucaoSql = `
         SELECT
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 38 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
@@ -587,7 +587,7 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
         instrucaoSql = `
         SELECT
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 38 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
@@ -602,7 +602,7 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
         instrucaoSql = `
         SELECT
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
+        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 38 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
