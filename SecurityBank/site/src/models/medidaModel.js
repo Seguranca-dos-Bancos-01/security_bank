@@ -202,28 +202,29 @@ function buscarUltimasMedidas(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 38 and fkBancoReg = 1) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
-        dataHorario AS horario
-    FROM registros 
-    JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE fkComponentesReg = 1
-    LIMIT 0, 50;
+        instrucaoSql = `
+        SELECT 
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
+    dataHorario AS horario
+FROM registros
+JOIN Componentes ON fkComponentesReg = idComponentes
+WHERE fkBancoReg = 1
+LIMIT 0, 50;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT
+        instrucaoSql = `
+        SELECT 
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 38 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
-    FROM registros 
+    FROM registros
     JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE fkComponentesReg = 1
+    WHERE fkBancoReg = 1
     LIMIT 0, 50;
-    
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -239,27 +240,29 @@ function buscarMedidasEmTempoReal(idUsuario) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT
+        instrucaoSql = `
+        SELECT 
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 38 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
         dataHorario AS horario
-    FROM registros 
+    FROM registros
     JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE fkComponentesReg = 1
+    WHERE fkBancoReg = 1
     LIMIT 0, 50;
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 38 and fkBancoReg = 1) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
-        dataHorario AS horario
-    FROM registros 
-    JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE fkComponentesReg = 1
-    LIMIT 0, 50;
+        instrucaoSql = `
+        SELECT 
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
+    dataHorario AS horario
+FROM registros
+JOIN Componentes ON fkComponentesReg = idComponentes
+WHERE fkBancoReg = 1
+LIMIT 0, 50;
     
     `;
     } else {
