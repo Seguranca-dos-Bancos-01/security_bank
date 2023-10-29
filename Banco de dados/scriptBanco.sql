@@ -1,7 +1,7 @@
 CREATE database SecurityBank;
 USE SecurityBank;
 drop database SecurityBank;
--- 00:39:29	drop database SecurtyBank	Error Code: 1008. Can't drop database 'securtybank'; database doesn't exist	0.00030 sec
+
 
 
 CREATE TABLE planoContratado(
@@ -175,38 +175,47 @@ fkLocacao int,
     FOREIGN KEY (fkComponente) REFERENCES componentes (idComponentes),
 	foreign key (fkMetrica) references metrica(idMetrica)
 );
+-- Inserção na tabela planoContratado
+INSERT INTO planoContratado (tipo) VALUES (1), (2), (3);
 
-INSERT INTO planoContratado(tipo) VALUES (1);
-INSERT INTO planoContratado(tipo) VALUES (2);
+-- Inserção na tabela statusMaquina
+INSERT INTO statusMaquina (nome) VALUES ('Ativo'), ('Inativo'), ('Em manutenção');
 
--- Inserindo dados na tabela statusMaquina
-INSERT INTO statusMaquina(nome) VALUES ('Ativo');
-INSERT INTO statusMaquina(nome) VALUES ('Inativo');
+-- Inserção na tabela localizacaoMatriz
+INSERT INTO localizacaoMatriz (empresa, país) VALUES ('Empresa X', 'Brasil'), ('Empresa Y', 'Estados Unidos'), ('Empresa Z', 'Alemanha');
 
--- Inserindo dados na tabela localizacaoMatriz
-INSERT INTO localizacaoMatriz(empresa, país) VALUES ('Empresa A', 'Brasil');
-INSERT INTO localizacaoMatriz(empresa, país) VALUES ('Empresa B', 'Estados Unidos');
+-- Inserção na tabela especificacoes
+INSERT INTO especificacoes (potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco) VALUES (2.5, 16, 500), (3.0, 32, 1000), (2.0, 8, 250);
 
--- Inserindo dados na tabela especificacoes
-INSERT INTO especificacoes(potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco, dataCompra, dataValidade) VALUES (3.2, 16, 500, '2022-01-01', '2024-01-01');
-INSERT INTO especificacoes(potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco, dataCompra, dataValidade) VALUES (2.5, 8, 250, '2021-06-15', '2023-06-15');
+-- Inserção na tabela locacao
+INSERT INTO locacao (dataCompraLocacao, dateValidade) VALUES ('2023-10-28', '2024-10-28'), ('2023-09-15', '2024-09-15'), ('2023-11-01', '2024-11-01');
 
--- Inserindo dados na tabela banco
-INSERT INTO banco(nomeFantasia, cnpj, razaoSocial, sigla, responsavelLegal) 
-VALUES('bla', '12345678901234','blabla', '1bla', 'pedrao');
+-- Inserção na tabela banco
+INSERT INTO banco (nomeFantasia, cnpj, razaoSocial, sigla, responsavelLegal) VALUES ('Banco A', '12345678901234', 'Empresa A Ltda.', 'BAL', 'Fulano de Tal'), ('Banco B', '98765432109876', 'Empresa B Ltda.', 'BBL', 'Ciclano de Tal'), ('Banco C', '45678901234567', 'Empresa C Ltda.', 'BCL', 'Beltrano de Tal');
 
--- Inserindo dados na tabela escalonamentoFuncionarios
-INSERT INTO escalonamentoFuncionarios(cargo, nívelAcesso) VALUES ('Gerente', 3);
-INSERT INTO escalonamentoFuncionarios(cargo, nívelAcesso) VALUES ('Técnico', 2);
+-- Inserção na tabela escalonamentoFuncionarios
+INSERT INTO escalonamentoFuncionarios (cargo, nívelAcesso) VALUES ('Gerente', 3), ('Analista', 2), ('Assistente', 1);
 
--- Inserindo dados na tabela funcionarios
-INSERT INTO funcionarios(nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('João', 'joao@email.com', '12345678901', '11999999999', '123456', 1, 1);
-INSERT INTO funcionarios(nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('Maria', 'maria@email.com', '98765432101', '11888888888', '654321', 1, 2);
-select*from banco;
--- Inserindo dados na tabela servidor
-INSERT INTO servidor(apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus, fkLocalizacaoMatriz, fkEspecificacoes, fkPlano) 
-VALUES ('teste', 'Linux', 'Fulano', '192.168.0.1', 1, 1, 1, 1, 1);
-INSERT INTO servidor(apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus, fkLocalizacaoMatriz, fkEspecificacoes, fkPlano) VALUES ('Servidor B', 'Windows', 'Beltrano', '192.168.0.2', 1, 2, 2, 2, 2);
+-- Inserção na tabela funcionarios
+INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('João Silva', 'joao.silva@example.com', '12345678901', '9999999999', 'senha123', 1, 1), ('Maria Souza', 'maria.souza@example.com', '98765432109', '8888888888', 'senha456', 2, 2), ('Carlos Santos', 'carlos.santos@example.com', '45678901234', '7777777777', 'senha789', 3, 3);
+
+-- Inserção na tabela servidor
+INSERT INTO servidor (apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus, fkLocalizacaoMatriz, fkEspecificacoes, fkPlano, fkLocacao) VALUES ('Servidor A', 'Linux', 'Fulano de Tal', '192.168.1.1', 1, 1, 1, 1, 1, 1), ('Servidor B', 'Windows', 'Ciclano de Tal', '192.168.1.2', 2, 2, 2, 2, 2, 2), ('Servidor C', 'Unix', 'Beltrano de Tal', '192.168.1.3', 3, 3, 3, 3, 3, 3);
+
+-- Inserção na tabela usb
+INSERT INTO usb (idUSB, nomeDispositivo, qtdPorta, qtdConectada, fkServidorUSB, fkBancoUSB, fkEpescUBS, fkPlanoUBS, fkLocacaoUBS) VALUES (1, 'Dispositivo A', 4, 2, 1, 1, 1, 1, 1), (2, 'Dispositivo B', 6, 3, 2, 2, 2, 2, 2), (3, 'Dispositivo C', 8, 4, 3, 3, 3, 3, 3);
+
+-- Inserção na tabela metrica
+INSERT INTO metrica (estavel, atencao, emergencia, urgencia) VALUES (0.5, 0.7, 0.9, 1.0), (0.6, 0.8, 0.95, 1.0), (0.4, 0.6, 0.85, 1.0);
+
+-- Inserção na tabela componentes
+INSERT INTO componentes (nome, modelo, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp, fkMetrica, fkLocacao) VALUES ('Componente A', 'Modelo 1', 1, 1, 1, 1, 1, 1), ('Componente B', 'Modelo 2', 2, 2, 2, 2, 2, 2), ('Componente C', 'Modelo 3', 3, 3, 3, 3, 3, 3);
+
+-- Inserção na tabela registros
+INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg, fkLocacaoReg, fkMetricaReg) VALUES ('2023-10-29 08:00:00', 50.2, 1, 1, 1, 1, 1, 1, 1), ('2023-10-29 09:00:00', 55.5, 2, 2, 2, 2, 2, 2, 2), ('2023-10-29 10:00:00', 60.1, 3, 3, 3, 3, 3, 3, 3);
+
+-- Inserção na tabela alerta
+INSERT INTO alerta (hora, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkEsoecificacao, fkPlano, fkLocacao) VALUES ('10:30:00', 1, 1, 1, 1, 1, 1, 1, 1), ('11:00:00', 2, 2, 2, 2, 2, 2, 2, 2), ('11:30:00', 3, 3, 3, 3, 3, 3, 3, 3);
 
 -- Consultando os dados inseridos nas tabelas
 SELECT * FROM planoContratado;
