@@ -24,10 +24,13 @@ CREATE TABLE especificacoes(
 idEspecificacoes int primary key auto_increment,
 potenciaMaxCPU double,
 potenciaMaxRAM double,
-potenciaMaxDisco double,
-dataCompra date,
-dataValidade date
+potenciaMaxDisco double
 ) ;
+CREATE TABLE locacao(
+idLocacao int primary key auto_increment,
+dataCompraLocacao DATE,
+dateValidade DATE
+);
 
 CREATE TABLE banco(
 idBanco int primary key auto_increment,
@@ -57,7 +60,7 @@ fkEscalonamento int,
 constraint pkComposta primary key (idFuncionarios, fkBanco , fkEscalonamento),
  foreign key (fkBanco) references banco (idBanco),
  foreign key (fkEscalonamento) references  escalonamentoFuncionarios (idEscalonamento)
-) ;
+);
 
 
 CREATE TABLE servidor(
@@ -71,13 +74,46 @@ fkStatus int,
 fkLocalizacaoMatriz int,
 fkEspecificacoes int,
 fkPlano int,
-constraint pkComposta primary key (idServidor,fkBanco, fkEspecificacoes, fkPlano),
+fkLocacao int, 
+constraint pkComposta primary key (idServidor,fkBanco, fkEspecificacoes, fkPlano, fkLocacao),
  foreign key (fkBanco) references banco (idBanco),
  foreign key (fkStatus) references statusMaquina (idStatus),
  foreign key (fkLocalizacaoMatriz) references LocalizacaoMatriz (idLocalização),
  foreign key (fkEspecificacoes) references especificacoes (idEspecificacoes),
- foreign key (fkPlano) references planoContratado (idPlano)
+ foreign key (fkPlano) references planoContratado (idPlano),
+ foreign key (fkLocacao) references locacao(idLocacao)
 ) ;
+
+
+CREATE TABLE usb (
+idUSB int,
+nomeDispositivo varchar(255),
+qtdPorta int,
+qtdConectada int,
+fkServidorUSB int,
+fkBancoUSB int,
+fkEpescUBS int,
+fkPlanoUBS int,
+fkLocacaoUBS int,
+constraint pkComposta primary key (idSUB, fkServidorUSB, fkBancoUSB, fkEpescUBS, fkPlanoUBS, fkLocacaoUBS ),
+foreign key (fkServidorUSB) references Servidor(idServidor),
+foreign key (fkBancoUSB) references banco(idBanco),
+foreign key(fkEpescUBS) references especificacoes(idEspecificacoes),
+foreign key(fkPlanoUBS) references planoContratado (idPlano),
+foreign key(fkLocacaoUBS) references locacao(idLocacao)
+);
+
+
+
+
+CREATE TABLE metrica(
+idMetrica int primary key auto_increment,
+estavel DOUBLE,
+atencao DOUBLE,
+emergencia DOUBLE,
+urgencia DOUBLE
+);
+
 CREATE TABLE componentes (
     idComponentes INT AUTO_INCREMENT,
     nome VARCHAR(90),
@@ -86,13 +122,17 @@ CREATE TABLE componentes (
     fkBancoComp INT,
     fkEspecificacoesComp INT,
     fkPlanoComp INT,
-    PRIMARY KEY (idComponentes),
+    fkMetrica int,
+    fkLocacao int,
+    PRIMARY KEY (idComponentes, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp, fkMetrica ),
     CONSTRAINT fk_servidor_comp FOREIGN KEY (fkServidorComp) REFERENCES servidor(idServidor),
     CONSTRAINT fk_banco_comp FOREIGN KEY (fkBancoComp) REFERENCES banco(idBanco),
     CONSTRAINT fk_especificacoes_comp FOREIGN KEY (fkEspecificacoesComp) REFERENCES especificacoes(idEspecificacoes),
-    CONSTRAINT fk_plano_comp FOREIGN KEY (fkPlanoComp) REFERENCES planoContratado(idPlano)
+    CONSTRAINT fk_plano_comp FOREIGN KEY (fkPlanoComp) REFERENCES planoContratado(idPlano),
+    constraint fk_locacao_comp FOREIGN KEY (fkLocacao) references locacao(idLocacao),
+    CONSTRAINT fk_metricas_comp FOREIGN KEY(fkMetrica) REFERENCES metrica(idMetrica)
 );
-drop table registros;
+
 CREATE TABLE registros (
     idRegistros INT AUTO_INCREMENT,
     dataHorario DATETIME,
@@ -102,12 +142,38 @@ CREATE TABLE registros (
     fkEspeciReg INT,
     fkPlanoReg INT,
     fkComponentesReg INT,
+    fkLocacaoReg int,
+    fkMetricaReg int,
     PRIMARY KEY (idRegistros, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg),
     FOREIGN KEY (fkServidorReg) REFERENCES servidor (idServidor),
     FOREIGN KEY (fkBancoReg) REFERENCES banco (idBanco),
     FOREIGN KEY (fkEspeciReg) REFERENCES especificacoes (idEspecificacoes),
     FOREIGN KEY (fkPlanoReg) REFERENCES planoContratado(idPlano),
-    FOREIGN KEY (fkComponentesReg) REFERENCES componentes (idComponentes)
+    FOREIGN KEY (fkLocacaoReg) references locacao(idLocacao),
+    FOREIGN KEY (fkComponentesReg) REFERENCES componentes (idComponentes),
+    foreign key (fkMetricaReg) references metrica(idMetrica)
+    
+);
+
+create table alerta(
+idAlertas int primary key auto_increment,
+hora time,
+fkRegistro int,
+fkComponente int,
+fkMetrica int,
+fkServidor int,
+fkBanco int,
+fkEsoecificacao int,
+fkPlano int,
+fkLocacao int,
+	foreign key(fkRegistro) references registro(idRegistro),
+	FOREIGN KEY (fkServidor) REFERENCES servidor (idServidor),
+    FOREIGN KEY (fkBanco) REFERENCES banco (idBanco),
+    FOREIGN KEY (fkEspeci) REFERENCES especificacoes (idEspecificacoes),
+    FOREIGN KEY (fkPlano) REFERENCES planoContratado(idPlano),
+    FOREIGN KEY (fkLocacao) references locacao(idLocacao),
+    FOREIGN KEY (fkComponentes) REFERENCES componentes (idComponentes),
+	foreign key (fkMetrica) references metrica(idMetrica)
 );
 
 INSERT INTO planoContratado(tipo) VALUES (1);
