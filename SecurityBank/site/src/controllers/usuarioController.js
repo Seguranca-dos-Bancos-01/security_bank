@@ -19,24 +19,38 @@ function autenticar(req, res) {
 
                     if (resultadoAutenticar.length == 1) {
                         console.log(resultadoAutenticar);
-
+                    
                         bancoModel.buscarAquariosPorEmpresa(resultadoAutenticar[0])
                             .then((resultadoBanco) => {
                                 if (resultadoBanco.length > 0) {
-                                    res.json({
-                                        idFuncionarios: resultadoAutenticar[0].idFuncionarios,
-                                        email: resultadoAutenticar[0].email,
-                                        nome: resultadoAutenticar[0].nome,
-                                        telefone: resultadoAutenticar[0].telefone,
-                                        senha: resultadoAutenticar[0].senha,
-                                        fkBanco: resultadoAutenticar[0].fkBanco,
-                                        fkEscalonamento: resultadoAutenticar[0].fkEscalonamento,
-                                        banco: resultadoBanco,
-                                        bancoA: resultadoBanco[0].apelido,
-                                        bancoSO: resultadoBanco[0].sistemaOperacional,
-                                        bancoR: resultadoBanco[0].responsavelLegal,
-                                        bancoIP: resultadoBanco[0].enderecoIP
-                                    });
+                                    bancoModel.buscarAquariosPorEmpresa(resultadoBanco[0])
+                                        .then((resultadoServidor) => {
+                                            if (resultadoServidor.length > 0) {
+                                                res.json({
+                                                    idFuncionarios: resultadoAutenticar[0].idFuncionarios,
+                                                    email: resultadoAutenticar[0].email,
+                                                    nome: resultadoAutenticar[0].nome,
+                                                    telefone: resultadoAutenticar[0].telefone,
+                                                    senha: resultadoAutenticar[0].senha,
+                                                    fkBanco: resultadoAutenticar[0].fkBanco,
+                                                    fkEscalonamento: resultadoAutenticar[0].fkEscalonamento,
+                                                    banco: resultadoBanco,
+                                                    bancoA: resultadoBanco[0].apelido,
+                                                    bancoSO: resultadoBanco[0].sistemaOperacional,
+                                                    bancoR: resultadoBanco[0].responsavelLegal,
+                                                    bancoIP: resultadoBanco[0].enderecoIP,
+                                                    servidor: resultadoServidor,
+                                                    servidorA: resultadoServidor[0].apelido,
+                                                    servidorSO: resultadoServidor[0].sistemaOperacional,
+                                                    servidorR: resultadoServidor[0].responsavelLegal,
+                                                    servidorIP: resultadoServidor[0].enderecoIP,
+                                                    fkPlano: resultadoServidor[0].fkPlano
+                                                   
+                                                });
+                                            } else {
+                                                res.status(204).json({ banco: [], servidor: [] });
+                                            }
+                                        })
                                 } else {
                                     res.status(204).json({ banco: [] });
                                 }

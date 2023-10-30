@@ -2,7 +2,10 @@ var database = require("../database/config");
 
 function buscarAquariosPorEmpresa(empresaId) {
 
-  instrucaoSql = `select * from servidor a where fkBanco = 1 `;
+  instrucaoSql = `SELECT * FROM servidor 
+  JOIN banco a 
+  ON servidor.fkBanco = a.idBanco 
+  WHERE a.idBanco = 1; `;
 
   console.log("Executando a instrução SQL: \n" + instrucaoSql);
   return database.executar(instrucaoSql);

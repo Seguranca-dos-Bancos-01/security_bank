@@ -1,9 +1,19 @@
 var database = require("../database/config")
 
 function autenticar(email, senha) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucao = `
-        SELECT idFuncionarios, nome, email, cpf, telefone ,senha, fkBanco, fkEscalonamento FROM funcionarios WHERE email = '${email}' AND senha = '${senha}';
+    SELECT 
+    Funcionarios.*,
+    Banco.*,
+    Servidor.*
+FROM 
+    funcionarios
+JOIN Banco ON funcionarios.fkBanco = Banco.idBanco
+JOIN Servidor ON funcionarios.fkBanco = Servidor.fkBanco
+WHERE 
+    Funcionarios.email = '${email}' AND
+    Funcionarios.senha = '${senha}';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
@@ -11,12 +21,12 @@ function autenticar(email, senha) {
 
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function cadastrar(nome, email, cpf, telefone, senha, empresaId,) {
-    console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
     
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('${nome}', '${email}', '${cpf}', '${telefone}', '${senha}', ${empresaId}, 1);
+    INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('${nome}', '${email}', '${cpf}', '${telefone}', '${senha}', ${empresaId}, 3);
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -31,7 +41,7 @@ function cadastrarServidor(apelidoServidor, soServidor, cpfRespServidor, ipServi
 
     //CONVERSAR COM GRUPO ()
     var instrucao = `
-    INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('${nome}', '${email}', '${cpf}', '${telefone}', '${senha}', ${empresaId}, 501);
+    INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('${nome}', '${email}', '${cpf}', '${telefone}', '${senha}', ${empresaId}, 1);
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);

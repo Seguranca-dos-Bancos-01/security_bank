@@ -31,7 +31,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body onload="ContasAdministradas()">
+<body onload="ContasAdministradas(), Plano(),VerificarServidor()">
 
     <div class="janela">
         <div class="header-left">
@@ -153,7 +153,7 @@
             </div>
             <div class="headerGerenciar">
                 <h1 class="tituloGerenciar">Controle de Acesso</h1>
-                <div class="divPlanoUsuario"><span id="planoUsuario">Plano Premium</span></div>
+                <div id="nomePlano" class="divPlanoUsuario"><span id="planoUsuario">Plano Premium</span></div>
             </div>
             <div class="ativoDesativo">
                 <div class="blocoCpu">
@@ -250,6 +250,36 @@
 </html>
 
 <script>
+
+function Plano() {
+        const planoContratado = sessionStorage.fkPlano;
+        const nomePlano = document.getElementById('nomePlano');
+        if (planoContratado != 1) {
+            nomePlano.innerHTML = '<span id="planoUsuario">Plano Basico</span>';
+        } else {
+            nomePlano.innerHTML = '<span id="planoUsuario">Plano Premium</span>';
+        }
+    }
+
+
+    function VerificarServidor() {
+        var planoContratado = sessionStorage.fkPlano;
+        if (planoContratado != 1) {
+            var blocoRede = document.querySelector('.blocoRede');
+            var blocoUsb = document.querySelector('.blocoUsb');
+            if (blocoRede) {
+                blocoRede.style.display = 'none';
+            }
+            if (blocoUsb) {
+                blocoUsb.style.display = 'none';
+            }
+        }
+    }
+
+
+
+
+
 var vetorNivel = []
 var vetorEmail = []
 

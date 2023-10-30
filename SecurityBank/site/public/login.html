@@ -159,6 +159,18 @@ function entrar() {
         sessionStorage.FKBANCO = data.fkBanco;
         sessionStorage.FKESCALONAMENTO = data.fkEscalonamento;
         sessionStorage.BANCO = JSON.stringify(data.banco);
+        sessionStorage.BANCOA = JSON.stringify(data.bancoA);
+        sessionStorage.BANCOSO = JSON.stringify(data.bancoSO);
+        sessionStorage.BANCOR = JSON.stringify(data.bancoR);
+        sessionStorage.BANCOIP = JSON.stringify(data.bancoIP);
+        sessionStorage.servidor = JSON.stringify(data.servidor);
+        sessionStorage.servidorA = JSON.stringify(data.servidorA);
+        sessionStorage.servidorSO = JSON.stringify(data.servidorSO);
+        sessionStorage.servidorR = JSON.stringify(data.servidorR);
+        sessionStorage.servidorIP = JSON.stringify(data.servidorIP);
+        sessionStorage.fkPlano = JSON.stringify(data.fkPlano);
+
+
 
         window.location.href = "./dashboard/dashboard.html";
     }).catch(error => {
