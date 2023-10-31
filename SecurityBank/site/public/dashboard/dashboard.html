@@ -34,7 +34,6 @@
 
 <body
     onload="percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia()">
-
     <div class="janela">
         <div class="header-left">
             <div class="logo">
@@ -145,6 +144,10 @@
         </div>
 
         <div class="dash">
+            <div id="alerta">
+            </div>
+
+
             <div class="Nome">
                 <h2>Painel Geral</h2>
             </div>
@@ -201,28 +204,28 @@
                     </div>
                 </div>
             </div>
-                <div class="barraInformativa">
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="numeroServidores"></span>
-                        <span>Servidores Monitorados</span>
-                    </div>
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="alertaHoras">10</span>
-                        <span>Alertas em 24 horas</span>
-                    </div>
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="InstaveisServidores"></span>
-                        <span>Servidores Instáveis</span>
-                    </div>
+            <div class="barraInformativa">
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="numeroServidores"></span>
+                    <span>Servidores Monitorados</span>
                 </div>
-                <div class="Historico">
-                    <span class="tituloHistorico">Histórico dos Servidores</span>
-                    <div class="graph">
-                        <canvas id="myChartsegundo"></canvas>
-                    </div>
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="alertaHoras">10</span>
+                    <span>Alertas em 24 horas</span>
                 </div>
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="InstaveisServidores"></span>
+                    <span>Servidores Instáveis</span>
+                </div>
+            </div>
+            <div class="Historico">
+                <span class="tituloHistorico">Histórico dos Servidores</span>
+                <div class="graph">
+                    <canvas id="myChartsegundo"></canvas>
+                </div>
+            </div>
 
-        
+
         </div>
     </div>
     </div>
@@ -250,12 +253,11 @@
 </body>
 
 </html>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 <script>
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
-
 
 
     function percentCPU(idUsuarioCPU) {
@@ -270,10 +272,10 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirDadosCPU(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosCPU(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -281,20 +283,52 @@
             });
     }
 
+
     function exibirDadosCPU(response) {
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
             var dado = registro.asd;
+            var limitescpU = {
+                estavel: 18,
+                atencao: 23,
+                emergencia: 50
+            };
+            if (dado > limitescpU.estavel && dado <= limitescpU.atencao) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'CPU EM ATENÇÃO',
+                    text: `CPU com ${dado}% de uso!`,
+                });
+                cadastrarAlertaCPUAtencao()
 
+            } else if (dado > limitescpU.atencao && dado <= limitescpU.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'CPU EM EMERGÊNCIA',
+                    text: `CPU com ${dado}% de uso!`,
+                });
+
+             
+
+            } else if (dado > limitescpU.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'CPU EM URGÊNCIA',
+                    text: `CPU com ${dado}% de uso!`,
+                });
+
+
+            }
         }
+        
         console.log(dado)
         console.log(response[0])
 
         var cpuServidores = document.getElementById('cpuServidores');
         cpuServidores.innerHTML = `${dado}%`;
 
-
+        var proximaAtualizacao = setTimeout(() => percentCPU(), 5000)
     }
 
 
@@ -311,10 +345,10 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirDadosRAM(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosRAM(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -352,10 +386,10 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirDadosDISK(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosDISK(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -394,10 +428,10 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirDadosQTD(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosQTD(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -433,10 +467,10 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibir24h(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibir24h(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -472,10 +506,10 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); MostrarsInstaveis(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); MostrarsInstaveis(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -512,10 +546,10 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); MostrarsUltimosAlertas(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); MostrarsUltimosAlertas(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -556,10 +590,10 @@
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); MostrarServerEmergencia(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); MostrarServerEmergencia(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -835,7 +869,30 @@
             });
     }
 
+    var servidorFK = sessionStorage.servidor[1]
+    var planoFK = sessionStorage.fkPlano
+    var bancoFK = sessionStorage.FKBANCO
+    
+    function cadastrarAlertaCPUAtencao() {
 
+    // Enviando o valor da nova input
+    fetch("/medidas/cadastrarAlertaCPUAtencao", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        servidorFKServer: servidorFK,
+        planoFKServer: planoFK,
+        bancoFKServer: bancoFK,
+      })
+    })
+      
+
+    return false;
+    }
 
 
 

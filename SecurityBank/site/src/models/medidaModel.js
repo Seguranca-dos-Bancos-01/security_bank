@@ -1,5 +1,50 @@
 var database = require("../database/config");
 
+function cadastrarAlertaCPUAtencao(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkEsoecificacao, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), 1, 1, 1, 1, ${bancoFK}, 1, ${planoFK}, 1);
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+function buscarMedidasEmTempoRealAlerta(idAlerta) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT 
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 order by idRegistros desc limit 1) AS PROC,
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 order by idRegistros desc limit 1) AS RAM,
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 order by idRegistros desc limit 1) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN componentes ON fkComponentesReg = idComponentes
+    ;`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT 
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 order by idRegistros desc limit 1) AS PROC,
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 order by idRegistros desc limit 1) AS RAM,
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 order by idRegistros desc limit 1) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN componentes ON fkComponentesReg = idComponentes
+    ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js NOS ALERTASSSSSSSSSSSSSSSs\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
@@ -127,18 +172,41 @@ function buscarUltimasMedidasUltimoAlerta(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT IFNULL(fkServidorAlertas, 0) AS numBanco,  IFNULL(descricaoAlerta, 'Nenhum') AS descr, IFNULL(dataRegistro, 'Sem Alertas') hr FROM Alertas WHERE fkBancoAlertas = 1 UNION ALL SELECT 0, 'Nenhum', 'Sem Alertas' WHERE NOT EXISTS (
-            SELECT 1
-            FROM Alertas
-            WHERE fkBancoAlertas = 1
-        );
+        instrucaoSql = `SELECT IFNULL(fkServidor, 0) AS numBanco, 
+        IFNULL(descricaoAlerta, 'Nenhum') AS descr, 
+        IFNULL(CONCAT(dataAlerta, ' ', horaAlerta), 'Sem Alertas') AS hr 
+ FROM alerta 
+ WHERE fkBanco = 1
+ 
+ UNION
+ 
+ SELECT 0 AS numBanco, 
+        'Nenhum' AS descr, 
+        'Sem Alertas' AS hr 
+ WHERE NOT EXISTS (
+     SELECT 1
+     FROM alerta
+     WHERE fkBanco = 1
+ );
+ 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT IFNULL(fkServidorAlertas, 0) AS numBanco,  IFNULL(descricaoAlerta, 'Nenhum') AS descr, IFNULL(dataRegistro, 'Sem Alertas') hr FROM Alertas WHERE fkBancoAlertas = 1 UNION ALL SELECT 0, 'Nenhum', 'Sem Alertas' WHERE NOT EXISTS (
-            SELECT 1
-            FROM Alertas
-            WHERE fkBancoAlertas = 1
-        );
+        instrucaoSql = `SELECT IFNULL(fkServidor, 0) AS numBanco, 
+        IFNULL(descricaoAlerta, 'Nenhum') AS descr, 
+        IFNULL(CONCAT(dataAlerta, ' ', horaAlerta), 'Sem Alertas') AS hr 
+ FROM alerta 
+ WHERE fkBanco = 1
+ 
+ UNION
+ 
+ SELECT 0 AS numBanco, 
+        'Nenhum' AS descr, 
+        'Sem Alertas' AS hr 
+ WHERE NOT EXISTS (
+     SELECT 1
+     FROM alerta
+     WHERE fkBanco = 1
+ );
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -280,10 +348,11 @@ LIMIT 0, 50;
 
 
 
+
 function buscarUltimasMedidas2(idUsuario2, limite_linhas) {
 
     instrucaoSql2 = ''
-//COLOCAR O ID DO USUARIO
+    //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join statusMaquina on fkStatus = idStatus where fkBanco = 1 group by fkStatus;`;
@@ -631,6 +700,7 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
 
 module.exports = {
     buscarUltimasMedidas,
+    buscarMedidasEmTempoRealAlerta,
     buscarMedidasEmTempoReal,
     buscarUltimasMedidas2,
     buscarMedidasEmTempoReal2,
@@ -651,4 +721,5 @@ module.exports = {
     buscarUltimasMedidasServidores3,
     buscarMedidasEmTempoRealServidores4,
     buscarUltimasMedidasServidores4,
+    cadastrarAlertaCPUAtencao,
 }

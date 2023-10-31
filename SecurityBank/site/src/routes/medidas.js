@@ -3,7 +3,14 @@ var router = express.Router();
 
 var medidaController = require("../controllers/medidaController");
 
+router.post("/cadastrarAlertaCPUAtencao", function (req, res) {
+    medidaController.cadastrarAlertaCPUAtencao(req, res);
+})
 
+
+router.get("/tempo-real/:idAlerta", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlerta(req, res);
+})
 
 router.get("/ultimasPercentCPU/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasCPU(req, res);

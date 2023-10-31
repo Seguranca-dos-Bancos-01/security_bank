@@ -1,95 +1,101 @@
 var alertas = [];
 
-function obterdados(idAquario) {
-    fetch(`/medidas/tempo-real/${idAquario}`)
+function obterdadosAlerta(idAlerta) {
+    fetch(`/medidas/tempo-real/${idAlerta}`)
         .then(resposta => {
             if (resposta.status == 200) {
                 resposta.json().then(resposta => {
 
-                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    console.log(`Dados recebidos NOS ALERTASSSSSSSSS: ${JSON.stringify(resposta)}`);
 
-                    alertar(resposta, idAquario);
+                    alertar(resposta, idAlerta);
                 });
             } else {
-                console.error(`Nenhum dado encontrado para o id ${idAquario} ou erro na API`);
+                console.error(`Nenhum dado encontrado para o id ${idAlerta} ou erro na API  NOS ALERTASSSSSSSSS`);
             }
         })
         .catch(function (error) {
-            console.error(`Erro na obtenção dos dados do aquario p/ gráfico: ${error.message}`);
+            console.error(`Erro na obtenção dos dados do aquario p/ gráfico  NOS ALERTASSSSSSSSS: ${error.message}`);
         });
 
 }
 
-function alertar(resposta, idAquario) {
-    var temp = resposta[0].temperatura;
+function alertar(resposta, idAlerta) {
+    var cpuAlerta = resposta[0].PROC;
 
     var grauDeAviso = '';
 
-    var limites = {
-        muito_quente: 23,
-        quente: 22,
-        ideal: 20,
-        frio: 10,
-        muito_frio: 5
+    var limitescpU = {
+        estavel: 18,
+        atencao: 23,
+        emergencia: 50
     };
 
     var classe_temperatura = 'cor-alerta';
 
-    if (temp >= limites.muito_quente) {
-        classe_temperatura = 'cor-alerta perigo-quente';
-        grauDeAviso = 'perigo quente'
-        grauDeAvisoCor = 'cor-alerta perigo-quente'
-        exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
+    if (cpuAlerta > limitescpU.estavel && cpuAlerta <= limitescpU.atencao) {
+        Swal.fire({
+                icon: 'warning',
+                title: 'CPU EM ATENÇÃO',
+                text: `CPU com ${cpuAlerta}% de uso!`,
+            });
     }
-    else if (temp < limites.muito_quente && temp >= limites.quente) {
-        classe_temperatura = 'cor-alerta alerta-quente';
-        grauDeAviso = 'alerta quente'
-        grauDeAvisoCor = 'cor-alerta alerta-quente'
-        exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
+    else if (cpuAlerta < limites.atencao && cpuAlerta >= limites.emergencia) {
+        Swal.fire({
+                    icon: 'warning',
+                    title: 'CPU EM EMERGÊNCIA',
+                    text: `CPU com ${dado}% de uso!`,
+                })
     }
-    else if (temp < limites.quente && temp > limites.frio) {
-        classe_temperatura = 'cor-alerta ideal';
-        removerAlerta(idAquario);
+    else if (cpuAlerta > limites.emergencia) {
+       Swal.fire({
+                    icon: 'warning',
+                    title: 'CPU EM URGÊNCIA',
+                    text: `CPU com ${dado}% de uso!`,
+                });
+        removerAlerta(idAlerta);
     }
-    else if (temp <= limites.frio && temp > limites.muito_frio) {
-        classe_temperatura = 'cor-alerta alerta-frio';
-        grauDeAviso = 'alerta frio'
-        grauDeAvisoCor = 'cor-alerta alerta-frio'
-        exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
+    else if (cpuAlerta <= limites.frio && cpuAlerta > limites.muito_frio) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'PROCESSAMENTO FORA DOS PADRÕES IDEAIS',
+            text: 'VÁ PARA A ESTUFA 1 ARRUMAR OS PADRÕES',
+        });
     }
-    else if (temp <= limites.muito_frio) {
-        classe_temperatura = 'cor-alerta perigo-frio';
-        grauDeAviso = 'perigo frio'
-        grauDeAvisoCor = 'cor-alerta perigo-frio'
-        exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor)
+    else if (cpuAlerta <= limites.muito_frio) {
+        Swal.fire({
+            icon: 'warning',
+            title: 'PROCESSAMENTO FORA DOS PADRÕES IDEAIS',
+            text: 'VÁ PARA A ESTUFA 1 ARRUMAR OS PADRÕES',
+        });
     }
 
     var card;
 
-    if (document.getElementById(`temp_aquario_${idAquario}`) != null) {
-        document.getElementById(`temp_aquario_${idAquario}`).innerHTML = temp + "°C";
+    if (document.getElementById(`temp_aquario_${idAlerta}`) != null) {
+        document.getElementById(`temp_aquario_${idAlerta}`).innerHTML = cpuAlerta + "°C";
     }
 
-    if (document.getElementById(`card_${idAquario}`)) {
-        card = document.getElementById(`card_${idAquario}`)
+    if (document.getElementById(`card_${idAlerta}`)) {
+        card = document.getElementById(`card_${idAlerta}`)
         card.className = classe_temperatura;
     }
 }
 
-function exibirAlerta(temp, idAquario, grauDeAviso, grauDeAvisoCor) {
-    var indice = alertas.findIndex(item => item.idAquario == idAquario);
+function exibirAlerta(cpuAlerta, idAlerta, grauDeAviso, grauDeAvisoCor) {
+    var indice = alertas.findIndex(item => item.idAlerta == idAlerta);
 
     if (indice >= 0) {
-        alertas[indice] = { idAquario, temp, grauDeAviso, grauDeAvisoCor }
+        alertas[indice] = { idAlerta, cpuAlerta, grauDeAviso, grauDeAvisoCor }
     } else {
-        alertas.push({ idAquario, temp, grauDeAviso, grauDeAvisoCor });
+        alertas.push({ idAlerta, cpuAlerta, grauDeAviso, grauDeAvisoCor });
     }
 
     exibirCards();
 }
 
-function removerAlerta(idAquario) {
-    alertas = alertas.filter(item => item.idAquario != idAquario);
+function removerAlerta(idAlerta) {
+    alertas = alertas.filter(item => item.idAlerta != idAlerta);
     exibirCards();
 }
 
@@ -102,15 +108,15 @@ function exibirCards() {
     }
 }
 
-function transformarEmDiv({ idAquario, temp, grauDeAviso, grauDeAvisoCor }) {
+function transformarEmDiv({ idAlerta, cpuAlerta, grauDeAviso, grauDeAvisoCor }) {
 
-    var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAquario).descricao;
+    // var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idAlerta).descricao;
     return `
     <div class="mensagem-alarme">
         <div class="informacao">
             <div class="${grauDeAvisoCor}">&#12644;</div> 
-            <h3>${descricao} está em estado de ${grauDeAviso}!</h3>
-            <small>Temperatura ${temp}.</small>   
+            <h3>está em estado de ${grauDeAviso}!</h3>
+            <small>Temperatura ${cpuAlerta}.</small>   
         </div>
         <div class="alarme-sino"></div>
     </div>
