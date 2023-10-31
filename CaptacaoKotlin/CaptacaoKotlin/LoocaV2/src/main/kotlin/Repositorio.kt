@@ -7,6 +7,12 @@ class Repositorio {
     fun iniciar(){
         jdbcTemplate = Conexao.jdbcTemplate!!
     }
+    fun validarFunc(email: String,senha: String):Boolean{
+        val validacao = jdbcTemplate.queryForObject("""
+           select count(idFuncionarios) from funcionarios where email = '$email' and senha = '$senha' 
+        """,Int::class.java)
+        return validacao != 0
+    }
 
     fun logar(email:String, senha:String): Funcionario{
         return jdbcTemplate.queryForObject("""
