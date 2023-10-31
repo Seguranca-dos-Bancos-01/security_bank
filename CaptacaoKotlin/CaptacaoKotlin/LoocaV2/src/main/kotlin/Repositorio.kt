@@ -1,7 +1,5 @@
-import com.google.common.io.BaseEncoding
 import org.springframework.jdbc.core.BeanPropertyRowMapper
 import org.springframework.jdbc.core.JdbcTemplate
-import org.springframework.jdbc.core.queryForObject
 
 class Repositorio {
     lateinit var jdbcTemplate: JdbcTemplate
@@ -52,6 +50,13 @@ class Repositorio {
            insert into registros values
             (null,'${InterfaceUSB.dataTime}',${InterfaceUSB.dado},$fkServidor,$fkBanco,$fkEspec,$fkPlano,5),
             (null,'${ConexaoUSB.dataTime}',${ConexaoUSB.dado}, $fkServidor,$fkBanco,$fkEspec,$fkPlano,6)
+        """)
+    }
+
+    fun cadastrarEspec(totalProcessador: Double, totalMemoria:Double, totalDisco:Double){
+        jdbcTemplate.execute("""
+           insert into especificacoes (idEspecificacoes, potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco) values
+            (null, $totalProcessador,$totalMemoria,$totalDisco)
         """)
     }
 }
