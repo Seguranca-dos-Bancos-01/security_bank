@@ -11,6 +11,9 @@ router.post("/cadastrar", function (req, res) {
 router.post("/cadastrarServidor", function (req, res) {
     usuarioController.cadastrarServidor(req, res);
 })
+router.post("/cadastrarServidorNuvem", function (req, res) {
+    usuarioController.cadastrarServidorNuvem(req, res);
+})
 
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
