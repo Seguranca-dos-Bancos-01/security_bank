@@ -30,7 +30,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body>
+<body onload="validadeServer(idUsuario)">
 
     <div class="janela">
         <div class="header-left">
@@ -161,7 +161,7 @@
                         </div>
                         <div class="info">
                             <span>VALIDADE</span>
-                            <span class="Situacao" id="validadeServidor">231 dias</span>
+                            <span class="Situacao" id="validadeServidores">231 dias</span>
                         </div>
                     </div>
                     <div class="blocoKpi">
@@ -878,6 +878,47 @@ function atualizarGrafico4(idUsuario, dados, myChart4) {
         console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
     });
 }
+
+var idUsuario = sessionStorage.ID_USUARIO;
+
+function validadeServer(idUsuario) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
+
+
+        fetch(`/medidas/ultimasValidadeServer/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                    .then(function (response) {
+                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                        response.reverse(); exibirDadosValidade(response);
+                    });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function exibirDadosValidade(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var dadoValidade = registro.val;
+
+        }
+
+        console.log(response[0])
+
+        var ValidadeServidores = document.getElementById('validadeServidores');
+        ValidadeServidores.innerHTML = `${dadoValidade}%`;
+
+
+    }
 
 
 </script>

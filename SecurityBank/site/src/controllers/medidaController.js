@@ -55,6 +55,26 @@ function buscarUltimasMedidasDISK(req, res) {
     });
 }
 
+
+function buscarUltimasMedidasValidade(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasValidade(idUsuario, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function buscarUltimasMedidasQTD(req, res) {
     const limite_linhas = 50;
     var idUsuario = req.params.idUsuario;
@@ -429,5 +449,6 @@ module.exports = {
     buscarMedidasEmTempoRealServidores3,
     buscarUltimasMedidasServidores4,
     buscarMedidasEmTempoRealServidores4,
+    buscarUltimasMedidasValidade,
     
 };
