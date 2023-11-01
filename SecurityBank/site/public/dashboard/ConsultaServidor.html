@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body onload="exibirServidoresUsuario()">
+    <div>
+<div id="mostrarServidores">
+<select name="" id="SelectServidores"></select>
+</div>
+
+<div id="MostrarRestoPag">
+
+<div class="">
+
+
+</div>
+</div>
+
+</div>
+</body>
+</html>
+<script>
+
+var ServidorSelecione  = null
+function exibirServidoresUsuario() {
+    var server = JSON.parse(sessionStorage.servidor);
+    var selectServidores = document.getElementById("SelectServidores");
+    selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+    server.forEach(element => {
+        selectServidores.innerHTML += `<option value="${element.idServidor}">Servidor ${element.idServidor}</option>`;
+    });
+}
+
+function MostrarProcessos(id) {
+    document.getElementById("MostrarRestoPag").innerHTML = `Servidor numero ${id}`;
+}
+
+// Evento de seleção do usuário
+document.getElementById("SelectServidores").addEventListener("change", function () {
+    var selectedServer = this.value;
+    MostrarProcessos(selectedServer);
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+</script>

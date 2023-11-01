@@ -5,12 +5,10 @@ function autenticar(email, senha) {
     var instrucao = `
     SELECT 
     Funcionarios.*,
-    Banco.*,
-    Servidor.*
+    Banco.*
 FROM 
     funcionarios
 JOIN Banco ON funcionarios.fkBanco = Banco.idBanco
-JOIN Servidor ON funcionarios.fkBanco = Servidor.fkBanco
 WHERE 
     Funcionarios.email = '${email}' AND
     Funcionarios.senha = '${senha}';
