@@ -35,6 +35,286 @@ function cadastrarAlertaCPUAtencao(req, res) {
     }
 }
 
+function cadastrarAlertaCPUEmergencia(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var servidorFK = req.body.servidorFKServer;
+    var planoFK = req.body.planoFKServer;
+    var bancoFK =req.body.bancoFKServer;
+
+        // Faça as validações dos valores
+        if (servidorFK == undefined) {
+            res.status(400).send("Seu servidorFK está undefined!");
+        } else if (planoFK == undefined) {
+            res.status(400).send("Seu planoFK está undefined!");
+        } else if (bancoFK == undefined) {
+            res.status(400).send("Sua bancoFK está undefined!");
+        }else {
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.cadastrarAlertaCPUEmergencia(servidorFK, planoFK, bancoFK)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+    }
+
+    function cadastrarAlertaCPUUrgencia(req, res) {
+        // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+        var servidorFK = req.body.servidorFKServer;
+        var planoFK = req.body.planoFKServer;
+        var bancoFK =req.body.bancoFKServer;
+
+        // Faça as validações dos valores
+        if (servidorFK == undefined) {
+            res.status(400).send("Seu servidorFK está undefined!");
+        } else if (planoFK == undefined) {
+            res.status(400).send("Seu planoFK está undefined!");
+        } else if (bancoFK == undefined) {
+            res.status(400).send("Sua bancoFK está undefined!");
+        }else {
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.cadastrarAlertaCPUUrgencia(servidorFK, planoFK, bancoFK)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+    }
+    
+
+    
+function cadastrarAlertaRAMAtencao(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var servidorFK = req.body.servidorFKServer;
+    var planoFK = req.body.planoFKServer;
+    var bancoFK =req.body.bancoFKServer;
+    
+    
+    // Faça as validações dos valores
+    if (servidorFK == undefined) {
+        res.status(400).send("Seu servidorFK está undefined!");
+    } else if (planoFK == undefined) {
+        res.status(400).send("Seu planoFK está undefined!");
+    } else if (bancoFK == undefined) {
+        res.status(400).send("Sua bancoFK está undefined!");
+    }else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        medidaModel.cadastrarAlertaRAMAtencao(servidorFK, planoFK, bancoFK)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function cadastrarAlertaRAMEmergencia(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var servidorFK = req.body.servidorFKServer;
+    var planoFK = req.body.planoFKServer;
+    var bancoFK =req.body.bancoFKServer;
+
+        // Faça as validações dos valores
+        if (servidorFK == undefined) {
+            res.status(400).send("Seu servidorFK está undefined!");
+        } else if (planoFK == undefined) {
+            res.status(400).send("Seu planoFK está undefined!");
+        } else if (bancoFK == undefined) {
+            res.status(400).send("Sua bancoFK está undefined!");
+        }else {
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.cadastrarAlertaRAMEmergencia(servidorFK, planoFK, bancoFK)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+    }
+
+    function cadastrarAlertaRAMUrgencia(req, res) {
+        // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+        var servidorFK = req.body.servidorFKServer;
+        var planoFK = req.body.planoFKServer;
+        var bancoFK =req.body.bancoFKServer;
+
+        // Faça as validações dos valores
+        if (servidorFK == undefined) {
+            res.status(400).send("Seu servidorFK está undefined!");
+        } else if (planoFK == undefined) {
+            res.status(400).send("Seu planoFK está undefined!");
+        } else if (bancoFK == undefined) {
+            res.status(400).send("Sua bancoFK está undefined!");
+        }else {
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.cadastrarAlertaRAMUrgencia(servidorFK, planoFK, bancoFK)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+    }
+    
+
+    
+    
+function cadastrarAlertaDISCOAtencao(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var servidorFK = req.body.servidorFKServer;
+    var planoFK = req.body.planoFKServer;
+    var bancoFK =req.body.bancoFKServer;
+    
+    
+    // Faça as validações dos valores
+    if (servidorFK == undefined) {
+        res.status(400).send("Seu servidorFK está undefined!");
+    } else if (planoFK == undefined) {
+        res.status(400).send("Seu planoFK está undefined!");
+    } else if (bancoFK == undefined) {
+        res.status(400).send("Sua bancoFK está undefined!");
+    }else {
+
+        // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+        medidaModel.cadastrarAlertaDISCOAtencao(servidorFK, planoFK, bancoFK)
+            .then(
+                function (resultado) {
+                    res.json(resultado);
+                }
+            ).catch(
+                function (erro) {
+                    console.log(erro);
+                    console.log(
+                        "\nHouve um erro ao realizar o cadastro! Erro: ",
+                        erro.sqlMessage
+                    );
+                    res.status(500).json(erro.sqlMessage);
+                }
+            );
+    }
+}
+
+function cadastrarAlertaDISCOEmergencia(req, res) {
+    // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+    var servidorFK = req.body.servidorFKServer;
+    var planoFK = req.body.planoFKServer;
+    var bancoFK =req.body.bancoFKServer;
+
+        // Faça as validações dos valores
+        if (servidorFK == undefined) {
+            res.status(400).send("Seu servidorFK está undefined!");
+        } else if (planoFK == undefined) {
+            res.status(400).send("Seu planoFK está undefined!");
+        } else if (bancoFK == undefined) {
+            res.status(400).send("Sua bancoFK está undefined!");
+        }else {
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.cadastrarAlertaDISCOEmergencia(servidorFK, planoFK, bancoFK)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+    }
+
+    function cadastrarAlertaDISCOUrgencia(req, res) {
+        // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
+        var servidorFK = req.body.servidorFKServer;
+        var planoFK = req.body.planoFKServer;
+        var bancoFK =req.body.bancoFKServer;
+
+        // Faça as validações dos valores
+        if (servidorFK == undefined) {
+            res.status(400).send("Seu servidorFK está undefined!");
+        } else if (planoFK == undefined) {
+            res.status(400).send("Seu planoFK está undefined!");
+        } else if (bancoFK == undefined) {
+            res.status(400).send("Sua bancoFK está undefined!");
+        }else {
+    
+            // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
+            medidaModel.cadastrarAlertaDISCOUrgencia(servidorFK, planoFK, bancoFK)
+                .then(
+                    function (resultado) {
+                        res.json(resultado);
+                    }
+                ).catch(
+                    function (erro) {
+                        console.log(erro);
+                        console.log(
+                            "\nHouve um erro ao realizar o cadastro! Erro: ",
+                            erro.sqlMessage
+                        );
+                        res.status(500).json(erro.sqlMessage);
+                    }
+                );
+        }
+    }
+    
+
 function buscarMedidasEmTempoRealAlerta(req, res) {
     var idAlerta = req.params.idAlerta;
     console.log(`Recuperando medidas em tempo real`);
@@ -484,4 +764,12 @@ module.exports = {
     buscarUltimasMedidasServidores4,
     buscarMedidasEmTempoRealServidores4,
     cadastrarAlertaCPUAtencao,
+    cadastrarAlertaCPUEmergencia,
+    cadastrarAlertaCPUUrgencia,
+    cadastrarAlertaRAMAtencao,
+    cadastrarAlertaRAMEmergencia,
+    cadastrarAlertaRAMUrgencia,
+     cadastrarAlertaDISCOAtencao,
+     cadastrarAlertaDISCOEmergencia,
+     cadastrarAlertaDISCOUrgencia,
 };
