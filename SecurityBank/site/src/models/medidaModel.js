@@ -20,6 +20,48 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+
+
+
+
+function buscarDiasFaltando(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT 
+        DATEDIFF(dateValidade, CURDATE()) AS dias_restantes, 
+        DATE_FORMAT(dataCompraLocacao, '%d/%m/%Y') AS DtC,
+        DATE_FORMAT(dateValidade, '%d/%m/%Y') AS DtV
+    FROM 
+        servidor
+    WHERE 
+        dateValidade >= CURDATE();
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT 
+        DATEDIFF(dateValidade, CURDATE()) AS dias_restantes, 
+        DATE_FORMAT(dataCompraLocacao, '%d/%m/%Y') AS DtC,
+        DATE_FORMAT(dateValidade, '%d/%m/%Y') AS DtV
+    FROM 
+        servidor
+    WHERE 
+        dateValidade >= CURDATE();
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 function buscarUltimasMedidasRAM(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
@@ -651,4 +693,6 @@ module.exports = {
     buscarUltimasMedidasServidores3,
     buscarMedidasEmTempoRealServidores4,
     buscarUltimasMedidasServidores4,
+    buscarDiasFaltando,
+   
 }

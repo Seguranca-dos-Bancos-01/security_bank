@@ -28,4 +28,9 @@ router.post("/excluirConta", function (req, res) {
     usuarioController.excluirConta(req, res);
 });
 
+router.post("/AlterarValidade", function (req, res) {
+    usuarioController.UpdateValidadeNova(req, res);
+});
+
+
 module.exports = router;

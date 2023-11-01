@@ -72,6 +72,28 @@ function autenticar(req, res) {
 
 }
 
+
+
+
+function UpdateValidadeNova(req, res) {
+  
+    var validadeNova = req.body.validadeServidorServer;
+    var server = req.body.ServerS;
+
+
+    usuarioModel.UpdateValidadeNova(validadeNova, server).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function cadastrar(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nome = req.body.nomeServer;
@@ -287,4 +309,5 @@ module.exports = {
     cadastrarServidor,
     atualizarNivelAcesso,
     excluirConta,
+    UpdateValidadeNova
 }

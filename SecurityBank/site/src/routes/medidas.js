@@ -32,7 +32,9 @@ router.get("/ServerEmergencia/:idUsuario", function (req, res) {
 router.get("/SelectContas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasSelectContas(req, res);
 });
-
+router.get("/diasFaltando/:selectedServer", function (req, res) {
+    medidaController.buscarDiasFaltando(req, res);
+});
 
 
 router.get("/ultimasServidores/:idUsuario", function (req, res) {
@@ -65,7 +67,6 @@ router.get("/ultimasServidores4/:idUsuario", function (req, res) {
 router.get("/tempo-realServidores4/:idUsuario", function (req, res) {
     medidaController.buscarMedidasEmTempoRealServidores4(req, res);
 })
-
 
 
 
