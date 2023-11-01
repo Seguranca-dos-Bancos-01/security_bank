@@ -34,8 +34,14 @@
   padding: 20px 40px;
   color: #000F53;
 font-size: 18px;
-
 }
+
+.inputcheckbox {
+  width: 40px;
+  margin: 0 0 0 30px ;
+}
+
+
 
 .inputServidor {
   margin: 10px 30px;
@@ -82,6 +88,7 @@ align-items: center;
   height: 50px;
   display: flex;
   justify-content: center;
+  margin: 20px 0;
 }
 
 .botaoServidor {

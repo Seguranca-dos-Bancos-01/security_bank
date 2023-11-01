@@ -167,12 +167,16 @@
                 <input id="cpfRespServidor" class="inputServidor" type="text"><br>
 
                 <span class="camposServidor">Endereço IP</span><br>
-                <input id="ipServidor" class="inputServidor" type="text">
+                <input id="ipServidor" class="inputServidor" type="text"><br>
 
-                <h2 class="subtituloServidor">Especificações de Hardware</h2>
+                <input type="checkbox" id="Nuvem" name="Nuvem" class="inputcheckbox" />
+                 <label style="padding: 20px 0px;" class="camposServidor" for="Nuvem">Servidor na nuvem</label> 
+                 
 
-                <div class="linhaServidor">
-                    <div class="camposPotencia">
+             <!--  <h2 class="subtituloServidor">Especificações de Hardware</h2> -->
+
+               <!-- <div class="linhaServidor">
+                   <div class="camposPotencia">
                         <span class="camposServidor">Potência Máxima da CPU</span><br>
                         <select id="cpuServidor" class="selectServidor" name="potenciacpu">
                             <option value="" default>X</option>
@@ -188,8 +192,8 @@
                             <option value="">Y</option>
                         </select><br>
                     </div>
-                </div>
-
+                </div> 
+          
                 <div class="camposPotencia">
                     <span class="camposServidor">Potência Máxima da Memória RAM</span><br>
                     <select id="ramServidor" class="selectServidor" name="potenciaram">
@@ -198,8 +202,12 @@
                         <option value="">Y</option>
                     </select><br>
 
-                </div>
-                <div class="linhaServidor">
+                </div> -->
+            
+                 
+
+                
+                <div id="dataServidorDiv" class="linhaServidor"> 
                     <div class="camposData">
                         <span class="camposServidor">Data de Compra</span><br>
                         <input id="compraServidor" class="inputServidor" type="date"><br>
@@ -245,6 +253,19 @@
 <script>
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
     codigo = sessionStorage.fkBanco
+   
+    window.addEventListener('load', function() {
+      document.getElementById('dataServidorDiv').style.display = 'none';
+    });
+    const checkbox = document.getElementById('Nuvem');
+    checkbox.addEventListener('change', function() {
+      if (checkbox.checked) {
+        document.getElementById('dataServidorDiv').style.display = 'flex';
+      } else {
+        document.getElementById('dataServidorDiv').style.display = 'none';
+      }
+    });
+
 
     function limparForm() {
         document.getElementById('apelidoServidor').value = "";
