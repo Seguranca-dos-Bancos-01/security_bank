@@ -82,6 +82,9 @@ router.get("/SelectContas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasSelectContas(req, res);
 });
 
+router.get("/HistoricoAlertas/:idUsuario", function (req, res) {
+    medidaController.buscarHistoricoAlertas(req, res);
+});
 
 
 router.get("/ultimasServidores/:idUsuario", function (req, res) {

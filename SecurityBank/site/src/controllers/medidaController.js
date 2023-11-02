@@ -500,6 +500,24 @@ function buscarUltimasMedidasSelectContas(req, res) {
     });
 }
 
+function buscarHistoricoAlertas(req, res) {
+    const limite_linhas = 30;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarHistoricoAlertas(idUsuario, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 
 
@@ -772,4 +790,5 @@ module.exports = {
      cadastrarAlertaDISCOAtencao,
      cadastrarAlertaDISCOEmergencia,
      cadastrarAlertaDISCOUrgencia,
+     buscarHistoricoAlertas,
 };

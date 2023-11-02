@@ -8,11 +8,11 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
 
-    <title>Security Bank | Painel Geral</title>
+    <title>Security Bank | Alertas</title>
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/alertas.css"">
-    <link rel="stylesheet" href="../css/navbarDash.css">
+    <link rel=" stylesheet" href="../css/navbarDash.css">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
     <script src="alertasDash.js"></script>
@@ -32,7 +32,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body onload="percentCPU(),percentRAM(),percentDISK()">
+<body onload="percentCPU(),percentRAM(),percentDISK(),  ReceberHistoricoAlertas(), MostrarHistoricoAlertas()">
 
     <div class="janela">
         <div class="header-left">
@@ -144,24 +144,26 @@
         </div>
 
         <div class="dash">
-                <div class="Nome">
-                    <h2>Alertas</h2>
+            <div class="Nome">
+                <h2>Alertas</h2>
+            </div>
+            <div class="tipos">
+                <span class="tipo"><b>Servidor</b></span>
+                <span class="tipo"><b>Componente</b></span>
+                <span class="tipo"><b>Data</b></span>
+                <span class="tipo"><b>Hora</b></span>
+                <span class="tipo"><b>Status</b></span>
+            </div>
+            <div id="historicoAlertas">
+                <div class="alerta" id="divMostrarAlerta">
+                    <span class="msgAlerta"><b  id="nomeServidor">Servidor XX1</b></span>
+                    <span class="msgAlerta"><b  id="nomeComponente">CPU</b></span>
+                    <span class="msgAlerta"><b  id="dataAlerta">13/09/2023</b></span>
+                    <span class="msgAlerta"><b  id="horaAlerta">13h45</b></span>
+                    <span class="msgAlerta"><b  id="statusAlerta">Emergência</b></span>
                 </div>
-                <div class="tipos">
-                    <span class="tipo"><b>Servidor</b></span>
-                    <span class="tipo"><b>Componente</b></span>
-                    <span class="tipo"><b>Data</b></span>
-                    <span class="tipo"><b>Hora</b></span>
-                    <span class="tipo"><b>Status</b></span>
-                </div>
-                <div class="alerta">
-                    <span class="msgAlerta"><b>Servidor XX1</b></span>
-                    <span class="msgAlerta"><b>CPU</b></span>
-                    <span class="msgAlerta"><b>13/09/2023</b></span>
-                    <span class="msgAlerta"><b>13h45</b></span>
-                    <span class="msgAlerta"><b>Emergência</b></span>
-                </div>
-                <div class="alerta2">
+            </div>
+            <!-- <div class="alerta2">
                     <span class="msgAlerta"><b>Servidor XX1</b></span>
                     <span class="msgAlerta"><b>CPU</b></span>
                     <span class="msgAlerta"><b>13/09/2023</b></span>
@@ -174,35 +176,36 @@
                     <span class="msgAlerta"><b>13/09/2023</b></span>
                     <span class="msgAlerta"><b>13h45</b></span>
                     <span class="msgAlerta"><b>Emergência</b></span>
+                </div> -->
+        </div>
+        <div class="rodapeDash">
+            <div class="itens">
+                <div class="blocos">
+                    <h1>Security Bank</h1>
+                    <h4>TECH & SOLUTIONS</h4>
                 </div>
+                <div class="blocos">
+                    <span><b>Telefone:</b>(11)40028922</span>
+                    <br>
+                    <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+                </div>
+                <div class="blocos">
+                    <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                        Cerqueira César, São Paulo - SP,<br>
+                        01414-001</span>
+                </div>
+            </div>
+            <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
         </div>
     </div>
-    <div class="rodapeDash">
-        <div    class="itens">
-            <div class="blocos">
-                <h1>Security Bank</h1>
-                <h4>TECH & SOLUTIONS</h4>
-            </div>
-            <div class="blocos">
-                <span><b>Telefone:</b>(11)40028922</span>
-                <br>
-                <span><b>Email:</b>SC.contato.2023@gmail.com</span>
-            </div>
-            <div class="blocos">
-                <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
-                Cerqueira César, São Paulo - SP,<br>
-                01414-001</span>
-            </div>
-        </div>
-        <div class="direitos">&copy;  2023 copyrights by SecurityBank. All Rights Reserved</div>
-    </div>
+    
 
 
 </body>
 
 </html>
 <footer>
-    
+
 </footer>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 
@@ -223,5 +226,97 @@
     percentCPU(idUsuarioCPU)
     percentRAM(idUsuarioRAM)
     percentDISK(idUsuarioDISK)
+
+    idUsuarioServer = sessionStorage.ID_USUARIO;
+
+
+    function ReceberHistoricoAlertas(idUsuarioServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
+
+
+        fetch(`/medidas/HistoricoAlertas/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                    .then(function (response) {
+                        console.log(`Dados recebidos: GRaIFCO AAAAAAAAAAAAAAA ${JSON.stringify(response)}`);
+                        response.reverse(); 
+                        MostrarHistoricoAlertas(response);
+
+                    });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function MostrarHistoricoAlertas(response) {
+        console.log('Exibindo dados retornados:')
+        var dadosMostrar = document.getElementById('historicoAlertas');
+        dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+
+        // var vetorServidor;
+        // var vetornomeComponente;
+        // var vetordataAlerta;
+        // var vetorhoraAlerta;
+        
+
+        for (var i = 0; i < response.length; i++) {
+            var registro = response[i];
+
+            console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAA: ${JSON.stringify(registro)}`)
+            var nomeServidor = registro.nomeServidor;
+            var nomeComponente = registro.nomeComponente;
+            var dataAlerta = registro.dataAlerta;
+            var horaAlerta = registro.horaAlerta;
+            var statusAlerta = 'Emergencia';
+            // vetorServidor.push(nomeServidor); // Adiciona o valor de 'nivel' ao vetor
+            // vetornomeComponente.push(nomeComponente); // Adiciona o valor de 'email' ao vetor
+            // vetordataAlerta.push(dataAlerta); // Adiciona o valor de 'email' ao vetor
+            // vetorhoraAlerta.push(horaAlerta); // Adiciona o valor de 'email' ao vetor
+            // console.log(vetorServidor)
+            // console.log(vetornomeComponente)
+            // console.log(vetordataAlerta)
+            // console.log(vetorhoraAlerta)
+            var elemento = document.createElement('divMostrarAlerta');
+            elemento.classList.add('àlerta');
+            var conteudo = `
+            <div class="alerta" id="divMostrarAlerta">
+            <span class="msgAlerta"><b  id="nomeServidor">${nomeServidor}</b></span>
+                <span class="msgAlerta"><b  id="nomeComponente">${nomeComponente}</b></span>
+                <span class="msgAlerta"><b  id="dataAlerta">${dataAlerta}</b></span>
+                <span class="msgAlerta"><b  id="horaAlerta">${horaAlerta}</b></span>
+                <span class="msgAlerta"><b  id="statusAlerta">${statusAlerta}</b></span>
+                </div>
+    `;
+            // <div class="imgsContas">
+            //     <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
+            //     <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
+            // </div>
+            elemento.innerHTML = conteudo;
+            dadosMostrar.appendChild(elemento);
+            // var textoServidor = document.getElementById(nomeServidor)
+            // textoServidor.innerHTML = "nomeServidor";
+            // nomeComponente.innerHTML = "nomeComponente";
+            // dataAlerta.innerHTML = "dataAlerta";
+            // horaAlerta.innerHTML = "horaAlerta";
+            // statusAlerta.innerHTML = "statusAlerta";
+
+
+            // if (i !== response.length - 1) {
+            //     var linhaEspacamento = document.createElement('div');
+            //     linhaEspacamento.classList.add('linhaEspacamento');
+            //     linhaEspacamento.innerHTML = '<span></span>';
+            //     dadosMostrar.appendChild(linhaEspacamento);
+            // }
+        }
+    }
+
+    ReceberHistoricoAlertas()
 
 </script>

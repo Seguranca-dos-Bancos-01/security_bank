@@ -382,7 +382,28 @@ function buscarUltimasMedidasSelectContas(idUsuario, limite_linhas) {
 }
 
 
+function buscarHistoricoAlertas(idUsuario, limite_linhas) {
 
+    let instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta
+        from alerta join servidor on fkServidor = idServidor
+        join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT ${limite_linhas};`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta
+        from alerta join servidor on fkServidor = idServidor
+        join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT ${limite_linhas};`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return null; // Retornando nulo se nenhuma condição for satisfeita
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 
 
@@ -823,4 +844,5 @@ module.exports = {
      cadastrarAlertaDISCOAtencao,
      cadastrarAlertaDISCOEmergencia,
      cadastrarAlertaDISCOUrgencia,
+     buscarHistoricoAlertas,
 }
