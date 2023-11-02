@@ -33,7 +33,7 @@
 <!-- <body onload=" atualizarFeed()"> -->
 
 <body
-    onload="percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia()">
+    onload="exibirServidoresUsuario(),percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia()">
 
     <div class="janela">
         <div class="header-left">
@@ -61,10 +61,8 @@
                     <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
-                <div class="opcoesServidores-content">
-                   <a href="servidoresDash.html">Servidor 1 </a> 
-                    <a href="servidoresDash.html">Servidor 2 </a>
-                    <a href="servidoresDash.html">Servidor 3 </a>
+                <div id="opcoesServidores-content"class="opcoesServidores-content">
+                   
                   </div>
             </div>
  
@@ -259,15 +257,53 @@
 </html>
 
 <script>
+ var vetor = [];
+var selectedServer;// Declarar idUsuario fora do escopo da função
+
+function exibirServidoresUsuario() {
+    var server = JSON.parse(sessionStorage.servidor);
+    console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+    var selectServidores = document.getElementById("opcoesServidores-content");
+    selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+    server.forEach(element => {
+        var button = document.createElement('button');
+        button.textContent = element.apelido;
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            selectedServer = element.idServidor; 
+            vetor.push(selectedServer);
+            console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+            
+            console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+            inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+            window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+        });
+        selectServidores.appendChild(button);
+    });
+}
+
+function inserir(id) {
+    vetor.push(id);
+    console.log(vetor);
+    sessionStorage.servidorSelecionado = selectedServer
+}
+
+// Chamar a função exibirServidoresUsuario
+exibirServidoresUsuario();
+
+
+
+
+
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
 
-
+const idUsuario = sessionStorage.FKBANCO;
 
     function percentCPU(idUsuarioCPU) {
         if (sessionStorage.ID_USUARIO) {
-            let idUsuario = sessionStorage.ID_USUARIO;
+           
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -678,7 +714,7 @@
 
 
 
-    idUsuario = sessionStorage.ID_USUARIO;
+
 
     console.log(idUsuario);
 

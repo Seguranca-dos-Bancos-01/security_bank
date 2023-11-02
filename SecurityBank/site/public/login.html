@@ -151,6 +151,10 @@ function entrar() {
     resposta.json().then(data => {
         console.log("Resposta JSON:", data);
 
+
+ 
+
+
         sessionStorage.ID_USUARIO = data.idFuncionarios;
         sessionStorage.EMAIL_USUARIO = data.email;
         sessionStorage.NOME_USUARIO = data.nome;
@@ -158,19 +162,43 @@ function entrar() {
         sessionStorage.SENHA_USUARIO = data.senha;
         sessionStorage.FKBANCO = data.fkBanco;
         sessionStorage.FKESCALONAMENTO = data.fkEscalonamento;
-        sessionStorage.BANCO = JSON.stringify(data.banco);
-        sessionStorage.BANCOA = JSON.stringify(data.bancoA);
-        sessionStorage.BANCOSO = JSON.stringify(data.bancoSO);
-        sessionStorage.BANCOR = JSON.stringify(data.bancoR);
-        sessionStorage.BANCOIP = JSON.stringify(data.bancoIP);
-        sessionStorage.servidor = JSON.stringify(data.servidor);
-        sessionStorage.servidorA = JSON.stringify(data.servidorA);
-        sessionStorage.servidorSO = JSON.stringify(data.servidorSO);
-        sessionStorage.servidorR = JSON.stringify(data.servidorR);
-        sessionStorage.servidorIP = JSON.stringify(data.servidorIP);
-        sessionStorage.fkPlano = JSON.stringify(data.fkPlano);
+        sessionStorage.servidor = JSON.stringify(data.server)
+for(var i =0; i < data.server.length; i++){  
+      sessionStorage[`bancoTUDO${i+1}`] = JSON.stringify(data.server[i])
+      sessionStorage[`servidor_Apelido${i+1}`] = JSON.stringify(data.server[i].apelido)
+      sessionStorage[`servidor_id${i+1}`] = JSON.stringify(data.server[i].idServidor)
+      sessionStorage[`servidor_SO${i+1}`] = JSON.stringify(data.server[i].sistemaOperacional)
+      sessionStorage[`servidor_Responsavel${i+1}`] = JSON.stringify(data.server[i].responsavelLegal)
+      sessionStorage[`servidor_IP${i+1}`] = JSON.stringify(data.server[i].enderecoIP)
+      sessionStorage[`servidor_dataCompra${i+1}`] = JSON.stringify(data.server[i].dataCompraLocacao)
+      sessionStorage[`servidor_ValidadeServer${i+1}`] = JSON.stringify(data.server[i].dateValidade)
+      sessionStorage[`banco${i+1}`] = JSON.stringify(data.server[i].fkBanco)
+      sessionStorage[`fkStatus_Servidor${i+1}`] = JSON.stringify(data.server[i].fkStatus)
+      sessionStorage[`LocalizacaoFK${i+1}`] = JSON.stringify(data.server[i].fkLocalizacaoMatriz)
+      sessionStorage[`fkPlano${i+1}`] = JSON.stringify(data.server[i].fkPlano)
+    }
 
 
+
+       // sessionStorage.bancoTUDOTESTE = JSON.stringify(data.server)
+        //sessionStorage.BANCO = JSON.stringify(data.banco);
+       // sessionStorage.servidoresID = JSON.stringify(data.servidoresID);
+        //sessionStorage.servidoresapelidos = JSON.stringify(data.servidoresapelidos);
+        //sessionStorage.servidoresSistemas = JSON.stringify(data.servidoresSistemas);
+       // sessionStorage.servidoresResponsaveis = JSON.stringify(data.servidoresResponsaveis);
+       // sessionStorage.servidoresEnderecos = JSON.stringify(data.servidoresEnderecos);
+       // sessionStorage.servidoresDtCompra = JSON.stringify(data.servidoresDtCompra);
+       // sessionStorage.servidoresdatasValidade = JSON.stringify(data.servidoresdatasValidade);
+       // sessionStorage.servidoresfkStatus = JSON.stringify(data.servidoresfkStatus);
+      //  sessionStorage.servidoresLocMatriz = JSON.stringify(data.servidoresLocMatriz);
+      //  sessionStorage.servidoresPlano = JSON.stringify(data.servidoresPlano);
+
+      // if (data.banco && data.banco.length > 0) {
+       //     console.log("entrei")
+       //     sessionStorage.servidoresLocMatriz = JSON.stringify(data.banco[0].servidoresLocMatriz);
+       //     sessionStorage.servidoresPlano = JSON.stringify(data.banco[0].servidoresPlano);
+       //     sessionStorage.servidoresfkStatus = JSON.stringify(data.banco[0].servidoresfkStatus);
+       // }
 
         window.location.href = "./dashboard/dashboard.html";
     }).catch(error => {

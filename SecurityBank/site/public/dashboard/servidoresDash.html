@@ -30,7 +30,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body>
+<body onload="exibirServidoresUsuario()">
 
     <div class="janela">
         <div class="header-left">
@@ -57,10 +57,8 @@
                     <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
-                <div class="opcoesServidores-content">
-                   <a href="servidoresDash.html">Servidor 1 </a> 
-                    <a href="servidoresDash.html">Servidor 2 </a>
-                    <a href="servidoresDash.html">Servidor 3 </a>
+                <div id="opcoesServidores-content"class="opcoesServidores-content">
+
                   </div>
             </div>
  
@@ -148,8 +146,8 @@
         </div>
 
         <div class="dash">
-                <div class="Nome">
-                    <h2>Servidor XX1</h2>
+                <div id="nomeEspec" class="Nome">
+                    <h2></h2>
                 </div>
                 <div class="kpi">
                     <div class="blocoKpi">
@@ -295,24 +293,78 @@
 </footer>
 
 <script>
+exibirServidoresUsuario();
+
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
+var dadoServer;
+    var vetor = [];
+var selectedServer;// Declarar idUsuario fora do escopo da função
+
+function exibirServidoresUsuario() {
+    var server = JSON.parse(sessionStorage.servidor);
+    console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+    var selectServidores = document.getElementById("opcoesServidores-content");
+    selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+    server.forEach(element => {
+        var button = document.createElement('button');
+        button.textContent = element.apelido;
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            selectedServer = element.idServidor; 
+            vetor.push(selectedServer);
+            console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+            
+            console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+            inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+            window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+        });
+        selectServidores.appendChild(button);
+    });
+}
+
+function inserir(id) {
+    vetor.push(id);
+    console.log(vetor);
+    sessionStorage.servidorSelecionado = selectedServer
+}
+
+// Chamar a função exibirServidoresUsuario
+exibirServidoresUsuario();
+dadoServer =  sessionStorage.servidorSelecionado
+console.log(dadoServer)
+window.onload = obterDadosGrafico(dadoServer)
+window.onload = obterDadosGrafico2(dadoServer)
+window.onload = obterDadosGrafico3(dadoServer)
 
 
-
-
-    idUsuario = sessionStorage.ID_USUARIO;
-
-console.log(idUsuario);
 
 document.addEventListener("DOMContentLoaded", function () {
-    obterDadosGrafico(idUsuario);
+    obterDadosGrafico(dadoServer);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    obterDadosGrafico2(dadoServer);
+});
+
+document.addEventListener("DOMContentLoaded", function () {
+    obterDadosGrafico3(dadoServer);
+});
+
+
+   var idUsuario = selectedServer;
+   var idUsuario2 = selectedServer;
+console.log(vetor)
+console.log(selectedServer);
+
+document.addEventListener("DOMContentLoaded", function () {
+    obterDadosGrafico(dadoServer);
 });
 
 function obterDadosGrafico(idUsuario) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
+    if (idUsuario) {
+       
         console.log(idUsuario);
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -445,12 +497,12 @@ function atualizarGrafico(idUsuario, dados, myChart) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    obterDadosGrafico2(idUsuario);
+    obterDadosGrafico2(dadoServer);
 });
 
 function obterDadosGrafico2(idUsuario) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
+    if (idUsuario) {
+       
         console.log(idUsuario);
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -582,12 +634,12 @@ function atualizarGrafico2(idUsuario, dados, myChart2) {
 
 
 document.addEventListener("DOMContentLoaded", function () {
-    obterDadosGrafico3(idUsuario);
+    obterDadosGrafico3(dadoServer);
 });
 
 function obterDadosGrafico3(idUsuario) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
+    if (idUsuario) {
+        
         console.log(idUsuario);
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -715,14 +767,14 @@ function atualizarGrafico3(idUsuario, dados, myChart3) {
         console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
     });
 }
-
+/*
 document.addEventListener("DOMContentLoaded", function () {
     obterDadosGrafico4(idUsuario);
 });
 
 function obterDadosGrafico4(idUsuario) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
+    if (idUsuario) {
+  
         console.log(idUsuario);
 
         document.addEventListener("DOMContentLoaded", function () {
@@ -884,6 +936,6 @@ function atualizarGrafico4(idUsuario, dados, myChart4) {
         console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
     });
 }
-
+*/
 
 </script>
