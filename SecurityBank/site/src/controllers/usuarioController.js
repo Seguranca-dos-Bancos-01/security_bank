@@ -12,40 +12,53 @@ function autenticar(req, res) {
     } else {
 
         usuarioModel.autenticar(email, senha)
-            .then(
-                function (resultadoAutenticar) {
-                    console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
-                    console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
 
-                    if (resultadoAutenticar.length == 1) {
-                        console.log(resultadoAutenticar);
-                    
-                        bancoModel.buscarAquariosPorEmpresa(resultadoAutenticar[0])
-                            .then((resultadoBanco) => {
-                                if (resultadoBanco.length > 0) {
-                                    bancoModel.buscarAquariosPorEmpresa(resultadoBanco[0])
-                                        .then((resultadoServidor) => {
-                                            if (resultadoServidor.length > 0) {
-                                                res.json({
-                                                    idFuncionarios: resultadoAutenticar[0].idFuncionarios,
-                                                    email: resultadoAutenticar[0].email,
-                                                    nome: resultadoAutenticar[0].nome,
-                                                    telefone: resultadoAutenticar[0].telefone,
-                                                    senha: resultadoAutenticar[0].senha,
-                                                    fkBanco: resultadoAutenticar[0].fkBanco,
-                                                    fkEscalonamento: resultadoAutenticar[0].fkEscalonamento,
-                                                    banco: resultadoBanco,
-                                                    bancoA: resultadoBanco[0].apelido,
-                                                    bancoSO: resultadoBanco[0].sistemaOperacional,
-                                                    bancoR: resultadoBanco[0].responsavelLegal,
-                                                    bancoIP: resultadoBanco[0].enderecoIP,
-                                                    servidor: resultadoServidor,
-                                                    servidorA: resultadoServidor[0].apelido,
-                                                    servidorSO: resultadoServidor[0].sistemaOperacional,
-                                                    servidorR: resultadoServidor[0].responsavelLegal,
-                                                    servidorIP: resultadoServidor[0].enderecoIP,
-                                                    fkPlano: resultadoServidor[0].fkPlano
-                                                   
+                if (resultadoAutenticar.length == 1) {
+                    console.log(resultadoAutenticar);
+                    bancoModel.buscarAquariosPorEmpresa(resultadoAutenticar[0])
+                        .then((resultadoBanco) => {
+                               
+
+                            if (resultadoBanco.length > 0) {
+                                bancoModel.buscarAquariosPorEmpresa(resultadoBanco[0])
+                                    .then((resultadoServidor) => {
+                                        if (resultadoServidor.length > 0) {
+                                            res.json({
+                                                idFuncionarios: resultadoAutenticar[0].idFuncionarios,
+                                                email: resultadoAutenticar[0].email,
+                                                nome: resultadoAutenticar[0].nome,
+                                                telefone: resultadoAutenticar[0].telefone,
+                                                senha: resultadoAutenticar[0].senha,
+                                                fkBanco: resultadoAutenticar[0].fkBanco,
+                                                fkEscalonamento: resultadoAutenticar[0].fkEscalonamento,
+                                                server: resultadoBanco,
+                                               // servidoresID: resultadoAutenticar[0].servidores_ids,
+                                               // servidoresapelidos: resultadoAutenticar[0].servidores_apelidos,
+                                               // servidoresSistemas: resultadoAutenticar[0].servidores_sistemas,
+                                               // servidoresResponsaveis: resultadoAutenticar[0].servidores_responsaveis,
+                                               // servidoresEnderecos: resultadoAutenticar[0].servidores_enderecos,
+                                               // servidoresDtCompra: resultadoAutenticar[0].servidores_datasCompra,
+                                              //  servidoresdatasValidade: resultadoAutenticar[0].servidores_datasValidade,
+                                              //  servidoresfkStatus: resultadoAutenticar[0].servidores_fksStatus,
+                                              //  servidoresLocMatriz: resultadoAutenticar[0].servidores_fksLocalizacaoMatriz,
+                                               // servidoresPlano: resultadoAutenticar[0].servidores_fksPlano,
+
+
+                                             //   bancoA: resultadoBanco[0].apelido,
+                                               // bancoSO: resultadoBanco[0].sistemaOperacional,
+                                               // bancoR: resultadoBanco[0].responsavelLegal,
+                                               // bancoIP: resultadoBanco[0].enderecoIP,
+                                               // servidor: resultadoServidor,
+                                               // servidorA: resultadoServidor[0].apelido,
+                                                //servidorSO: resultadoServidor[0].sistemaOperacional,
+                                               // servidorR: resultadoServidor[0].responsavelLegal,
+                                               // servidorIP: resultadoServidor[0].enderecoIP,
+                                               // fkPlano: resultadoServidor[0].fkPlano
+
                                                 });
                                             } else {
                                                 res.status(204).json({ banco: [], servidor: [] });
