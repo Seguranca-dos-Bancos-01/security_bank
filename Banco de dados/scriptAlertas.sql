@@ -125,7 +125,6 @@ CREATE TABLE componentes (
     modelo VARCHAR(45),
     fkServidorComp INT,
     fkBancoComp INT,
-    fkEspecificacoesComp INT,
     fkPlanoComp INT,
     fkMetrica int,
     fkLocacao int,
@@ -217,7 +216,7 @@ JOIN banco a
 ON servidor.fkBanco = a.idBanco 
 WHERE a.idBanco = 1;
 
-
+select * from alerta;
 SELECT * FROM planoContratado;
 SELECT * FROM statusMaquina;
 SELECT * FROM localizacaoMatriz;
@@ -229,6 +228,7 @@ SELECT * FROM servidor;
 SELECT * FROM componentes;
 select*from registros;
 desc registros;
+select * from metrica;
 SELECT * FROM registros where fkservidor =1;
 SELECT
         (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
@@ -249,3 +249,48 @@ FROM registros
 JOIN Componentes ON fkComponentesReg = idComponentes
 WHERE fkBancoReg = 1
 LIMIT 0, 50;
+
+desc registros;
+INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg, fkMetricaReg)
+VALUES
+    ('2023-11-02 10:00:00', 100.50, 1, 1, 1, 1, 1, 1),
+    ('2023-11-02 10:15:00', 110.75, 1, 1, 1, 1, 2, 1),
+    ('2023-11-02 10:30:00', 120.00, 1, 1, 1, 1, 3, 1);
+
+-- Repita esse padrão para adicionar mais registros até ter 30 no total.
+
+-- Inserção 1
+INSERT INTO componentes (nome, modelo, fkServidorComp, fkBancoComp, fkPlanoComp, fkMetrica, fkLocacao)
+VALUES ('Componente 1', 'CPU', 1, 1, 1, 1, 1);
+
+-- Inserção 2
+INSERT INTO componentes (nome, modelo, fkServidorComp, fkBancoComp, fkPlanoComp, fkMetrica, fkLocacao)
+VALUES ('Componente 2', 'Memória RAM', 1, 1, 1, 1, 1);
+
+-- Inserção 3
+INSERT INTO componentes (nome, modelo, fkServidorComp, fkBancoComp, fkPlanoComp, fkMetrica, fkLocacao)
+VALUES ('Componente 3', 'Disco', 1, 1, 1, 1, 1);
+truncate table componentes;
+select * from alerta;
+INSERT INTO alerta (dataAlerta, horaAlerta, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), 1, 1, 3, 1, 1, 1, 1);
+
+SELECT dadosCaptados as ads 
+FROM registros 
+WHERE fkComponentesReg = 2 and fkBancoReg = 1 
+ORDER BY idRegistros DESC 
+LIMIT 1;
+
+select * from registros;
+
+select dadosCaptados as sda from registros where fkComponentesReg =3 and fkBancoReg = 1 order by idRegistros desc limit 1;
+select dadosCaptados as sda from registros where fkComponentesReg =3 and fkBancoReg = 1 order by idRegistros desc limit 1;
+
+update registros set dadosCaptados = 10 where idRegistros = 1;
+
+update registros set dadosCaptados = 20 where idRegistros = 2;
+
+update registros set dadosCaptados = 15 where idRegistros = 3;
+-- nome servidor, nome componente, data, hora e status
+select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT 10;
