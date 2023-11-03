@@ -5,6 +5,64 @@
 * {
   font-family: Poppins, sans-serif;
 }
+
+
+.bar {
+  background-color: #ffffff;
+  height: 20px;
+  border-radius: 10px;
+  position: relative;
+  margin-bottom: 20px;
+  width: 400px;
+  padding-bottom: 20px;
+  margin-top: 2vh;
+}
+
+
+
+
+
+.fill {
+  background-color: #4CAF50;
+  height: 100%;
+  width: 10%;
+  border-radius: 10px;
+  transition: width 0.5s ease;
+}
+
+.percentage {
+  margin-left: 45vh;
+  margin-top: 30px;
+  font-weight: bold;
+}
+
+.container {
+  width: 200px;
+  text-align: center;
+  
+}
+.containerBarra{
+
+  display: flex;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 .label-captura {
   display: flex;
   justify-content: center;
@@ -397,6 +455,7 @@ canvas {
     width: 550px;
     border-radius: 10px;
     box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.136);
+    height: 40vh;
 }
 .visaoGeral h2{
     font-size: 16px;

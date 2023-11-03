@@ -8,6 +8,13 @@ var medidaController = require("../controllers/medidaController");
 router.get("/ultimasPercentCPU/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasCPU(req, res);
 });
+
+router.get("/ultimasPercentREDE/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasREDE(req, res);
+});
+
+
+
 router.get("/ultimasPercentRAM/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasRAM(req, res);
 });
