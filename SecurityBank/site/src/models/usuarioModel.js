@@ -34,7 +34,6 @@ WHERE
     f.senha = '${senha}'
 GROUP BY 
     f.idFuncionarios, f.nome, f.email, f.cpf, f.telefone, f.senha, f.fkBanco, f.fkEscalonamento, b.idBanco, b.nomeFantasia, b.cnpj, b.razaoSocial, b.sigla, b.responsavelLegal;
-
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);

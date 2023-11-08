@@ -16,6 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -150,6 +151,10 @@
         </div>
 
         <div class="dash">
+            <div id="alerta">
+            </div>
+
+
             <div class="Nome">
                 <h2>Painel Geral</h2>
             </div>
@@ -206,28 +211,28 @@
                     </div>
                 </div>
             </div>
-                <div class="barraInformativa">
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="numeroServidores"></span>
-                        <span>Servidores Monitorados</span>
-                    </div>
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="alertaHoras">10</span>
-                        <span>Alertas em 24 horas</span>
-                    </div>
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="InstaveisServidores"></span>
-                        <span>Servidores Instáveis</span>
-                    </div>
+            <div class="barraInformativa">
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="numeroServidores"></span>
+                    <span>Servidores Monitorados</span>
                 </div>
-                <div class="Historico">
-                    <span class="tituloHistorico">Histórico dos Servidores</span>
-                    <div class="graph">
-                        <canvas id="myChartsegundo"></canvas>
-                    </div>
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="alertaHoras">10</span>
+                    <span>Alertas em 24 horas</span>
                 </div>
+                <div class="infoBarra">
+                    <span class="SituacaoBarra" id="InstaveisServidores"></span>
+                    <span>Servidores Instáveis</span>
+                </div>
+            </div>
+            <div class="Historico">
+                <span class="tituloHistorico">Histórico dos Servidores</span>
+                <div class="graph">
+                    <canvas id="myChartsegundo"></canvas>
+                </div>
+            </div>
 
-        
+
         </div>
     </div>
     </div>
@@ -255,7 +260,7 @@
 </body>
 
 </html>
-
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 <script>
  var vetor = [];
 var selectedServer;// Declarar idUsuario fora do escopo da função
@@ -313,10 +318,10 @@ const idUsuario = sessionStorage.FKBANCO;
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirDadosCPU(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosCPU(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -324,20 +329,53 @@ const idUsuario = sessionStorage.FKBANCO;
             });
     }
 
+
     function exibirDadosCPU(response) {
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
             var dado = registro.asd;
+            var limitescpU = {
+                estavel: 18,
+                atencao: 23,
+                emergencia: 50
+            };
+            if (dado > limitescpU.estavel && dado <= limitescpU.atencao) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'CPU EM ATENÇÃO',
+                    text: `CPU com ${dado}% de uso!`,
+                });
+                cadastrarAlertaCPUAtencao()
 
+            } else if (dado > limitescpU.atencao && dado <= limitescpU.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'CPU EM EMERGÊNCIA',
+                    text: `CPU com ${dado}% de uso!`,
+                });
+                cadastrarAlertaCPUEmergencia()
+
+             
+
+            } else if (dado > limitescpU.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'CPU EM URGÊNCIA',
+                    text: `CPU com ${dado}% de uso!`,
+                });
+                cadastrarAlertaCPUUrgencia()
+
+            }
         }
+        
         console.log(dado)
         console.log(response[0])
 
         var cpuServidores = document.getElementById('cpuServidores');
         cpuServidores.innerHTML = `${dado}%`;
 
-
+        var proximaAtualizacao = setTimeout(() => percentCPU(), 5000)
     }
 
 
@@ -350,14 +388,15 @@ const idUsuario = sessionStorage.FKBANCO;
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
 
 
+
         fetch(`/medidas/ultimasPercentRAM/${idUsuario}`, { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirDadosRAM(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosRAM(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -365,21 +404,70 @@ const idUsuario = sessionStorage.FKBANCO;
             });
     }
 
+    
     function exibirDadosRAM(response) {
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
-            var dadoRAM = registro.ads;
+            var dado = registro.asd;
+            var limitesram = {
+                estavel: 45,
+                atencao:55,
+                emergencia: 65
+            };
+            if (dado > limitesram.estavel && dado <= limitesram.atencao) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'MEMÓRIA RAM EM ATENÇÃO',
+                    text: `Memória RAM com ${dado}% de uso!`,
+                });
+                cadastrarAlertaRAMAtencao()
 
+            } else if (dado > limitesram.atencao && dado <= limitesram.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'MEMÓRIA RAM EM EMERGÊNCIA',
+                    text: `Memória RAM com ${dado}% de uso!`,
+                });
+                cadastrarAlertaRAMEmergencia()
+
+             
+
+            } else if (dado > limitesRAM.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'MEMÓRIA RAM EM URGÊNCIA',
+                    text: `Memória RAM com ${dado}% de uso!`,
+                });
+                cadastrarAlertaRAMUrgencia()
+
+            }
         }
-
+        
+        console.log(dado)
         console.log(response[0])
 
-        var RAMServidores = document.getElementById('ramServidores');
-        RAMServidores.innerHTML = `${dadoRAM}%`;
+        var ramServidores = document.getElementById('ramServidores');
+        ramServidores.innerHTML = `${dado}%`;
 
-
+        var proximaAtualizacao = setTimeout(() => percentRAM(), 5000)
     }
+
+    // function exibirDadosRAM(response) {
+    //     console.log('Exibindo dados retornados:')
+    //     for (i = 0; i < response.length; i++) {
+    //         var registro = response[i];
+    //         var dadoRAM = registro.ads;
+
+    //     }
+
+    //     console.log(response[0])
+
+    //     var RAMServidores = document.getElementById('ramServidores');
+    //     RAMServidores.innerHTML = `${dadoRAM}%`;
+
+
+    // }
 
 
 
@@ -395,10 +483,10 @@ const idUsuario = sessionStorage.FKBANCO;
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirDadosDISK(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosDISK(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -406,21 +494,72 @@ const idUsuario = sessionStorage.FKBANCO;
             });
     }
 
-    function exibirDadosDISK(response) {
+  
+    function exibirDadosDISCO(response) {
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
-            var dadoRAM = registro.sda;
+            var dado = registro.asd;
+            var limitesdisco = {
+                estavel: 50,
+                atencao:70,
+                emergencia: 80
+            };
+            if (dado > limitesdisco.estavel && dado <= limitesdisco.atencao) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'DISCO EM ATENÇÃO',
+                    text: `Disco com ${dado}% de uso!`,
+                });
+                cadastrarAlertaDISCOAtencao()
 
+            } else if (dado > limitesdisco.atencao && dado <= limitesdisco.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'DISCO EM EMERGÊNCIA',
+                    text: `Disco com ${dado}% de uso!`,
+                });
+                cadastrarAlertaDISCOAtencao()
+
+             
+
+            } else if (dado > limitesdisco.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'DISCO EM URGÊNCIA',
+                    text: `Disco com ${dado}% de uso!`,
+                });
+                cadastrarAlertaDISCOAtencao()
+
+            }
         }
-
+        
+        console.log(dado)
         console.log(response[0])
 
-        var DISKServidores = document.getElementById('discoServidores');
-        DISKServidores.innerHTML = `${dadoRAM}%`;
+        var discoServidores = document.getElementById('discoServidores');
+        discoServidores.innerHTML = `${dado}%`;
 
-
+        var proximaAtualizacao = setTimeout(() => percentDISCO(), 5000)
     }
+
+
+
+    // function exibirDadosDISK(response) {
+    //     console.log('Exibindo dados retornados:')
+    //     for (i = 0; i < response.length; i++) {
+    //         var registro = response[i];
+    //         var dadoRAM = registro.sda;
+
+    //     }
+
+    //     console.log(response[0])
+
+    //     var DISKServidores = document.getElementById('discoServidores');
+    //     DISKServidores.innerHTML = `${dadoRAM}%`;
+
+
+    // }
 
 
 
@@ -437,10 +576,10 @@ const idUsuario = sessionStorage.FKBANCO;
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirDadosQTD(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosQTD(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -476,10 +615,10 @@ const idUsuario = sessionStorage.FKBANCO;
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibir24h(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibir24h(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -515,10 +654,10 @@ const idUsuario = sessionStorage.FKBANCO;
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); MostrarsInstaveis(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); MostrarsInstaveis(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -555,10 +694,10 @@ const idUsuario = sessionStorage.FKBANCO;
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); MostrarsUltimosAlertas(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); MostrarsUltimosAlertas(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -599,10 +738,10 @@ const idUsuario = sessionStorage.FKBANCO;
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); MostrarServerEmergencia(response);
-                    });
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); MostrarServerEmergencia(response);
+                        });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
             .catch(function (error) {
@@ -878,29 +1017,211 @@ const idUsuario = sessionStorage.FKBANCO;
             });
     }
 
+    var servidorFK = sessionStorage.servidor_id1
+    var planoFK = sessionStorage.fkPlano1
+    var bancoFK = sessionStorage.banco1
+    
+
+    // ALERTA CPU
+
+    function cadastrarAlertaCPUAtencao() {
+
+    // Enviando o valor da nova input
+    fetch("/medidas/cadastrarAlertaCPUAtencao", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        servidorFKServer: servidorFK,
+        planoFKServer: planoFK,
+        bancoFKServer: bancoFK,
+      })
+    })
+  
+      
+
+    return false;
+    }
+
+
+    function cadastrarAlertaCPUEmergencia() {
+
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaCPUEmergencia", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    // crie um atributo que recebe o valor recuperado aqui
+    // Agora vá para o arquivo routes/usuario.js
+    servidorFKServer: servidorFK,
+    planoFKServer: planoFK,
+    bancoFKServer: bancoFK,
+  })
+})
+
+return false;
+    }
+
+
+    function cadastrarAlertaCPUUrgencia() {
+
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaCPUUrgencia", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    // crie um atributo que recebe o valor recuperado aqui
+    // Agora vá para o arquivo routes/usuario.js
+    servidorFKServer: servidorFK,
+    planoFKServer: planoFK,
+    bancoFKServer: bancoFK,
+  })
+})
+
+return false;
+    }
+
+
+    // ALERTA MEMORIA RAM
+
+    function cadastrarAlertaRAMAtencao() {
+
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaRAMAtencao", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    // crie um atributo que recebe o valor recuperado aqui
+    // Agora vá para o arquivo routes/usuario.js
+    servidorFKServer: servidorFK,
+    planoFKServer: planoFK,
+    bancoFKServer: bancoFK,
+  })
+})
+
+  
+
+return false;
+}
+
+
+function cadastrarAlertaRAMEmergencia() {
+
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaRAMEmergencia", {
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify({
+// crie um atributo que recebe o valor recuperado aqui
+// Agora vá para o arquivo routes/usuario.js
+servidorFKServer: servidorFK,
+planoFKServer: planoFK,
+bancoFKServer: bancoFK,
+})
+})
+
+return false;
+}
+
+
+function cadastrarAlertaRAMUrgencia() {
+
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaRAMUrgencia", {
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify({
+// crie um atributo que recebe o valor recuperado aqui
+// Agora vá para o arquivo routes/usuario.js
+servidorFKServer: servidorFK,
+planoFKServer: planoFK,
+bancoFKServer: bancoFK,
+})
+})
+
+return false;
+}
 
 
 
+// ALERTA DISCO
+
+function cadastrarAlertaDISCOAtencao() {
+
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaDISCOAtencao", {
+  method: "POST",
+  headers: {
+    "Content-Type": "application/json",
+  },
+  body: JSON.stringify({
+    // crie um atributo que recebe o valor recuperado aqui
+    // Agora vá para o arquivo routes/usuario.js
+    servidorFKServer: servidorFK,
+    planoFKServer: planoFK,
+    bancoFKServer: bancoFK,
+  })
+})
+
+  
+
+return false;
+}
 
 
+function cadastrarAlertaDISCOEmergencia() {
+
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaDISCOEmergencia", {
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify({
+// crie um atributo que recebe o valor recuperado aqui
+// Agora vá para o arquivo routes/usuario.js
+servidorFKServer: servidorFK,
+planoFKServer: planoFK,
+bancoFKServer: bancoFK,
+})
+})
+
+return false;
+}
 
 
+function cadastrarAlertaDISCOUrgencia() {
 
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaDISCOUrgencia", {
+method: "POST",
+headers: {
+"Content-Type": "application/json",
+},
+body: JSON.stringify({
+// crie um atributo que recebe o valor recuperado aqui
+// Agora vá para o arquivo routes/usuario.js
+servidorFKServer: servidorFK,
+planoFKServer: planoFK,
+bancoFKServer: bancoFK,
+})
+})
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+return false;
+}
 
 
 

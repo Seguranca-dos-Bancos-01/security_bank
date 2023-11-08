@@ -12,7 +12,7 @@
     <link rel="stylesheet" href="./css/login.css">
     <link rel="stylesheet" href="./css/navBar.css">
 
- 
+
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -73,19 +73,19 @@
             <div class="rodape">
 
                 <div class="rodape_contato">
-                
+
                     <h1>Security Bank</h1>
                     <h4>TECH & SOLUTIONS</h4>
-                
+
                     <h3>Telefone: (00) 12345-6789</h3>
                     <h3>E-mail: securitybank@email.com</h3>
                     <h3>Endereço: Rua Haddock Loobo, 595
-                    Cerqueira César, São Paulo - SP,
-                    01414-001</h3>
+                        Cerqueira César, São Paulo - SP,
+                        01414-001</h3>
                 </div>
-                
+
                 <div class="rodape_links">
-                
+
                     <h2>Links</h2>
                     <h3><a href="index.html">Home</a></h3>
                     <h3><a href="index.html#planos">Planos</a></h3>
@@ -94,20 +94,20 @@
                     <h3><a href="faleconosco.html">Fale Conosco</a></h3>
                     <h3><a href="cadastro.html">Cadastro</a></h3>
                     <h3><a href="login.html">Login</a></h3>
-                  </div>
-                
-                  <div class="rodape_redes">
-                <h2>Redes Sociais</h2>
+                </div>
+
+                <div class="rodape_redes">
+                    <h2>Redes Sociais</h2>
                     <h3>Instagram</h3>
                     <h3>Linkedln</h3>
-                  </div>
                 </div>
-                
-                
-                   <div class="rodape_direitos"> &copy;  2023 copyrights by SecurityBank. All Rights Reserved</div>
             </div>
-            <!--footer fim-->
+
+
+            <div class="rodape_direitos"> &copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
         </div>
+        <!--footer fim-->
+    </div>
     </div>
     <!-- Fim Login -->
     <div id="div_aguardar" class="loading-div"></div>
@@ -118,10 +118,10 @@
 
 </html>
 <script>
-//  document.getElementById("Cad").onclick = function () {
-//         location.href = "./login.html";
-//     };
-function entrar() {
+    //  document.getElementById("Cad").onclick = function () {
+    //         location.href = "./login.html";
+    //     };
+    function entrar() {
         var emailVar = document.getElementById('email_input').value;
         var senhaVar = document.getElementById('senha_input').value;
 
@@ -144,14 +144,12 @@ function entrar() {
                 senhaServer: senhaVar
             })
         })
-        
+
         .then(function (resposta) {
     console.log("ESTOU NO THEN DO entrar()!")
     if (resposta.ok) {
     resposta.json().then(data => {
         console.log("Resposta JSON:", data);
-
-
  
 
 

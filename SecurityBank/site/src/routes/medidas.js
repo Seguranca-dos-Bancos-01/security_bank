@@ -3,7 +3,56 @@ var router = express.Router();
 
 var medidaController = require("../controllers/medidaController");
 
+router.post("/cadastrarAlertaCPUAtencao", function (req, res) {
+    medidaController.cadastrarAlertaCPUAtencao(req, res);
+})
 
+
+router.post("/cadastrarAlertaCPUEmergencia", function (req, res) {
+    medidaController.cadastrarAlertaCPUEmergencia(req, res);
+})
+
+
+router.post("/cadastrarAlertaCPUUrgencia", function (req, res) {
+    medidaController.cadastrarAlertaCPUUrgencia(req, res);
+})
+
+
+
+router.post("/cadastrarAlertaRAMAtencao", function (req, res) {
+    medidaController.cadastrarAlertaRAMAtencao(req, res);
+})
+
+
+router.post("/cadastrarAlertaRAMEmergencia", function (req, res) {
+    medidaController.cadastrarAlertaRAMEmergencia(req, res);
+})
+
+
+router.post("/cadastrarAlertaRAMUrgencia", function (req, res) {
+    medidaController.cadastrarAlertaRAMUrgencia(req, res);
+})
+
+
+router.post("/cadastrarAlertaDISCOAtencao", function (req, res) {
+    medidaController.cadastrarAlertaDISCOAtencao(req, res);
+})
+
+
+router.post("/cadastrarAlertaDISCOEmergencia", function (req, res) {
+    medidaController.cadastrarAlertaDISCOEmergencia(req, res);
+})
+
+
+router.post("/cadastrarAlertaDISCOUrgencia", function (req, res) {
+    medidaController.cadastrarAlertaDISCOUrgencia(req, res);
+})
+
+
+
+router.get("/tempo-real/:idAlerta", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlerta(req, res);
+})
 
 router.get("/ultimasPercentCPU/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasCPU(req, res);
@@ -40,6 +89,9 @@ router.get("/SelectContas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasSelectContas(req, res);
 });
 
+router.get("/HistoricoAlertas/:idUsuario", function (req, res) {
+    medidaController.buscarHistoricoAlertas(req, res);
+});
 
 
 router.get("/ultimasServidores/:idUsuario", function (req, res) {

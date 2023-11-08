@@ -303,10 +303,14 @@ canvas {
 .tipos{
     display: flex;
     justify-content: space-around;
+    margin-left: 5%;
+    margin-right: 5%;
 }
 .tipo {
     font-size: 22px;
     color: #000F53;
+    width: 200px;
+
 }
 .direitos{
   padding-bottom: 20px;
@@ -328,6 +332,7 @@ canvas {
 .msgAlerta{
     color: #ffffff;
     font-size: 18px;
+    width: 200px;
 }
 .alerta2{
     display: flex;

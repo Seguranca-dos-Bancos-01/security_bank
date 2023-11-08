@@ -15,6 +15,8 @@
     <link rel="stylesheet" href="../css/perfilDash.css">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -31,6 +33,7 @@
 <!-- <body onload=" atualizarFeed()"> -->
 
     <body onload="exibirServidoresUsuario()">
+<body onload="percentCPU(),percentRAM(),percentDISK()">
 
     <div class="janela">
         <div class="header-left">
@@ -157,23 +160,25 @@
             <div class="blocoInformacoes">
                 <div class="blocoHeaderPerfil">
                     <h2 class="subtituloPerfil">Dados Cadastrados</h2>
-                    <div id="botoesEdicao"><button class="imgEditarPerfil" onclick="editarPerfil()"><img src="../assets/imgs/editarAdm.png" alt=""></button></div>
+                    <div id="botoesEdicao"><button class="imgEditarPerfil" onclick="editarPerfil()"><img
+                                src="../assets/imgs/editarAdm.png" alt=""></button></div>
                 </div>
 
                 <span class="camposPerfil">Nome Completo</span><br>
-                <div id="inputNome"><input id="nomeFuncionario" class="inputPerfil" type="text"  disabled="disabled"><br></div>
+                <div id="inputNome"><input id="nomeFuncionario" class="inputPerfil" type="text" disabled="disabled"><br>
+                </div>
 
                 <span class="camposPerfil">CPF</span><br>
-                <input id="cpfFuncionario" class="inputPerfil" type="text"  disabled="disabled"><br>
+                <input id="cpfFuncionario" class="inputPerfil" type="text" disabled="disabled"><br>
 
                 <span class="camposPerfil">Telefone</span><br>
-                <input id="telefoneFuncionario" class="inputPerfil" type="text"  disabled="disabled"><br>
+                <input id="telefoneFuncionario" class="inputPerfil" type="text" disabled="disabled"><br>
 
                 <span class="camposPerfil">E-mail</span><br>
-                <input id="emailFuncionario" class="inputPerfil" type="text"  disabled="disabled">
+                <input id="emailFuncionario" class="inputPerfil" type="text" disabled="disabled">
 
                 <span class="camposPerfil">Senha</span><br>
-                <input id="senhaFuncionario" class="inputPerfil" type="text"  disabled="disabled">
+                <input id="senhaFuncionario" class="inputPerfil" type="text" disabled="disabled">
 
                 <div class="bloco2">
                     <div class="bloco3">
@@ -187,7 +192,7 @@
                 </div>
             </div>
             <div class="rodapeDash">
-                <div    class="itens">
+                <div class="itens">
                     <div class="blocos">
                         <h1>Security Bank</h1>
                         <h4>TECH & SOLUTIONS</h4>
@@ -199,20 +204,21 @@
                     </div>
                     <div class="blocos">
                         <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
-                        Cerqueira César, São Paulo - SP,<br>
-                        01414-001</span>
+                            Cerqueira César, São Paulo - SP,<br>
+                            01414-001</span>
                     </div>
                 </div>
-                <div class="direitos">&copy;  2023 copyrights by SecurityBank. All Rights Reserved</div>
+                <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
             </div>
         </div>
     </div>
-   
+
 
 
 </body>
 
 </html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 
 <script>
 
@@ -258,13 +264,28 @@ exibirServidoresUsuario();
 
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
 
+    let proximaAtualizacao;
+
+    var idUsuario = sessionStorage.banco1
+    var idUsuarioCPU = sessionStorage.servidor_id1
+    var idUsuarioRAM = sessionStorage.servidor_id1
+    var idUsuarioDISK = sessionStorage.servidor_id1
+
+    window.onload = percentCPU(idUsuarioCPU),
+        percentRAM(idUsuarioRAM),
+        percentDISK(idUsuarioDISK);
+
+    percentCPU(idUsuarioCPU)
+    percentRAM(idUsuarioRAM)
+    percentDISK(idUsuarioDISK)
+
     document.getElementById('nomeFuncionario').value = sessionStorage.NOME_USUARIO;
     document.getElementById('cpfFuncionario').value = sessionStorage.CPF_USUARIO;
     document.getElementById('telefoneFuncionario').value = sessionStorage.TELEFONE_USUARIO;
     document.getElementById('emailFuncionario').value = sessionStorage.EMAIL_USUARIO;
     document.getElementById('senhaFuncionario').value = sessionStorage.SENHA_USUARIO;
- 
-    
+
+
 
     function editarPerfil() {
         botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="salvarPerfil()"><img src="../assets/imgs/salvarConta (2).png" alt=""></button'
@@ -286,71 +307,71 @@ exibirServidoresUsuario();
     }
 
     function atualizarPerfil() {
-    //Recupere o valor da nova input pelo nome do id
-    // Agora vá para o método fetch logo abaixo
-    var nomePerfilVar = nomeFuncionario.value;
-    var emailPerfilVar = emailFuncionario.value;
-    var senhaPerfilVar = senhaFuncionario.value;
-    var cpfPerfilVar = cpfFuncionario.value;
-    var telefonePerfilVar = telefoneFuncionario.value;
-    var idPerfilVar = sessionStorage.ID_USUARIO;
-    if (
-      nomePerfilVar == "" ||idPerfilVar == "" ||
-      emailPerfilVar == "" ||
-      senhaPerfilVar == "" ||
-       cpfPerfilVar == ""|| telefonePerfilVar == ""
-    ) {
-      cardErro.style.display = "block";
-      mensagem_erro.innerHTML =
-        "(Mensagem de erro para todos os campos em branco)";
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var nomePerfilVar = nomeFuncionario.value;
+        var emailPerfilVar = emailFuncionario.value;
+        var senhaPerfilVar = senhaFuncionario.value;
+        var cpfPerfilVar = cpfFuncionario.value;
+        var telefonePerfilVar = telefoneFuncionario.value;
+        var idPerfilVar = sessionStorage.ID_USUARIO;
+        if (
+            nomePerfilVar == "" || idPerfilVar == "" ||
+            emailPerfilVar == "" ||
+            senhaPerfilVar == "" ||
+            cpfPerfilVar == "" || telefonePerfilVar == ""
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "(Mensagem de erro para todos os campos em branco)";
 
-      finalizarAguardar();
-      return false;
-    } else {
-      setInterval(sumirMensagem, 5000);
-    }
-
-    // Enviando o valor da nova input
-    fetch("/usuarios/atualizarPerfil", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        nomePerfilServer: nomePerfilVar,
-        emailPerfilServer: emailPerfilVar,
-        senhaPerfilServer: senhaPerfilVar,
-        cpfPerfilServer: cpfPerfilVar,
-        telefonePerfilServer: telefonePerfilVar,
-        idPerfilServer: idPerfilVar,
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          cardErro.style.display = "block";
-
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
-
-          limparFormulario();
-          
+            finalizarAguardar();
+            return false;
         } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
+            setInterval(sumirMensagem, 5000);
         }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        
-      });
 
-    return false;
-  }
+        // Enviando o valor da nova input
+        fetch("/usuarios/atualizarPerfil", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                nomePerfilServer: nomePerfilVar,
+                emailPerfilServer: emailPerfilVar,
+                senhaPerfilServer: senhaPerfilVar,
+                cpfPerfilServer: cpfPerfilVar,
+                telefonePerfilServer: telefonePerfilVar,
+                idPerfilServer: idPerfilVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    cardErro.style.display = "block";
+
+                    mensagem_erro.innerHTML =
+                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
+
+                    setTimeout(() => {
+                        window.location = "login.html";
+                    }, "2000");
+
+                    limparFormulario();
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+    }
 </script>

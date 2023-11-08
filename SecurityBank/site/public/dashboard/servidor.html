@@ -16,6 +16,8 @@
     <link rel="stylesheet" href="../css/navbarDash.css">
     <script src="../js/sessao.js"></script>
     <script src="./../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
 
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
@@ -32,6 +34,7 @@
 <!-- <body onload=" atualizarFeed()"> -->
 
 <body onload="exibirServidoresUsuario()">
+<body  onload="percentCPU(),percentRAM(),percentDISK()">
 
     <div class="janela">
         <div class="header-left">
@@ -246,6 +249,7 @@
 </body>
 
 </html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 
 <script>
 
@@ -301,6 +305,21 @@ exibirServidoresUsuario();
 
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
     codigo = sessionStorage.fkBanco
+
+    let proximaAtualizacao;
+
+var idUsuario = sessionStorage.banco1
+var idUsuarioCPU = sessionStorage.servidor_id1
+var idUsuarioRAM = sessionStorage.servidor_id1
+var idUsuarioDISK = sessionStorage.servidor_id1
+
+window.onload = percentCPU(idUsuarioCPU),
+    percentRAM(idUsuarioRAM),
+    percentDISK(idUsuarioDISK);
+
+percentCPU(idUsuarioCPU)
+percentRAM(idUsuarioRAM)
+percentDISK(idUsuarioDISK)
 
     function limparForm() {
         document.getElementById('apelidoServidor').value = "";

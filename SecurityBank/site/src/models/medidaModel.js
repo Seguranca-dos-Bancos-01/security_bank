@@ -1,5 +1,168 @@
 var database = require("../database/config");
 
+function cadastrarAlertaCPUAtencao(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 1, 1, 1, ${bancoFK}, ${planoFK}, 1);
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+function cadastrarAlertaCPUEmergencia(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 1, 2, 1, ${bancoFK}, ${planoFK}, 1);
+`;
+
+console.log("Executando a instrução SQL: \n" + instrucao);
+return database.executar(instrucao);
+}
+
+function cadastrarAlertaCPUUrgencia(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 1, 3, ${servidorFK}, ${bancoFK},${planoFK}, 1);
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+
+
+
+function cadastrarAlertaRAMAtencao(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(),"Atenção", 1, 2, 1, 1, ${bancoFK}, ${planoFK}, 1);
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+function cadastrarAlertaRAMEmergencia(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 2, 2, 1, ${bancoFK}, ${planoFK}, 1);
+`;
+
+console.log("Executando a instrução SQL: \n" + instrucao);
+return database.executar(instrucao);
+}
+
+function cadastrarAlertaRAMUrgencia(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 2, 3, 1, ${bancoFK},${planoFK}, 1);
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+
+
+
+
+function cadastrarAlertaDISCOAtencao(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 3, 1, 1, ${bancoFK}, ${planoFK}, 1);
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+function cadastrarAlertaDISCOEmergencia(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 3, 2, 1, ${bancoFK}, ${planoFK}, 1);
+`;
+
+console.log("Executando a instrução SQL: \n" + instrucao);
+return database.executar(instrucao);
+}
+
+function cadastrarAlertaDISCOUrgencia(servidorFK, planoFK, bancoFK) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+
+    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
+    //  e na ordem de inserção dos dados.
+    var instrucao = `
+    INSERT INTO alerta (dataAlerta, horaAlerta, situcao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 3, 3, 1, ${bancoFK},${planoFK}, 1);
+`;
+
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+
+function buscarMedidasEmTempoRealAlerta(idAlerta) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT 
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 order by idRegistros desc limit 1) AS PROC,
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 order by idRegistros desc limit 1) AS RAM,
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 order by idRegistros desc limit 1) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN componentes ON fkComponentesReg = idComponentes
+    ;`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT 
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 order by idRegistros desc limit 1) AS PROC,
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 order by idRegistros desc limit 1) AS RAM,
+        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 order by idRegistros desc limit 1) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN componentes ON fkComponentesReg = idComponentes
+    ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js NOS ALERTASSSSSSSSSSSSSSSs\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
@@ -153,18 +316,41 @@ function buscarUltimasMedidasUltimoAlerta(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT IFNULL(fkServidorAlertas, 0) AS numBanco,  IFNULL(descricaoAlerta, 'Nenhum') AS descr, IFNULL(dataRegistro, 'Sem Alertas') hr FROM Alertas WHERE fkBancoAlertas = 1 UNION ALL SELECT 0, 'Nenhum', 'Sem Alertas' WHERE NOT EXISTS (
-            SELECT 1
-            FROM Alertas
-            WHERE fkBancoAlertas = 1
-        );
+        instrucaoSql = `SELECT IFNULL(fkServidor, 0) AS numBanco, 
+        IFNULL(descricaoAlerta, 'Nenhum') AS descr, 
+        IFNULL(CONCAT(dataAlerta, ' ', horaAlerta), 'Sem Alertas') AS hr 
+ FROM alerta 
+ WHERE fkBanco = 1
+ 
+ UNION
+ 
+ SELECT 0 AS numBanco, 
+        'Nenhum' AS descr, 
+        'Sem Alertas' AS hr 
+ WHERE NOT EXISTS (
+     SELECT 1
+     FROM alerta
+     WHERE fkBanco = 1
+ );
+ 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT IFNULL(fkServidorAlertas, 0) AS numBanco,  IFNULL(descricaoAlerta, 'Nenhum') AS descr, IFNULL(dataRegistro, 'Sem Alertas') hr FROM Alertas WHERE fkBancoAlertas = 1 UNION ALL SELECT 0, 'Nenhum', 'Sem Alertas' WHERE NOT EXISTS (
-            SELECT 1
-            FROM Alertas
-            WHERE fkBancoAlertas = 1
-        );
+        instrucaoSql = `SELECT IFNULL(fkServidor, 0) AS numBanco, 
+        IFNULL(descricaoAlerta, 'Nenhum') AS descr, 
+        IFNULL(CONCAT(dataAlerta, ' ', horaAlerta), 'Sem Alertas') AS hr 
+ FROM alerta 
+ WHERE fkBanco = 1
+ 
+ UNION
+ 
+ SELECT 0 AS numBanco, 
+        'Nenhum' AS descr, 
+        'Sem Alertas' AS hr 
+ WHERE NOT EXISTS (
+     SELECT 1
+     FROM alerta
+     WHERE fkBanco = 1
+ );
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -214,7 +400,28 @@ function buscarUltimasMedidasSelectContas(idUsuario, limite_linhas) {
 }
 
 
+function buscarHistoricoAlertas(idUsuario, limite_linhas) {
 
+    let instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT  ${limite_linhas};`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT ${limite_linhas};`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return null; // Retornando nulo se nenhuma condição for satisfeita
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 
 
@@ -305,10 +512,11 @@ LIMIT 0, 50;
 
 
 
+
 function buscarUltimasMedidas2(idUsuario2, limite_linhas) {
 
     instrucaoSql2 = ''
-//COLOCAR O ID DO USUARIO
+    //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join statusMaquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
@@ -623,30 +831,14 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 38 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
-    FROM registros
-    JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+        SELECT         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,     FROM registros     JOIN Componentes ON fkComponentesReg = idComponentes     WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
     
     
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
-        SELECT
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 38 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC LIMIT 1), 0) AS porta
-    FROM registros
-    JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+        SELECT         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,     FROM registros     JOIN Componentes ON fkComponentesReg = idComponentes     WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
     
     `;
     } else {
@@ -666,6 +858,7 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
 
 module.exports = {
     buscarUltimasMedidas,
+    buscarMedidasEmTempoRealAlerta,
     buscarMedidasEmTempoReal,
     buscarUltimasMedidas2,
     buscarMedidasEmTempoReal2,
@@ -686,5 +879,15 @@ module.exports = {
     buscarUltimasMedidasServidores3,
     buscarMedidasEmTempoRealServidores4,
     buscarUltimasMedidasServidores4,
-    buscarUltimasMedidasREDE
+    buscarUltimasMedidasREDE,
+    cadastrarAlertaCPUAtencao,
+    cadastrarAlertaCPUEmergencia,
+    cadastrarAlertaCPUUrgencia,
+    cadastrarAlertaRAMAtencao,
+    cadastrarAlertaRAMEmergencia,
+    cadastrarAlertaRAMUrgencia,
+     cadastrarAlertaDISCOAtencao,
+     cadastrarAlertaDISCOEmergencia,
+     cadastrarAlertaDISCOUrgencia,
+     buscarHistoricoAlertas,
 }
