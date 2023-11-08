@@ -273,6 +273,30 @@ function buscarUltimasMedidasDISK(idUsuario, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+function buscarUltimasMedidasValidade(idUsuario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select dataCompraLocacao as val from servidor where  fkBanco = 1;
+
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select dataCompraLocacao as val from servidor where  fkBanco = 1;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarUltimasMedidasQTD(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
@@ -915,4 +939,5 @@ module.exports = {
      buscarHistoricoAlertas,
     buscarDiasFaltando,
    
+    buscarUltimasMedidasValidade,
 }
