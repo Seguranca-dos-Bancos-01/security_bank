@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body onload="exibirServidoresUsuario()">
+    <div>
+        <div id="mostrarServidores">
+            <select name="" id="SelectServidores"></select>
+        </div>
+
+        <div id="MostrarRestoPag">
+            <div id="MostrarServer"></div>
+            <div id="MostrarDados"></div>
+        </div>
+    </div>
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+<script>
+    var ServidorSelecione = null;
+    var selectedServer = null
+    function exibirServidoresUsuario() {
+        var server = JSON.parse(sessionStorage.servidor);
+        var selectServidores = document.getElementById("SelectServidores");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            selectServidores.innerHTML += `<option value="${element.idServidor}">Servidor ${element.idServidor}</option>`;
+        });
+    }
+
+    // Evento de seleção do usuário
+    document.getElementById("SelectServidores").addEventListener("change", function () {
+        selectedServer = this.value;
+        MostrarProcessos(selectedServer);
+        diasFaltando(selectedServer);
+    });
+
+    function diasFaltando(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/diasFaltando/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse();
+                            buscarDiasFaltando(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    var dado = null;
+    var Compra = null;
+    var Validade = null;
+
+    function buscarDiasFaltando(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            dado = registro.dias_restantes;
+            Compra = registro.DtC;
+            validade = registro.DtV;
+        }
+        console.log(dado);
+        console.log(response[0]);
+
+        var cpuServidores = document.getElementById('MostrarDados');
+        cpuServidores.innerHTML += `<h1>faltam ${dado} dias faltando</h1>
+        <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
+        <span> Validade do Servidor</span> <div class= "boxValidade">${validade}</div>
+        <button onclick="AlterarDataValidade(dado,Compra,Validade)">Mudar</button>
+    `;
+    }
+
+    function AlterarDataValidade(dado, Compra, Validade) {
+        var cpuServidores = document.getElementById('MostrarDados');
+        cpuServidores.innerHTML = `<h1>faltam ${dado} dias faltando</h1>
+        <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
+        <span> Validade do Servidor</span>   <input id="validadeServidor" class="inputServidor" type="date">
+        <button onclick="Alterar(selectedServer)">Alterar</button> 
+        <button onclick="CancelarAlteracoes()">Concelar Alterações</button>
+    `;
+    }
+
+    function Alterar(selectedServer) {
+
+        var ValidadeNovaVar = validadeServidor.value;
+        var serverVar = selectedServer
+        if (
+            ValidadeNovaVar == ""
+        ) {
+            cardErro.style.display = "block";
+            mensagem_erro.innerHTML =
+                "(Mensagem de erro para todos os campos em branco)";
+
+
+        }
+
+        fetch("/usuarios/AlterarValidade", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+
+                validadeServidorServer: ValidadeNovaVar,
+                ServerS: serverVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+                if (resposta.ok) {
+                    Swal.fire({
+                    icon: 'warning',
+                    title: 'dados atualizados!',
+                    text: `volte para tela Home da dashboard`,
+                });
+
+               
+
+                } else {
+                    throw "Houve um erro ao tentar realizar o cadastro!";
+                }
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+
+    }
+
+    function CancelarAlteracoes() {
+        var cpuServidores = document.getElementById('MostrarDados');
+        cpuServidores.innerHTML = `<h1>faltam ${dado} dias faltando</h1>
+        <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
+        <span> Validade do Servidor</span> <div class= "boxValidade">${validade}</div>
+        <button onclick="AlterarDataValidade(dado,Compra,Validade)">Mudar</button>
+    `;
+    }
+
+    function MostrarProcessos(id) {
+        document.getElementById("MostrarServer").innerHTML = `Locação do Servidor ${id}`;
+    }
+</script>

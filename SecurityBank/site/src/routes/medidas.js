@@ -90,7 +90,9 @@ router.get("/SelectContas/:idUsuario", function (req, res) {
 });
 
 router.get("/HistoricoAlertas/:idUsuario", function (req, res) {
-    medidaController.buscarHistoricoAlertas(req, res);
+    medidaController.buscarHistoricoAlertas(req, res);});
+router.get("/diasFaltando/:selectedServer", function (req, res) {
+    medidaController.buscarDiasFaltando(req, res);
 });
 
 
@@ -128,7 +130,6 @@ router.get("/tempo-realServidores4/:idUsuario", function (req, res) {
 
 
 
-
 router.get("/ultimas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
@@ -144,7 +145,6 @@ router.get("/ultimas2/:idUsuario2", function (req, res) {
 
 router.get("/tempo-real2/:idUsuario2", function (req, res) {
     medidaController.buscarMedidasEmTempoReal2(req, res);
-})
-
+});
 
 module.exports = router;

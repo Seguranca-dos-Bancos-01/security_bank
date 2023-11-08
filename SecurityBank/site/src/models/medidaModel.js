@@ -186,7 +186,11 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
 
 
-function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
+function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {}
+
+
+
+function buscarDiasFaltando(idSelect) {
 
     instrucaoSql = ''
 
@@ -195,7 +199,26 @@ function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+        instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `SELECT 
+        DATEDIFF(dateValidade, CURDATE()) AS dias_restantes, 
+        DATE_FORMAT(dataCompraLocacao, '%d/%m/%Y') AS DtC,
+        DATE_FORMAT(dateValidade, '%d/%m/%Y') AS DtV
+    FROM 
+        servidor
+    WHERE 
+        dateValidade >= CURDATE();
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT 
+        DATEDIFF(dateValidade, CURDATE()) AS dias_restantes, 
+        DATE_FORMAT(dataCompraLocacao, '%d/%m/%Y') AS DtC,
+        DATE_FORMAT(dateValidade, '%d/%m/%Y') AS DtV
+    FROM 
+        servidor
+    WHERE 
+        dateValidade >= CURDATE();
     
     `;
     } else {
@@ -890,4 +913,6 @@ module.exports = {
      cadastrarAlertaDISCOEmergencia,
      cadastrarAlertaDISCOUrgencia,
      buscarHistoricoAlertas,
+    buscarDiasFaltando,
+   
 }
