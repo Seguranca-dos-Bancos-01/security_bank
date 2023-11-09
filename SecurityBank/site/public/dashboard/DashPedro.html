@@ -1,0 +1,403 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Painel Geral</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/Rde.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+</head>
+
+<!-- <body onload=" atualizarFeed()"> -->
+
+<body
+    onload="exibirServidoresUsuario(),percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia()">
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes localizacao">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+         
+            <div class="opcoesServidores">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+                <div id="opcoesServidores-content"class="opcoesServidores-content">
+                   
+                  </div>
+            </div>
+ 
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gabriel</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Marcela</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div> -->
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="recFacial.html">
+                    <img src="../assets/imgs/recFacial.png" alt="">
+                    <span>Reconhecimento Facial</span>
+                </a>
+            </div> -->
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessao()">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+
+            <div class="Nome">
+                <h2>Fluxo de Rede</h2>
+            </div>
+            <div class="kpi">
+                <div class="blocoKpi">
+                    <div class="img">
+                        <img src="../assets/imgs/kpi.png" alt="">
+                    </div>
+                    <div class="info">
+                        <span class="Situacao" id="cpuServidores">Servidor XX1</span>
+
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+
+                    </div>
+                    <div class="info">
+
+                        <span class="Situacao" id="ramServidores">Servidor XX1</span>
+
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+
+                    </div>
+                    <div class="info">
+
+                        <span class="Situacao" id="discoServidores">Servidor XX1</span>
+
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+
+                    </div>
+                    <div class="info">
+
+                        <span class="Situacao" id="discoServidores">Servidor XX1</span>
+
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+
+                    </div>
+                    <div class="info">
+
+                        <span class="Situacao" id="discoServidores">Servidor XX1</span>
+
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+
+                    </div>
+                    <div class="info">
+
+                        <span class="Situacao" id="discoServidores">Servidor XX1</span>
+
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+
+                    </div>
+                    <div class="info">
+
+                        <span class="Situacao" id="discoServidores">Servidor XX1</span>
+
+                    </div>
+                </div>
+
+            </div>
+            <div class="dadosGraficos">
+
+                <div class="VisaoGeralServidores">
+                    <span class="tituloVisaoGeral">Visão Geral Servidores</span>
+
+                </div>
+
+                <div class="VisaoGeralServidores">
+                    <span class="tituloVisaoGeral">Visão Geral Servidores</span>
+    
+                </div>
+
+
+
+            </div>
+            
+
+            <div class="dadosGraficos">
+
+                <div class="VisaoGeralServidores">
+                    <span class="tituloVisaoGeral">Visão Geral Servidores</span>
+
+                </div>
+
+                <div class="VisaoGeralServidores">
+                    <span class="tituloVisaoGeral">Visão Geral Servidores</span>
+    
+                </div>
+
+
+                
+            </div>
+
+            
+
+
+        </div>
+        
+ 
+
+
+
+            </div>
+            
+           
+</div>
+
+
+
+
+        </div>
+    </div>
+    </div>
+    <div class="rodapeDash">
+        <div class="itens">
+            <div class="blocos">
+                <h1>Security Bank</h1>
+                <h4>TECH & SOLUTIONS</h4>
+            </div>
+            <div class="blocos">
+                <span><b>Telefone:</b>(11)40028922</span>
+                <br>
+                <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+            </div>
+            <div class="blocos">
+                <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                    Cerqueira César, São Paulo - SP,<br>
+                    01414-001</span>
+            </div>
+        </div>
+        <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
+    </div>
+
+
+</body>
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+<script>
+ var vetor = [];
+var selectedServer;// Declarar idUsuario fora do escopo da função
+
+function exibirServidoresUsuario() {
+    var server = JSON.parse(sessionStorage.servidor);
+    console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+    var selectServidores = document.getElementById("opcoesServidores-content");
+    selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+    server.forEach(element => {
+        var button = document.createElement('button');
+        button.textContent = element.apelido;
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            selectedServer = element.idServidor; 
+            vetor.push(selectedServer);
+            console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+            
+            console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+            inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+            window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+        });
+        selectServidores.appendChild(button);
+    });
+}
+
+function inserir(id) {
+    vetor.push(id);
+    console.log(vetor);
+    sessionStorage.servidorSelecionado = selectedServer
+}
+
+// Chamar a função exibirServidoresUsuario
+exibirServidoresUsuario();
+
+
+
+nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+let proximaAtualizacao;
+
+const idUsuario = sessionStorage.FKBANCO;
+
+function percentCPU(idUsuarioCPU) {
+    if (sessionStorage.ID_USUARIO) {
+        let idUsuario = sessionStorage.ID_USUARIO;
+        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+    }
+    else { console.error("ID do usuário não encontrada no sessionStorage."); }
+
+
+    fetch(`/medidas/ultimasPercentCPU/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+                    .then(function (response) {
+                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                        response.reverse(); exibirDadosCPU(response);
+                    });
+            } else { console.error('Nenhum dado encontrado ou erro na API'); }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+
+function exibirDadosCPU(response) {
+    console.log('Exibindo dados retornados:')
+    for (i = 0; i < response.length; i++) {
+        var registro = response[i];
+        var dado = registro.asd;
+
+    }
+    
+    console.log(dado)
+    console.log(response[0])
+
+    var cpuServidores = document.getElementById('cpuServidores');
+    cpuServidores.innerHTML = `${dado}%`;
+
+    var proximaAtualizacao = setTimeout(() => percentCPU(), 5000)
+}
+
+
+
+
+
+
+
+
+
+</script>
