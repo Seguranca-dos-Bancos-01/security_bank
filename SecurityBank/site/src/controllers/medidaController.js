@@ -826,6 +826,38 @@ function buscarDiasFaltando(req, res) {
 
 
 
+
+
+
+
+
+
+
+
+function buscarUltimasMedidasIpRede(req, res) {
+
+    var idUsuario = req.params.idUsuario;
+
+    medidaModel.buscarUltimasMedidasIpRede(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoRealAlerta,
@@ -851,7 +883,7 @@ module.exports = {
     buscarMedidasEmTempoRealServidores4,
     buscarUltimasMedidasREDE,
     buscarUltimasMedidasValidade,
-    
+    buscarUltimasMedidasIpRede,
     cadastrarAlertaCPUAtencao,
     cadastrarAlertaCPUEmergencia,
     cadastrarAlertaCPUUrgencia,

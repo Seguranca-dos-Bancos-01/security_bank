@@ -64,6 +64,12 @@ router.get("/ultimasPercentREDE/:idUsuario", function (req, res) {
 
 
 
+router.get("/ultimasIpREDE/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasIpRede(req, res);
+});
+
+
+
 router.get("/ultimasPercentRAM/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasRAM(req, res);
 });

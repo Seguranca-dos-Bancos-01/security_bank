@@ -186,6 +186,36 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
 
 
+
+
+function buscarUltimasMedidasIpRede(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select enderecoIP as redeIP from servidor where idServidor = ${idUsuario};
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select enderecoIP as redeIP from servidor where idServidor = ${idUsuario};
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+
+
+
+
+
 function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {}
 
 
@@ -938,6 +968,6 @@ module.exports = {
      cadastrarAlertaDISCOUrgencia,
      buscarHistoricoAlertas,
     buscarDiasFaltando,
-   
+    buscarUltimasMedidasIpRede,
     buscarUltimasMedidasValidade,
 }
