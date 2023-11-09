@@ -352,12 +352,12 @@ let proximaAtualizacao;
 const idUsuario = sessionStorage.FKBANCO;
 
 function percentCPU(idUsuarioCPU) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
+    if (sessionStorage.FKBANCO) {
+        let idUsuario = sessionStorage.FKBANCO;
         console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
     }
     else { console.error("ID do usuário não encontrada no sessionStorage."); }
-
+a
 
     fetch(`/medidas/ultimasPercentCPU/${idUsuario}`, { cache: 'no-store' })
         .then(function (response) {
