@@ -1,3 +1,131 @@
+
+
+.ConecctOrNot {
+  display: flex; /* Adicionando o display flex para utilizar os alinhamentos */
+  width: 100%;
+  justify-content: center;
+  align-items: center;
+  height: 75%; 
+  position: relative;
+  display: flex; /* Adicionando o display flex para alinhar verticalmente */
+  justify-content: center; /* Centralizando horizontalmente */
+  align-items: center; /* Alterando para 75vh */
+ 
+}
+
+.wifi-symbol {
+  width: 40vh;
+  height: 20vh;
+  position: relative;
+  display: flex; /* Adicionando o display flex para alinhar verticalmente */
+  justify-content: center; /* Centralizando horizontalmente */
+  align-items: center; /* Centralizando verticalmente */
+}
+.wifi-bar1 {
+  width: 80px;
+  height: 90px;
+  position: absolute;
+  border: 21px solid #000;
+  border-radius: 7400px;
+  border-bottom: none;
+  border-right: none;
+  border-left: none ;
+  /* left: 10px; */
+  opacity: 1;
+}
+
+.wifi-bar2 {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  border: 21px solid #000;
+  border-radius: 50%;
+  border-bottom: none;
+  border-right: none;
+  border-left: none ;
+  /* left: 10px; */
+  opacity: 1;
+}
+
+.wifi-bar3 {
+  width: 80px;
+  height: 80px;
+  position: absolute;
+  border: 21px solid #000;
+  border-radius: 50%;
+  border-bottom: none;
+  border-right: none;
+  border-left: none ;
+  /* left: 10px; */
+  opacity: 1;
+}
+
+.wifi-bar4 {
+  width: 25vh;
+  height: 25vh;
+  position: absolute;
+  border-radius: 100px;
+  opacity: 1;
+  background-color: #34b605;
+  
+}
+
+.wifi-bar-1 {
+  top: 5px;
+  left: 5px;
+  animation: wifi-disappear-1 6s linear infinite;
+}
+
+.wifi-bar-2 {
+  top: 35px;
+  left: 5px;
+  animation: wifi-disappear-2 6s linear infinite;
+}
+
+.wifi-bar-3 {
+  top: 65px;
+  left: 5px;
+  animation: wifi-disappear-3 6s linear infinite;
+}
+.wifi-bar-4 {
+ 
+}
+
+@keyframes wifi-disappear-1 {
+  0%, 25%, 75% {
+    opacity: 1;
+  }
+  33%, 58% {
+    opacity: 0;
+  }
+}
+
+@keyframes wifi-disappear-2 {
+  0%, 50%, 100% {
+    opacity: 1;
+  }
+  58%, 83% {
+    opacity: 0;
+  }
+}
+
+@keyframes wifi-disappear-3 {
+  0%, 75%, 100% {
+    opacity: 1;
+  }
+  83%, 100% {
+    opacity: 0;
+  }
+}
+
+
+
+
+
+
+
+
+
 /* pagina mural */
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
@@ -445,7 +573,7 @@ canvas {
 }
 
 .dadosGraficos {
-  width: 100%;
+  width: 90%;
   margin: auto;
   display: flex;
   align-items: center;
@@ -539,22 +667,34 @@ canvas {
 }
 
 .VisaoGeralServidores {
-  width: 40%;
+  width: 50%;
   height: 40vh;
   margin: 20px;
   background-color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+  /* display: flex; */
+  /* flex-direction: column; */
+  /* justify-content: center; */
+  /* align-items: center; */
   border-radius: 20px;
-margin-left: 10vh;
+
   box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
 }
+.Ip{
+  width: 100%;
+  height: 40%;
+  top: 4vh;
+  margin-left: 5vh;
+}
+
 
 .tituloVisaoGeral {
+  
   align-self: flex-start;
-  margin: 20px 20px 0px 20px; 
+  margin-left: 5vh; 
+margin-top: 5vh;
   color: black;
   font-weight: 600;
 }
+
+
+
