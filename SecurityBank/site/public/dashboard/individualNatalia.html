@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Previsão e Análise Fluxo de Alertas</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/individualNatalia.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+</head>
+
+<!-- <body onload=" atualizarFeed()"> -->
+
+<body
+    onload="BuscarSetores()">
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes localizacao">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+         
+            <div class="opcoesServidores">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+                <div id="opcoesServidores-content"class="opcoesServidores-content">
+                   
+                  </div>
+            </div>
+ 
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gabriel</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Marcela</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div> -->
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="recFacial.html">
+                    <img src="../assets/imgs/recFacial.png" alt="">
+                    <span>Reconhecimento Facial</span>
+                </a>
+            </div> -->
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessao()">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+
+            <div class="Nome">
+                <h2>Previsão e Análise Fluxo de Alertas</h2>
+            </div>
+            
+            <div class="divEscolhaServidor">
+                <span class="textoIndividual">Selecione um Servidor</span>
+                <select name="" id="selectServidor" class="selectServidor">
+                </select>
+            </div>
+
+            <div class="divConteudoPagina">
+                <div class="linhaConteudo">
+                    <span id="nomeServidorSelecionado">Servidor XX1</span>
+                    <select name="" id="" class="selectServidor">
+                        <option value="cpu" selected>CPU</option>
+                        <option value="ram">Memória RAM</option>
+                        <option value="disco">Disco</option>
+                    </select>
+                </div>
+                
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <div class="rodapeDash">
+        <div class="itens">
+            <div class="blocos">
+                <h1>Security Bank</h1>
+                <h4>TECH & SOLUTIONS</h4>
+            </div>
+            <div class="blocos">
+                <span><b>Telefone:</b>(11)40028922</span>
+                <br>
+                <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+            </div>
+            <div class="blocos">
+                <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                    Cerqueira César, São Paulo - SP,<br>
+                    01414-001</span>
+            </div>
+        </div>
+        <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+    nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+    function BuscarSetores() {
+        fetch("/usuarios/listarServidores").then(function (resposta) {
+
+            if (resposta.ok) {
+                // if (resposta.status == 204) {
+                //     var feed = document.getElementById("feed_container");
+                //     var mensagem = document.createElement("span");
+                //     mensagem.innerHTML = "Nenhum resultado encontrado."
+                //     feed.appendChild(mensagem);
+                //     throw "Nenhum resultado encontrado!!";
+                // }
+                console.log("ENTREII")
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+
+                    const inputServidor = document.getElementById('selectServidor');
+
+                    for (let i = 0; i < resposta.length; i++) {
+
+                        var servidorResposta = resposta[i];
+
+                        var OptionServidor = document.createElement("option");
+                        OptionServidor.setAttribute("Value", servidorResposta.idServidor)
+                        OptionServidor.innerHTML = servidorResposta.apelido;
+                        inputServidor.appendChild(OptionServidor);
+
+                    }
+                    // finalizarAguardar();
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            // finalizarAguardar();
+        });
+    }
+
+</script>

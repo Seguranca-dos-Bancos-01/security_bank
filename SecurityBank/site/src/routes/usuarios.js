@@ -35,5 +35,10 @@ router.post("/AlterarValidade", function (req, res) {
     usuarioController.UpdateValidadeNova(req, res);
 });
 
+/*INDIVIDUAL NALTIA */
+
+router.get("/listarServidores", function (req, res) {
+    usuarioController.listarServidores(req, res);
+});
 
 module.exports = router;
