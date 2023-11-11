@@ -43,10 +43,10 @@
             </div>
 
             <div class="opcao">
-                <span>Olá,<b id="nomeAdm">Nome ADM</b></span>
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
             </div>
 
-            <div class="TipoAcesso">
+            <div id="nivelACesso" class="TipoAcesso">
                 <span>Administrador</span>
             </div>
 
@@ -62,7 +62,8 @@
                     <span>Servidores</span>
                 </a>
                 <div id="opcoesServidores-content"class="opcoesServidores-content">
-                  
+
+ 
                   </div>
             </div>
  
@@ -71,6 +72,10 @@
                     <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
                 </a>
+                <!-- <div class="opcoesServidores-content">
+                    <a href="alertas.html">Visão 1</a>
+                    <a href="alertas.html">Visão 2</a>
+                </div> -->
             </div>
             <!-- <div class="opcoes">
                 <a href="">
@@ -114,7 +119,7 @@
                     <span>Perfil</span>
                 </a>
             </div>
-            <div class="opcoes">
+            <div id="gerenciarAcesso" class="opcoes">
                 <a href="GerenciarAcesso.html">
                     <img src="../assets/controle.png" alt="">
                     <span>Controle de acesso</span>
@@ -256,6 +261,14 @@
 
 
 <script>
+
+var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+
+if (escalonamentoFunc != 3) {
+    nivelACesso.innerHTML = `<span>Funcionário</span>`
+    var divAcesso = document.getElementById("gerenciarAcesso")
+    divAcesso.style.display = 'none';
+}
  
  var vetor = [];
 var selectedServer;// Declarar idUsuario fora do escopo da função
@@ -278,6 +291,7 @@ function exibirServidoresUsuario() {
             inserir(selectedServer); // Chamar a função inserir com o ID do servidor
             window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
         });
+        button.classList.add('botaodropdown');
         selectServidores.appendChild(button);
     });
 }

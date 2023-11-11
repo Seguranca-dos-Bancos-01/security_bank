@@ -480,6 +480,7 @@ canvas {
     margin-top: 10px;
     margin-left: 20px;
     box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    width: 300px;
 }
 .ultimosAlertas span{
     color: #FFFFFF

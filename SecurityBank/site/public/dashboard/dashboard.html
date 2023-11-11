@@ -31,10 +31,9 @@
     <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
 
-<!-- <body onload=" atualizarFeed()"> -->
+<body onload=" exibirServidoresUsuario()">
 
-<body
-    onload="exibirServidoresUsuario(),percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia()">
+<body onload="percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia(), ReceberUltimosAlertas1()">
 
     <div class="janela">
         <div class="header-left">
@@ -46,24 +45,24 @@
                 <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
             </div>
 
-            <div class="TipoAcesso">
+            <div id="nivelACesso" class="TipoAcesso">
                 <span>Administrador</span>
             </div>
 
-            <div class="opcoes localizacao">
+            <div class="opcoes  localizacao">
                 <a href="dashboard.html">
                     <img src="../assets/home.png" alt="">
                     <span>Home</span>
                 </a>
             </div>
-         
             <div class="opcoesServidores">
                 <a href="servidoresDash.html">
                     <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
                 <div id="opcoesServidores-content"class="opcoesServidores-content">
-                   
+
+ 
                   </div>
             </div>
  
@@ -72,6 +71,10 @@
                     <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
                 </a>
+                <!-- <div class="opcoesServidores-content">
+                    <a href="alertas.html">Visão 1</a>
+                    <a href="alertas.html">Visão 2</a>
+                </div> -->
             </div>
             <!-- <div class="opcoes">
                 <a href="">
@@ -115,7 +118,7 @@
                     <span>Perfil</span>
                 </a>
             </div>
-            <div class="opcoes">
+            <div id="gerenciarAcesso" class="opcoes">
                 <a href="GerenciarAcesso.html">
                     <img src="../assets/controle.png" alt="">
                     <span>Controle de acesso</span>
@@ -194,8 +197,9 @@
                 <div class="blocoalertasLateralDash">
                     <div class="UltimoAlerta">
                         <span class="tituloUltimoAlerta">Último Alerta</span>
-                        <span id="TituloAlerta">Servidor XX1 está superaquecendo</span>
-                        <span id="dataAlerta">29/09/2023 as 13h45</span>
+                        <div id="AlertaUltimoMostrar">
+
+                        </div>
                     </div>
                     <div class="ServidorEmergencia">
                         <span class="tituloServidorEmergencia">Servidor em Emergência</span>
@@ -213,7 +217,7 @@
             </div>
             <div class="barraInformativa">
                 <div class="infoBarra">
-                    <span class="SituacaoBarra" id="numeroServidores"></span>
+                    <span class="SituacaoBarra" id="numeroServidores">12</span>
                     <span>Servidores Monitorados</span>
                 </div>
                 <div class="infoBarra">
@@ -221,7 +225,7 @@
                     <span>Alertas em 24 horas</span>
                 </div>
                 <div class="infoBarra">
-                    <span class="SituacaoBarra" id="InstaveisServidores"></span>
+                    <span class="SituacaoBarra" id="InstaveisServidores">0</span>
                     <span>Servidores Instáveis</span>
                 </div>
             </div>
@@ -262,7 +266,80 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 <script>
- var vetor = [];
+
+var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+
+if (escalonamentoFunc != 3) {
+    nivelACesso.innerHTML = `<span>Funcionário</span>`
+    var divAcesso = document.getElementById("gerenciarAcesso")
+    divAcesso.style.display = 'none';
+}
+
+// var idUsuarioServer = sessionStorage.banco1
+// //    var idUsuarioServer = sessionStorage.ID_USUARIO;
+
+//     function ReceberUltimosAlertas1(idUsuarioServer) {
+//         if (sessionStorage.ID_USUARIO) {
+//             let idUsuario = sessionStorage.ID_USUARIO;
+//             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+//         }
+//         else { console.error("ID do usuário não encontrada no sessionStorage."); }
+
+
+//         fetch(`/medidas/buscarUltimosAlertas1/${idUsuario}`, { cache: 'no-store' })
+//             .then(function (response) {
+//                 if (response.ok) {
+//                     response.json()
+//                         .then(function (response) {
+//                             console.log(`Dados recebidos: GRaIFCO AAAAAAAAAAAAAAA ${JSON.stringify(response)}`);
+//                             response.reverse();
+//                             MostrarUltimosAlertas1(response);
+
+//                         });
+//                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
+//             })
+//             .catch(function (error) {
+//                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+//             });
+//     }
+
+//     function MostrarUltimosAlertas1(response) {
+//         console.log('Exibindo dados retornados:')
+//         var dadosMostrar = document.getElementById('AlertaUltimoMostrar');
+//         dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+
+//         // var vetorServidor;
+//         // var vetornomeComponente;
+//         // var vetordataAlerta;
+//         // var vetorhoraAlerta;
+
+
+//         for (var i = 0; i < response.length; i++) {
+//             var registro = response[i];
+
+//             console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAA: ${JSON.stringify(registro)}`)
+//             var nomeServidor = registro.nomeServidor;
+//             var nomeComponente = registro.nomeComponente;
+//             var dataAlerta = registro.dataAlerta;
+//             var horaAlerta = registro.horaAlerta;
+//             var statusAlerta = registro.situacaoAlerta;
+
+//             var elemento = document.createElement('AlertaUltimoMostrar');
+
+//             var conteudo = `
+//                         <span id="TituloAlerta">${nomeServidor}está em ${statusAlerta}</span><br>
+//                         <span id="dataAlerta"> ${dataAlerta} as  ${horaAlerta}</span>
+//             `;
+
+//             elemento.innerHTML = conteudo;
+//             dadosMostrar.appendChild(elemento);
+
+//         }
+//     }
+
+//     ReceberUltimosAlertas1()
+
+var vetor = [];
 var selectedServer;// Declarar idUsuario fora do escopo da função
 
 function exibirServidoresUsuario() {
@@ -283,6 +360,7 @@ function exibirServidoresUsuario() {
             inserir(selectedServer); // Chamar a função inserir com o ID do servidor
             window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
         });
+        button.classList.add('botaodropdown');
         selectServidores.appendChild(button);
     });
 }
@@ -304,11 +382,11 @@ exibirServidoresUsuario();
 
     let proximaAtualizacao;
 
-const idUsuario = sessionStorage.FKBANCO;
+    const idUsuario = sessionStorage.FKBANCO;
 
     function percentCPU(idUsuarioCPU) {
         if (sessionStorage.FKBANCO) {
-           
+
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -356,7 +434,7 @@ const idUsuario = sessionStorage.FKBANCO;
                 });
                 cadastrarAlertaCPUEmergencia()
 
-             
+
 
             } else if (dado > limitescpU.emergencia) {
                 Swal.fire({
@@ -368,7 +446,7 @@ const idUsuario = sessionStorage.FKBANCO;
 
             }
         }
-        
+
         console.log(dado)
         console.log(response[0])
 
@@ -404,7 +482,7 @@ const idUsuario = sessionStorage.FKBANCO;
             });
     }
 
-    
+
     function exibirDadosRAM(response) {
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
@@ -412,7 +490,7 @@ const idUsuario = sessionStorage.FKBANCO;
             var dado = registro.asd;
             var limitesram = {
                 estavel: 45,
-                atencao:55,
+                atencao: 55,
                 emergencia: 65
             };
             if (dado > limitesram.estavel && dado <= limitesram.atencao) {
@@ -431,7 +509,7 @@ const idUsuario = sessionStorage.FKBANCO;
                 });
                 cadastrarAlertaRAMEmergencia()
 
-             
+
 
             } else if (dado > limitesRAM.emergencia) {
                 Swal.fire({
@@ -443,7 +521,7 @@ const idUsuario = sessionStorage.FKBANCO;
 
             }
         }
-        
+
         console.log(dado)
         console.log(response[0])
 
@@ -494,7 +572,7 @@ const idUsuario = sessionStorage.FKBANCO;
             });
     }
 
-  
+
     function exibirDadosDISCO(response) {
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
@@ -502,7 +580,7 @@ const idUsuario = sessionStorage.FKBANCO;
             var dado = registro.asd;
             var limitesdisco = {
                 estavel: 50,
-                atencao:70,
+                atencao: 70,
                 emergencia: 80
             };
             if (dado > limitesdisco.estavel && dado <= limitesdisco.atencao) {
@@ -521,7 +599,7 @@ const idUsuario = sessionStorage.FKBANCO;
                 });
                 cadastrarAlertaDISCOAtencao()
 
-             
+
 
             } else if (dado > limitesdisco.emergencia) {
                 Swal.fire({
@@ -533,7 +611,7 @@ const idUsuario = sessionStorage.FKBANCO;
 
             }
         }
-        
+
         console.log(dado)
         console.log(response[0])
 
@@ -638,6 +716,11 @@ const idUsuario = sessionStorage.FKBANCO;
         console.log(response[0])
 
         var cpuServidores = document.getElementById('alertaHoras');
+        if (dado > 5) {
+        cpuServidores.classList.add('textoVermelho');
+        }else {
+        cpuServidores.classList.add('textoVerde');
+        }
         cpuServidores.innerHTML = `${dado}`;
 
 
@@ -677,6 +760,11 @@ const idUsuario = sessionStorage.FKBANCO;
         console.log(response[0])
 
         var cpuServidores = document.getElementById('InstaveisServidores');
+        if (dado > 0) {
+        cpuServidores.classList.add('textoVermelho');
+        }else {
+        cpuServidores.classList.add('textoVerde');
+        }
         cpuServidores.innerHTML = `${dado}`;
 
 
@@ -1020,72 +1108,72 @@ const idUsuario = sessionStorage.FKBANCO;
     var servidorFK = sessionStorage.servidor_id1
     var planoFK = sessionStorage.fkPlano1
     var bancoFK = sessionStorage.banco1
-    
+
 
     // ALERTA CPU
 
     function cadastrarAlertaCPUAtencao() {
 
-    // Enviando o valor da nova input
-    fetch("/medidas/cadastrarAlertaCPUAtencao", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        servidorFKServer: servidorFK,
-        planoFKServer: planoFK,
-        bancoFKServer: bancoFK,
-      })
-    })
-  
-      
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaCPUAtencao", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
 
-    return false;
+
+
+        return false;
     }
 
 
     function cadastrarAlertaCPUEmergencia() {
 
-// Enviando o valor da nova input
-fetch("/medidas/cadastrarAlertaCPUEmergencia", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    // crie um atributo que recebe o valor recuperado aqui
-    // Agora vá para o arquivo routes/usuario.js
-    servidorFKServer: servidorFK,
-    planoFKServer: planoFK,
-    bancoFKServer: bancoFK,
-  })
-})
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaCPUEmergencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
 
-return false;
+        return false;
     }
 
 
     function cadastrarAlertaCPUUrgencia() {
 
-// Enviando o valor da nova input
-fetch("/medidas/cadastrarAlertaCPUUrgencia", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    // crie um atributo que recebe o valor recuperado aqui
-    // Agora vá para o arquivo routes/usuario.js
-    servidorFKServer: servidorFK,
-    planoFKServer: planoFK,
-    bancoFKServer: bancoFK,
-  })
-})
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaCPUUrgencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
 
-return false;
+        return false;
     }
 
 
@@ -1093,135 +1181,135 @@ return false;
 
     function cadastrarAlertaRAMAtencao() {
 
-// Enviando o valor da nova input
-fetch("/medidas/cadastrarAlertaRAMAtencao", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    // crie um atributo que recebe o valor recuperado aqui
-    // Agora vá para o arquivo routes/usuario.js
-    servidorFKServer: servidorFK,
-    planoFKServer: planoFK,
-    bancoFKServer: bancoFK,
-  })
-})
-
-  
-
-return false;
-}
-
-
-function cadastrarAlertaRAMEmergencia() {
-
-// Enviando o valor da nova input
-fetch("/medidas/cadastrarAlertaRAMEmergencia", {
-method: "POST",
-headers: {
-"Content-Type": "application/json",
-},
-body: JSON.stringify({
-// crie um atributo que recebe o valor recuperado aqui
-// Agora vá para o arquivo routes/usuario.js
-servidorFKServer: servidorFK,
-planoFKServer: planoFK,
-bancoFKServer: bancoFK,
-})
-})
-
-return false;
-}
-
-
-function cadastrarAlertaRAMUrgencia() {
-
-// Enviando o valor da nova input
-fetch("/medidas/cadastrarAlertaRAMUrgencia", {
-method: "POST",
-headers: {
-"Content-Type": "application/json",
-},
-body: JSON.stringify({
-// crie um atributo que recebe o valor recuperado aqui
-// Agora vá para o arquivo routes/usuario.js
-servidorFKServer: servidorFK,
-planoFKServer: planoFK,
-bancoFKServer: bancoFK,
-})
-})
-
-return false;
-}
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaRAMAtencao", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
 
 
 
-// ALERTA DISCO
-
-function cadastrarAlertaDISCOAtencao() {
-
-// Enviando o valor da nova input
-fetch("/medidas/cadastrarAlertaDISCOAtencao", {
-  method: "POST",
-  headers: {
-    "Content-Type": "application/json",
-  },
-  body: JSON.stringify({
-    // crie um atributo que recebe o valor recuperado aqui
-    // Agora vá para o arquivo routes/usuario.js
-    servidorFKServer: servidorFK,
-    planoFKServer: planoFK,
-    bancoFKServer: bancoFK,
-  })
-})
-
-  
-
-return false;
-}
+        return false;
+    }
 
 
-function cadastrarAlertaDISCOEmergencia() {
+    function cadastrarAlertaRAMEmergencia() {
 
-// Enviando o valor da nova input
-fetch("/medidas/cadastrarAlertaDISCOEmergencia", {
-method: "POST",
-headers: {
-"Content-Type": "application/json",
-},
-body: JSON.stringify({
-// crie um atributo que recebe o valor recuperado aqui
-// Agora vá para o arquivo routes/usuario.js
-servidorFKServer: servidorFK,
-planoFKServer: planoFK,
-bancoFKServer: bancoFK,
-})
-})
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaRAMEmergencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
 
-return false;
-}
+        return false;
+    }
 
 
-function cadastrarAlertaDISCOUrgencia() {
+    function cadastrarAlertaRAMUrgencia() {
 
-// Enviando o valor da nova input
-fetch("/medidas/cadastrarAlertaDISCOUrgencia", {
-method: "POST",
-headers: {
-"Content-Type": "application/json",
-},
-body: JSON.stringify({
-// crie um atributo que recebe o valor recuperado aqui
-// Agora vá para o arquivo routes/usuario.js
-servidorFKServer: servidorFK,
-planoFKServer: planoFK,
-bancoFKServer: bancoFK,
-})
-})
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaRAMUrgencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
 
-return false;
-}
+        return false;
+    }
+
+
+
+    // ALERTA DISCO
+
+    function cadastrarAlertaDISCOAtencao() {
+
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaDISCOAtencao", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
+
+
+
+        return false;
+    }
+
+
+    function cadastrarAlertaDISCOEmergencia() {
+
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaDISCOEmergencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
+
+        return false;
+    }
+
+
+    function cadastrarAlertaDISCOUrgencia() {
+
+        // Enviando o valor da nova input
+        fetch("/medidas/cadastrarAlertaDISCOUrgencia", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
+
+        return false;
+    }
 
 
 

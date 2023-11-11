@@ -447,6 +447,54 @@ function buscarUltimasMedidasSelectContas(idUsuario, limite_linhas) {
 }
 
 
+function buscarUltimosAlertas1(idUsuario, limite_linhas) {
+
+    let instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT  1;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT 1;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return null; // Retornando nulo se nenhuma condição for satisfeita
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimosAlertas2(idUsuarioServer, limite_linhas) {
+
+    let instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT  3;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT 3;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return null; // Retornando nulo se nenhuma condição for satisfeita
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
 function buscarHistoricoAlertas(idUsuario, limite_linhas) {
 
     let instrucaoSql = '';
@@ -469,8 +517,6 @@ join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT $
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
-
-
 
 
 
@@ -938,6 +984,7 @@ module.exports = {
      cadastrarAlertaDISCOUrgencia,
      buscarHistoricoAlertas,
     buscarDiasFaltando,
-   
+    buscarUltimosAlertas1,
+    buscarUltimosAlertas2,
     buscarUltimasMedidasValidade,
 }

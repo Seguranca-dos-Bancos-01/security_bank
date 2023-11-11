@@ -47,7 +47,8 @@
 
 <body onload="exibirServidoresUsuario()">
 
-    <body onload="percentCPU(),percentRAM(),percentDISK()">
+
+<body onload="percentCPU(),percentRAM(),percentDISK(), ReceberUltimosAlertas2()">
 
         <div class="janela">
             <div class="header-left">
@@ -56,65 +57,70 @@
                 </div>
 
                 <div class="opcao">
-                    <span>Olá,<b id="nomeAdm">Nome ADM</b></span>
+                    <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
                 </div>
-
-                <div class="TipoAcesso">
+    
+                <div id="nivelACesso" class="TipoAcesso">
                     <span>Administrador</span>
                 </div>
-
+    
                 <div class="opcoes">
                     <a href="dashboard.html">
                         <img src="../assets/home.png" alt="">
                         <span>Home</span>
                     </a>
                 </div>
-                <div class="opcoesServidores">
+                <div class="opcoesServidores  localizacao">
                     <a href="servidoresDash.html">
                         <img src="../assets/servidor.png" alt="">
                         <span>Servidores</span>
                     </a>
-                    <div id="opcoesServidores-content" class="opcoesServidores-content">
-
-                    </div>
+                    <div id="opcoesServidores-content"class="opcoesServidores-content">
+    
+     
+                      </div>
                 </div>
-
+     
                 <div class="opcoes">
                     <a href="">
                         <img src="../assets/servidor.png    " alt="">
                         <span>Visões</span>
                     </a>
+                    <!-- <div class="opcoesServidores-content">
+                        <a href="alertas.html">Visão 1</a>
+                        <a href="alertas.html">Visão 2</a>
+                    </div> -->
                 </div>
                 <!-- <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Gabriel</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Gustavo</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Marcela</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Natália</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Pedro</span>
-                </a>
-            </div> -->
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Gabriel</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Gustavo</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Marcela</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Natália</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Pedro</span>
+                    </a>
+                </div> -->
                 <div class="opcoes">
                     <a href="alertas.html">
                         <img src="../assets/alerta.png" alt="">
@@ -127,7 +133,7 @@
                         <span>Perfil</span>
                     </a>
                 </div>
-                <div class="opcoes">
+                <div id="gerenciarAcesso" class="opcoes">
                     <a href="GerenciarAcesso.html">
                         <img src="../assets/controle.png" alt="">
                         <span>Controle de acesso</span>
@@ -146,11 +152,11 @@
                     </a>
                 </div>
                 <!-- <div class="opcoes">
-                <a href="recFacial.html">
-                    <img src="../assets/imgs/recFacial.png" alt="">
-                    <span>Reconhecimento Facial</span>
-                </a>
-            </div> -->
+                    <a href="recFacial.html">
+                        <img src="../assets/imgs/recFacial.png" alt="">
+                        <span>Reconhecimento Facial</span>
+                    </a>
+                </div> -->
                 <div class="linha">
                     <span></span>
                 </div>
@@ -198,7 +204,7 @@
                 <div class="Dados">
                     <div class="ultimosAlertas">
                         <h3>Ultimos Alertas</h3>
-                        <div class="cardAlertas">
+                        <!-- <div class="cardAlertas">
                             <h4>CPU em Emergência</h4>
                             <span>29/09/2023 as 13h45</span>
                         </div>
@@ -209,7 +215,7 @@
                         <div class="cardAlertas">
                             <h4>Disco em análise</h4>
                             <span>10/05/2023 as 10h09</span>
-                        </div>
+                        </div> -->
                     </div>
                     <div class="visaoGeral">
                         <h2>Visão Geral do Servidor</h2>
@@ -315,7 +321,80 @@
 
 <script>
 
+var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
+if (escalonamentoFunc != 3) {
+    nivelACesso.innerHTML = `<span>Funcionário</span>`
+    var divAcesso = document.getElementById("gerenciarAcesso")
+    divAcesso.style.display = 'none';
+}
+    
+
+var idUsuarioServer = sessionStorage.banco1;
+
+function ReceberUltimosAlertas2(idUsuarioServer) {
+    if (sessionStorage.ID_USUARIO) {
+        let idUsuarioServer = sessionStorage.ID_USUARIO;
+        console.log(idUsuarioServer); document.addEventListener("DOMContentLoaded", function () { });
+    }
+    else { console.error("ID do usuário não encontrada no sessionStorage."); }
+
+
+    fetch(`/medidas/buscarUltimosAlertas2/${idUsuarioServer}`, { cache: 'no-store' })
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+                    .then(function (response) {
+                        console.log(`Dados recebidos: GRaIFCO AAAAAAAAAAAAAAA ${JSON.stringify(response)}`);
+                        response.reverse();
+                        MostrarUltimosAlertas2(response);
+
+                    });
+            } else { console.error('Nenhum dado encontrado ou erro na API'); }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+function MostrarUltimosAlertas2(response) {
+    console.log('Exibindo dados retornados:')
+    var dadosMostrar = document.getElementById('AlertaUltimoMostrar');
+    dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+
+    // var vetorServidor;
+    // var vetornomeComponente;
+    // var vetordataAlerta;
+    // var vetorhoraAlerta;
+
+
+    for (var i = 0; i < response.length; i++) {
+        var registro = response[i];
+
+        console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAA: ${JSON.stringify(registro)}`)
+        var nomeServidor = registro.nomeServidor;
+        var nomeComponente = registro.nomeComponente;
+        var dataAlerta = registro.dataAlerta;
+        var horaAlerta = registro.horaAlerta;
+        var statusAlerta = registro.situacaoAlerta;
+
+        var elemento = document.createElement('AlertaUltimoMostrar');
+
+        var conteudo = `
+        <div class="cardAlertas">
+            <h4> ${nomeComponente} em Alerta</h4>
+            <span> ${dataAlerta} as  ${horaAlerta}</span>
+        </div>
+        `;
+
+        elemento.innerHTML = conteudo;
+        dadosMostrar.appendChild(elemento);
+
+    }
+}
+
+
+ReceberUltimosAlertas2()
 
 
 

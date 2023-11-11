@@ -42,7 +42,7 @@
     background-color: #f08080;
     height: 12vh;
     border-radius: 30px;
-    width: 90%; 
+    width: 47%; 
     display: flex;
     justify-content: space-around;
     align-items: center;
@@ -54,6 +54,12 @@
     cursor: pointer;
     -webkit-transform: scale(0.98);
     transform: scale(0.98);
+}
+
+.botoesControle {
+    display: flex;
+    justify-content: space-between;
+    width: 80%;
 }
 .fundoContas{
     background-color: #ffffff;
