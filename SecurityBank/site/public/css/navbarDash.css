@@ -86,6 +86,7 @@
     box-shadow: 0px 8px 16px 0px rgba(0,0,0,0.2);
     padding: 12px 16px;
     z-index: 1;
+    
   }
 
   .opcoesServidores:hover .opcoesServidores-content {
@@ -104,6 +105,7 @@
   .opcoesServidores a span {
     margin-left: 5px;
     transition: 0.5s;
+    
   }
 
   .opcoesServidores a img {
@@ -111,6 +113,13 @@
     height: 16px;
     /* margin-top: -30px; */
   }
+
+  .botaodropdown {
+    background-color: #5c6bc0;
+    border: none;
+    color: #fff;
+  }
+
 
 
   .linha{
