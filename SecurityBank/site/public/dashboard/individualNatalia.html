@@ -51,7 +51,7 @@
                 <span>Administrador</span>
             </div>
 
-            <div class="opcoes localizacao">
+            <div class="opcoes">
                 <a href="dashboard.html">
                     <img src="../assets/home.png" alt="">
                     <span>Home</span>
@@ -68,7 +68,7 @@
                   </div>
             </div>
  
-            <div class="opcoes">
+            <div class="opcoes localizacao">
                 <a href="">
                     <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
@@ -170,12 +170,64 @@
                 <div class="linhaConteudo">
                     <span id="nomeServidorSelecionado">Servidor XX1</span>
                     <select name="" id="" class="selectServidor">
-                        <option value="cpu" selected>CPU</option>
+                        <option value="todos" selected>Todos Componentes</option>
+                        <option value="cpu">CPU</option>
                         <option value="ram">Memória RAM</option>
                         <option value="disco">Disco</option>
                     </select>
                 </div>
-                
+                <div class="linhaGraficos">
+                    <div class="divAlertas">
+                        <div class="KPIAlerta">
+                            <div class="corAlertaKPI verde"></div>
+                            <div class="conteudoKPI">
+                                <span class="informacaoKPI">53</span>
+                                <span class="legendaKPI">Total de Alertas Emitidos</span>
+                            </div>
+                            <div class="ajudaHINT">
+                                <img src="../assets/helpHINT.png" alt="">
+                            </div>
+                        </div>
+                        <div class="KPIAlerta">
+                            <div class="corAlertaKPI laranja"></div>
+                            <div class="conteudoKPI">
+                                <span class="informacaoKPI">53</span>
+                                <span class="legendaKPI">Alertas de Atenção</span>
+                            </div>
+                            <div class="ajudaHINT">
+                                <img src="../assets/helpHINT.png" alt="">
+                            </div>
+                        </div>
+                        <div class="KPIAlerta">
+                            <div class="corAlertaKPI rosa"></div>
+                            <div class="conteudoKPI">
+                                <span class="informacaoKPI">53</span>
+                                <span class="legendaKPI">Alertas de Emergência</span>
+                            </div>
+                            <div class="ajudaHINT">
+                                <img src="../assets/helpHINT.png" alt="">
+                            </div>
+                        </div>
+                        <div class="KPIAlerta">
+                            <div class="corAlertaKPI roxo"></div>
+                            <div class="conteudoKPI">
+                                <span class="informacaoKPI">53</span>
+                                <span class="legendaKPI">Alertas de Urgência</span>
+                            </div>
+                            <div class="ajudaHINT">
+                                <img src="../assets/helpHINT.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="graficosServidorGeral">
+                        <div class="graficoConsumoComponentes">
+
+                        </div>
+                        <div class="graficoAlertasComponentes">
+
+                        </div>
+                    </div>
+                </div>
             </div>
 
         </div>

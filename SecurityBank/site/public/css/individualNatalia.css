@@ -1,5 +1,5 @@
 .divEscolhaServidor {
-    width: 80%;
+    width: 90%;
     background-color: #fff;
   filter: drop-shadow(0px 10px 60px rgba(226, 236, 249, 0.50));
     height: 60px;
@@ -24,9 +24,9 @@
 }
 
 .divConteudoPagina {
-    width: 80%;
+    width: 90%;
     background-color: #fff;
-  filter: drop-shadow(0px 10px 60px rgba(226, 236, 249, 0.50));
+  filter: drop-shadow(0px 10px 30px rgba(226, 236, 249, 0.50));
   height: 500px;
   margin: 20px auto;
   border-radius: 12px;
@@ -38,9 +38,108 @@
 }
 
 .linhaConteudo {
-    height: 40px;
+    height: 60px;
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin: 40px ;
+    margin: 20px 40px ;
 }
+
+.linhaGraficos {
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 40px;
+    align-items: center;
+}
+
+.divAlertas {
+    height: 400px;
+    width: 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.KPIAlerta {
+    box-shadow: 0px 4px 4px 0px rgba(0, 0, 0, 0.25);
+    border-radius: 10px;
+    width: 250px;
+    height: 80px;
+    display: flex;
+    
+}
+
+.corAlertaKPI {
+    width: 15px;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+}
+
+.verde {
+    background-color: #36D000;
+}
+
+.laranja {
+background-color: #F79042;
+}
+
+.rosa {
+    background-color: #FF847F;
+}
+
+.roxo {
+    background-color: #6953D3;
+}
+
+.conteudoKPI {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 70%;
+    color: #000F53;
+    margin: 0 10px;
+}
+
+.informacaoKPI {
+    color: #000F53;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.legendaKPI {
+    color: #000F53;
+    font-size: 12px;
+}
+
+.ajudaHINT {
+    width: 25px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 10px;
+}
+
+.ajudaHINT img {
+    width: 20px;
+}
+
+/* .graficosServidorGeral {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.graficoConsumoComponentes {
+    background-color: #000F53;
+    width: 100%;
+    height: 300px;
+}
+
+.graficoAlertasComponentes {
+    background-color: #36D000;
+    width: 100%;
+    height: 300px;
+} */
