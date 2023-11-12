@@ -8,8 +8,7 @@ function buscarAquariosPorEmpresa(empresaId) {
        sistemaOperacional, 
        responsavelLegal, 
        enderecoIP, 
-       DATE_FORMAT(dataCompraLocacao, '%d/%m/%Y') as dataCompraLocacao,
-       DATE_FORMAT(dateValidade, '%d/%m/%Y') as dateValidade,
+     
        fkBanco,
        fkStatus,
        fkLocalizacaoMatriz,

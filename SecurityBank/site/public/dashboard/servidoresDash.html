@@ -48,7 +48,7 @@
 <body onload="exibirServidoresUsuario()">
 
 
-<body onload="percentCPU(),percentRAM(),percentDISK(), ReceberUltimosAlertas2()">
+<body onload="percentCPU(),percentRAM(),percentDISK(), percentRede(),ReceberUltimosAlertas2()">
 
         <div class="janela">
             <div class="header-left">
@@ -330,11 +330,11 @@ if (escalonamentoFunc != 3) {
 }
     
 
-var idUsuarioServer = sessionStorage.banco1;
+var idUsuarioServer = sessionStorage.servidorSelecionado;
 
 function ReceberUltimosAlertas2(idUsuarioServer) {
     if (sessionStorage.ID_USUARIO) {
-        let idUsuarioServer = sessionStorage.ID_USUARIO;
+        let idUsuarioServer = sessionStorage.servidorSelecionado;
         console.log(idUsuarioServer); document.addEventListener("DOMContentLoaded", function () { });
     }
     else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -421,18 +421,7 @@ ReceberUltimosAlertas2()
                 selectedServer = element.idServidor;
                 vetor.push(selectedServer);
                 console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
-                var idUsuario = sessionStorage.banco1
-                var idUsuarioCPU = sessionStorage.servidor_id1
-                var idUsuarioRAM = sessionStorage.servidor_id1
-                var idUsuarioDISK = sessionStorage.servidor_id1
 
-                window.onload = percentCPU(idUsuarioCPU),
-                    percentRAM(idUsuarioRAM),
-                    percentDISK(idUsuarioDISK);
-
-                percentCPU(idUsuarioCPU)
-                percentRAM(idUsuarioRAM)
-                percentDISK(idUsuarioDISK)
 
                 console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
                 inserir(selectedServer); // Chamar a função inserir com o ID do servidor
@@ -462,7 +451,7 @@ ReceberUltimosAlertas2()
     window.onload = percentCPU(dadoServer),
         window.onload = percentRAM(dadoServer),
         window.onload = percentDISK(dadoServer);
-
+        window.onload = percentRede(dadoServer);
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -478,7 +467,9 @@ ReceberUltimosAlertas2()
     document.addEventListener("DOMContentLoaded", function () {
         percentDISK(dadoServer);
     });
-
+    document.addEventListener("DOMContentLoaded", function () {
+        percentRede(dadoServer);
+    });
 
 
 
@@ -496,7 +487,7 @@ ReceberUltimosAlertas2()
     document.addEventListener("DOMContentLoaded", function () {
         percentRede(dadoServer);
     });
-    window.onload = percentRede(dadoServer)
+  
 
 
 
@@ -576,16 +567,8 @@ ReceberUltimosAlertas2()
         // var cpuServidores = document.getElementById('cpuServidores');
         // cpuServidores.innerHTML = `${dado}%`;
 
-        var proximaAtualizacao = setTimeout(() => percentCPU(), 5000);
+        var proximaAtualizacao = setTimeout(() => percentRede(), 5000);
     }
-
-
-
-
-
-
-
-
 
 
 
@@ -676,7 +659,7 @@ ReceberUltimosAlertas2()
 
     function percentRAM(idUsuario) {
         if (sessionStorage.ID_USUARIO) {
-            let idUsuario = dadoServer
+            idUsuario = dadoServer
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -756,7 +739,7 @@ ReceberUltimosAlertas2()
 
     function percentDISK(idUsuario) {
         if (sessionStorage.ID_USUARIO) {
-            let idUsuario = dadoServer;
+             idUsuario = dadoServer;
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }

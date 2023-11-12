@@ -165,7 +165,7 @@ function buscarMedidasEmTempoRealAlerta(idAlerta) {
 
 function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
-    instrucaoSql = ''
+   var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select dadosCaptados from registros where fkComponentesReg =1 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
@@ -186,7 +186,26 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
 
 
-function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {}
+function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
+    var instrucaoSql = ''
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select StatusRede as cnc from Rede where fkServidorRede = ${idUsuario} order by idRede desc limit 1;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select StatusRede as cnc from Rede where fkServidorRede = ${idUsuario} order by idRede desc limit 1;
+    
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+       
+    }
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
 
 
 
@@ -200,28 +219,8 @@ function buscarDiasFaltando(idSelect) {
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `SELECT 
-        DATEDIFF(dateValidade, CURDATE()) AS dias_restantes, 
-        DATE_FORMAT(dataCompraLocacao, '%d/%m/%Y') AS DtC,
-        DATE_FORMAT(dateValidade, '%d/%m/%Y') AS DtV
-    FROM 
-        servidor
-    WHERE 
-        dateValidade >= CURDATE();
-    
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT 
-        DATEDIFF(dateValidade, CURDATE()) AS dias_restantes, 
-        DATE_FORMAT(dataCompraLocacao, '%d/%m/%Y') AS DtC,
-        DATE_FORMAT(dateValidade, '%d/%m/%Y') AS DtV
-    FROM 
-        servidor
-    WHERE 
-        dateValidade >= CURDATE();
-    
-    `;
-    } else {
+
+    }  else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
     }

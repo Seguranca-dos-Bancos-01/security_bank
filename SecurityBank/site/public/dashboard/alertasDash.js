@@ -1,14 +1,12 @@
 src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"
 
-    var idUsuario = sessionStorage.banco1
-    var idUsuarioCPU = sessionStorage.servidor_id1
-    var idUsuarioRAM = sessionStorage.servidor_id1
-    var idUsuarioDISK = sessionStorage.servidor_id1
+    var idUsuario = sessionStorage.servidorSelecionado
+   
 
 
 function percentCPU(idUsuarioCPU) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
+    if (sessionStorage.servidorSelecionado) {
+        let idUsuario = sessionStorage.servidorSelecionado;
         console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
     }
     else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -94,8 +92,8 @@ function exibirDadosCPU(response) {
 
 
 function percentRAM(idUsuarioRAM) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
+    if (sessionStorage.servidorSelecionado) {
+        let idUsuario = sessionStorage.servidorSelecionado;
         console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
     }
     else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -186,8 +184,8 @@ function exibirDadosRAM(response) {
 
 
 function percentDISK(idUsuarioDISK) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuario = sessionStorage.ID_USUARIO;
+    if (sessionStorage.servidorSelecionado) {
+        let idUsuario = sessionStorage.servidorSelecionado;
         console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
     }
     else { console.error("ID do usuário não encontrada no sessionStorage."); }
