@@ -57,6 +57,8 @@ constraint pkComposta primary key (idFuncionarios, fkBanco , fkEscalonamento),
  foreign key (fkEscalonamento) references  escalonamentoFuncionarios (idEscalonamento)
 );
 
+select * from escalonamentoFuncionarios;
+
 
 CREATE TABLE servidor(
 idServidor int  auto_increment,
@@ -158,6 +160,7 @@ create table alerta(
 idAlertas int primary key auto_increment,
 dataAlerta date,
 horaAlerta time,
+situacao varchar(20),
 fkRegistro int,
 fkComponente int,
 fkMetrica int,
@@ -227,6 +230,7 @@ SELECT * FROM funcionarios;
 SELECT * FROM servidor;
 SELECT * FROM componentes;
 select*from registros;
+select * from funcionarios;
 desc registros;
 select * from metrica;
 SELECT * FROM registros where fkservidor =1;
@@ -291,6 +295,118 @@ update registros set dadosCaptados = 20 where idRegistros = 2;
 
 update registros set dadosCaptados = 15 where idRegistros = 3;
 -- nome servidor, nome componente, data, hora e status
-select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta
+select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
 from alerta join servidor on fkServidor = idServidor
 join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT 10;
+
+use securitybank;
+select idServidor, apelido from servidor;
+
+select resultado, count(resultado) as num from respostas group by resultado;
+
+select alerta.situacao, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+where fkServidor = 1
+group by alerta.situacao
+; 
+
+-- total de alertas no servidor
+select count(*) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+where fkServidor = 1
+; 
+
+-- total de alertas de atencao no servidor
+select alerta.situacao, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+where fkServidor = 1
+and alerta.situacao = "Atenção"
+; 
+
+-- total de alertas de eergencia no servidor
+select alerta.situacao, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+where fkServidor = 1
+and alerta.situacao = "Emergência"
+; 
+
+-- total de alertas de urgencia no servidor
+select alerta.situacao, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+where fkServidor = 1
+and alerta.situacao = "Urgência"
+; 
+
+-- consumo do servidor por componente
+-- reutilizar o select da página principal
+
+-- total de alertas po componentes no servidor
+select componentes.modelo, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+join componentes on fkComponente = idComponentes
+where fkServidor = 1
+group by componentes.modelo
+; 
+
+-- total de alertas de atencao no servidor no componente cpu
+select alerta.situacao, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+join componentes on fkComponente = idComponentes
+where fkServidor = 1
+and alerta.situacao = "Atenção"
+and componentes.modelo = "CPU"
+; 
+
+-- total de alertas de emergencia no servidor no componente cpu
+select alerta.situacao, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+join componentes on fkComponente = idComponentes
+where fkServidor = 1
+and alerta.situacao = "Emergência"
+and componentes.modelo = "CPU"
+; 
+
+-- total de alertas de emergencia no servidor no componente cpu
+select alerta.situacao, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+join componentes on fkComponente = idComponentes
+where fkServidor = 1
+and alerta.situacao = "Urgência"
+and componentes.modelo = "Memória RAM"
+; 
+
+-- consumo do componente por servidor eu uso a rota do servidor individual
+
+
+-- resultado mais frequente em cpu no servidor
+select alerta.situacao, count(alerta.situacao) as totalAlertas 
+from alerta join servidor
+on fkServidor = idServidor
+join componentes on fkComponente = idComponentes
+where fkServidor = 1
+and componentes.modelo = "Memória RAM"
+group by alerta.situacao
+;
+ -- fazer a maracutaia do msm do projeto individual do ano passado
+ 
+ -- pegar o ultimo registro do componente por servidor e ver a distancia da metrica de atencao
+ -- usar select da barra do painel geral e dos alertas
+
+select * from alerta;
+delete from alerta where idAlertas <= 34;
+
+select * from alerta order by idAlertas desc limit 1;
+
+-- nome servidor, nome componente, data, hora e status
+        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT  3;
