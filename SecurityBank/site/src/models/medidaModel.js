@@ -205,24 +205,57 @@ function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
 }
 
 
+function buscarUltimasMedidasSituSelected(idUsuario, limite_linhas) {
+    var instrucaoSql = ''
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select situacao as UltimasSituSelected from alerta where fkServidor = ${idUsuario} order by  idAlertas desc limit 1;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select situacao  as UltimasSituSelected from alerta where fkServidor = ${idUsuario} order by  idAlertas desc limit 1;
+    
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+       
+    }
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 
 
 
-function buscarDiasFaltando(idSelect) {
+
+
+function buscarDiasFaltando(idUsuario) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+        instrucaoSql = `SELECT
+        DATEDIFF(l.dateValidade, CURDATE()) AS diasRestantes
+      FROM
+        servidor as s
+      INNER JOIN
+        locacao as l ON s.fkLocacao = l.idLocacao
+      WHERE
+        s.idServidor = ${idUsuario};
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `SELECT
+        DATEDIFF(l.dateValidade, CURDATE()) AS diasRestantes
+      FROM
+        servidor as s
+      INNER JOIN
+        locacao as l ON s.fkLocacao = l.idLocacao
+      WHERE
+        s.idServidor = ${idUsuario};`
 
     }  else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
+    
     }
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -986,4 +1019,5 @@ module.exports = {
     buscarUltimosAlertas1,
     buscarUltimosAlertas2,
     buscarUltimasMedidasValidade,
+    buscarUltimasMedidasSituSelected,
 }

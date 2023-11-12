@@ -62,6 +62,11 @@ router.get("/ultimasPercentREDE/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasREDE(req, res);
 });
 
+router.get("/ultimasSituSelected/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasSituSelected(req, res);
+});
+
+
 
 
 router.get("/ultimasPercentRAM/:idUsuario", function (req, res) {
@@ -98,8 +103,12 @@ router.get("/UltimosAlertas1/:idUsuario", function (req, res) {
 router.get("/UltimosAlertas2/:idUsuarioServer", function (req, res) {
      medidaController.buscarUltimosAlertas2(req, res);});
 
-router.get("/diasFaltando/:selectedServer", function (req, res) {
+router.get("/diasFaltando/:idUsuario", function (req, res) {
     medidaController.buscarDiasFaltando(req, res);})
+
+
+
+
 router.get("/ultimasValidadeServer/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasValidade(req, res);
 });

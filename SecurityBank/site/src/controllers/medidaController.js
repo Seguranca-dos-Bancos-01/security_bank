@@ -370,6 +370,28 @@ function buscarUltimasMedidasREDE(req, res) {
 }
 
 
+function buscarUltimasMedidasSituSelected(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasSituSelected(idUsuario, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
 function buscarUltimasMedidasRAM(req, res) {
     const limite_linhas = 50;
     var idUsuario = req.params.idUsuario;
@@ -842,11 +864,11 @@ function buscarMedidasEmTempoRealServidores4(req, res) {
 
 function buscarDiasFaltando(req, res) {
     const limite_linhas = 50;
-    var idSelect = req.params.selectedServer;
+    var idUsuario = req.params.idUsuario;
 
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
-    medidaModel.buscarDiasFaltando(idSelect).then(function (resultado) {
+    medidaModel.buscarDiasFaltando(idUsuario).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -900,5 +922,5 @@ module.exports = {
      cadastrarAlertaDISCOUrgencia,
      buscarHistoricoAlertas,
     buscarDiasFaltando,
-   
+    buscarUltimasMedidasSituSelected,
 };
