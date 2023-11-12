@@ -46,158 +46,165 @@
 <!-- <body onload=" atualizarFeed()"> -->
 
 <body onload="exibirServidoresUsuario()">
-<body onload="percentCPU(),percentRAM(),percentDISK()">
 
-    <div class="janela">
-        <div class="header-left">
-            <div class="logo">
-                <img src="../assets/logoBranca.png" alt="">
-            </div>
 
-            <div class="opcao">
-                <span>Olá,<b id="nomeAdm">Nome ADM</b></span>
-            </div>
+<body onload="percentCPU(),percentRAM(),percentDISK(), ReceberUltimosAlertas2()">
 
-            <div class="TipoAcesso">
-                <span>Administrador</span>
-            </div>
+        <div class="janela">
+            <div class="header-left">
+                <div class="logo">
+                    <img src="../assets/logoBranca.png" alt="">
+                </div>
 
-            <div class="opcoes">
-                <a href="dashboard.html">
-                    <img src="../assets/home.png" alt="">
-                    <span>Home</span>
-                </a>
-            </div>
-            <div class="opcoesServidores">
-                <a href="servidoresDash.html">
-                    <img src="../assets/servidor.png" alt="">
-                    <span>Servidores</span>
-                </a>
-                <div id="opcoesServidores-content" class="opcoesServidores-content">
-
+                <div class="opcao">
+                    <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+                </div>
+    
+                <div id="nivelACesso" class="TipoAcesso">
+                    <span>Administrador</span>
+                </div>
+    
+                <div class="opcoes">
+                    <a href="dashboard.html">
+                        <img src="../assets/home.png" alt="">
+                        <span>Home</span>
+                    </a>
+                </div>
+                <div class="opcoesServidores  localizacao">
+                    <a href="servidoresDash.html">
+                        <img src="../assets/servidor.png" alt="">
+                        <span>Servidores</span>
+                    </a>
+                    <div id="opcoesServidores-content"class="opcoesServidores-content">
+    
+     
+                      </div>
+                </div>
+     
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/servidor.png    " alt="">
+                        <span>Visões</span>
+                    </a>
+                    <!-- <div class="opcoesServidores-content">
+                        <a href="alertas.html">Visão 1</a>
+                        <a href="alertas.html">Visão 2</a>
+                    </div> -->
+                </div>
+                <!-- <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Gabriel</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Gustavo</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Marcela</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Natália</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Pedro</span>
+                    </a>
+                </div> -->
+                <div class="opcoes">
+                    <a href="alertas.html">
+                        <img src="../assets/alerta.png" alt="">
+                        <span>Alertas</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="perfil.html">
+                        <img src="../assets/perfil.png" alt="">
+                        <span>Perfil</span>
+                    </a>
+                </div>
+                <div id="gerenciarAcesso" class="opcoes">
+                    <a href="GerenciarAcesso.html">
+                        <img src="../assets/controle.png" alt="">
+                        <span>Controle de acesso</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="suporteDash.html">
+                        <img src="../assets/ajuda.png" alt="">
+                        <span>Ajuda</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="metricasDash.html">
+                        <img src="../assets/metricas.png" alt="">
+                        <span>Métricas</span>
+                    </a>
+                </div>
+                <!-- <div class="opcoes">
+                    <a href="recFacial.html">
+                        <img src="../assets/imgs/recFacial.png" alt="">
+                        <span>Reconhecimento Facial</span>
+                    </a>
+                </div> -->
+                <div class="linha">
+                    <span></span>
+                </div>
+                <div class="opcoes">
+                    <a href="../index.html">
+                        <img src="../assets/logout.png" alt="">
+                        <span onclick="limparSessonStorage()">Logout</span>
+                    </a>
                 </div>
             </div>
 
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/servidor.png    " alt="">
-                    <span>Visões</span>
-                </a>
-            </div>
-            <!-- <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Gabriel</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Gustavo</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Marcela</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Natália</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="">
-                    <img src="../assets/imgs/servdores.png" alt="">
-                    <span>Visão Pedro</span>
-                </a>
-            </div> -->
-            <div class="opcoes">
-                <a href="alertas.html">
-                    <img src="../assets/alerta.png" alt="">
-                    <span>Alertas</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="perfil.html">
-                    <img src="../assets/perfil.png" alt="">
-                    <span>Perfil</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="GerenciarAcesso.html">
-                    <img src="../assets/controle.png" alt="">
-                    <span>Controle de acesso</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="suporteDash.html">
-                    <img src="../assets/ajuda.png" alt="">
-                    <span>Ajuda</span>
-                </a>
-            </div>
-            <div class="opcoes">
-                <a href="metricasDash.html">
-                    <img src="../assets/metricas.png" alt="">
-                    <span>Métricas</span>
-                </a>
-            </div>
-            <!-- <div class="opcoes">
-                <a href="recFacial.html">
-                    <img src="../assets/imgs/recFacial.png" alt="">
-                    <span>Reconhecimento Facial</span>
-                </a>
-            </div> -->
-            <div class="linha">
-                <span></span>
-            </div>
-            <div class="opcoes">
-                <a href="../index.html">
-                    <img src="../assets/logout.png" alt="">
-                    <span onclick="limparSessao()">Logout</span>
-                </a>
-            </div>
-        </div>
-
-        <div class="dash">
-            <div id="nomeEspec" class="Nome">
-                <h2></h2>
-            </div>
-            <div class="kpi">
-                <div class="blocoKpi">
-                    <div class="img">
-                        <img src="../assets/imgs/kpi.png" alt="">
+            <div class="dash">
+                <div id="nomeEspec" class="Nome">
+                    <h2></h2>
+                </div>
+                <div class="kpi">
+                    <div class="blocoKpi">
+                        <div class="img">
+                            <img src="../assets/imgs/kpi.png" alt="">
+                        </div>
+                        <div class="info">
+                            <span>SITUAÇÃO</span>
+                            <span class="Situacao" id="situacaoServidor">Estável</span>
+                        </div>
                     </div>
-                    <div class="info">
-                        <span>SITUAÇÃO</span>
-                        <span class="Situacao" id="situacaoServidor">Estável</span>
+                    <div class="blocoKpi">
+                        <div class="img">
+                            <img src="../assets/imgs/kpi.png" alt="">
+                        </div>
+                        <div class="info">
+                            <span>VALIDADE</span>
+                            <span class="Situacao" id="validadeServidor">231 dias</span>
+                        </div>
+                    </div>
+                    <div class="blocoKpi">
+                        <div class="img">
+                            <img src="../assets/imgs/kpi.png" alt="">
+                        </div>
+                        <div class="info">
+                            <span>REDE</span>
+                            <span class="Situacao" id="redeServidor">Ativa</span>
+                        </div>
                     </div>
                 </div>
-                <div class="blocoKpi">
-                    <div class="img">
-                        <img src="../assets/imgs/kpi.png" alt="">
-                    </div>
-                    <div class="info">
-                        <span>VALIDADE</span>
-                        <span class="Situacao" id="validadeServidor">231 dias</span>
-                    </div>
-                </div>
-                <div class="blocoKpi">
-                    <div class="img">
-                        <img src="../assets/imgs/kpi.png" alt="">
-                    </div>
-                    <div class="info">
-                        <span>REDE</span>
-                        <span class="Situacao" id="redeServidor">Ativa</span>
-                    </div>
-                </div>
-            </div>
-            <div class="Dados">
-                <!--div class="ultimosAlertas">
+                <div class="Dados">
+                    <div class="ultimosAlertas">
                         <h3>Ultimos Alertas</h3>
-                        <div class="cardAlertas">
+                        <!-- <div class="cardAlertas">
                             <h4>CPU em Emergência</h4>
                             <span>29/09/2023 as 13h45</span>
                         </div>
@@ -208,101 +215,103 @@
                         <div class="cardAlertas">
                             <h4>Disco em análise</h4>
                             <span>10/05/2023 as 10h09</span>
-                        </div-->
-            </div>
-            <div class="visaoGeral">
-                <h2>Visão Geral do Servidor</h2>
-
-                <div class="barrasMae">
-                    <div class="barrasMae">
-                        <div class="containerBarra">
-                            <div class="bar">
-                                <div class="fill" id="fill">
+                        </div> -->
+                    </div>
+                    <div class="visaoGeral">
+                        <h2>Visão Geral do Servidor</h2>
+                            <div class="barrasMae">
+                                <div class="containerBarra">
+                                    <div class="bar">
+                                        <div class="fill" id="fill">
+                                           
+                                        </div>
+                                    </div>
                                     <div class="percentage" id="percentage">0%</div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="containerBarra">
-                            <div class="bar">
-                                <div class="fill" id="fill2">
+                                <div class="containerBarra">
+                                    <div class="bar">
+                                        <div class="fill" id="fill2">
+                                        
+                                        </div>
+                                    </div>
                                     <div class="percentage" id="percentage2">0%</div>
                                 </div>
-                            </div>
-                        </div>
-                        <div class="containerBarra">
-                            <div class="bar">
-                                <div class="fill" id="fill3">
+                                <div class="containerBarra">
+                                    <div class="bar">
+                                        <div class="fill" id="fill3">
+
+                                        </div>
+                                    </div>
                                     <div class="percentage" id="percentage3">0%</div>
+
                                 </div>
+                                <div class="containerBarra">
+                                    <div class="bar">
+                                        <div class="fill" id="fill4">
+                                        </div>
+                                    </div>
+                                    <div class="percentage" id="percentage4">OFF</div>
+
+                                </div>
+                        </div>
+
+                    </div>
+                    <div class="USBs">
+                        <h2>Entradas USB</h2>
+                        <span>Mouse A23 - Porta 3</span><br>
+                        <span>Pendrive 783 - Porta 1</span>
+                    </div>
+                    
+                </div>
+                <div class="blocoGraficos">
+                    <div class="subtituloServidoresGraficos">
+                        <h3>Visão Detalhada dos Componentes</h3>
+                        <h3 class="textoGraficosSubtitulo">Gráficos</h3>
+                    </div>
+                    <div class="graficos">
+                        <div class="grafico">
+                            <h5>Histórico de uso do Processador</h5>
+                            <div class="graph">
+                                <canvas id="myChartsegundo"></canvas>
                             </div>
                         </div>
-                        <div class="containerBarra">
-                            <div class="bar">
-                                <div class="fill" id="fill4">
-                                    <div class="percentage" id="percentage4"></div>
-                                </div>
+                        <div class="grafico">
+                            <h5>Histórico de uso da Memoria RAM</h5>
+                            <div class="graph">
+                                <canvas id="myChartTerceiro"></canvas>
                             </div>
                         </div>
-
-
-                    </div>
-                </div>
-                <!--div class="USBs">
-                  //      <h2>Entradas USB</h2>
-                   //     <span>Mouse A23 - Porta 3</span><br>
-                    //    <span>Pendrive 783 - Porta 1</span>
-                    </div-->
-            </div>
-            <div class="blocoGraficos">
-                <div class="subtituloServidoresGraficos">
-                    <h3>Visão Detalhada dos Componentes</h3>
-                    <h3 class="textoGraficosSubtitulo">Gráficos</h3>
-                </div>
-                <div class="graficos">
-                    <div class="grafico">
-                        <h5>Histórico de uso do Processador</h5>
-                        <div class="graph">
-                            <canvas id="myChartsegundo"></canvas>
+                        <div class="grafico">
+                            <h5>Histórico de uso do Disco</h5>
+                            <div class="graph">
+                                <canvas id="myChart"></canvas>
+                            </div>
                         </div>
                     </div>
-                    <div class="grafico">
-                        <h5>Histórico de uso da Memoria RAM</h5>
-                        <div class="graph">
-                            <canvas id="myChartTerceiro"></canvas>
+                </div> 
+                <div class="rodapeDash">
+                    <div class="itens">
+                        <div class="blocos">
+                            <h1>Security Bank</h1>
+                            <h4>TECH & SOLUTIONS</h4>
+                        </div>
+                        <div class="blocos">
+                            <span><b>Telefone:</b>(11)40028922</span>
+                            <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+                        </div>
+                        <div class="blocos">
+                            <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                                Cerqueira César, São Paulo - SP,<br>
+                                01414-001</span>
                         </div>
                     </div>
-                    <div class="grafico">
-                        <h5>Histórico de uso do Disco</h5>
-                        <div class="graph">
-                            <canvas id="myChart"></canvas>
-                        </div>
-                    </div>
+                    <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
                 </div>
             </div>
-            <div class="rodapeDash">
-                <div class="itens">
-                    <div class="blocos">
-                        <h1>Security Bank</h1>
-                        <h4>TECH & SOLUTIONS</h4>
-                    </div>
-                    <div class="blocos">
-                        <span><b>Telefone:</b>(11)40028922</span>
-                        <span><b>Email:</b>SC.contato.2023@gmail.com</span>
-                    </div>
-                    <div class="blocos">
-                        <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
-                            Cerqueira César, São Paulo - SP,<br>
-                            01414-001</span>
-                    </div>
-                </div>
-                <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
-            </div>
-        </div>
-    </div>
 
 
 
-</body>
+    </body>
 
 </html>
 <footer>
@@ -312,7 +321,80 @@
 
 <script>
 
+var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
+if (escalonamentoFunc != 3) {
+    nivelACesso.innerHTML = `<span>Funcionário</span>`
+    var divAcesso = document.getElementById("gerenciarAcesso")
+    divAcesso.style.display = 'none';
+}
+    
+
+var idUsuarioServer = sessionStorage.banco1;
+
+function ReceberUltimosAlertas2(idUsuarioServer) {
+    if (sessionStorage.ID_USUARIO) {
+        let idUsuarioServer = sessionStorage.ID_USUARIO;
+        console.log(idUsuarioServer); document.addEventListener("DOMContentLoaded", function () { });
+    }
+    else { console.error("ID do usuário não encontrada no sessionStorage."); }
+
+
+    fetch(`/medidas/buscarUltimosAlertas2/${idUsuarioServer}`, { cache: 'no-store' })
+        .then(function (response) {
+            if (response.ok) {
+                response.json()
+                    .then(function (response) {
+                        console.log(`Dados recebidos: GRaIFCO AAAAAAAAAAAAAAA ${JSON.stringify(response)}`);
+                        response.reverse();
+                        MostrarUltimosAlertas2(response);
+
+                    });
+            } else { console.error('Nenhum dado encontrado ou erro na API'); }
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+function MostrarUltimosAlertas2(response) {
+    console.log('Exibindo dados retornados:')
+    var dadosMostrar = document.getElementById('AlertaUltimoMostrar');
+    dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+
+    // var vetorServidor;
+    // var vetornomeComponente;
+    // var vetordataAlerta;
+    // var vetorhoraAlerta;
+
+
+    for (var i = 0; i < response.length; i++) {
+        var registro = response[i];
+
+        console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAA: ${JSON.stringify(registro)}`)
+        var nomeServidor = registro.nomeServidor;
+        var nomeComponente = registro.nomeComponente;
+        var dataAlerta = registro.dataAlerta;
+        var horaAlerta = registro.horaAlerta;
+        var statusAlerta = registro.situacaoAlerta;
+
+        var elemento = document.createElement('AlertaUltimoMostrar');
+
+        var conteudo = `
+        <div class="cardAlertas">
+            <h4> ${nomeComponente} em Alerta</h4>
+            <span> ${dataAlerta} as  ${horaAlerta}</span>
+        </div>
+        `;
+
+        elemento.innerHTML = conteudo;
+        dadosMostrar.appendChild(elemento);
+
+    }
+}
+
+
+ReceberUltimosAlertas2()
 
 
 
@@ -339,24 +421,25 @@
                 selectedServer = element.idServidor;
                 vetor.push(selectedServer);
                 console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
-    var idUsuario = sessionStorage.banco1
-    var idUsuarioCPU = sessionStorage.servidor_id1
-    var idUsuarioRAM = sessionStorage.servidor_id1
-    var idUsuarioDISK = sessionStorage.servidor_id1
+                var idUsuario = sessionStorage.banco1
+                var idUsuarioCPU = sessionStorage.servidor_id1
+                var idUsuarioRAM = sessionStorage.servidor_id1
+                var idUsuarioDISK = sessionStorage.servidor_id1
 
-    window.onload = percentCPU(idUsuarioCPU),
-        percentRAM(idUsuarioRAM),
-        percentDISK(idUsuarioDISK);
+                window.onload = percentCPU(idUsuarioCPU),
+                    percentRAM(idUsuarioRAM),
+                    percentDISK(idUsuarioDISK);
 
-    percentCPU(idUsuarioCPU)
-    percentRAM(idUsuarioRAM)
-    percentDISK(idUsuarioDISK)
+                percentCPU(idUsuarioCPU)
+                percentRAM(idUsuarioRAM)
+                percentDISK(idUsuarioDISK)
 
                 console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
                 inserir(selectedServer); // Chamar a função inserir com o ID do servidor
                 window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
             });
             selectServidores.appendChild(button);
+            button.classList.add('botaodropdown');
         });
     }
 
@@ -415,7 +498,7 @@
     });
     window.onload = percentRede(dadoServer)
 
-    
+
 
     var idUsuario = selectedServer;
     var idUsuario2 = selectedServer;
@@ -474,13 +557,13 @@
             const percentage = document.getElementById('percentage4');
             currentPercentage = dado;
             fill.style.width = `100%`;
-            if (currentPercentage == 1) { 
-                percentage.innerText = 'ON'; 
+            if (currentPercentage == 1) {
+                percentage.innerText = 'ON';
                 fill.style.backgroundColor = 'green';
-        } else { 
-            percentage.innerText = 'OFF'; 
-            fill.style.backgroundColor = 'purple';
-        }
+            } else {
+                percentage.innerText = 'OFF';
+                fill.style.backgroundColor = 'purple';
+            }
             console.log(dado)
             if (currentPercentage < 100) {
                 requestAnimationFrame(exibirDadosRede);
@@ -547,7 +630,7 @@
             const percentage = document.getElementById('percentage');
             currentPercentage = dado;
             fill.style.width = `${currentPercentage}%`;
-            percentage.innerText = currentPercentage.toFixed(1 ) + '%';
+            percentage.innerText = currentPercentage.toFixed(1) + '%';
 
             if (currentPercentage > 50) {
                 fill.style.backgroundColor = 'purple';
@@ -723,7 +806,7 @@
             }
         }
 
-        
+
         console.log(response[0]);
 
         // var discoServidores = document.getElementById('discoServidores');
@@ -1175,6 +1258,11 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
+
+    function limparSessonStorage() {
+    sessionStorage.clear()
+}
+
     /*
     document.addEventListener("DOMContentLoaded", function () {
         obterDadosGrafico4(idUsuario);

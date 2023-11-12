@@ -29,6 +29,7 @@ function autenticar(req, res) {
                                                 idFuncionarios: resultadoAutenticar[0].idFuncionarios,
                                                 email: resultadoAutenticar[0].email,
                                                 nome: resultadoAutenticar[0].nome,
+                                                cpf: resultadoAutenticar[0].cpf,
                                                 telefone: resultadoAutenticar[0].telefone,
                                                 senha: resultadoAutenticar[0].senha,
                                                 fkBanco: resultadoAutenticar[0].fkBanco,

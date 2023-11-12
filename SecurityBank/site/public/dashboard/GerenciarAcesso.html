@@ -8,7 +8,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
 
-    <title>Security Bank | Métricas</title>
+    <title>Security Bank | Controle Acesso</title>
 
     <link rel="stylesheet" href="../css/style.css">
     <link rel="stylesheet" href="../css/navbarDash.css">
@@ -42,10 +42,10 @@
             </div>
 
             <div class="opcao">
-                <span>Olá,<b id="nomeAdm">Nome ADM</b></span>
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
             </div>
 
-            <div class="TipoAcesso">
+            <div id="nivelACesso" class="TipoAcesso">
                 <span>Administrador</span>
             </div>
 
@@ -62,6 +62,7 @@
                 </a>
                 <div id="opcoesServidores-content"class="opcoesServidores-content">
 
+ 
                   </div>
             </div>
  
@@ -70,6 +71,10 @@
                     <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
                 </a>
+                <!-- <div class="opcoesServidores-content">
+                    <a href="alertas.html">Visão 1</a>
+                    <a href="alertas.html">Visão 2</a>
+                </div> -->
             </div>
             <!-- <div class="opcoes">
                 <a href="">
@@ -113,7 +118,7 @@
                     <span>Perfil</span>
                 </a>
             </div>
-            <div class="opcoes localizacao">
+            <div id="gerenciarAcesso  localizacao" class="opcoes">
                 <a href="GerenciarAcesso.html">
                     <img src="../assets/controle.png" alt="">
                     <span>Controle de acesso</span>
@@ -142,8 +147,8 @@
             </div>
             <div class="opcoes">
                 <a href="../index.html">
-                    <img src="../assets/logout.png" alt=""">
-                    <span onclick="limparSessao()">Logout</span>
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessonStorage()">Logout</span>
                 </a>
             </div>
         </div>
@@ -195,9 +200,15 @@
             </div>
 
             <div class="fundo">
-                <div onclick="adicionar()" class="boxAdicionarServico">
-                    <n class="adicione">Adicione um Servidor ao Monitoramento</n>
-                    <!-- <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG"> -->
+                <div class="botoesControle">
+                    <div onclick="adicionar()" class="boxAdicionarServico">
+                        <n class="adicione">Adicione um Servidor ao Monitoramento</n>
+                        <!-- <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG"> -->
+                    </div>
+                    <div onclick="controleData()" class="boxAdicionarServico">
+                        <n class="adicione">Controle da Data de Validade</n>
+                        <!-- <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG"> -->
+                    </div>
                 </div>
 
                 <div class="fundoContas">
@@ -257,6 +268,14 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 
 <script>
+
+var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+
+if (escalonamentoFunc != 3) {
+    nivelACesso.innerHTML = `<span>Funcionário</span>`
+    var divAcesso = document.getElementById("gerenciarAcesso")
+    divAcesso.style.display = 'none';
+}
  
  var vetor = [];
 var selectedServer;// Declarar idUsuario fora do escopo da função
@@ -279,6 +298,7 @@ function exibirServidoresUsuario() {
             inserir(selectedServer); // Chamar a função inserir com o ID do servidor
             window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
         });
+        button.classList.add('botaodropdown');
         selectServidores.appendChild(button);
     });
 }
@@ -536,7 +556,7 @@ function atualizarLista() {
     }
 }
 
-function limparSessao() {
+function limparSessonStorage() {
         sessionStorage.clear()
     }
 

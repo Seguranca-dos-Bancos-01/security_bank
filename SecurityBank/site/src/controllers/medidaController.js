@@ -565,7 +565,43 @@ function buscarHistoricoAlertas(req, res) {
     });
 }
 
+function buscarUltimosAlertas1(req, res) {
+    const limite_linhas = 30;
+    var idUsuario = req.params.idUsuario;
 
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimosAlertas1(idUsuario, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function buscarUltimosAlertas2(req, res) {
+    const limite_linhas = 30;
+    var idUsuarioServer = req.params.idUsuarioServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimosAlertas2(idUsuarioServer, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 
 function buscarUltimasMedidasServidores(req, res) {
@@ -851,7 +887,8 @@ module.exports = {
     buscarMedidasEmTempoRealServidores4,
     buscarUltimasMedidasREDE,
     buscarUltimasMedidasValidade,
-    
+    buscarUltimosAlertas1,
+    buscarUltimosAlertas2,
     cadastrarAlertaCPUAtencao,
     cadastrarAlertaCPUEmergencia,
     cadastrarAlertaCPUUrgencia,

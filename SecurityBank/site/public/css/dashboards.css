@@ -428,6 +428,14 @@ canvas {
   color: #36D000;
 }
 
+.textoVerde {
+  color: #36D000;
+}
+
+.textoVermelho {
+  color: #FF847F;
+}
+
 .textinhoAlerta {
   color: #FF847F;
   font-weight: 500;

@@ -362,3 +362,15 @@ canvas {
   box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
 
 }
+
+.laranja {
+  background-color: #F79042;
+}
+
+.rosa {
+  background-color: #FF847F;
+}
+
+.roxo {
+  background-color: #6953D3;
+}

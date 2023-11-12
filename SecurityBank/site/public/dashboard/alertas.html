@@ -41,10 +41,10 @@
             </div>
 
             <div class="opcao">
-                <span>Olá,<b id="nomeAdm">Nome ADM</b></span>
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
             </div>
 
-            <div class="TipoAcesso">
+            <div id="nivelACesso" class="TipoAcesso">
                 <span>Administrador</span>
             </div>
 
@@ -60,7 +60,8 @@
                     <span>Servidores</span>
                 </a>
                 <div id="opcoesServidores-content"class="opcoesServidores-content">
-                  
+
+ 
                   </div>
             </div>
  
@@ -69,6 +70,10 @@
                     <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
                 </a>
+                <!-- <div class="opcoesServidores-content">
+                    <a href="alertas.html">Visão 1</a>
+                    <a href="alertas.html">Visão 2</a>
+                </div> -->
             </div>
             <!-- <div class="opcoes">
                 <a href="">
@@ -112,7 +117,7 @@
                     <span>Perfil</span>
                 </a>
             </div>
-            <div class="opcoes">
+            <div id="gerenciarAcesso" class="opcoes">
                 <a href="GerenciarAcesso.html">
                     <img src="../assets/controle.png" alt="">
                     <span>Controle de acesso</span>
@@ -141,8 +146,8 @@
             </div>
             <div class="opcoes">
                 <a href="../index.html">
-                    <img src="../assets/logout.png" alt="" >
-                    <span onclick="limparSessao()">Logout</span>
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessonStorage()">Logout</span>
                 </a>
             </div>
         </div>
@@ -215,6 +220,14 @@
 
 <script>
 
+var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+
+if (escalonamentoFunc != 3) {
+    nivelACesso.innerHTML = `<span>Funcionário</span>`
+    var divAcesso = document.getElementById("gerenciarAcesso")
+    divAcesso.style.display = 'none';
+}
+
 var vetor = [];
 var selectedServer;// Declarar idUsuario fora do escopo da função
 
@@ -236,6 +249,7 @@ function exibirServidoresUsuario() {
             inserir(selectedServer); // Chamar a função inserir com o ID do servidor
             window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
         });
+        button.classList.add('botaodropdown');
         selectServidores.appendChild(button);
     });
 }
@@ -316,48 +330,48 @@ exibirServidoresUsuario();
             var dataAlerta = registro.dataAlerta;
             var horaAlerta = registro.horaAlerta;
             var statusAlerta = registro.situacaoAlerta;
-            // vetorServidor.push(nomeServidor); // Adiciona o valor de 'nivel' ao vetor
-            // vetornomeComponente.push(nomeComponente); // Adiciona o valor de 'email' ao vetor
-            // vetordataAlerta.push(dataAlerta); // Adiciona o valor de 'email' ao vetor
-            // vetorhoraAlerta.push(horaAlerta); // Adiciona o valor de 'email' ao vetor
-            // console.log(vetorServidor)
-            // console.log(vetornomeComponente)
-            // console.log(vetordataAlerta)
-            // console.log(vetorhoraAlerta)
+            
             var elemento = document.createElement('divMostrarAlerta');
-            elemento.classList.add('àlerta');
-            var conteudo = `
-            <div class="alerta" id="divMostrarAlerta">
+    
+            
+            if (statusAlerta == "Urgência") {
+                var conteudo = `
+            <div class="alerta roxo" id="divMostrarAlerta">
             <span class="msgAlerta"><b  id="nomeServidor">${nomeServidor}</b></span>
                 <span class="msgAlerta"><b  id="nomeComponente">${nomeComponente}</b></span>
                 <span class="msgAlerta"><b  id="dataAlerta">${dataAlerta}</b></span>
                 <span class="msgAlerta"><b  id="horaAlerta">${horaAlerta}</b></span>
                 <span class="msgAlerta"><b  id="statusAlerta">${statusAlerta}</b></span>
-                </div>
-    `;
-            // <div class="imgsContas">
-            //     <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
-            //     <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
-            // </div>
+                </div>`;
+            } else if (statusAlerta == "Atenção") {
+                var conteudo = `
+            <div class="alerta laranja" id="divMostrarAlerta">
+            <span class="msgAlerta"><b  id="nomeServidor">${nomeServidor}</b></span>
+                <span class="msgAlerta"><b  id="nomeComponente">${nomeComponente}</b></span>
+                <span class="msgAlerta"><b  id="dataAlerta">${dataAlerta}</b></span>
+                <span class="msgAlerta"><b  id="horaAlerta">${horaAlerta}</b></span>
+                <span class="msgAlerta"><b  id="statusAlerta">${statusAlerta}</b></span>
+                </div>`;
+            } else if (statusAlerta == "Emergência") {
+                var conteudo = `
+            <div class="alerta rosa" id="divMostrarAlerta">
+            <span class="msgAlerta"><b  id="nomeServidor">${nomeServidor}</b></span>
+                <span class="msgAlerta"><b  id="nomeComponente">${nomeComponente}</b></span>
+                <span class="msgAlerta"><b  id="dataAlerta">${dataAlerta}</b></span>
+                <span class="msgAlerta"><b  id="horaAlerta">${horaAlerta}</b></span>
+                <span class="msgAlerta"><b  id="statusAlerta">${statusAlerta}</b></span>
+                </div>`;
+            }
             elemento.innerHTML = conteudo;
             dadosMostrar.appendChild(elemento);
-            // var textoServidor = document.getElementById(nomeServidor)
-            // textoServidor.innerHTML = "nomeServidor";
-            // nomeComponente.innerHTML = "nomeComponente";
-            // dataAlerta.innerHTML = "dataAlerta";
-            // horaAlerta.innerHTML = "horaAlerta";
-            // statusAlerta.innerHTML = "statusAlerta";
-
-
-            // if (i !== response.length - 1) {
-            //     var linhaEspacamento = document.createElement('div');
-            //     linhaEspacamento.classList.add('linhaEspacamento');
-            //     linhaEspacamento.innerHTML = '<span></span>';
-            //     dadosMostrar.appendChild(linhaEspacamento);
-            // }
+           
         }
     }
 
     ReceberHistoricoAlertas()
+
+    function limparSessonStorage() {
+        sessionStorage.clear()
+    }
 
 </script>
