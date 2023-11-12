@@ -3,37 +3,10 @@ var database = require("../database/config")
 function autenticar(email, senha) {
     // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
     var instrucao = `
-    SELECT 
-    f.idFuncionarios,
-    f.nome,
-    f.email,
-    f.cpf,
-    f.telefone,
-    f.senha,
-    f.fkBanco,
-    f.fkEscalonamento,
-    GROUP_CONCAT(s.idServidor) AS servidores_ids,
-    GROUP_CONCAT(s.apelido) AS servidores_apelidos,
-    GROUP_CONCAT(s.sistemaOperacional) AS servidores_sistemas,
-    GROUP_CONCAT(s.responsavelLegal) AS servidores_responsaveis,
-    GROUP_CONCAT(s.enderecoIP) AS servidores_enderecos,
-    GROUP_CONCAT(s.dataCompraLocacao) AS servidores_datasCompra,
-    GROUP_CONCAT(s.dateValidade) AS servidores_datasValidade,
-    b.idBanco,
-    b.nomeFantasia,
-    b.cnpj,
-    b.razaoSocial,
-    b.sigla,
-    b.responsavelLegal
-FROM 
-    funcionarios f
-JOIN servidor s ON f.idFuncionarios = s.fkBanco
-JOIN banco b ON f.fkBanco = b.idBanco
-WHERE 
-    f.email = '${email}' AND 
-    f.senha = '${senha}'
-GROUP BY 
-    f.idFuncionarios, f.nome, f.email, f.cpf, f.telefone, f.senha, f.fkBanco, f.fkEscalonamento, b.idBanco, b.nomeFantasia, b.cnpj, b.razaoSocial, b.sigla, b.responsavelLegal;
+   
+ select*From funcionarios WHERE 
+ email = 'pedro@gmail.com' AND 
+ senha = '123';
     `;
     console.log("Executando a instrução SQL: \n" + instrucao);
     return database.executar(instrucao);
