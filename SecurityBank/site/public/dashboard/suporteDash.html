@@ -149,7 +149,7 @@
             <div class="opcoes">
                 <a href="../index.html">
                     <img src="../assets/logout.png" alt="">
-                    <span onclick="limparSessao()">Logout</span>
+                    <span onclick="limparSessonStorage()">Logout</span>
                 </a>
             </div>
         </div>
@@ -249,6 +249,10 @@ function inserir(id) {
     vetor.push(id);
     console.log(vetor);
     sessionStorage.servidorSelecionado = selectedServer
+}
+
+function limparSessonStorage() {
+    sessionStorage.clear()
 }
 
 // Chamar a função exibirServidoresUsuario
