@@ -208,13 +208,18 @@
             <div class="dadosGraficos">
 
                 <div class="VisaoGeralServidores">
-                    <span class="tituloVisaoGeral">Visão Geral Servidores</span>
+                    <span class="tituloVisaoGeral">Porcentagem Download</span>
 
                 </div>
 
                 <div class="VisaoGeralServidores">
-                    <span class="tituloVisaoGeral">Visão Geral Servidores</span>
+                    <span class="tituloVisaoGeral">Porcentagem Upload</span>
     
+                    <div class="doughnut-chart">
+    
+                    </div>
+                  <div class="percentage-label">0%</div>
+
                 </div>
 
 
@@ -226,7 +231,7 @@
 
         </div>
     </div>
-    <div class="rodapeDash">
+    <!--div class="rodapeDash">
         <div    class="itens">
             <div class="blocos">
                 <h1>Security Bank</h1>
@@ -244,7 +249,7 @@
             </div>
         </div>
         <div class="direitos">&copy;  2023 copyrights by SecurityBank. All Rights Reserved</div>
-    </div>
+    </div-->
 
 
 </body>
@@ -371,6 +376,28 @@ idUsuario = sessionStorage.servidorSelecionado
 
         var proximaAtualizacao = setTimeout(() => percentCPU(), 5000)
     }
+
+
+
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+      // Atualize o gráfico de rosca de 0 a 100 em intervalos de 10 milissegundos
+      var progress = 0;
+      var interval = setInterval(function () {
+        document.querySelector('.doughnut-chart').style.background = `conic-gradient(#4caf50 0%, #4caf50 ${progress}%, #e0e0e0 ${progress}%, #e0e0e0 100%)`;
+        document.querySelector('.percentage-label').innerText = `${progress}%`;
+
+        // Pare o intervalo quando atingir 100
+        if (progress >= 100) {
+          clearInterval(interval);
+        }
+
+        progress++;
+      }, 20);
+    });
 
 
 

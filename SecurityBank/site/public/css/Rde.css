@@ -687,6 +687,34 @@ canvas {
 }
 
 
+body {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 100vh;
+  margin: 0;
+}
+
+.doughnut-chart {
+  position: relative;
+  width: 200px;
+  height: 200px;
+  border-radius: 50%;
+  background: conic-gradient(#42f7ac 0%, #4caf8e 70%, #e0e0e0 70%, #e0e0e0 100%);
+}
+
+.percentage-label {
+  position: absolute;
+  bottom: 5px; /* Ajuste a posição conforme necessário */
+  left: 50%;
+  transform: translateX(-50%);
+  font-size: 20px;
+  font-weight: bold;
+  color: #4caf50;
+}
+
+
+
 .tituloVisaoGeral {
   
   align-self: flex-start;
