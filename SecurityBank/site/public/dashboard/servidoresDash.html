@@ -261,9 +261,17 @@
 
                     </div>
                     <div class="USBs">
-                        <h2>Entradas USB</h2>
-                        <span>Mouse A23 - Porta 3</span><br>
-                        <span>Pendrive 783 - Porta 1</span>
+                        <h1>Entradas USB</h1>
+                        <div class="cardAlertas">
+                            <span id="situacaoTittleUSB">CPU em Emergência</span>
+                            <span id="horariosAlertasUSB">29/09/2023 as 13h45</span>
+                        </div>
+
+
+
+
+
+
                     </div>
 
                 </div>
@@ -491,6 +499,10 @@
     });
     window.onload = UltimosAlertasSelectedServer(dadoServer);
 
+    document.addEventListener("DOMContentLoaded", function () {
+        UltimosPortasConnect(dadoServer);
+    });
+    window.onload = UltimosPortasConnect(dadoServer);
 
 
 
@@ -696,6 +708,77 @@
         }
         var proximaAtualizacao = setTimeout(() => UltimosAlertasSelectedServer(), 35000);
     }
+
+
+    function UltimosPortasConnect(idUsuario) {
+        let currentPercentage;
+
+        if (sessionStorage.ID_USUARIO) {
+            idUsuario = dadoServer;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/ultimasUsbConectadas/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (responseData) {
+                            console.log(`Dados recebidos: ${JSON.stringify(responseData)}`);
+                            responseData.reverse();
+                            exibirPortasConnect(responseData);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function exibirPortasConnect(response) {
+        console.log('Exibindo dados retornados:');
+        for (let i = 0; i < response.length; i++) {
+            let registro = response[i];
+            let dado = registro.nome;
+            let dado2 = registro.qtdPortasTotal;
+            let dado3 = registro.qtdConnect;
+
+            const fill = document.getElementById('situacaoTittleUSB');
+            const percentage = document.getElementById('situacaoTittleUSB');
+            percentage.innerText = `${dado}`;
+
+
+            const fill2 = document.getElementById('horariosAlertasUSB');
+            const percentage2 = document.getElementById('horariosAlertasUSB');
+            percentage2.innerText = `Total: ${dado2}  - Utilizadas: ${dado3}.`;
+
+
+            console.log(dado)
+
+
+            console.log(dado);
+            console.log(response[0]);
+        }
+        var proximaAtualizacao = setTimeout(() => UltimosAlertasSelectedServer(), 35000);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 

@@ -317,6 +317,36 @@ function buscarUltimasUltAlertasSelected(idUsuario) {
 
 
 
+function buscarUltimasUsbConectadas(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select nomeDispositivo as nome,
+        qtdPorta as qtdPortasTotal,
+        qtdConectada as qtdConnect from usb where fkServidorUSB = ${idUsuario};
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select nomeDispositivo as nome,
+        qtdPorta as qtdPortasTotal,
+        qtdConectada as qtdConnect from usb where fkServidorUSB = ${idUsuario};`
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+
+
+
+
 
 
 function buscarUltimasMedidasRAM(idUsuario, limite_linhas) {
@@ -1076,4 +1106,5 @@ module.exports = {
     buscarUltimasMedidasValidade,
     buscarUltimasMedidasSituSelected,
     buscarUltimasUltAlertasSelected,
+    buscarUltimasUsbConectadas,
 }

@@ -113,7 +113,11 @@ router.get("/diasFaltando/:idUsuario", function (req, res) {
 router.get("/ultimasUltAlertasSelected/:idUsuario", function (req, res) {
     medidaController.buscarUltimasUltAlertasSelected(req, res);})
 
-
+    
+    router.get("/ultimasUsbConectadas/:idUsuario", function (req, res) {
+        medidaController.buscarUltimasUsbConectadas(req, res);})
+    
+    
 
 router.get("/ultimasValidadeServer/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasValidade(req, res);
