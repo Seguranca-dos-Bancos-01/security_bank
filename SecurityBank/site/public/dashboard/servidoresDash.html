@@ -333,13 +333,13 @@
 
 <script>
 
-    var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
-    if (escalonamentoFunc != 3) {
-        nivelACesso.innerHTML = `<span>Funcionário</span>`
-        var divAcesso = document.getElementById("gerenciarAcesso")
-        divAcesso.style.display = 'none';
-    }
+if (escalonamentoFunc != 1) {
+    nivelACesso.innerHTML = `<span>Funcionário</span>`
+    var divAcesso = document.getElementById("gerenciarAcesso")
+    divAcesso.style.display = 'none';
+}
 
 
     var idUsuarioServer = sessionStorage.servidorSelecionado;
