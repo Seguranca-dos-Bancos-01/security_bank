@@ -16,7 +16,13 @@ router.post("/cadastrarAlertaCPUEmergencia", function (req, res) {
 router.post("/cadastrarAlertaCPUUrgencia", function (req, res) {
     medidaController.cadastrarAlertaCPUUrgencia(req, res);
 })
+router.post("/ultimasUploadREDE/:idUsuario", function (req, res) {
+    medidaController.ultimoUpload(req, res);
+})
 
+router.post("/ultimasIpREDE/:idUsuario", function (req, res) {
+    medidaController.BuscarIpServidor(req, res);
+})
 
 
 router.post("/cadastrarAlertaRAMAtencao", function (req, res) {

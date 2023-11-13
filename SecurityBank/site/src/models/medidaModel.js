@@ -402,6 +402,50 @@ function buscarUltimasUsbConectadas(idUsuario) {
 
 
 
+function ultimoUpload(idUsuario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select PotenciaUpload as Upload from Rede where fkServidorRede = ${idUsuario}  order by idRede desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select PotenciaUpload as Upload from Rede where fkServidorRede = ${idUsuario}  order by idRede desc limit 1;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+function BuscarIpServidor(idUsuario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select enderecoIP as redeIP from servidor where idServidor = ${idUsuario};
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select enderecoIP as redeIP from servidor where idServidor = ${idUsuario};
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 function buscarUltimasMedidasRAM(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
@@ -1211,4 +1255,8 @@ module.exports = {
     buscarUltimasUltAlertasSelected,
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2, 
+    ultimoUpload,
+    BuscarIpServidor,
+
+
 }
