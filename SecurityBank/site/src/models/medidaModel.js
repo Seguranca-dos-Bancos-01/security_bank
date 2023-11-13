@@ -208,10 +208,10 @@ function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
 function buscarUltimasMedidasSituSelected(idUsuario, limite_linhas) {
     var instrucaoSql = ''
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select situacao as UltimasSituSelected from alerta where fkServidor = ${idUsuario} order by  idAlertas desc limit 1;
+        instrucaoSql = `select nome as UltimasSituSelected from servidor join statusMaquina on fkStatus = idStatus where idServidor = ${idUsuario};
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select situacao  as UltimasSituSelected from alerta where fkServidor = ${idUsuario} order by  idAlertas desc limit 1;
+        instrucaoSql = `select nome as UltimasSituSelected from servidor join statusMaquina on fkStatus = idStatus where idServidor = ${idUsuario};
     
     
     `;
@@ -305,6 +305,59 @@ function buscarUltimasUltAlertasSelected(idUsuario) {
       ORDER BY
         alerta.idAlertas DESC
       LIMIT 3;`
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+function buscarUltimasUltAlertasSelected2(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT
+        situacao as situ,
+        componentes.modelo AS nomeComponente,
+        DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
+        alerta.horaAlerta AS horaAlerta
+        
+      FROM
+        alerta
+      JOIN
+        servidor ON alerta.fkServidor = servidor.idServidor
+      JOIN
+        componentes ON alerta.fkComponente = componentes.idComponentes
+      WHERE
+        alerta.fkServidor = ${idUsuario}
+      ORDER BY
+        alerta.idAlertas DESC
+      LIMIT 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT
+        situacao as situ,
+        componentes.modelo AS nomeComponente,
+        DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
+        alerta.horaAlerta AS horaAlerta
+        
+      FROM
+        alerta
+      JOIN
+        servidor ON alerta.fkServidor = servidor.idServidor
+      JOIN
+        componentes ON alerta.fkComponente = componentes.idComponentes
+      WHERE
+        alerta.fkServidor = ${idUsuario}
+      ORDER BY
+        alerta.idAlertas DESC
+      LIMIT 1;`
 
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -419,11 +472,17 @@ function buscarUltimasMedidasQTD(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select idServidor AS qtd from servidor where fkBanco = 1 order by idServidor desc  limit 1;
+        instrucaoSql = `SELECT  COUNT(*) AS NumeroDeServidores
+        FROM servidor
+        WHERE fkBanco = ${idUsuario}
+        GROUP BY fkBanco;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select idServidor AS qtd from servidor where fkBanco = 1 order by idServidor desc  limit 1;
+        instrucaoSql = `SELECT  COUNT(*) AS NumeroDeServidores
+        FROM servidor
+        WHERE fkBanco = ${idUsuario}
+        GROUP BY fkBanco;
     
     `;
     } else {
@@ -440,11 +499,23 @@ function buscarUltimasMedidas24h(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT IFNULL((SELECT idAlertas FROM Alertas WHERE dataRegistro  >= NOW()  and fkBancoAlertas   = 1 - INTERVAL 1 DAY ORDER BY idAlertas DESC LIMIT 1), 0) AS Al;
+        instrucaoSql = `
+        SELECT IFNULL((SELECT idAlertas 
+                       FROM alerta 
+                       WHERE dataAlerta >= CURDATE() - INTERVAL 1 DAY
+                         AND fkBanco = 1 
+                       ORDER BY idAlertas DESC 
+                       LIMIT 1), 0) AS Al;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT IFNULL((SELECT idAlertas FROM Alertas WHERE dataRegistro  >= NOW()  and fkBancoAlertas   = 1 - INTERVAL 1 DAY ORDER BY idAlertas DESC LIMIT 1), 0) AS Al;
+        instrucaoSql = `
+        SELECT IFNULL((SELECT idAlertas 
+                       FROM alerta 
+                       WHERE dataAlerta >= CURDATE() - INTERVAL 1 DAY
+                         AND fkBanco = 1 
+                       ORDER BY idAlertas DESC 
+                       LIMIT 1), 0) AS Al;
     
     `;
     } else {
@@ -460,10 +531,20 @@ function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT IFNULL((SELECT idServidor FROM servidor JOIN statusMaquina ON fkStatus = idStatus WHERE nome = 'Instavel' and fkBanco = 1 ORDER BY idServidor DESC LIMIT 1), 0) AS qtdS;
+        instrucaoSql = `SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
+        FROM servidor
+        WHERE fkStatus = (SELECT idStatus FROM statusMaquina WHERE nome = 'Instavel')
+          AND fkBanco = ${idUsuario};
+        
+        
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT IFNULL((SELECT idServidor FROM servidor JOIN statusMaquina ON fkStatus = idStatus WHERE nome = 'Instavel' and fkBanco = 1 ORDER BY idServidor DESC LIMIT 1), 0) AS qtdS;
+        instrucaoSql = `SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
+        FROM servidor
+        WHERE fkStatus = (SELECT idStatus FROM statusMaquina WHERE nome = 'Instavel')
+          AND fkBanco = ${idUsuario};
+        
+        
     
     `;
     } else {
@@ -530,10 +611,30 @@ function buscarUltimasMedidasServidorEmergencia(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT IFNULL((SELECT idServidor FROM servidor JOIN statusMaquina ON fkStatus = idStatus WHERE nome = 'Emergencia' and fkBanco = 1 ORDER BY idServidor DESC LIMIT 1), 0) AS qtdE;
+        instrucaoSql = `
+        SELECT IFNULL(
+            (SELECT COUNT(*) 
+             FROM servidor 
+             JOIN statusMaquina ON fkStatus = idStatus 
+             WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario}
+            ), 0) AS qtdE,
+            GROUP_CONCAT(servidor.apelido) AS nomesServidores
+        FROM servidor
+        JOIN statusMaquina ON servidor.fkStatus = statusMaquina.idStatus
+        WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario};
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT IFNULL((SELECT idServidor FROM servidor JOIN statusMaquina ON fkStatus = idStatus WHERE nome = 'Emergencia' and fkBanco = 1 ORDER BY idServidor DESC LIMIT 1), 0) AS qtdE;
+        instrucaoSql = `
+        SELECT IFNULL(
+            (SELECT COUNT(*) 
+             FROM servidor 
+             JOIN statusMaquina ON fkStatus = idStatus 
+             WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario}
+            ), 0) AS qtdE,
+            GROUP_CONCAT(servidor.apelido) AS nomesServidores
+        FROM servidor
+        JOIN statusMaquina ON servidor.fkStatus = statusMaquina.idStatus
+        WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario};
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -551,9 +652,11 @@ function buscarUltimasMedidasSelectContas(idUsuario, limite_linhas) {
     let instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT email AS mail, fkEscalonamento AS Esca FROM funcionarios WHERE fkBanco = 1;`;
+        instrucaoSql = `SELECT email AS mail, 
+        cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamentoFuncionarios on fkEscalonamento = idEscalonamento WHERE fkBanco = ${idUsuario};`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT email AS mail, fkEscalonamento AS Esca FROM funcionarios WHERE fkBanco = 1;`;
+        instrucaoSql = `SELECT email AS mail, 
+        cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamentoFuncionarios on fkEscalonamento = idEscalonamento WHERE fkBanco = ${idUsuario};`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return null; // Retornando nulo se nenhuma condição for satisfeita
@@ -1107,4 +1210,5 @@ module.exports = {
     buscarUltimasMedidasSituSelected,
     buscarUltimasUltAlertasSelected,
     buscarUltimasUsbConectadas,
+    buscarUltimasUltAlertasSelected2, 
 }

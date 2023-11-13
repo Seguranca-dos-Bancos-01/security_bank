@@ -60,12 +60,12 @@
                     <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
-                <div id="opcoesServidores-content"class="opcoesServidores-content">
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
 
- 
-                  </div>
+
+                </div>
             </div>
- 
+
             <div class="opcoes">
                 <a href="">
                     <img src="../assets/servidor.png    " alt="">
@@ -218,11 +218,11 @@
                         <h2 class="SubtittleContas">Nivel Acesso</h2>
                         <h2 class="SubtittleContas">Edição</h2>
                     </div>
-                    <div id="colocar"class="espaco">
+                    <div id="colocar" class="espaco">
                         <div id="dadosMostrar" class="dadosUsuarios">
-                            <a id="MostrarEmail"class="emailControle"></a>
+                            <a id="MostrarEmail" class="emailControle"></a>
                             <span id="MostrarNivel" class="nivelAcesso"></span>
-                            
+
                             <div class="edicaoGerenciamentoContas">
                                 <button class="botaoEditarAcesso" onclick="EditarAcesso(i)">Editar</button>
                                 <button class="botaoEditarAcesso" onclick="ExcluirConta(i)">Excluir</button>
@@ -239,7 +239,7 @@
                     <div class="cabecario"></div>
                 </div>
                 <div class="rodapeDash">
-                    <div    class="itens">
+                    <div class="itens">
                         <div class="blocos">
                             <h1>Security Bank</h1>
                             <h4>TECH & SOLUTIONS</h4>
@@ -251,17 +251,17 @@
                         </div>
                         <div class="blocos">
                             <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
-                            Cerqueira César, São Paulo - SP,<br>
-                            01414-001</span>
+                                Cerqueira César, São Paulo - SP,<br>
+                                01414-001</span>
                         </div>
                     </div>
-                    <div class="direitos">&copy;  2023 copyrights by SecurityBank. All Rights Reserved</div>
+                    <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
                 </div>
             </div>
         </div>
 
-       
-    
+
+
 </body>
 
 </html>
@@ -269,68 +269,68 @@
 
 <script>
 
-var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+    var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
-if (escalonamentoFunc != 1) {
-    nivelACesso.innerHTML = `<span>Funcionário</span>`
-    var divAcesso = document.getElementById("gerenciarAcesso")
-    divAcesso.style.display = 'none';
-}
- 
- var vetor = [];
-var selectedServer;// Declarar idUsuario fora do escopo da função
+    if (escalonamentoFunc != 1) {
+        nivelACesso.innerHTML = `<span>Funcionário</span>`
+        var divAcesso = document.getElementById("gerenciarAcesso")
+        divAcesso.style.display = 'none';
+    }
 
-function exibirServidoresUsuario() {
-    var server = JSON.parse(sessionStorage.servidor);
-    console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
-    var selectServidores = document.getElementById("opcoesServidores-content");
-    selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
-    server.forEach(element => {
-        var button = document.createElement('button');
-        button.textContent = element.apelido;
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-            selectedServer = element.idServidor; 
-            vetor.push(selectedServer);
-            console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
-            
-            console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
-            inserir(selectedServer); // Chamar a função inserir com o ID do servidor
-            window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+
+    function exibirServidoresUsuario() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("opcoesServidores-content");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            var button = document.createElement('button');
+            button.textContent = element.apelido;
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+                window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+            });
+            button.classList.add('botaodropdown');
+            selectServidores.appendChild(button);
         });
-        button.classList.add('botaodropdown');
-        selectServidores.appendChild(button);
-    });
-}
+    }
 
-function inserir(id) {
-    vetor.push(id);
-    console.log(vetor);
-    sessionStorage.servidorSelecionado = selectedServer
-}
+    function inserir(id) {
+        vetor.push(id);
+        console.log(vetor);
+        sessionStorage.servidorSelecionado = selectedServer
+    }
 
-// Chamar a função exibirServidoresUsuario
-exibirServidoresUsuario();
+    // Chamar a função exibirServidoresUsuario
+    exibirServidoresUsuario();
 
 
 
-let proximaAtualizacao;
+    let proximaAtualizacao;
 
-var idUsuario = sessionStorage.banco1
-var idUsuarioCPU = sessionStorage.servidor_id1
-var idUsuarioRAM = sessionStorage.servidor_id1
-var idUsuarioDISK = sessionStorage.servidor_id1
+    var idUsuario = sessionStorage.banco1
+    var idUsuarioCPU = sessionStorage.servidor_id1
+    var idUsuarioRAM = sessionStorage.servidor_id1
+    var idUsuarioDISK = sessionStorage.servidor_id1
 
-window.onload = percentCPU(idUsuarioCPU),
-    percentRAM(idUsuarioRAM),
-    percentDISK(idUsuarioDISK);
+    window.onload = percentCPU(idUsuarioCPU),
+        percentRAM(idUsuarioRAM),
+        percentDISK(idUsuarioDISK);
 
-percentCPU(idUsuarioCPU)
-percentRAM(idUsuarioRAM)
-percentDISK(idUsuarioDISK)
+    percentCPU(idUsuarioCPU)
+    percentRAM(idUsuarioRAM)
+    percentDISK(idUsuarioDISK)
 
 
-function Plano() {
+    function Plano() {
         const planoContratado = sessionStorage.fkPlano;
         const nomePlano = document.getElementById('nomePlano');
         if (planoContratado != 1) {
@@ -358,14 +358,14 @@ function Plano() {
 
 
     document.addEventListener("DOMContentLoaded", function () {
-        ContasAdministradas(dadoServer);
+        ContasAdministradas(sessionStorage.FKBANCO);
     });
-    window.onload = ContasAdministradas(dadoServer);
+    window.onload = ContasAdministradas(sessionStorage.FKBANCO);
 
 
-var vetorNivel = []
-var vetorEmail = []
-
+    var vetorNivel = []
+    var vetorEmail = []
+    var CargoNivel = []
 
 
 
@@ -379,188 +379,195 @@ var vetorEmail = []
     }
 
 
-    function ContasAdministradas(idUsuarioServer) { 
-    if (sessionStorage.ID_USUARIO) { 
-        let idUsuario = sessionStorage.ID_USUARIO; 
-        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { }); } 
-        else { console.error("ID do usuário não encontrada no sessionStorage."); } 
-
-
+    function ContasAdministradas(idUsuarioServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.FKBANCO;
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
         fetch(`/medidas/SelectContas/${idUsuario}`, { cache: 'no-store' })
-        .then(function (response) { if (response.ok) { response.json()
-            .then(function (response) { console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-             response.reverse(); MostrarsUltimosAlertas(response); }); } else
-              { console.error('Nenhum dado encontrado ou erro na API'); } })
-              .catch(function (error) { console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`); 
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                    .then(function (response) {
+                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                        response.reverse(); MostrarsUltimosAlertas(response);
+                    });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
-         } 
-         
-         function MostrarsUltimosAlertas(response) { console.log('Exibindo dados retornados:')
-         var dadosMostrar = document.getElementById('colocar');
-dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+    }
 
-
-for (var i = 0; i < response.length; i++) {
-    var registro = response[i];
-    var email = registro.mail;
-    var nivel = registro.Esca;
-    vetorNivel.push(nivel); // Adiciona o valor de 'nivel' ao vetor
-    vetorEmail.push(email); // Adiciona o valor de 'email' ao vetor
-console.log(vetorEmail)
-console.log(vetorNivel)
-    var elemento = document.createElement('div');
-    elemento.classList.add('colocar');
-    var conteudo = `
-        <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}</a>
-        <span id="MostrarNivel${i}" class="nivelAcesso">${vetorNivel[i]}</span>
+    function MostrarsUltimosAlertas(response) {
+        console.log('Exibindo dados retornados:')
+        var dadosMostrar = document.getElementById('colocar');
+        dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+        for (var i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var email = registro.mail;
+            var nivel = registro.Esca;
+            var cargo = registro.Cargo;
+            CargoNivel.push(cargo)
+            vetorNivel.push(nivel); // Adiciona o valor de 'nivel' ao vetor
+            vetorEmail.push(email); // Adiciona o valor de 'email' ao vetor
+            console.log(vetorEmail)
+            console.log(vetorNivel)
+            var elemento = document.createElement('div');
+            elemento.classList.add('colocar');
+            var conteudo = `
+        <a id="MostrarEmail" class="emailControle">${vetorEmail[i]} -  </a>
+        <span id="MostrarNivel${i}" class="nivelAcesso"> ${CargoNivel[i]} - ${vetorNivel[i]}</span>
         <div class="edicaoGerenciamentoContas">
          <input class="inputContas" id="novoValor${i}" type="text">
         <button class="botaoEditarAcesso" onclick="editarAcesso(${i})">Editar</button>
         <button class="botaoEditarAcesso" onclick="excluirConta(${i})">Excluir</button>
         </div> 
     `;
-        // <div class="imgsContas">
-        //     <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
-        //     <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
-        // </div>
-    elemento.innerHTML = conteudo;
-    dadosMostrar.appendChild(elemento);
+            // <div class="imgsContas">
+            //     <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
+            //     <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
+            // </div>
+            elemento.innerHTML = conteudo;
+            dadosMostrar.appendChild(elemento);
 
-    if (i !== response.length - 1) {
-        var linhaEspacamento = document.createElement('div');
-        linhaEspacamento.classList.add('linhaEspacamento');
-        linhaEspacamento.innerHTML = '<span></span>';
-        dadosMostrar.appendChild(linhaEspacamento);
-    }}}
-
-
-console.log(vetorEmail)
-
-
-
-function editarAcesso(i) {
-    window.editarAcesso = function(i) {
-    var novoValorInput = document.getElementById('novoValor' + i);
-    var novoNivel = novoValorInput.value;
-    if (novoNivel !== '') {
-        console.log(vetorNivel)
-        vetorNivel[i] = novoNivel; // Atualiza o vetor com o novo valor de nível
-        console.log(vetorNivel)
-        // Atualiza o conteúdo da div correspondente
-        var divNivel = document.getElementById('MostrarNivel' + i);
-        divNivel.textContent = novoNivel; // Atualiza o texto da div de nível com o novo valor
-
-        // Limpa o valor do input após a edição
-        novoValorInput.value = '';
-    }
-var email = vetorEmail[i]
-
-    fetch("/usuarios/atualizarAcesso", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        // crie um atributo que recebe o valor recuperado aqui
-        // Agora vá para o arquivo routes/usuario.js
-        NovoNivel: novoNivel,
-        Email: email,
-      }),
-    })
-      .then(function (resposta) {
-        console.log("resposta: ", resposta);
-
-        if (resposta.ok) {
-          cardErro.style.display = "block";
-
-          mensagem_erro.innerHTML =
-            "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-          setTimeout(() => {
-            window.location = "login.html";
-          }, "2000");
-
-          limparFormulario();
-          
-        } else {
-          throw "Houve um erro ao tentar realizar o cadastro!";
-        }
-      })
-      .catch(function (resposta) {
-        console.log(`#ERRO: ${resposta}`);
-        
-      });
-
-    }
-
-
-
-
-}
-function excluirConta(i) {
-    if (i > -1) {
-        var email = vetorEmail[i];
-        var nivel = vetorNivel[i]
-        fetch("/usuarios/excluirConta", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                Nivel:nivel,
-                Email: email,
-                
-            }),
-        })
-        .then(function (resposta) {
-            if (resposta.ok) {
-                // Removendo os valores do vetor
-                vetorNivel.splice(i, 1);
-                vetorEmail.splice(i, 1);
-                // Atualizando a lista
-                atualizarLista();
-            } else {
-                throw new Error("Erro ao excluir a conta.");
+            if (i !== response.length - 1) {
+                var linhaEspacamento = document.createElement('div');
+                linhaEspacamento.classList.add('linhaEspacamento');
+                linhaEspacamento.innerHTML = '<span></span>';
+                dadosMostrar.appendChild(linhaEspacamento);
             }
-        })
-        .catch(function (erro) {
-            console.error("Houve um erro ao tentar excluir a conta:", erro);
-        });
+        }
     }
-}
 
-function atualizarLista() {
-    var dadosMostrar = document.getElementById('colocar');
-    dadosMostrar.innerHTML = '';
 
-    for (var i = 0; i < vetorNivel.length; i++) {
-        var elemento = document.createElement('div');
-        elemento.classList.add('dadosUsuarios');
-        var conteudo = `
+    console.log(vetorEmail)
+
+
+
+    function editarAcesso(i) {
+        window.editarAcesso = function (i) {
+            var novoValorInput = document.getElementById('novoValor' + i);
+            var novoNivel = novoValorInput.value;
+            if (novoNivel !== '') {
+                console.log(vetorNivel)
+                vetorNivel[i] = novoNivel; // Atualiza o vetor com o novo valor de nível
+                console.log(vetorNivel)
+                // Atualiza o conteúdo da div correspondente
+                var divNivel = document.getElementById('MostrarNivel' + i);
+                divNivel.textContent = novoNivel; // Atualiza o texto da div de nível com o novo valor
+
+                // Limpa o valor do input após a edição
+                novoValorInput.value = '';
+            }
+            var email = vetorEmail[i]
+
+            fetch("/usuarios/atualizarAcesso", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    // crie um atributo que recebe o valor recuperado aqui
+                    // Agora vá para o arquivo routes/usuario.js
+                    NovoNivel: novoNivel,
+                    Email: email,
+                }),
+            })
+                .then(function (resposta) {
+                    console.log("resposta: ", resposta);
+                    Swal.fire({
+                icon: 'correct',
+                title: 'Regarregue a pagina',
+                text: `Edição feita com sucesso`,
+            });
+            window.location = 'GerenciarAcesso.html'
+                })
+                .catch(function (resposta) {
+                    console.log(`#ERRO: ${resposta}`);
+
+                });
+
+        }
+
+
+
+
+    }
+    function excluirConta(i) {
+        if (i > -1) {
+            var email = vetorEmail[i];
+            var nivel = vetorNivel[i]
+            fetch("/usuarios/excluirConta", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    Nivel: nivel,
+                    Email: email,
+
+                }),
+            })
+                .then(function (resposta) {
+                    if (resposta.ok) {
+                        // Removendo os valores do vetor
+                        vetorNivel.splice(i, 1);
+                        vetorEmail.splice(i, 1);
+                        // Atualizando a lista
+                        atualizarLista();
+                        Swal.fire({
+                icon: 'correct',
+                title: 'Regarregue a pagina',
+                text: `Edição feita com sucesso`,
+            });
+            window.location = 'GerenciarAcesso.html'
+
+                    } else {
+                        throw new Error("Erro ao excluir a conta.");
+                    }
+                })
+                .catch(function (erro) {
+                    console.error("Houve um erro ao tentar excluir a conta:", erro);
+                });
+        }
+
+
+    }
+
+    function atualizarLista() {
+        var dadosMostrar = document.getElementById('colocar');
+        dadosMostrar.innerHTML = '';
+
+        for (var i = 0; i < vetorNivel.length; i++) {
+            var elemento = document.createElement('div');
+            elemento.classList.add('dadosUsuarios');
+            var conteudo = `
             <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}</a>
-            <span id="MostrarNivel${i}" class="nivelAcesso">${vetorNivel[i]}</span>
+            <span id="MostrarNivel${i}" class="nivelAcesso">${CargoNivel[i]} - ${vetorNivel[i]}</span>
             <div class="edicaoGerenciamentoContas">
             <input class="inputContas" id="novoValor${i}" type="text">
             <button class="botaoEditarAcesso" onclick="editarAcesso(${i})">Editar</button>
             <button class="botaoEditarAcesso" onclick="excluirConta(${i})">Excluir</button>
             </div>
         `;
-        // <div class="imgsContas">
-        //         <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
-        //         <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
-        elemento.innerHTML = conteudo;
-        dadosMostrar.appendChild(elemento);
+            // <div class="imgsContas">
+            //         <!-- <img class="imgEdicaoGerenciar" src="../assets/🦆 icon _Edit_.png" alt="" class="alterar"> -->
+            //         <!-- <img src="../assets/🦆 icon _Delete_.png" alt="" class="deletar"><span>editar</span> -->
+            elemento.innerHTML = conteudo;
+            dadosMostrar.appendChild(elemento);
 
-        if (i !== vetorNivel.length - 1) {
-            var linhaEspacamento = document.createElement('div');
-            linhaEspacamento.classList.add('linhaEspacamento');
-            linhaEspacamento.innerHTML = '<span></span>';
-            dadosMostrar.appendChild(linhaEspacamento);
+            if (i !== vetorNivel.length - 1) {
+                var linhaEspacamento = document.createElement('div');
+                linhaEspacamento.classList.add('linhaEspacamento');
+                linhaEspacamento.innerHTML = '<span></span>';
+                dadosMostrar.appendChild(linhaEspacamento);
+            }
         }
     }
-}
 
-function limparSessonStorage() {
+    function limparSessonStorage() {
         sessionStorage.clear()
     }
 

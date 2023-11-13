@@ -252,7 +252,7 @@ function exibirDadosDISCO(response) {
         // var discoServidores = document.getElementById('discoServidores');
         // discoServidores.innerHTML = `${dado}%`;
 
-        var proximaAtualizacao = setTimeout(() => percentDISK(), 10000)
+        var proximaAtualizacao = setTimeout(() => percentDISK(), 15000)
     }
 
     var servidorFK = sessionStorage.servidor_id1
@@ -277,7 +277,7 @@ function exibirDadosDISCO(response) {
         })
       
           
-    
+        var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUAtencao(), 15000)
         return false;
         }
     
@@ -300,6 +300,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUEmergencia(), 15000)
         }
     
     
@@ -321,6 +322,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUUrgencia(), 15000)
         }
     
     
@@ -346,6 +348,7 @@ function exibirDadosDISCO(response) {
       
     
     return false;
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMAtencao(), 15000)
     }
     
     
@@ -367,6 +370,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMEmergencia(), 15000)
     }
     
     
@@ -388,6 +392,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMUrgencia(), 15000)
     }
     
     
@@ -414,6 +419,7 @@ function exibirDadosDISCO(response) {
       
     
     return false;
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaDISCOAtencao(), 15000)
     }
     
     
@@ -435,6 +441,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaDISCOEmergencia(), 15000)
     }
     
     
@@ -456,4 +463,5 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaDISCOUrgencia(), 15000)
     }

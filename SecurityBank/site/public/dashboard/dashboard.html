@@ -33,7 +33,8 @@
 
 
 
-<body onload=" percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia(), ReceberUltimosAlertas1()">
+<body
+    onload=" percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia(), ReceberUltimosAlertas1()">
 
     <div class="janela">
         <div class="header-left">
@@ -60,12 +61,12 @@
                     <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
-                <div id="opcoesServidores-content"class="opcoesServidores-content">
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
 
- 
-                  </div>
+
+                </div>
             </div>
- 
+
             <div class="opcoes">
                 <a href="">
                     <img src="../assets/servidor.png    " alt="">
@@ -161,10 +162,10 @@
             <div class="Nome">
                 <h2>Painel Geral</h2>
             </div>
-           
+
             <div class="dadosGraficos">
                 <div class="blocoalertasLateralDash">
-                    <div class="UltimoAlerta">
+                    <div id="colocar" class="UltimoAlerta">
                         <span class="tituloUltimoAlerta">Último Alerta</span>
                         <div id="AlertaUltimoMostrar">
 
@@ -172,7 +173,11 @@
                     </div>
                     <div class="ServidorEmergencia">
                         <span class="tituloServidorEmergencia">Servidor em Emergência</span>
-                        <span id="nomeServidorEmergencia">Nenhum servidor</span>
+                        <span id="nomeServidorEmergencia"></span>
+                        <div  id="ServidoresEmEmergencia">
+
+
+                        </div>
                     </div>
                 </div>
                 <div class="VisaoGeralServidores">
@@ -186,23 +191,25 @@
             </div>
             <div class="barraInformativa">
                 <div class="infoBarra">
-                    <span class="SituacaoBarra" id="numeroServidores">12</span>
+                    <span class="SituacaoBarra" id="numeroServidores"></span>
                     <span>Servidores Monitorados</span>
                 </div>
                 <div class="infoBarra">
-                    <span class="SituacaoBarra" id="alertaHoras">10</span>
+                    <span class="SituacaoBarra" id="alertaHoras"></span>
                     <span>Alertas em 24 horas</span>
                 </div>
                 <div class="infoBarra">
-                    <span class="SituacaoBarra" id="InstaveisServidores">0</span>
+                    <span class="SituacaoBarra" id="InstaveisServidores"></span>
                     <span>Servidores Instáveis</span>
                 </div>
             </div>
             <div class="Historico">
-                <span class="tituloHistorico">Histórico dos Servidores</span>
-                <div class="graph">
-                    <canvas id="myChartsegundo"></canvas>
-                </div>
+                <span class="tituloHistorico">Servidores</span>
+               <div id="Mostrar-Servidores">
+
+
+
+               </div>
             </div>
 
 
@@ -235,118 +242,161 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 <script>
- 
-var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
-if (escalonamentoFunc != 1) {
-    nivelACesso.innerHTML = `<span>Funcionário</span>`
-    var divAcesso = document.getElementById("gerenciarAcesso")
-    divAcesso.style.display = 'none';
-}
+    var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
-// var idUsuarioServer = sessionStorage.banco1
-// //    var idUsuarioServer = sessionStorage.ID_USUARIO;
+    if (escalonamentoFunc != 1) {
+        nivelACesso.innerHTML = `<span>Funcionário</span>`
+        var divAcesso = document.getElementById("gerenciarAcesso")
+        divAcesso.style.display = 'none';
+    }
 
-//     function ReceberUltimosAlertas1(idUsuarioServer) {
-//         if (sessionStorage.ID_USUARIO) {
-//             let idUsuario = sessionStorage.ID_USUARIO;
-//             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
-//         }
-//         else { console.error("ID do usuário não encontrada no sessionStorage."); }
+    // var idUsuarioServer = sessionStorage.banco1
+    // //    var idUsuarioServer = sessionStorage.ID_USUARIO;
 
-
-//         fetch(`/medidas/buscarUltimosAlertas1/${idUsuario}`, { cache: 'no-store' })
-//             .then(function (response) {
-//                 if (response.ok) {
-//                     response.json()
-//                         .then(function (response) {
-//                             console.log(`Dados recebidos: GRaIFCO AAAAAAAAAAAAAAA ${JSON.stringify(response)}`);
-//                             response.reverse();
-//                             MostrarUltimosAlertas1(response);
-
-//                         });
-//                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
-//             })
-//             .catch(function (error) {
-//                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-//             });
-//     }
-
-//     function MostrarUltimosAlertas1(response) {
-//         console.log('Exibindo dados retornados:')
-//         var dadosMostrar = document.getElementById('AlertaUltimoMostrar');
-//         dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
-
-//         // var vetorServidor;
-//         // var vetornomeComponente;
-//         // var vetordataAlerta;
-//         // var vetorhoraAlerta;
+    //     function ReceberUltimosAlertas1(idUsuarioServer) {
+    //         if (sessionStorage.ID_USUARIO) {
+    //             let idUsuario = sessionStorage.ID_USUARIO;
+    //             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+    //         }
+    //         else { console.error("ID do usuário não encontrada no sessionStorage."); }
 
 
-//         for (var i = 0; i < response.length; i++) {
-//             var registro = response[i];
+    //         fetch(`/medidas/buscarUltimosAlertas1/${idUsuario}`, { cache: 'no-store' })
+    //             .then(function (response) {
+    //                 if (response.ok) {
+    //                     response.json()
+    //                         .then(function (response) {
+    //                             console.log(`Dados recebidos: GRaIFCO AAAAAAAAAAAAAAA ${JSON.stringify(response)}`);
+    //                             response.reverse();
+    //                             MostrarUltimosAlertas1(response);
 
-//             console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAA: ${JSON.stringify(registro)}`)
-//             var nomeServidor = registro.nomeServidor;
-//             var nomeComponente = registro.nomeComponente;
-//             var dataAlerta = registro.dataAlerta;
-//             var horaAlerta = registro.horaAlerta;
-//             var statusAlerta = registro.situacaoAlerta;
+    //                         });
+    //                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
+    //             })
+    //             .catch(function (error) {
+    //                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    //             });
+    //     }
 
-//             var elemento = document.createElement('AlertaUltimoMostrar');
+    //     function MostrarUltimosAlertas1(response) {
+    //         console.log('Exibindo dados retornados:')
+    //         var dadosMostrar = document.getElementById('AlertaUltimoMostrar');
+    //         dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
 
-//             var conteudo = `
-//                         <span id="TituloAlerta">${nomeServidor}está em ${statusAlerta}</span><br>
-//                         <span id="dataAlerta"> ${dataAlerta} as  ${horaAlerta}</span>
-//             `;
+    //         // var vetorServidor;
+    //         // var vetornomeComponente;
+    //         // var vetordataAlerta;
+    //         // var vetorhoraAlerta;
 
-//             elemento.innerHTML = conteudo;
-//             dadosMostrar.appendChild(elemento);
 
-//         }
-//     }
+    //         for (var i = 0; i < response.length; i++) {
+    //             var registro = response[i];
 
-//     ReceberUltimosAlertas1()
+    //             console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAA: ${JSON.stringify(registro)}`)
+    //             var nomeServidor = registro.nomeServidor;
+    //             var nomeComponente = registro.nomeComponente;
+    //             var dataAlerta = registro.dataAlerta;
+    //             var horaAlerta = registro.horaAlerta;
+    //             var statusAlerta = registro.situacaoAlerta;
 
-var vetor = [];
-var selectedServer;// Declarar idUsuario fora do escopo da função
+    //             var elemento = document.createElement('AlertaUltimoMostrar');
 
-function exibirServidoresUsuario() {
-    var server = JSON.parse(sessionStorage.servidor);
-    console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
-    var selectServidores = document.getElementById("opcoesServidores-content");
-    selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
-    server.forEach(element => {
-        var button = document.createElement('button');
-        button.textContent = element.apelido;
-        button.addEventListener("click", function (event) {
-            event.preventDefault();
-            selectedServer = element.idServidor; 
-            vetor.push(selectedServer);
-            console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
-            
-            console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
-            inserir(selectedServer); // Chamar a função inserir com o ID do servidor
-            window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+    //             var conteudo = `
+    //                         <span id="TituloAlerta">${nomeServidor}está em ${statusAlerta}</span><br>
+    //                         <span id="dataAlerta"> ${dataAlerta} as  ${horaAlerta}</span>
+    //             `;
+
+    //             elemento.innerHTML = conteudo;
+    //             dadosMostrar.appendChild(elemento);
+
+    //         }
+    //     }
+
+    //     ReceberUltimosAlertas1()
+
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+
+    function exibirServidoresUsuario() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("Mostrar-Servidores");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            var button = document.createElement('button');
+            button.textContent = element.apelido;
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+                window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+            });
+            button.classList.add('botaodropdown');
+            selectServidores.appendChild(button);
         });
-        button.classList.add('botaodropdown');
-        selectServidores.appendChild(button);
-    });
-}
+    }
 
-function inserir(id) {
-    vetor.push(id);
-    console.log(vetor);
-    sessionStorage.servidorSelecionado = selectedServer
-}
+    function inserir(id) {
+        vetor.push(id);
+        console.log(vetor);
+        sessionStorage.servidorSelecionado = selectedServer
+    }
 
-// Chamar a função exibirServidoresUsuario
-exibirServidoresUsuario();
+    // Chamar a função exibirServidoresUsuario
+    exibirServidoresUsuario();
 
 
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
 
     let proximaAtualizacao;
+
+
+
+
+    function exibirServidoresUsuario2() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("opcoesServidores-content");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            var button = document.createElement('button');
+            button.textContent = element.apelido;
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserir2(selectedServer); // Chamar a função inserir com o ID do servidor
+                window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+            });
+            selectServidores.appendChild(button);
+            button.classList.add('botaodropdown');
+        });
+    }
+
+
+    function inserir2(id) {
+        vetor.push(id);
+        console.log(vetor);
+        sessionStorage.servidorSelecionado = selectedServer
+    }
+
+
+    exibirServidoresUsuario2();
+
+
+
+
+
+
 
 
 
@@ -608,9 +658,9 @@ exibirServidoresUsuario();
 
 
 
-    function QtdServidor(idUsuarioServer) {
+    function QtdServidor(idUsuario) {
         if (sessionStorage.FKBANCO) {
-            let idUsuario = sessionStorage.FKBANCO;
+            idUsuario = sessionStorage.FKBANCO;
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -635,7 +685,7 @@ exibirServidoresUsuario();
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
-            var dado = registro.qtd;
+            var dado = registro.NumeroDeServidores;
 
         }
         console.log(dado)
@@ -647,9 +697,16 @@ exibirServidoresUsuario();
 
     }
 
-    function alerta24(idUsuarioServer) {
+    document.addEventListener("DOMContentLoaded", function () {
+        QtdServidor();
+    });
+    window.onload = QtdServidor();
+
+
+
+    function alerta24(idUsuario) {
         if (sessionStorage.FKBANCO) {
-            let idUsuario = sessionStorage.FKBANCO;
+            idUsuario = sessionStorage.FKBANCO;
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -683,17 +740,29 @@ exibirServidoresUsuario();
 
         var cpuServidores = document.getElementById('alertaHoras');
         if (dado > 5) {
-        cpuServidores.classList.add('textoVermelho');
-        }else {
-        cpuServidores.classList.add('textoVerde');
+            cpuServidores.classList.add('textoVermelho');
+        } else {
+            cpuServidores.classList.add('textoVerde');
         }
         cpuServidores.innerHTML = `${dado}`;
 
 
     }
-    function sInstaveis(idUsuarioServer) {
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        alerta24();
+    });
+    window.onload = alerta24();
+
+
+
+
+
+
+    function sInstaveis(idUsuario) {
         if (sessionStorage.FKBANCO) {
-            let idUsuario = sessionStorage.FKBANCO;
+            idUsuario = sessionStorage.FKBANCO;
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -718,7 +787,7 @@ exibirServidoresUsuario();
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
-            var dado = registro.qtdS;
+            var dado = registro.QuantidadeDeMaquinasInstaveis;
 
 
         }
@@ -727,62 +796,108 @@ exibirServidoresUsuario();
 
         var cpuServidores = document.getElementById('InstaveisServidores');
         if (dado > 0) {
-        cpuServidores.classList.add('textoVermelho');
-        }else {
-        cpuServidores.classList.add('textoVerde');
+            cpuServidores.classList.add('textoVermelho');
+        } else {
+            cpuServidores.classList.add('textoVerde');
         }
         cpuServidores.innerHTML = `${dado}`;
-
-
     }
 
-    function UltimosAlertas(idUsuarioServer) {
-        if (sessionStorage.FKBANCO) {
-            let idUsuario = sessionStorage.FKBANCO;
-            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+    document.addEventListener("DOMContentLoaded", function () {
+        sInstaveis();
+    });
+    window.onload = sInstaveis();
+
+
+
+
+    document.addEventListener("DOMContentLoaded", function () {
+        UltimosAlertasSelectedServer();
+    });
+    window.onload = UltimosAlertasSelectedServer();
+
+
+    function UltimosAlertasSelectedServer(idUsuario) {
+        let currentPercentage;
+
+        if (sessionStorage.ID_USUARIO) {
+            idUsuario = sessionStorage.FKBANCO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
         }
-        else { console.error("ID do usuário não encontrada no sessionStorage."); }
 
-
-        fetch(`/medidas/UltimoAlerta/${idUsuario}`, { cache: 'no-store' })
+        fetch(`/medidas/ultimasUltAlertasSelected2/${idUsuario}`, { cache: 'no-store' })
             .then(function (response) {
                 if (response.ok) {
                     response.json()
-                        .then(function (response) {
-                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                            response.reverse(); MostrarsUltimosAlertas(response);
+                        .then(function (responseData) {
+                            console.log(`Dados recebidos: ${JSON.stringify(responseData)}`);
+                            responseData.reverse();
+                            exibirUltimosAlertasSelected(responseData);
                         });
-                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
             })
             .catch(function (error) {
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
 
-    function MostrarsUltimosAlertas(response) {
-        console.log('Exibindo dados retornados:')
-        for (i = 0; i < response.length; i++) {
-            var registro = response[i];
-            var dado = registro.numBanco;
-            var desc = registro.descr
-            var horario = registro.hr
 
+
+    function exibirUltimosAlertasSelected(response) {
+
+        var ultimosAlertas = document.getElementById('colocar');
+        ultimosAlertas.innerHTML = '';
+        console.log('Exibindo dados retornados:');
+        for (let i = 0; i < response.length; i++) {
+            let registro = response[i];
+            let dado = registro.situ;
+            let dado2 = registro.nomeComponente;
+            let dado3 = registro.dataAlerta;
+            let dado4 = registro.horaAlerta;
+
+            // const fill = document.getElementById('situacaoTittle');
+            // const percentage = document.getElementById('situacaoTittle');
+            // percentage.innerText += `${dado} no ${dado2}.`;
+
+
+            //  const fill2 = document.getElementById('horariosAlertas');
+            //  const percentage2 = document.getElementById('horariosAlertas');
+            //  percentage2.innerText += `${dado3} as ${dado4}.`;
+
+
+            // Criação do elemento div
+            var elemento = document.createElement('div');
+            elemento.classList.add('cardAlertas');
+
+            var conteudo = `
+            <h4 id="situacaoTittle">${dado} no ${dado2}.</h4>
+            <span id="horariosAlertas">${dado3} às ${dado4}.</span>
+        `;
+
+            elemento.innerHTML = conteudo;
+
+            // Adicionando o novo alerta à seção "Ultimos Alertas"
+            var ultimosAlertas = document.getElementById('colocar');
+            ultimosAlertas.appendChild(elemento);
+
+            console.log(dado)
+
+
+            console.log(dado);
+            console.log(response[0]);
         }
-        console.log(dado)
-        console.log(desc)
-        console.log(response[0])
-
-        var cpuServidores = document.getElementById('TituloAlerta');
-        cpuServidores.innerHTML = `O servidor ${dado}, ${desc}`;
-        var mostraHorario = document.getElementById('dataAlerta');
-        mostraHorario.innerHTML = `${horario}`;
-
+        var proximaAtualizacao = setTimeout(() => UltimosAlertasSelectedServer(), 35000);
     }
 
 
-    function ServerEmergencia(idUsuarioServer) {
+    function ServerEmergencia(idUsuario) {
         if (sessionStorage.FKBANCO) {
-            let idUsuario = sessionStorage.FKBANCO;
+            idUsuario = sessionStorage.FKBANCO;
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -794,7 +909,7 @@ exibirServidoresUsuario();
                     response.json()
                         .then(function (response) {
                             console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                            response.reverse(); MostrarServerEmergencia(response);
+                            response.reverse(); mostrarServerEmergencia(response);
                         });
                 } else { console.error('Nenhum dado encontrado ou erro na API'); }
             })
@@ -802,109 +917,45 @@ exibirServidoresUsuario();
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
+    
+    function mostrarServerEmergencia(response) {
+        cpuServidores = ''
+        cpuServidores2 = ''
+    console.log('Exibindo dados retornados:');
 
-    function MostrarServerEmergencia(response) {
-        console.log('Exibindo dados retornados:')
-        for (i = 0; i < response.length; i++) {
-            var registro = response[i];
-            var dado = registro.qtdE;
+    var cpuServidores = document.getElementById('nomeServidorEmergencia');
+        var cpuServidores2 = document.getElementById('ServidoresEmEmergencia');
 
+    // Inicializar acumulador de conteúdo
+ 
 
+    for (let i = 0; i < response.length; i++) {
+        var registro = response[i];
+        var quantidadeServidores = registro.qtdE;
+        var nomeServidor = registro.nomesServidores;
+
+       
+        if (quantidadeServidores === 0) {
+            cpuServidores.innerHTML = `${quantidadeServidores} servidores`;
+        } else {
+            cpuServidores.innerHTML = `${quantidadeServidores} servidores`;
+            cpuServidores2.innerHTML = `O servidor ${nomeServidor} esta em Emergencia!`;
+
+            
         }
-        console.log(dado)
-
-
-        var cpuServidores = document.getElementById('nomeServidorEmergencia');
-        cpuServidores.innerHTML = `${dado} servidores`;
-
     }
 
+}
 
 
 
 
 
-    // function exibirAquariosDoUsuario() {
-    //     var aquarios = JSON.parse(sessionStorage.fkBanco);
-    //     aquarios.forEach(item => {
-    //         document.getElementById("btnAquario").innerHTML += `
-    //         <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
-    //         `
 
-    //         document.getElementById("graficos").innerHTML += `
-    //             <div id="grafico${item.id}" class="display-none">
-    //                 <h3 class="tituloGraficos">
-    //                     <span id="tituloAquario${item.id}">${item.descricao}</span>
-    //                 </h3>
-    //                 <div class="graph">
-    //                     <canvas id="myChartCanvas${item.id}"></canvas>
-    //                 </div>
-    //                 <div class="label-captura">
-    //                     <p id="avisoCaptura${item.id}" style="color: black"></p>
-    //                 </div>
-    //             </div>
-    //         `
-
-    //         obterDadosGrafico(item.id)
-    //     });
-
-    //     if (aquarios.length > 0) {
-    //         exibirAquario(aquarios[0].id)
-    //     }
-    // }
-
-    // function alterarTitulo(idUsuario) {
-    //     var tituloAquario = document.getElementById(`tituloAquario${idUsuario}`)
-    //     var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idUsuario).descricao;
-    //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
-    // }
-
-    // function exibirAquario(idUsuario) {
-    //     let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
-
-    //     for (i = 0; i < todosOsGraficos.length; i++) {
-    //         // exibindo - ou não - o gráfico
-    //         if (todosOsGraficos[i].id != idUsuario) {
-    //             let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
-    //             if (elementoAtual.classList.contains("display-block")) {
-    //                 elementoAtual.classList.remove("display-block")
-    //             }
-    //             elementoAtual.classList.add("display-none")
-
-    //             // alterando estilo do botão
-    //             let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
-    //             if (btnAtual.classList.contains("btn-pink")) {
-    //                 btnAtual.classList.remove("btn-pink")
-    //             }
-    //             btnAtual.classList.add("btn-white")
-    //         }
-    //     }
-
-    //     // exibindo - ou não - o gráfico
-    //     let graficoExibir = document.getElementById(`grafico${idUsuario}`)
-    //     graficoExibir.classList.remove("display-none")
-    //     graficoExibir.classList.add("display-block")
-
-    //     // alterando estilo do botão
-    //     let btnExibir = document.getElementById(`btnAquario${idUsuario}`)
-    //     btnExibir.classList.remove("btn-white")
-    //     btnExibir.classList.add("btn-pink")
-    // }
-
-    // O gráfico é construído com três funções:
-    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
-    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
-    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
-
-    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
-    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
-    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
-
-    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
-    //     Para ajustar o "select", ajuste o comando sql em src/models
-
-
-
+    document.addEventListener("DOMContentLoaded", function () {
+        ServerEmergencia();
+    });
+    window.onload = ServerEmergencia();
 
 
 
@@ -915,161 +966,6 @@ exibirServidoresUsuario();
         obterDadosGrafico(idUsuario);
     });
 
-    function obterDadosGrafico(idUsuario) {
-        if (sessionStorage.FKBANCO) {
-            let idUsuario = sessionStorage.FKBANCO;
-            console.log(idUsuario);
-
-            document.addEventListener("DOMContentLoaded", function () {
-                obterDadosGrafico(idUsuario);
-            });
-        } else {
-            console.error("ID do usuário não encontrada no sessionStorage.");
-        }
-
-        fetch(`/medidas/ultimas/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (resposta) {
-                    console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
-                    resposta.reverse();
-
-                    plotarGrafico(resposta, idUsuario);
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-            }
-        }).catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-    }
-
-    function plotarGrafico(resposta, idUsuario) {
-        console.log('iniciando plotagem do gráfico...');
-
-        const cores = ['#FF847F', '#A6E22E', '#66D9EF', '#AE81FF', '#F92672'];
-
-        // Mapear os valores únicos de statuss
-        const statussUnicos = [...new Set(resposta.map(item => item.statuss))];
-
-        // Atribuir cores para cada valor de statuss
-        const coresPorStatuss = {};
-        statussUnicos.forEach((status, index) => {
-            coresPorStatuss[status] = cores[index % cores.length];
-        });
-        let labels = [];
-
-        let dados = {
-            labels: labels,
-            datasets: [
-                {
-                    label: 'CPU',
-                    data: [],
-                    fill: false,
-                    borderColor: '#FF847F',
-                    tension: 0.1
-                },
-                {
-                    label: 'RAM',
-                    data: [],
-                    fill: false,
-                    borderColor: '#5E1A8D'
-                },
-                {
-                    label: 'DISCO',
-                    data: [],
-                    fill: false,
-                    borderColor: '#36D000',
-                    tension: 0.1
-                }
-            ]
-        };
-
-        console.log('----------------------------------------------')
-        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
-        console.log(resposta)
-
-        // Inserindo valores recebidos em estrutura para plotar o gráfico
-        for (i = 0; i < resposta.length; i++) {
-            var registro = resposta[i];
-            labels.push(registro.horario);
-            dados.datasets[0].data.push(registro.proc);
-            dados.datasets[1].data.push(registro.RAM);
-            dados.datasets[2].data.push(registro.disco);
-        }
-
-        console.log('----------------------------------------------')
-        console.log('O gráfico será plotado com os respectivos valores:')
-        console.log('Labels:')
-        console.log(labels)
-        console.log('Dados:')
-        console.log(dados.datasets)
-        console.log('----------------------------------------------')
-
-        const config = {
-            type: 'line',
-            data: dados
-        };
-
-        let myChart = new Chart(document.getElementById('myChartsegundo'), config);
-
-        atualizarGrafico(idUsuario, dados, myChart);
-    }
-
-    function atualizarGrafico(idUsuario, dados, myChart) {
-        fetch(`/medidas/tempo-real/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
-            if (response.ok) {
-                response.json().then(function (novoRegistro) {
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log('Dados atuais do gráfico:');
-                    console.log(dados);
-
-
-
-                    if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
-                        console.log('---------------------------------------------------------------');
-                        console.log('Como não há dados novos para captura, o gráfico não atualizará.');
-
-                        console.log('Horário do novo dado capturado:');
-                        console.log(novoRegistro[0].horario);
-                        console.log('Horário do último dado capturado:');
-                        console.log(dados.labels[dados.labels.length - 1]);
-                        console.log('---------------------------------------------------------------');
-                    } else {
-                        dados.labels.shift();
-                        dados.labels.push(novoRegistro[0].momento_grafico);
-
-                        dados.datasets[0].data.shift();
-                        dados.datasets[0].data.push(novoRegistro[0].proc);
-
-                        dados.datasets[1].data.shift();
-                        dados.datasets[1].data.push(novoRegistro[1].RAM);
-
-                        dados.datasets[2].data.shift();
-                        dados.datasets[2].data.push(novoRegistro[2].disco);
-
-                        myChart.update();
-                    }
-
-                    proximaAtualizacao = setTimeout(() => {
-                        obterDadosGrafico4(idUsuario);
-                    }, 20000);
-
-
-                });
-            } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                proximaAtualizacao = setTimeout(
-                    function () {
-                        obterDadosGrafico(idUsuario);
-                    },
-                    2000
-                );
-            }
-        })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
 
     var servidorFK = sessionStorage.servidor_id1
     var planoFK = sessionStorage.fkPlano1
