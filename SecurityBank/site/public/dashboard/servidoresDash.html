@@ -202,12 +202,11 @@
                     </div>
                 </div>
                 <div class="Dados">
-                    <div class="ultimosAlertas">
+                    <div id="colocar" class="ultimosAlertas">
                         <h3>Ultimos Alertas</h3>
-                        <div class="cardAlertas">
-                            <h4 id="situacaoTittle">CPU em Emergência</h4>
-                            <span id="horariosAlertas">29/09/2023 as 13h45</span>
-                        </div>
+
+
+                    </div>
                         <!-- <div class="cardAlertas">
                             <h4>CPU em Emergência</h4>
                             <span>29/09/2023 as 13h45</span>
@@ -333,13 +332,13 @@
 
 <script>
 
-var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+    var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
-if (escalonamentoFunc != 1) {
-    nivelACesso.innerHTML = `<span>Funcionário</span>`
-    var divAcesso = document.getElementById("gerenciarAcesso")
-    divAcesso.style.display = 'none';
-}
+    if (escalonamentoFunc != 1) {
+        nivelACesso.innerHTML = `<span>Funcionário</span>`
+        var divAcesso = document.getElementById("gerenciarAcesso")
+        divAcesso.style.display = 'none';
+    }
 
 
     var idUsuarioServer = sessionStorage.servidorSelecionado;
@@ -682,6 +681,9 @@ if (escalonamentoFunc != 1) {
 
 
     function exibirUltimosAlertasSelected(response) {
+
+        var ultimosAlertas = document.getElementById('colocar');
+            ultimosAlertas.innerHTML = '';
         console.log('Exibindo dados retornados:');
         for (let i = 0; i < response.length; i++) {
             let registro = response[i];
@@ -690,15 +692,30 @@ if (escalonamentoFunc != 1) {
             let dado3 = registro.dataAlerta;
             let dado4 = registro.horaAlerta;
 
-            const fill = document.getElementById('situacaoTittle');
-            const percentage = document.getElementById('situacaoTittle');
-            percentage.innerText = `${dado} no ${dado2}.`;
+           // const fill = document.getElementById('situacaoTittle');
+           // const percentage = document.getElementById('situacaoTittle');
+           // percentage.innerText += `${dado} no ${dado2}.`;
 
 
-            const fill2 = document.getElementById('horariosAlertas');
-            const percentage2 = document.getElementById('horariosAlertas');
-            percentage2.innerText = `${dado3} as ${dado4}.`;
+          //  const fill2 = document.getElementById('horariosAlertas');
+          //  const percentage2 = document.getElementById('horariosAlertas');
+          //  percentage2.innerText += `${dado3} as ${dado4}.`;
 
+        
+// Criação do elemento div
+var elemento = document.createElement('div');
+        elemento.classList.add('cardAlertas');
+
+        var conteudo = `
+            <h4 id="situacaoTittle">${dado} no ${dado2}.</h4>
+            <span id="horariosAlertas">${dado3} às ${dado4}.</span>
+        `;
+
+        elemento.innerHTML = conteudo;
+
+        // Adicionando o novo alerta à seção "Ultimos Alertas"
+        var ultimosAlertas = document.getElementById('colocar');
+        ultimosAlertas.appendChild(elemento);
 
             console.log(dado)
 

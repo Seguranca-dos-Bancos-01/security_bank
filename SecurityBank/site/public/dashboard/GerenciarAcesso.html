@@ -220,8 +220,8 @@
                     </div>
                     <div id="colocar"class="espaco">
                         <div id="dadosMostrar" class="dadosUsuarios">
-                            <a id="MostrarEmail"class="emailControle">0000</a>
-                            <span id="MostrarNivel" class="nivelAcesso">0</span>
+                            <a id="MostrarEmail"class="emailControle"></a>
+                            <span id="MostrarNivel" class="nivelAcesso"></span>
                             
                             <div class="edicaoGerenciamentoContas">
                                 <button class="botaoEditarAcesso" onclick="EditarAcesso(i)">Editar</button>
@@ -357,6 +357,10 @@ function Plano() {
 
 
 
+    document.addEventListener("DOMContentLoaded", function () {
+        ContasAdministradas(dadoServer);
+    });
+    window.onload = ContasAdministradas(dadoServer);
 
 
 var vetorNivel = []
@@ -405,7 +409,7 @@ for (var i = 0; i < response.length; i++) {
 console.log(vetorEmail)
 console.log(vetorNivel)
     var elemento = document.createElement('div');
-    elemento.classList.add('dadosUsuarios');
+    elemento.classList.add('colocar');
     var conteudo = `
         <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}</a>
         <span id="MostrarNivel${i}" class="nivelAcesso">${vetorNivel[i]}</span>
