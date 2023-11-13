@@ -97,6 +97,10 @@ router.get("/SelectContas/:idUsuario", function (req, res) {
 router.get("/HistoricoAlertas/:idUsuario", function (req, res) {
     medidaController.buscarHistoricoAlertas(req, res);});
 
+
+
+
+
 router.get("/UltimosAlertas1/:idUsuario", function (req, res) {
     medidaController.buscarUltimosAlertas1(req, res);});
 
@@ -106,6 +110,8 @@ router.get("/UltimosAlertas2/:idUsuarioServer", function (req, res) {
 router.get("/diasFaltando/:idUsuario", function (req, res) {
     medidaController.buscarDiasFaltando(req, res);})
 
+router.get("/ultimasUltAlertasSelected/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasUltAlertasSelected(req, res);})
 
 
 

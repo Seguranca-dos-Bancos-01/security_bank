@@ -23,8 +23,8 @@ function cadastrarAlertaCPUEmergencia(servidorFK, planoFK, bancoFK) {
     INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 1, 2, 1, ${bancoFK}, ${planoFK}, 1);
 `;
 
-console.log("Executando a instrução SQL: \n" + instrucao);
-return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
 function cadastrarAlertaCPUUrgencia(servidorFK, planoFK, bancoFK) {
@@ -67,8 +67,8 @@ function cadastrarAlertaRAMEmergencia(servidorFK, planoFK, bancoFK) {
     INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 2, 2, 1, ${bancoFK}, ${planoFK}, 1);
 `;
 
-console.log("Executando a instrução SQL: \n" + instrucao);
-return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
 function cadastrarAlertaRAMUrgencia(servidorFK, planoFK, bancoFK) {
@@ -112,8 +112,8 @@ function cadastrarAlertaDISCOEmergencia(servidorFK, planoFK, bancoFK) {
     INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 3, 2, 1, ${bancoFK}, ${planoFK}, 1);
 `;
 
-console.log("Executando a instrução SQL: \n" + instrucao);
-return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
 function cadastrarAlertaDISCOUrgencia(servidorFK, planoFK, bancoFK) {
@@ -165,7 +165,7 @@ function buscarMedidasEmTempoRealAlerta(idAlerta) {
 
 function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
-   var instrucaoSql = ''
+    var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select dadosCaptados from registros where fkComponentesReg =1 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
@@ -198,7 +198,7 @@ function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-       
+
     }
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -217,7 +217,7 @@ function buscarUltimasMedidasSituSelected(idUsuario, limite_linhas) {
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-       
+
     }
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
@@ -253,14 +253,69 @@ function buscarDiasFaltando(idUsuario) {
       WHERE
         s.idServidor = ${idUsuario};`
 
-    }  else {
+    } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-    
+
     }
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+function buscarUltimasUltAlertasSelected(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT
+        situacao as situ,
+        componentes.modelo AS nomeComponente,
+        DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
+        alerta.horaAlerta AS horaAlerta
+        
+      FROM
+        alerta
+      JOIN
+        servidor ON alerta.fkServidor = servidor.idServidor
+      JOIN
+        componentes ON alerta.fkComponente = componentes.idComponentes
+      WHERE
+        alerta.fkServidor = ${idUsuario}
+      ORDER BY
+        alerta.idAlertas DESC
+      LIMIT 3;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT
+        situacao as situ,
+        componentes.modelo AS nomeComponente,
+        DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
+        alerta.horaAlerta AS horaAlerta
+        
+      FROM
+        alerta
+      JOIN
+        servidor ON alerta.fkServidor = servidor.idServidor
+      JOIN
+        componentes ON alerta.fkComponente = componentes.idComponentes
+      WHERE
+        alerta.fkServidor = ${idUsuario}
+      ORDER BY
+        alerta.idAlertas DESC
+      LIMIT 3;`
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 
 
 
@@ -1011,13 +1066,14 @@ module.exports = {
     cadastrarAlertaRAMAtencao,
     cadastrarAlertaRAMEmergencia,
     cadastrarAlertaRAMUrgencia,
-     cadastrarAlertaDISCOAtencao,
-     cadastrarAlertaDISCOEmergencia,
-     cadastrarAlertaDISCOUrgencia,
-     buscarHistoricoAlertas,
+    cadastrarAlertaDISCOAtencao,
+    cadastrarAlertaDISCOEmergencia,
+    cadastrarAlertaDISCOUrgencia,
+    buscarHistoricoAlertas,
     buscarDiasFaltando,
     buscarUltimosAlertas1,
     buscarUltimosAlertas2,
     buscarUltimasMedidasValidade,
     buscarUltimasMedidasSituSelected,
+    buscarUltimasUltAlertasSelected,
 }

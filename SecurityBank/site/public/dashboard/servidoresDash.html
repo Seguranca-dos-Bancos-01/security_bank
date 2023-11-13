@@ -48,7 +48,7 @@
 <body onload="exibirServidoresUsuario()">
 
 
-<body onload="percentCPU(),percentRAM(),percentDISK(), percentRede(),ReceberUltimosAlertas2()">
+    <body onload="percentCPU(),percentRAM(),percentDISK(), percentRede(),ReceberUltimosAlertas2()">
 
         <div class="janela">
             <div class="header-left">
@@ -59,11 +59,11 @@
                 <div class="opcao">
                     <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
                 </div>
-    
+
                 <div id="nivelACesso" class="TipoAcesso">
                     <span>Administrador</span>
                 </div>
-    
+
                 <div class="opcoes">
                     <a href="dashboard.html">
                         <img src="../assets/home.png" alt="">
@@ -75,12 +75,12 @@
                         <img src="../assets/servidor.png" alt="">
                         <span>Servidores</span>
                     </a>
-                    <div id="opcoesServidores-content"class="opcoesServidores-content">
-    
-     
-                      </div>
+                    <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
+                    </div>
                 </div>
-     
+
                 <div class="opcoes">
                     <a href="">
                         <img src="../assets/servidor.png    " alt="">
@@ -204,6 +204,10 @@
                 <div class="Dados">
                     <div class="ultimosAlertas">
                         <h3>Ultimos Alertas</h3>
+                        <div class="cardAlertas">
+                            <h4 id="situacaoTittle">CPU em Emergência</h4>
+                            <span id="horariosAlertas">29/09/2023 as 13h45</span>
+                        </div>
                         <!-- <div class="cardAlertas">
                             <h4>CPU em Emergência</h4>
                             <span>29/09/2023 as 13h45</span>
@@ -219,40 +223,40 @@
                     </div>
                     <div class="visaoGeral">
                         <h2>Visão Geral do Servidor</h2>
-                            <div class="barrasMae">
-                                <div class="containerBarra">
-                                    <div class="bar">
-                                        <div class="fill" id="fill">
-                                           
-                                        </div>
-                                    </div>
-                                    <div class="percentage" id="percentage">0%</div>
-                                </div>
-                                <div class="containerBarra">
-                                    <div class="bar">
-                                        <div class="fill" id="fill2">
-                                        
-                                        </div>
-                                    </div>
-                                    <div class="percentage" id="percentage2">0%</div>
-                                </div>
-                                <div class="containerBarra">
-                                    <div class="bar">
-                                        <div class="fill" id="fill3">
+                        <div class="barrasMae">
+                            <div class="containerBarra">
+                                <div class="bar">
+                                    <div class="fill" id="fill">
 
-                                        </div>
                                     </div>
-                                    <div class="percentage" id="percentage3">0%</div>
-
                                 </div>
-                                <div class="containerBarra">
-                                    <div class="bar">
-                                        <div class="fill" id="fill4">
-                                        </div>
+                                <div class="percentage" id="percentage">0%</div>
+                            </div>
+                            <div class="containerBarra">
+                                <div class="bar">
+                                    <div class="fill" id="fill2">
+
                                     </div>
-                                    <div class="percentage" id="percentage4">OFF</div>
-
                                 </div>
+                                <div class="percentage" id="percentage2">0%</div>
+                            </div>
+                            <div class="containerBarra">
+                                <div class="bar">
+                                    <div class="fill" id="fill3">
+
+                                    </div>
+                                </div>
+                                <div class="percentage" id="percentage3">0%</div>
+
+                            </div>
+                            <div class="containerBarra">
+                                <div class="bar">
+                                    <div class="fill" id="fill4">
+                                    </div>
+                                </div>
+                                <div class="percentage" id="percentage4">OFF</div>
+
+                            </div>
                         </div>
 
                     </div>
@@ -261,7 +265,7 @@
                         <span>Mouse A23 - Porta 3</span><br>
                         <span>Pendrive 783 - Porta 1</span>
                     </div>
-                    
+
                 </div>
                 <div class="blocoGraficos">
                     <div class="subtituloServidoresGraficos">
@@ -288,7 +292,7 @@
                             </div>
                         </div>
                     </div>
-                </div> 
+                </div>
                 <div class="rodapeDash">
                     <div class="itens">
                         <div class="blocos">
@@ -321,80 +325,80 @@
 
 <script>
 
-var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+    var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
-if (escalonamentoFunc != 3) {
-    nivelACesso.innerHTML = `<span>Funcionário</span>`
-    var divAcesso = document.getElementById("gerenciarAcesso")
-    divAcesso.style.display = 'none';
-}
-    
-
-var idUsuarioServer = sessionStorage.servidorSelecionado;
-
-function ReceberUltimosAlertas2(idUsuarioServer) {
-    if (sessionStorage.ID_USUARIO) {
-        let idUsuarioServer = sessionStorage.servidorSelecionado;
-        console.log(idUsuarioServer); document.addEventListener("DOMContentLoaded", function () { });
+    if (escalonamentoFunc != 3) {
+        nivelACesso.innerHTML = `<span>Funcionário</span>`
+        var divAcesso = document.getElementById("gerenciarAcesso")
+        divAcesso.style.display = 'none';
     }
-    else { console.error("ID do usuário não encontrada no sessionStorage."); }
 
 
-    fetch(`/medidas/buscarUltimosAlertas2/${idUsuarioServer}`, { cache: 'no-store' })
-        .then(function (response) {
-            if (response.ok) {
-                response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO AAAAAAAAAAAAAAA ${JSON.stringify(response)}`);
-                        response.reverse();
-                        MostrarUltimosAlertas2(response);
+    var idUsuarioServer = sessionStorage.servidorSelecionado;
 
-                    });
-            } else { console.error('Nenhum dado encontrado ou erro na API'); }
-        })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-        });
-}
-
-function MostrarUltimosAlertas2(response) {
-    console.log('Exibindo dados retornados:')
-    var dadosMostrar = document.getElementById('AlertaUltimoMostrar');
-    dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
-
-    // var vetorServidor;
-    // var vetornomeComponente;
-    // var vetordataAlerta;
-    // var vetorhoraAlerta;
+    function ReceberUltimosAlertas2(idUsuarioServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuarioServer = sessionStorage.servidorSelecionado;
+            console.log(idUsuarioServer); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
 
 
-    for (var i = 0; i < response.length; i++) {
-        var registro = response[i];
+        fetch(`/medidas/buscarUltimosAlertas2/${idUsuarioServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO AAAAAAAAAAAAAAA ${JSON.stringify(response)}`);
+                            response.reverse();
+                            MostrarUltimosAlertas2(response);
 
-        console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAA: ${JSON.stringify(registro)}`)
-        var nomeServidor = registro.nomeServidor;
-        var nomeComponente = registro.nomeComponente;
-        var dataAlerta = registro.dataAlerta;
-        var horaAlerta = registro.horaAlerta;
-        var statusAlerta = registro.situacaoAlerta;
+                        });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
 
-        var elemento = document.createElement('AlertaUltimoMostrar');
+    function MostrarUltimosAlertas2(response) {
+        console.log('Exibindo dados retornados:')
+        var dadosMostrar = document.getElementById('AlertaUltimoMostrar');
+        dadosMostrar.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
 
-        var conteudo = `
+        // var vetorServidor;
+        // var vetornomeComponente;
+        // var vetordataAlerta;
+        // var vetorhoraAlerta;
+
+
+        for (var i = 0; i < response.length; i++) {
+            var registro = response[i];
+
+            console.log(`AAAAAAAAAAAAAAAAAAAAAAAAAAAA: ${JSON.stringify(registro)}`)
+            var nomeServidor = registro.nomeServidor;
+            var nomeComponente = registro.nomeComponente;
+            var dataAlerta = registro.dataAlerta;
+            var horaAlerta = registro.horaAlerta;
+            var statusAlerta = registro.situacaoAlerta;
+
+            var elemento = document.createElement('AlertaUltimoMostrar');
+
+            var conteudo = `
         <div class="cardAlertas">
             <h4> ${nomeComponente} em Alerta</h4>
             <span> ${dataAlerta} as  ${horaAlerta}</span>
         </div>
         `;
 
-        elemento.innerHTML = conteudo;
-        dadosMostrar.appendChild(elemento);
+            elemento.innerHTML = conteudo;
+            dadosMostrar.appendChild(elemento);
 
+        }
     }
-}
 
 
-ReceberUltimosAlertas2()
+    ReceberUltimosAlertas2()
 
 
 
@@ -451,7 +455,7 @@ ReceberUltimosAlertas2()
     window.onload = percentCPU(dadoServer),
         window.onload = percentRAM(dadoServer),
         window.onload = percentDISK(dadoServer);
-        window.onload = percentRede(dadoServer);
+    window.onload = percentRede(dadoServer);
 
 
     document.addEventListener("DOMContentLoaded", function () {
@@ -482,6 +486,14 @@ ReceberUltimosAlertas2()
     });
     window.onload = SituacaoSelected(dadoServer);
 
+    document.addEventListener("DOMContentLoaded", function () {
+        UltimosAlertasSelectedServer(dadoServer);
+    });
+    window.onload = UltimosAlertasSelectedServer(dadoServer);
+
+
+
+
 
 
 
@@ -498,7 +510,7 @@ ReceberUltimosAlertas2()
         obterDadosGrafico3(dadoServer);
     });
 
-  
+
 
 
 
@@ -562,14 +574,15 @@ ReceberUltimosAlertas2()
             let dado = registro.UltimasSituSelected;
             const fill = document.getElementById('situacaoServidor');
             const percentage = document.getElementById('situacaoServidor');
-                percentage.innerText = `${dado}`;
-           
+            percentage.innerText = `${dado}`;
+
             console.log(dado)
-          
+
 
             console.log(dado);
             console.log(response[0]);
         }
+        var proximaAtualizacao = setTimeout(() => SituacaoSelected(), 35000);
 
     }
 
@@ -612,16 +625,78 @@ ReceberUltimosAlertas2()
             let dado = registro.diasRestantes;
             const fill = document.getElementById('validadeServidor');
             const percentage = document.getElementById('validadeServidor');
-                percentage.innerText = `${dado} dias`;
-           
+            percentage.innerText = `${dado} dias`;
+
             console.log(dado)
-          
+
 
             console.log(dado);
             console.log(response[0]);
         }
-
+        var proximaAtualizacao = setTimeout(() => DiasFaltando(), 35000);
     }
+
+
+
+    function UltimosAlertasSelectedServer(idUsuario) {
+        let currentPercentage;
+
+        if (sessionStorage.ID_USUARIO) {
+            idUsuario = dadoServer;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/ultimasUltAlertasSelected/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (responseData) {
+                            console.log(`Dados recebidos: ${JSON.stringify(responseData)}`);
+                            responseData.reverse();
+                            exibirUltimosAlertasSelected(responseData);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function exibirUltimosAlertasSelected(response) {
+        console.log('Exibindo dados retornados:');
+        for (let i = 0; i < response.length; i++) {
+            let registro = response[i];
+            let dado = registro.situ;
+            let dado2 = registro.nomeComponente;
+            let dado3 = registro.dataAlerta;
+            let dado4 = registro.horaAlerta;
+
+            const fill = document.getElementById('situacaoTittle');
+            const percentage = document.getElementById('situacaoTittle');
+            percentage.innerText = `${dado} no ${dado2}.`;
+
+
+            const fill2 = document.getElementById('horariosAlertas');
+            const percentage2 = document.getElementById('horariosAlertas');
+            percentage2.innerText = `${dado3} as ${dado4}.`;
+
+
+            console.log(dado)
+
+
+            console.log(dado);
+            console.log(response[0]);
+        }
+        var proximaAtualizacao = setTimeout(() => UltimosAlertasSelectedServer(), 35000);
+    }
+
 
 
 
@@ -701,7 +776,7 @@ ReceberUltimosAlertas2()
         // var cpuServidores = document.getElementById('cpuServidores');
         // cpuServidores.innerHTML = `${dado}%`;
 
-        var proximaAtualizacao = setTimeout(() => percentRede(), 15000);
+        var proximaAtualizacao = setTimeout(() => percentRede(), 35000);
     }
 
 
@@ -717,10 +792,10 @@ ReceberUltimosAlertas2()
             fill.style.width = `100%`;
             if (currentPercentage == 1) {
                 percentage.innerText = 'Ativa';
-                
+
             } else {
                 percentage.innerText = 'Inativa';
-                
+
             }
             console.log(dado)
             if (currentPercentage < 100) {
@@ -731,10 +806,6 @@ ReceberUltimosAlertas2()
             console.log(response[0]);
         }
 
-        // var cpuServidores = document.getElementById('cpuServidores');
-        // cpuServidores.innerHTML = `${dado}%`;
-
-        var proximaAtualizacao = setTimeout(() => percentRede(), 15000);
     }
 
 
@@ -907,7 +978,7 @@ ReceberUltimosAlertas2()
 
     function percentDISK(idUsuario) {
         if (sessionStorage.ID_USUARIO) {
-             idUsuario = dadoServer;
+            idUsuario = dadoServer;
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -1411,8 +1482,8 @@ ReceberUltimosAlertas2()
     }
 
     function limparSessonStorage() {
-    sessionStorage.clear()
-}
+        sessionStorage.clear()
+    }
 
 
 
