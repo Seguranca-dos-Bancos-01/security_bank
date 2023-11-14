@@ -118,7 +118,7 @@
                     <span>Perfil</span>
                 </a>
             </div>
-            <div id="gerenciarAcesso  localizacao" class="opcoes">
+            <div id="gerenciarAcesso" class="opcoes localizacao">
                 <a href="GerenciarAcesso.html">
                     <img src="../assets/controle.png" alt="">
                     <span>Controle de acesso</span>
@@ -417,9 +417,10 @@
             var elemento = document.createElement('div');
             elemento.classList.add('colocar');
             var conteudo = `
-        <a id="MostrarEmail" class="emailControle">${vetorEmail[i]} -  </a>
-        <span id="MostrarNivel${i}" class="nivelAcesso"> ${CargoNivel[i]} - ${vetorNivel[i]}</span>
+        
         <div class="edicaoGerenciamentoContas">
+            <a id="MostrarEmail" class="emailControle">${vetorEmail[i]} -  </a>
+        <span id="MostrarNivel${i}" class="nivelAcesso"> ${CargoNivel[i]} - ${vetorNivel[i]}</span>
          <input class="inputContas" id="novoValor${i}" type="text">
         <button class="botaoEditarAcesso" onclick="editarAcesso(${i})">Editar</button>
         <button class="botaoEditarAcesso" onclick="excluirConta(${i})">Excluir</button>

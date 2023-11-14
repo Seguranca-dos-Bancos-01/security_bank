@@ -92,9 +92,10 @@
     padding-left: 50px;
 }
 
-/* .edicaoGerenciamentoContas {
-    width: 150px;
-} */
+.edicaoGerenciamentoContas {
+    display: flex;
+    justify-content: space-around;
+} 
 
 .botaoEditarAcesso {
     background-color: rgb(62, 62, 168);

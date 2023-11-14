@@ -723,12 +723,12 @@ function buscarHistoricoAlertas(idUsuario, limite_linhas) {
         instrucaoSql = `-- nome servidor, nome componente, data, hora e status
         select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
 from alerta join servidor on fkServidor = idServidor
-join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT  ${limite_linhas};`;
+join componentes on fkComponente = idComponentes where servidor.fkBanco = ${idUsuario} order by idAlertas desc LIMIT  ${limite_linhas};`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `-- nome servidor, nome componente, data, hora e status
         select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
 from alerta join servidor on fkServidor = idServidor
-join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT ${limite_linhas};`;
+join componentes on fkComponente = idComponentes where servidor.fkBanco = ${idUsuario} order by idAlertas desc LIMIT ${limite_linhas};`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return null; // Retornando nulo se nenhuma condição for satisfeita

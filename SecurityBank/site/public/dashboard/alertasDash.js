@@ -257,7 +257,7 @@ function exibirDadosDISCO(response) {
 
     var servidorFK = sessionStorage.servidor_id1
     var planoFK = sessionStorage.fkPlano1
-    var bancoFK = sessionStorage.banco1
+    var bancoFK = sessionStorage.FKBANCO
 
     function cadastrarAlertaCPUAtencao() {
 

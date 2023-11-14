@@ -285,9 +285,9 @@ exibirServidoresUsuario();
     idUsuarioServer = sessionStorage.ID_USUARIO;
 
 
-    function ReceberHistoricoAlertas(idUsuarioServer) {
+    function ReceberHistoricoAlertas(idUsuario) {
         if (sessionStorage.ID_USUARIO) {
-            let idUsuario = sessionStorage.ID_USUARIO;
+            idUsuario = sessionStorage.FKBANCO;
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
@@ -331,7 +331,8 @@ exibirServidoresUsuario();
             var horaAlerta = registro.horaAlerta;
             var statusAlerta = registro.situacaoAlerta;
             
-            var elemento = document.createElement('divMostrarAlerta');
+            var elemento = document.createElement('div');
+            elemento.classList.add('divMostrarAlerta');
     
             
             if (statusAlerta == "Urgência") {
