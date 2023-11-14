@@ -533,7 +533,7 @@ function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
         FROM servidor
-        WHERE fkStatus = (SELECT idStatus FROM statusMaquina WHERE nome = 'Instavel')
+        WHERE fkStatus = (SELECT idStatus FROM statusMaquina WHERE nome != 'Estável')
           AND fkBanco = ${idUsuario};
         
         
@@ -541,7 +541,7 @@ function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
         FROM servidor
-        WHERE fkStatus = (SELECT idStatus FROM statusMaquina WHERE nome = 'Instavel')
+        WHERE fkStatus = (SELECT idStatus FROM statusMaquina WHERE nome != 'Estável')
           AND fkBanco = ${idUsuario};
         
         

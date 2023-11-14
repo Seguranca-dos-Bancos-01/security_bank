@@ -168,15 +168,16 @@
                     <div id="colocar" class="UltimoAlerta">
                         <span class="tituloUltimoAlerta">Último Alerta</span>
                         <div id="AlertaUltimoMostrar">
-
+                            <!-- <h4 id="situacaoTittle">alerrat</h4>
+                            <span id="horariosAlertas"></span> -->
                         </div>
                     </div>
                     <div class="ServidorEmergencia">
                         <span class="tituloServidorEmergencia">Servidor em Emergência</span>
-                        <span id="nomeServidorEmergencia"></span>
-                        <div  id="ServidoresEmEmergencia">
-
-
+                        <div class="AlertaUltimoMostrar">
+                            <span id="nomeServidorEmergencia"></span>
+                            <span  id="ServidoresEmEmergencia">
+                            </span>
                         </div>
                     </div>
                 </div>
@@ -324,8 +325,11 @@
         var selectServidores = document.getElementById("Mostrar-Servidores");
         selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
         server.forEach(element => {
-            var button = document.createElement('button');
-            button.textContent = element.apelido;
+            var button = document.createElement('div');
+            button.innerHTML = 
+            `<span>${element.apelido}</span>
+            <div class= "bola"></div>
+            `;
             button.addEventListener("click", function (event) {
                 event.preventDefault();
                 selectedServer = element.idServidor;
@@ -336,7 +340,7 @@
                 inserir(selectedServer); // Chamar a função inserir com o ID do servidor
                 window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
             });
-            button.classList.add('botaodropdown');
+            button.classList.add('botoesServidoresDash');
             selectServidores.appendChild(button);
         });
     }
@@ -868,15 +872,20 @@
             //  const fill2 = document.getElementById('horariosAlertas');
             //  const percentage2 = document.getElementById('horariosAlertas');
             //  percentage2.innerText += `${dado3} as ${dado4}.`;
-
-
+            // var tituloAlerta = document.getElementById("situacaoTittle")
+            // var datahoraAlerta = document.getElementById("horariosAlertas")
+            // tituloAlerta.textContent  = `${dado} em ${dado2}`;
+            // datahoraAlerta.textContent  = `${dado3} às ${dado4}`;
             // Criação do elemento div
             var elemento = document.createElement('div');
-            elemento.classList.add('cardAlertas');
+            elemento.classList.add('UltimoAlerta');
 
             var conteudo = `
-            <h4 id="situacaoTittle">${dado} no ${dado2}.</h4>
-            <span id="horariosAlertas">${dado3} às ${dado4}.</span>
+            <span class="tituloUltimoAlerta">Último Alerta</span>
+            <div class="AlertaUltimoMostrar">
+                <span id="TituloAlerta">${dado} no ${dado2}.</span> <br>
+                <span id="dataAlerta">${dado3} às ${dado4}.</span>
+            </div>
         `;
 
             elemento.innerHTML = conteudo;
@@ -938,8 +947,8 @@
         if (quantidadeServidores === 0) {
             cpuServidores.innerHTML = `${quantidadeServidores} servidores`;
         } else {
-            cpuServidores.innerHTML = `${quantidadeServidores} servidores`;
-            cpuServidores2.innerHTML = `O servidor ${nomeServidor} esta em Emergencia!`;
+            cpuServidores.innerHTML = `Total: ${quantidadeServidores} servidores`;
+            cpuServidores2.innerHTML = `O servidor ${nomeServidor} está em Emergência!`;
 
             
         }
