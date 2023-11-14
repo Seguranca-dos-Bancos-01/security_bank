@@ -165,7 +165,17 @@
                 <select name="" id="selectServidor" class="selectServidor">
                 </select>
             </div>
-
+            <dialog id="modalDialog" class="modal">
+                <p><span class="alertaCPU">Alerta em Atenção</span> representa que os componentes atingiram as seguintes métricas:</p>
+                <div style="align-self: flex-start; margin: 10px 0">
+                    <p>Consumo de <strong>CPU</strong> acima de <strong>18%</strong></p>
+                    <p>Consumo de <strong>Memória RAM</strong> acima de <strong>18%</strong></p>
+                    <p>Consumo de <strong>Disco</strong> acima de <strong>18%</strong></p>
+                </div>
+                <form method="dialog">
+                  <button class="button-close laranja">Ok</button>
+                </form>
+              </dialog>
             <div class="divConteudoPagina">
                 <div class="linhaConteudo">
                     <span id="nomeServidorSelecionado">Servidor XX1</span>
@@ -194,7 +204,7 @@
                                 <span class="informacaoKPI">53</span>
                                 <span class="legendaKPI">Alertas de Atenção</span>
                             </div>
-                            <div class="ajudaHINT">
+                            <div class="ajudaHINT" onclick="window.modalDialog.showModal();">
                                 <img src="../assets/helpHINT.png" alt="">
                             </div>
                         </div>
@@ -260,7 +270,7 @@
 
 <script>
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
-
+    // docuemn.getElementById("modalDialog").style.display = "none";
     function BuscarSetores() {
         fetch("/usuarios/listarServidores").then(function (resposta) {
 
@@ -298,6 +308,10 @@
             console.error(resposta);
             // finalizarAguardar();
         });
+    }
+
+    function modelAtencao() {
+
     }
 
 </script>
