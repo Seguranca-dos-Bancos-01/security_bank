@@ -1,0 +1,125 @@
+* {
+    font-family: Poppins, sans-serif;
+}
+
+.tituloSuporte {
+    margin-left: 80px;
+    color: #000F53;
+    font-family: Poppins, sans-serif;
+
+}
+
+.barraEscolhaServidor {
+    background-color: #fff;
+    height: fit-content;
+    width: 88%;
+    border-radius: 20px;
+    margin: 30px auto;
+    box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 20px;
+
+}
+
+.barraEscolhaServidor span {
+    color: #000F53;
+}
+
+#SelectServidores {
+    width: fit-content;
+    padding: 7px 20px;
+    border-radius: 10px;
+    background-color: rgba(0, 15, 83, 0.06);
+    border: none;
+
+}
+
+.divConteudoValidade {
+    background-color: #fff;
+    height: 450px;
+    width: 90%;
+    border-radius: 20px;
+    margin: 30px auto;
+    box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: flex-start;
+}
+
+.tituloValidade {
+    padding: 30px;
+    font-size: 20px;
+    color: #f08080;
+    font-weight: 500;
+}
+
+#nomeServidorSelecionado {
+    color: #f08080;
+}
+
+.descricaoValidade {
+    color: #000F53;
+    margin: 30px;
+
+}
+
+.linha {
+    border-bottom: solid 1px #000f532e;
+    width: 90%;
+    margin-top: 3vh;
+    margin-left: 5vh;
+}
+
+.linhaServidor {
+    width: 90%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  }
+
+  .camposData {
+    width: 440px;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    
+  }
+
+  .inputServidor {
+    margin: 10px 30px;
+    background-color: rgba(0, 15, 83, 0.12);
+    border-radius: 10px;
+    border: none;
+    width: 90%;
+    text-align: start;
+  }
+
+  .camposServidor {
+    padding: 20px 40px;
+    color: #000F53;
+  font-size: 18px;
+  }
+
+  #divBotoesServidor {
+    width: 100%;
+    height: 50px;
+    display: flex;
+    justify-content: center;
+    margin: 20px 0;
+  }
+
+  .botaoServidor {
+    width: 40%;
+  border-radius: 10px;
+  border: none;
+  color: white;
+  font-weight: 600;
+  font-size: 15px;
+  height: 40px;
+  }
+
+  #imgEditarValidade {
+    width: 22px;
+  }

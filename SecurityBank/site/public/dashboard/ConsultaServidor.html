@@ -4,25 +4,253 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Controle Validade Servidor</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <link rel="stylesheet" href="../css/validade.css">
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
 
 <body onload="exibirServidoresUsuario()">
-    <div>
-        <div id="mostrarServidores">
-            <select name="" id="SelectServidores"></select>
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div id="nivelACesso" class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="opcoesServidores">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
+                </div>
+            </div>
+
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+                <!-- <div class="opcoesServidores-content">
+                    <a href="alertas.html">Visão 1</a>
+                    <a href="alertas.html">Visão 2</a>
+                </div> -->
+            </div>
+            <!-- <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gabriel</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Marcela</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div> -->
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div id="gerenciarAcesso" class="opcoes  localizacao">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="recFacial.html">
+                    <img src="../assets/imgs/recFacial.png" alt="">
+                    <span>Reconhecimento Facial</span>
+                </a>
+            </div> -->
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessonStorage()">Logout</span>
+                </a>
+            </div>
         </div>
 
-        <div id="MostrarRestoPag">
-            <div id="MostrarServer"></div>
-            <div id="MostrarDados"></div>
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+            <div class="btns-dash" id="btnAquario">
+                <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
+            </div>
+            <div id="graficos">
+            </div>
+            <h1 class="tituloSuporte">Controle de Validade do Servidor</h1>
+            <div class="barraEscolhaServidor">
+                <span>Consulte um servidor</span>
+                <div id="mostrarServidores">
+                    <select name="" id="SelectServidores"></select>
+                </div>
+            </div>
+
+            <div class="divConteudoValidade">
+                <span class="tituloValidade">Locação do <span id="nomeServidorSelecionado">Servidor XX1</span></span>
+                <span class="descricaoValidade">O servidor está a <strong id="diasValidadeDescricao">15 dias</strong> da
+                    validade.</span>
+                <div class="linha">
+                    <span></span>
+                </div>
+                <div id="dataServidorDiv" class="linhaServidor">
+                    <div class="camposData">
+                        <span class="camposServidor">Data de Compra</span><br>
+                        <input id="compraServidor" class="inputServidor" type="date" disabled><br>
+                    </div>
+                    <div class="camposData">
+                        <span class="camposServidor">Data Validade do Servidor</span><br>
+                        <input id="validadeServidor" class="inputServidor" type="date" disabled>
+                    </div>
+                    <img src="../assets/imgs/editarAdm.png" alt="" id="imgEditarValidade" onclick="divAlterar()">
+                </div>
+                <div id="divBotoesServidor">
+                    <button onclick="Alterar(selectedServer)" class="botaoServidor"
+                        style="background-color: #FF847F">Salvar Alterações</button>
+                    <button onclick="fechar()" class="botaoServidor"
+                        style="background-color: #000F53; margin-left: 20px;">Fechar</button>
+                </div>
+                <div id="MostrarRestoPag">
+                    <div id="MostrarServer"></div>
+                    <div id="MostrarDados"></div>
+                </div>
+            </div>
+
         </div>
     </div>
+
+    <div class="rodapeDash">
+        <div class="itens">
+            <div class="blocos">
+                <h1>Security Bank</h1>
+                <h4>TECH & SOLUTIONS</h4>
+            </div>
+            <div class="blocos">
+                <span><b>Telefone:</b>(11)40028922</span>
+                <br>
+                <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+            </div>
+            <div class="blocos">
+                <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                    Cerqueira César, São Paulo - SP,<br>
+                    01414-001</span>
+            </div>
+        </div>
+        <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
+    </div>
+
+
+
 </body>
 
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 <script>
+    var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+
+    if (escalonamentoFunc != 1) {
+        nivelACesso.innerHTML = `<span>Funcionário</span>`
+        var divAcesso = document.getElementById("gerenciarAcesso")
+        divAcesso.style.display = 'none';
+    }
+
+    nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+
+    // let proximaAtualizacao;
+
+    // var idUsuario = sessionStorage.banco1
+    // var idUsuarioCPU = sessionStorage.servidor_id1
+    // var idUsuarioRAM = sessionStorage.servidor_id1
+    // var idUsuarioDISK = sessionStorage.servidor_id1
+
+    // window.onload = percentCPU(idUsuarioCPU),
+    //     percentRAM(idUsuarioRAM),
+    //     percentDISK(idUsuarioDISK);
+
+    // percentCPU(idUsuarioCPU)
+    // percentRAM(idUsuarioRAM)
+    // percentDISK(idUsuarioDISK)
+
     var ServidorSelecione = null;
     var selectedServer = null
     function exibirServidoresUsuario() {
@@ -34,12 +262,22 @@
         });
     }
 
-    // Evento de seleção do usuário
-    document.getElementById("SelectServidores").addEventListener("change", function () {
-        selectedServer = this.value;
-        MostrarProcessos(selectedServer);
-        diasFaltando(selectedServer);
+    window.addEventListener('load', function () {
+        document.getElementById('divBotoesServidor').style.display = 'none';
     });
+    function divAlterar() {
+        document.getElementById('divBotoesServidor').style.display = 'flex';
+        document.querySelector("#validadeServidor").disabled = false;
+    }
+
+    // Evento de seleção do usuário
+    document.getElementById("SelectServidores").addEventListener("click", function () {
+        selectedServer = this.value;
+        // MostrarProcessos(selectedServer);
+        diasFaltando(selectedServer);
+        document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`
+    });
+
 
     function diasFaltando(selectedServer) {
         if (sessionStorage.ID_USUARIO) {
@@ -73,7 +311,7 @@
     var Validade = null;
 
     function buscarDiasFaltando(response) {
-        console.log('Exibindo dados retornados:')
+        console.log('Exibindo dados retornados:', response)
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
             dado = registro.dias_restantes;
@@ -83,23 +321,48 @@
         console.log(dado);
         console.log(response[0]);
 
-        var cpuServidores = document.getElementById('MostrarDados');
-        cpuServidores.innerHTML += `<h1>faltam ${dado} dias faltando</h1>
-        <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
-        <span> Validade do Servidor</span> <div class= "boxValidade">${validade}</div>
-        <button onclick="AlterarDataValidade(dado,Compra,Validade)">Mudar</button>
-    `;
+        // var cpuServidores = document.getElementById('MostrarDados');
+        // cpuServidores.innerHTML += `<h1>faltam ${dado} dias faltando</h1>
+        // <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
+        // <span> Validade do Servidor</span> <div class= "boxValidade">${validade}</div>
+        // <button onclick="AlterarDataValidade(dado,Compra,Validade)">Mudar</button>
+        // `;
+        // Converter a string em um objeto Date
+        var dataDoBancoCOMPRA = new Date(Compra);
+
+        // Formatar a data no formato apropriado para o input date
+        var anoCOMPRA = dataDoBancoCOMPRA.getFullYear();
+        var mesCOMPRA = ('0' + (dataDoBancoCOMPRA.getMonth() + 1)).slice(-2);
+        var diaCOMPRA = ('0' + dataDoBancoCOMPRA.getDate()).slice(-2);
+        var dataFormatadaCOMPRA = anoCOMPRA + '-' + mesCOMPRA + '-' + diaCOMPRA;
+
+
+        var dataDoBancoVAL = new Date(validade);
+
+        // Formatar a data no formato apropriado para o input date
+        var anoVAL = dataDoBancoVAL.getFullYear();
+        var mesVAL = ('0' + (dataDoBancoVAL.getMonth() + 1)).slice(-2);
+        var diaVAL = ('0' + dataDoBancoVAL.getDate()).slice(-2);
+        var dataFormatadaVAL = anoVAL + '-' + mesVAL + '-' + diaVAL;
+
+        document.getElementById("diasValidadeDescricao").textContent = `${dado} dias`;
+        document.getElementById("compraServidor").value = dataFormatadaCOMPRA;
+        document.getElementById("validadeServidor").value = dataFormatadaVAL;
+
+
+        
+
     }
 
-    function AlterarDataValidade(dado, Compra, Validade) {
-        var cpuServidores = document.getElementById('MostrarDados');
-        cpuServidores.innerHTML = `<h1>faltam ${dado} dias faltando</h1>
-        <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
-        <span> Validade do Servidor</span>   <input id="validadeServidor" class="inputServidor" type="date">
-        <button onclick="Alterar(selectedServer)">Alterar</button> 
-        <button onclick="CancelarAlteracoes()">Concelar Alterações</button>
-    `;
-    }
+    // function AlterarDataValidade(dado, Compra, Validade) {
+    //     var cpuServidores = document.getElementById('MostrarDados');
+    //     cpuServidores.innerHTML = `<h1>faltam ${dado} dias faltando</h1>
+    //     <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
+    //     <span> Validade do Servidor</span>   <input id="validadeServidor" class="inputServidor" type="date">
+    //     <button onclick="Alterar(selectedServer)">Alterar</button> 
+    //     <button onclick="CancelarAlteracoes()">Concelar Alterações</button>
+    // `;
+    // }
 
     function Alterar(selectedServer) {
 
@@ -133,12 +396,12 @@
 
                 if (resposta.ok) {
                     Swal.fire({
-                    icon: 'warning',
-                    title: 'dados atualizados!',
-                    text: `volte para tela Home da dashboard`,
-                });
+                        icon: 'warning',
+                        title: 'Dados atualizados!',
+                        text: `Continue sua análise!`,
+                    });
 
-               
+
 
                 } else {
                     throw "Houve um erro ao tentar realizar o cadastro!";
@@ -153,16 +416,24 @@
 
     }
 
-    function CancelarAlteracoes() {
-        var cpuServidores = document.getElementById('MostrarDados');
-        cpuServidores.innerHTML = `<h1>faltam ${dado} dias faltando</h1>
-        <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
-        <span> Validade do Servidor</span> <div class= "boxValidade">${validade}</div>
-        <button onclick="AlterarDataValidade(dado,Compra,Validade)">Mudar</button>
-    `;
-    }
+    // function CancelarAlteracoes() {
+    //     var cpuServidores = document.getElementById('MostrarDados');
+    //     cpuServidores.innerHTML = `<h1>faltam ${dado} dias faltando</h1>
+    //     <span>Data de compra</span> <div class= "boxCompra">${Compra}</div>
+    //     <span> Validade do Servidor</span> <div class= "boxValidade">${validade}</div>
+    //     <button onclick="AlterarDataValidade(dado,Compra,Validade)">Mudar</button>
+    // `;
+    // }
 
-    function MostrarProcessos(id) {
-        document.getElementById("MostrarServer").innerHTML = `Locação do Servidor ${id}`;
+    // function MostrarProcessos(id) {
+    //     document.getElementById("MostrarServer").innerHTML = `Locação do Servidor ${id}`;
+    // }
+
+    function fechar() {
+        document.getElementById('divBotoesServidor').style.display = 'none';
+        document.getElementById('compraServidor').value = dataFormatadaCOMPRA;
+        document.getElementById('validadeServidor').value = dataFormatadaVAL;
+        document.querySelector("#validadeServidor").disabled = true;
     }
+    
 </script>

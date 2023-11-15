@@ -71,7 +71,7 @@
    
 }
 .adicione{
-    font-size: 20px;
+    font-size: 18px;
     font-weight: 600;
     /* padding-top: 2.5vh; */
     color: #ffff;
@@ -80,7 +80,7 @@
 .espaco {
     width: 100%;
     display: flex;
-    align-items: center;
+    align-items: space-around;
     flex-direction: column;
 }
 
@@ -95,6 +95,7 @@
 .edicaoGerenciamentoContas {
     display: flex;
     justify-content: space-around;
+    align-items: center;
 } 
 
 .botaoEditarAcesso {
@@ -128,6 +129,7 @@
     font-weight: 500;
     font-size: 15px;
     color: black;
+    width: 200px;
 }
 .nivelAcesso{
     font-weight: 500;
@@ -223,4 +225,5 @@ width: 45px;
 
 .inputContas {
     width: 50px;
+    margin: 10px 0;
 }

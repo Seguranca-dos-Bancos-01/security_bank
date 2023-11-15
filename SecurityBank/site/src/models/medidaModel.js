@@ -234,7 +234,7 @@ function buscarDiasFaltando(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT
-        DATEDIFF(l.dateValidade, CURDATE()) AS diasRestantes
+        DATEDIFF(l.dateValidade, CURDATE()) AS dias_restantes, l.dataCompraLocacao as DtC, l.dateValidade as DtV
       FROM
         servidor as s
       INNER JOIN
@@ -245,7 +245,7 @@ function buscarDiasFaltando(idUsuario) {
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
-        DATEDIFF(l.dateValidade, CURDATE()) AS diasRestantes
+        DATEDIFF(l.dateValidade, CURDATE()) AS dias_restantes, l.dataCompraLocacao as DtC, l.dateValidade as DtV
       FROM
         servidor as s
       INNER JOIN

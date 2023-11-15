@@ -206,7 +206,8 @@
                         <!-- <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG"> -->
                     </div>
                     <div onclick="controleData()" class="boxAdicionarServico">
-                        <n class="adicione">Controle da Data de Validade</n>
+                        <n class="adicione">Controle de Validade do Servidor
+                        </n>
                         <!-- <img src="../assets/🦆 icon _add circle outline_.png" alt="" class="addIMG"> -->
                     </div>
                 </div>
@@ -378,6 +379,9 @@
         window.location = "servidor.html"
     }
 
+    function controleData() {
+        window.location = "ConsultaServidor.html"
+    }
 
     function ContasAdministradas(idUsuarioServer) {
         if (sessionStorage.ID_USUARIO) {
@@ -419,11 +423,13 @@
             var conteudo = `
         
         <div class="edicaoGerenciamentoContas">
-            <a id="MostrarEmail" class="emailControle">${vetorEmail[i]} -  </a>
+            <a id="MostrarEmail" class="emailControle">${vetorEmail[i]}  </a>
         <span id="MostrarNivel${i}" class="nivelAcesso"> ${CargoNivel[i]} - ${vetorNivel[i]}</span>
-         <input class="inputContas" id="novoValor${i}" type="text">
-        <button class="botaoEditarAcesso" onclick="editarAcesso(${i})">Editar</button>
-        <button class="botaoEditarAcesso" onclick="excluirConta(${i})">Excluir</button>
+        <div>
+            <input class="inputContas" id="novoValor${i}" type="text">
+            <button class="botaoEditarAcesso" onclick="editarAcesso(${i})">Editar</button>
+            <button class="botaoEditarAcesso" onclick="excluirConta(${i})">Excluir</button>
+        </div>
         </div> 
     `;
             // <div class="imgsContas">
