@@ -982,6 +982,58 @@ function buscarUltimasUsbConectadas(req, res) {
 
 
 
+
+
+
+
+
+function UltimasRedeConnect(req, res) {
+    
+    var idUsuario = req.params.idUsuario;
+
+    
+
+    medidaModel.UltimasRedeConnect(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function TempoRealRedeConnect(req, res) {
+    var idUsuario = req.params.idUsuario;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.TempoRealRedeConnect(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoRealAlerta,
@@ -1026,5 +1078,6 @@ module.exports = {
     buscarUltimasUltAlertasSelected2, 
     ultimoUpload,
     BuscarIpServidor,
-
+    UltimasRedeConnect,
+    TempoRealRedeConnect,
 };

@@ -1213,6 +1213,67 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+function UltimasRedeConnect(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN statusRede = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN statusRede = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidorRede = ${idUsuario};`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN statusRede = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN statusRede = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidorRede = ${idUsuario};`;
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+function TempoRealRedeConnect(idUsuario) {
+
+    instrucaoSql2 = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN statusRede = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN statusRede = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidorRede = ${idUsuario};`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN statusRede = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN statusRede = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidorRede = ${idUsuario};`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoRealAlerta,
@@ -1257,6 +1318,6 @@ module.exports = {
     buscarUltimasUltAlertasSelected2, 
     ultimoUpload,
     BuscarIpServidor,
-
-
+    TempoRealRedeConnect,
+    UltimasRedeConnect,
 }

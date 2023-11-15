@@ -24,6 +24,16 @@ router.post("/ultimasIpREDE/:idUsuario", function (req, res) {
     medidaController.BuscarIpServidor(req, res);
 })
 
+router.get("/ultimasRedeConnect/:idUsuario", function (req, res) {
+    medidaController.UltimasRedeConnect(req, res);
+})
+router.get("/tempo-realRedeConnect/:idUsuario", function (req, res) {
+    medidaController.TempoRealRedeConnect(req, res);
+})
+
+
+
+
 
 router.post("/cadastrarAlertaRAMAtencao", function (req, res) {
     medidaController.cadastrarAlertaRAMAtencao(req, res);
