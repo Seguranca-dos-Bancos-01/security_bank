@@ -8,10 +8,8 @@ function buscarAquariosPorEmpresa(empresaId) {
        sistemaOperacional, 
        responsavelLegal, 
        enderecoIP, 
-     
        fkBanco,
        fkStatus,
-       fkLocalizacaoMatriz,
        fkPlano
 FROM servidor
 WHERE fkBanco = 1;

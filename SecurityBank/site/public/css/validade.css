@@ -2,6 +2,10 @@
     font-family: Poppins, sans-serif;
 }
 
+.dash {
+  height: 750px;
+}
+
 .tituloSuporte {
     margin-left: 80px;
     color: #000F53;

@@ -15,6 +15,11 @@ router.post("/cadastrarServidorNuvem", function (req, res) {
     usuarioController.cadastrarServidorNuvem(req, res);
 })
 
+router.get("/PuxarFkServidor/:idUsuario", function (req, res) {
+    usuarioController.PuxarFkServidor(req, res);
+})
+
+
 router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });

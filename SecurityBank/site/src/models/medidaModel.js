@@ -6,7 +6,7 @@ function cadastrarAlertaCPUAtencao(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 1, 1, 1, ${bancoFK}, ${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 1, 1, 1, ${bancoFK}, ${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -20,7 +20,7 @@ function cadastrarAlertaCPUEmergencia(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 1, 2, 1, ${bancoFK}, ${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 1, 2, 1, ${bancoFK}, ${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -33,7 +33,7 @@ function cadastrarAlertaCPUUrgencia(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 1, 3, ${servidorFK}, ${bancoFK},${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 1, 3, ${servidorFK}, ${bancoFK},${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -50,7 +50,7 @@ function cadastrarAlertaRAMAtencao(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(),"Atenção", 1, 2, 1, 1, ${bancoFK}, ${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(),"Atenção", 1, 2, 1, 1, ${bancoFK}, ${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -64,7 +64,7 @@ function cadastrarAlertaRAMEmergencia(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 2, 2, 1, ${bancoFK}, ${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 2, 2, 1, ${bancoFK}, ${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -77,7 +77,7 @@ function cadastrarAlertaRAMUrgencia(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 2, 3, 1, ${bancoFK},${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 2, 3, 1, ${bancoFK},${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -95,7 +95,7 @@ function cadastrarAlertaDISCOAtencao(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 3, 1, 1, ${bancoFK}, ${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 3, 1, 1, ${bancoFK}, ${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -109,7 +109,7 @@ function cadastrarAlertaDISCOEmergencia(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 3, 2, 1, ${bancoFK}, ${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 3, 2, 1, ${bancoFK}, ${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -122,7 +122,7 @@ function cadastrarAlertaDISCOUrgencia(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situcao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 3, 3, 1, ${bancoFK},${planoFK}, 1);
+    INSERT INTO alerta (dataAlerta, horaAlerta, situcao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 3, 3, 1, ${bancoFK},${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -238,7 +238,7 @@ function buscarDiasFaltando(idUsuario) {
       FROM
         servidor as s
       INNER JOIN
-        locacao as l ON s.fkLocacao = l.idLocacao
+        locacao as l ON l.fkServidor = s.idServidor
       WHERE
         s.idServidor = ${idUsuario};
     
@@ -249,7 +249,7 @@ function buscarDiasFaltando(idUsuario) {
       FROM
         servidor as s
       INNER JOIN
-        locacao as l ON s.fkLocacao = l.idLocacao
+        locacao as l ON l.fkServidor = s.idServidor
       WHERE
         s.idServidor = ${idUsuario};`
 
@@ -1210,5 +1210,5 @@ module.exports = {
     buscarUltimasMedidasSituSelected,
     buscarUltimasUltAlertasSelected,
     buscarUltimasUsbConectadas,
-    buscarUltimasUltAlertasSelected2, 
+    buscarUltimasUltAlertasSelected2,
 }

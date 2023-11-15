@@ -210,6 +210,31 @@ function cadastrarServidorNuvem(req, res) {
 
 
 
+function PuxarFkServidor(req, res) {
+    
+    var idUsuario = req.params.idUsuario;
+    
+   
+
+    usuarioModel.PuxarFkServidor(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
 function atualizarPerfil(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
     var nomePerfil = req.body.nomePerfilServer;
@@ -329,4 +354,5 @@ module.exports = {
     excluirConta,
     UpdateValidadeNova,
     cadastrarServidorNuvem,
+    PuxarFkServidor,
 }

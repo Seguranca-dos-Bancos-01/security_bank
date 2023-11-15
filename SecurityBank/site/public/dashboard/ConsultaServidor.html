@@ -165,7 +165,7 @@
                 </div>
             </div>
 
-            <div class="divConteudoValidade">
+            <div class="divConteudoValidade" id="conteudoLocacao">
                 <span class="tituloValidade">Locação do <span id="nomeServidorSelecionado">Servidor XX1</span></span>
                 <span class="descricaoValidade">O servidor está a <strong id="diasValidadeDescricao">15 dias</strong> da
                     validade.</span>
@@ -264,7 +264,10 @@
 
     window.addEventListener('load', function () {
         document.getElementById('divBotoesServidor').style.display = 'none';
+        document.getElementById('conteudoLocacao').style.display = 'none';
     });
+
+
     function divAlterar() {
         document.getElementById('divBotoesServidor').style.display = 'flex';
         document.querySelector("#validadeServidor").disabled = false;
@@ -276,6 +279,8 @@
         // MostrarProcessos(selectedServer);
         diasFaltando(selectedServer);
         document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`
+        document.getElementById('conteudoLocacao').style.display = 'flex';
+
     });
 
 
@@ -309,6 +314,14 @@
     var dado = null;
     var Compra = null;
     var Validade = null;
+    var anoVAL;
+    var dtFormatadaVAL;
+    var dtFormatadaCompra;
+    var mesVAL;
+    var diaVAL;
+    var dataFormatadaVAL;
+
+
 
     function buscarDiasFaltando(response) {
         console.log('Exibindo dados retornados:', response)
@@ -340,16 +353,17 @@
         var dataDoBancoVAL = new Date(validade);
 
         // Formatar a data no formato apropriado para o input date
-        var anoVAL = dataDoBancoVAL.getFullYear();
-        var mesVAL = ('0' + (dataDoBancoVAL.getMonth() + 1)).slice(-2);
-        var diaVAL = ('0' + dataDoBancoVAL.getDate()).slice(-2);
-        var dataFormatadaVAL = anoVAL + '-' + mesVAL + '-' + diaVAL;
+         anoVAL = dataDoBancoVAL.getFullYear();
+         mesVAL = ('0' + (dataDoBancoVAL.getMonth() + 1)).slice(-2);
+         diaVAL = ('0' + dataDoBancoVAL.getDate()).slice(-2);
+         dataFormatadaVAL = anoVAL + '-' + mesVAL + '-' + diaVAL;
 
         document.getElementById("diasValidadeDescricao").textContent = `${dado} dias`;
         document.getElementById("compraServidor").value = dataFormatadaCOMPRA;
         document.getElementById("validadeServidor").value = dataFormatadaVAL;
 
-
+        dtFormatadaVAL = dataFormatadaVAL
+        dtFormatadCOMPRA = dataFormatadaCOMPRA
         
 
     }
@@ -378,7 +392,7 @@
 
         }
 
-        fetch("/usuarios/AlterarValidade", {
+        fetch("/usuarios/AlterarValidade/", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json",
@@ -430,10 +444,14 @@
     // }
 
     function fechar() {
+        dataFormatadaVAL = anoVAL + '-' + mesVAL + '-' + diaVAL;
+       document.querySelector("#validadeServidor").value = dataFormatadaVAL
+        
         document.getElementById('divBotoesServidor').style.display = 'none';
-        document.getElementById('compraServidor').value = dataFormatadaCOMPRA;
+        // document.getElementById('compraServidor').value = dtFormatadaCOMPRA;
         document.getElementById('validadeServidor').value = dataFormatadaVAL;
         document.querySelector("#validadeServidor").disabled = true;
+        return dataFormatadaVAL
     }
     
 </script>
