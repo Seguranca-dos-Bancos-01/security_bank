@@ -823,7 +823,81 @@ function buscarDiasFaltando(req, res) {
     });
 }
 
+function totalAlertas(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
 
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertas(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasAtencao(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasAtencao(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasEmergencia(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasEmergencia(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasUrgencia(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasUrgencia(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 
 module.exports = {
@@ -851,7 +925,6 @@ module.exports = {
     buscarMedidasEmTempoRealServidores4,
     buscarUltimasMedidasREDE,
     buscarUltimasMedidasValidade,
-    
     cadastrarAlertaCPUAtencao,
     cadastrarAlertaCPUEmergencia,
     cadastrarAlertaCPUUrgencia,
@@ -863,5 +936,9 @@ module.exports = {
      cadastrarAlertaDISCOUrgencia,
      buscarHistoricoAlertas,
     buscarDiasFaltando,
+    totalAlertas,
+    totalAlertasAtencao,
+    totalAlertasEmergencia,
+    totalAlertasUrgencia,
    
 };

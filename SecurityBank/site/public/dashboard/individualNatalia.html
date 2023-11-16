@@ -34,8 +34,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body
-    onload="BuscarSetores()">
+<body onload="BuscarSetores()">
 
     <div class="janela">
         <div class="header-left">
@@ -57,17 +56,17 @@
                     <span>Home</span>
                 </a>
             </div>
-         
+
             <div class="opcoesServidores">
                 <a href="servidoresDash.html">
                     <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
-                <div id="opcoesServidores-content"class="opcoesServidores-content">
-                   
-                  </div>
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+                </div>
             </div>
- 
+
             <div class="opcoes localizacao">
                 <a href="">
                     <img src="../assets/servidor.png    " alt="">
@@ -159,28 +158,53 @@
             <div class="Nome">
                 <h2>Previsão e Análise Fluxo de Alertas</h2>
             </div>
-            
+
             <div class="divEscolhaServidor">
                 <span class="textoIndividual">Selecione um Servidor</span>
                 <select name="" id="selectServidor" class="selectServidor">
                 </select>
             </div>
-            <dialog id="modalDialog" class="modal">
-                <p><span class="alertaCPU">Alerta em Atenção</span> representa que os componentes atingiram as seguintes métricas:</p>
+            <dialog id="modalDialogAtencao" class="modal">
+                <p><span class="alertaCPU">Alerta em Atenção</span> representa que os componentes atingiram as seguintes
+                    métricas:</p>
                 <div style="align-self: flex-start; margin: 10px 0">
                     <p>Consumo de <strong>CPU</strong> acima de <strong>18%</strong></p>
-                    <p>Consumo de <strong>Memória RAM</strong> acima de <strong>18%</strong></p>
-                    <p>Consumo de <strong>Disco</strong> acima de <strong>18%</strong></p>
+                    <p>Consumo de <strong>Memória RAM</strong> acima de <strong>50%</strong></p>
+                    <p>Consumo de <strong>Disco</strong> acima de <strong>45%</strong></p>
                 </div>
                 <form method="dialog">
-                  <button class="button-close laranja">Ok</button>
+                    <button class="button-close laranja">Ok</button>
                 </form>
-              </dialog>
+            </dialog>
+            <dialog id="modalDialogEmergencia" class="modal">
+                <p><span class="alertaEmergencia">Alerta em Emergência</span> representa que os componentes atingiram as seguintes
+                    métricas:</p>
+                <div style="align-self: flex-start; margin: 10px 0">
+                    <p>Consumo de <strong>CPU</strong> acima de <strong>23%</strong></p>
+                    <p>Consumo de <strong>Memória RAM</strong> acima de <strong>70%</strong></p>
+                    <p>Consumo de <strong>Disco</strong> acima de <strong>55%</strong></p>
+                </div>
+                <form method="dialog">
+                    <button class="button-close rosa">Ok</button>
+                </form>
+            </dialog>
+            <dialog id="modalDialogUrgencia" class="modal">
+                <p><span class="alertaUrgencia">Alerta em Urgência</span> representa que os componentes atingiram as seguintes
+                    métricas:</p>
+                <div style="align-self: flex-start; margin: 10px 0">
+                    <p>Consumo de <strong>CPU</strong> acima de <strong>50%</strong></p>
+                    <p>Consumo de <strong>Memória RAM</strong> acima de <strong>80%</strong></p>
+                    <p>Consumo de <strong>Disco</strong> acima de <strong>65%</strong></p>
+                </div>
+                <form method="dialog">
+                    <button class="button-close roxo">Ok</button>
+                </form>
+            </dialog>
             <div class="divConteudoPagina">
                 <div class="linhaConteudo">
                     <span id="nomeServidorSelecionado">Servidor XX1</span>
-                    <select name="" id="" class="selectServidor">
-                        <option value="todos" selected>Todos Componentes</option>
+                    <select name="" id="selectComponente" class="selectServidor">
+                        <option value="todos">Todos Componentes</option>
                         <option value="cpu">CPU</option>
                         <option value="ram">Memória RAM</option>
                         <option value="disco">Disco</option>
@@ -191,49 +215,50 @@
                         <div class="KPIAlerta">
                             <div class="corAlertaKPI verde"></div>
                             <div class="conteudoKPI">
-                                <span class="informacaoKPI">53</span>
+                                <span class="informacaoKPI" id="ttlAlertasTEXTO">53</span>
                                 <span class="legendaKPI">Total de Alertas Emitidos</span>
                             </div>
-                            <div class="ajudaHINT">
+                            <!-- <div class="ajudaHINT" >
                                 <img src="../assets/helpHINT.png" alt="">
-                            </div>
+                            </div> -->
                         </div>
                         <div class="KPIAlerta">
                             <div class="corAlertaKPI laranja"></div>
                             <div class="conteudoKPI">
-                                <span class="informacaoKPI">53</span>
+                                <span class="informacaoKPI" id="ttlAlertasAtencaoTEXTO">53</span>
                                 <span class="legendaKPI">Alertas de Atenção</span>
                             </div>
-                            <div class="ajudaHINT" onclick="window.modalDialog.showModal();">
+                            <div class="ajudaHINT" onclick="window.modalDialogAtencao.showModal(); modelAtencao()">
                                 <img src="../assets/helpHINT.png" alt="">
                             </div>
                         </div>
                         <div class="KPIAlerta">
                             <div class="corAlertaKPI rosa"></div>
                             <div class="conteudoKPI">
-                                <span class="informacaoKPI">53</span>
+                                <span class="informacaoKPI"  id="ttlAlertasEmergenciaTEXTO">53</span>
                                 <span class="legendaKPI">Alertas de Emergência</span>
                             </div>
-                            <div class="ajudaHINT">
+                            <div class="ajudaHINT" onclick="window.modalDialogEmergencia.showModal(); modelEmergencia()">
                                 <img src="../assets/helpHINT.png" alt="">
                             </div>
                         </div>
                         <div class="KPIAlerta">
                             <div class="corAlertaKPI roxo"></div>
                             <div class="conteudoKPI">
-                                <span class="informacaoKPI">53</span>
+                                <span class="informacaoKPI" id="ttlAlertasUrgenciaTEXTO">53</span>
                                 <span class="legendaKPI">Alertas de Urgência</span>
                             </div>
-                            <div class="ajudaHINT">
+                            <div class="ajudaHINT" onclick="window.modalDialogUrgencia.showModal(); modelUrgencia()">
                                 <img src="../assets/helpHINT.png" alt="">
                             </div>
                         </div>
                     </div>
-                    <div class="graficosServidorGeral">
+                    <div id="DivGraficoGeral" class="graficosServidorGeral">
                         <div class="graficoConsumoComponentes">
-
+                            <span class="tituloGraficos">Consumo Médio por Componente</span>
                         </div>
                         <div class="graficoAlertasComponentes">
+                            <span class="tituloGraficos">Alertas por Componente</span>
 
                         </div>
                     </div>
@@ -271,6 +296,10 @@
 <script>
     nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
     // docuemn.getElementById("modalDialog").style.display = "none";
+    document.getElementById("modalDialogAtencao").style.display = 'none';
+    document.getElementById("modalDialogEmergencia").style.display = 'none';
+    document.getElementById("modalDialogUrgencia").style.display = 'none';
+
     function BuscarSetores() {
         fetch("/usuarios/listarServidores").then(function (resposta) {
 
@@ -295,8 +324,9 @@
 
                         var OptionServidor = document.createElement("option");
                         OptionServidor.setAttribute("Value", servidorResposta.idServidor)
-                        OptionServidor.innerHTML = servidorResposta.apelido;
+                        OptionServidor.innerHTML = `Servidor ${servidorResposta.idServidor}`;
                         inputServidor.appendChild(OptionServidor);
+                        // servidorResposta.apelido
 
                     }
                     // finalizarAguardar();
@@ -311,7 +341,191 @@
     }
 
     function modelAtencao() {
+        document.getElementById("modalDialogAtencao").style.display = 'flex';
+    }
+    function modelEmergencia() {
+        document.getElementById("modalDialogEmergencia").style.display = 'flex';
+    }
+    function modelUrgencia() {
+        document.getElementById("modalDialogUrgencia").style.display = 'flex';
+    }
 
+    var componenteSelecionado = document.getElementById("selectComponente").value;
+
+    if (componenteSelecionado.value == "cpu") {
+        document.getElementById("DivGraficoGeral").style.display = 'none';
+    }
+
+    var selectServer;
+
+    document.getElementById("selectServidor").addEventListener("click", function () {
+        selectedServer = this.value;
+        // MostrarProcessos(selectedServer);
+        totalAlertas(selectedServer);
+        totalAlertasAtencao(selectedServer);
+        totalAlertasEmergencia(selectedServer);
+        totalAlertasUrgencia(selectedServer);
+        document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectServer}`;
+
+    });
+
+
+    function totalAlertas(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertas/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertas(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+   
+
+    function mostrarTotalAlertas(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas ;
+        }
+        console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasTEXTO").textContent = num;
+    }
+
+    function totalAlertasAtencao(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasAtencao/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasAtencao(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+   
+    function mostrarTotalAlertasAtencao(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas ;
+        }
+        console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
+    }
+
+    function totalAlertasEmergencia(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasEmergencia/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasEmergencia(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+   
+    function mostrarTotalAlertasEmergencia(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas ;
+        }
+        console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
+    }
+
+
+    function totalAlertasUrgencia(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasUrgencia/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasUrgencia(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+   
+    function mostrarTotalAlertasUrgencia(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas ;
+        }
+        console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
     }
 
 </script>

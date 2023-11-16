@@ -90,9 +90,11 @@ router.get("/SelectContas/:idUsuario", function (req, res) {
 });
 
 router.get("/HistoricoAlertas/:idUsuario", function (req, res) {
-    medidaController.buscarHistoricoAlertas(req, res);});
+    medidaController.buscarHistoricoAlertas(req, res);
+});
 router.get("/diasFaltando/:selectedServer", function (req, res) {
-    medidaController.buscarDiasFaltando(req, res);})
+    medidaController.buscarDiasFaltando(req, res);
+})
 router.get("/ultimasValidadeServer/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasValidade(req, res);
 });
@@ -148,5 +150,23 @@ router.get("/ultimas2/:idUsuario2", function (req, res) {
 router.get("/tempo-real2/:idUsuario2", function (req, res) {
     medidaController.buscarMedidasEmTempoReal2(req, res);
 });
+
+
+router.get("/totalAlertas/:selectedServer", function (req, res) {
+    medidaController.totalAlertas(req, res);
+})
+
+router.get("/totalAlertasAtencao/:selectedServer", function (req, res) {
+    medidaController.totalAlertasAtencao(req, res);
+})
+
+router.get("/totalAlertasEmergencia/:selectedServer", function (req, res) {
+    medidaController.totalAlertasEmergencia(req, res);
+})
+
+router.get("/totalAlertasUrgencia/:selectedServer", function (req, res) {
+    medidaController.totalAlertasUrgencia(req, res);
+})
+
 
 module.exports = router;

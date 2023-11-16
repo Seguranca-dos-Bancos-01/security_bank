@@ -23,8 +23,8 @@ function cadastrarAlertaCPUEmergencia(servidorFK, planoFK, bancoFK) {
     INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 1, 2, 1, ${bancoFK}, ${planoFK}, 1);
 `;
 
-console.log("Executando a instrução SQL: \n" + instrucao);
-return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
 function cadastrarAlertaCPUUrgencia(servidorFK, planoFK, bancoFK) {
@@ -67,8 +67,8 @@ function cadastrarAlertaRAMEmergencia(servidorFK, planoFK, bancoFK) {
     INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 2, 2, 1, ${bancoFK}, ${planoFK}, 1);
 `;
 
-console.log("Executando a instrução SQL: \n" + instrucao);
-return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
 function cadastrarAlertaRAMUrgencia(servidorFK, planoFK, bancoFK) {
@@ -112,8 +112,8 @@ function cadastrarAlertaDISCOEmergencia(servidorFK, planoFK, bancoFK) {
     INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano, fkLocacao) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 3, 2, 1, ${bancoFK}, ${planoFK}, 1);
 `;
 
-console.log("Executando a instrução SQL: \n" + instrucao);
-return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
 }
 
 function cadastrarAlertaDISCOUrgencia(servidorFK, planoFK, bancoFK) {
@@ -186,7 +186,7 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
 
 
-function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {}
+function buscarUltimasMedidasREDE(idUsuario, limite_linhas) { }
 
 
 
@@ -898,6 +898,156 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
 }
 
 
+function totalAlertas(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select count(*) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        ; 
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select count(*) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        ; 
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select count(*) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        ; 
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function totalAlertasAtencao(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Atenção"
+        ; 
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Atenção"
+        ; 
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Atenção"
+        ; 
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function totalAlertasEmergencia(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Emergência"
+        ; 
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Emergência"
+        ; 
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Emergência"
+        ; 
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function totalAlertasUrgencia(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Urgência"
+        ; 
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Urgência"
+        ; 
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        where fkServidor = ${idSelect}
+        and alerta.situacao = "Urgência"
+        ; 
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 
 
@@ -933,11 +1083,14 @@ module.exports = {
     cadastrarAlertaRAMAtencao,
     cadastrarAlertaRAMEmergencia,
     cadastrarAlertaRAMUrgencia,
-     cadastrarAlertaDISCOAtencao,
-     cadastrarAlertaDISCOEmergencia,
-     cadastrarAlertaDISCOUrgencia,
-     buscarHistoricoAlertas,
+    cadastrarAlertaDISCOAtencao,
+    cadastrarAlertaDISCOEmergencia,
+    cadastrarAlertaDISCOUrgencia,
+    buscarHistoricoAlertas,
     buscarDiasFaltando,
-   
+    totalAlertas,
+    totalAlertasAtencao,
+    totalAlertasEmergencia,
+    totalAlertasUrgencia,
     buscarUltimasMedidasValidade,
 }
