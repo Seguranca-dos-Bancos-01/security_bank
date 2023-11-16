@@ -1,19 +1,40 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="pt-br">
 
 <head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
     <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Projeto Individual Bernardo</title>
-    <link rel="stylesheet" href="../css/navbarDash.css">
-    <link rel="stylesheet" href="../css/projbernardo.css">
-    <link rel="stylesheet" href="../css/style.css">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
 
+    <title>Security Bank | Painel Geral</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+<link rel="stylesheet" href="../css/proj_bernardo.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
 </head>
 
-<body>
 
 
+<body
+    onload=" percentCPU(),percentRAM(),percentDISK(), QtdServidor(), alerta24(), sInstaveis(), UltimosAlertas(), ServerEmergencia(), ReceberUltimosAlertas1()">
 
     <div class="janela">
         <div class="header-left">
@@ -51,8 +72,41 @@
                     <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
                 </a>
+                <!-- <div class="opcoesServidores-content">
+                    <a href="alertas.html">Visão 1</a>
+                    <a href="alertas.html">Visão 2</a>
+                </div> -->
             </div>
-
+            <!-- <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gabriel</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Marcela</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div> -->
             <div class="opcoes">
                 <a href="alertas.html">
                     <img src="../assets/alerta.png" alt="">
@@ -83,7 +137,12 @@
                     <span>Métricas</span>
                 </a>
             </div>
-
+            <!-- <div class="opcoes">
+                <a href="recFacial.html">
+                    <img src="../assets/imgs/recFacial.png" alt="">
+                    <span>Reconhecimento Facial</span>
+                </a>
+            </div> -->
             <div class="linha">
                 <span></span>
             </div>
@@ -95,13 +154,66 @@
             </div>
         </div>
 
+        
+        <div class="Nome">
+            <h2>Monitoramento de bytes por partições</h2>
+        </div>
+
+        <div class="linhaAnaliseMetricas">
+            <h2 class="tituloAnalise">Análise de Porcentagem de Uso do Disco</h2>
+            <div class="opcoesMetricas">
+                <div class="opcaoMetrica atencao">
+                    <span class="tituloEstado">Atenção</span>
+                    <span class="porcentagem">50% - 70%</span>
+                </div>
+                <div class="opcaoMetrica emergencia">
+                    <span class="tituloEstado">Emergência</span>
+                    <span class="porcentagem">70% - 80%</span>
+                </div>
+                <div class="opcaoMetrica urgencia">
+                    <span class="tituloEstado">Urgência</span>
+                    <span class="porcentagem">> 80%</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+            <div class="monitoramento">
+                <div class="blocoparticoes">
+                    <div id="colocar" class="particoes">
+                        <span class="particao">Particao 1
+                        </span>
+                        <span class="particao">Particao 2
+                        </span>
+                        <span class="particao">Particao 3
+                        </span>
+                        <span class="particao">Particao 4
+                        </span>
+                      
+                    </div>
+            
+                </div>
+                <div class="ultimoAlerta">
+                    <span class="tituloUltimoAlerta">Último Alerta</span>
+                </div>
+            </div>
+          
+            <div class="bytes">
+                
+
+            <div class="bytes_lidos"></div>
+
+            <div class="bytes_escritos"></div>
+
+            </div>
 
 
-    
- 
-
-
-   
+        </div>
+    </div>
+    </div>
     <div class="rodapeDash">
         <div class="itens">
             <div class="blocos">

@@ -1,26 +1,202 @@
+/* pagina mural */
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
+* {
+  font-family: Poppins, sans-serif;
+} 
+.label-captura {
+  display: flex;
+  justify-content: center;
+}
 
-.rodapeDash{
-    /* width: 89.8%; */
-    height: 30vh ;
-    background-color: #000F53;
+
+.linhaAnaliseMetricas {
+    margin-left: 90px;
+    padding-top: 30px;
+    width: 80%;
+  }
+
+  .opcoesMetricas {
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+  
+  }
+  
+  .opcaoMetrica {
+    width: 170px;
+    height: 120px;
+    border-radius: 20px;
     display: flex;
     flex-direction: column;
     justify-content: center;
-    justify-content: space-evenly;
-    color: #ffffff;
     align-items: center;
+    background-color: blueviolet;
   }
+
+  .atencao {
+    background-color: #d9ff00;
+  }
+  
+  .emergencia {
+    background-color: rgb(253, 153, 2);
+  }
+  
+  .urgencia {
+    background-color: #ff0404;
+  }
+  
 
   
-.janela{
-    width: 9.1%;
-    height: 100%;
-    background-color: #000F53;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    justify-content: space-evenly;
-    color: #ffffff;
-    align-items: center;
-    padding-left: 150px;
-  }
+.dash-right .avisos {
+  width: 100%;
+  /* border: 3px solid pink; */
+  color: rgb(216, 216, 216);
+  font-family: "Exo 2", sans-serif;
+}
+
+.dash-right .avisos .container {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.dash-right .avisos .container .div-form {
+  width: 100%;
+}
+
+.dash-right .avisos .container .div-form #form_postagem {
+  width: 100%;
+}
+
+.dash-right .avisos .div-form label {
+  width: 100%;
+}
+
+.dash-right .avisos .div-form input {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.dash-right .avisos .div-form textarea {
+  width: 100%;
+  /* color: #E6005A; */
+  border: 3px solid #e6005a;
+  background-color: #FAFBFF;
+  border-radius: 5px;
+}
+
+.dash-right .avisos .div-form button {
+  cursor: pointer;
+  font-family: "Exo 2", sans-serif;
+  border: 0;
+  border-radius: 5px;
+  font-weight: 600;
+  font-size: 18px;
+  padding: 10px 15px;
+  color: #FAFBFF;
+  background-color: #e6005a;
+  width: 120px;
+}
+
+
+.dash {
+  width: 84.85%;
+  background-color: #FAFBFF;
+  height: fit-content;
+  overflow: auto;
+  padding-left: 230px;
+}
+
+
+.rodapeDash{
+  width: 90.1%;
+  height: 100%;
+  background-color: #000F53;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  justify-content: space-evenly;
+  color: #ffffff;
+  align-items: center;
+  padding-left: 150px;
+}
+.itens{
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  width: 100%;
+}
+.direitos{
+  padding-bottom: 20px;
+}
+
+.Nome h2 {
+  margin-left: 300px;
+  color: #000F53;
+  font-family: Poppins, sans-serif;
+}
+
+
+.monitoramento {
+  width: 90%;
+  margin: auto;
+  display: flex;
+  align-items: center;
+}
+
+
+
+.blocoparticoes {
+  width: 50%;
+  height: 40vh;
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.particoes {
+  width: 80%;
+  height: 60vh;
+  background-color: #6953D3;
+  border-radius: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  align-items: center;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+.particao {
+  align-self: center;
+ 
+  color: black;
+
+}
+
+
+.ultimoAlerta {
+
+  width: 50%;
+  height: 40vh;
+  margin: 20px;
+  background-color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 20px;
+ background-color: #011361;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+}
+
+.tituloUltimoAlerta {
+  align-self: center;
+ margin-bottom: 30vh;
+  color: black;
+  font-weight: 700;
+  font-size: 3vh;
+}
