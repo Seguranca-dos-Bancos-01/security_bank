@@ -716,7 +716,7 @@ function exibirConnect(response) {
 
         ctx.arc(centerX, centerY, radius, Math.PI * 0.75, Math.PI * (0.75 + (speed / 300) * 1.5), false); // Desenha um arco para representar a velocidade no gráfico
 
-        ctx.lineWidth = 10;// Define a largura da linha do arco
+        ctx.lineWidth = 20;// Define a largura da linha do arco
 
         ctx.strokeStyle = color;// Define a cor da linha do arco
 
@@ -847,7 +847,7 @@ function exibirConnect(response) {
     function drawSpeedometer1(label, speed, color) {
         ctx2.beginPath();
         ctx2.arc(centerX2, centerY2, radius2, Math.PI * 0.75, Math.PI * (0.75 + (speed / 300) * 1.5), false);
-        ctx2.lineWidth = 10;
+        ctx2.lineWidth = 20;
         ctx2.strokeStyle = color;
         ctx2.stroke();
 
