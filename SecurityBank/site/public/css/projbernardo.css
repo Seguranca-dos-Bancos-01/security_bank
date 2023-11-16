@@ -1,0 +1,26 @@
+
+.rodapeDash{
+    /* width: 89.8%; */
+    height: 30vh ;
+    background-color: #000F53;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+    color: #ffffff;
+    align-items: center;
+  }
+
+  
+.janela{
+    width: 9.1%;
+    height: 100%;
+    background-color: #000F53;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    justify-content: space-evenly;
+    color: #ffffff;
+    align-items: center;
+    padding-left: 150px;
+  }
