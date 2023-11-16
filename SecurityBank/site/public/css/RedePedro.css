@@ -522,14 +522,19 @@ canvas {
 .visaoGeral{
     background-color: #fff;
     margin-top: 10px;
-    width: 650px;
+    width: 550px;
     border-radius: 10px;
     box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.136);
-    height: 40vh;
+    height: 36vh;
     margin-left: 15vh;
     
 }
 
+.MostrarIP {
+  font-size: 3vh;
+ margin-left: 3vh;
+  color: #000; /* Define a cor do texto como branco para melhor legibilidade */
+}
 
 
 .visaoGeral h2{

@@ -429,11 +429,12 @@ function BuscarIpServidor(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select enderecoIP as redeIP from servidor where idServidor = ${idUsuario};
+        instrucaoSql = `select EnderecoIP as redeIP from Rede where fkServidorRede =${idUsuario} order by idRede desc limit 1;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select enderecoIP as redeIP from servidor where idServidor = ${idUsuario};
+        instrucaoSql = `select EnderecoIP as redeIP from Rede where fkServidorRede =${idUsuario} order by idRede desc limit 1;
+
     
     `;
     } else {
@@ -1221,6 +1222,150 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
 
 
 
+function UltimasRedeUpload(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidorRede = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidorRede = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+function TempoRealRedeUpload(idUsuario) {
+
+    instrucaoSql2 = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidorRede = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidorRede = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+
+
+
+function BuscarConnect(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `select StatusRede as connectOrN from rede where fkServidorRede = ${idUsuario} order by idRede desc limit 1;;`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `select StatusRede as connectOrN from rede where fkServidorRede = ${idUsuario} order by idRede desc limit 1;;`;
+
+
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+
+
+function UltimasRedeDownload(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidorRede = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidorRede = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+
+
+
+
+
+function TempoRealRedeDownload(idUsuario) {
+
+    instrucaoSql2 = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidorRede = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidorRede = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
 
 
 
@@ -1320,4 +1465,9 @@ module.exports = {
     BuscarIpServidor,
     TempoRealRedeConnect,
     UltimasRedeConnect,
+    UltimasRedeDownload,
+    TempoRealRedeDownload,
+    UltimasRedeUpload,
+    TempoRealRedeUpload,
+    BuscarConnect,
 }

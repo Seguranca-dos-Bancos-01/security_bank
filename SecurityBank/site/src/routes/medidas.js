@@ -20,9 +20,14 @@ router.post("/ultimasUploadREDE/:idUsuario", function (req, res) {
     medidaController.ultimoUpload(req, res);
 })
 
-router.post("/ultimasIpREDE/:idUsuario", function (req, res) {
+router.get("/ultimasIpREDE/:idUsuario", function (req, res) {
     medidaController.BuscarIpServidor(req, res);
 })
+
+router.get("/ultimasConnect/:idUsuario", function (req, res) {
+    medidaController.BuscarConnect(req, res);
+})
+
 
 router.get("/ultimasRedeConnect/:idUsuario", function (req, res) {
     medidaController.UltimasRedeConnect(req, res);
@@ -30,6 +35,23 @@ router.get("/ultimasRedeConnect/:idUsuario", function (req, res) {
 router.get("/tempo-realRedeConnect/:idUsuario", function (req, res) {
     medidaController.TempoRealRedeConnect(req, res);
 })
+
+
+router.get("/ultimasDownload/:idUsuario", function (req, res) {
+    medidaController.UltimasRedeDownload(req, res);
+})
+router.get("/tempo-real-Download/:idUsuario", function (req, res) {
+    medidaController.TempoRealRedeDownload(req, res);
+})
+
+router.get("/ultimasUpload/:idUsuario", function (req, res) {
+    medidaController.UltimasRedeUpload(req, res);
+})
+router.get("/tempo-real-Upload/:idUsuario", function (req, res) {
+    medidaController.TempoRealRedeUpload(req, res);
+})
+
+
 
 
 
