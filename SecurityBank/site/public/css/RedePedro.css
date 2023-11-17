@@ -10,10 +10,16 @@
 
 
 .blocosPai{
+display: block;
+
+}
+.parte2{
 display: flex;
 
 }
-
+.parte1{
+  display: flex;
+}
 
 
 
@@ -526,7 +532,7 @@ canvas {
     border-radius: 10px;
     box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.136);
     height: 36vh;
-    margin-left: 15vh;
+    margin-left: 2vh;
     
 }
 

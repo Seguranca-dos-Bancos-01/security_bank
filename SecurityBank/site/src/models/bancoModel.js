@@ -11,7 +11,7 @@ function buscarAquariosPorEmpresa(empresaId) {
      
        fkBanco,
        fkStatus,
-       fkLocalizacaoMatriz,
+       
        fkPlano
 FROM servidor
 WHERE fkBanco = 1;
