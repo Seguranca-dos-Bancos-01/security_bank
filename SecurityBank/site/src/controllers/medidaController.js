@@ -1014,6 +1014,48 @@ function totalAlertasUrgencia(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+function buscarUltimasMedidasAlertasConsumo1(req, res) {
+
+    const limite_linhas = 7;
+
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as ultimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasAlertasConsumo1(idSelect, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+function buscarMedidasEmTempoRealAlertasConsumo1(req, res) {
+
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando medidas em tempo real`);
+
+    medidaModel.buscarMedidasEmTempoRealAlertasConsumo1(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar as ultimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 
 
 
@@ -1064,4 +1106,6 @@ module.exports = {
     totalAlertasAtencao,
     totalAlertasEmergencia,
     totalAlertasUrgencia,
+    buscarUltimasMedidasAlertasConsumo1,
+    buscarMedidasEmTempoRealAlertasConsumo1,
 };

@@ -192,4 +192,13 @@ router.get("/totalAlertasUrgencia/:selectedServer", function (req, res) {
     medidaController.totalAlertasUrgencia(req, res);
 })
 
+router.get("/ultimasAlertasConsumo1/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumo1(req, res);
+});
+
+router.get("/tempo-realAlertasConsumo1/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumo1(req, res);
+})
+
+
 module.exports = router;

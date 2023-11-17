@@ -1314,6 +1314,65 @@ function totalAlertasUrgencia(idSelect) {
     return database.executar(instrucaoSql);
 }
 
+function buscarUltimasMedidasAlertasConsumo1(idSelect) {
+
+    instrucaoSql = ''
+//COLOCAR O ID DO USUARIO
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select componentes.modelo as modelo, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        join componentes on fkComponente = idComponentes
+        where fkServidor = ${idSelect}
+        group by componentes.modelo
+        ; `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select componentes.modelo as modelo, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        join componentes on fkComponente = idComponentes
+        where fkServidor = ${idSelect}
+        group by componentes.modelo
+        ; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealAlertasConsumo1(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select componentes.modelo as modelo, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        join componentes on fkComponente = idComponentes
+        where fkServidor = ${idSelect}
+        group by componentes.modelo
+        ;`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select componentes.modelo as modelo, count(alerta.situacao) as totalAlertas 
+        from alerta join servidor
+        on fkServidor = idServidor
+        join componentes on fkComponente = idComponentes
+        where fkServidor = ${idSelect}
+        group by componentes.modelo
+        ; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 
 
@@ -1363,4 +1422,6 @@ module.exports = {
     totalAlertasAtencao,
     totalAlertasEmergencia,
     totalAlertasUrgencia,
+    buscarUltimasMedidasAlertasConsumo1,
+    buscarMedidasEmTempoRealAlertasConsumo1,
 }
