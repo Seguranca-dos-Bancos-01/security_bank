@@ -146,6 +146,15 @@ WHERE email = '${Email}' AND fkEscalonamento = ${NovoNivel};
         return database.executar(instrucao);
     }
 
+    function listarServidores() {
+        console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
+        var instrucao = `
+        select idServidor, apelido from servidor;
+        `;
+        console.log("Executando a instrução SQL: \n" + instrucao);
+        return database.executar(instrucao);
+      }
+
     module.exports = {
         autenticar,
         cadastrar,
@@ -156,5 +165,6 @@ WHERE email = '${Email}' AND fkEscalonamento = ${NovoNivel};
         UpdateValidadeNova,
         cadastrarServidorNuvem,
         PuxarFkServidor,
+        listarServidores,
 
     };
