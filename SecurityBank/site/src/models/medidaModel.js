@@ -494,6 +494,26 @@ function buscarUltimasMedidasQTD(idUsuario, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
+function buscarUltimasMedidasBola(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `  select idServidor as idS, fkStatus as fkStatus from servidor where fkBanco =${idUsuario};`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `  select idServidor as idS, fkStatus as fkStatus from servidor where fkBanco =${idUsuario};`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
 function buscarUltimasMedidas24h(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
@@ -526,26 +546,31 @@ function buscarUltimasMedidas24h(idUsuario, limite_linhas) {
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+
+
+
+
 function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
+        instrucaoSql = `          SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
         FROM servidor
-        WHERE fkStatus = (SELECT idStatus FROM statusMaquina WHERE nome != 'Estável')
+        WHERE fkStatus IN (SELECT idStatus FROM statusMaquina WHERE nome != 'Estável')
           AND fkBanco = ${idUsuario};
         
         
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
+        instrucaoSql = `          SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
         FROM servidor
-        WHERE fkStatus = (SELECT idStatus FROM statusMaquina WHERE nome != 'Estável')
+        WHERE fkStatus IN (SELECT idStatus FROM statusMaquina WHERE nome != 'Estável')
           AND fkBanco = ${idUsuario};
         
         
-    
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1211,4 +1236,5 @@ module.exports = {
     buscarUltimasUltAlertasSelected,
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2,
+    buscarUltimasMedidasBola,
 }

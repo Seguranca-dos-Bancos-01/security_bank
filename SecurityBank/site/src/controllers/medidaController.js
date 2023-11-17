@@ -491,6 +491,28 @@ function buscarUltimasMedidas24h(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+
+
+function buscarUltimasMedidasBola(req, res) {
+    var idUsuario = req.params.idUsuario;
+    medidaModel.buscarUltimasMedidasBola(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
 function buscarUltimasMedidasInstaveis(req, res) {
     const limite_linhas = 50;
     var idUsuario = req.params.idUsuario;
@@ -984,4 +1006,5 @@ module.exports = {
     buscarUltimasUltAlertasSelected,
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2, 
+    buscarUltimasMedidasBola,
 };

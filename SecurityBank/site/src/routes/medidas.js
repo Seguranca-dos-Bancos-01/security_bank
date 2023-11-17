@@ -81,6 +81,17 @@ router.get("/ultimasQTD/:idUsuario", function (req, res) {
 router.get("/ultimas24h/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidas24h(req, res);
 });
+
+router.get("/ultimasBolaStatus/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasBola(req, res);
+});
+
+
+
+
+
+
+
 router.get("/sInstaveis/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasInstaveis(req, res);
 });
