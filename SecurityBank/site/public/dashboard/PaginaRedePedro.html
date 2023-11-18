@@ -188,24 +188,25 @@
                     <div class="parte1">
                         <div class="visaoGeral">
                             <h2>Detalhes de Rede</h2>
-                                <h1 id="Conectado?"></h1>
+                            <h1 id="Conectado?"></h1>
 
                             <span class="MostrarIP" id="IPselecionado">IP:</span>
                         </div>
                         <div class="visaoGeral">
                             <h2>Ping da rede</h2>
-                                <h1 id="Conectado?"></h1>
-
-                            <span class="MostrarIP" id="IPselecionado">IP:</span>
+                            <div class="graph">
+                                <canvas id="myChartPing"></canvas>
+                            </div>
                         </div>
-                        <div class="visaoGeral">
-                            <h2>Ultimos alertas de rede</h2>
-                                <h1 id="Conectado?"></h1>
-
-                            <span class="MostrarIP" id="IPselecionado">IP:</span>
-                        </div>
-
                        
+                            <div id="colocar" class="ultimosAlertas">
+                                <h3>Ultimos Alertas</h3>
+        
+        
+                            </div>
+                       
+
+
                     </div>
                     <div class="parte2">
                         <div class="visaoGeral">
@@ -360,7 +361,7 @@
 
 
 
-window.onload = BuscarIP(sessionStorage.servidorSelecionado)
+    window.onload = BuscarIP(sessionStorage.servidorSelecionado)
 
     function BuscarIP(idUsuario) {
         if (sessionStorage.ID_USUARIO) {
@@ -391,11 +392,11 @@ window.onload = BuscarIP(sessionStorage.servidorSelecionado)
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
             var dado = registro.redeIP;
-          
+
             const percentage = document.getElementById('IPselecionado');
 
-          
-            percentage.innerText = `IP: ${dado}` ;
+
+            percentage.innerText = `IP: ${dado}`;
 
         }
 
@@ -414,51 +415,309 @@ window.onload = BuscarIP(sessionStorage.servidorSelecionado)
 
     window.onload = BuscarConnect(sessionStorage.servidorSelecionado)
 
-function BuscarConnect(idUsuario) {
-    if (sessionStorage.ID_USUARIO) {
-        idUsuario = sessionStorage.servidorSelecionado
-        console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+    function BuscarConnect(idUsuario) {
+        if (sessionStorage.ID_USUARIO) {
+            idUsuario = sessionStorage.servidorSelecionado
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
+        fetch(`/medidas/ultimasConnect/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirConnect(response);
+                        });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
     }
-    else { console.error("ID do usuário não encontrada no sessionStorage."); }
-    fetch(`/medidas/ultimasConnect/${idUsuario}`, { cache: 'no-store' })
-        .then(function (response) {
+
+
+
+    function exibirConnect(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var dado = registro.connectOrN;
+
+            const percentage = document.getElementById('Conectado?');
+
+
+            percentage.innerText = `${dado}`;
+
+        }
+
+        console.log(dado)
+        console.log(response[0])
+
+        // var ramServidores = document.getElementById('ramServidores');
+        // ramServidores.innerHTML = `${dado}%`;
+
+        var proximaAtualizacao = setTimeout(() => BuscarIP(), 15000)
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    window.onload = obterDadosGrafico4(sessionStorage.servidorSelecionado)
+
+    function obterDadosGrafico4(idUsuario) {
+        if (idUsuario) {
+            idUsuario = sessionStorage.servidorSelecionado
+            console.log(idUsuario);
+
+            document.addEventListener("DOMContentLoaded", function () {
+                obterDadosGrafico4(idUsuario);
+            });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/ultimasPing/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
-                response.json()
-                    .then(function (response) {
-                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
-                        response.reverse(); exibirConnect(response);
-                    });
-            } else { console.error('Nenhum dado encontrado ou erro na API'); }
-        })
-        .catch(function (error) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico4(resposta, idUsuario);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        }).catch(function (error) {
             console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
         });
-
-}
-
-
-
-function exibirConnect(response) {
-    console.log('Exibindo dados retornados:')
-    for (i = 0; i < response.length; i++) {
-        var registro = response[i];
-        var dado = registro.connectOrN;
-      
-        const percentage = document.getElementById('Conectado?');
-
-      
-        percentage.innerText = `${dado}` ;
-
     }
 
-    console.log(dado)
-    console.log(response[0])
+    function plotarGrafico4(resposta, idUsuario) {
+        console.log('iniciando plotagem do gráfico...');
+        let labels = [];
+        let dados = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Ping',
+                    data: [],
+                    fill: false,
+                    borderColor: '#36D000',
+                    tension: 0.1
+                }
+            ]
+        };
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
 
-    // var ramServidores = document.getElementById('ramServidores');
-    // ramServidores.innerHTML = `${dado}%`;
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.DataHora);
+            dados.datasets[0].data.push(registro.Ping);
 
-    var proximaAtualizacao = setTimeout(() => BuscarIP(), 15000)
-}
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        const config = {
+            type: 'line',
+            data: dados
+        };
+
+        let myChart = new Chart(document.getElementById('myChartPing'), config);
+
+        atualizarGrafico4(idUsuario, dados, myChart);
+    }
+
+    function atualizarGrafico4(idUsuario, dados, myChart) {
+        fetch(`/medidas/tempo-realPing/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log('Dados atuais do gráfico:');
+                    console.log(dados);
+
+
+                    if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
+                        console.log('---------------------------------------------------------------');
+                        console.log('Como não há dados novos para captura, o gráfico não atualizará.');
+
+                        console.log('Horário do novo dado capturado:');
+                        console.log(novoRegistro[0].horario);
+                        console.log('Horário do último dado capturado:');
+                        console.log(dados.labels[dados.labels.length - 1]);
+                        console.log('---------------------------------------------------------------');
+                    } else {
+                        dados.labels.shift();
+                        dados.labels.push(novoRegistro[0].momento_grafico);
+
+                        dados.datasets[0].data.shift();
+                        dados.datasets[0].data.push(novoRegistro[0].proc);
+
+
+                        myChart.update();
+                    }
+
+                    proximaAtualizacao = setTimeout(() => {
+                        obterDadosGrafico4(idUsuario);
+                    }, 20000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                proximaAtualizacao = setTimeout(() => {
+                    obterDadosGrafico4(idUsuario);
+                }, 20000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+window.onload = UltimosAlertasSelectedServer(sessionStorage.servidorSelecionado)
+
+    function UltimosAlertasSelectedServer(idUsuario) {
+        let currentPercentage;
+
+        if (sessionStorage.ID_USUARIO) {
+            idUsuario = sessionStorage.servidorSelecionado;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/ultimasUltAlertasRede/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (responseData) {
+                            console.log(`Dados recebidos: ${JSON.stringify(responseData)}`);
+                            responseData.reverse();
+                            exibirUltimosAlertasSelected(responseData);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function exibirUltimosAlertasSelected(response) {
+
+        var ultimosAlertas = document.getElementById('colocar');
+            ultimosAlertas.innerHTML = '';
+        console.log('Exibindo dados retornados:');
+        for (let i = 0; i < response.length; i++) {
+            let registro = response[i];
+            let dado = registro.situ;
+            let dado3 = registro.dataAlerta;
+            let dado4 = registro.horaAlerta;
+
+           // const fill = document.getElementById('situacaoTittle');
+           // const percentage = document.getElementById('situacaoTittle');
+           // percentage.innerText += `${dado} no ${dado2}.`;
+
+
+          //  const fill2 = document.getElementById('horariosAlertas');
+          //  const percentage2 = document.getElementById('horariosAlertas');
+          //  percentage2.innerText += `${dado3} as ${dado4}.`;
+
+        
+// Criação do elemento div
+var elemento = document.createElement('div');
+        elemento.classList.add('cardAlertas');
+
+        var conteudo = `
+            <h4 id="situacaoTittle">${dado}.</h4>
+            <span id="horariosAlertas">${dado3} às ${dado4}.</span>
+        `;
+
+        elemento.innerHTML = conteudo;
+
+        // Adicionando o novo alerta à seção "Ultimos Alertas"
+        var ultimosAlertas = document.getElementById('colocar');
+        ultimosAlertas.appendChild(elemento);
+
+            console.log(dado)
+
+
+            console.log(dado);
+            console.log(response[0]);
+        }
+        var proximaAtualizacao = setTimeout(() => UltimosAlertasSelectedServer(), 35000);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    
+
+
+
+
 
 
 
@@ -739,7 +998,7 @@ function exibirConnect(response) {
         ctx.fillStyle = 'black';
 
 
-        ctx.fillText(`${label}: ${speed} Mbps`, centerX - 100, centerY ); // Exibe o texto com o rótulo e a velocidade no gráfico
+        ctx.fillText(`${label}: ${speed} Mbps`, centerX - 100, centerY); // Exibe o texto com o rótulo e a velocidade no gráfico
 
         // Define um temporizador para atualizar os dados a cada 10 segundos
         proximaAtualizacao = setTimeout(() => {
@@ -865,7 +1124,7 @@ function exibirConnect(response) {
 
         ctx2.font = '20px Arial';
         ctx2.fillStyle = 'black';
-        ctx2.fillText(`${label}: ${speed} Mbps`, centerX2- 100, centerY2 );
+        ctx2.fillText(`${label}: ${speed} Mbps`, centerX2 - 100, centerY2);
 
         proximaAtualizacao = setTimeout(() => {
             let idUsuario = sessionStorage.servidorSelecionado

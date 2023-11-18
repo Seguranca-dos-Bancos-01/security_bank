@@ -993,6 +993,71 @@ function buscarUltimasUsbConectadas(req, res) {
 
 
 
+function buscarUltimasUltAlertasRede(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasUltAlertasRede(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+function buscarUltimasMedidasPing(req, res) {
+    
+    var idUsuario = req.params.idUsuario;
+
+    
+
+    medidaModel.buscarUltimasMedidasPing(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+function buscarMedidasEmTempoRealPing(req, res) {
+    var idUsuario = req.params.idUsuario;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.buscarMedidasEmTempoRealPing(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
 
 
 
@@ -1211,4 +1276,7 @@ module.exports = {
     UltimasRedeUpload,
     TempoRealRedeUpload,
     BuscarConnect,
+    buscarUltimasMedidasPing,
+    buscarMedidasEmTempoRealPing,
+    buscarUltimasUltAlertasRede,
 };

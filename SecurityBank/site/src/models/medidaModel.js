@@ -1222,6 +1222,66 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+function buscarUltimasUltAlertasRede(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT
+                alertaRede.situacao AS situ,
+               
+                DATE_FORMAT(alertaRede.dataAlerta, '%d/%m/%Y') AS dataAlerta,
+                alertaRede.horaAlerta AS horaAlerta
+            FROM
+                alertaRede
+            JOIN
+                Rede ON alertaRede.fkRede = Rede.idRede
+            WHERE
+                Rede.fkServidorRede = 1
+            ORDER BY
+                alertaRede.idAlertas desc
+            LIMIT 3;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT
+                alertaRede.situacao AS situ,
+               
+                DATE_FORMAT(alertaRede.dataAlerta, '%d/%m/%Y') AS dataAlerta,
+                alertaRede.horaAlerta AS horaAlerta
+            FROM
+                alertaRede
+            JOIN
+                Rede ON alertaRede.fkRede = Rede.idRede
+            WHERE
+                Rede.fkServidorRede = 1
+            ORDER BY
+                alertaRede.idAlertas desc
+            LIMIT 3;`
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
 function UltimasRedeUpload(idUsuario, limite_linhas) {
 
     instrucaoSql2 = ''
@@ -1412,6 +1472,65 @@ function TempoRealRedeConnect(idUsuario) {
 
 
 
+function buscarUltimasMedidasPing(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT Ping as Ping, DataHora as DataHora
+        FROM Rede
+        WHERE fkServidorRede = ${idUsuario}
+        ORDER BY DataHora DESC
+        LIMIT 15;`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT Ping as Ping, DataHora as DataHora
+        FROM Rede
+        WHERE fkServidorRede = ${idUsuario}
+        ORDER BY DataHora DESC
+        LIMIT 15;`;
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+function buscarMedidasEmTempoRealPing(idUsuario) {
+
+    instrucaoSql2 = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT Ping as Ping, DataHora as DataHora
+        FROM Rede
+        WHERE fkServidorRede = ${idUsuario}
+        ORDER BY DataHora DESC
+        LIMIT 15;`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = ` SELECT Ping as Ping, DataHora as DataHora
+        FROM Rede
+        WHERE fkServidorRede = ${idUsuario}
+        ORDER BY DataHora DESC
+        LIMIT 15;`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
 
 
 
@@ -1470,4 +1589,7 @@ module.exports = {
     UltimasRedeUpload,
     TempoRealRedeUpload,
     BuscarConnect,
+    buscarUltimasMedidasPing,
+    buscarMedidasEmTempoRealPing,
+    buscarUltimasUltAlertasRede
 }

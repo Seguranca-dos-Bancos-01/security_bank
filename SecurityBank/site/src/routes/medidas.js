@@ -51,6 +51,19 @@ router.get("/tempo-real-Upload/:idUsuario", function (req, res) {
     medidaController.TempoRealRedeUpload(req, res);
 })
 
+router.get("/ultimasPing/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasPing(req, res);
+});
+
+router.get("/tempo-realPing/:idUsuario", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealPing(req, res);
+})
+
+router.get("/ultimasUltAlertasRede/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasUltAlertasRede(req, res);})
+   
+
+
 
 
 
