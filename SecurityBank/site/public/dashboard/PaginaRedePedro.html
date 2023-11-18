@@ -48,7 +48,7 @@
 <body onload="exibirServidoresUsuario()">
 
 
-    <body onload="percentCPU(),percentRAM(),percentDISK(), percentRede(),ReceberUltimosAlertas2()">
+    <body onload="percentCPU(),percentRAM(),percentDISK(), percentRede(),ReceberUltimosAlertas2(),exibirServidoresUsuarioReede()">
 
         <div class="janela">
             <div class="header-left">
@@ -172,15 +172,13 @@
                 <div id="nomeEspec" class="Nome">
                     <h2>Dados de Rede</h2>
                 </div>
-                <div class="kpi">
-                    <div class="blocoKpi">
-                        <div class="img">
+                
+                    <div class="Historico">
+                        <span class="tituloHistorico">Servidores</span>
+                        <div id="Servidores" >
 
                         </div>
-                        <div id="Servidores" class="info">
-
-                        </div>
-                    </div>
+                   
 
 
                 </div>
@@ -209,20 +207,20 @@
 
                     </div>
                     <div class="parte2">
-                        <div class="visaoGeral">
-                            <h2>Potencia de rede de Download</h2>
+                        
+                            <span>Potencia de rede de Download</span>
                             <div class="graph">
                                 <canvas id="speedCanvas" width="600" height="310"
                                     style="border: 1px solid #000;"></canvas>
                             </div>
-                        </div>
-                        <div class="visaoGeral">
+                        
+                  
                             <h2>Historico de Rede</h2>
                             <div class="graph">
                                 <canvas id="myChart"></canvas>
                             </div>
-                        </div>
-                        <div class="visaoGeral">
+                        
+                        
                             <h2>Potencia de rede de Upload</h2>
                             <div class="graph">
                                 <div class="graph">
@@ -230,7 +228,7 @@
                                         style="border: 1px solid #000;"></canvas>
                                 </div>
                             </div>
-                        </div>
+                        
                     </div>
                 </div>
             </div>
@@ -255,7 +253,7 @@
             </div>
             <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
         </div>
-        </div>
+        
 
 
 
@@ -313,15 +311,115 @@
     var vetor = [];
     var selectedServer;// Declarar idUsuario fora do escopo da função
 
-    function exibirServidoresUsuarioRede() {
+
+
+
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+    var i = 0
+    function exibirServidoresUsuarioReede() {
         var server = JSON.parse(sessionStorage.servidor);
         console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
         var selectServidores = document.getElementById("Servidores");
         selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
         server.forEach(element => {
-            var button = document.createElement('button');
-            button.textContent = element.apelido;
+            var button = document.createElement('div');
+            button.innerHTML =
+                `<span>${element.apelido}</span>
+            <div id = "boola"class= "bola"></div>
+            `;
+ 
+          //  while ( i <= element.idServidor) {
+                // Encontrou o ID do servidor no sessionStorage
+              //  var fkStatusKey = sessionStorage.getItem(`BolafkStatus${element.fkStatus}_fkStatus`);
+                if (element.fkStatus == 3) { // Por exemplo, alterando a cor se fkStatus for igual a 1
+                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                    bolaDiv.style.backgroundColor = '#FF0000';
+                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+                } else if (element.fkStatus == 2) {
+                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                    bolaDiv.style.backgroundColor = '#F79042';
+                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+                } else if (element.fkStatus == 4) {
+                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                    bolaDiv.style.backgroundColor = '#6953D3';
+                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+                }else if (element.fkStatus == 1) {
+                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                    bolaDiv.style.backgroundColor = '#36D000';
+                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+                }else{i++}
+
+            
+
+
+
+
             button.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserirRede(selectedServer); // Chamar a função inserir com o ID do servidor
+                window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+            });
+            button.classList.add('botoesServidoresDash');
+            selectServidores.appendChild(button);
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+    function exibirServidoresUsuarioRede() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("Servidorees");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            var button = document.createElement('div');
+            button.innerHTML =
+                `<span>${element.apelido}</span>
+            <div id = "boola"class= "bola"></div>
+            `;
+ 
+          //  while ( i <= element.idServidor) {
+                // Encontrou o ID do servidor no sessionStorage
+              //  var fkStatusKey = sessionStorage.getItem(`BolafkStatus${element.fkStatus}_fkStatus`);
+                if (element.fkStatus == 3) { // Por exemplo, alterando a cor se fkStatus for igual a 1
+                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                    bolaDiv.style.backgroundColor = '#FF0000';
+                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+                } else if (element.fkStatus == 2) {
+                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                    bolaDiv.style.backgroundColor = '#F79042';
+                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+                } else if (element.fkStatus == 4) {
+                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                    bolaDiv.style.backgroundColor = '#6953D3';
+                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+                }else if (element.fkStatus == 1) {
+                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                    bolaDiv.style.backgroundColor = '#36D000';
+                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+                }else{i++}
+
+            
+                button.addEventListener("click", function (event) {
                 event.preventDefault();
                 selectedServer = element.idServidor;
                 vetor.push(selectedServer);
@@ -342,7 +440,7 @@
     }
     console.log(selectedServer)
     // Chamar a função exibirServidoresUsuario
-    exibirServidoresUsuarioRede();
+    exibirServidoresUsuarioReede();
 
 
 
@@ -406,7 +504,7 @@
         // var ramServidores = document.getElementById('ramServidores');
         // ramServidores.innerHTML = `${dado}%`;
 
-        var proximaAtualizacao = setTimeout(() => BuscarIP(), 15000)
+        var proximaAtualizacao = setTimeout(() => BuscarIP(), 20000)
     }
 
 
@@ -470,7 +568,7 @@
     // var ramServidores = document.getElementById('ramServidores');
     // ramServidores.innerHTML = `${dado}%`;
 
-    var proximaAtualizacao = setTimeout(() => BuscarIP(), 15000);
+    var proximaAtualizacao = setTimeout(() => BuscarIP(), 20000);
 }
 
 
@@ -700,7 +798,7 @@ var elemento = document.createElement('div');
             console.log(dado);
             console.log(response[0]);
         }
-        var proximaAtualizacao = setTimeout(() => UltimosAlertasSelectedServer(), 35000);
+        var proximaAtualizacao = setTimeout(() => UltimosAlertasSelectedServer(), 20000);
     }
 
 
@@ -838,7 +936,7 @@ var elemento = document.createElement('div');
         proximaAtualizacao = setTimeout(() => {
             let idUsuario = sessionStorage.servidorSelecionado
             obterDadosGrafico3(idUsuario);
-        }, 2000);
+        }, 20000);
     }
 
     function atualizarGrafico3(idUsuario, dados, myChart3) {
@@ -883,7 +981,7 @@ var elemento = document.createElement('div');
                 // Agendando a próxima atualização em caso de erro
                 proximaAtualizacao = setTimeout(() => {
                     obterDadosGrafico3(idUsuario);
-                }, 2000);
+                }, 20000);
             }
         }).catch(function (error) {
             console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
@@ -1118,7 +1216,7 @@ var elemento = document.createElement('div');
 
 
         }
-        drawSpeedometer1('Download', downloadSpeed2, '#F79042');
+        drawSpeedometer1('Upload', downloadSpeed2, '#F79042');
 
 
 
@@ -1142,7 +1240,7 @@ var elemento = document.createElement('div');
         proximaAtualizacao = setTimeout(() => {
             let idUsuario = sessionStorage.servidorSelecionado
             obterDadosGrafico1(idUsuario);
-        }, 2000);
+        }, 20000);
 
     }
 

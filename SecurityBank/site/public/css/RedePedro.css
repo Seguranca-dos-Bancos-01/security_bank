@@ -5,6 +5,59 @@
   font-family: Poppins, sans-serif;
 }
 
+
+
+.bola {
+  width: 20px;
+  height: 20px;
+  background-color: #36D000;
+  border-radius: 20px;
+}
+
+
+#Servidores{display: flex;}
+
+.Historico {
+  width: 93%;
+  margin: 20px ;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  
+  background-color: rgb(255, 255, 255);
+  border-radius: 20px;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.15);
+}
+
+
+
+.tituloHistorico {
+  align-self: flex-start;
+  margin: 10px 20px;
+  color: #5c6bc0;
+}
+.botoesServidoresDash {
+  width: 200px;
+  background-color: #fff;
+  border: none;
+  border-radius: 10px;
+  height: 70px;
+  margin: 20px;
+  box-shadow: 1px 7px 20px 0px rgba(0, 0, 0, 0.10);
+  cursor: pointer;
+display: flex;
+align-items: center;
+justify-content: space-evenly;
+}
+
+.botoesServidoresDash span {
+  color: #000F53;
+  font-size: 15px;
+}
+
+
+
+
 /* Estilo básico para o círculo */
 .conexao {
   width: 160px;
@@ -624,6 +677,30 @@ canvas {
   box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.136);
   height: 36vh;
   margin-left: 2vh;
+
+}
+.parte2 {
+  background-color: #fff;
+  margin-top: 10px;
+  width: 93%;
+  border-radius: 10px;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.136);
+  height: 36vh;
+  margin-left: 2vh;
+  display: flex;
+
+}
+
+.parte2 h2 {
+  font-size: 16px;
+  padding-left: 20px;
+
+}
+.parte2 span {
+  font-size: 16px;
+  padding-left: 20px;
+  color: black;
+  width: 30vh;
 
 }
 
