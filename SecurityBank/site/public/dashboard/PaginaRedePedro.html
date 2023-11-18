@@ -438,28 +438,41 @@
     }
 
 
-
     function exibirConnect(response) {
-        console.log('Exibindo dados retornados:')
-        for (i = 0; i < response.length; i++) {
-            var registro = response[i];
-            var dado = registro.connectOrN;
+    console.log('Exibindo dados retornados:');
+    var conectadoEncontrado = false; // Adicionando uma variável para controlar se foi encontrado um elemento conectado
 
-            const percentage = document.getElementById('Conectado?');
+    for (var i = 0; i < response.length; i++) {
+        var registro = response[i];
+        var dado = registro.connectOrN;
 
-
-            percentage.innerText = `${dado}`;
+        if (dado === 1) {
+            var percentage = document.getElementById('Conectado?');
+            percentage.innerHTML = '<h2>Conectado</h2><div class="conexao conectado"></div>';
+            conectadoEncontrado = true; // Definindo como verdadeiro se um elemento conectado for encontrado
+            break; // Parando o loop assim que encontrar um elemento conectado
+        } else{
+            var percentage = document.getElementById('Conectado?');
+            percentage.innerHTML = '<h2>Desconectado</h2><div class="conexao desconectado"></div>';
+            conectadoEncontrado = false; // Definindo como verdadeiro se um elemento conectado for encontrado
+            break; // Parando o loop assim que encontrar um elemento conectado
 
         }
-
-        console.log(dado)
-        console.log(response[0])
-
-        // var ramServidores = document.getElementById('ramServidores');
-        // ramServidores.innerHTML = `${dado}%`;
-
-        var proximaAtualizacao = setTimeout(() => BuscarIP(), 15000)
     }
+
+    if (!conectadoEncontrado) {
+        console.log('Nenhum elemento conectado encontrado');
+    }
+
+    console.log(dado);
+    console.log(response[0]);
+
+    // var ramServidores = document.getElementById('ramServidores');
+    // ramServidores.innerHTML = `${dado}%`;
+
+    var proximaAtualizacao = setTimeout(() => BuscarIP(), 15000);
+}
+
 
 
 

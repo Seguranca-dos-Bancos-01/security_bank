@@ -1,4 +1,3 @@
-
 @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@100;200;300;400;500;600;700;800;900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@100;200;300;400;500;600;700&family=VT323&display=swap');
 
@@ -6,18 +5,88 @@
   font-family: Poppins, sans-serif;
 }
 
+/* Estilo básico para o círculo */
+.conexao {
+  width: 160px;
+  height: 160px;
+  border-radius: 50%;
+  border: 2px solid #333;
+  animation: pulse 2s infinite;
+  /* Adicionando animação */
+  margin-left: 18vh;
+}
+
+/* Estilo para indicar conexão ativa */
+.conectado {
+  background-color: #2ecc71;
+  /* Verde */
+}
+
+/* Estilo para indicar conexão inativa */
+.desconectado {
+  background-color: #e74c3c;
+  /* Vermelho */
+  animation-name: pulseDisconnected;
+  /* Adicionando a animação para desconectado */
+}
+
+/* Animação de pulsação para indicar conexão inativa */
+@keyframes pulseDisconnected {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(204, 46, 46, 0.4);
+  }
+
+  70% {
+    transform: scale(1.3);
+    box-shadow: 0 0 0 50px rgba(204, 46, 46, 0);
+  }
+
+  100% {
+    transform: scale(1.0);
+    box-shadow: 0 0 0 0 rgba(204, 46, 46, 0);
+  }
+}
+
+/* Animação de pulsação para indicar conexão ativa */
+@keyframes pulse {
+  0% {
+    transform: scale(0.9);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0.4);
+  }
+
+  70% {
+    transform: scale(1.3);
+    box-shadow: 0 0 0 50px rgba(46, 204, 113, 0);
+  }
+
+  100% {
+    transform: scale(1.0);
+    box-shadow: 0 0 0 0 rgba(46, 204, 113, 0);
+  }
+}
 
 
 
-.blocosPai{
-display: block;
+
+
+
+
+
+
+
+
+.blocosPai {
+  display: block;
 
 }
-.parte2{
-display: flex;
+
+.parte2 {
+  display: flex;
 
 }
-.parte1{
+
+.parte1 {
   display: flex;
 }
 
@@ -58,9 +127,10 @@ display: flex;
 .container {
   width: 200px;
   text-align: center;
-  
+
 }
-.containerBarra{
+
+.containerBarra {
   display: flex;
   align-items: center;
 }
@@ -145,7 +215,7 @@ display: flex;
 
 .dash-right .avisos {
   width: 100%;
-   border: 3px solid pink; 
+  border: 3px solid pink;
   color: rgb(216, 216, 216);
   font-family: "Exo 2", sans-serif;
 }
@@ -175,7 +245,7 @@ display: flex;
 
 .dash-right .avisos .div-form textarea {
   width: 100%;
-   color: #E6005A; 
+  color: #E6005A;
   border: 3px solid #e6005a;
   background-color: #FAFBFF;
   border-radius: 5px;
@@ -218,13 +288,14 @@ display: flex;
   padding: 20px;
 }
 
-.publicacao > *:not(:last-child) {
+.publicacao>*:not(:last-child) {
   padding: 0 0 10px 0;
 }
 
 .div-results {
   width: 100%;
 }
+
 .div-results .feed-container {
   background-color: #FAFBFF;
   border-radius: 5px;
@@ -236,7 +307,7 @@ display: flex;
   justify-content: flex-end;
 }
 
-.div-buttons > * {
+.div-buttons>* {
   margin-left: 30px;
 }
 
@@ -407,7 +478,7 @@ canvas {
   height: 100% !important;
 }
 
-.rodapeDash{
+.rodapeDash {
   width: 100%;
   height: 50v h;
   background-color: #000F53;
@@ -418,29 +489,35 @@ canvas {
   color: #ffffff;
   align-items: center;
 }
-.itens{
+
+.itens {
   display: flex;
   justify-content: space-around;
   align-items: center;
   width: 100%;
 }
-.blocos span{
+
+.blocos span {
   color: #ffffff;
 }
-.tipos{
-    display: flex;
-    justify-content: space-around;
+
+.tipos {
+  display: flex;
+  justify-content: space-around;
 }
+
 .tipo {
-    font-size: 22px;
-    color: #000F53;
+  font-size: 22px;
+  color: #000F53;
 }
-.direitos{
+
+.direitos {
   padding-bottom: 20px;
 }
-.Nome{
-    margin-left: 50px;
-    margin-top: 10px;
+
+.Nome {
+  margin-left: 50px;
+  margin-top: 10px;
 }
 
 .Nome h2 {
@@ -448,136 +525,157 @@ canvas {
   color: #000F53;
   font-family: Poppins, sans-serif;
 }
-.kpi{
-    margin-left: 50px;
-    display: flex;
-    background-color: #ffffff;
-    justify-content: space-around;
-    margin-right: 20px;
-    border-radius: 20px;
-    padding: 5px;
-    height: 90px;
+
+.kpi {
+  margin-left: 50px;
+  display: flex;
+  background-color: #ffffff;
+  justify-content: space-around;
+  margin-right: 20px;
+  border-radius: 20px;
+  padding: 5px;
+  height: 90px;
   filter: drop-shadow(0px 10px 60px rgba(226, 236, 249, 0.50));
 
 }
-.blocoKpi img{
-    background-color: #A293DE;
-    padding: 5px;
-    border-radius: 100px;
-    width: 30px;
+
+.blocoKpi img {
+  background-color: #A293DE;
+  padding: 5px;
+  border-radius: 100px;
+  width: 30px;
 }
-.blocoKpi{
-    display: flex;
-    align-items: center;
+
+.blocoKpi {
+  display: flex;
+  align-items: center;
 }
-.info span{
-    color: #ACACAC;
-    font-size: 12px;
-    margin-left: 10px;
-    display: flex;
+
+.info span {
+  color: #ACACAC;
+  font-size: 12px;
+  margin-left: 10px;
+  display: flex;
 }
-.info .Situacao{
-    color: black;
-    font-size: 20px;
-    font-weight: 600;
+
+.info .Situacao {
+  color: black;
+  font-size: 20px;
+  font-weight: 600;
 }
+
 #validadeServidor {
   color: black;
 }
-.Dados{
+
+.Dados {
   margin-top: 20px;
-    display: flex;
-    justify-content: space-around;
+  display: flex;
+  justify-content: space-around;
 }
-.ultimosAlertas{
-    background-color: #6953D3;
-    border-radius: 10px;
-    padding: 10px;
-    color: #FFFFFF;
-    margin-top: 10px;
-    margin-left: 20px;
-    box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
-    width: 300px;
+
+.ultimosAlertas {
+  background-color: #6953D3;
+  border-radius: 10px;
+  padding: 10px;
+  color: #FFFFFF;
+  margin-top: 10px;
+  margin-left: 20px;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+  width: 300px;
 }
-.ultimosAlertas span{
-    color: #FFFFFF
+
+.ultimosAlertas span {
+  color: #FFFFFF
 }
-.ultimosAlertas h3{
-    font-size: 13px;
-    font-weight: 400;
+
+.ultimosAlertas h3 {
+  font-size: 13px;
+  font-weight: 400;
 }
-.cardAlertas{
-    background-color: #4E1C99;
-    width: 300px;
-    border-radius: 10px;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    margin-top: 10px;
+
+.cardAlertas {
+  background-color: #4E1C99;
+  width: 300px;
+  border-radius: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: 10px;
 }
-.cardAlertas h4{
-    margin: 3px;
-    margin-bottom: 10px;
-    font-size: 18px;
-    font-weight: 600;
+
+.cardAlertas h4 {
+  margin: 3px;
+  margin-bottom: 10px;
+  font-size: 18px;
+  font-weight: 600;
 }
-.cardAlertas span{
-    margin-bottom: 5px;
-    font-size: 14px;
+
+.cardAlertas span {
+  margin-bottom: 5px;
+  font-size: 14px;
 }
-.visaoGeral{
-    background-color: #fff;
-    margin-top: 10px;
-    width: 550px;
-    border-radius: 10px;
-    box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.136);
-    height: 36vh;
-    margin-left: 2vh;
-    
+
+.visaoGeral {
+  background-color: #fff;
+  margin-top: 10px;
+  width: 550px;
+  border-radius: 10px;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.136);
+  height: 36vh;
+  margin-left: 2vh;
+
 }
 
 .MostrarIP {
   font-size: 3vh;
- margin-left: 3vh;
-  color: #000; /* Define a cor do texto como branco para melhor legibilidade */
+  margin-left: 3vh;
+  color: #000;
+  /* Define a cor do texto como branco para melhor legibilidade */
 }
 
 
-.visaoGeral h2{
-    font-size: 16px;
-    padding-left: 20px;
-    font-weight: 600;
+.visaoGeral h2 {
+  font-size: 16px;
+  padding-left: 20px;
+  font-weight: 600;
 }
-.USBs{
-    background-color: #000F53;
-    color: #ffffff;
-    width: 250px;
-    margin-top: 10px;
-    border-radius: 10px;
-    box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
+
+.USBs {
+  background-color: #000F53;
+  color: #ffffff;
+  width: 250px;
+  margin-top: 10px;
+  border-radius: 10px;
+  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
 }
-.USBs h2{
-    font-size: 16px;
-    padding-left: 10px;
-    font-weight: 600;
+
+.USBs h2 {
+  font-size: 16px;
+  padding-left: 10px;
+  font-weight: 600;
 }
-.USBs span{
+
+.USBs span {
   padding-left: 10px;
 }
-.blocoGraficos{
-    margin-top: 10px;
-    margin-left: 50px;
-    color: #000F53;
-    font-size: 16px;
-    display: flex;
-    flex-direction: column;
-  
+
+.blocoGraficos {
+  margin-top: 10px;
+  margin-left: 50px;
+  color: #000F53;
+  font-size: 16px;
+  display: flex;
+  flex-direction: column;
+
 }
-.graficos{
+
+.graficos {
   display: flex;
   margin-bottom: 10vh;
 }
-.grafico{
+
+.grafico {
   background-color: #6953D31A;
   width: 300px;
   margin: auto;
@@ -589,10 +687,11 @@ canvas {
   flex-direction: column;
   box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
 }
-.grafico img{
+
+.grafico img {
   width: 200px;
   margin: auto;
- 
+
 }
 
 .subtituloServidoresGraficos {
@@ -605,4 +704,3 @@ canvas {
   color: #ACACAC;
   font-weight: 500;
 }
-
