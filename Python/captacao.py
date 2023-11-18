@@ -17,7 +17,7 @@ import wmi
     #)
     #return connection
 
-config ={"user": "root","password":"justin123","host":"localhost","database":"SecurityBank"}
+config ={"user": "root","password":"rootpassword","host":"localhost","database":"SecurityBank"}
 connection = pymysql.connect(**config)
 
 cursor1 = connection.cursor()
@@ -43,7 +43,7 @@ fkServidor = valores_id[0]
 mycursor2.execute("SELECT idBanco FROM banco WHERE nomeFantasia = 'bla'")
 result2 = mycursor2.fetchall()
 id_banco_vetor2 = [x[0] for x in result2]
-valores_id.extend(id_banco_vetor2)
+valores_id.extend(id_banco_vetor2)  
 fkBanco = valores_id[1]
 
 
@@ -138,7 +138,7 @@ for partition in partitions:
 
 print('\n')
 print(first_device_name)
-print(nomeCPU)
+print(nomeCPU)  
 print(nomeMemoria)
 print(fkServidor, fkBanco, fkEspec, fkPlano)
 

@@ -21,19 +21,19 @@ class Repositorio {
     }
     fun servidor():Int{
         val servidor = jdbcTemplate.queryForObject("""
-           SELECT idServidor FROM servidor WHERE apelido = 'teste'
+           SELECT idServidor FROM servidor WHERE apelido = 'Servidor1'
         """,Int::class.java)
         return servidor
     }
     fun banco():Int{
         val banco = jdbcTemplate.queryForObject("""
-            SELECT idBanco FROM banco WHERE nomeFantasia = 'bla'
+            SELECT idBanco FROM banco WHERE nomeFantasia = 'Banco A'
         """,Int::class.java)
         return banco
     }
     fun especificacoes():Int{
         val espec = jdbcTemplate.queryForObject("""
-            SELECT idEspecificacoes FROM especificacoes WHERE dataValidade = '2024-01-01'
+            SELECT idEspecificacoes FROM especificacoes WHERE idEspecificacoes = 1
         """,Int::class.java)
         return espec
     }
@@ -43,19 +43,46 @@ class Repositorio {
         """,Int::class.java)
         return plano
     }
-    fun cadastrarComp(fkServidor:Int,fkBanco:Int,fkEspec:Int,fkPlano:Int){
-        jdbcTemplate.execute("""
-           insert into componentes values
-            (null,'Interfaces USB','Interfaces',$fkServidor,$fkBanco,$fkEspec,$fkPlano),
-            (null,'Conexoes USB','Conexoes',$fkServidor,$fkBanco,$fkEspec,$fkPlano)
-        """)
+
+    fun locacao():Int{
+        val locacao = jdbcTemplate.queryForObject("""
+           SELECT idLocacao FROM locacao WHERE idLocacao = 1 
+        """,Int::class.java)
+        return locacao
     }
 
-    fun cadastrarRegistro(InterfaceUSB:Dispositivo,ConexaoUSB:Dispositivo,fkServidor:Int,fkBanco:Int,fkEspec:Int,fkPlano:Int){
+    fun metrica():Int{
+        val metrica = jdbcTemplate.queryForObject("""
+           SELECT idMetrica FROM metrica WHERE idMetrica = 1 
+        """,Int::class.java)
+        return metrica
+    }
+
+    fun cadastrarComp(fkServidor:Int,fkBanco:Int,fkEspec:Int,fkPlano:Int,fkLocacao:Int,fkMetrica:Int){
+        jdbcTemplate.execute("""
+           insert into componentes values
+            (null,'Interfaces USB','Interfaces',$fkServidor,$fkBanco,$fkEspec,$fkPlano,$fkLocacao,$fkMetrica),
+            (null,'Conexoes USB','Conexoes',$fkServidor,$fkBanco,$fkEspec,$fkPlano,$fkLocacao,$fkMetrica)
+        """)
+    }
+     fun getIdInterface():Int{
+         val idInterface = jdbcTemplate.queryForObject("""
+             Select idComponentes from componentes where idComponentes = 3
+         """,Int::class.java)
+         return idInterface
+     }
+    fun getIdConexoes():Int{
+        val idConexoes = jdbcTemplate.queryForObject("""
+             Select idComponentes from componentes where idComponentes = 4 
+         """,Int::class.java)
+        return idConexoes
+    }
+
+    fun cadastrarRegistro(InterfaceUSB:Dispositivo,ConexaoUSB:Dispositivo,fkServidor:Int,fkBanco:Int,fkEspec:Int,fkPlano:Int,fkInterface:Int, fkConexoes:Int, fkLocacao:Int,fkMetrica: Int){
         jdbcTemplate.execute("""
            insert into registros values
-            (null,'${InterfaceUSB.dataTime}',${InterfaceUSB.dado},$fkServidor,$fkBanco,$fkEspec,$fkPlano,5),
-            (null,'${ConexaoUSB.dataTime}',${ConexaoUSB.dado}, $fkServidor,$fkBanco,$fkEspec,$fkPlano,6)
+            (null,'${InterfaceUSB.dataTime}',${InterfaceUSB.dado},$fkServidor,$fkBanco,$fkEspec,$fkPlano,3,$fkLocacao,$fkMetrica),
+            (null,'${ConexaoUSB.dataTime}',${ConexaoUSB.dado}, $fkServidor,$fkBanco,$fkEspec,$fkPlano,4,$fkLocacao,$fkMetrica)
         """)
     }
 
