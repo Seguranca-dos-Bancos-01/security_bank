@@ -83,7 +83,7 @@ def monitorar_recursos(intervalo):
 
             requests.post(webhook, data=json.dumps(alerta))
 
-        if uso_memoria >= 55 and uso_memoria < 65:
+        if uso_memoria >= 55 and uso_memoria < 65:  
            
             alerta = {"text": f"Emergência! Memória RAM com {uso_memoria}% de uso"}
           

@@ -1,0 +1,32 @@
+import psutil
+import time
+
+while True:
+    partitions = psutil.disk_partitions()
+
+    for partition in partitions:
+        print(f"Device: {partition.device}")  # dispositivo da partição
+        print(f"Mountpoint: {partition.mountpoint}")  # ponto de montagem
+        print(f"Fstype: {partition.fstype}")  # sistema de arquivo
+        print(f"Opts: {partition.opts}")  # indica as opções de montagem
+        print()
+
+
+        usage = psutil.disk_usage(partition.mountpoint)
+        print(f"Espaço total: {usage.total / (1024 ** 3):.2f} GB")
+        print(f"Espaço usado: {usage.used / (1024 ** 3):.2f} GB")
+        print(f"Espaço livre: {usage.free / (1024 ** 3):.2f} GB")
+        print(f"Percentual de uso: {usage.percent}%")
+        print()
+
+
+    disk_counters = psutil.disk_io_counters()
+    
+
+    print(f"Total de leituras: {disk_counters.read_bytes / (1024 ** 3):.2f} GB")
+    print(f"Total de gravações: { disk_counters.write_bytes / (1024 ** 3):.2f} GB")
+    print(f"Leituras da última captura: {disk_counters.read_count}")
+    print(f"Gravações da última captura: {disk_counters.write_count}")
+    print()
+
+    time.sleep(600)
