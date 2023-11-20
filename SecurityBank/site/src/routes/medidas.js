@@ -200,5 +200,13 @@ router.get("/tempo-realAlertasConsumo1/:selectedServer", function (req, res) {
     medidaController.buscarMedidasEmTempoRealAlertasConsumo1(req, res);
 })
 
+router.get("/ultimasAlertasConsumo2/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumo2(req, res);
+});
+
+router.get("/tempo-realAlertasConsumo2/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumo2(req, res);
+})
+
 
 module.exports = router;
