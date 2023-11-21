@@ -208,19 +208,21 @@
                     </div>
                     <div class="parte2">
                         
-                            <span>Potencia de rede de Download</span>
-                            <div class="graph">
-                                <canvas id="speedCanvas" width="600" height="310"
-                                    style="border: 1px solid #000;"></canvas>
+                            <div class="graph1">
+                                <span>Potencia de rede de Download</span>
+                                <div class="graph">
+                                    <canvas id="speedCanvas" width="600" height="310"
+                                        style="border: 1px solid #000;"></canvas>
+                                </div>
                             </div>
                         
-                  
+                  <div class="graph1">
                             <h2>Historico de Rede</h2>
                             <div class="graph">
                                 <canvas id="myChart"></canvas>
                             </div>
-                        
-                        
+                        </div>
+                        <div class="graph3">
                             <h2>Potencia de rede de Upload</h2>
                             <div class="graph">
                                 <div class="graph">
@@ -228,7 +230,7 @@
                                         style="border: 1px solid #000;"></canvas>
                                 </div>
                             </div>
-                        
+                        </div>
                     </div>
                 </div>
             </div>
@@ -366,7 +368,8 @@
 
                 console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
                 inserirRede(selectedServer); // Chamar a função inserir com o ID do servidor
-                window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+                window.location.href = "PaginaRedePedro.html"; // Redirecionar para a página desejada
+
             });
             button.classList.add('botoesServidoresDash');
             selectServidores.appendChild(button);

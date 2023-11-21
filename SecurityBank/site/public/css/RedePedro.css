@@ -635,7 +635,7 @@ canvas {
   margin-top: 10px;
   margin-left: 20px;
   box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
-  width: 300px;
+  width: 23.5vh;
 }
 
 .ultimosAlertas span {
@@ -649,7 +649,7 @@ canvas {
 
 .cardAlertas {
   background-color: #4E1C99;
-  width: 300px;
+  width: 100%;
   border-radius: 10px;
   display: flex;
   flex-direction: column;
@@ -690,6 +690,13 @@ canvas {
   display: flex;
 
 }
+
+.graph1{
+width: 100vh;
+
+}
+
+
 
 .parte2 h2 {
   font-size: 16px;
