@@ -1,25 +1,14 @@
 var database = require("../database/config");
 
 
-function kpiINdividual() {
+function kpiIndividual(servidorSelecionado) {
    
     var instrucao = `
-    
-`;
-
-    console.log("Executando a instrução SQL: \n" + instrucao);
+    select qtdNucleos, qtdThreads, especificacaoCpu from qtdNucleosThreads where fkServidor = ${servidorSelecionado};`
     return database.executar(instrucao);
 }
 
 
-
-
-
-
-
-
-
-
 module.exports = {
-    kpiINdividual
+    kpiIndividual
 }

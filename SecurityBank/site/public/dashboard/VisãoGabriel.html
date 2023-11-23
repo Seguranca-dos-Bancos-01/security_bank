@@ -18,219 +18,214 @@
     <script src="alertasDash.js"></script>
 </head>
 
-<body>
+<body onload="UltimasMedidasIndividual()">
 
-    <body>
 
-        <div class="janela">
-            <div class="header-left">
-                <div class="logo">
-                    <img src="../assets/logoBranca.png" alt="">
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div id="nivelACesso" class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="opcoesServidores">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
                 </div>
+            </div>
 
-                <div class="opcao">
-                    <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
-                </div>
-
-                <div id="nivelACesso" class="TipoAcesso">
-                    <span>Administrador</span>
-                </div>
-
-                <div class="opcoes">
-                    <a href="dashboard.html">
-                        <img src="../assets/home.png" alt="">
-                        <span>Home</span>
-                    </a>
-                </div>
-                <div class="opcoesServidores">
-                    <a href="servidoresDash.html">
-                        <img src="../assets/servidor.png" alt="">
-                        <span>Servidores</span>
-                    </a>
-                    <div id="opcoesServidores-content" class="opcoesServidores-content">
-
-
-                    </div>
-                </div>
-
-                <div class="opcoes">
-                    <a href="">
-                        <img src="../assets/servidor.png    " alt="">
-                        <span>Visões</span>
-                    </a>
-                    <!-- <div class="opcoesServidores-content">
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+                <!-- <div class="opcoesServidores-content">
                         <a href="alertas.html">Visão 1</a>
                         <a href="alertas.html">Visão 2</a>
                     </div> -->
-                </div>
-                <div class="opcoes">
-                    <a href="">
-                        <img src="../assets/imgs/servdores.png" alt="">
-                        <span>Visão Bernardo</span>
-                    </a>
-                </div>
-                <div class="opcoes">
-                    <a href="">
-                        <img src="../assets/imgs/servdores.png" alt="">
-                        <span><a href="VisãoGabriel.html">Visão Gabriel</a></span>
-                    </a>
-                </div>
-                <div class="opcoes">
-                    <a href="">
-                        <img src="../assets/imgs/servdores.png" alt="">
-                        <span>Visão Gustavo</span>
-                    </a>
-                </div>
-                <!-- <div class="opcoes">
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Bernardo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span><a href="VisãoGabriel.html">Visão Gabriel</a></span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
                     <a href="">
                         <img src="../assets/imgs/servdores.png" alt="">
                         <span>Visão Marcela</span>
                     </a>
                 </div> -->
-                <div class="opcoes">
-                    <a href="">
-                        <img src="../assets/imgs/servdores.png" alt="">
-                        <span>Visão Natália</span>
-                    </a>
-                </div>
-                <div class="opcoes">
-                    <a href="">
-                        <img src="../assets/imgs/servdores.png" alt="">
-                        <span>Visão Pedro</span>
-                    </a>
-                </div>
-                <div class="opcoes">
-                    <a href="alertas.html">
-                        <img src="../assets/alerta.png" alt="">
-                        <span>Alertas</span>
-                    </a>
-                </div>
-                <div class="opcoes">
-                    <a href="perfil.html">
-                        <img src="../assets/perfil.png" alt="">
-                        <span>Perfil</span>
-                    </a>
-                </div>
-                <div id="gerenciarAcesso  localizacao" class="opcoes">
-                    <a href="GerenciarAcesso.html">
-                        <img src="../assets/controle.png" alt="">
-                        <span>Controle de acesso</span>
-                    </a>
-                </div>
-                <div class="opcoes">
-                    <a href="suporteDash.html">
-                        <img src="../assets/ajuda.png" alt="">
-                        <span>Ajuda</span>
-                    </a>
-                </div>
-                <div class="opcoes">
-                    <a href="metricasDash.html">
-                        <img src="../assets/metricas.png" alt="">
-                        <span>Métricas</span>
-                    </a>
-                </div>
-                <!-- <div class="opcoes">
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div id="gerenciarAcesso  localizacao" class="opcoes">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
                     <a href="recFacial.html">
                         <img src="../assets/imgs/recFacial.png" alt="">
                         <span>Reconhecimento Facial</span>
                     </a>
                 </div> -->
-                <div class="linha">
-                    <span></span>
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessonStorage()">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="divUsoGeraleTipoProcessador">
+            <div class="usoProcessador">
+                <div class="texto_titulo_usoProcessador">
+                    <span>Uso Geral do Processador:</span>
                 </div>
-                <div class="opcoes">
-                    <a href="../index.html">
-                        <img src="../assets/logout.png" alt="">
-                        <span onclick="limparSessonStorage()">Logout</span>
-                    </a>
+                <div class="texto_info_usoProcessador_porcentagem">
+                    <span>70%</span>
                 </div>
             </div>
 
-            <div class="divUsoGeraleTipoProcessador">
-                <div class="usoProcessador">
-                    <div class="texto_titulo_usoProcessador">
-                        <span>Uso Geral do Processador:</span>
-                    </div>
-                    <div class="texto_info_usoProcessador_porcentagem">
-                        <span>70%</span>
-                    </div>
+            <div class="linha-vertical"></div>
+
+            <div class="tipoProcessador">
+                <div class="texto_titulo_tipoProcessador">
+                    <span>Tipo de Processador:</span>
                 </div>
-
-                <div class="linha-vertical"></div>
-
-                <div class="tipoProcessador">
-                    <div class="texto_titulo_tipoProcessador">
-                        <span>Tipo de Processador:</span>
-                    </div>
-                    <div class="texto_info_tipoProcessador">
-                        <span>Intel core i5</span>
-                    </div>
+                <div class="texto_info_tipoProcessador">
+                    <span>Intel core i5</span>
                 </div>
             </div>
+        </div>
 
-            <div class="div_bloco_kpis">
-                <div class="Kpi_núcleos">
-                    <div class="div_nucleos_titulo">
-                        <h3>Núcleos:</h3>
-                    </div>
-
-
-                    <div class="div_nucleos_informacao">
-                        <span>4</span>
-                    </div>
-
+        <div class="div_bloco_kpis">
+            <div class="Kpi_núcleos">
+                <div class="div_nucleos_titulo">
+                    <h3>Núcleos:</h3>
                 </div>
-                <div class="Kpi_threads">
 
-                    <div class="div_threads_titulo2">
-                        <h3>Threads:</h3>
-                    </div>
 
-                    <div class="div_theads_informacao">
-                        <span>8</span>
-                    </div>
-
+                <div class="div_nucleos_informacao">
+                    <span>4</span>
                 </div>
-            </div>
-
-            <div class="grafico">
 
             </div>
-    </body>
+            <div class="Kpi_threads">
+
+                <div class="div_threads_titulo2">
+                    <h3>Threads:</h3>
+                </div>
+
+                <div class="div_theads_informacao">
+                    <span>8</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="grafico">
+
+        </div>
+</body>
 
 </html>
 
 <script>
-    function UltimasMedidasIndividual() {
-        // var idMaquina = sessionStorage.ID_MAQUINA
-        fetch(`/gabriel/kpiINdividual`).then(function (resposta) {
+  function UltimasMedidasIndividual() {
+    var servidorSelecionado = sessionStorage.servidorSelecionado;
+    alert(servidorSelecionado);
+
+    fetch(`/gabriel/kpiINdividual/${servidorSelecionado}`, { cache: 'no-store' })
+        .then(function (resposta) {
             if (resposta.ok) {
-                console.log("ENTREII no atualizar feed")
+                console.log("ENTREII no atualizar feed");
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(resposta));
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
 
-                    for (let i = 0; i < resposta.length; i++) {
-
-                        var publicacao = resposta[i];
-
-                        if (publicacao.fkComponente == 1) {
-                            AtualCPU.innerHTML = `${publicacao.MaiorPorcentagem}%`
-                        }
-                        else if (publicacao.fkComponente == 2) {
-                            AtualRAM.innerHTML = `${publicacao.MaiorPorcentagem}%`
-                        } else if (publicacao.fkComponente == 3) {
-                            AtualDisco.innerHTML = `${publicacao.MaiorPorcentagem}%`
-                        }
-
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+                        // Faça algo com 'publicacao'
                     }
                 });
             } else {
-                throw ('Houve um erro na API!');
+                throw new Error('Houve um erro na API!');
             }
-        }).catch(function (resposta) {
-            console.error(resposta);
+        })
+        .catch(function (erro) {
+            console.error(erro);
             // finalizarAguardar();
         });
-    }
+}
+
 </script>

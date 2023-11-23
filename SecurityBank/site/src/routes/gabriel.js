@@ -3,8 +3,8 @@ var router = express.Router();
 
 var gabrielController = require("../controllers/gabrielController");
 
-router.get("/kpiINdividual", function (req, res) {
-    gabrielController.kpiINdividual(req, res);
+router.get("/kpiINdividual/:servidorSelecionado", function (req, res) {
+    gabrielController.kpiIndividual(req, res);
 })
 
 

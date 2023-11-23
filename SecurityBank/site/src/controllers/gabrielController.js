@@ -1,7 +1,9 @@
 var gabrielmodel = require("../models/gabrielModel");
 
-function kpiINdividual(req, res) {
-    gabrielmodel.kpiINdividual().then(function (resultado) {
+function kpiIndividual(req, res) {
+    var  servidorSelecionado = req.params.servidorSelecionado;
+
+    gabrielmodel.kpiINdividual(servidorSelecionado).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -15,5 +17,5 @@ function kpiINdividual(req, res) {
 }
 
 module.exports = {
-    kpiINdividual
+    kpiIndividual
 };
