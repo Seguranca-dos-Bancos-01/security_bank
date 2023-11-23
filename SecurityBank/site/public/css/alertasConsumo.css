@@ -142,6 +142,14 @@ align-items: center;
     width: 75%;
 }
 
+.divKPIComp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+        justify-content: space-between;
+        height: 400px;
+}
+
 .graficoConsumoComponentes {
     background-color: #fff;
     width: 48%;
@@ -222,4 +230,17 @@ padding: 5px 20px;
     width: 373px !important;
     height: 318px !important;
     /* height: 350px !important; */
+}
+
+.conteudoKIPComp {
+    background-color: #fff;
+    width: 100%;
+    height: 190px;
+    filter: drop-shadow(0px 10px 10px rgba(226, 236, 249, 0.50));
+    border-radius: 20px;
+}
+
+.conteudoKIPComp {
+    text-align: center;
+
 }

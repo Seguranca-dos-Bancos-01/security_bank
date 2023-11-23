@@ -267,6 +267,23 @@
 
                         </div>
                     </div>
+
+                    <div id="DivGraficoComp" class="graficosServidorGeral">
+                        <div class="graficoConsumoComponentes">
+                            <span class="tituloGraficos">Histórico de Consumo da CPU</span>
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                        <div class="divKPIComp">
+                            <div class="conteudoKIPComp">
+                                <span class="tituloGraficos">Estado Frequente do Componente</span>
+                                <span class="informacaoKPI" id="estadoFrequenteComp">53</span>
+                            </div>
+                            <div class="conteudoKIPComp">
+                                <span class="tituloGraficos">Análise Atual Componente</span>
+                                <span class="informacaoKPI" id="compMetrica">53</span>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
 
@@ -305,6 +322,7 @@
     document.getElementById("modalDialogEmergencia").style.display = 'none';
     document.getElementById("modalDialogUrgencia").style.display = 'none';
     document.getElementById("divConteudoPagina").style.display = 'none';
+    document.getElementById("DivGraficoComp").style.display = 'none';
 
     var selectedBanco = sessionStorage.FKBANCO;
     console.log(selectedBanco)
@@ -387,7 +405,7 @@
                 inserir(selectedServer); // Chamar a função inserir com o ID do servidor
             });
             // button.classList.add('botoesServidoresDash');
-            selectServidores.appendChild(selectedServer);
+            // selectServidores.appendChild(selectedServer);
             var OptionServidor = document.createElement("option");
 
         });
@@ -412,7 +430,6 @@
         document.getElementById("modalDialogUrgencia").style.display = 'flex';
     }
 
-    var componenteSelecionado = document.querySelector("#selectComponente");
     // function buscarComponente() {
     //     var elementoSelect = document.querySelector("#selectComponente")
     //     var opcaoSelecionada = elementoSelect.options[elementoSelect.selectedIndex];
@@ -426,7 +443,7 @@
     //         document.getElementById("DivGraficoGeral").style.display = 'none';
 
     //     } else if (componenteSelecionado == "disco") {
-            
+
     //     } else {
     //         document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
     //         document.getElementById("divConteudoPagina").style.display = 'block';
@@ -442,25 +459,34 @@
     // }
 
     // buscarComponente()
+    var componenteSelecionado = document.querySelector("#selectComponente");
+
     var valorOptions = 0;
 
     componenteSelecionado.addEventListener("change", () => {
-        var elementoSelect = document.querySelector("#selectComponente")
-        var indice = elementoSelect.selectedIndex
-        valorOptions = elementoSelect.options[indice].value
-        console.log(valorOptions)
-
+        var elementoSelect = document.querySelector("#selectComponente");
+        var indice = elementoSelect.selectedIndex;
+        valorOptions = elementoSelect.options[indice].value;
+        console.log(valorOptions);
+        
         if (valorOptions == "cpu") {
             document.getElementById("DivGraficoGeral").style.display = 'none';
+            document.getElementById("DivGraficoComp").style.display = 'flex';
+
 
         } else if (valorOptions == "ram") {
+            document.getElementById("DivGraficoComp").style.display = 'flex';
             document.getElementById("DivGraficoGeral").style.display = 'none';
 
         } else if (valorOptions == "disco") {
+            document.getElementById("DivGraficoComp").style.display = 'flex';
+            document.getElementById("DivGraficoGeral").style.display = 'none';
+
 
         } else if (valorOptions == "todos") {
             document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
             document.getElementById("divConteudoPagina").style.display = 'block';
+            document.getElementById("DivGraficoComp").style.display = 'none';
             document.getElementById("DivGraficoGeral").style.display = 'flex';
 
             totalAlertas(selectedServer);
