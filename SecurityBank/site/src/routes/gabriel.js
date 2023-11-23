@@ -3,8 +3,8 @@ var router = express.Router();
 
 var gabrielController = require("../controllers/gabrielController");
 
-router.post("/cadastrarAlertaCPUAtencao", function (req, res) {
-    gabrielControllerController.cadastrarAlertaCPUAtencao(req, res);
+router.get("/kpiINdividual", function (req, res) {
+    gabrielController.kpiINdividual(req, res);
 })
 
 

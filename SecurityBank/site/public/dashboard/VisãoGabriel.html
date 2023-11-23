@@ -72,7 +72,7 @@
                 <div class="opcoes">
                     <a href="">
                         <img src="../assets/imgs/servdores.png" alt="">
-                        <span>Visão Gabriel</span>
+                        <span><a href="VisãoGabriel.html">Visão Gabriel</a></span>
                     </a>
                 </div>
                 <div class="opcoes">
@@ -201,5 +201,36 @@
 </html>
 
 <script>
-    
+    function UltimasMedidasIndividual() {
+        // var idMaquina = sessionStorage.ID_MAQUINA
+        fetch(`/gabriel/kpiINdividual`).then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed")
+
+                resposta.json().then(function (resposta) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(resposta));
+
+                    for (let i = 0; i < resposta.length; i++) {
+
+                        var publicacao = resposta[i];
+
+                        if (publicacao.fkComponente == 1) {
+                            AtualCPU.innerHTML = `${publicacao.MaiorPorcentagem}%`
+                        }
+                        else if (publicacao.fkComponente == 2) {
+                            AtualRAM.innerHTML = `${publicacao.MaiorPorcentagem}%`
+                        } else if (publicacao.fkComponente == 3) {
+                            AtualDisco.innerHTML = `${publicacao.MaiorPorcentagem}%`
+                        }
+
+                    }
+                });
+            } else {
+                throw ('Houve um erro na API!');
+            }
+        }).catch(function (resposta) {
+            console.error(resposta);
+            // finalizarAguardar();
+        });
+    }
 </script>
