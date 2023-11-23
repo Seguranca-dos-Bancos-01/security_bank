@@ -34,7 +34,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body onload="BuscarSetores()">
+<body>
 
     <div class="janela">
         <div class="header-left">
@@ -205,7 +205,7 @@
             <div id="divConteudoPagina" class="divConteudoPagina">
                 <div class="linhaConteudo">
                     <span id="nomeServidorSelecionado">Servidor XX1</span>
-                    <select name="" id="selectComponente" class="selectServidor">
+                    <select name="selectComponente" id="selectComponente" class="selectServidor">
                         <option value="todos">Todos Componentes</option>
                         <option value="cpu">CPU</option>
                         <option value="ram">Memória RAM</option>
@@ -306,45 +306,101 @@
     document.getElementById("modalDialogUrgencia").style.display = 'none';
     document.getElementById("divConteudoPagina").style.display = 'none';
 
-    function BuscarSetores() {
-        fetch("/usuarios/listarServidores").then(function (resposta) {
+    var selectedBanco = sessionStorage.FKBANCO;
+    console.log(selectedBanco)
 
-            if (resposta.ok) {
-                // if (resposta.status == 204) {
-                //     var feed = document.getElementById("feed_container");
-                //     var mensagem = document.createElement("span");
-                //     mensagem.innerHTML = "Nenhum resultado encontrado."
-                //     feed.appendChild(mensagem);
-                //     throw "Nenhum resultado encontrado!!";
-                // }
-                console.log("ENTREII")
+    // var server = JSON.parse(sessionStorage.servidor);
+    //         console.log("Conteúdo da sessionStorage.servidor: ", server);
+    //     function BuscarSetores(selectedBanco) {
+    //         fetch(`/usuarios/listarServidores/:${selectedBanco}`).then(function (resposta) {
 
-                resposta.json().then(function (resposta) {
-                    console.log("Dados recebidos: ", JSON.stringify(resposta));
+    //             if (resposta.ok) {
+    //                 // if (resposta.status == 204) {
+    //                 //     var feed = document.getElementById("feed_container");
+    //                 //     var mensagem = document.createElement("span");
+    //                 //     mensagem.innerHTML = "Nenhum resultado encontrado."
+    //                 //     feed.appendChild(mensagem);
+    //                 //     throw "Nenhum resultado encontrado!!";
+    //                 // }
+    //                 console.log("ENTREII")
 
-                    const inputServidor = document.getElementById('selectServidor');
+    //                 resposta.json().then(function (resposta) {
+    //                     console.log("Dados recebidos: ", JSON.stringify(resposta));
 
-                    for (let i = 0; i < resposta.length; i++) {
+    //                     const inputServidor = document.getElementById('selectServidor');
 
-                        var servidorResposta = resposta[i];
+    //                     for (let i = 0; i < resposta.length; i++) {
 
-                        var OptionServidor = document.createElement("option");
-                        OptionServidor.setAttribute("Value", servidorResposta.idServidor)
-                        OptionServidor.innerHTML = `Servidor ${servidorResposta.idServidor}`;
-                        inputServidor.appendChild(OptionServidor);
-                        // servidorResposta.apelido
+    //                         var servidorResposta = resposta[i];
 
-                    }
-                    // finalizarAguardar();
-                });
-            } else {
-                throw ('Houve um erro na API!');
-            }
-        }).catch(function (resposta) {
-            console.error(resposta);
-            // finalizarAguardar();
+    //                         var OptionServidor = document.createElement("option");
+    //                         OptionServidor.setAttribute("Value", servidorResposta.idServidor)
+    //                         OptionServidor.innerHTML = `Servidor ${servidorResposta.idServidor}`;
+    //                         inputServidor.appendChild(OptionServidor);
+    //                         // servidorResposta.apelido
+
+    //                     }
+    //                     // finalizarAguardar();
+    //                 });
+    //             } else {
+    //                 throw ('Houve um erro na API!');
+    //             }
+    //         }).catch(function (resposta) {
+    //             console.error(resposta);
+    //             // finalizarAguardar();
+    //         });
+    //     }
+
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+
+    function exibirServidoresUsuario() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("selectServidor");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        // var inputServidor = document.getElementById('selectServidor');
+        server.forEach(element => {
+
+            // var OptionServidor = document.createElement('option');
+            selectServidores.innerHTML =
+                `<option>Servidor ${element.idServidor}</option>
+            `;
+            selectServidores.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+                // selectedServer = this.value;
+                document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
+                document.getElementById("divConteudoPagina").style.display = 'block';
+
+                // MostrarProcessos(selectedServer);
+                totalAlertas(selectedServer);
+                totalAlertasAtencao(selectedServer);
+                totalAlertasEmergencia(selectedServer);
+                totalAlertasUrgencia(selectedServer);
+                obterDadosGraficoAlertasConsumo1(selectedServer);
+                obterDadosGraficoAlertasConsumo2(selectedServer);
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+            });
+            // button.classList.add('botoesServidoresDash');
+            selectServidores.appendChild(selectedServer);
+            var OptionServidor = document.createElement("option");
+
         });
+
+    };
+
+    function inserir(id) {
+        vetor.push(id);
+        console.log(vetor);
+        sessionStorage.servidorSelecionado = selectedServer
     }
+
+    exibirServidoresUsuario()
 
     function modelAtencao() {
         document.getElementById("modalDialogAtencao").style.display = 'flex';
@@ -356,36 +412,85 @@
         document.getElementById("modalDialogUrgencia").style.display = 'flex';
     }
 
-    var componenteSelecionado = document.getElementById("selectComponente").value;
+    var componenteSelecionado = document.querySelector("#selectComponente");
+    // function buscarComponente() {
+    //     var elementoSelect = document.querySelector("#selectComponente")
+    //     var opcaoSelecionada = elementoSelect.options[elementoSelect.selectedIndex];
+    //     componenteSelecionado = opcaoSelecionada.value;
+    //     // componenteSelecionado = document.getElementById("selectComponente").value;
 
-    if (componenteSelecionado == "cpu") {
-        document.getElementById("DivGraficoGeral").style.display = 'none';
+    //     if (componenteSelecionado == "cpu") {
+    //         document.getElementById("DivGraficoGeral").style.display = 'none';
 
-    } else if (componenteSelecionado == "ram") {
-        document.getElementById("DivGraficoGeral").style.display = 'none';
+    //     } else if (componenteSelecionado == "ram") {
+    //         document.getElementById("DivGraficoGeral").style.display = 'none';
 
-    } else if (componenteSelecionado == "disco") {
+    //     } else if (componenteSelecionado == "disco") {
+            
+    //     } else {
+    //         document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
+    //         document.getElementById("divConteudoPagina").style.display = 'block';
+    //         document.getElementById("DivGraficoGeral").style.display = 'flex';
 
-    }
+    //         totalAlertas(selectedServer);
+    //         totalAlertasAtencao(selectedServer);
+    //         totalAlertasEmergencia(selectedServer);
+    //         totalAlertasUrgencia(selectedServer);
+    //         obterDadosGraficoAlertasConsumo1(selectedServer);
+    //         obterDadosGraficoAlertasConsumo2(selectedServer);
+    //     }
+    // }
 
-    var selectedServer;
+    // buscarComponente()
+    var valorOptions = 0;
 
-    document.getElementById("selectServidor").addEventListener("click", function () {
-        selectedServer = this.value;
-        document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
-        document.getElementById("divConteudoPagina").style.display = 'block';
+    componenteSelecionado.addEventListener("change", () => {
+        var elementoSelect = document.querySelector("#selectComponente")
+        var indice = elementoSelect.selectedIndex
+        valorOptions = elementoSelect.options[indice].value
+        console.log(valorOptions)
 
-        // MostrarProcessos(selectedServer);
-        totalAlertas(selectedServer);
-        totalAlertasAtencao(selectedServer);
-        totalAlertasEmergencia(selectedServer);
-        totalAlertasUrgencia(selectedServer);
-        obterDadosGraficoAlertasConsumo1(selectedServer);
-        obterDadosGraficoAlertasConsumo2(selectedServer);
+        if (valorOptions == "cpu") {
+            document.getElementById("DivGraficoGeral").style.display = 'none';
+
+        } else if (valorOptions == "ram") {
+            document.getElementById("DivGraficoGeral").style.display = 'none';
+
+        } else if (valorOptions == "disco") {
+
+        } else if (valorOptions == "todos") {
+            document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
+            document.getElementById("divConteudoPagina").style.display = 'block';
+            document.getElementById("DivGraficoGeral").style.display = 'flex';
+
+            totalAlertas(selectedServer);
+            totalAlertasAtencao(selectedServer);
+            totalAlertasEmergencia(selectedServer);
+            totalAlertasUrgencia(selectedServer);
+            obterDadosGraficoAlertasConsumo1(selectedServer);
+            obterDadosGraficoAlertasConsumo2(selectedServer);
+        }
+    })
 
 
-    });
-    console.log(selectedServer)
+    // var selectedServer;
+
+    // document.getElementById("selectServidor").addEventListener("click", function () {
+    //     selectedServer = this.value;
+    //     document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
+    //     document.getElementById("divConteudoPagina").style.display = 'block';
+
+    //     // MostrarProcessos(selectedServer);
+    //     totalAlertas(selectedServer);
+    //     totalAlertasAtencao(selectedServer);
+    //     totalAlertasEmergencia(selectedServer);
+    //     totalAlertasUrgencia(selectedServer);
+    //     obterDadosGraficoAlertasConsumo1(selectedServer);
+    //     obterDadosGraficoAlertasConsumo2(selectedServer);
+
+
+    // });
+    // console.log(selectedServer)
 
     function totalAlertas(selectedServer) {
         if (sessionStorage.ID_USUARIO) {

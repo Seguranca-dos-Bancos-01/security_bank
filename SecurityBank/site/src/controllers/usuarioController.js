@@ -345,7 +345,9 @@ function excluirConta(req, res) {
 }
 
 function listarServidores(req, res) {
-    usuarioModel.listarServidores().then(function (resultado) {
+    var selectBanco = req.params.selectedBanco;
+
+    usuarioModel.listarServidores(selectBanco).then(function (resultado) {
       if (resultado.length > 0) {
         res.status(200).json(resultado);
       } else {

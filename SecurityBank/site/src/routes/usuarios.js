@@ -40,7 +40,7 @@ router.post("/AlterarValidade", function (req, res) {
     usuarioController.UpdateValidadeNova(req, res);
 });
 
-router.get("/listarServidores", function (req, res) {
+router.get("/listarServidores/:selectedBanco", function (req, res) {
     usuarioController.listarServidores(req, res);
 });
 

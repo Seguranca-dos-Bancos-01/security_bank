@@ -146,10 +146,10 @@ WHERE email = '${Email}' AND fkEscalonamento = ${NovoNivel};
         return database.executar(instrucao);
     }
 
-    function listarServidores() {
+    function listarServidores(selectBanco) {
         console.log("ACESSEI O AVISO  MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function listar()");
         var instrucao = `
-        select idServidor, apelido from servidor;
+        select idServidor, apelido from servidor where fkBanco = ${selectBanco};
         `;
         console.log("Executando a instrução SQL: \n" + instrucao);
         return database.executar(instrucao);
