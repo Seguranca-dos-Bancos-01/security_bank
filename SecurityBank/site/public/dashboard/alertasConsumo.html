@@ -259,11 +259,11 @@
                     <div id="DivGraficoGeral" class="graficosServidorGeral">
                         <div class="graficoConsumoComponentes">
                             <span class="tituloGraficos">Consumo Médio por Componente</span>
-                            <canvas id="myChart2"></canvas>
+                            <canvas id="myChart2" style="width: 100px; height: 200px;"></canvas>
                         </div>
                         <div class="graficoAlertasComponentes">
                             <span class="tituloGraficos">Alertas por Componente</span>
-                            <canvas id="myChart"></canvas>
+                            <canvas id="myChart" style="width: 100px; height: 200px;"></canvas>
 
                         </div>
                     </div>
@@ -468,7 +468,7 @@
         var indice = elementoSelect.selectedIndex;
         valorOptions = elementoSelect.options[indice].value;
         console.log(valorOptions);
-        
+
         if (valorOptions == "cpu") {
             document.getElementById("DivGraficoGeral").style.display = 'none';
             document.getElementById("DivGraficoComp").style.display = 'flex';

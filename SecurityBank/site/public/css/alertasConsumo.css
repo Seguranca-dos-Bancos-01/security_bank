@@ -68,7 +68,7 @@
 .KPIAlerta {
     box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.132);
     border-radius: 10px;
-    width: 250px;
+    width: 220px;
     height: 80px;
     display: flex;
     
@@ -154,7 +154,7 @@ align-items: center;
     background-color: #fff;
     width: 48%;
     height: 400px;
-    filter: drop-shadow(0px 10px 10px rgba(226, 236, 249, 0.50));
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.132);
     border-radius: 20px;
 }
 
@@ -162,7 +162,7 @@ align-items: center;
     background-color: #fff;
     width: 48%;
     height: 400px;
-    filter: drop-shadow(0px 10px 10px rgba(226, 236, 249, 0.50));
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.132);
     border-radius: 20px;
     display: flex;
     flex-direction: column;
@@ -222,15 +222,20 @@ padding: 5px 20px;
     padding: 30px;
 }
 
-#myChart {
-    width: 350px !important;
-}
+/* #myChart {
+    width: 80% !important;
+    height: fit-content;
+} */
 
-#myChart2 {
+/* canvas {
+    width: 100px;
+} */
+
+/* #myChart2 {
     width: 373px !important;
     height: 318px !important;
-    /* height: 350px !important; */
-}
+   height: 350px !important; 
+} */
 
 .conteudoKIPComp {
     background-color: #fff;
