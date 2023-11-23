@@ -11,7 +11,7 @@
     <title>Temperatura e CPU</title>
 
     <link rel="stylesheet" href="../css/style.css">
-    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/temp-cpu.css">
     <link rel="stylesheet" href="../css/navbarDash.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/sessao.js"></script>
@@ -146,37 +146,43 @@
 
         <div class="dash">
             <div class="Nome">
-                <h2>Painel Geral</h2>
+                <h2>Temperatura e uso de CPU</h2>
             </div>
             <div class="kpi">
                 <div class="blocoKpi">
                     <div class="img">
-                        <img src="../assets/imgs/kpi.png" alt="">
+                        <div class="bolinhaIdeal"></div>
                     </div>
                     <div class="info">
-                        <span class="infotitulo">CPU</span>
-                        <span class="Situacao" id="cpuServidores">80%</span>
-                        <span class="textinhoAlerta"> ↓ Alerta</span>
+                        <span class="infotitulo">Temperatura Ideal</span>
+                        <span class="Situacao" id="cpuServidores"><45°C</span>
                     </div>
                 </div>
                 <div class="blocoKpi">
                     <div class="img">
-                        <img src="../assets/imgs/kpi.png" alt="">
+                        <div class="bolinhaAlerta"></div>
                     </div>
                     <div class="info">
-                        <span class="infotitulo">MEMÓRIA RAM</span>
-                        <span class="Situacao" id="ramServidores">90%</span>
-                        <span class="textinhoAlerta"> ↓ Alerta</span>
+                        <span class="infotitulo">Temperatura Alerta</span>
+                        <span class="Situacao" id="ramServidores">>48°C e <49°C </span>
                     </div>
                 </div>
                 <div class="blocoKpi">
                     <div class="img">
-                        <img src="../assets/imgs/kpi.png" alt="">
+                        <div class="bolinhaEmergencia"></div>
                     </div>
                     <div class="info">
-                        <span class="infotitulo">DISCO</span>
-                        <span class="Situacao" id="discoServidores">50%</span>
-                        <span class="textinhoEstavel"> ↑ Estável</span>
+                        <span class="infotitulo">Temperatura Emergência</span>
+                        <span class="Situacao" id="discoServidores">>49°C e <53°C </span>
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+                        <div class="bolinhaCritica"></div>
+                    </div>
+                    <div class="info">
+                        <span class="infotitulo">Temperatura Crítica</span>
+                        <span class="Situacao" id="discoServidores">>53°C</span>
                     </div>
                 </div>
             </div>
@@ -186,10 +192,6 @@
                         <span class="tituloUltimoAlerta">Último Alerta</span>
                         <span id="TituloAlerta">Servidor XX1 está superaquecendo</span>
                         <span id="dataAlerta">29/09/2023 as 13h45</span>
-                    </div>
-                    <div class="ServidorEmergencia">
-                        <span class="tituloServidorEmergencia">Servidor em Emergência</span>
-                        <span id="nomeServidorEmergencia">Nenhum servidor</span>
                     </div>
                 </div>
                 <div class="VisaoGeralServidores">
@@ -201,24 +203,9 @@
                     </div>
                 </div>
             </div>
-                <div class="barraInformativa">
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="numeroServidores"></span>
-                        <span>Servidores Monitorados</span>
-                    </div>
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="alertaHoras">10</span>
-                        <span>Alertas em 24 horas</span>
-                    </div>
-                    <div class="infoBarra">
-                        <span class="SituacaoBarra" id="InstaveisServidores"></span>
-                        <span>Servidores Instáveis</span>
-                    </div>
-                </div>
                 <div class="Historico">
                     <span class="tituloHistorico">Histórico dos Servidores</span>
                     <div class="graph">
-                        <canvas id="mychartTemp"></canvas>
                         <canvas id="myChartsegundo"></canvas>
                     </div>
                 </div>
