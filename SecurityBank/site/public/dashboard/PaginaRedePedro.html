@@ -507,7 +507,7 @@
         // var ramServidores = document.getElementById('ramServidores');
         // ramServidores.innerHTML = `${dado}%`;
 
-        var proximaAtualizacao = setTimeout(() => BuscarIP(), 20000)
+        var proximaAtualizacaoIP = setTimeout(() => BuscarIP(), 20000)
     }
 
 
@@ -571,7 +571,7 @@
     // var ramServidores = document.getElementById('ramServidores');
     // ramServidores.innerHTML = `${dado}%`;
 
-    var proximaAtualizacao = setTimeout(() => BuscarIP(), 20000);
+    var proximaAtualizacaoIP = setTimeout(() => BuscarIP(), 20000);
 }
 
 
@@ -663,57 +663,68 @@
             data: dados
         };
 
-        let myChart = new Chart(document.getElementById('myChartPing'), config);
+        var ChartPing = new Chart(document.getElementById('myChartPing'), config);
 
-        atualizarGrafico4(idUsuario, dados, myChart);
+        setTimeout(() => atualizarGrafico4(idUsuario, dados, ChartPing), 2000);
     }
-
     function atualizarGrafico4(idUsuario, dados, myChart) {
-        fetch(`/medidas/tempo-realPing/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+    fetch(`/medidas/tempo-realPing/${idUsuario}`, { cache: 'no-store' })
+        .then(function (response) {
             if (response.ok) {
-                response.json().then(function (novoRegistro) {
-                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-                    console.log('Dados atuais do gráfico:');
-                    console.log(dados);
-
-
-                    if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
-                        console.log('---------------------------------------------------------------');
-                        console.log('Como não há dados novos para captura, o gráfico não atualizará.');
-
-                        console.log('Horário do novo dado capturado:');
-                        console.log(novoRegistro[0].horario);
-                        console.log('Horário do último dado capturado:');
-                        console.log(dados.labels[dados.labels.length - 1]);
-                        console.log('---------------------------------------------------------------');
-                    } else {
-                        dados.labels.shift();
-                        dados.labels.push(novoRegistro[0].momento_grafico);
-
-                        dados.datasets[0].data.shift();
-                        dados.datasets[0].data.push(novoRegistro[0].proc);
-
-
-                        myChart.update();
-                    }
-
-                    proximaAtualizacao = setTimeout(() => {
-                        obterDadosGrafico4(idUsuario);
-                    }, 20000);
-                });
+                return response.json();
             } else {
-                console.error('Nenhum dado encontrado ou erro na API');
-                proximaAtualizacao = setTimeout(() => {
-                    obterDadosGrafico4(idUsuario);
-                }, 20000);
+                throw new Error('Erro na requisição da API');
             }
         })
-            .catch(function (error) {
-                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
-            });
-    }
+        .then(function (novoRegistro) {
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log('Dados atuais do gráfico:');
+            console.log(dados);
 
+            if (novoRegistro.length > 0) {
+                const ultimoDadoNoGrafico = dados.labels[dados.labels.length - 1];
+                const novoDado = novoRegistro[0];
 
+                if (novoDado.DataHora !== ultimoDadoNoGrafico) {
+                    dados.labels.push(novoDado.DataHora);
+                    dados.datasets[0].data.push(novoDado.Ping);
+
+                    if (dados.labels.length > MAX_LABELS) {
+                        dados.labels.shift();
+                        dados.datasets[0].data.shift();
+                    }
+
+                    myChart.data.labels = dados.labels.slice();
+                    myChart.data.datasets[0].data = dados.datasets[0].data.slice();
+
+                    myChart.update();
+                } else {
+                    console.log('---------------------------------------------------------------');
+                    console.log('Não há novos dados para capturar, o gráfico não será atualizado.');
+
+                    console.log('Horário do novo dado capturado:');
+                    console.log(novoDado.DataHora);
+                    console.log('Horário do último dado capturado:');
+                    console.log(ultimoDadoNoGrafico);
+                    console.log('---------------------------------------------------------------');
+                }
+            } else {
+                console.log('---------------------------------------------------------------');
+                console.log('Nenhum novo dado recebido.');
+                console.log('---------------------------------------------------------------');
+            }
+
+            proximaAtualizacao4 = setTimeout(() => {
+                atualizarGrafico4(idUsuario, dados, myChart);
+            }, 20000);
+        })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+            proximaAtualizacao4 = setTimeout(() => {
+                atualizarGrafico4(idUsuario, dados, myChart);
+            }, 20000);
+        });
+}
 
 
 
@@ -801,7 +812,7 @@ var elemento = document.createElement('div');
             console.log(dado);
             console.log(response[0]);
         }
-        var proximaAtualizacao = setTimeout(() => UltimosAlertasSelectedServer(), 20000);
+        var proximaAtualizacaoAlerta = setTimeout(() => UltimosAlertasSelectedServer(), 20000);
     }
 
 
@@ -936,7 +947,7 @@ var elemento = document.createElement('div');
         let myChart3 = new Chart(document.getElementById('myChart'), config);
 
 
-        proximaAtualizacao = setTimeout(() => {
+        proximaAtualizacao3 = setTimeout(() => {
             let idUsuario = sessionStorage.servidorSelecionado
             obterDadosGrafico3(idUsuario);
         }, 20000);
@@ -975,14 +986,14 @@ var elemento = document.createElement('div');
                     }
 
                     // Agendando a próxima atualização
-                    proximaAtualizacao = setTimeout(() => {
+                    proximaAtualizacao3 = setTimeout(() => {
                         obterDadosGrafico3(idUsuario);
                     }, 20000);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
                 // Agendando a próxima atualização em caso de erro
-                proximaAtualizacao = setTimeout(() => {
+                proximaAtualizacao3 = setTimeout(() => {
                     obterDadosGrafico3(idUsuario);
                 }, 20000);
             }
@@ -1039,7 +1050,7 @@ var elemento = document.createElement('div');
                     resposta.reverse();
 
                     plotarGrafico2(resposta);
-                    atualizarGrafico2(resposta);
+                    //atualizarGrafico2(resposta);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -1115,7 +1126,7 @@ var elemento = document.createElement('div');
         ctx.fillText(`${label}: ${speed} Mbps`, centerX - 100, centerY); // Exibe o texto com o rótulo e a velocidade no gráfico
 
         // Define um temporizador para atualizar os dados a cada 10 segundos
-        proximaAtualizacao = setTimeout(() => {
+        proximaAtualizacao2 = setTimeout(() => {
             let idUsuario = sessionStorage.servidorSelecionado;
             obterDadosGrafico2(idUsuario);
         }, 10000);
@@ -1192,7 +1203,7 @@ var elemento = document.createElement('div');
                     resposta.reverse();
 
                     plotarGrafico1(resposta);
-                    atualizarGrafico1(resposta);
+                    //atualizarGrafico1(resposta);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');

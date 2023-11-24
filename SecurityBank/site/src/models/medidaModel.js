@@ -1482,14 +1482,14 @@ function buscarUltimasMedidasPing(idUsuario, limite_linhas) {
         FROM Rede
         WHERE fkServidorRede = ${idUsuario}
         ORDER BY DataHora DESC
-        LIMIT 15;`;
+        LIMIT 6;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql2 = `SELECT Ping as Ping, DataHora as DataHora
         FROM Rede
         WHERE fkServidorRede = ${idUsuario}
         ORDER BY DataHora DESC
-        LIMIT 15;`;
+        LIMIT 6;`;
 
 
     } else {
@@ -1509,16 +1509,14 @@ function buscarMedidasEmTempoRealPing(idUsuario) {
         instrucaoSql2 = `SELECT Ping as Ping, DataHora as DataHora
         FROM Rede
         WHERE fkServidorRede = ${idUsuario}
-        ORDER BY DataHora DESC
-        LIMIT 15;`;
+        ORDER BY DataHora DESC;`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql2 = ` SELECT Ping as Ping, DataHora as DataHora
         FROM Rede
         WHERE fkServidorRede = ${idUsuario}
-        ORDER BY DataHora DESC
-        LIMIT 15;`;
+        ORDER BY DataHora DESC;`;
 
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
