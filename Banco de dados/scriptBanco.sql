@@ -1,6 +1,6 @@
 CREATE database SecurityBank;
 USE SecurityBank;
-drop database SecurityBank;
+ -- drop database SecurityBank;
 
 
 
@@ -90,6 +90,9 @@ FROM servidor
 WHERE fkBanco = 1
 GROUP BY fkBanco;
 
+
+
+
 SELECT IFNULL((SELECT idAlertas 
                FROM alerta 
                WHERE dataAlerta >= CURDATE() - INTERVAL 1 DAY
@@ -117,12 +120,17 @@ foreign key(fkEpescUBS) references especificacoes(idEspecificacoes),
 foreign key(fkPlanoUBS) references planoContratado (idPlano),
 foreign key(fkLocacaoUBS) references locacao(idLocacao)
 );
+ALTER TABLE Rede
+ADD COLUMN EnderecoIP VARCHAR(39);
+DESC REDE;
+
 
 create table Rede(
 idRede int auto_increment,
 StatusRede int,
 PotenciaUpload Double,
 PotenciaDownload Double,
+EnderecoIP varchar(39),
 fkServidorRede int,
 fkBancoRede int,
 fkEspecificacoesRede int,
@@ -136,6 +144,8 @@ foreign key(fkPlanoRede) references planoContratado (idPlano),
 foreign key(fkLocacaoRede) references locacao(idLocacao)
 );
 
+select EnderecoIP as redeIP from Rede where fkServidorRede =1 order by idRede desc limit 1;
+select StatusRede as connectOrN from rede where fkServidorRede = 1 order by idRede desc limit 1;
 
 CREATE TABLE metrica(
 idMetrica int primary key auto_increment,
@@ -176,6 +186,7 @@ CREATE TABLE registros (
     fkComponentesReg INT,
     fkLocacaoReg int,
     fkMetricaReg int,
+    fkParticoesReg int,
     PRIMARY KEY (idRegistros, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg),
     FOREIGN KEY (fkServidorReg) REFERENCES servidor (idServidor),
     FOREIGN KEY (fkBancoReg) REFERENCES banco (idBanco),
@@ -183,8 +194,8 @@ CREATE TABLE registros (
     FOREIGN KEY (fkPlanoReg) REFERENCES planoContratado(idPlano),
     FOREIGN KEY (fkLocacaoReg) references locacao(idLocacao),
     FOREIGN KEY (fkComponentesReg) REFERENCES componentes (idComponentes),
-    foreign key (fkMetricaReg) references metrica(idMetrica)
-    
+    foreign key (fkMetricaReg) references metrica(idMetrica),
+    foreign key (fkParticoes) references particoes(idParticoes)
 );
 
 create table alerta(
@@ -210,7 +221,25 @@ fkLocacao int,
 	foreign key (fkMetrica) references metrica(idMetrica)
 );
 
-
+CREATE TABLE particoes (
+idParticoes int primary key auto_increment,
+nomeParticao varchar (99),
+pontoMontagem varchar (5),
+fkComponente int,
+fkMetrica int,
+fkServidor int,
+fkBanco int,
+fkEspecificacoes int, 
+fkPlano int,
+fkLocacao int,
+foreign key (fkComponente) references componentes(idComponentes),
+foreign key (fkMetrica) references metrica(idMetrica),
+foreign key (fkServidor) references servidor(idServidor),
+foreign key (fkBanco) references banco(idBanco),
+foreign key (fkEspecificacoes) references especificacoes(idEspecificacoes),
+foreign key (fkPlano) references planoContratado(idPlano),
+foreign key (fkLocacao) references locacao(idLocacao)
+);
 
 
 
@@ -271,8 +300,8 @@ INSERT INTO usb (idUSB, nomeDispositivo, qtdPorta, qtdConectada, fkServidorUSB, 
 
 -- Inserting data into Rede
 INSERT INTO Rede (StatusRede, PotenciaUpload, PotenciaDownload, fkServidorRede, fkBancoRede, fkEspecificacoesRede, fkPlanoRede, fkLocacaoRede) VALUES
-(1, 100, 200, 1, 1, 1, 1, 1),
-(2, 50, 100, 2, 2, 2, 2, 2);
+(0, 100, 250, 1, 1, 1, 1, 1);
+
 
 -- Inserting data into metrica
 INSERT INTO metrica (estavel, atencao, emergencia, urgencia) VALUES
@@ -286,15 +315,15 @@ INSERT INTO componentes (nome, modelo, fkServidorComp, fkBancoComp, fkEspecifica
 ('Component C', 'Model Z', 1, 1, 1, 1, 1, 1);
 
 -- Inserting data into registros
-INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg, fkLocacaoReg, fkMetricaReg) VALUES
+INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg, fkLocacaoReg, fkMetricaReg, fkParticoesReg) VALUES
 ('2023-03-01 12:00:00', 150, 1, 1, 1, 1, 2, 1, 1),
 ('2023-03-02 15:30:00', 200, 2, 2, 2, 2, 2, 2, 2);
 
 -- Inserting data into alerta
 INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkEsoecificacao, fkPlano, fkLocacao) VALUES
-('2023-03-01', '12:05:00', 'Critical', 1, 1, 1, 1, 1, 1, 1, 1),
-('2023-03-02', '15:35:00', 'Warning', 2, 2, 2, 2, 2, 2, 2, 2);
-
+('2023-03-01', '12:05:00', 'Urgência', 1, 1, 1, 1, 1, 1, 1, 1),
+('2023-03-02', '15:35:00', 'Emergencia', 2, 2, 2, 2, 2, 2, 2, 2);
+-- truncate table alerta;
 
 
 INSERT INTO servidor (apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus, fkLocalizacaoMatriz, fkEspecificacoes, fkPlano, fkLocacao) VALUES
@@ -341,6 +370,9 @@ select situacao from alerta where fkServidor = 1 order by  idAlertas desc limit 
 select*from servidor;
 
 select situacao as UltimasSituSelected from alerta where fkServidor =5 order by  idAlertas desc limit 1;
+select*from rede;
+
+SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidorRede = 1  ORDER BY idRede DESC LIMIT 1;
 
 select*from servidor;
 select*from funcionarios;
@@ -363,7 +395,7 @@ SELECT
       ORDER BY
         alerta.idAlertas DESC
       LIMIT 3;
-
+select * from funcionarios;
 select nome as UltimasSituSelected from servidor join statusMaquina on fkStatus = idStatus where idServidor = 1;
 
 
@@ -376,5 +408,3 @@ INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalona
 ('cleide', 'cleide@example.com', '12345678901', '123-456-7890', 'password123', 1, 3);
 
 select idServidor AS qtd from servidor where fkBanco = 1 order by idServidor desc  limit 1;
-
-
