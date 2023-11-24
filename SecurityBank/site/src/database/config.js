@@ -6,7 +6,7 @@ var sqlServerConfig = {
     server: "34.206.192.7",
     database: "SecurityBank",
     user: "sa",
-    password: "UrubuDoGit12345",
+    password: "UrubuDoGit123",
     pool: {
         max: 10,
         min: 0,
