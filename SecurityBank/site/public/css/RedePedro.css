@@ -691,6 +691,11 @@ canvas {
 
 }
 
+#speedCanvasUpload{
+width: 70vh;
+height: 40vh;
+}
+
 .graph1{
 width: 100vh;
 
