@@ -151,7 +151,7 @@
                 <div class="texto_titulo_usoProcessador">
                     <span>Uso Geral do Processador:</span>
                 </div>
-                <div class="texto_info_usoProcessador_porcentagem">
+                <div id="textousoprocessador" class="texto_info_usoProcessador_porcentagem">
                     <span>70%</span>
                 </div>
             </div>
@@ -162,7 +162,7 @@
                 <div class="texto_titulo_tipoProcessador">
                     <span>Tipo de Processador:</span>
                 </div>
-                <div class="texto_info_tipoProcessador">
+                <div id = "texto_tipo_do_cpu" class="texto_info_tipoProcessador">
                     <span>Intel core i5</span>
                 </div>
             </div>
@@ -175,19 +175,21 @@
                 </div>
 
 
-                <div class="div_nucleos_informacao">
-                    <span>4</span>
+                <div id= "div_quant_nucleos" class="div_nucleos_informacao">
+                    <span>NUM</span>
                 </div>
 
             </div>
+
+        
             <div class="Kpi_threads">
 
                 <div class="div_threads_titulo2">
                     <h3>Threads:</h3>
                 </div>
 
-                <div class="div_theads_informacao">
-                    <span>8</span>
+                <div id= "div_quant_threads" class="div_theads_informacao">
+                    <span>NUM</span>
                 </div>
 
             </div>
@@ -205,7 +207,7 @@
     var servidorSelecionado = sessionStorage.servidorSelecionado;
     alert(servidorSelecionado);
 
-    fetch(`/gabriel/kpiINdividual/${servidorSelecionado}`, { cache: 'no-store' })
+    fetch(`/gabriel/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
         .then(function (resposta) {
             if (resposta.ok) {
                 console.log("ENTREII no atualizar feed");
@@ -215,7 +217,36 @@
 
                     for (let i = 0; i < respostaJson.length; i++) {
                         var publicacao = respostaJson[i];
-                        // Faça algo com 'publicacao'
+
+                        div_quant_threads.innerHTML = `${publicacao.qtdThreads}`
+                        div_quant_nucleos.innerHTML = `${publicacao.qtdNucleos}`
+                        texto_tipo_do_cpu.innerHTML = `${publicacao.especificacaoCpu}`
+                        
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+
+        fetch(`/gabriel/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        textousoprocessador.innerHTML = `${publicacao.dadosCaptados}%`
+                        
+                        
                     }
                 });
             } else {

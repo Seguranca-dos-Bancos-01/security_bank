@@ -3,7 +3,23 @@ var gabrielmodel = require("../models/gabrielModel");
 function kpiIndividual(req, res) {
     var  servidorSelecionado = req.params.servidorSelecionado;
 
-    gabrielmodel.kpiINdividual(servidorSelecionado).then(function (resultado) {
+    gabrielmodel.kpiIndividual(servidorSelecionado).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!")
+        }
+    }).catch(function (erro) {
+        console.log(erro);
+        console.log("Houve um erro ao buscar os avisos: ", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function PorcentagemTotalProcessador(req, res) {
+    var  servidorSelecionado = req.params.servidorSelecionado;
+
+    gabrielmodel.PorcentagemTotalProcessador(servidorSelecionado).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -17,5 +33,6 @@ function kpiIndividual(req, res) {
 }
 
 module.exports = {
-    kpiIndividual
+    kpiIndividual,
+    PorcentagemTotalProcessador
 };

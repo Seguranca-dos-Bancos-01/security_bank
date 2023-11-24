@@ -529,6 +529,25 @@ input {
     opacity: 0.8;
 }
 
+#div_quant_threads {
+    font-size: 4vh;
+    color: #fff;
+}
+
+#div_quant_nucleos{
+    font-size: 4vh;
+    color: #fff;
+}
+
+#textousoprocessador {
+    color: #fff;
+    font-size: 4vh;
+}
+
+#texto_tipo_do_cpu{
+    color: #fff;
+}
+
 .grafico:hover{
     transform: scale(1.1);
 }

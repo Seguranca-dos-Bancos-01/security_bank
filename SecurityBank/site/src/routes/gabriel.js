@@ -3,8 +3,12 @@ var router = express.Router();
 
 var gabrielController = require("../controllers/gabrielController");
 
-router.get("/kpiINdividual/:servidorSelecionado", function (req, res) {
+router.get("/kpiIndividual/:servidorSelecionado", function (req, res) {
     gabrielController.kpiIndividual(req, res);
+})
+
+router.get("/PorcentagemTotalProcessador/:servidorSelecionado", function (req, res) {
+    gabrielController.PorcentagemTotalProcessador(req, res);
 })
 
 
