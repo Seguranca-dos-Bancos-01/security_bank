@@ -50,6 +50,22 @@ router.post("/cadastrarAlertaDISCOUrgencia", function (req, res) {
 
 
 
+router.post("/cadastrarAlertaPRTAtencao", function (req, res) {
+    medidaController.cadastrarAlertaPRTAtencao(req, res);
+})
+
+
+router.post("/cadastrarAlertaPRTEmergencia", function (req, res) {
+    medidaController.cadastrarAlertaPRTEmergencia(req, res);
+})
+
+
+router.post("/cadastrarAlertaPRTUrgencia", function (req, res) {
+    medidaController.cadastrarAlertaPRTUrgencia(req, res);
+})
+
+
+
 router.get("/tempo-real/:idAlerta", function (req, res) {
     medidaController.buscarMedidasEmTempoRealAlerta(req, res);
 })
@@ -92,6 +108,10 @@ router.get("/ServerEmergencia/:idUsuario", function (req, res) {
 });
 router.get("/SelectContas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasSelectContas(req, res);
+});
+
+router.get("/ultimasPercentPRT/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasPRT(req, res);
 });
 
 router.get("/HistoricoAlertas/:idUsuario", function (req, res) {
