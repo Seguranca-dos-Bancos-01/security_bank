@@ -678,10 +678,10 @@ function buscarUltimasMedidasSelectContas(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT email AS mail, 
-        cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamentoFuncionarios on fkEscalonamento = idEscalonamento WHERE fkBanco = ${idUsuario};`;
+        cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamento_funcionario on fkEscalonamento = idEscalonamento WHERE fkBanco = ${idUsuario};`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT email AS mail, 
-        cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamentoFuncionarios on fkEscalonamento = idEscalonamento WHERE fkBanco = ${idUsuario};`;
+        cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamento_funcionario on fkEscalonamento = idEscalonamento WHERE fkBanco = ${idUsuario};`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return null; // Retornando nulo se nenhuma condição for satisfeita
