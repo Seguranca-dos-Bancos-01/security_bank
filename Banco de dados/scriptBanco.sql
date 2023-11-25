@@ -44,11 +44,13 @@ atencao double,
 emergente double,
 urgente double
 );
-
+select*from registros;
 INSERT INTO metrica (estavel, atencao, emergente, urgente) VALUES
 (90, 80, 70, 60),
 (95, 85, 75, 65);
 
+INSERT INTO metrica (estavel, atencao, emergente, urgente) VALUES
+(80, 70, 60, 50);
 
 create table banco(
 idBanco int primary key auto_increment,
@@ -138,7 +140,7 @@ INSERT INTO locacao (dataCompraLocacao, dataValidade,servidor_fkLocacao,servidor
 ('2023-02-15', '2024-02-15',1,1,1,1,1);
 
 
-CREATE TABLE componente (
+CREATE TABLE componentes (
 idComponentes int auto_increment,
 nome varchar(90),
 modelo varchar(45),
@@ -161,33 +163,46 @@ INSERT INTO componente (nome, modelo,fkMetrica, servidor_idServidor, servidor_fk
 ('Component C', 'disco', 1, 1, 1, 1, 1); -- padronização do campo "modelo" : disco
 -- pode-se adicionar mais componentes, porém é preciso dessa formatação (letra minúscula), só é necessário essa padronização com esses 3 componentes
 
+alter table alerta add column fkRegistro int;
+alter table alerta add constraint fkReg foreign key (fkRegistro) references registros (idRegistros);
 
 
 CREATE TABLE alerta (
 idAlertas int primary key auto_increment,
 componente VARCHAR(45),
-data DATE,
-hora time,
-status VARCHAR(45),
-registro_fkServidor int,
-registro_fkBanco int,
-registro_fkEspecificacoes int,
-registro_fkComponentes int,
-registro_fkMetrica int,
-registro_fkPlano int,
-registro_fkLocacao int,
-foreign key(registro_fkServidor) references servidor(idServidor),
-foreign key  (registro_fkBanco) REFERENCES banco (idBanco),
-foreign key  (registro_fkEspecificacoes) REFERENCES especificacao (idEspecificacoes),
-foreign key  (registro_fkComponentes) REFERENCES componente (idComponentes),
-foreign key (registro_fkMetrica) references metrica(idMetrica),
-foreign key (registro_fkPlano) REFERENCES plano_contratado(idPlano),
-foreign key (registro_fkLocacao) references locacao(idLocacao)
+dataAlerta DATE,
+horaAlerta time,
+situacao VARCHAR(45),
+fkServidor int,
+fkBanco int,
+fkEspecificacoes int,
+fkComponente int,
+fkMetrica int,
+fkPlano int,
+fkLocacao int,
+fkRegistro int,
+foreign key(fkServidor) references servidor(idServidor),
+foreign key  (fkBanco) REFERENCES banco (idBanco),
+foreign key  (fkEspecificacoes) REFERENCES especificacao (idEspecificacoes),
+foreign key  (fkComponente) REFERENCES componente (idComponentes),
+foreign key (fkMetrica) references metrica(idMetrica),
+foreign key (fkPlano) REFERENCES plano_contratado(idPlano),
+foreign key (fkLocacao) references locacao(idLocacao)
 );
+select * from funcionarios;
+INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkServidor, fkBanco, fkEspecificacoes, fkComponente, fkMetrica, fkPlano, fkLocacao) VALUES
+('2023-03-01', '12:05:00', 'Urgência', 3, 1, 1, 1, 1, 1,1,1), -- o campo status deve sempre estar com essa formatação, primeira letra maiúscula e com acentuação
+('2023-03-02', '15:35:00', 'Emergencia', 3, 2, 2, 2, 2, 2,2,2);
 
-INSERT INTO alerta (data, hora, status, registro_fkServidor, registro_fkBanco, registro_fkEspecificacoes, registro_fkComponentes, registro_fkMetrica, registro_fkPlano, registro_fkLocacao) VALUES
-('2023-03-01', '12:05:00', 'Urgência', 1, 1, 1, 1, 1, 1,1), -- o campo status deve sempre estar com essa formatação, primeira letra maiúscula e com acentuação
-('2023-03-02', '15:35:00', 'Emergencia', 2, 2, 2, 2, 2, 2,2);
+select*from alerta;
+   INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 3, 3, 3, 1,1,1);
+
+select*from metrica;
+
+
+
+
+select*from alerta;
 
 CREATE TABLE usb (
 idUSB int,
@@ -301,15 +316,15 @@ CREATE TABLE alertaRede (
     foreign key(rede_idrede) references rede(idRede)
 );
 
-
-CREATE TABLE registro (
+alter table registros rename column fkServidor to fkServidorReg;
+CREATE TABLE registros (
 idRegistros int auto_increment,
 dataHorario DATETIME,
-dadoCaptado DOUBLE,
-fkServidor int,
+dadoCaptados DOUBLE,
+fkServidorReg int,
 fkBanco int,
 fkEspecificacoes int,
-fkComponentes int,
+fkComponentesReg int,
 fkMetrica int,
 fkLocacao int,
 fkParticao int,
@@ -323,11 +338,21 @@ foreign key (fkLocacao) references locacao(idLocacao),
 foreign key (fkParticao) references particao(idParticao)
 );
 
-
-INSERT INTO registro (dataHorario, dadoCaptado, fkServidor, fkBanco, fkEspecificacoes, fkComponentes, fkMetrica, fkLocacao, fkParticao) VALUES
+select*from alerta;
+INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBanco, fkEspecificacoes, fkComponentesReg, fkMetrica, fkLocacao, fkParticao) VALUES
 ('2023-03-01 12:00:00', 150, 1, 1, 1, 1, 2, 1, 1),
 ('2023-03-02 15:30:00', 200, 2, 2, 2, 2, 2, 2, 2);
+select*from registros;
 
+INSERT INTO registro (dataHorario, dadoCaptado, fkServidor, fkBanco, fkEspecificacoes, fkComponentes, fkMetrica, fkLocacao, fkParticao) VALUES
+('2023-08-01 14:00:00', 150, 1, 1, 1, 1, 2, 1, 1);
+
+select*from registro;
+select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = 1 group by fkStatus;
+
+ select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes where servidor.fkBanco = 1 order by idAlertas desc LIMIT 30;
 
 
 
