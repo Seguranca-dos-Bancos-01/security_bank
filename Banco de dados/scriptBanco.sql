@@ -1,6 +1,6 @@
 create database SecurityBank;
 use SecurityBank;
- --  drop database SecurityBank;
+   drop database SecurityBank;
 
 create table plano_contratado(
 idPlano int primary key auto_increment,
@@ -157,7 +157,7 @@ FOREIGN KEY (servidor_fkEspecificacoes) REFERENCES plano_contratado(idPlano),
 FOREIGN KEY (servidor_fkLocacao) references locacao(idLocacao)
 );
 
-INSERT INTO componente (nome, modelo,fkMetrica, servidor_idServidor, servidor_fkBanco, servidor_fkEspecificacoes, servidor_fkLocacao) VALUES
+INSERT INTO componentes (nome, modelo,fkMetrica, servidor_idServidor, servidor_fkBanco, servidor_fkEspecificacoes, servidor_fkLocacao) VALUES
 ('Component A', 'cpu', 1, 1, 1, 1, 1), -- padronização do campo "modelo" : cpu
 ('Component B', 'ram', 1, 1, 1, 1, 1), -- padronização do campo "modelo" : ram
 ('Component C', 'disco', 1, 1, 1, 1, 1); -- padronização do campo "modelo" : disco
@@ -184,7 +184,7 @@ fkRegistro int,
 foreign key(fkServidor) references servidor(idServidor),
 foreign key  (fkBanco) REFERENCES banco (idBanco),
 foreign key  (fkEspecificacoes) REFERENCES especificacao (idEspecificacoes),
-foreign key  (fkComponente) REFERENCES componente (idComponentes),
+foreign key  (fkComponente) REFERENCES componentes (idComponentes),
 foreign key (fkMetrica) references metrica(idMetrica),
 foreign key (fkPlano) REFERENCES plano_contratado(idPlano),
 foreign key (fkLocacao) references locacao(idLocacao)
@@ -328,11 +328,11 @@ fkComponentesReg int,
 fkMetrica int,
 fkLocacao int,
 fkParticao int,
-constraint pkComposta primary key (idRegistros,fkServidor,fkBanco,fkEspecificacoes,fkComponentes,fkMetrica,fkLocacao),
-foreign key (fkServidor) references servidor(idServidor),
+constraint pkComposta primary key (idRegistros,fkServidorReg,fkBanco,fkEspecificacoes,fkComponentesReg,fkMetrica,fkLocacao),
+foreign key (fkServidorReg) references servidor(idServidor),
 foreign key (fkBanco) references banco(idBanco),
 foreign key (fkEspecificacoes) references especificacao(idEspecificacoes),
-foreign key (fkComponentes) references componente(idComponentes),
+foreign key (fkComponentesReg) references componentes(idComponentes),
 foreign key (fkMetrica) references metrica(idMetrica),
 foreign key (fkLocacao) references locacao(idLocacao),
 foreign key (fkParticao) references particao(idParticao)
@@ -354,7 +354,7 @@ select nome as statuss, count(fkStatus) as num from Servidor join status_maquina
 from alerta join servidor on fkServidor = idServidor
 join componentes on fkComponente = idComponentes where servidor.fkBanco = 1 order by idAlertas desc LIMIT 30;
 
-
+select*from funcionarios;
 
 
 
