@@ -55,6 +55,21 @@ function autenticar(req, res) {
     }
 }
 
+function totalAlertasComponente(req, res) {
+    var servidor = req.body.servidorServer;
+    var componente = req.body.componenteServer;
+
+    if (servidor == undefined) {
+        res.status(400).send("Seu email está undefined!");
+    } else if (componente == undefined) {
+        res.status(400).send("Sua senha está indefinida!");
+    } else {
+
+        usuarioModel.totalAlertasComponente(servidor, componente)
+        
+    }
+}
+
 
 
 

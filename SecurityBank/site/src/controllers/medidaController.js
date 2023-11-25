@@ -958,6 +958,65 @@ function totalAlertas(req, res) {
     });
 }
 
+
+
+function totalAlertasCPU(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasCPU(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasRAM(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasRAM(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasDISCO(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasDISCO(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function totalAlertasAtencao(req, res) {
     const limite_linhas = 50;
     var idSelect = req.params.selectedServer;
@@ -977,6 +1036,64 @@ function totalAlertasAtencao(req, res) {
     });
 }
 
+function totalAlertasAtencaoCPU(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasAtencaoCPU(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasAtencaoRAM(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasAtencaoRAM(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasAtencaoDISCO(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasAtencaoDISCO(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 function totalAlertasEmergencia(req, res) {
     const limite_linhas = 50;
     var idSelect = req.params.selectedServer;
@@ -984,6 +1101,63 @@ function totalAlertasEmergencia(req, res) {
     console.log(`Recuperando as últimas ${limite_linhas} medidas`);
 
     medidaModel.totalAlertasEmergencia(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasEmergenciaCPU(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasEmergenciaCPU(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasEmergenciaRAM(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasEmergenciaRAM(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasEmergenciaDISCO(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasEmergenciaDISCO(idSelect).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -1014,6 +1188,64 @@ function totalAlertasUrgencia(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+
+function totalAlertasUrgenciaCPU(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasUrgenciaCPU(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasUrgenciaRAM(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasUrgenciaRAM(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function totalAlertasUrgenciaDISCO(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.totalAlertasUrgenciaDISCO(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function buscarUltimasMedidasAlertasConsumo1(req, res) {
 
     const limite_linhas = 7;
@@ -1142,9 +1374,21 @@ module.exports = {
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2, 
     totalAlertas,
+    totalAlertasCPU,
+    totalAlertasRAM,
+    totalAlertasDISCO,
     totalAlertasAtencao,
+    totalAlertasAtencaoCPU,
+    totalAlertasAtencaoRAM,
+    totalAlertasAtencaoDISCO,
     totalAlertasEmergencia,
+    totalAlertasEmergenciaCPU,
+    totalAlertasEmergenciaRAM,
+    totalAlertasEmergenciaDISCO,
     totalAlertasUrgencia,
+    totalAlertasUrgenciaCPU,
+    totalAlertasUrgenciaRAM,
+    totalAlertasUrgenciaDISCO,
     buscarUltimasMedidasAlertasConsumo1,
     buscarMedidasEmTempoRealAlertasConsumo1,
     buscarUltimasMedidasAlertasConsumo2,

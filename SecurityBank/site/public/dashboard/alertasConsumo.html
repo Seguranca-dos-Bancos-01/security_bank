@@ -327,96 +327,53 @@
     var selectedBanco = sessionStorage.FKBANCO;
     console.log(selectedBanco)
 
-    // var server = JSON.parse(sessionStorage.servidor);
-    //         console.log("Conteúdo da sessionStorage.servidor: ", server);
-    //     function BuscarSetores(selectedBanco) {
-    //         fetch(`/usuarios/listarServidores/:${selectedBanco}`).then(function (resposta) {
-
-    //             if (resposta.ok) {
-    //                 // if (resposta.status == 204) {
-    //                 //     var feed = document.getElementById("feed_container");
-    //                 //     var mensagem = document.createElement("span");
-    //                 //     mensagem.innerHTML = "Nenhum resultado encontrado."
-    //                 //     feed.appendChild(mensagem);
-    //                 //     throw "Nenhum resultado encontrado!!";
-    //                 // }
-    //                 console.log("ENTREII")
-
-    //                 resposta.json().then(function (resposta) {
-    //                     console.log("Dados recebidos: ", JSON.stringify(resposta));
-
-    //                     const inputServidor = document.getElementById('selectServidor');
-
-    //                     for (let i = 0; i < resposta.length; i++) {
-
-    //                         var servidorResposta = resposta[i];
-
-    //                         var OptionServidor = document.createElement("option");
-    //                         OptionServidor.setAttribute("Value", servidorResposta.idServidor)
-    //                         OptionServidor.innerHTML = `Servidor ${servidorResposta.idServidor}`;
-    //                         inputServidor.appendChild(OptionServidor);
-    //                         // servidorResposta.apelido
-
-    //                     }
-    //                     // finalizarAguardar();
-    //                 });
-    //             } else {
-    //                 throw ('Houve um erro na API!');
-    //             }
-    //         }).catch(function (resposta) {
-    //             console.error(resposta);
-    //             // finalizarAguardar();
-    //         });
-    //     }
-
     var vetor = [];
     var selectedServer;// Declarar idUsuario fora do escopo da função
 
+
     function exibirServidoresUsuario() {
         var server = JSON.parse(sessionStorage.servidor);
-        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
         var selectServidores = document.getElementById("selectServidor");
-        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
-        // var inputServidor = document.getElementById('selectServidor');
-        server.forEach(element => {
 
-            // var OptionServidor = document.createElement('option');
-            selectServidores.innerHTML =
-                `<option>Servidor ${element.idServidor}</option>
-            `;
-            selectServidores.addEventListener("click", function (event) {
-                event.preventDefault();
-                selectedServer = element.idServidor;
+        // Limpar as opções existentes para evitar duplicatas
+        selectServidores.innerHTML = "";
+
+        /*PARA FUNCIONAR PRECISA TER MAIS DE UM SERVIDOR NO BANCO*/
+
+        selectServidores.addEventListener("change", function (event) {
+            var selectedOption = selectServidores.options[selectServidores.selectedIndex];
+            if (selectedOption) {
+                selectedServer = selectedOption.value;
                 vetor.push(selectedServer);
-                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
-                // selectedServer = this.value;
+                console.log("Valor de selectedServer: ", selectedServer);
+
                 document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
                 document.getElementById("divConteudoPagina").style.display = 'block';
 
-                // MostrarProcessos(selectedServer);
                 totalAlertas(selectedServer);
                 totalAlertasAtencao(selectedServer);
                 totalAlertasEmergencia(selectedServer);
                 totalAlertasUrgencia(selectedServer);
                 obterDadosGraficoAlertasConsumo1(selectedServer);
                 obterDadosGraficoAlertasConsumo2(selectedServer);
+                document.getElementById('myChart2').style.width = "200px";
+                document.getElementById('myChart2').style.height = "300px";
 
-                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
-                inserir(selectedServer); // Chamar a função inserir com o ID do servidor
-            });
-            // button.classList.add('botoesServidoresDash');
-            // selectServidores.appendChild(selectedServer);
-            var OptionServidor = document.createElement("option");
-
+                console.log("Valor de idUsuario: ", idUsuario);
+                // inserir(selectedServer);
+            }
         });
 
-    };
+        server.forEach(element => {
+            var optionServidor = document.createElement('option');
+            optionServidor.textContent = `Servidor ${element.idServidor}`;
+            optionServidor.value = element.idServidor;
 
-    function inserir(id) {
-        vetor.push(id);
-        console.log(vetor);
-        sessionStorage.servidorSelecionado = selectedServer
+            // Adiciona a opção ao elemento select
+            selectServidores.appendChild(optionServidor);
+        });
     }
+
 
     exibirServidoresUsuario()
 
@@ -430,39 +387,13 @@
         document.getElementById("modalDialogUrgencia").style.display = 'flex';
     }
 
-    // function buscarComponente() {
-    //     var elementoSelect = document.querySelector("#selectComponente")
-    //     var opcaoSelecionada = elementoSelect.options[elementoSelect.selectedIndex];
-    //     componenteSelecionado = opcaoSelecionada.value;
-    //     // componenteSelecionado = document.getElementById("selectComponente").value;
 
-    //     if (componenteSelecionado == "cpu") {
-    //         document.getElementById("DivGraficoGeral").style.display = 'none';
-
-    //     } else if (componenteSelecionado == "ram") {
-    //         document.getElementById("DivGraficoGeral").style.display = 'none';
-
-    //     } else if (componenteSelecionado == "disco") {
-
-    //     } else {
-    //         document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
-    //         document.getElementById("divConteudoPagina").style.display = 'block';
-    //         document.getElementById("DivGraficoGeral").style.display = 'flex';
-
-    //         totalAlertas(selectedServer);
-    //         totalAlertasAtencao(selectedServer);
-    //         totalAlertasEmergencia(selectedServer);
-    //         totalAlertasUrgencia(selectedServer);
-    //         obterDadosGraficoAlertasConsumo1(selectedServer);
-    //         obterDadosGraficoAlertasConsumo2(selectedServer);
-    //     }
-    // }
 
     // buscarComponente()
     var componenteSelecionado = document.querySelector("#selectComponente");
 
     var valorOptions = 0;
-
+    var componente;
     componenteSelecionado.addEventListener("change", () => {
         var elementoSelect = document.querySelector("#selectComponente");
         var indice = elementoSelect.selectedIndex;
@@ -471,16 +402,30 @@
 
         if (valorOptions == "cpu") {
             document.getElementById("DivGraficoGeral").style.display = 'none';
+            document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
             document.getElementById("DivGraficoComp").style.display = 'flex';
+            totalAlertasCPU(selectedServer);
+            totalAlertasAtencaoCPU(selectedServer);
+            totalAlertasEmergenciaCPU(selectedServer);
+            totalAlertasUrgenciaCPU(selectedServer);
 
 
         } else if (valorOptions == "ram") {
             document.getElementById("DivGraficoComp").style.display = 'flex';
             document.getElementById("DivGraficoGeral").style.display = 'none';
+            totalAlertasRAM(selectedServer);
+            totalAlertasAtencaoRAM(selectedServer);
+            totalAlertasEmergenciaRAM(selectedServer);
+            totalAlertasUrgenciaRAM(selectedServer);
+
 
         } else if (valorOptions == "disco") {
             document.getElementById("DivGraficoComp").style.display = 'flex';
             document.getElementById("DivGraficoGeral").style.display = 'none';
+            totalAlertasDISCO(selectedServer);
+            totalAlertasAtencaoDISCO(selectedServer);
+            totalAlertasEmergenciaDISCO(selectedServer);
+            totalAlertasUrgenciaDISCO(selectedServer);
 
 
         } else if (valorOptions == "todos") {
@@ -499,25 +444,6 @@
     })
 
 
-    // var selectedServer;
-
-    // document.getElementById("selectServidor").addEventListener("click", function () {
-    //     selectedServer = this.value;
-    //     document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
-    //     document.getElementById("divConteudoPagina").style.display = 'block';
-
-    //     // MostrarProcessos(selectedServer);
-    //     totalAlertas(selectedServer);
-    //     totalAlertasAtencao(selectedServer);
-    //     totalAlertasEmergencia(selectedServer);
-    //     totalAlertasUrgencia(selectedServer);
-    //     obterDadosGraficoAlertasConsumo1(selectedServer);
-    //     obterDadosGraficoAlertasConsumo2(selectedServer);
-
-
-    // });
-    // console.log(selectedServer)
-
     function totalAlertas(selectedServer) {
         if (sessionStorage.ID_USUARIO) {
             let idUsuario = sessionStorage.ID_USUARIO;
@@ -532,7 +458,7 @@
                 if (response.ok) {
                     response.json()
                         .then(function (response) {
-                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            console.log(`Dados recebidos: GRaIFCO--Aosdia--------- ${JSON.stringify(response)}`);
                             response.reverse();
                             mostrarTotalAlertas(response);
                         });
@@ -548,6 +474,126 @@
 
 
     function mostrarTotalAlertas(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasTEXTO").textContent = num;
+    }
+
+    function totalAlertasCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarTotalAlertasCPU(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasTEXTO").textContent = num;
+    }
+
+    function totalAlertasRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarTotalAlertasRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasTEXTO").textContent = num;
+    }
+
+    function totalAlertasDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarTotalAlertasDISCO(response) {
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
@@ -597,6 +643,123 @@
         document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
     }
 
+    function totalAlertasAtencaoCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasAtencaoCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasAtencaoCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasAtencaoCPU(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
+    }
+
+    function totalAlertasAtencaoRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasAtencaoRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasAtencaoRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasAtencaoRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
+    }
+
+    function totalAlertasAtencaoDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasAtencaoDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasAtencaoDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasAtencaoDISCO(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
+    }
+
     function totalAlertasEmergencia(selectedServer) {
         if (sessionStorage.ID_USUARIO) {
             let idUsuario = sessionStorage.ID_USUARIO;
@@ -636,6 +799,122 @@
         document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
     }
 
+    function totalAlertasEmergenciaCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasEmergenciaCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasEmergenciaCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasEmergenciaCPU(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
+    }
+
+    function totalAlertasEmergenciaRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasEmergenciaRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasEmergenciaRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasEmergenciaRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
+    }
+
+    function totalAlertasEmergenciaDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasEmergenciaDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasEmergenciaDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasEmergenciaDISCO(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
+    }
 
     function totalAlertasUrgencia(selectedServer) {
         if (sessionStorage.ID_USUARIO) {
@@ -676,6 +955,124 @@
         document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
     }
 
+    function totalAlertasUrgenciaCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasUrgenciaCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasUrgenciaCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasUrgenciaCPU(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
+    }
+
+
+    function totalAlertasUrgenciaRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasUrgenciaRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasUrgenciaRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasUrgenciaRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
+    }
+
+
+    function totalAlertasUrgenciaDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasUrgenciaDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasUrgenciaDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasUrgenciaDISCO(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
+    }
     // window.onload = obterDadosGraficoAlertasConsumo1(selectedServer);
 
 
