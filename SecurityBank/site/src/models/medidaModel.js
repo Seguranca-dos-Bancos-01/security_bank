@@ -1163,6 +1163,248 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
     return database.executar(instrucaoSql);
 }
 
+function componenteMetricaCPU(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "cpu"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "cpu"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `sselect dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "cpu"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function componenteMetricaRAM(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "ram"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "ram"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `sselect dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "ram"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function componenteMetricaDISCO(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "disco"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "disco"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `sselect dadoCaptado 
+        from registro join componente on fkComponentes = idComponentes
+        where componente.modelo = "disco"
+        and fkServidor = ${idSelect}
+        order by idRegistros desc limit 1;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function estadoFrequenteCPU(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "cpu"
+        group by alerta.status
+        ;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "cpu"
+        group by alerta.status
+        ;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "cpu"
+        group by alerta.status
+        ;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function estadoFrequenteDISCO(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "disco"
+        group by alerta.status
+        ;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "disco"
+        group by alerta.status
+        ;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "disco"
+        group by alerta.status
+        ;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function estadoFrequenteRAM(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "ram"
+        group by alerta.status
+        ;
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "ram"
+        group by alerta.status
+        ;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
+        from alerta join servidor
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and componente.modelo = "ram"
+        group by alerta.status
+        ;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 function totalAlertas(idSelect) {
 
@@ -1171,24 +1413,24 @@ function totalAlertas(idSelect) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select count(*) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
         instrucaoSql = `select count(*) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
         ; 
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select count(*) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
         ; 
     `;
     } else {
@@ -1201,26 +1443,27 @@ function totalAlertas(idSelect) {
 }
 
 
+
 function totalAlertasCPU(idSelect) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT componentes.modelo, COUNT(alerta.situacao) as totalAlertas 
+        instrucaoSql = `SELECT componente.modelo, COUNT(alerta.status) as totalAlertas 
         FROM alerta 
-        JOIN servidor ON alerta.fkServidor = servidor.idServidor 
-        JOIN componentes ON alerta.fkComponente = componentes.idComponentes 
-        WHERE servidor.idServidor = ${idSelect} AND componentes.modelo = "cpu"
-        GROUP BY componentes.modelo;
+        JOIN servidor ON alerta.registro_fkServidor = servidor.idServidor 
+        JOIN componente ON alerta.registro_fkComponentes = componente.idComponentes 
+        WHERE servidor.idServidor = ${idSelect} AND componente.modelo = "cpu"
+        GROUP BY componente.modelo;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `SELECT componentes.modelo, COUNT(alerta.situacao) as totalAlertas 
+        instrucaoSql = `SELECT componente.modelo, COUNT(alerta.status) as totalAlertas 
         FROM alerta 
-        JOIN servidor ON alerta.fkServidor = servidor.idServidor 
-        JOIN componentes ON alerta.fkComponente = componentes.idComponentes 
-        WHERE servidor.idServidor = ${idSelect} AND componentes.modelo = "cpu"
-        GROUP BY componentes.modelo; 
+        JOIN servidor ON alerta.registro_fkServidor = servidor.idServidor 
+        JOIN componente ON alerta.registro_fkComponentes = componente.idComponentes 
+        WHERE servidor.idServidor = ${idSelect} AND componente.modelo = "cpu"
+        GROUP BY componente.modelo;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1238,21 +1481,21 @@ function totalAlertasRAM(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT componentes.modelo, COUNT(alerta.situacao) as totalAlertas 
+        instrucaoSql = `SELECT componente.modelo, COUNT(alerta.status) as totalAlertas 
         FROM alerta 
-        JOIN servidor ON alerta.fkServidor = servidor.idServidor 
-        JOIN componentes ON alerta.fkComponente = componentes.idComponentes 
-        WHERE servidor.idServidor = ${idSelect} AND componentes.modelo = "ram"
-        GROUP BY componentes.modelo; 
+        JOIN servidor ON alerta.registro_fkServidor = servidor.idServidor 
+        JOIN componente ON alerta.registro_fkComponentes = componente.idComponentes 
+        WHERE servidor.idServidor = ${idSelect} AND componente.modelo = "ram"
+        GROUP BY componente.modelo;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `SELECT componentes.modelo, COUNT(alerta.situacao) as totalAlertas 
+        instrucaoSql = `SELECT componente.modelo, COUNT(alerta.status) as totalAlertas 
         FROM alerta 
-        JOIN servidor ON alerta.fkServidor = servidor.idServidor 
-        JOIN componentes ON alerta.fkComponente = componentes.idComponentes 
-        WHERE servidor.idServidor = ${idSelect} AND componentes.modelo = "ram"
-        GROUP BY componentes.modelo; 
+        JOIN servidor ON alerta.registro_fkServidor = servidor.idServidor 
+        JOIN componente ON alerta.registro_fkComponentes = componente.idComponentes 
+        WHERE servidor.idServidor = ${idSelect} AND componente.modelo = "ram"
+        GROUP BY componente.modelo; 
     
     `;
     } else {
@@ -1269,21 +1512,21 @@ function totalAlertasDISCO(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT componentes.modelo, COUNT(alerta.situacao) as totalAlertas 
+        instrucaoSql = `SELECT componente.modelo, COUNT(alerta.status) as totalAlertas 
         FROM alerta 
-        JOIN servidor ON alerta.fkServidor = servidor.idServidor 
-        JOIN componentes ON alerta.fkComponente = componentes.idComponentes 
-        WHERE servidor.idServidor = ${idSelect} AND componentes.modelo = "disco"
-        GROUP BY componentes.modelo;
+        JOIN servidor ON alerta.registro_fkServidor = servidor.idServidor 
+        JOIN componente ON alerta.registro_fkComponentes = componente.idComponentes 
+        WHERE servidor.idServidor = ${idSelect} AND componente.modelo = "disco"
+        GROUP BY componente.modelo;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `SELECT componentes.modelo, COUNT(alerta.situacao) as totalAlertas 
+        instrucaoSql = `SELECT componente.modelo, COUNT(alerta.status) as totalAlertas 
         FROM alerta 
-        JOIN servidor ON alerta.fkServidor = servidor.idServidor 
-        JOIN componentes ON alerta.fkComponente = componentes.idComponentes 
-        WHERE servidor.idServidor = ${idSelect} AND componentes.modelo = "disco"
-        GROUP BY componentes.modelo
+        JOIN servidor ON alerta.registro_fkServidor = servidor.idServidor 
+        JOIN componente ON alerta.registro_fkComponentes = componente.idComponentes 
+        WHERE servidor.idServidor = ${idSelect} AND componente.modelo = "disco"
+        GROUP BY componente.modelo;
         ; 
     `;
     } else {
@@ -1300,28 +1543,28 @@ function totalAlertasAtencao(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
         ; 
     `;
     } else {
@@ -1338,34 +1581,34 @@ function totalAlertasAtencaoCPU(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "cpu"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "cpu"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "cpu"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "cpu"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "cpu"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "cpu"
         ; 
     `;
     } else {
@@ -1382,34 +1625,34 @@ function totalAlertasAtencaoRAM(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "ram"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "ram"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "ram"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "ram"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "ram"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "ram"
         ; 
     `;
     } else {
@@ -1426,34 +1669,34 @@ function totalAlertasAtencaoDISCO(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "disco"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "disco"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "disco"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "disco"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "disco"
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Atenção"
+        and componente.modelo = "disco"
         ; 
     `;
     } else {
@@ -1471,28 +1714,28 @@ function totalAlertasEmergencia(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = ` select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
         ; 
     `;
     } else {
@@ -1509,35 +1752,35 @@ function totalAlertasEmergenciaCPU(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "cpu"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "cpu"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "cpu"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "cpu"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "cpu"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "cpu"
+        ;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1553,35 +1796,35 @@ function totalAlertasEmergenciaRAM(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "ram"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "ram"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "ram"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "ram"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "ram"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "ram"
+        ;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1598,35 +1841,35 @@ function totalAlertasEmergenciaDISCO(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "disco"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "disco"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "disco"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "disco"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "disco"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Emergência"
+        and componente.modelo = "disco"
+        ;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1642,28 +1885,28 @@ function totalAlertasUrgencia(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
+        on registro_fkServidor = idServidor
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
         ; 
     `;
     } else {
@@ -1680,35 +1923,35 @@ function totalAlertasUrgenciaCPU(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "cpu"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "cpu"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "cpu"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "cpu"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "cpu"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "cpu"
+        ;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1724,35 +1967,35 @@ function totalAlertasUrgenciaRAM(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "ram"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "ram"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "ram"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "ram"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "ram"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "ram"
+        ;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1768,35 +2011,35 @@ function totalAlertasUrgenciaDISCO(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "disco"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "disco"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "disco"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "disco"
+        ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select alerta.status, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "disco"
-        ; 
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        and alerta.status = "Urgência"
+        and componente.modelo = "disco"
+        ;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1813,21 +2056,21 @@ function buscarUltimasMedidasAlertasConsumo1(idSelect) {
     instrucaoSql = ''
 //COLOCAR O ID DO USUARIO
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select componentes.modelo as modelo, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select componente.modelo as modelo, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        group by componentes.modelo
-        ; `;
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        group by componente.modelo
+        ;  `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select componentes.modelo as modelo, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select componente.modelo as modelo, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        group by componentes.modelo
-        ; `;
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        group by componente.modelo
+        ;  `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -1842,22 +2085,22 @@ function buscarMedidasEmTempoRealAlertasConsumo1(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select componentes.modelo as modelo, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select componente.modelo as modelo, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        group by componentes.modelo
-        ;`;
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        group by componente.modelo
+        ;  `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select componentes.modelo as modelo, count(alerta.situacao) as totalAlertas 
+        instrucaoSql = `select componente.modelo as modelo, count(alerta.status) as totalAlertas 
         from alerta join servidor
-        on fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where fkServidor = ${idSelect}
-        group by componentes.modelo
-        ; `;
+        on registro_fkServidor = idServidor
+        join componente on registro_fkComponentes = idComponentes
+        where registro_fkServidor = ${idSelect}
+        group by componente.modelo
+        ;  `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -1872,17 +2115,17 @@ function buscarUltimasMedidasAlertasConsumo2(idSelect) {
     instrucaoSql = ''
 //COLOCAR O ID DO USUARIO
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT componentes.modelo as modelo, AVG(registros.dadosCaptados) as media
-        FROM componentes join registros on idComponentes = fkComponentesReg
-        join servidor on fkServidorComp = idServidor
-        where fkServidorReg = ${idSelect}
+        instrucaoSql = `SELECT componente.modelo as modelo, AVG(registro.dadoCaptado) as media
+        FROM componente join registro on idComponentes = fkComponentes
+        join servidor on fkServidor = idServidor
+        where fkServidor = ${idSelect}
         GROUP BY modelo
         ; `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT componentes.modelo as modelo, AVG(registros.dadosCaptados) as media
-        FROM componentes join registros on idComponentes = fkComponentesReg
-        join servidor on fkServidorComp = idServidor
-        where fkServidorReg = ${idSelect}
+        instrucaoSql = `SELECT componente.modelo as modelo, AVG(registro.dadoCaptado) as media
+        FROM componente join registro on idComponentes = fkComponentes
+        join servidor on fkServidor = idServidor
+        where fkServidor = ${idSelect}
         GROUP BY modelo
         ; `;
     } else {
@@ -1899,20 +2142,20 @@ function buscarMedidasEmTempoRealAlertasConsumo2(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT componentes.modelo as modelo, AVG(registros.dadosCaptados) as media
-        FROM componentes join registros on idComponentes = fkComponentesReg
-        join servidor on fkServidorComp = idServidor
-        where fkServidorReg = ${idSelect}
+        instrucaoSql = `SELECT componente.modelo as modelo, AVG(registro.dadoCaptado) as media
+        FROM componente join registro on idComponentes = fkComponentes
+        join servidor on fkServidor = idServidor
+        where fkServidor = ${idSelect}
         GROUP BY modelo
-        ;`;
+        ; `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT componentes.modelo as modelo, AVG(registros.dadosCaptados) as media
-        FROM componentes join registros on idComponentes = fkComponentesReg
-        join servidor on fkServidorComp = idServidor
-        where fkServidorReg = ${idSelect}
+        instrucaoSql = `SELECT componente.modelo as modelo, AVG(registro.dadoCaptado) as media
+        FROM componente join registro on idComponentes = fkComponentes
+        join servidor on fkServidor = idServidor
+        where fkServidor = ${idSelect}
         GROUP BY modelo
-        ;`;
+        ; `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -1965,6 +2208,12 @@ module.exports = {
     buscarUltimasUltAlertasSelected,
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2,
+    componenteMetricaCPU,
+    componenteMetricaRAM,
+    componenteMetricaDISCO,
+    estadoFrequenteCPU,
+    estadoFrequenteDISCO,
+    estadoFrequenteRAM,
     totalAlertas,
     totalAlertasCPU,
     totalAlertasRAM,

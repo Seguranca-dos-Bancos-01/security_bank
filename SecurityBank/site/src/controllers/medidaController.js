@@ -939,6 +939,120 @@ function buscarUltimasUsbConectadas(req, res) {
     });
 }
 
+function componenteMetricaCPU(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.componenteMetricaCPU(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function componenteMetricaRAM(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.componenteMetricaRAM(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function componenteMetricaDISCO(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.componenteMetricaDISCO(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function estadoFrequenteCPU(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.estadoFrequenteCPU(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function estadoFrequenteDISCO(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.estadoFrequenteDISCO(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+function estadoFrequenteRAM(req, res) {
+    const limite_linhas = 50;
+    var idSelect = req.params.selectedServer;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.estadoFrequenteRAM(idSelect).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
 function totalAlertas(req, res) {
     const limite_linhas = 50;
     var idSelect = req.params.selectedServer;
@@ -1373,6 +1487,12 @@ module.exports = {
     buscarUltimasUltAlertasSelected,
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2, 
+    componenteMetricaCPU,
+    componenteMetricaDISCO,
+    componenteMetricaRAM,
+    estadoFrequenteCPU,
+    estadoFrequenteDISCO,
+    estadoFrequenteRAM,
     totalAlertas,
     totalAlertasCPU,
     totalAlertasRAM,

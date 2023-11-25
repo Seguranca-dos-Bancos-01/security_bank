@@ -176,6 +176,30 @@ router.get("/tempo-real2/:idUsuario2", function (req, res) {
     medidaController.buscarMedidasEmTempoReal2(req, res);
 });
 
+router.get("/componenteMetricaCPU/:selectedServer", function (req, res) {
+    medidaController.componenteMetricaCPU(req, res);
+})
+
+router.get("/componenteMetricaDISCO/:selectedServer", function (req, res) {
+    medidaController.componenteMetricaDISCO(req, res);
+})
+
+router.get("/componenteMetricaRAM/:selectedServer", function (req, res) {
+    medidaController.componenteMetricaRAM(req, res);
+})
+
+router.get("/estadoFrequenteCPU/:selectedServer", function (req, res) {
+    medidaController.estadoFrequenteCPU(req, res);
+})
+
+router.get("/estadoFrequenteDISCO/:selectedServer", function (req, res) {
+    medidaController.estadoFrequenteDISCO(req, res);
+})
+
+router.get("/estadoFrequenteRAM/:selectedServer", function (req, res) {
+    medidaController.estadoFrequenteRAM(req, res);
+})
+
 router.get("/totalAlertas/:selectedServer", function (req, res) {
     medidaController.totalAlertas(req, res);
 })
