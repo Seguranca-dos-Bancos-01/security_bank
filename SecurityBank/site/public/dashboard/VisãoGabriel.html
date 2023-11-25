@@ -16,6 +16,8 @@
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
     <script src="alertasDash.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
 <body onload="UltimasMedidasIndividual()">
@@ -211,7 +213,8 @@
         </div>
 
         <div class="grafico">
-
+            <canvas id="myChart" width="400" height="200"></canvas>
+            <script src="script.js"></script>
         </div>
 </body>
 
@@ -334,5 +337,72 @@ function iniciarAtualizacaoEmTempoReal() {
 
 // Chamar a função de inicialização
 iniciarAtualizacaoEmTempoReal();
+
+function createChart() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  
+  // Exemplo de dados iniciais
+  var data = {
+    labels: ['Label 1', 'Label 2', 'Label 3'],
+    datasets: [{
+      label: 'Data Set 1',
+      data: [10, 20, 30],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  var options = {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  };
+
+
+  // Criação do gráfico
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: options
+  });
+
+
+
+  return myChart;
+}
+
+// Função para atualizar o gráfico em tempo real
+function updateChart(chart) {
+  // Exemplo de geração de dados aleatórios
+  var newData = [Math.random() * 50, Math.random() * 50, Math.random() * 50];
+
+  // Atualiza os dados do gráfico
+  chart.data.datasets[0].data = newData;
+
+  // Atualiza o gráfico
+  chart.update();
+
+  // Chama a função novamente após um intervalo de tempo
+  setTimeout(function () {
+    updateChart(chart);
+  }, 1000); // Atualiza a cada 1000 milissegundos (1 segundo)
+}
+
+// Chama a função para criar o gráfico
+var myChart = createChart();
+
+// Chama a função para atualizar o gráfico em tempo real
+updateChart(myChart);
 
 </script>
