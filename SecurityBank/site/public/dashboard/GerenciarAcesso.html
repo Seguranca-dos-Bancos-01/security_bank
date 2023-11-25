@@ -164,7 +164,7 @@
             </div>
             <div class="headerGerenciar">
                 <h1 class="tituloGerenciar">Controle de Acesso</h1>
-                <div id="nomePlano" class="divPlanoUsuario"><span id="planoUsuario">Plano Premium</span></div>
+                
             </div>
             <div class="ativoDesativo">
                 <div class="blocoCpu">
@@ -331,15 +331,7 @@
     percentDISK(idUsuarioDISK)
 
 
-    function Plano() {
-        const planoContratado = sessionStorage.fkPlano;
-        const nomePlano = document.getElementById('nomePlano');
-        if (planoContratado != 1) {
-            nomePlano.innerHTML = '<span id="planoUsuario">Plano Basico</span>';
-        } else {
-            nomePlano.innerHTML = '<span id="planoUsuario">Plano Premium</span>';
-        }
-    }
+   
 
 
     function VerificarServidor() {

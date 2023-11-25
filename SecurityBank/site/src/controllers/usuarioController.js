@@ -165,32 +165,15 @@ function cadastrarServidor(req, res) {
 
 function cadastrarServidorNuvem(req, res) {
     // Crie uma variável que vá recuperar os valores do arquivo cadastro.html
-    var apelidoServidor = req.body.apelidoServidorServer;
-    var soServidor = req.body.soServidorServer;
-    var cpfRespServidor =req.body.cpfRespServidorServer;
-    var ipServidor = req.body.ipServidorServer;
-    var fkBanco = req.body.fkBancoServer;
-    var fkPlano = req.body.fkPlanoServer;
+    var fk = req.body.idServerS;
     var compra = req.body.CompraServer;
-    var vali = req.body.ValidadeServer
+    var validade =req.body.ValidadeServer;
+    
     
     // Faça as validações dos valores
-    if (apelidoServidor == undefined) {
-        res.status(400).send("Seu apelidoServidor está undefined!");
-    } else if (soServidor == undefined) {
-        res.status(400).send("Seu soServidor está undefined!");
-    } else if (cpfRespServidor == undefined) {
-        res.status(400).send("Sua cpfRespServidor está undefined!");
-    } else if (ipServidor == undefined) {
-        res.status(400).send("Sua ipServidor está undefined!");
-    } else if (compra == undefined) {
-        res.status(400).send("Sua data compra está undefined!");
-    } else if (vali == undefined) {
-        res.status(400).send("Sua validade está undefined!");
-    }  else {
 
         // Passe os valores como parâmetro e vá para o arquivo usuarioModel.js
-        usuarioModel.cadastrarServidorNuvem(apelidoServidor, soServidor, cpfRespServidor, ipServidor, fkBanco, fkPlano,compra, vali)
+        usuarioModel.cadastrarServidorNuvem(compra, validade, fk)
             .then(
                 function (resultado) {
                     res.json(resultado);
@@ -206,7 +189,7 @@ function cadastrarServidorNuvem(req, res) {
                 }
             );
     }
-}
+
 
 
 
@@ -214,9 +197,9 @@ function PuxarFkServidor(req, res) {
     
     var idUsuario = req.params.idUsuario;
     
-   
+    var apelido= req.query.apelido;
 
-    usuarioModel.PuxarFkServidor(idUsuario).then(function (resultado) {
+    usuarioModel.PuxarFkServidor(idUsuario,apelido).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

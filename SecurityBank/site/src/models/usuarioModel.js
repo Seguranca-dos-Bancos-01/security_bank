@@ -34,7 +34,7 @@ function cadastrarServidor(apelidoServidor, soServidor, cpfRespServidor, ipServi
 
     //CONVERSAR COM GRUPO ()
     var instrucao = `INSERT INTO servidor (apelido, sistemaOperacional, cpfResponsavelLegal, enderecoIP, fkbAnco, fkstatus, fkEspecificacoes, fkPlano) VALUES 
-            ('${apelidoServidor}','${soServidor}','${cpfRespServidor}','${ipServidor}',${fkBanco},1 ,NULL ,${fkPlano})   
+            ('${apelidoServidor}','${soServidor}','${cpfRespServidor}','${ipServidor}',${fkBanco},1 ,1 ,${fkPlano})   
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -42,18 +42,23 @@ function cadastrarServidor(apelidoServidor, soServidor, cpfRespServidor, ipServi
 }
 
 
-function PuxarFkServidor(idUsuario) {
+function PuxarFkServidor(idUsuario, apelido) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select idServidor as fkP from Servidor where enderecoIP = '${idUsuario}';
+        instrucaoSql = `SELECT idServidor AS fkP
+        FROM Servidor
+        WHERE apelido = '${apelido}' AND fkbanco = ${idUsuario};
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select idServidor as fkP from Servidor where enderecoIP = '${idUsuario}';
+        instrucaoSql = `
+        SELECT idServidor AS fkP,
+        apelido as apelido
+        FROM Servidor
+        WHERE apelido = '${apelido}' AND fkbanco = ${idUsuario};
 
-    
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -73,10 +78,12 @@ function PuxarFkServidor(idUsuario) {
         function cadastrarServidorNuvem(dtCompra, dtVal, idUsuario) {
 
 
-    var instrucao3 = `INSERT INTO locacao (dataCompraLocacao, dateValidade, fkServidor) 
+    var instrucao = `INSERT INTO locacao (dataCompraLocacao, dataValidade, idServidor) 
     VALUES('${dtCompra}','${dtVal}',${idUsuario});
       `;
 
+      console.log("Executando a instrução SQL: \n" + instrucao);
+      return database.executar(instrucao);
     //     console.log("Executando a instrução SQL: \n" + instrucao3);
     //     return database.executar(instrucao3);
     }

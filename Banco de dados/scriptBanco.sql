@@ -10,8 +10,11 @@ tipo int
 INSERT INTO plano_contratado (tipo) VALUES
 (1), -- plano premium
 (2); -- plano básico
-
-
+select*from locacao;
+SELECT idServidor AS fkP
+FROM Servidor
+WHERE apelido = 'Server C' AND fkbanco = 1;
+select*from servidor;
 create table status_maquina(
 idStatus int primary key auto_increment,
 nome varchar(45) -- status que serão alterados conforme a captação dos servidores
@@ -65,7 +68,8 @@ INSERT INTO banco (nomeFantasia, cnpj, razaoSocial, sigla, cpfResponsavelLegal) 
 ('Bank c', '12345678901234', 'Bank A Ltd.', 'BKA', '12345678901'),
 ('Bank B', '98765432109876', 'Bank B Inc.', 'BKB', '09876543210');
 
-
+SELECT email AS mail, 
+        cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamento_funcionario on fkEscalonamento = idEscalonamento WHERE fkBanco = 1;
 create table escalonamento_funcionario( -- permissionamento dos funcionários nas páginas da dashboard
 idEscalonamento int primary key auto_increment,
 cargo varchar(45),
@@ -77,7 +81,7 @@ INSERT INTO escalonamento_funcionario (cargo, nivelAcesso) VALUES
 ('Operator', 2), -- acesso geral - página de controle de acesso
 ('Estagiario', 3); --  acesso limitado às páginas de painel geral e servidor individual
 
-
+select*from servidor;
 CREATE TABLE funcionarios (
 idFuncionarios int auto_increment,
 nome VARCHAR(45),
@@ -116,23 +120,40 @@ foreign key (fkPlano) references plano_contratado(idPlano)
 INSERT INTO servidor (apelido, sistemaOperacional, cpfResponsavelLegal, enderecoIP, fkBanco, fkStatus,fkEspecificacoes, fkPlano) VALUES
 ('Server C', 'Linux', '12345678961', '192.168.1.1', 1, 1, 1, 1),
 ('Server B', 'Windows', '12345678902', '192.168.2.2',1, 1, 1, 1);
+select*From locacao;
 
+SELECT *
+FROM monitoramentoThreads AS mt
+JOIN (
+    SELECT numeroThreads = 1 as um , 
+    numeroThreads = 2 as dois ,
+    numeroThreads = 3 as tres ,
+    numeroThreads = 4 as quatro ,
+    numeroThreads = 5 as quinto ,
+    MAX(idcaptacao) AS ultimaCaptacao
+    FROM monitoramentoThreads
+    GROUP BY numeroThreads
+) AS ultimos ON mt.idcaptacao = ultimos.ultimaCaptacao;
+
+
+
+
+select*from locacao;
+select*from servidor;
 
 create table locacao( -- locacao caso servidor seja da nuvem
 idLocacao int auto_increment,
 dataCompraLocacao date,
 dataValidade date,
-servidor_fkLocacao int,
-servidor_idServidor int,
-servidor_fkBanco int,
-servidor_fkEspecificacoes int,
-servidor_fkPlano int,
-constraint pkComposta primary key (idLocacao,servidor_fkLocacao),
-foreign key (servidor_fkLocacao) references locacao (idLocacao),
-foreign key (servidor_idServidor) references servidor (idServidor),
-foreign key (servidor_fkBanco) references banco (idBanco),
-foreign key (servidor_fkEspecificacoes) references especificacao (idEspecificacoes),
-foreign key (servidor_fkPlano) references plano_contratado (idPlano)
+fkServidor int,
+fkBanco int,
+fkEspecificacoes int,
+fkPlano int,
+constraint pkComposta primary key (idLocacao,fkServidor),
+foreign key (fkServidor) references servidor (idServidor),
+foreign key (fkBanco) references banco (idBanco),
+foreign key (fkEspecificacoes) references especificacao (idEspecificacoes),
+foreign key (fkPlano) references plano_contratado (idPlano)
 );
 
 INSERT INTO locacao (dataCompraLocacao, dataValidade,servidor_fkLocacao,servidor_idServidor,servidor_fkBanco,servidor_fkEspecificacoes,servidor_fkPlano) VALUES
@@ -278,7 +299,7 @@ INSERT INTO particao (nomeParticao,pontoMontagem,fkComponentes,fkMetrica,fkServi
 CREATE TABLE qtdNucleosThreads (
 idThreads int primary key auto_increment,
 qtdNucleos int,
-Threads int,
+qtdThreads int,
 especificacaoCpu varchar(255),
 fkComponentes int,
 fkMetrica int,

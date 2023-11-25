@@ -35,7 +35,7 @@
 
 <body onload="exibirServidoresUsuario()">
 
-    <body onload="percentCPU(),percentRAM(),percentDISK()">
+    <body onload="percentCPU(),percentRAM(),percentDISK(),FkServidorForCloud()">
 
         <div class="janela">
             <div class="header-left">
@@ -156,70 +156,28 @@
             </div>
 
             <div class="dash">
-                <div id="alerta">
-                </div>
 
-                <div class="btns-dash" id="btnAquario">
-                    <!-- O gráfico é chamado de acordo com o id (fk_aquario) do banco  -->
-                </div>
-                <div id="graficos">
-                </div>
-
-                <h1 class="tituloServidor">Adicionar um Servidor</h1>
-
-                <div class="blocoAdicao" id="blocoServidor">
-                    <h2 class="subtituloServidor">Cadastre um Servidor</h2>
-
-                    <span class="camposServidor">Apelido Fantasia</span><br>
-                    <input id="apelidoServidor" class="inputServidor" type="text"><br>
-
-                    <span class="camposServidor">Sistema Operacional</span><br>
-                    <input id="soServidor" class="inputServidor" type="text"><br>
-
-                    <span class="camposServidor">CPF do Responsável Legal</span><br>
-                    <input id="cpfRespServidor" class="inputServidor" type="text"><br>
-
-                    <span class="camposServidor">Endereço IP</span><br>
-                    <input id="ipServidor" class="inputServidor" type="text"><br>
-
-                    <span class="camposServidor">Plano Server</span><br>
-                    <select  id="opPlano">
-                        <option value="2">Plano Basico</option>
-                        <option value="1">Plano Premium</option>
-                    </select>
-                    <!-- <input type="checkbox" id="Nuvem" name="Nuvem" class="inputcheckbox" />
-                 <label style="padding: 20px 0px;" class="camposServidor" for="Nuvem">Servidor na nuvem</label>  -->
-
-
-                    <!--h2 class="subtituloServidor">Especificações de Hardware</h2> 
-                <div class="linhaServidor">
-                   <div class="camposPotencia">
-                        <span class="camposServidor">Potência Máxima da CPU</span><br>
-                       <input id="cpuServidor" class="selectServidor"><br>
-                    </div> 
-                    <div class="camposPotencia">
-                        <span class="camposServidor">Potência Máxima do Disco</span> <br>
-                       <input id="discoServidor" class="selectServidor"><br>
+                    <div id="dataServidorDiv">
+                      
+                        <h2 class="subtituloServidor">Adicione uma locação ao servidor cadastrado</h2>
+                        <div class="linhaServidor">
+                            <h1 id="nomeServer">SEVIDOR XX1</h1>
+                            <div class="camposData">
+                                <span class="camposServidor">Data de Compra</span><br>
+                                <input id="compraServidor" class="inputServidor" type="date"><br>
+                            </div>
+                            <div class="camposData">
+                                <span class="camposServidor">Data Validade do Servidor</span><br>
+                                <input id="validadeServidor" class="inputServidor" type="date">
+                            </div>
+                        </div>
+                        <div id="divBotoesServidor">
+                            <button onclick="cadastrarServidorNuvem()" class="botaoServidor"
+                                style="background-color: #FF847F">Adicionar Locação</button>
+                            <button onclick="semNuvem()" class="botaoServidor"
+                                style="background-color: #000F53; margin-left: 20px;">Não Adicionar</button>
+                        </div>
                     </div>
-               </div> 
-          
-              <div class="camposPotencia">
-                 <span class="camposServidor">Potência Máxima da Memória RAM</span><br>
-                 <input id="ramServidor" class="selectServidor"><br>
-
-               </div!-->
-
-
-
-
-
-                    <div id="divBotoesServidor">
-                        <button onclick="cadastrarServidor()" class="botaoServidor"
-                            style="background-color: #FF847F">Adicionar Servidor</button>
-                        <button onclick="limparForm()" class="botaoServidor"
-                            style="background-color: #000F53; margin-left: 20px;">Limpar Formulário</button>
-                    </div>
-
                 </div>
 
             </div>
@@ -251,7 +209,7 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 
 <script>
-
+var idParaCadastro;
     var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
     if (escalonamentoFunc != 1) {
@@ -358,18 +316,22 @@
 
     var fkBanco = sessionStorage.FKBANCO
    
-
-
-
+var apelido = sessionStorage.CrudApelidoServer;
+   
+console.log(apelido)
     var fkServidorParaNuvem;
+    window.onload = FkServidorForCloud()
 
     function FkServidorForCloud(idUsuario) {
         if (sessionStorage.ID_USUARIO) {
-            idUsuario = ipServidor.value;
+            idUsuario = fkBanco;
+            var apelido = sessionStorage.CrudApelidoServer;
             console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
         }
         else { console.error("ID do usuário não encontrada no sessionStorage."); }
-        fetch(`/usuarios/PuxarFkServidor/${idUsuario}`, { cache: 'no-store' })
+        fetch(`/usuarios/PuxarFkServidor/${idUsuario}?apelido=${apelido}`, { cache: 'no-store'
+
+    })
             .then(function (response) {
                 if (response.ok) {
                     response.json()
@@ -385,14 +347,15 @@
 
     }
 
-
+var fkServidor_Locacao;
     function exibirfkServerNuvem(response) {
         console.log('Exibindo dados retornados:')
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
-            fkServidorParaNuvem = registro.fkP;
-
-
+            var nomeServidor = registro.apelido
+            fkServidor_Locacao = registro.fkP;
+            nomeServer.innerHTML = `${nomeServidor}`
+           
             // var ramServidores = document.getElementById('ramServidores');
             // ramServidores.innerHTML = `${dado}%`;
 
@@ -401,12 +364,11 @@
     }
 
 
+console.log(fkServidor_Locacao)
 
+       
 
-        console.log(fkBanco, fkPlano)
-
-        document.getElementById("dataServidorDiv").style.display = 'none'
-        document.getElementById("blocoServidor").style.display = 'block'
+       
 
         function cadastrarServidor() {
             //Recupere o valor da nova input pelo nome do id
@@ -449,8 +411,6 @@
             })
                 .then(function (resposta) {
                     console.log("resposta: ", resposta);
-                    sessionStorage.CrudApelidoServer = apelidoServidor.value;
-                    window.location = "qualTipoServerCRUD.html"
 
                 })
                 .catch(function (resposta) {
@@ -479,8 +439,9 @@
             console.log(compraServidorVar)
             var validadeServidorVar = validadeServidor.value;
             console.log(validadeServidorVar)
+            var idServer = fkServidor_Locacao
             if (
-                idServidorVar == ""  ||
+                compraServidorVar == ""  ||
                 validadeServidorVar == ""
             ) {
 
@@ -498,14 +459,14 @@
                 body: JSON.stringify({
                     // crie um atributo que recebe o valor recuperado aqui
                     // Agora vá para o arquivo routes/usuario.js
-                   
+                   idServerS : idServer,
                     CompraServer: compraServidorVar,
                     ValidadeServer: validadeServidorVar,
                 }),
             })
                 .then(function (resposta) {
                     console.log("resposta: ", resposta);
-
+                  
                 })
                 .catch(function (resposta) {
                     console.log(`#ERRO: ${resposta}`);
@@ -521,7 +482,8 @@
 
         function semNuvem() {
             document.getElementById("dataServidorDiv").style.display = 'none'
-            limparForm()
+window.location = "paginaCarregamento.html"
+            
         }
 
 
