@@ -1,624 +1,364 @@
-CREATE database SecurityBank;
-USE SecurityBank;
- -- drop database SecurityBank;
+create database SecurityBank;
+use SecurityBank;
+  -- drop database SecurityBank;
 
-
-
-CREATE TABLE planoContratado(
+create table plano_contratado(
 idPlano int primary key auto_increment,
 tipo int
 );
 
-CREATE TABLE statusMaquina(
+INSERT INTO plano_contratado (tipo) VALUES
+(1), -- plano premium
+(2); -- plano básico
+
+
+create table status_maquina(
 idStatus int primary key auto_increment,
-nome varchar (45)
-)  ;
+nome varchar(45) -- status que serão alterados conforme a captação dos servidores
+);
 
-<<<<<<< Updated upstream
-CREATE TABLE localizacaoMatriz(
-idLocalização int primary key auto_increment,
-empresa varchar (45),
-país varchar (45)
-) ;
+INSERT INTO status_maquina (nome) VALUES
+('Emergência'),
+('Estável'),
+('Atenção'),
+('Urgência');
 
 
--- CREATE TABLE locacao(
--- idLocacao int primary key auto_increment,
--- dataCompraLocacao DATE,
--- dateValidade DATE
--- );
-=======
-select*from funcionarios;
-
-CREATE TABLE especificacoes(
+create table especificacao( -- disponibilidade máxima de cada componente
 idEspecificacoes int primary key auto_increment,
 potenciaMaxCPU double,
 potenciaMaxRAM double,
 potenciaMaxDisco double
-) ;
-CREATE TABLE locacao(
-idLocacao int auto_increment,
-dataCompraLocacao DATE,
-dateValidade DATE,
-fkServidor int,
-constraint pkComposta primary key (idLocacao, fkServidor),
-foreign key (fkServidor) references servidor(idServidor)
 );
->>>>>>> Stashed changes
 
-CREATE TABLE banco(
+INSERT INTO especificacao (potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco) VALUES
+(3.2, 16, 500),
+(2.5, 8, 256);
+
+
+
+create table metrica (
+idMetrica int primary key auto_increment,
+estavel double,
+atencao double,
+emergente double,
+urgente double
+);
+select*from registros;
+INSERT INTO metrica (estavel, atencao, emergente, urgente) VALUES
+(90, 80, 70, 60),
+(95, 85, 75, 65);
+
+INSERT INTO metrica (estavel, atencao, emergente, urgente) VALUES
+(80, 70, 60, 50);
+
+create table banco(
 idBanco int primary key auto_increment,
-nomeFantasia varchar (45),
-cnpj CHAR(14),
-razaoSocial varchar (45),
-sigla varchar (10),
-responsavelLegal varchar(11)
-) ;
-
-select*from servidor;
-CREATE TABLE escalonamentoFuncionarios(
-idEscalonamento int primary key auto_increment,
-cargo varchar (45),
-nívelAcesso int
-) ;
-
-CREATE TABLE funcionarios(
-idFuncionarios int auto_increment,
-nome varchar (45),
-email varchar (45),
-cpf CHAR(14),
-telefone varchar (16),
-senha varchar (45),
-fkBanco int,
-fkEscalonamento int,
-constraint pkComposta primary key (idFuncionarios, fkBanco , fkEscalonamento),
- foreign key (fkBanco) references banco (idBanco),
- foreign key (fkEscalonamento) references  escalonamentoFuncionarios (idEscalonamento)
+nomeFantasia varchar(45),
+cnpj char(14),
+razaoSocial varchar(45),
+sigla varchar(10),
+cpfResponsavelLegal varchar(14)
 );
 
+INSERT INTO banco (nomeFantasia, cnpj, razaoSocial, sigla, cpfResponsavelLegal) VALUES
+('Bank c', '12345678901234', 'Bank A Ltd.', 'BKA', '12345678901'),
+('Bank B', '98765432109876', 'Bank B Inc.', 'BKB', '09876543210');
 
-CREATE TABLE servidor(
-idServidor int  auto_increment,
-apelido varchar (20),
-sistemaOperacional varchar (45),
-responsavelLegal VARCHAR(45),
-enderecoIP varchar (15),
-dataCompraLocacao DATE,
-dateValidade DATE,
+
+create table escalonamento_funcionario( -- permissionamento dos funcionários nas páginas da dashboard
+idEscalonamento int primary key auto_increment,
+cargo varchar(45),
+nivelAcesso int
+);
+
+INSERT INTO escalonamento_funcionario (cargo, nivelAcesso) VALUES
+('Admin', 1), -- acesso geral
+('Operator', 2), -- acesso geral - página de controle de acesso
+('Estagiario', 3); --  acesso limitado às páginas de painel geral e servidor individual
+
+select*from funcionarios;
+
+CREATE TABLE funcionarios (
+idFuncionarios int auto_increment,
+nome VARCHAR(45),
+email VARCHAR(45),
+cpf CHAR(14),
+telefone VARCHAR(14),
+senha VARCHAR(20),
+fkBanco int, 
+fkEscalonamento int,
+foreign key (fkBanco) references banco(idBanco),
+foreign key (fkEscalonamento) references escalonamento_funcionario(idEscalonamento),
+constraint pkComposta primary key (idFuncionarios,fkBanco,fkEscalonamento)
+);
+
+INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES
+('John Doe', 'john@example.com', '12345678901', '123-456-7890', 'password123', 1, 1),
+('Jane Smith', 'jane@example.com', '98765432109', '987-654-3210', 'pass456', 2, 2);
+
+
+CREATE TABLE servidor (
+idServidor int auto_increment,
+apelido VARCHAR(20),
+sistemaOperacional VARCHAR(45),
+cpfResponsavelLegal VARCHAR(45),
+enderecoIP VARCHAR(15),
 fkBanco int,
-fkStatus int,
-<<<<<<< Updated upstream
-fkLocalizacaoMatriz int,
-fkPlano int, 
-constraint pkComposta primary key (idServidor,fkBanco,fkPlano),
- foreign key (fkBanco) references banco (idBanco),
- foreign key (fkStatus) references statusMaquina (idStatus),
- foreign key (fkLocalizacaoMatriz) references LocalizacaoMatriz (idLocalização),
-=======
+fkStatus int, 
 fkEspecificacoes int,
 fkPlano int,
-constraint pkComposta primary key (idServidor,fkBanco, fkEspecificacoes, fkPlano),
- foreign key (fkBanco) references banco (idBanco),
- foreign key (fkStatus) references statusMaquina (idStatus),
- foreign key (fkEspecificacoes) references especificacoes (idEspecificacoes),
->>>>>>> Stashed changes
- foreign key (fkPlano) references planoContratado (idPlano)
-) ;
-
-SELECT DATEDIFF(dateValidade, CURDATE()) AS dias_restantes
-FROM servidor
-WHERE dateValidade >= CURDATE();
-
-SELECT 
-    DATEDIFF(dateValidade, CURDATE()) AS dias_restantes, 
-    DATE_FORMAT(dataCompraLocacao, '%d/%m/%Y') AS DtC,
-    DATE_FORMAT(dateValidade, '%d/%m/%Y') AS DtV
-FROM 
-    servidor
-WHERE 
-    dateValidade >= CURDATE();
+constraint pkComposta primary key (idServidor,fkBanco,fkEspecificacoes,fkPlano),
+foreign key (fkBanco) references banco(idBanco),
+foreign key (fkStatus) references status_maquina(idStatus),
+foreign key (fkEspecificacoes) references especificacao(idEspecificacoes),
+foreign key (fkPlano) references plano_contratado(idPlano)
+);
+INSERT INTO servidor (apelido, sistemaOperacional, cpfResponsavelLegal, enderecoIP, fkBanco, fkStatus,fkEspecificacoes, fkPlano) VALUES
+('Server C', 'Linux', '12345678961', '192.168.1.1', 1, 1, 1, 1),
+('Server B', 'Windows', '12345678902', '192.168.2.2',1, 1, 1, 1);
 
 
+create table locacao( -- locacao caso servidor seja da nuvem
+idLocacao int auto_increment,
+dataCompraLocacao date,
+dataValidade date,
+servidor_fkLocacao int,
+servidor_idServidor int,
+servidor_fkBanco int,
+servidor_fkEspecificacoes int,
+servidor_fkPlano int,
+constraint pkComposta primary key (idLocacao,servidor_fkLocacao),
+foreign key (servidor_fkLocacao) references locacao (idLocacao),
+foreign key (servidor_idServidor) references servidor (idServidor),
+foreign key (servidor_fkBanco) references banco (idBanco),
+foreign key (servidor_fkEspecificacoes) references especificacao (idEspecificacoes),
+foreign key (servidor_fkPlano) references plano_contratado (idPlano)
+);
+
+INSERT INTO locacao (dataCompraLocacao, dataValidade,servidor_fkLocacao,servidor_idServidor,servidor_fkBanco,servidor_fkEspecificacoes,servidor_fkPlano) VALUES
+('2023-01-01', '2024-01-01',1,1,1,1,1),
+('2023-02-15', '2024-02-15',1,1,1,1,1);
+
+
+CREATE TABLE componentes (
+idComponentes int auto_increment,
+nome varchar(90),
+modelo varchar(45),
+fkMetrica int,
+servidor_idServidor int,
+servidor_fkBanco int,
+servidor_fkEspecificacoes int,
+servidor_fkLocacao int,
+constraint pkComposta primary key (idComponentes, fkMetrica, servidor_idServidor, servidor_fkBanco, servidor_fkEspecificacoes, servidor_fkLocacao),
+FOREIGN KEY (fkMetrica) REFERENCES servidor(idServidor),
+FOREIGN KEY (servidor_idServidor) REFERENCES banco(idBanco),
+FOREIGN KEY (servidor_fkBanco) REFERENCES especificacao(idEspecificacoes),
+FOREIGN KEY (servidor_fkEspecificacoes) REFERENCES plano_contratado(idPlano),
+FOREIGN KEY (servidor_fkLocacao) references locacao(idLocacao)
+);
+
+INSERT INTO componente (nome, modelo,fkMetrica, servidor_idServidor, servidor_fkBanco, servidor_fkEspecificacoes, servidor_fkLocacao) VALUES
+('Component A', 'cpu', 1, 1, 1, 1, 1), -- padronização do campo "modelo" : cpu
+('Component B', 'ram', 1, 1, 1, 1, 1), -- padronização do campo "modelo" : ram
+('Component C', 'disco', 1, 1, 1, 1, 1); -- padronização do campo "modelo" : disco
+-- pode-se adicionar mais componentes, porém é preciso dessa formatação (letra minúscula), só é necessário essa padronização com esses 3 componentes
+
+alter table alerta add column fkRegistro int;
+alter table alerta add constraint fkReg foreign key (fkRegistro) references registros (idRegistros);
+
+
+CREATE TABLE alerta (
+idAlertas int primary key auto_increment,
+componente VARCHAR(45),
+dataAlerta DATE,
+horaAlerta time,
+situacao VARCHAR(45),
+fkServidor int,
+fkBanco int,
+fkEspecificacoes int,
+fkComponente int,
+fkMetrica int,
+fkPlano int,
+fkLocacao int,
+fkRegistro int,
+foreign key(fkServidor) references servidor(idServidor),
+foreign key  (fkBanco) REFERENCES banco (idBanco),
+foreign key  (fkEspecificacoes) REFERENCES especificacao (idEspecificacoes),
+foreign key  (fkComponente) REFERENCES componente (idComponentes),
+foreign key (fkMetrica) references metrica(idMetrica),
+foreign key (fkPlano) REFERENCES plano_contratado(idPlano),
+foreign key (fkLocacao) references locacao(idLocacao)
+);
+select * from funcionarios;
+INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkServidor, fkBanco, fkEspecificacoes, fkComponente, fkMetrica, fkPlano, fkLocacao) VALUES
+('2023-03-01', '12:05:00', 'Urgência', 3, 1, 1, 1, 1, 1,1,1), -- o campo status deve sempre estar com essa formatação, primeira letra maiúscula e com acentuação
+('2023-03-02', '15:35:00', 'Emergencia', 3, 2, 2, 2, 2, 2,2,2);
+
+select*from alerta;
+   INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 3, 3, 3, 1,1,1);
+
+select*from metrica;
+
+
+
+
+select*from alerta;
 
 CREATE TABLE usb (
-idUSB int auto_increment,
+idUSB int,
 nomeDispositivo varchar(255),
-qtdPorta int,
-qtdConectada int,
-fkServidorUSB int,
-fkBancoUSB int,
-fkEpescUBS int,
-fkPlanoUBS int,
-fkLocacaoUBS int,
-<<<<<<< Updated upstream
-constraint pkComposta primary key (idUSB, fkServidorUSB, fkBancoUSB, fkEpescUBS, fkPlanoUBS ),
-foreign key (fkServidorUSB) references Servidor(idServidor),
-foreign key (fkBancoUSB) references banco(idBanco),
-foreign key(fkPlanoUBS) references planoContratado (idPlano)
+qtddPorta int,
+qtddConectada int,
+servidor_idServidor int,
+servidor_fkBanco int,
+servidor_fkEspecificacoes int,
+servidor_fkPlano int,
+servidor_fkLocacao int,
+constraint pkComposta primary key (idUSB, servidor_idServidor, servidor_fkBanco, servidor_fkEspecificacoes, servidor_fkPlano, servidor_fkLocacao),
+foreign key (servidor_idServidor) references servidor(idServidor),
+foreign key (servidor_fkBanco) references banco(idBanco),
+foreign key(servidor_fkEspecificacoes) references especificacao(idEspecificacoes),
+foreign key(servidor_fkPlano) references plano_contratado (idPlano),
+foreign key(servidor_fkLocacao) references locacao(idLocacao)
+);
+
+INSERT INTO usb (idUSB, nomeDispositivo, qtddPorta, qtddConectada, servidor_idServidor, servidor_fkBanco, servidor_fkEspecificacoes, servidor_fkPlano, servidor_fkLocacao) VALUES
+(1, 'USB Device A', 4, 2, 1, 1, 1, 1, 1),
+(2, 'USB Device B', 8, 6, 2, 2, 2, 2, 2);
+
+CREATE TABLE rede (
+idRede int primary key auto_increment,
+status int,
+ping DOUBLE,
+potenciaUpload DOUBLE,
+potenciaDownload DOUBLE,
+ip varchar(45),
+dtHora datetime,
+servidor_idServidor int,
+servidor_fkBanco int,
+servidor_fkEspecificacoes int,
+servidor_fkPlano int,
+servidor_fkLocacao int,
+foreign key (servidor_idServidor) references servidor(idServidor),
+foreign key (servidor_fkBanco) references banco(idBanco),
+foreign key(servidor_fkEspecificacoes) references especificacao(idEspecificacoes),
+foreign key(servidor_fkPlano) references plano_contratado (idPlano),
+foreign key(servidor_fkLocacao) references locacao(idLocacao)
 );
 
 
-=======
-constraint pkComposta primary key (idUSB, fkServidorUSB, fkBancoUSB, fkEpescUBS, fkPlanoUBS, fkLocacaoUBS ),
-foreign key (fkServidorUSB) references Servidor(idServidor),
-foreign key (fkBancoUSB) references banco(idBanco),
-foreign key(fkEpescUBS) references especificacoes(idEspecificacoes),
-foreign key(fkPlanoUBS) references planoContratado (idPlano),
-foreign key(fkLocacaoUBS) references locacao(idLocacao)
-);
+INSERT INTO rede (status, PotenciaUpload, PotenciaDownload, servidor_idServidor, servidor_fkBanco, servidor_fkEspecificacoes, servidor_fkPlano, servidor_fkLocacao) VALUES
+(0, 100, 250, 1, 1, 1, 1, 1);
 
-create table Rede(
-idRede int auto_increment,
-StatusRede int,
-PotenciaUpload Double,
-PotenciaDownload Double,
-EnderecoIP varchar(39),
-Ping Double,
-DataHora datetime,
-fkServidorRede int,
-fkBancoRede int,
-fkEspecificacoesRede int,
-fkPlanoRede int,
-fkLocacaoRede int,
-fkMetricaRede int,
-constraint pkComposta primary key (idRede, fkServidorRede, fkBancoRede, fkEspecificacoesRede, fkPlanoRede, fkLocacaoRede),
-foreign key (fkServidorRede) references Servidor(idServidor),
-foreign key (fkBancoRede) references banco(idBanco),
-foreign key(fkEspecificacoesRede) references especificacoes(idEspecificacoes),
-foreign key(fkPlanoRede) references planoContratado (idPlano),
-foreign key(fkLocacaoRede) references locacao(idLocacao),
-foreign key (fkMetricaRede) references Metrica(idMetrica)
-);
->>>>>>> Stashed changes
-
-
-
-
-create table alertaRede(
-idAlertas int primary key auto_increment,
-dataAlerta date,
-horaAlerta time,
-situacao varchar(99),
-fkRede int,
-foreign key(fkRede) references Rede(idRede)
-);
-
-<<<<<<< Updated upstream
-=======
 CREATE TABLE particao (
 idParticao int primary key auto_increment,
-NomeParticao varchar (99),
-PontoMontagem varchar (5), 
-fkComponente int,
+dispositivo varchar (45),
+pontoMontagem varchar (5), 
+fkComponentes int,
 fkMetrica int,
 fkServidor int,
 fkBanco int,
 fkEspecificacoes int, 
 fkPlano int,
 fkLocacao int,
-foreign key (fkComponente) references componente(idComponente),
+foreign key (fkComponentes) references componente(idComponentes),
 foreign key (fkMetrica) references metrica(idMetrica),
 foreign key (fkServidor) references servidor(idServidor),
 foreign key (fkBanco) references banco(idBanco),
-foreign key (fkEspecificacoes) references especificacoes(idEspecificacoes),
-foreign key (fkPlano) references planoContratado(idPlano),
+foreign key (fkEspecificacoes) references especificacao(idEspecificacoes),
+foreign key (fkPlano) references plano_contratado(idPlano),
 foreign key (fkLocacao) references locacao(idLocacao)
 );
 
-create table qtdNucleosThreads(
-idTheads int primary key auto_increment,
+INSERT INTO particao (nomeParticao,pontoMontagem,fkComponentes,fkMetrica,fkServidor,fkBanco,fkEspecificacoes,fkPlano,fkLocacao) VALUES
+('backups','D:/', 1,1,1,1,1,1,1),
+('faculdade','E:/', 1,1,1,1,1,1,1);
+
+
+CREATE TABLE qtdNucleosThreads (
+idThreads int primary key auto_increment,
 qtdNucleos int,
-qtdThreads int,
+Threads int,
 especificacaoCpu varchar(255),
-fkComponente int,
+fkComponentes int,
 fkMetrica int,
 fkServidor int,
 fkBanco int,
 fkEspecificacoes int,
 fkPlano int,
 fkLocacao int,
-foreign key (fkComponente) references componentes(idcomponentes),
+foreign key (fkComponentes) references componente(idComponentes),
 foreign key (fkMetrica) references metrica(idMetrica),
 foreign key (fkServidor) references servidor(idServidor),
 foreign key (fkBanco) references banco(idBanco),
-foreign key (fkEspecificacoes) references especificacoes(idEspecificacoes),
-foreign key (fkPlano) references planoContratado(idPlano),
+foreign key (fkEspecificacoes) references especificacao(idEspecificacoes),
+foreign key (fkPlano) references plano_contratado(idPlano),
 foreign key (fkLocacao) references locacao(idLocacao)
 );
 
-create table monitoramentoThreads (
-idcaptacao int primary key auto_increment,
-porcentagem double,
-numeroThreads int,
-fkNucleosThreds int,
-foreign key (fkNucleosThreds) references qtdNucleosThreads(idTheads)
+
+
+CREATE TABLE monitoramentoThreads (
+    idcaptacao int primary key auto_increment,
+    porcentagem double,
+    numeroThreads int,
+    qtdNucloesThreads_idThreads int,
+    foreign key (qtdNucloesThreads_idThreads) references qtdNucleosThreads(idThreads)
 );
 
-
-INSERT INTO alertaRede (dataAlerta, horaAlerta, situacao, fkRede)
-VALUES (CURDATE(), CURTIME(), 'Problema de conexão detectado', 1);
-
-SELECT
-        alertaRede.situacao AS situ,
-       
-        DATE_FORMAT(alertaRede.dataAlerta, '%d/%m/%Y') AS dataAlerta,
-        alertaRede.horaAlerta AS horaAlerta
-    FROM
-        alertaRede
-    JOIN
-        Rede ON alertaRede.fkRede = Rede.idRede
-    WHERE
-        Rede.fkServidorRede = 1
-    ORDER BY
-        alertaRede.idAlertas desc
-    LIMIT 3;
-
-
-select*From alertaRede;
-
-SELECT
-    alertaRede.situacao AS situ,
-   
-    DATE_FORMAT(alertaRede.dataAlerta, '%d/%m/%Y') AS dataAlerta,
-    alertaRede.horaAlerta AS horaAlerta
-FROM
-    alertaRede
-JOIN
-    Rede ON alertaRede.fkRede = Rede.idRede
-WHERE
-    Rede.fkServidorRede = 1
-ORDER BY
-    alertaRede.idAlertas DESC
-LIMIT 3;
-
-
-
-  SELECT
-        situacao as situ,
-        componentes.modelo AS nomeComponente,
-        DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
-        alerta.horaAlerta AS horaAlerta
-        
-      FROM
-        alerta
-      JOIN
-        servidor ON alerta.fkServidor = servidor.idServidor
-      JOIN
-        componentes ON alerta.fkComponente = componentes.idComponentes
-      WHERE
-        alerta.fkServidor = 1
-      ORDER BY
-        alerta.idAlertas DESC
-      LIMIT 3;
-
-
-
-
-
-
-SELECT Ping as Ping, DataHora as DataHora
-FROM Rede
-WHERE fkServidorRede = 1
-ORDER BY DataHora DESC
-LIMIT 15;
-
-
-
-ALTER TABLE Rede
-ADD COLUMN DataHora datetime;
-
-select EnderecoIP as redeIP from Rede where fkServidorRede =1 order by idRede desc limit 1;
-select StatusRede as connectOrN from rede where fkServidorRede = 1 order by idRede desc limit 1;
-
-
-
-select*from metrica;
->>>>>>> Stashed changes
-CREATE TABLE componentes (
-    idComponentes INT AUTO_INCREMENT,
-    nome VARCHAR(90),
-    modelo VARCHAR(45),
-    fkServidorComp INT,
-    fkBancoComp INT,
-    fkEspecificacoesComp INT,
-    fkPlanoComp INT,
-    fkMetrica int,
-    fkLocacao int,
-<<<<<<< Updated upstream
-    PRIMARY KEY (idComponentes, fkServidorComp, fkBancoComp, fkPlanoComp, fkMetrica ),
-=======
-    PRIMARY KEY (idComponentes, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp, fkMetrica ),
->>>>>>> Stashed changes
-    CONSTRAINT fk_servidor_comp FOREIGN KEY (fkServidorComp) REFERENCES servidor(idServidor),
-    CONSTRAINT fk_banco_comp FOREIGN KEY (fkBancoComp) REFERENCES banco(idBanco),
-    CONSTRAINT fk_plano_comp FOREIGN KEY (fkPlanoComp) REFERENCES planoContratado(idPlano),
-    constraint fk_locacao_comp FOREIGN KEY (fkLocacao) references locacao(idLocacao),
-    CONSTRAINT fk_metricas_comp FOREIGN KEY(fkMetrica) REFERENCES metrica(idMetrica)
+CREATE TABLE alertaRede (
+    idAlertas int primary key auto_increment,
+    componente VARCHAR(45),
+    data date,
+    hora time,
+    status varchar(99),
+    rede_idrede int,
+    foreign key(rede_idrede) references rede(idRede)
 );
 
+alter table registros rename column fkServidor to fkServidorReg;
 CREATE TABLE registros (
-    idRegistros INT AUTO_INCREMENT,
-    dataHorario DATETIME,
-    dadosCaptados DOUBLE,
-    fkServidorReg INT,
-    fkBancoReg INT,
-    fkEspeciReg INT,
-    fkPlanoReg INT,
-    fkComponentesReg INT,
-    fkLocacaoReg int,
-    fkMetricaReg int,
-    PRIMARY KEY (idRegistros, fkServidorReg, fkBancoReg, fkPlanoReg, fkComponentesReg),
-    FOREIGN KEY (fkServidorReg) REFERENCES servidor (idServidor),
-    FOREIGN KEY (fkBancoReg) REFERENCES banco (idBanco),
-    FOREIGN KEY (fkPlanoReg) REFERENCES planoContratado(idPlano),
-    FOREIGN KEY (fkLocacaoReg) references locacao(idLocacao),
-    FOREIGN KEY (fkComponentesReg) REFERENCES componentes (idComponentes),
-    foreign key (fkMetricaReg) references metrica(idMetrica)
-    
+idRegistros int auto_increment,
+dataHorario DATETIME,
+dadoCaptados DOUBLE,
+fkServidorReg int,
+fkBanco int,
+fkEspecificacoes int,
+fkComponentesReg int,
+fkMetrica int,
+fkLocacao int,
+fkParticao int,
+constraint pkComposta primary key (idRegistros,fkServidor,fkBanco,fkEspecificacoes,fkComponentes,fkMetrica,fkLocacao),
+foreign key (fkServidor) references servidor(idServidor),
+foreign key (fkBanco) references banco(idBanco),
+foreign key (fkEspecificacoes) references especificacao(idEspecificacoes),
+foreign key (fkComponentes) references componente(idComponentes),
+foreign key (fkMetrica) references metrica(idMetrica),
+foreign key (fkLocacao) references locacao(idLocacao),
+foreign key (fkParticao) references particao(idParticao)
 );
 
-create table alerta(
-idAlertas int primary key auto_increment,
-hora time,
-fkRegistro int,
-fkComponente int,
-fkMetrica int,
-fkServidor int,
-fkBanco int,
-fkPlano int,
-fkLocacao int,
-	foreign key(fkRegistro) references registros(idRegistros),
-	FOREIGN KEY (fkServidor) REFERENCES servidor (idServidor),
-    FOREIGN KEY (fkBanco) REFERENCES banco (idBanco),
-    FOREIGN KEY (fkPlano) REFERENCES planoContratado(idPlano),
-    FOREIGN KEY (fkLocacao) references locacao(idLocacao),
-    FOREIGN KEY (fkComponente) REFERENCES componentes (idComponentes),
-	foreign key (fkMetrica) references metrica(idMetrica)
-);-- Inserção de dados na tabela 'planoContratado'
-INSERT INTO planoContratado (tipo) VALUES (1), (2);
-
--- Inserção de dados na tabela 'statusMaquina'
-INSERT INTO statusMaquina (nome) VALUES ('Ativo'), ('Inativo'), ('Em manutenção');
-
--- Inserção de dados na tabela 'localizacaoMatriz'
-INSERT INTO localizacaoMatriz (empresa, país) VALUES ('Empresa A', 'Brasil'), ('Empresa B', 'EUA');
-
--- Inserção de dados na tabela 'banco'
-INSERT INTO banco (nomeFantasia, cnpj, razaoSocial, sigla, responsavelLegal) VALUES ('Banco A', '12345678901234', 'Razão A', 'RA', '11111111111'), ('Banco B', '23456789012345', 'Razão B', 'RB', '22222222222'), ('Banco C', '34567890123456', 'Razão C', 'RC', '33333333333');
-
--- Inserção de dados na tabela 'escalonamentoFuncionarios'
-INSERT INTO escalonamentoFuncionarios (cargo, nívelAcesso) VALUES ('Gerente', 1), ('Supervisor', 2), ('Funcionário', 3);
-
--- Inserção de dados na tabela 'funcionarios'
-INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES ('Nome A', 'emailA@example.com', '12345678901234', '1234567890', 'senhaA', 1, 1), ('Nome B', 'emailB@example.com', '23456789012345', '2345678901', 'senhaB', 2, 2), ('Nome C', 'emailC@example.com', '34567890123456', '3456789012', 'senhaC', 3, 3);
-
--- Inserção de dados na tabela 'servidor'
-INSERT INTO servidor (apelido, sistemaOperacional, responsavelLegal, enderecoIP, dataCompraLocacao, dateValidade, fkBanco, fkStatus, fkLocalizacaoMatriz, fkPlano) VALUES ('Servidor A', 'Windows', 'Responsável A', '192.168.1.1', '2023-10-31', '2024-10-31', 1, 1, 1, 1), ('Servidor B', 'Linux', 'Responsável B', '192.168.1.2', '2023-11-01', '2024-11-01', 2, 2, 2, 2);
-
-INSERT INTO servidor (apelido, sistemaOperacional, responsavelLegal, enderecoIP, dataCompraLocacao, dateValidade, fkBanco, fkStatus, fkLocalizacaoMatriz, fkPlano) VALUES ('Servidor aws', 'Windows', 'Responsável A', '192.168.1.1', '2023-10-31', '2024-10-31', 1, 1, 1, 1);
-
--- Inserção de dados na tabela 'usb'
-INSERT INTO usb (nomeDispositivo, qtdPorta, qtdConectada, fkServidorUSB, fkBancoUSB, fkEpescUBS, fkPlanoUBS) VALUES ('Dispositivo A', 2, 1, 1, 1, 1, 1), ('Dispositivo B', 3, 2, 2, 2, 2, 2);
-
--- Inserção de dados na tabela 'metrica'
-INSERT INTO metrica (estavel, atencao, emergencia, urgencia) VALUES (0.1, 0.2, 0.3, 0.4), (0.2, 0.3, 0.4, 0.5), (0.3, 0.4, 0.5, 0.6);
-
--- Consultando os dados inseridos nas tabelas
-USE SecurityBank;
-SELECT 
-    Funcionarios.*,
-    Banco.*,
-    Servidor.*
-FROM 
-    funcionarios
-JOIN Banco ON funcionarios.fkBanco = Banco.idBanco
-JOIN Servidor ON funcionarios.fkBanco = Servidor.fkBanco;
-
-SELECT * FROM servidor 
-JOIN banco a 
-ON servidor.fkBanco = a.idBanco 
-WHERE a.idBanco = 1;
-
-
-<<<<<<< Updated upstream
-SELECT * FROM planoContratado;
-SELECT * FROM statusMaquina;
-SELECT * FROM localizacaoMatriz;
-SELECT * FROM especificacoes;
-SELECT * FROM banco;
-SELECT * FROM escalonamentoFuncionarios;
-SELECT * FROM funcionarios;
-SELECT * FROM servidor;
-SELECT * FROM componentes;
-select*from registros;
-desc registros;
-SELECT * FROM registros where fkservidor =1;
-SELECT
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
-        dataHorario AS horario
-    FROM registros 
-    JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE fkComponentesReg = 1
-    LIMIT 0, 50;
-    
-SELECT 
-    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
-    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
-    dataHorario AS horario
-FROM registros
-JOIN Componentes ON fkComponentesReg = idComponentes
-WHERE fkBancoReg = 1
-LIMIT 0, 50;
-=======
-
-
-
--- Inserting data into planoContratado
-INSERT INTO planoContratado (tipo) VALUES
-(1),
-(2);
-
--- Inserting data into statusMaquina
-INSERT INTO statusMaquina (nome) VALUES
-('Emergencia');
-
--- Inserting data into especificacoes
-INSERT INTO especificacoes (potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco) VALUES
-(3.2, 16, 500),
-(2.5, 8, 256);
-
--- Inserting data into locacao
-INSERT INTO locacao (dataCompraLocacao, dateValidade) VALUES
-('2023-01-01', '2024-01-01'),
-('2023-02-15', '2024-02-15');
-
--- Inserting data into banco
-INSERT INTO banco (nomeFantasia, cnpj, razaoSocial, sigla, responsavelLegal) VALUES
-('Bank c', '12345678901234', 'Bank A Ltd.', 'BKA', 'John Doe'),
-('Bank B', '98765432109876', 'Bank B Inc.', 'BKB', 'Jane Smith');
-
--- Inserting data into escalonamentoFuncionarios
-INSERT INTO escalonamentoFuncionarios (cargo, nivelAcesso) VALUES
-('Admin', 1),
-('Operator', 2),
-('Estagiario', 3);
-
-
-SELECT email AS mail, 
-cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamentoFuncionarios on fkEscalonamento = idEscalonamento WHERE fkBanco = 1;
-
-
--- Inserting data into funcionarios
-INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES
-('John Doe', 'john@example.com', '12345678901', '123-456-7890', 'password123', 1, 1),
-('Jane Smith', 'jane@example.com', '98765432109', '987-654-3210', 'pass456', 2, 2);
-
--- Inserting data into servidor
-INSERT INTO servidor (apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus, fkEspecificacoes, fkPlano) VALUES
-('Server C', 'Linux', 'John Doe', '192.168.1.1', 1, 1, 1, 1),
-('Server B', 'Windows', 'Jane Smith', '192.168.2.2', 1,1,1,1);
-select*from funcionarios;
--- Inserting data into usb
-INSERT INTO usb (idUSB, nomeDispositivo, qtdPorta, qtdConectada, fkServidorUSB, fkBancoUSB, fkEpescUBS, fkPlanoUBS, fkLocacaoUBS) VALUES
-(1, 'USB Device A', 4, 2, 1, 1, 1, 1, 1),
-(2, 'USB Device B', 8, 6, 2, 2, 2, 2, 2);
-
--- Inserting data into Rede
-INSERT INTO Rede (StatusRede, PotenciaUpload, PotenciaDownload, fkServidorRede, fkBancoRede, fkEspecificacoesRede, fkPlanoRede, fkLocacaoRede) VALUES
-(0, 100, 250, 1, 1, 1, 1, 1);
-
-
--- Inserting data into metrica
-INSERT INTO metrica (estavel, atencao, emergencia, urgencia) VALUES
-(90, 80, 70, 60),
-(95, 85, 75, 65);
-
--- Inserting data into componentes
-INSERT INTO componentes (nome, modelo, fkServidorComp, fkBancoComp, fkEspecificacoesComp, fkPlanoComp, fkMetrica, fkLocacao) VALUES
-('Component A', 'Model X', 1, 1, 1, 1, 1, 1),
-('Component B', 'Model Y', 1, 1, 1, 1, 1, 1),
-('Component C', 'Model Z', 1, 1, 1, 1, 1, 1);
-
--- Inserting data into registros
-INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg, fkLocacaoReg, fkMetricaReg) VALUES
+select*from alerta;
+INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBanco, fkEspecificacoes, fkComponentesReg, fkMetrica, fkLocacao, fkParticao) VALUES
 ('2023-03-01 12:00:00', 150, 1, 1, 1, 1, 2, 1, 1),
 ('2023-03-02 15:30:00', 200, 2, 2, 2, 2, 2, 2, 2);
-
--- Inserting data into alerta
-INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkEsoecificacao, fkPlano, fkLocacao) VALUES
-('2023-03-01', '12:05:00', 'Urgência', 1, 1, 1, 1, 1, 1, 1, 1),
-('2023-03-02', '15:35:00', 'Emergencia', 2, 2, 2, 2, 2, 2, 2, 2);
-truncate table alerta;
-
-
-INSERT INTO servidor (apelido, sistemaOperacional, responsavelLegal, enderecoIP, fkBanco, fkStatus,fkEspecificacoes, fkPlano, fkLocacao) VALUES
-('Server Plim Plim', 'Linux', 'John Doe', '192.168.1.1', 1, 3, 1, 1, 1, 1);
-
-
-select*from funcionarios;
-select*from locacao;
-select*from alerta;
-
-
-SELECT
-situacao as situ,
-  componentes.modelo AS nomeComponente,
-  DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
-  alerta.horaAlerta AS horaAlerta
-FROM
-  alerta
-JOIN
-  servidor ON alerta.fkServidor = servidor.idServidor
-JOIN
-  componentes ON alerta.fkComponente = componentes.idComponentes
-WHERE
-  alerta.fkServidor = 1
-ORDER BY
-  alerta.idAlertas DESC
-LIMIT 7;
-
-select*from locacao;
-
-
-select*From usb;
-
-INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg, fkLocacaoReg, fkMetricaReg) VALUES
-('2023-03-01 12:00:00', 15, 1, 1, 1, 1, 2, 1, 1),
-('2023-03-01 12:00:00', 15, 1, 1, 1, 1, 1, 1, 1),
-('2023-03-01 12:00:00', 15, 1, 1, 1, 1, 3, 1, 1);
-
-select*From Rede;
-desc Rede;
-
-select nomeDispositivo as nome,
-qtdPorta as qtdPortasTotal,
-qtdConectada as qtdConnect from usb where fkServidorUSB = 1;
-
-select situacao from alerta where fkServidor = 1 order by  idAlertas desc limit 1;
-select*from servidor;
-
-select situacao as UltimasSituSelected from alerta where fkServidor =5 order by  idAlertas desc limit 1;
-select*from rede;
-
-SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidorRede = 1  ORDER BY idRede DESC LIMIT 1;
-
-select*from servidor;
-select*from funcionarios;
 select*from registros;
-select*From componentes;
-SELECT
-        situacao as situ,
-        componentes.modelo AS nomeComponente,
-        DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
-        alerta.horaAlerta AS horaAlerta
-        
-      FROM
-        alerta
-      JOIN
-        servidor ON alerta.fkServidor = servidor.idServidor
-      JOIN
-        componentes ON alerta.fkComponente = componentes.idComponentes
-      WHERE
-        alerta.fkServidor = ${idUsuario}
-      ORDER BY
-        alerta.idAlertas DESC
-      LIMIT 3;
 
-select nome as UltimasSituSelected from servidor join statusMaquina on fkStatus = idStatus where idServidor = 1;
+INSERT INTO registro (dataHorario, dadoCaptado, fkServidor, fkBanco, fkEspecificacoes, fkComponentes, fkMetrica, fkLocacao, fkParticao) VALUES
+('2023-08-01 14:00:00', 150, 1, 1, 1, 1, 2, 1, 1);
+
+select*from registro;
+select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = 1 group by fkStatus;
+
+ select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
+from alerta join servidor on fkServidor = idServidor
+join componentes on fkComponente = idComponentes where servidor.fkBanco = 1 order by idAlertas desc LIMIT 30;
 
 
 
-INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES
-('Pedrao', 'PedraoChefe@example.com', '12345678901', '123-456-7890', 'password123', 1, 1);
-INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES
-('tutu', 'tutue@example.com', '12345678901', '123-456-7890', 'password123', 1, 2);
-INSERT INTO funcionarios (nome, email, cpf, telefone, senha, fkBanco, fkEscalonamento) VALUES
-('cleide', 'cleide@example.com', '12345678901', '123-456-7890', 'password123', 1, 3);
-
-select idServidor AS qtd from servidor where fkBanco = 1 order by idServidor desc  limit 1;
 
 
->>>>>>> Stashed changes
+
+
+

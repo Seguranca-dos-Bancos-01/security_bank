@@ -148,7 +148,6 @@ mycursor1Comp = connection.cursor()
 mycursor2Comp = connection.cursor()
 mycursor3Comp = connection.cursor()
 mycursor4Comp = connection.cursor()
-mycursorPrt = connection.cursor()
 
 componentesID = []
 
@@ -172,22 +171,16 @@ valuesC4 = (fkServidor, fkBanco, fkEspec, fkPlano)
 mycursor4Comp.execute(queryC4, valuesC4)
 connection.commit()
 
-queryPrt = "INSERT INTO particoes(NomeParticao, pontoMontagem,fkComponente, fkMetrica,  fkServidor, fkBanco, fkEspecificacoes, fkPlano,fkLocacao) VALUES (%s,'PARTICAO', %s, %s, %s, %s)"
-valuesPrt = (fkComponente, fkMetrica,  fkServidor, fkBanco, fkEspecificacoes, fkPlano,fkLocacao)
-mycursorPrt.execute(queryPrt, valuesPrt)
-connection.commit()
-
 mycursor1CompS = connection.cursor()
 mycursor2CompS = connection.cursor()
 mycursor3CompS = connection.cursor()
 mycursor4CompS = connection.cursor()
-mycursorPrt = connection.cursor()
+
 
 idCPU = None
 idMemoria = None
 idDisco = None
 idNet = None
-idParticoes = None
 mycursor1CompS.execute("SELECT idComponentes FROM componentes WHERE nome = %s", (nomeCPU,))
 result1 = mycursor1CompS.fetchall()
 id_componente_vetor1 = [x[0] for x in result1]
@@ -208,18 +201,12 @@ result4 = mycursor4CompS.fetchall()
 id_componente_vetor4 = [x[0] for x in result4]
 idInternet = id_componente_vetor4[0]
 
-mycursorPrt.execute("SELECT idParticoes FROM particoes WHERE nome = %s", (first_device_name,))
-resultPrt = mycursorPrt.fetchall()
-id_particoes_vetorPrt = [x[0] for x in resultPrt]
-idParticoes = id_particoes_vetorPrt[0]
-
 
 print(idCPU)
 print(idMemoria)
 print(idDisco)
 print(idInternet)
 print(fkServidor, fkBanco, fkEspec, fkPlano)
-print(idParticoes)
 print(fkComponente, fkMetrica,  fkServidor, fkBanco, fkEspecificacoes, fkPlano,fkLocacao)
 
 
@@ -227,7 +214,6 @@ while True:
     memoria = psutil.virtual_memory()[2]
     cpu = psutil.cpu_percent(None)
     disco = psutil.disk_usage('/')[3]
-    particao = psutil.disk_usage(partition.mountpoint)
     interval = 1
     statusRede = 0
     network_connections = psutil.net_connections()
@@ -248,21 +234,21 @@ while True:
     horarioFormatado = horarioAtual.strftime('%Y-%m-%d %H:%M:%S')
     sele = "Select"
 
-    ins = [cpu, memoria, disco, statusRede,particao]
-    componentes = [idCPU, idMemoria, idDisco, idInternet,idParticoes]
+    ins = [cpu, memoria, disco, statusRede]
+    componentes = [idCPU, idMemoria, idDisco, idInternet]
     cursor = connection.cursor()
 
     for i in range(len(ins)):
         dado = ins[i]
 
-        query = "INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg,fkParticoesReg) VALUES (%s, %s, %s, %s, %s, %s, %s)"
+        query = "INSERT INTO registros (dataHorario, dadosCaptados, fkServidorReg, fkBancoReg, fkEspeciReg, fkPlanoReg, fkComponentesReg) VALUES (%s, %s, %s, %s, %s, %s, %s)"
         cursor.execute(query, (horarioFormatado, dado, fkServidor, fkBanco, fkEspec, fkPlano,  componentes[i]))
 
         connection.commit()
 
     print("\nINFORMAÇÕES SOBRE PROCESSAMENTO: ")
     print('Porcentagem utilizada do Processador: ', cpu, '\nPorcentagem utilizada de memoria: ', memoria,
-          '\nPorcentagem do disco sendo utilizada:', disco, '\nStatus da rede: ', statusRede, 'Porcentagem utilizada da Partição: ', particao)
+          '\nPorcentagem do disco sendo utilizada:', disco, '\nStatus da rede: ', statusRede)
 
     time.sleep(10)
 
