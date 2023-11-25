@@ -6,7 +6,7 @@ function buscarAquariosPorEmpresa(empresaId) {
   SELECT idServidor, 
        apelido, 
        sistemaOperacional, 
-       responsavelLegal, 
+       cpfResponsavelLegal, 
        enderecoIP, 
        fkBanco,
        fkStatus,

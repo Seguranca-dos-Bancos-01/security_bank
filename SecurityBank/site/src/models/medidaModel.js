@@ -122,7 +122,7 @@ function cadastrarAlertaDISCOUrgencia(servidorFK, planoFK, bancoFK) {
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
     var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situcao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 3, 3, 1, ${bancoFK},${planoFK});
+    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 3, 3, 3, 1, ${bancoFK},${planoFK});
 `;
 
     console.log("Executando a instrução SQL: \n" + instrucao);
@@ -208,10 +208,10 @@ function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
 function buscarUltimasMedidasSituSelected(idUsuario, limite_linhas) {
     var instrucaoSql = ''
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select nome as UltimasSituSelected from servidor join statusMaquina on fkStatus = idStatus where idServidor = ${idUsuario};
+        instrucaoSql = `select nome as UltimasSituSelected from servidor join status_maquina on fkStatus = idStatus where idServidor = ${idUsuario};
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select nome as UltimasSituSelected from servidor join statusMaquina on fkStatus = idStatus where idServidor = ${idUsuario};
+        instrucaoSql = `select nome as UltimasSituSelected from servidor join status_maquina on fkStatus = idStatus where idServidor = ${idUsuario};
     
     
     `;
@@ -559,7 +559,7 @@ function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `          SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
         FROM servidor
-        WHERE fkStatus IN (SELECT idStatus FROM statusMaquina WHERE nome != 'Estável')
+        WHERE fkStatus IN (SELECT idStatus FROM status_maquina WHERE nome != 'Estável')
           AND fkBanco = ${idUsuario};
         
         
@@ -567,7 +567,7 @@ function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `          SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
         FROM servidor
-        WHERE fkStatus IN (SELECT idStatus FROM statusMaquina WHERE nome != 'Estável')
+        WHERE fkStatus IN (SELECT idStatus FROM status_maquina WHERE nome != 'Estável')
           AND fkBanco = ${idUsuario};
         
         
@@ -640,12 +640,12 @@ function buscarUltimasMedidasServidorEmergencia(idUsuario, limite_linhas) {
         SELECT IFNULL(
             (SELECT COUNT(*) 
              FROM servidor 
-             JOIN statusMaquina ON fkStatus = idStatus 
+             JOIN status_maquina ON fkStatus = idStatus 
              WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario}
             ), 0) AS qtdE,
             GROUP_CONCAT(servidor.apelido) AS nomesServidores
         FROM servidor
-        JOIN statusMaquina ON servidor.fkStatus = statusMaquina.idStatus
+        JOIN status_maquina ON servidor.fkStatus = status_maquina.idStatus
         WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario};
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -653,12 +653,12 @@ function buscarUltimasMedidasServidorEmergencia(idUsuario, limite_linhas) {
         SELECT IFNULL(
             (SELECT COUNT(*) 
              FROM servidor 
-             JOIN statusMaquina ON fkStatus = idStatus 
+             JOIN status_maquina ON fkStatus = idStatus 
              WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario}
             ), 0) AS qtdE,
             GROUP_CONCAT(servidor.apelido) AS nomesServidores
         FROM servidor
-        JOIN statusMaquina ON servidor.fkStatus = statusMaquina.idStatus
+        JOIN status_maquina ON servidor.fkStatus = status_maquina.idStatus
         WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario};
     `;
     } else {
@@ -857,9 +857,9 @@ function buscarUltimasMedidas2(idUsuario2, limite_linhas) {
     //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join statusMaquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
+        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join statusMaquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
+        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
@@ -874,10 +874,10 @@ function buscarMedidasEmTempoReal2(idUsuario2) {
     instrucaoSql2 = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join statusMaquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
+        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join statusMaquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
+        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return
