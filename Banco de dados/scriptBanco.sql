@@ -1,6 +1,6 @@
 create database SecurityBank;
 use SecurityBank;
-  -- drop database SecurityBank;
+ --  drop database SecurityBank;
 
 create table plano_contratado(
 idPlano int primary key auto_increment,
@@ -44,7 +44,7 @@ atencao double,
 emergente double,
 urgente double
 );
-select*from registros;
+
 INSERT INTO metrica (estavel, atencao, emergente, urgente) VALUES
 (90, 80, 70, 60),
 (95, 85, 75, 65);
@@ -234,20 +234,20 @@ potenciaUpload DOUBLE,
 potenciaDownload DOUBLE,
 ip varchar(45),
 dtHora datetime,
-servidor_idServidor int,
-servidor_fkBanco int,
-servidor_fkEspecificacoes int,
-servidor_fkPlano int,
-servidor_fkLocacao int,
-foreign key (servidor_idServidor) references servidor(idServidor),
-foreign key (servidor_fkBanco) references banco(idBanco),
-foreign key(servidor_fkEspecificacoes) references especificacao(idEspecificacoes),
-foreign key(servidor_fkPlano) references plano_contratado (idPlano),
-foreign key(servidor_fkLocacao) references locacao(idLocacao)
+fkServidor int,
+fkBanco int,
+fkEspecificacoes int,
+fkPlano int,
+fkLocacao int,
+foreign key (fkServidor) references servidor(idServidor),
+foreign key (fkBanco) references banco(idBanco),
+foreign key(fkEspecificacoes) references especificacao(idEspecificacoes),
+foreign key(fkPlano) references plano_contratado (idPlano),
+foreign key(fkLocacao) references locacao(idLocacao)
 );
 
 
-INSERT INTO rede (status, PotenciaUpload, PotenciaDownload, servidor_idServidor, servidor_fkBanco, servidor_fkEspecificacoes, servidor_fkPlano, servidor_fkLocacao) VALUES
+INSERT INTO rede (status, PotenciaUpload, PotenciaDownload, fkServidor, fkBanco, fkEspecificacoes, fkPlano, fkLocacao) VALUES
 (0, 100, 250, 1, 1, 1, 1, 1);
 
 CREATE TABLE particao (
