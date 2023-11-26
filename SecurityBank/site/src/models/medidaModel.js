@@ -811,11 +811,12 @@ function buscarUltimasMedidasTemperatura(servidor, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor};    
+        select registros.dadoCaptado as Temperatura, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where modelo = 'Temperatura' and fkServidor = ${servidor} order by idRegistros desc limit 8;
+
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
-        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor};
+        select registros.dadoCaptado as Temperatura, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where modelo = 'Temperatura' and fkServidor = ${servidor} order by idRegistros desc limit 8;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -826,35 +827,18 @@ function buscarUltimasMedidasTemperatura(servidor, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
-function buscarMedidasEmTempoRealTemperatura(idUsuario) {
+function buscarMedidasEmTempoRealTemperatura(servidor) {
 
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT 
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
-        dataHorario AS horario
-    FROM registros
-    JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE fkBancoReg = ${idUsuario}
-    LIMIT 0, 50;
+        select registros.dadoCaptado as Temperatura, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where modelo = 'Temperatura' and fkServidor = ${servidor} order by idRegistros desc limit 8;
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
-        SELECT 
-    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
-    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
-    dataHorario AS horario
-FROM registros
-JOIN Componentes ON fkComponentesReg = idComponentes
-WHERE fkBancoReg = ${idUsuario}
-LIMIT 0, 50;
-    
+        select registros.dadoCaptado as Temperatura, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where modelo = 'Temperatura' and fkServidor = ${servidor} order by idRegistros desc limit 8;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -864,6 +848,54 @@ LIMIT 0, 50;
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
     return database.executar(instrucaoSql);
 }
+
+
+
+function buscarUltimasMedidasCPU2(servidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor} order by  registros.idRegistros desc limit 8;
+
+   
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor} order by  registros.idRegistros desc limit 8;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealCPU2(servidor) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor} order by  registros.idRegistros desc limit 8;
+    `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor} order by  registros.idRegistros desc limit 8;
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 
 function buscarMedidasEmTempoReal(idUsuario) {
 
@@ -1298,4 +1330,7 @@ module.exports = {
     buscarUltimasUltAlertasSelected2,
     buscarUltimasMedidasBola,
     buscarUltimasMedidasTemperatura,
+    buscarMedidasEmTempoRealTemperatura,
+    buscarUltimasMedidasCPU2,
+    buscarMedidasEmTempoRealCPU2,
 }

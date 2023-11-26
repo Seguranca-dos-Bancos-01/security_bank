@@ -223,11 +223,14 @@
   padding-top: 10px;
 }
 .graph2 {
-  width: 30vh;
   margin: auto;
   padding-top: 10px;
+  margin: 5vh;
+  font-size: 4vh;
 }
-
+.indicacao{
+    margin:auto;
+}
 .tituloGraficos {
   color: rgb(216, 216, 216);
   display: flex;
@@ -504,6 +507,7 @@ canvas {
 .tituloUltimoAlerta {
   align-self: flex-start;
   margin: 0 20px;
+  padding-top: 1vh;
 }
 
 .tituloHistorico {

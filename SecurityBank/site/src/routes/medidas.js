@@ -181,6 +181,13 @@ router.get("/tempo-realTemperatura/:servidor", function (req, res) {
     medidaController.buscarMedidasEmTempoRealTemperatura(req, res);
 })
 
+router.get("/CPU2/:servidor", function (req, res) {
+    medidaController.buscarUltimasMedidasCPU2(req, res);
+});
+router.get("/tempo-realCPU2/:servidor", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealCPU2(req, res);
+})
+
 
 router.get("/tempo-real/:idUsuario", function (req, res) {
     medidaController.buscarMedidasEmTempoReal(req, res);

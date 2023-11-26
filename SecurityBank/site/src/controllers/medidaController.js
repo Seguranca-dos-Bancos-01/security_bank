@@ -722,6 +722,61 @@ function buscarUltimasMedidasTemperatura(req, res) {
         res.status(500).json(erro.sqlMessage);
     });
 }
+function buscarMedidasEmTempoRealTemperatura(req, res) {
+    var servidor = req.params.servidor;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.buscarMedidasEmTempoReal(servidor).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
+function buscarUltimasMedidasCPU2(req, res) {
+    const limite_linhas = 50;
+    var servidor = req.params.servidor;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasCPU2(servidor, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+function buscarMedidasEmTempoRealCPU2(req, res) {
+    var servidor = req.params.servidor;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.buscarMedidasEmTempoRealCPU(servidor).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
 
 function buscarMedidasEmTempoReal(req, res) {
     var idUsuario = req.params.idUsuario;
@@ -1027,4 +1082,7 @@ module.exports = {
     buscarUltimasUltAlertasSelected2, 
     buscarUltimasMedidasBola,
     buscarUltimasMedidasTemperatura,
+    buscarMedidasEmTempoRealTemperatura,
+    buscarUltimasMedidasCPU2,
+    buscarMedidasEmTempoRealCPU2,
 };
