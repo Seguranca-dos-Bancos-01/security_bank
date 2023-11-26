@@ -168,11 +168,13 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
     var instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadosCaptados from registros where fkComponentesReg =1 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+        instrucaoSql = `select dadoCaptado as asd from registros where fkComponentesReg =${idUsuario} and fkServidorReg = 1 order by idRegistros desc limit 1;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as asd from registros where fkComponentesReg =1 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+        instrucaoSql = `select dadoCaptado as asd from registros where fkComponentesReg =${idUsuario} and fkServidorReg = 1 order by idRegistros desc limit 1;
+
+
     
     `;
     } else {
@@ -189,10 +191,11 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
     var instrucaoSql = ''
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select StatusRede as cnc from Rede where fkServidorRede = ${idUsuario} order by idRede desc limit 1;
+        instrucaoSql = `select status as cnc from Rede where fkServidor = ${idUsuario} order by idRede desc limit 1;;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select StatusRede as cnc from Rede where fkServidorRede = ${idUsuario} order by idRede desc limit 1;
+        instrucaoSql = `select status as cnc from Rede where fkServidor = ${idUsuario} order by idRede desc limit 1;;
+
     
     
     `;
@@ -233,25 +236,15 @@ function buscarDiasFaltando(idUsuario) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT
-        DATEDIFF(l.dateValidade, CURDATE()) AS dias_restantes, l.dataCompraLocacao as DtC, l.dateValidade as DtV
-      FROM
-        servidor as s
-      INNER JOIN
-        locacao as l ON l.fkServidor = s.idServidor
-      WHERE
-        s.idServidor = ${idUsuario};
+        instrucaoSql = `
+        select  DATEDIFF(dataValidade, CURDATE()) AS diasRestantes, dataCompraLocacao as DtC, dataValidade as DtV from locacao where fkServidor = ${idUsuario};
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT
-        DATEDIFF(l.dateValidade, CURDATE()) AS dias_restantes, l.dataCompraLocacao as DtC, l.dateValidade as DtV
-      FROM
-        servidor as s
-      INNER JOIN
-        locacao as l ON l.fkServidor = s.idServidor
-      WHERE
-        s.idServidor = ${idUsuario};`
+        instrucaoSql = `
+        select  DATEDIFF(dataValidade, CURDATE()) AS diasRestantes, dataCompraLocacao as DtC, dataValidade as DtV from locacao where fkServidor = ${idUsuario};
+
+        `;
 
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -376,15 +369,16 @@ function buscarUltimasUsbConectadas(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select nomeDispositivo as nome,
-        qtdPorta as qtdPortasTotal,
-        qtdConectada as qtdConnect from usb where fkServidorUSB = ${idUsuario};
+        qtddPorta as qtdPortasTotal,
+        qtddConectada as qtdConnect from usb where fkServidor = ${idUsuario};
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select nomeDispositivo as nome,
-        qtdPorta as qtdPortasTotal,
-        qtdConectada as qtdConnect from usb where fkServidorUSB = ${idUsuario};`
-
+        qtddPorta as qtdPortasTotal,
+        qtddConectada as qtdConnect from usb where fkServidor = ${idUsuario};
+    
+    `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
 
@@ -407,11 +401,11 @@ function buscarUltimasMedidasRAM(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg = 2 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+        instrucaoSql = `select dadoCaptado as ads from registros where fkComponentesReg = 2 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as ads from registros where fkComponentesReg = 2 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+        instrucaoSql = `select dadoCaptado as ads from registros where fkComponentesReg = 2 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
     
     `;
     } else {
@@ -428,11 +422,11 @@ function buscarUltimasMedidasDISK(idUsuario, limite_linhas) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadosCaptados as sda from registros where fkComponentesReg =3 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+        instrucaoSql = `select dadoCaptado as sda from registros where fkComponentesReg =3 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadosCaptados as sda from registros where fkComponentesReg =3 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+        instrucaoSql = `select dadoCaptado as sda from registros where fkComponentesReg =3 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
     
     `;
     } else {
@@ -897,26 +891,26 @@ function buscarUltimasMedidasServidores(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadosCaptados AS proc, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 1 
-        AND fkServidorReg = ${idUsuario}
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS proc, 
+       dataHorario AS horario 
+FROM registros 
+JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+WHERE registros.fkComponentesReg = 1 
+  AND registros.fkServidorReg = ${idUsuario}
+ORDER BY registros.idRegistros DESC 
+LIMIT 10;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
-        SELECT dadosCaptados AS proc, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 1 
-        AND fkServidorReg = ${idUsuario}
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS proc, 
+       dataHorario AS horario 
+FROM registros 
+JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+WHERE registros.fkComponentesReg = 1 
+  AND registros.fkServidorReg = ${idUsuario}
+ORDER BY registros.idRegistros DESC 
+LIMIT 10;
     
     `;
     } else {
@@ -934,27 +928,27 @@ function buscarMedidasEmTempoRealServidores(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadosCaptados AS proc, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 1 
-        AND fkServidorReg = ${idUsuario}
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS proc, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 1 
+   AND registros.fkServidorReg = ${idUsuario}
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
-        SELECT dadosCaptados AS proc, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 1 
-        AND fkServidorReg = ${idUsuario}
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS proc, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 1 
+   AND registros.fkServidorReg = ${idUsuario}
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
     } else {
@@ -975,27 +969,27 @@ function buscarUltimasMedidasServidores2(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadosCaptados AS ram, 
+        SELECT dadoCaptado AS ram, 
         dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 2 
-        AND fkServidorReg = ${idUsuario} -- Add the extra condition here
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 2 
+   AND registros.fkServidorReg = ${idUsuario} 
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         
-SELECT dadosCaptados AS ram, 
-dataHorario AS horario 
-FROM registros 
-JOIN Componentes ON fkComponentesReg = idComponentes
-WHERE fkComponentesReg = 2 
-AND fkServidorReg = ${idUsuario} -- Add the extra condition here
-ORDER BY idRegistros DESC 
-LIMIT 10;
+        SELECT dadoCaptado AS ram, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 2 
+   AND registros.fkServidorReg = ${idUsuario} 
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
     } else {
@@ -1013,25 +1007,27 @@ function buscarMedidasEmTempoRealServidores2(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadosCaptados AS ram, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 2
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS ram, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 2 
+   AND registros.fkServidorReg = ${idUsuario} 
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
-        SELECT dadosCaptados AS ram, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 2
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS ram, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 2 
+   AND registros.fkServidorReg = ${idUsuario} 
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
     } else {
@@ -1051,26 +1047,26 @@ function buscarUltimasMedidasServidores3(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadosCaptados AS DISK, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 3 
-        AND fkServidorReg = ${idUsuario}
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS DISK, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 3 
+   AND registros.fkServidorReg = ${idUsuario} 
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
-        SELECT dadosCaptados AS DISK, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 3 
-        AND fkServidorReg = ${idUsuario}
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS DISK, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 3 
+   AND registros.fkServidorReg = ${idUsuario} 
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
     } else {
@@ -1088,27 +1084,27 @@ function buscarMedidasEmTempoRealServidores3(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadosCaptados AS DISK, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 2
-        AND fkServidorReg = ${idUsuario}
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS DISK, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 3 
+   AND registros.fkServidorReg = ${idUsuario} 
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
-        SELECT dadosCaptados AS DISK, 
-               dataHorario AS horario 
-        FROM registros 
-        JOIN Componentes ON fkComponentesReg = idComponentes
-        WHERE fkComponentesReg = 2
-        AND fkServidorReg = ${idUsuario}
-        ORDER BY idRegistros DESC 
-        LIMIT 10;
+        SELECT dadoCaptado AS DISK, 
+        dataHorario AS horario 
+ FROM registros 
+ JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
+ WHERE registros.fkComponentesReg = 3 
+   AND registros.fkServidorReg = ${idUsuario} 
+ ORDER BY registros.idRegistros DESC 
+ LIMIT 10;
     
     `;
     } else {

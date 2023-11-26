@@ -142,7 +142,7 @@ foreign key (fkPlano) references plano_contratado (idPlano)
 
 INSERT INTO locacao (dataCompraLocacao, dataValidade, fkServidor, fkBanco, fkEspecificacoes, fkPlano) VALUES
 ('2023-01-01', '2024-01-01',1,1,1,1),
-('2023-02-15', '2024-02-15',1,1,1,1);
+('2023-02-15', '2024-02-15',2,1,1,1);
 
 select * from locacao;
 
