@@ -12,6 +12,42 @@ function autenticar(email, senha) {
     return database.executar(instrucao);
 }
 
+
+
+
+
+function AtualizarSessionUsuario(id) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    var instrucao = `
+   
+ select* from funcionarios WHERE 
+ idFuncionarios = ${id}
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+function AtualizarSessionBanco(id) {
+    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function entrar(): ", email, senha)
+    var instrucao = `
+   
+ select* from banco WHERE 
+ idBanco = ${id}
+    `;
+    console.log("Executando a instrução SQL: \n" + instrucao);
+    return database.executar(instrucao);
+}
+
+
+
+
+
+
+
+
+
+
 // Coloque os mesmos parâmetros aqui. Vá para a var instrucao
 function cadastrar(nome, email, cpf, telefone, senha, empresaId,) {
     // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
@@ -163,5 +199,6 @@ WHERE email = '${Email}' AND fkEscalonamento = ${NovoNivel};
         UpdateValidadeNova,
         cadastrarServidorNuvem,
         PuxarFkServidor,
-
+        AtualizarSessionUsuario,
+        AtualizarSessionBanco,
     };

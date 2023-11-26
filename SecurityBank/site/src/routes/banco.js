@@ -3,7 +3,7 @@ var router = express.Router();
 
 var aquarioController = require("../controllers/bancoController");
 
-router.get("/:empresaId", function (req, res) {
+router.get("/BuscarBancoAndServers/:idUsuario", function (req, res) {
   aquarioController.buscarAquariosPorEmpresa(req, res);
 });
 

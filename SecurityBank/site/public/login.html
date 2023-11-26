@@ -122,10 +122,21 @@
     //  document.getElementById("Cad").onclick = function () {
     //         location.href = "./login.html";
     //     };
+    let executado = false
+    var vezes = 0
+    var emailb;
+    var senhab;
     function entrar() {
         var emailVar = document.getElementById('email_input').value;
         var senhaVar = document.getElementById('senha_input').value;
-
+        emailb = document.getElementById('email_input').value;
+        senhab = document.getElementById('senha_input').value;
+        if(executado == false && vezes == 0){
+            BancoCerto() 
+            vezes = 1
+            executado = true
+        }
+        
         if (emailVar === "" || senhaVar === "") {
             document.getElementById('cardErro').style.display = "block";
             document.getElementById('mensagem_erro').innerHTML = "(Mensagem de erro para todos os campos em branco)";
@@ -141,14 +152,15 @@
                 "Content-Type": "application/json"
             },
             body: JSON.stringify({
-                emailServer: emailVar,
-                senhaServer: senhaVar
+                emailServer: emailb,
+                senhaServer: senhab
             })
         })
 
             .then(function (resposta) {
                 console.log("ESTOU NO THEN DO entrar()!")
                 if (resposta.ok) {
+                    
                     resposta.json().then(data => {
                         console.log("Resposta JSON:", data);
                         sessionStorage.ID_USUARIO = data.idFuncionarios;
@@ -200,7 +212,7 @@
                         //     sessionStorage.servidoresPlano = JSON.stringify(data.banco[0].servidoresPlano);
                         //     sessionStorage.servidoresfkStatus = JSON.stringify(data.banco[0].servidoresfkStatus);
                         // }
-
+                        
                         window.location.href = "./dashboard/dashboard.html";
                     }).catch(error => {
                         console.error("Erro ao processar JSON:", error);
@@ -218,6 +230,57 @@
             .catch(error => {
                 console.error("Error:", error);
                 finalizarAguardar(error);
+            });
+
+        return false;
+    }
+
+
+
+    function BancoCerto() {
+        vezes =1
+        executado = true
+        var emailVar = emailb
+        var senhaVar = senhab
+        console.log(emailVar,senhaVar)
+
+        if (emailVar === "" || senhaVar === "") {
+            document.getElementById('cardErro').style.display = "block";
+            document.getElementById('mensagem_erro').innerHTML = "(Mensagem de erro para todos os campos em branco)";
+            return false;
+        }
+
+        console.log("FORM LOGIN: ", emailVar);
+        console.log("FORM SENHA: ", senhaVar);
+
+        fetch(`/banco/BuscarBancoAndServers/${emailVar}?senha=${senhaVar}`, {
+            cache: 'no-store'
+        })
+
+            .then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+                if (resposta.ok) {
+                    resposta.json().then(data => {
+                     console.log("boa")
+                     
+                     entrar()
+
+                    }).catch(error => {
+                        console.error("Erro ao processar JSON:", error);
+                    });
+                } else {
+                    console.error("Houve um erro ao tentar realizar o login!");
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        
+                    }).catch(error => {
+                        console.error("Erro ao obter texto da resposta:", error);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+              
             });
 
         return false;

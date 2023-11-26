@@ -19,10 +19,10 @@ function autenticar(req, res) {
 
                 if (resultadoAutenticar.length == 1) {
                     console.log(resultadoAutenticar);
-                    bancoModel.buscarAquariosPorEmpresa(resultadoAutenticar[0])
+                    bancoModel.buscarAquariosPorEmpresa(email, senha)
                         .then((resultadoBanco) => {
                             if (resultadoBanco.length > 0) {
-                                bancoModel.buscarAquariosPorEmpresa(resultadoBanco[0])
+                                bancoModel.buscarAquariosPorEmpresa(email,senha)
                                     .then((resultadoServidor) => {
                                         if (resultadoServidor.length > 0) {
                                             res.json({
@@ -56,15 +56,15 @@ function autenticar(req, res) {
 }
 
 
-function AtualizarSession(req, res) {
+function AtualizarSessionUsuario(req, res) {
     
-    var id = req.body.idUsuario;
+    var id = req.body.idUserServer;
 
     if (id == undefined) {
         res.status(400).send("Seu ID está undefined!");
     }  else {
 
-        usuarioModel.AtualizarSession(email, senha)
+        usuarioModel.AtualizarSessionUsuario(id)
         .then(
             function (resultadoAutenticar) {
                 console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
@@ -389,5 +389,5 @@ module.exports = {
     UpdateValidadeNova,
     cadastrarServidorNuvem,
     PuxarFkServidor,
-    AtualizarSession,
+    AtualizarSessionUsuario,
 }

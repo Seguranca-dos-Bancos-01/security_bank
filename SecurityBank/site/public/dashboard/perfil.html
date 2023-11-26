@@ -431,7 +431,7 @@ function atualiarSessionStorage(idUsuario){
                     console.error("Houve um erro ao tentar realizar o login!");
                     resposta.text().then(texto => {
                         console.error(texto);
-                        finalizarAguardar(texto);
+                       
                     }).catch(error => {
                         console.error("Erro ao obter texto da resposta:", error);
                     });

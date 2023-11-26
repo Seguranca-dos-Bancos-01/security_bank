@@ -1,6 +1,6 @@
 var database = require("../database/config");
 
-function buscarAquariosPorEmpresa(empresaId) {
+function buscarAquariosPorEmpresa(email, senha) {
 
   instrucaoSql = `
   SELECT idServidor, 
@@ -12,7 +12,7 @@ function buscarAquariosPorEmpresa(empresaId) {
        fkStatus,
        fkPlano
 FROM servidor
-WHERE fkBanco = 1;
+WHERE fkBanco = (select fkBanco from funcionarios where email = '${email}' and senha = '${senha}');
 
 `;
 

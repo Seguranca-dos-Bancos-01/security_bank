@@ -25,7 +25,7 @@ router.post("/autenticar", function (req, res) {
 });
 
 router.post("/atualizarSession", function (req, res) {
-    usuarioController.AtualizarSession(req, res);
+    usuarioController.AtualizarSessionUsuario(req, res);
 });
 
 router.post("/atualizarPerfil", function (req, res) {

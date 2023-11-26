@@ -1,9 +1,9 @@
 var aquarioModel = require("../models/bancoModel");
 
 function buscarAquariosPorEmpresa(req, res) {
-  var idUsuario = req.params.idUsuario;
-
-  aquarioModel.buscarAquariosPorEmpresa(idUsuario).then((resultado) => {
+  var email = req.params.idUsuario;
+  var senha = req.query.senha;
+  aquarioModel.buscarAquariosPorEmpresa(email, senha).then((resultado) => {
     if (resultado.length > 0) {
       res.status(200).json(resultado);
     } else {
