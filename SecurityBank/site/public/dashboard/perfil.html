@@ -300,99 +300,179 @@ exibirServidoresUsuario();
     document.getElementById('senhaFuncionario').value = sessionStorage.SENHA_USUARIO;
     document.getElementById('nivelAcesso').textContent  = sessionStorage.FKESCALONAMENTO;
 
-
-
     function editarPerfil() {
-        botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="salvarPerfil()"><img src="../assets/imgs/salvarConta (2).png" alt=""></button'
-        document.querySelector("#nomeFuncionario").disabled = false;
-        document.querySelector("#cpfFuncionario").disabled = false;
-        document.querySelector("#telefoneFuncionario").disabled = false;
-        document.querySelector("#emailFuncionario").disabled = false;
-        document.querySelector("#senhaFuncionario").disabled = false;
-    }
+    botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="salvarPerfil()"><img src="../assets/imgs/salvarConta (2).png" alt=""></button>';
+    habilitarCampos();
+}
 
-    function salvarPerfil() {
-        botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="editarPerfil()"><img src="../assets/imgs/editarAdm.png" alt=""></button>'
-        document.querySelector("#nomeFuncionario").disabled = true;
-        document.querySelector("#cpfFuncionario").disabled = true;
-        document.querySelector("#telefoneFuncionario").disabled = true;
-        document.querySelector("#emailFuncionario").disabled = true;
-        document.querySelector("#senhaFuncionario").disabled = true;
-        atualizarPerfil()
-    }
+function habilitarCampos() {
+    var campos = [
+        "#nomeFuncionario",
+        "#cpfFuncionario",
+        "#telefoneFuncionario",
+        "#emailFuncionario",
+        "#senhaFuncionario"
+    ];
 
-    function atualizarPerfil() {
-        //Recupere o valor da nova input pelo nome do id
-        // Agora vá para o método fetch logo abaixo
-        var nomePerfilVar = nomeFuncionario.value;
-        var emailPerfilVar = emailFuncionario.value;
-        var senhaPerfilVar = senhaFuncionario.value;
-        var cpfPerfilVar = cpfFuncionario.value;
-        var telefonePerfilVar = telefoneFuncionario.value;
-        var idPerfilVar = sessionStorage.ID_USUARIO;
-        if (
-            nomePerfilVar == "" || idPerfilVar == "" ||
-            emailPerfilVar == "" ||
-            senhaPerfilVar == "" ||
-            cpfPerfilVar == "" || telefonePerfilVar == ""
-        ) {
-            cardErro.style.display = "block";
-            mensagem_erro.innerHTML =
-                "(Mensagem de erro para todos os campos em branco)";
+    campos.forEach(function (campo) {
+        document.querySelector(campo).disabled = false;
+    });
+}
 
-            finalizarAguardar();
-            return false;
-        } else {
-            setInterval(sumirMensagem, 5000);
-        }
+function atualizarPerfil() {
+    var nomePerfilVar = document.querySelector("#nomeFuncionario").value;
+    var emailPerfilVar = document.querySelector("#emailFuncionario").value;
+    var senhaPerfilVar = document.querySelector("#senhaFuncionario").value;
+    var cpfPerfilVar = document.querySelector("#cpfFuncionario").value;
+    var telefonePerfilVar = document.querySelector("#telefoneFuncionario").value;
+    var idPerfilVar = sessionStorage.ID_USUARIO;
 
-        // Enviando o valor da nova input
-        fetch("/usuarios/atualizarPerfil", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                // crie um atributo que recebe o valor recuperado aqui
-                // Agora vá para o arquivo routes/usuario.js
-                nomePerfilServer: nomePerfilVar,
-                emailPerfilServer: emailPerfilVar,
-                senhaPerfilServer: senhaPerfilVar,
-                cpfPerfilServer: cpfPerfilVar,
-                telefonePerfilServer: telefonePerfilVar,
-                idPerfilServer: idPerfilVar,
-            }),
-        })
-            .then(function (resposta) {
-                console.log("resposta: ", resposta);
-
-                if (resposta.ok) {
-                    cardErro.style.display = "block";
-
-                    mensagem_erro.innerHTML =
-                        "Cadastro realizado com sucesso! Redirecionando para tela de Login...";
-
-                    setTimeout(() => {
-                        window.location = "login.html";
-                    }, "2000");
-
-                    limparFormulario();
-
-                } else {
-                    throw "Houve um erro ao tentar realizar o cadastro!";
-                }
-            })
-            .catch(function (resposta) {
-                console.log(`#ERRO: ${resposta}`);
-
-            });
-
+    if (
+        nomePerfilVar === "" ||
+        idPerfilVar === "" ||
+        emailPerfilVar === "" ||
+        senhaPerfilVar === "" ||
+        cpfPerfilVar === "" ||
+        telefonePerfilVar === ""
+    ) {
+        console.log("Por favor, preencha todos os campos.");
         return false;
     }
 
-    function limparSessonStorage() {
-        sessionStorage.clear() 
-    }
+    fetch("/usuarios/atualizarPerfil", {
+        method: "POST",
+        headers: {
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            nomePerfilServer: nomePerfilVar,
+            emailPerfilServer: emailPerfilVar,
+            senhaPerfilServer: senhaPerfilVar,
+            cpfPerfilServer: cpfPerfilVar,
+            telefonePerfilServer: telefonePerfilVar,
+            idPerfilServer: idPerfilVar,
+        }),
+    })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                atualiarSessionStorage(sessionStorage.ID_USUARIO)
+            } else {
+                throw "Houve um erro ao tentar realizar o cadastro!";
+            }
+        })
+        .catch(function (erro) {
+            console.log(`#ERRO: ${erro}`);
+        });
+
+    return false;
+}
+
+function limparSessonStorage() {
+    sessionStorage.clear();
+}
+
+function salvarPerfil() {
+    atualizarPerfil();
+    botoesEdicao.innerHTML = '<button class="imgEditarPerfil" onclick="editarPerfil()"><img src="../assets/imgs/editarAdm.png" alt=""></button>';
+    desabilitarCampos();
+}
+
+
+
+
+
+
+function atualiarSessionStorage(idUsuario){
+  idUsuario = sessionStorage.ID_USUARIO
+        fetch("/usuarios/atualizarSession", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUserServer: idUsuario
+            })
+        })
+
+            .then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+                if (resposta.ok) {
+                    resposta.json().then(data => {
+                        console.log("Resposta JSON:", data);
+                        sessionStorage.CPF_USUARIO = data.cpf;
+                        sessionStorage.EMAIL_USUARIO = data.email;
+                        sessionStorage.NOME_USUARIO = data.nome;
+                        sessionStorage.TELEFONE_USUARIO = data.telefone;
+                        sessionStorage.SENHA_USUARIO = data.senha;
+                        for (var i = 0; i < data.server.length; i++) {
+                            sessionStorage[`bancoTUDO${i + 1}`] = JSON.stringify(data.server[i])
+                            sessionStorage[`servidor_Apelido${i + 1}`] = JSON.stringify(data.server[i].apelido)
+                            sessionStorage[`servidor_id${i + 1}`] = JSON.stringify(data.server[i].idServidor)
+                            sessionStorage[`servidor_SO${i + 1}`] = JSON.stringify(data.server[i].sistemaOperacional)
+                            sessionStorage[`servidor_Responsavel${i + 1}`] = JSON.stringify(data.server[i].cpfResponsavelLegal)
+                            sessionStorage[`servidor_IP${i + 1}`] = JSON.stringify(data.server[i].enderecoIP)
+                            sessionStorage[`servidor_dataCompra${i + 1}`] = JSON.stringify(data.server[i].dataCompraLocacao)
+                            sessionStorage[`servidor_ValidadeServer${i + 1}`] = JSON.stringify(data.server[i].dateValidade)
+                            sessionStorage[`banco${i + 1}`] = JSON.stringify(data.server[i].fkBanco)
+                            sessionStorage[`fkStatus_Servidor${i + 1}`] = JSON.stringify(data.server[i].fkStatus)
+
+                            sessionStorage[`fkPlano${i + 1}`] = JSON.stringify(data.server[i].fkPlano)
+                        }
+                        Swal.fire({
+                            icon: 'Correction',
+                            title: 'Dados Atualizados com Sucesso!',
+                            
+                        });
+                        window.location.href = "dashboard.html";
+                    }).catch(error => {
+                        console.error("Erro ao processar JSON:", error);
+                    });
+                } else {
+                    console.error("Houve um erro ao tentar realizar o login!");
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        finalizarAguardar(texto);
+                    }).catch(error => {
+                        console.error("Erro ao obter texto da resposta:", error);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                finalizarAguardar(error);
+            });
+
+        return false;
+    
+
+
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+function desabilitarCampos() {
+    var campos = [
+        "#nomeFuncionario",
+        "#cpfFuncionario",
+        "#telefoneFuncionario",
+        "#emailFuncionario",
+        "#senhaFuncionario"
+    ];
+
+    campos.forEach(function (campo) {
+        document.querySelector(campo).disabled = true;
+    });
+}
 
 
 window.onload = ContasAdministradas(sessionStorage.ID_USUARIO)

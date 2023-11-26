@@ -146,81 +146,79 @@
             })
         })
 
-        .then(function (resposta) {
-    console.log("ESTOU NO THEN DO entrar()!")
-    if (resposta.ok) {
-    resposta.json().then(data => {
-        console.log("Resposta JSON:", data);
- 
+            .then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+                if (resposta.ok) {
+                    resposta.json().then(data => {
+                        console.log("Resposta JSON:", data);
+                        sessionStorage.ID_USUARIO = data.idFuncionarios;
+                        sessionStorage.CPF_USUARIO = data.cpf;
+                        sessionStorage.EMAIL_USUARIO = data.email;
+                        sessionStorage.NOME_USUARIO = data.nome;
+                        sessionStorage.TELEFONE_USUARIO = data.telefone;
+                        sessionStorage.SENHA_USUARIO = data.senha;
+                        sessionStorage.FKBANCO = data.fkBanco;
+                        sessionStorage.FKESCALONAMENTO = data.fkEscalonamento;
+                        sessionStorage.servidor = JSON.stringify(data.server)
+                        for (var i = 0; i < data.server.length; i++) {
+                            sessionStorage[`bancoTUDO${i + 1}`] = JSON.stringify(data.server[i])
+                            sessionStorage[`servidor_Apelido${i + 1}`] = JSON.stringify(data.server[i].apelido)
+                            sessionStorage[`servidor_id${i + 1}`] = JSON.stringify(data.server[i].idServidor)
+                            sessionStorage[`servidor_SO${i + 1}`] = JSON.stringify(data.server[i].sistemaOperacional)
+                            sessionStorage[`servidor_Responsavel${i + 1}`] = JSON.stringify(data.server[i].cpfResponsavelLegal)
+                            sessionStorage[`servidor_IP${i + 1}`] = JSON.stringify(data.server[i].enderecoIP)
+                            sessionStorage[`servidor_dataCompra${i + 1}`] = JSON.stringify(data.server[i].dataCompraLocacao)
+                            sessionStorage[`servidor_ValidadeServer${i + 1}`] = JSON.stringify(data.server[i].dateValidade)
+                            sessionStorage[`banco${i + 1}`] = JSON.stringify(data.server[i].fkBanco)
+                            sessionStorage[`fkStatus_Servidor${i + 1}`] = JSON.stringify(data.server[i].fkStatus)
 
+                            sessionStorage[`fkPlano${i + 1}`] = JSON.stringify(data.server[i].fkPlano)
+                        }
 
-        sessionStorage.ID_USUARIO = data.idFuncionarios;
-        sessionStorage.CPF_USUARIO = data.cpf;
-        sessionStorage.EMAIL_USUARIO = data.email;
-        sessionStorage.NOME_USUARIO = data.nome;
-        sessionStorage.TELEFONE_USUARIO = data.telefone;
-        sessionStorage.SENHA_USUARIO = data.senha;
-        sessionStorage.FKBANCO = data.fkBanco;
-        sessionStorage.FKESCALONAMENTO = data.fkEscalonamento;
-        sessionStorage.servidor = JSON.stringify(data.server)
-for(var i =0; i < data.server.length; i++){  
-      sessionStorage[`bancoTUDO${i+1}`] = JSON.stringify(data.server[i])
-      sessionStorage[`servidor_Apelido${i+1}`] = JSON.stringify(data.server[i].apelido)
-      sessionStorage[`servidor_id${i+1}`] = JSON.stringify(data.server[i].idServidor)
-      sessionStorage[`servidor_SO${i+1}`] = JSON.stringify(data.server[i].sistemaOperacional)
-      sessionStorage[`servidor_Responsavel${i+1}`] = JSON.stringify(data.server[i].cpfResponsavelLegal)
-      sessionStorage[`servidor_IP${i+1}`] = JSON.stringify(data.server[i].enderecoIP)
-      sessionStorage[`servidor_dataCompra${i+1}`] = JSON.stringify(data.server[i].dataCompraLocacao)
-      sessionStorage[`servidor_ValidadeServer${i+1}`] = JSON.stringify(data.server[i].dateValidade)
-      sessionStorage[`banco${i+1}`] = JSON.stringify(data.server[i].fkBanco)
-      sessionStorage[`fkStatus_Servidor${i+1}`] = JSON.stringify(data.server[i].fkStatus)
- 
-      sessionStorage[`fkPlano${i+1}`] = JSON.stringify(data.server[i].fkPlano)
-    }
+                        Swal.fire({
+                            icon: 'warning',
+                            title: 'Login Realizado com Sucesso!',
+                            text: `Comece seu monitoramento agora!`,
+                        });
 
-        Swal.fire({
-                    icon: 'warning',
-                    title: 'Login Realizado com Sucesso!',
-                    text: `Comece seu monitoramento agora!`,
-                });
+                        // sessionStorage.bancoTUDOTESTE = JSON.stringify(data.server)
+                        //sessionStorage.BANCO = JSON.stringify(data.banco);
+                        // sessionStorage.servidoresID = JSON.stringify(data.servidoresID);
+                        //sessionStorage.servidoresapelidos = JSON.stringify(data.servidoresapelidos);
+                        //sessionStorage.servidoresSistemas = JSON.stringify(data.servidoresSistemas);
+                        // sessionStorage.servidoresResponsaveis = JSON.stringify(data.servidoresResponsaveis);
+                        // sessionStorage.servidoresEnderecos = JSON.stringify(data.servidoresEnderecos);
+                        // sessionStorage.servidoresDtCompra = JSON.stringify(data.servidoresDtCompra);
+                        // sessionStorage.servidoresdatasValidade = JSON.stringify(data.servidoresdatasValidade);
+                        // sessionStorage.servidoresfkStatus = JSON.stringify(data.servidoresfkStatus);
+                        //  sessionStorage.servidoresLocMatriz = JSON.stringify(data.servidoresLocMatriz);
+                        //  sessionStorage.servidoresPlano = JSON.stringify(data.servidoresPlano);
 
-       // sessionStorage.bancoTUDOTESTE = JSON.stringify(data.server)
-        //sessionStorage.BANCO = JSON.stringify(data.banco);
-       // sessionStorage.servidoresID = JSON.stringify(data.servidoresID);
-        //sessionStorage.servidoresapelidos = JSON.stringify(data.servidoresapelidos);
-        //sessionStorage.servidoresSistemas = JSON.stringify(data.servidoresSistemas);
-       // sessionStorage.servidoresResponsaveis = JSON.stringify(data.servidoresResponsaveis);
-       // sessionStorage.servidoresEnderecos = JSON.stringify(data.servidoresEnderecos);
-       // sessionStorage.servidoresDtCompra = JSON.stringify(data.servidoresDtCompra);
-       // sessionStorage.servidoresdatasValidade = JSON.stringify(data.servidoresdatasValidade);
-       // sessionStorage.servidoresfkStatus = JSON.stringify(data.servidoresfkStatus);
-      //  sessionStorage.servidoresLocMatriz = JSON.stringify(data.servidoresLocMatriz);
-      //  sessionStorage.servidoresPlano = JSON.stringify(data.servidoresPlano);
+                        // if (data.banco && data.banco.length > 0) {
+                        //     console.log("entrei")
+                        //     sessionStorage.servidoresLocMatriz = JSON.stringify(data.banco[0].servidoresLocMatriz);
+                        //     sessionStorage.servidoresPlano = JSON.stringify(data.banco[0].servidoresPlano);
+                        //     sessionStorage.servidoresfkStatus = JSON.stringify(data.banco[0].servidoresfkStatus);
+                        // }
 
-      // if (data.banco && data.banco.length > 0) {
-       //     console.log("entrei")
-       //     sessionStorage.servidoresLocMatriz = JSON.stringify(data.banco[0].servidoresLocMatriz);
-       //     sessionStorage.servidoresPlano = JSON.stringify(data.banco[0].servidoresPlano);
-       //     sessionStorage.servidoresfkStatus = JSON.stringify(data.banco[0].servidoresfkStatus);
-       // }
-
-        window.location.href = "./dashboard/dashboard.html";
-    }).catch(error => {
-        console.error("Erro ao processar JSON:", error);
-    });
-} else {
-    console.error("Houve um erro ao tentar realizar o login!");
-    resposta.text().then(texto => {
-        console.error(texto);
-        finalizarAguardar(texto);
-    }).catch(error => {
-        console.error("Erro ao obter texto da resposta:", error);
-    });
-}})
-        .catch(error => {
-            console.error("Error:", error);
-            finalizarAguardar(error);
-        });
+                        window.location.href = "./dashboard/dashboard.html";
+                    }).catch(error => {
+                        console.error("Erro ao processar JSON:", error);
+                    });
+                } else {
+                    console.error("Houve um erro ao tentar realizar o login!");
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                        finalizarAguardar(texto);
+                    }).catch(error => {
+                        console.error("Erro ao obter texto da resposta:", error);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                finalizarAguardar(error);
+            });
 
         return false;
     }

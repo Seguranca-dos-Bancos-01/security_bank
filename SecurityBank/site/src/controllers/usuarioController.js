@@ -56,6 +56,57 @@ function autenticar(req, res) {
 }
 
 
+function AtualizarSession(req, res) {
+    
+    var id = req.body.idUsuario;
+
+    if (id == undefined) {
+        res.status(400).send("Seu ID está undefined!");
+    }  else {
+
+        usuarioModel.AtualizarSession(email, senha)
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+
+                if (resultadoAutenticar.length == 1) {
+                    console.log(resultadoAutenticar);
+                    bancoModel.buscarAquariosPorEmpresa(resultadoAutenticar[0])
+                        .then((resultadoBanco) => {
+                            if (resultadoBanco.length > 0) {
+                                bancoModel.buscarAquariosPorEmpresa(resultadoBanco[0])
+                                    .then((resultadoServidor) => {
+                                        if (resultadoServidor.length > 0) {
+                                            res.json({
+                                                idFuncionarios: resultadoAutenticar[0].idFuncionarios,
+                                                email: resultadoAutenticar[0].email,
+                                                nome: resultadoAutenticar[0].nome,
+                                                cpf: resultadoAutenticar[0].cpf,
+                                                telefone: resultadoAutenticar[0].telefone,
+                                                senha: resultadoAutenticar[0].senha,
+                                                fkBanco: resultadoAutenticar[0].fkBanco,
+                                                fkEscalonamento: resultadoAutenticar[0].fkEscalonamento,
+                                                server: resultadoBanco,
+                                            });
+                                        } else {
+                                            res.status(204).json({ banco: [] });
+                                        }
+                                    })
+                            }
+                        })
+                        .catch(
+                            function (erro) {
+                                console.log(erro);
+                                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                                res.status(500).json(erro.sqlMessage);
+                            }
+                        );
+                }
+            }
+        );
+    }
+}
 
 
 function UpdateValidadeNova(req, res) {
@@ -338,4 +389,5 @@ module.exports = {
     UpdateValidadeNova,
     cadastrarServidorNuvem,
     PuxarFkServidor,
+    AtualizarSession,
 }

@@ -24,6 +24,10 @@ router.post("/autenticar", function (req, res) {
     usuarioController.autenticar(req, res);
 });
 
+router.post("/atualizarSession", function (req, res) {
+    usuarioController.AtualizarSession(req, res);
+});
+
 router.post("/atualizarPerfil", function (req, res) {
     usuarioController.atualizarPerfil(req, res);
 });
