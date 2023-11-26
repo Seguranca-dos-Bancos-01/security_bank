@@ -258,7 +258,7 @@
         var selectServidores = document.getElementById("SelectServidores");
         selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
         server.forEach(element => {
-            selectServidores.innerHTML += `<option value="${element.idServidor}">Servidor ${element.idServidor}</option>`;
+            selectServidores.innerHTML += `<option value="${element.idServidor}">${element.apelido}</option>`;
         });
     }
 
@@ -327,7 +327,7 @@
         console.log('Exibindo dados retornados:', response)
         for (i = 0; i < response.length; i++) {
             var registro = response[i];
-            dado = registro.dias_restantes;
+            dado = registro.diasRestantes;
             Compra = registro.DtC;
             validade = registro.DtV;
         }
@@ -409,12 +409,13 @@
                 console.log("resposta: ", resposta);
 
                 if (resposta.ok) {
+
                     Swal.fire({
                         icon: 'warning',
                         title: 'Dados atualizados!',
                         text: `Continue sua análise!`,
                     });
-
+                    window.location = "GerenciarAcesso.html"  
 
 
                 } else {

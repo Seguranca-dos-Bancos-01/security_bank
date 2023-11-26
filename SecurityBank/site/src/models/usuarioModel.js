@@ -110,9 +110,9 @@ function PuxarFkServidor(idUsuario, apelido) {
 
 
     
-    UPDATE servidor
-        SET dateValidade = '${validadeNova}'
-        WHERE idServidor = ${server};
+        UPDATE locacao
+        SET dataValidade = '${validadeNova}'
+        WHERE fkServidor = ${server};
 `;
 
         console.log("Executando a instrução SQL: \n" + instrucao);
