@@ -2,15 +2,16 @@ import mysql.connector
 import psutil
 import json
 import requests
-import pymysql
 import time
 from datetime import datetime
 
 webhook = "https://hooks.slack.com/services/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"
 
 config = {"user": "root", "password": "Brol2005", "host": "localhost", "database": "SecurityBank"}
-connection = pymysql.connect(**config)
+connection = mysql.connector.connect(**config)
 cursor = connection.cursor()
+servidorId = 1
+#servidorId = ${servidorId}
 
 mycursor1 = connection.cursor()
 mycursor2 = connection.cursor()
@@ -20,12 +21,45 @@ mycursor5 = connection.cursor()
 mycursor6 = connection.cursor()
 mycursor7 = connection.cursor()
 
+# Select para ver se já existem participações no banco
+partitions_info = []
+
+cursor = connection.cursor()
+queryExis = "SELECT COUNT(*) AS count FROM particao WHERE fkServidor = %s"
+
+cursor.execute(queryExis, (servidorId,))
+
+
+result = cursor.fetchone()
+
+
+
+for partition in psutil.disk_partitions():
+    partition_info = {
+        "nomeParticao": partition.mountpoint,
+        "espacoTotal": psutil.disk_usage(partition.mountpoint).total,
+    }
+    partitions_info.append(partition_info)
+
+for partition_info in partitions_info:
+    query_particao = """
+        INSERT IGNORE INTO particao (nomeParticao, espacoTotal, fkComponentes, fkMetrica, fkServidor, fkBanco, fkEspecificacoes, fkPlano)
+        VALUES (%s, %s, 3, 1, 1, 1, 1, 1)
+    """
+    print(result[0])
+    if result[0] == 0:
+            values_particao = (partition_info["nomeParticao"], partition_info["espacoTotal"])
+            cursor.execute(query_particao, values_particao)
+            connection.commit()
+
+# Se não existirem as partições, ele registra
 while True:
     partitions = psutil.disk_partitions()
-
+    print(partitions)
+    print("aaaa")
     for partition in partitions:
-       
         print(partition)
+       
         valores_id = []  # Reset valores_id for each partition
 
         mycursor1.execute("SELECT idComponentes FROM componentes WHERE modelo = 'cpu'")
@@ -64,23 +98,23 @@ while True:
         valores_id.extend(id_plano_vetor6)
         fkPlano = valores_id[-1]
 
-        mycursor7.execute("SELECT idParticao FROM particao WHERE qtdParticoes = 2")
-        result7 = mycursor7.fetchall()
-        id_particao_vetor7 = [x[0] for x in result7]
-        valores_id.extend(id_particao_vetor7)
-        fkParticao = valores_id[-1]
+##        mycursor7.execute("SELECT idParticao FROM particao WHERE qtdParticoes = 2")
+##        result7 = mycursor7.fetchall()
+##        id_particao_vetor7 = [x[0] for x in result7]
+##        valores_id.extend(id_particao_vetor7)
+##        fkParticao = valores_id[-1]
 
         usage = psutil.disk_usage(partition.mountpoint)
         print(usage)
         print()
-        query_registros = """
-            INSERT INTO registros (dataHorario, dadoCaptado, fkServidorReg, fkBanco, fkEspecificacoes, 
-                                   fkComponentesReg, fkMetrica, fkPlano, fkParticao)
-            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
-        """
-        values_registros = (datetime.now(), usage.percent, fkServidorReg, fkBanco, fkEspecificacoes, fkComponentesReg, fkMetrica, fkPlano, fkParticao)
-        cursor.execute(query_registros, values_registros)
-        connection.commit()
+##        query_registros = """
+##            INSERT INTO registros (dataHorario, dadoCaptado, fkServidorReg, fkBanco, fkEspecificacoes, 
+##                                   fkComponentesReg, fkMetrica, fkPlano, fkParticao)
+##            VALUES (%s, %s, %s, %s, %s, %s, %s, %s, %s)
+##        """
+##        values_registros = (datetime.now(), usage.percent, fkServidorReg, fkBanco, fkEspecificacoes, fkComponentesReg, fkMetrica, fkPlano, fkParticao)
+##        cursor.execute(query_registros, values_registros )
+##        connection.commit()
 
         print(f"Espaço total: {usage.total / (1024 ** 3):.2f} GB")
         print(f"Espaço usado: {usage.used / (1024 ** 3):.2f} GB")
