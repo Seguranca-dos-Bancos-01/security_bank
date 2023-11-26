@@ -11,6 +11,10 @@ router.get("/PorcentagemTotalProcessador/:servidorSelecionado", function (req, r
     gabrielController.PorcentagemTotalProcessador(req, res);
 })
 
+router.get("/PorcentagemThreads/:servidorSelecionado", function (req, res) {
+    gabrielController.PorcentagemThreads(req, res);
+})
+
 
 
 module.exports = router;
