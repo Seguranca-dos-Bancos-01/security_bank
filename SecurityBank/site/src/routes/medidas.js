@@ -187,4 +187,133 @@ router.get("/tempo-real2/:idUsuario2", function (req, res) {
     medidaController.buscarMedidasEmTempoReal2(req, res);
 });
 
+router.get("/componenteMetricaCPU/:selectedServer", function (req, res) {
+    medidaController.componenteMetricaCPU(req, res);
+})
+
+router.get("/componenteMetricaDISCO/:selectedServer", function (req, res) {
+    medidaController.componenteMetricaDISCO(req, res);
+})
+
+router.get("/componenteMetricaRAM/:selectedServer", function (req, res) {
+    medidaController.componenteMetricaRAM(req, res);
+})
+
+router.get("/estadoFrequenteCPU/:selectedServer", function (req, res) {
+    medidaController.estadoFrequenteCPU(req, res);
+})
+
+router.get("/estadoFrequenteDISCO/:selectedServer", function (req, res) {
+    medidaController.estadoFrequenteDISCO(req, res);
+})
+
+router.get("/estadoFrequenteRAM/:selectedServer", function (req, res) {
+    medidaController.estadoFrequenteRAM(req, res);
+})
+
+router.get("/totalAlertas/:selectedServer", function (req, res) {
+    medidaController.totalAlertas(req, res);
+})
+
+
+router.get("/totalAlertasCPU/:selectedServer", function (req, res) {
+    medidaController.totalAlertasCPU(req, res);
+})
+
+router.get("/totalAlertasRAM/:selectedServer", function (req, res) {
+    medidaController.totalAlertasRAM(req, res);
+})
+
+router.get("/totalAlertasDISCO/:selectedServer", function (req, res) {
+    medidaController.totalAlertasDISCO(req, res);
+})
+
+router.get("/totalAlertasAtencao/:selectedServer", function (req, res) {
+    medidaController.totalAlertasAtencao(req, res);
+})
+
+router.get("/totalAlertasAtencaoCPU/:selectedServer", function (req, res) {
+    medidaController.totalAlertasAtencaoCPU(req, res);
+})
+
+router.get("/totalAlertasAtencaoRAM/:selectedServer", function (req, res) {
+    medidaController.totalAlertasAtencaoRAM(req, res);
+})
+
+router.get("/totalAlertasAtencaoDISCO/:selectedServer", function (req, res) {
+    medidaController.totalAlertasAtencaoDISCO(req, res);
+})
+
+router.get("/totalAlertasEmergencia/:selectedServer", function (req, res) {
+    medidaController.totalAlertasEmergencia(req, res);
+})
+
+router.get("/totalAlertasEmergenciaCPU/:selectedServer", function (req, res) {
+    medidaController.totalAlertasEmergenciaCPU(req, res);
+})
+
+router.get("/totalAlertasEmergenciaRAM/:selectedServer", function (req, res) {
+    medidaController.totalAlertasEmergenciaRAM(req, res);
+})
+
+router.get("/totalAlertasEmergenciaDISCO/:selectedServer", function (req, res) {
+    medidaController.totalAlertasEmergenciaDISCO(req, res);
+})
+
+router.get("/totalAlertasUrgencia/:selectedServer", function (req, res) {
+    medidaController.totalAlertasUrgencia(req, res);
+})
+
+router.get("/totalAlertasUrgenciaCPU/:selectedServer", function (req, res) {
+    medidaController.totalAlertasUrgenciaCPU(req, res);
+})
+
+router.get("/totalAlertasUrgenciaRAM/:selectedServer", function (req, res) {
+    medidaController.totalAlertasUrgenciaRAM(req, res);
+})
+
+router.get("/totalAlertasUrgenciaDISCO/:selectedServer", function (req, res) {
+    medidaController.totalAlertasUrgenciaDISCO(req, res);
+})
+
+router.get("/ultimasAlertasConsumo1/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumo1(req, res);
+});
+
+router.get("/tempo-realAlertasConsumo1/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumo1(req, res);
+})
+
+router.get("/ultimasAlertasConsumo2/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumo2(req, res);
+});
+
+router.get("/tempo-realAlertasConsumo2/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumo2(req, res);
+})
+
+router.get("/ultimasAlertasConsumoCPU/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumoCPU(req, res);
+});
+
+router.get("/tempo-realAlertasConsumoCPU/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumoCPU(req, res);
+})
+
+router.get("/ultimasAlertasConsumoRAM/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumoRAM(req, res);
+});
+
+router.get("/tempo-realAlertasConsumoRAM/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumoRAM(req, res);
+})
+
+router.get("/ultimasAlertasConsumoDISCO/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumoDISCO(req, res);
+});
+
+router.get("/tempo-realAlertasConsumoDISCO/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumoDISCO(req, res);
+})
+
 module.exports = router;

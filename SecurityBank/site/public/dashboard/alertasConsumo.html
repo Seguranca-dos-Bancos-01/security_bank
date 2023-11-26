@@ -1,0 +1,2270 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Previsão e Análise Fluxo de Alertas</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/alertasConsumo.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+</head>
+
+<!-- <body onload=" atualizarFeed()"> -->
+
+<body>
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+
+            <div class="opcoesServidores">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+                </div>
+            </div>
+
+            <div class="opcoes localizacao">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gabriel</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Marcela</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div> -->
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="recFacial.html">
+                    <img src="../assets/imgs/recFacial.png" alt="">
+                    <span>Reconhecimento Facial</span>
+                </a>
+            </div> -->
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessao()">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+
+            <div class="Nome">
+                <h2>Previsão e Análise Fluxo de Alertas</h2>
+            </div>
+
+            <div class="divEscolhaServidor">
+                <span class="textoIndividual">Selecione um Servidor</span>
+                <select name="" id="selectServidor" class="selectServidor">
+                </select>
+            </div>
+            <dialog id="modalDialogAtencao" class="modal">
+                <p><span class="alertaCPU">Alerta em Atenção</span> representa que os componentes atingiram as seguintes
+                    métricas:</p>
+                <div style="align-self: flex-start; margin: 10px 0">
+                    <p>Consumo de <strong>CPU</strong> acima de <strong>18%</strong></p>
+                    <p>Consumo de <strong>Memória RAM</strong> acima de <strong>50%</strong></p>
+                    <p>Consumo de <strong>Disco</strong> acima de <strong>45%</strong></p>
+                </div>
+                <form method="dialog">
+                    <button class="button-close laranja">Ok</button>
+                </form>
+            </dialog>
+            <dialog id="modalDialogEmergencia" class="modal">
+                <p><span class="alertaEmergencia">Alerta em Emergência</span> representa que os componentes atingiram as
+                    seguintes
+                    métricas:</p>
+                <div style="align-self: flex-start; margin: 10px 0">
+                    <p>Consumo de <strong>CPU</strong> acima de <strong>23%</strong></p>
+                    <p>Consumo de <strong>Memória RAM</strong> acima de <strong>70%</strong></p>
+                    <p>Consumo de <strong>Disco</strong> acima de <strong>55%</strong></p>
+                </div>
+                <form method="dialog">
+                    <button class="button-close rosa">Ok</button>
+                </form>
+            </dialog>
+            <dialog id="modalDialogUrgencia" class="modal">
+                <p><span class="alertaUrgencia">Alerta em Urgência</span> representa que os componentes atingiram as
+                    seguintes
+                    métricas:</p>
+                <div style="align-self: flex-start; margin: 10px 0">
+                    <p>Consumo de <strong>CPU</strong> acima de <strong>50%</strong></p>
+                    <p>Consumo de <strong>Memória RAM</strong> acima de <strong>80%</strong></p>
+                    <p>Consumo de <strong>Disco</strong> acima de <strong>65%</strong></p>
+                </div>
+                <form method="dialog">
+                    <button class="button-close roxo">Ok</button>
+                </form>
+            </dialog>
+            <div id="divConteudoPagina" class="divConteudoPagina">
+                <div class="linhaConteudo">
+                    <span id="nomeServidorSelecionado">Servidor XX1</span>
+                    <select name="selectComponente" id="selectComponente" class="selectServidor">
+                        <option value="todos">Todos Componentes</option>
+                        <option value="cpu">CPU</option>
+                        <option value="ram">Memória RAM</option>
+                        <option value="disco">Disco</option>
+                    </select>
+                </div>
+                <div class="linhaGraficos">
+                    <div class="divAlertas">
+                        <div class="KPIAlerta">
+                            <div class="corAlertaKPI verde"></div>
+                            <div class="conteudoKPI">
+                                <span class="informacaoKPI" id="ttlAlertasTEXTO">53</span>
+                                <span class="legendaKPI">Total de Alertas Emitidos</span>
+                            </div>
+                            <!-- <div class="ajudaHINT" >
+                                <img src="../assets/helpHINT.png" alt="">
+                            </div> -->
+                        </div>
+                        <div class="KPIAlerta">
+                            <div class="corAlertaKPI laranja"></div>
+                            <div class="conteudoKPI">
+                                <span class="informacaoKPI" id="ttlAlertasAtencaoTEXTO">53</span>
+                                <span class="legendaKPI">Alertas de Atenção</span>
+                            </div>
+                            <div class="ajudaHINT" onclick="window.modalDialogAtencao.showModal(); modelAtencao()">
+                                <img src="../assets/helpHINT.png" alt="">
+                            </div>
+                        </div>
+                        <div class="KPIAlerta">
+                            <div class="corAlertaKPI rosa"></div>
+                            <div class="conteudoKPI">
+                                <span class="informacaoKPI" id="ttlAlertasEmergenciaTEXTO">53</span>
+                                <span class="legendaKPI">Alertas de Emergência</span>
+                            </div>
+                            <div class="ajudaHINT"
+                                onclick="window.modalDialogEmergencia.showModal(); modelEmergencia()">
+                                <img src="../assets/helpHINT.png" alt="">
+                            </div>
+                        </div>
+                        <div class="KPIAlerta">
+                            <div class="corAlertaKPI roxo"></div>
+                            <div class="conteudoKPI">
+                                <span class="informacaoKPI" id="ttlAlertasUrgenciaTEXTO">53</span>
+                                <span class="legendaKPI">Alertas de Urgência</span>
+                            </div>
+                            <div class="ajudaHINT" onclick="window.modalDialogUrgencia.showModal(); modelUrgencia()">
+                                <img src="../assets/helpHINT.png" alt="">
+                            </div>
+                        </div>
+                    </div>
+                    <div id="DivGraficoGeral" class="graficosServidorGeral">
+                        <div class="graficoConsumoComponentes">
+                            <span class="tituloGraficos">Consumo Médio por Componente</span>
+                            <canvas id="myChart2"></canvas>
+                        </div>
+                        <div class="graficoAlertasComponentes">
+                            <span class="tituloGraficos">Alertas por Componente</span>
+                            <canvas id="myChart" style="width: 100px; height: 200px;"></canvas>
+
+                        </div>
+                    </div>
+
+                    <div id="DivGraficoComp" class="graficosServidorGeral">
+                        <div class="graficoConsumoComponentes">
+                            <span class="tituloGraficos">Histórico de Consumo do Componente</span>
+                            <canvas id="myChart3"></canvas>
+                        </div>
+                        <div class="divKPIComp">
+                            <div class="conteudoKIPComp">
+                                <span class="tituloGraficos" id="testeTony">Estado Frequente do Componente</span>
+                                <span class="informacaoKPIComp" id="estadoFrequenteComp">53</span>
+                            </div>
+                            <div class="conteudoKIPComp">
+                                <span class="tituloGraficos">Análise Atual Componente</span>
+                                <span class="informacaoKPIComp" id="compMetrica">53</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+    </div>
+    <div class="rodapeDash">
+        <div class="itens">
+            <div class="blocos">
+                <h1>Security Bank</h1>
+                <h4>TECH & SOLUTIONS</h4>
+            </div>
+            <div class="blocos">
+                <span><b>Telefone:</b>(11)40028922</span>
+                <br>
+                <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+            </div>
+            <div class="blocos">
+                <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                    Cerqueira César, São Paulo - SP,<br>
+                    01414-001</span>
+            </div>
+        </div>
+        <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+    nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+    document.getElementById("modalDialogAtencao").style.display = 'none';
+    document.getElementById("modalDialogEmergencia").style.display = 'none';
+    document.getElementById("modalDialogUrgencia").style.display = 'none';
+    document.getElementById("divConteudoPagina").style.display = 'none';
+    document.getElementById("DivGraficoComp").style.display = 'none';
+
+    var selectedBanco = sessionStorage.FKBANCO;
+    console.log(selectedBanco)
+
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+
+
+    function exibirServidoresUsuario() {
+        var server = JSON.parse(sessionStorage.servidor);
+        var selectServidores = document.getElementById("selectServidor");
+
+        // Limpar as opções existentes para evitar duplicatas
+        selectServidores.innerHTML = "";
+
+        /*PARA FUNCIONAR PRECISA TER MAIS DE UM SERVIDOR NO BANCO*/
+
+        selectServidores.addEventListener("change", function (event) {
+
+            var selectedOption = selectServidores.options[selectServidores.selectedIndex];
+            // selectServer = 1;
+            if (selectedOption) {
+                selectedServer = selectedOption.value;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer);
+                document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
+                document.getElementById("divConteudoPagina").style.display = 'block';
+
+                totalAlertas(selectedServer);
+                totalAlertasAtencao(selectedServer);
+                totalAlertasEmergencia(selectedServer);
+                totalAlertasUrgencia(selectedServer);
+                obterDadosGraficoAlertasConsumo1(selectedServer);
+                obterDadosGraficoAlertasConsumo2(selectedServer);
+                document.getElementById('myChart2').style.width = "200px";
+                document.getElementById('myChart2').style.height = "300px";
+
+                console.log("Valor de idUsuario: ", idUsuario);
+                // inserir(selectedServer);
+            }
+        });
+
+        server.forEach(element => {
+            var optionServidor = document.createElement('option');
+            optionServidor.textContent = `Servidor ${element.idServidor}`;
+            optionServidor.value = element.idServidor;
+
+            // Adiciona a opção ao elemento select
+            selectServidores.appendChild(optionServidor);
+        });
+    }
+
+
+    exibirServidoresUsuario()
+
+    function modelAtencao() {
+        document.getElementById("modalDialogAtencao").style.display = 'flex';
+    }
+    function modelEmergencia() {
+        document.getElementById("modalDialogEmergencia").style.display = 'flex';
+    }
+    function modelUrgencia() {
+        document.getElementById("modalDialogUrgencia").style.display = 'flex';
+    }
+
+
+
+    // buscarComponente()
+    var componenteSelecionado = document.querySelector("#selectComponente");
+
+    var valorOptions = 0;
+    var componente;
+    componenteSelecionado.addEventListener("change", () => {
+        var elementoSelect = document.querySelector("#selectComponente");
+        var indice = elementoSelect.selectedIndex;
+        valorOptions = elementoSelect.options[indice].value;
+        console.log(valorOptions);
+
+        if (valorOptions == "cpu") {
+            document.getElementById("DivGraficoGeral").style.display = 'none';
+            document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
+            document.getElementById("DivGraficoComp").style.display = 'flex';
+            totalAlertasCPU(selectedServer);
+            totalAlertasAtencaoCPU(selectedServer);
+            totalAlertasEmergenciaCPU(selectedServer);
+            totalAlertasUrgenciaCPU(selectedServer);
+            estadoFrequenteCPU(selectedServer);
+            componenteMetricaCPU(selectedServer);
+            obterDadosGraficoAlertasConsumoCPU(selectedServer);
+
+        } else if (valorOptions == "ram") {
+            document.getElementById("DivGraficoComp").style.display = 'flex';
+            document.getElementById("DivGraficoGeral").style.display = 'none';
+            totalAlertasRAM(selectedServer);
+            totalAlertasAtencaoRAM(selectedServer);
+            totalAlertasEmergenciaRAM(selectedServer);
+            totalAlertasUrgenciaRAM(selectedServer);
+            estadoFrequenteRAM(selectedServer);
+            componenteMetricaRAM(selectedServer);
+            obterDadosGraficoAlertasConsumoRAM(selectedServer);
+
+        } else if (valorOptions == "disco") {
+            document.getElementById("DivGraficoComp").style.display = 'flex';
+            document.getElementById("DivGraficoGeral").style.display = 'none';
+            totalAlertasDISCO(selectedServer);
+            totalAlertasAtencaoDISCO(selectedServer);
+            totalAlertasEmergenciaDISCO(selectedServer);
+            totalAlertasUrgenciaDISCO(selectedServer);
+            componenteMetricaDISCO(selectedServer);
+            estadoFrequenteDISCO(selectedServer);
+            obterDadosGraficoAlertasConsumoDISCO(selectedServer);
+
+        } else if (valorOptions == "todos") {
+            document.getElementById("nomeServidorSelecionado").textContent = `Servidor ${selectedServer}`;
+            document.getElementById("divConteudoPagina").style.display = 'block';
+            document.getElementById("DivGraficoComp").style.display = 'none';
+            document.getElementById("DivGraficoGeral").style.display = 'flex';
+            totalAlertas(selectedServer);
+            totalAlertasAtencao(selectedServer);
+            totalAlertasEmergencia(selectedServer);
+            totalAlertasUrgencia(selectedServer);
+            obterDadosGraficoAlertasConsumo1(selectedServer);
+            obterDadosGraficoAlertasConsumo2(selectedServer);
+
+        }
+    })
+
+    function componenteMetricaCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/componenteMetricaCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO--Aosdia--------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarcomponenteMetricaCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function mostrarcomponenteMetricaCPU(response) {
+        console.log('Exibindo dados retornados:')
+        var metrica;
+            var limite;
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            // estado = registro.status
+            num = registro.dadoCaptado;
+
+            var limitescpU = {
+                atencao: 18,
+                emergencia: 23,
+                urgencia: 50
+            };
+            
+            if (num <= limitescpU.atencao) {
+                metrica = "Atenção"
+                limite = limitescpU.atencao - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num >= limitescpU.atencao && num < limitescpU.emergencia) {
+                metrica = "Emergência"
+                limite = limitescpU.emergencia - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num >= limitescpU.emergencia && num < limitescpU.urgencia) {
+                metrica = "Urgência"
+                limite = limitescpU.urgencia - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num > limitescpU.urgencia) {
+                metrica = "Urgência"
+                limite = num - limitescpU.urgencia
+                document.getElementById("compMetrica").innerHTML= `${metrica} ultrapassada <br> em ${limite}%`;
+            }
+            console.log('Exibindo dados retornados:4523790-5984763545769',limite)
+        }
+        // console.log(dado);
+        console.log(response[0]);
+       
+    }
+
+    function componenteMetricaRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/componenteMetricaRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO--Aosdia--------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarcomponenteMetricaRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function mostrarcomponenteMetricaRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            // estado = registro.status
+            num = registro.dadoCaptado;
+
+            var limitescpU = {
+                atencao: 45,
+                emergencia: 55,
+                urgencia: 65
+            };
+            var metrica;
+            var limite;
+            if (num <= limitescpU.atencao) {
+                metrica = "Atenção"
+                limite = limitescpU.atencao - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num >= limitescpU.atencao && num < limitescpU.emergencia) {
+                metrica = "Emergência"
+                limite = limitescpU.emergencia - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num >= limitescpU.emergencia && num < limitescpU.urgencia) {
+                metrica = "Urgência"
+                limite = limitescpU.urgencia - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num > limitescpU.urgencia) {
+                metrica = "Urgência"
+                limite = num - limitescpU.urgencia
+                document.getElementById("compMetrica").innerHTML= `${metrica} ultrapassada <br> em ${limite}%`;
+            }
+            console.log('Exibindo dados retornados:4523790-5984763545769',limite)
+        }
+    }
+
+    function componenteMetricaDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/componenteMetricaDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO--Aosdia--------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarcomponenteMetricaDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    function mostrarcomponenteMetricaDISCO(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            // estado = registro.status
+            num = registro.dadoCaptado;
+
+            var limitescpU = {
+                atencao: 50,
+                emergencia: 70,
+                urgencia: 80
+            };
+            var metrica;
+            var limite;
+            if (num <= limitescpU.atencao) {
+                metrica = "Atenção"
+                limite = limitescpU.atencao - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num >= limitescpU.atencao && num < limitescpU.emergencia) {
+                metrica = "Emergência"
+                limite = limitescpU.emergencia - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num >= limitescpU.emergencia && num < limitescpU.urgencia) {
+                metrica = "Urgência"
+                limite = limitescpU.urgencia - num
+                document.getElementById("compMetrica").textContent = `${limite}% para ${metrica}`;
+
+            } else if (num > limitescpU.urgencia) {
+                metrica = "Urgência"
+                limite = num - limitescpU.urgencia
+                document.getElementById("compMetrica").innerHTML= `${metrica} ultrapassada <br> em ${limite}%`;
+            }
+            console.log('Exibindo dados retornados:4523790-5984763545769',limite)
+        }
+    }
+
+
+
+    function estadoFrequenteCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/estadoFrequenteCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO--Aosdia--------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarestadoFrequenteCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarestadoFrequenteCPU(response) {
+        console.log('Exibindo dados retornados:')
+        var inicio = response[0]
+        console.log("sgdaiodajdahdoadadadmdkal", inicio)
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            estado = registro.situacao
+            num = registro.totalAlertas;
+            console.log(estado)
+
+            if (registro.totalAlertas > inicio.totalAlertas) {
+                inicio = registro;  // Atribuir o registro inteiro, não apenas o valor totalAlertas
+                document.getElementById("estadoFrequenteComp").textContent = registro.situacao;
+                console.log(inicio);
+            }
+        }
+
+        // console.log(dado);
+        console.log(response[0]);
+        // document.getElementById("estadoFrequenteComp").textContent = estado;
+    }
+
+    function estadoFrequenteDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/estadoFrequenteDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO--Aosdia--------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarestadoFrequenteDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarestadoFrequenteDISCO(response) {
+        console.log('Exibindo dados retornados:');
+        var inicio = response[0];
+        console.log("sgdaiodajdahdoadadadmdkal", inicio);
+
+        for (var i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var estado = registro.situacao;
+            var num = registro.totalAlertas;
+            console.log(estado);
+
+            if (registro.totalAlertas >= inicio.totalAlertas) {
+                inicio = registro;  // Atribuir o registro inteiro, não apenas o valor totalAlertas
+                document.getElementById("estadoFrequenteComp").textContent = registro.situacao;
+                console.log(inicio);
+            }
+        }
+
+        console.log(response[0]);
+
+    }
+
+    function estadoFrequenteRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/estadoFrequenteRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO--Aosdia--------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarestadoFrequenteRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarestadoFrequenteRAM(response) {
+        console.log('Exibindo dados retornados:')
+        var inicio = response[0]
+        console.log("sgdaiodajdahdoadadadmdkal", inicio)
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            estado = registro.situacao
+            num = registro.totalAlertas;
+            console.log(estado)
+
+            if (registro.totalAlertas >= inicio.totalAlertas) {
+                inicio = registro;  // Atribuir o registro inteiro, não apenas o valor totalAlertas
+                document.getElementById("estadoFrequenteComp").textContent = registro.situacao;
+                console.log(inicio);
+            }
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        // document.getElementById("estadoFrequenteComp").textContent = estado;
+    }
+
+    function totalAlertas(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertas/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO--Aosdia--------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertas(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarTotalAlertas(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasTEXTO").textContent = num;
+    }
+
+    function totalAlertasCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarTotalAlertasCPU(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasTEXTO").textContent = num;
+    }
+
+    function totalAlertasRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarTotalAlertasRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasTEXTO").textContent = num;
+    }
+
+    function totalAlertasDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function mostrarTotalAlertasDISCO(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasTEXTO").textContent = num;
+    }
+
+    function totalAlertasAtencao(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasAtencao/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasAtencao(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasAtencao(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
+    }
+
+    function totalAlertasAtencaoCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasAtencaoCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasAtencaoCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasAtencaoCPU(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
+    }
+
+    function totalAlertasAtencaoRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasAtencaoRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasAtencaoRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasAtencaoRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
+    }
+
+    function totalAlertasAtencaoDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasAtencaoDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasAtencaoDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasAtencaoDISCO(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasAtencaoTEXTO").textContent = num;
+    }
+
+    function totalAlertasEmergencia(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasEmergencia/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasEmergencia(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasEmergencia(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
+    }
+
+    function totalAlertasEmergenciaCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasEmergenciaCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasEmergenciaCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasEmergenciaCPU(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
+    }
+
+    function totalAlertasEmergenciaRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasEmergenciaRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasEmergenciaRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasEmergenciaRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
+    }
+
+    function totalAlertasEmergenciaDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasEmergenciaDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasEmergenciaDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasEmergenciaDISCO(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasEmergenciaTEXTO").textContent = num;
+    }
+
+    function totalAlertasUrgencia(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasUrgencia/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasUrgencia(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasUrgencia(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
+    }
+
+    function totalAlertasUrgenciaCPU(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasUrgenciaCPU/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasUrgenciaCPU(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasUrgenciaCPU(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
+    }
+
+
+    function totalAlertasUrgenciaRAM(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasUrgenciaRAM/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasUrgenciaRAM(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasUrgenciaRAM(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
+    }
+
+
+    function totalAlertasUrgenciaDISCO(selectedServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/totalAlertasUrgenciaDISCO/${selectedServer}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO----------- ${JSON.stringify(response)}`);
+                            response.reverse();
+                            mostrarTotalAlertasUrgenciaDISCO(response);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function mostrarTotalAlertasUrgenciaDISCO(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            num = registro.totalAlertas;
+        }
+        // console.log(dado);
+        console.log(response[0]);
+        document.getElementById("ttlAlertasUrgenciaTEXTO").textContent = num;
+    }
+    // window.onload = obterDadosGraficoAlertasConsumo1(selectedServer);
+
+
+
+
+    function obterDadosGraficoAlertasConsumo1(selectedServer) {
+        var existingChart = Chart.getChart('myChart');
+
+        // Verifique se a instância do gráfico existe
+        if (existingChart) {
+            // Se existir, destrua o gráfico
+            existingChart.destroy();
+            console.log('O gráfico existente foi destruído.');
+        }
+
+
+        fetch(`/medidas/ultimasAlertasConsumo1/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    plotarGraficoAlertasConsumo1(resposta, selectedServer);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function plotarGraficoAlertasConsumo1(resposta, selectedServer) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: '',
+                data: [],
+                fill: false,
+                backgroundColor: [
+                    '#6953D3'
+                ],
+                tension: 0.1
+            },
+            {
+                label: '',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(199, 52, 52)',
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // var inicio = resposta[0].num;
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.modelo);
+            dados.datasets[0].data.push(registro.totalAlertas);
+
+            // if (registro.totalAlertas >= inicio) {
+            //     inicio = registro.totalAlertas;
+            //     // kpi1.innerHTML = registro.modelo;
+            //     console.log(inicio)
+            // }
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Remover a legenda
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        var myChart = new Chart(
+            document.getElementById('myChart'),
+            config
+        );
+
+
+        setTimeout(() => atualizarGraficoAlertasConsumo1(selectedServer, dados, myChart), 2000);
+    }
+
+    function atualizarGraficoAlertasConsumo1(selectedServer, dados, myChart) {
+
+
+        fetch(`/medidas/tempo-realAlertasConsumo1/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${selectedServer}`)
+                    // avisoCaptura.innerHTML = ""
+
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].modelo)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        if (myChart) {
+                            myChart.destroy();
+                        }
+
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].modelo); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].totalAlertas); // incluir uma nova medida de umidade
+
+
+                        // myChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+    function obterDadosGraficoAlertasConsumo2(selectedServer) {
+        var existingChart = Chart.getChart('myChart2');
+
+        // Verifique se a instância do gráfico existe
+        if (existingChart) {
+            // Se existir, destrua o gráfico
+            existingChart.destroy();
+            console.log('O gráfico existente foi destruído.');
+        }
+
+
+        fetch(`/medidas/ultimasAlertasConsumo2/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos-----------------------------------------------------: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    plotarGraficoAlertasConsumo2(resposta, selectedServer);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function plotarGraficoAlertasConsumo2(resposta, selectedServer) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: '',
+                data: [],
+                fill: false,
+                backgroundColor: [
+                    '#6953D3'
+                ],
+                tension: 0.1
+            },
+            {
+                label: '',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(199, 52, 52)',
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // var inicio = resposta[0].num;
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.modelo);
+            dados.datasets[0].data.push(registro.media);
+
+            // if (registro.totalAlertas >= inicio) {
+            //     inicio = registro.totalAlertas;
+            //     // kpi1.innerHTML = registro.modelo;
+            //     console.log(inicio)
+            // }
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Remover a legenda
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        var myChart = new Chart(
+            document.getElementById('myChart2'),
+            config
+        );
+
+
+        setTimeout(() => atualizarGraficoAlertasConsumo2(selectedServer, dados, myChart), 2000);
+    }
+
+    function atualizarGraficoAlertasConsumo2(selectedServer, dados, myChart) {
+
+
+        fetch(`/medidas/tempo-realAlertasConsumo2/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${selectedServer}`)
+                    // avisoCaptura.innerHTML = ""
+
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].modelo)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        if (myChart) {
+                            myChart.destroy();
+                        }
+
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].modelo); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].media); // incluir uma nova medida de umidade
+
+
+                        // myChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+    function obterDadosGraficoAlertasConsumoCPU(selectedServer) {
+        var existingChart = Chart.getChart('myChart3');
+
+        // Verifique se a instância do gráfico existe
+        if (existingChart) {
+            // Se existir, destrua o gráfico
+            existingChart.destroy();
+            console.log('O gráfico existente foi destruído.');
+        }
+
+
+        fetch(`/medidas/ultimasAlertasConsumoCPU/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos-----------------------------------------------------: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    plotarGraficoAlertasConsumoCPU(resposta, selectedServer);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function plotarGraficoAlertasConsumoCPU(resposta, selectedServer) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: '',
+                data: [],
+                fill: false,
+                backgroundColor: [
+                    '#6953D3'
+                ],
+                tension: 0.1
+            },
+            {
+                label: '',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(199, 52, 52)',
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // var inicio = resposta[0].num;
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.mes);
+            dados.datasets[0].data.push(registro.consumo);
+
+            // if (registro.totalAlertas >= inicio) {
+            //     inicio = registro.totalAlertas;
+            //     // kpi1.innerHTML = registro.modelo;
+            //     console.log(inicio)
+            // }
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Remover a legenda
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        var myChart = new Chart(
+            document.getElementById('myChart3'),
+            config
+        );
+
+
+        setTimeout(() => atualizarGraficoAlertasConsumoCPU(selectedServer, dados, myChart), 2000);
+    }
+
+    function atualizarGraficoAlertasConsumoCPU(selectedServer, dados, myChart) {
+
+
+        fetch(`/medidas/tempo-realAlertasConsumoCPU/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${selectedServer}`)
+                    // avisoCaptura.innerHTML = ""
+
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].mes)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        if (myChart) {
+                            myChart.destroy();
+                        }
+
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].mes); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].consumo); // incluir uma nova medida de umidade
+
+
+                        // myChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+    function obterDadosGraficoAlertasConsumoRAM(selectedServer) {
+        var existingChart = Chart.getChart('myChart3');
+
+        // Verifique se a instância do gráfico existe
+        if (existingChart) {
+            // Se existir, destrua o gráfico
+            existingChart.destroy();
+            console.log('O gráfico existente foi destruído.');
+        }
+
+
+        fetch(`/medidas/ultimasAlertasConsumoRAM/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos-----------------------------------------------------: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    plotarGraficoAlertasConsumoRAM(resposta, selectedServer);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function plotarGraficoAlertasConsumoRAM(resposta, selectedServer) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: '',
+                data: [],
+                fill: false,
+                backgroundColor: [
+                    '#6953D3'
+                ],
+                tension: 0.1
+            },
+            {
+                label: '',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(199, 52, 52)',
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // var inicio = resposta[0].num;
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.mes);
+            dados.datasets[0].data.push(registro.consumo);
+
+            // if (registro.totalAlertas >= inicio) {
+            //     inicio = registro.totalAlertas;
+            //     // kpi1.innerHTML = registro.modelo;
+            //     console.log(inicio)
+            // }
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Remover a legenda
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        var myChart = new Chart(
+            document.getElementById('myChart3'),
+            config
+        );
+
+
+        setTimeout(() => atualizarGraficoAlertasConsumoRAM(selectedServer, dados, myChart), 2000);
+    }
+
+    function atualizarGraficoAlertasConsumoRAM(selectedServer, dados, myChart) {
+
+
+        fetch(`/medidas/tempo-realAlertasConsumoRAM/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${selectedServer}`)
+                    // avisoCaptura.innerHTML = ""
+
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].mes)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        if (myChart) {
+                            myChart.destroy();
+                        }
+
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].mes); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].consumo); // incluir uma nova medida de umidade
+
+
+                        // myChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+    function obterDadosGraficoAlertasConsumoDISCO(selectedServer) {
+        var existingChart = Chart.getChart('myChart3');
+
+        // Verifique se a instância do gráfico existe
+        if (existingChart) {
+            // Se existir, destrua o gráfico
+            existingChart.destroy();
+            console.log('O gráfico existente foi destruído.');
+        }
+
+
+        fetch(`/medidas/ultimasAlertasConsumoDISCO/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos--------------WWWWWWWWWWW---------------------------------------: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+                    plotarGraficoAlertasConsumoDISCO(resposta, selectedServer);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    function plotarGraficoAlertasConsumoDISCO(resposta, selectedServer) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+        // Criando estrutura para plotar gráfico - labels
+        let labels = [];
+
+        // Criando estrutura para plotar gráfico - dados
+        let dados = {
+            labels: labels,
+            datasets: [{
+                label: '',
+                data: [],
+                fill: false,
+                backgroundColor: [
+                    '#6953D3'
+                ],
+                tension: 0.1
+            },
+            {
+                label: '',
+                data: [],
+                fill: false,
+                borderColor: 'rgb(199, 52, 52)',
+                tension: 0.1
+            }]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // var inicio = resposta[0].num;
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.mes);
+            dados.datasets[0].data.push(registro.consumo);
+
+            // if (registro.totalAlertas >= inicio) {
+            //     inicio = registro.totalAlertas;
+            //     // kpi1.innerHTML = registro.modelo;
+            //     console.log(inicio)
+            // }
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        // Criando estrutura para plotar gráfico - config
+        const config = {
+            type: 'bar',
+            data: dados,
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                },
+                plugins: {
+                    legend: {
+                        display: false // Remover a legenda
+                    },
+                    title: {
+                        display: false
+                    }
+                }
+            }
+        };
+
+        // Adicionando gráfico criado em div na tela
+        var myChart = new Chart(
+            document.getElementById('myChart3'),
+            config
+        );
+
+
+        setTimeout(() => atualizarGraficoAlertasConsumoDISCO(selectedServer, dados, myChart), 2000);
+    }
+
+    function atualizarGraficoAlertasConsumoDISCO(selectedServer, dados, myChart) {
+
+
+        fetch(`/medidas/tempo-realAlertasConsumoDISCO/${selectedServer}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log(`Dados atuais do gráfico:`);
+                    console.log(dados);
+
+                    let avisoCaptura = document.getElementById(`avisoCaptura${selectedServer}`)
+                    // avisoCaptura.innerHTML = ""
+
+
+                    if (novoRegistro[0].momento_grafico == dados.labels[dados.labels.length]) {
+                        console.log("---------------------------------------------------------------")
+                        console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                        // avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                        console.log("Horário do novo dado capturado:")
+                        console.log(novoRegistro[0].mes)
+                        console.log("Horário do último dado capturado:")
+                        console.log(dados.labels[dados.labels.length])
+                        console.log("---------------------------------------------------------------")
+                    } else {
+                        if (myChart) {
+                            myChart.destroy();
+                        }
+
+                        // tirando e colocando valores no gráfico
+                        dados.labels.shift(); // apagar o primeiro
+                        dados.labels.push(novoRegistro[0].mes); // incluir um novo momento
+
+                        dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                        dados.datasets[0].data.push(novoRegistro[0].consumo); // incluir uma nova medida de umidade
+
+
+                        // myChart.update();
+                    }
+
+                    // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                    // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+                // proximaAtualizacao = setTimeout(() => atualizarGrafico(idResposta, dados, myChart), 2000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+</script>
