@@ -805,6 +805,66 @@ function buscarUltimasMedidas(idUsuario, limite_linhas) {
     return database.executar(instrucaoSql);
 }
 
+function buscarUltimasMedidasTemperatura(servidor, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor};    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor};
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealTemperatura(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT 
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
+        dataHorario AS horario
+    FROM registros
+    JOIN Componentes ON fkComponentesReg = idComponentes
+    WHERE fkBancoReg = ${idUsuario}
+    LIMIT 0, 50;
+    `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT 
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
+    (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
+    dataHorario AS horario
+FROM registros
+JOIN Componentes ON fkComponentesReg = idComponentes
+WHERE fkBancoReg = ${idUsuario}
+LIMIT 0, 50;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
 function buscarMedidasEmTempoReal(idUsuario) {
 
     instrucaoSql = ''
@@ -1237,4 +1297,5 @@ module.exports = {
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2,
     buscarUltimasMedidasBola,
+    buscarUltimasMedidasTemperatura,
 }

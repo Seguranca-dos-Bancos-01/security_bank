@@ -174,6 +174,12 @@ router.get("/ultimas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
 
+router.get("/Temperatura/:servidor", function (req, res) {
+    medidaController.buscarUltimasMedidasTemperatura(req, res);
+});
+router.get("/tempo-realTemperatura/:servidor", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealTemperatura(req, res);
+})
 
 
 router.get("/tempo-real/:idUsuario", function (req, res) {

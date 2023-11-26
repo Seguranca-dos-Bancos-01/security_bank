@@ -663,7 +663,8 @@
         obterDadosGrafico(idUsuario);
     });
 
-    function obterDadosGrafico(idUsuario) {
+    var servidor = 1
+    function obterDadosGraficoTemperatura(servidor) {
         if (sessionStorage.ID_USUARIO) {
             let idUsuario = sessionStorage.ID_USUARIO;
             console.log(idUsuario);
@@ -681,7 +682,7 @@
                     console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
                     resposta.reverse();
 
-                    plotarGrafico(resposta, idUsuario);
+                    plotarGraficoTemperatura(resposta, servidor);
                 });
             } else {
                 console.error('Nenhum dado encontrado ou erro na API');
@@ -691,7 +692,7 @@
         });
     }
 
-    function plotarGrafico(resposta, idUsuario) {
+    function plotarGraficoTemperatura(resposta, servidor) {
         console.log('iniciando plotagem do gráfico...');
 
         const cores = ['#FF847F', '#A6E22E', '#66D9EF', '#AE81FF', '#F92672'];
@@ -715,19 +716,6 @@
                     fill: false,
                     borderColor: '#FF847F',
                     tension: 0.1
-                },
-                {
-                    label: 'RAM',
-                    data: [],
-                    fill: false,
-                    borderColor: '#5E1A8D'
-                },
-                {
-                    label: 'DISCO',
-                    data: [],
-                    fill: false,
-                    borderColor: '#36D000',
-                    tension: 0.1
                 }
             ]
         };
@@ -739,10 +727,8 @@
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
-            labels.push(registro.horario);
-            dados.datasets[0].data.push(registro.proc);
-            dados.datasets[1].data.push(registro.RAM);
-            dados.datasets[2].data.push(registro.disco);
+            labels.push(registro.nome);
+            dados.datasets[0].data.push(registro.CPU);
         }
 
         console.log('----------------------------------------------')
@@ -760,11 +746,11 @@
 
         let myChart = new Chart(document.getElementById('myChartsegundo'), config);
 
-        atualizarGrafico(idUsuario, dados, myChart);
+        atualizarGraficoTemperatura(servidor, dados, myChart);
     }
 
-    function atualizarGrafico(idUsuario, dados, myChart) {
-        fetch(`/medidas/tempo-real/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+    function atualizarGraficoTemperatura(servidor, dados, myChart) {
+        fetch(`/medidas/tempo-realTemperatura/${servidor}`, { cache: 'no-store' }).then(function (response) {
             if (response.ok) {
                 response.json().then(function (novoRegistro) {
                     console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
