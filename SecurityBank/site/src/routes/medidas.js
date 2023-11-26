@@ -187,4 +187,29 @@ router.get("/tempo-real2/:idUsuario2", function (req, res) {
     medidaController.buscarMedidasEmTempoReal2(req, res);
 });
 
+
+
+
+
+
+
+router.get("/kpiIndividual/:servidorSelecionado", function (req, res) {
+    medidaController.kpiIndividual(req, res);
+})
+
+router.get("/PorcentagemTotalProcessador/:servidorSelecionado", function (req, res) {
+    medidaController.PorcentagemTotalProcessador(req, res);
+})
+
+
+router.get("/obterDadosGraficoThreads/:servidorSelecionado", function (req, res) {
+    medidaController.obterDadosGraficoThreads(req, res);
+});
+
+router.get("/atualizarGraficoThreads/:servidorSelecionado", function (req, res) {
+    medidaController.atualizarGraficoThreads(req, res);
+})
+
+
+
 module.exports = router;

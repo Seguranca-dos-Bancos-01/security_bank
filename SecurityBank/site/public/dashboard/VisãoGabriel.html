@@ -232,7 +232,7 @@
     
     alert(servidorSelecionado);
 
-    fetch(`/gabriel/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
+    fetch(`/medidas/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
         .then(function (resposta) {
             if (resposta.ok) {
                 console.log("ENTREII no atualizar feed");
@@ -258,7 +258,7 @@
             // finalizarAguardar();
         });
 
-        fetch(`/gabriel/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
+        fetch(`/medidas/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
         .then(function (resposta) {
             if (resposta.ok) {
                 console.log("ENTREII no atualizar feed");
@@ -287,7 +287,7 @@
 function atualizarDadosEmTempoReal() {
     var servidorSelecionado = sessionStorage.servidorSelecionado;
     
-    fetch(`/gabriel/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
+    fetch(`/medidas/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
         .then(function (resposta) {
             if (resposta.ok) {
                 console.log("ENTREII no atualizar feed");
@@ -312,7 +312,7 @@ function atualizarDadosEmTempoReal() {
             // finalizarAguardar();
         });
 
-    fetch(`/gabriel/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
+    fetch(`/medidas/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
         .then(function (resposta) {
             if (resposta.ok) {
                 console.log("ENTREII no atualizar feed");
@@ -356,7 +356,7 @@ function obterDadosGraficoThreads(servidorSelecionado) {
 //     clearTimeout(proximaAtualizacao);
 // }
 
-fetch(`/gabriel/obterDadosGraficoThreads/${servidorSelecionado}`, { cache: 'no-store' }).then(function (response) {
+fetch(`/medidas/obterDadosGraficoThreads/${servidorSelecionado}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (resposta) {
             console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
@@ -424,7 +424,7 @@ const config = {
 
 // Adicionando gráfico criado em div na tela
 let myChart = new Chart(
-    document.getElementById(`#myChart`),
+    document.getElementById(`myChart`),
     config
 );
 
@@ -442,7 +442,7 @@ function atualizarGraficoThreads(servidorSelecionado, dados, myChart) {
 
 
 
-fetch(`/gabriel/atualizarGraficoThreads/${servidorSelecionado}`, { cache: 'no-store' }).then(function (response) {
+fetch(`/medidas/atualizarGraficoThreads/${servidorSelecionado}`, { cache: 'no-store' }).then(function (response) {
     if (response.ok) {
         response.json().then(function (novoRegistro) {
 
