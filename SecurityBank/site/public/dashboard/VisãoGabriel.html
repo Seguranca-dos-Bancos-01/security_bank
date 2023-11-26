@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Controle Acesso</title>
+
+    <link rel="stylesheet" href="../css/VisaoGabriel.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/GerenciarAcesso.css">
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body onload="UltimasMedidasIndividual()">
+
+
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div id="nivelACesso" class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="opcoesServidores">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
+                </div>
+            </div>
+
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+                <!-- <div class="opcoesServidores-content">
+                        <a href="alertas.html">Visão 1</a>
+                        <a href="alertas.html">Visão 2</a>
+                    </div> -->
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Bernardo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span><a href="VisãoGabriel.html">Visão Gabriel</a></span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Marcela</span>
+                    </a>
+                </div> -->
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div id="gerenciarAcesso  localizacao" class="opcoes">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                    <a href="recFacial.html">
+                        <img src="../assets/imgs/recFacial.png" alt="">
+                        <span>Reconhecimento Facial</span>
+                    </a>
+                </div> -->
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessonStorage()">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="divUsoGeraleTipoProcessador">
+            <div class="usoProcessador">
+                <div class="texto_titulo_usoProcessador">
+                    <span>Uso Geral do Processador:</span>
+                </div>
+                <div id="textousoprocessador" class="texto_info_usoProcessador_porcentagem">
+                    <span>70%</span>
+                </div>
+            </div>
+
+            <div class="linha-vertical"></div>
+
+            <div class="tipoProcessador">
+                <div class="texto_titulo_tipoProcessador">
+                    <span>Tipo de Processador:</span>
+                </div>
+                <div id = "texto_tipo_do_cpu" class="texto_info_tipoProcessador">
+                    <span>Intel core i5</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="div_bloco_kpis">
+            <div class="Kpi_núcleos">
+                <div class="div_nucleos_titulo">
+                    <h3>Núcleos:</h3>
+                </div>
+
+
+                <div id= "div_quant_nucleos" class="div_nucleos_informacao">
+                    <span>NUM</span>
+                </div>
+
+            </div>
+
+            <!-- <div class="div_input_pergunta_servidor">
+
+                <div class="Servidor_input_texto">
+                  Qual servidor quer ver:
+                </div>
+                <div class="Servidor_input_numero">
+                    <input type="number">
+                </div>
+                <div>
+                    <button class="botao_input">Acept</button>
+                </div> -->
+                
+                
+            <!-- </div> -->
+
+            <select name="" id="selectServidor" class="selectServidor">
+            </select>
+
+        
+            <div class="Kpi_threads">
+
+                <div class="div_threads_titulo2">
+                    <h3>Threads:</h3>
+                </div>
+
+                <div id= "div_quant_threads" class="div_theads_informacao">
+                    <span>NUM</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="grafico">
+            <canvas id="myChart" width="400" height="200"></canvas>
+            <script src="script.js"></script>
+        </div>
+
+
+        
+</body>
+
+</html>
+
+<script>
+  function UltimasMedidasIndividual() {
+    var servidorSelecionado = sessionStorage.servidorSelecionado;
+    alert(servidorSelecionado);
+
+    fetch(`/gabriel/kpiIndividual/${selectedServer}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        div_quant_threads.innerHTML = `${publicacao.qtdThreads}`
+                        div_quant_nucleos.innerHTML = `${publicacao.qtdNucleos}`
+                        texto_tipo_do_cpu.innerHTML = `${publicacao.especificacaoCpu}`
+                        
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+
+        fetch(`/gabriel/PorcentagemTotalProcessador/${selectedServer}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        textousoprocessador.innerHTML = `${publicacao.dadosCaptados}%`
+                        
+                        
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+}
+
+function atualizarDadosEmTempoReal() {
+    var servidorSelecionado = sessionStorage.servidorSelecionado;
+    
+    fetch(`/gabriel/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        div_quant_threads.innerHTML = `${publicacao.qtdThreads}`
+                        div_quant_nucleos.innerHTML = `${publicacao.qtdNucleos}`
+                        texto_tipo_do_cpu.innerHTML = `${publicacao.especificacaoCpu}`
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+
+    fetch(`/gabriel/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        textousoprocessador.innerHTML = `${publicacao.dadosCaptados}%`
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+}
+
+// Função para chamar a atualização em tempo real a cada 5 segundos
+function iniciarAtualizacaoEmTempoReal() {
+    // Atualizar os dados a cada 5 segundos (5000 milissegundos)
+    setInterval(atualizarDadosEmTempoReal, 2000);
+}
+
+// Chamar a função de inicialização
+iniciarAtualizacaoEmTempoReal();
+
+function createChart() {
+  var ctx = document.getElementById('myChart').getContext('2d');
+  
+  // Exemplo de dados iniciais
+  var data = {
+    labels: ['Label 1', 'Label 2', 'Label 3'],
+    datasets: [{
+      label: 'Data Set 1',
+      data: [10, 20, 30],
+      backgroundColor: [
+        'rgba(255, 99, 132, 0.2)',
+        'rgba(54, 162, 235, 0.2)',
+        'rgba(255, 206, 86, 0.2)'
+      ],
+      borderColor: [
+        'rgba(255, 99, 132, 1)',
+        'rgba(54, 162, 235, 1)',
+        'rgba(255, 206, 86, 1)'
+      ],
+      borderWidth: 1
+    }]
+  };
+
+  var options = {
+    scales: {
+      y: {
+        beginAtZero: true
+      }
+    }
+  };
+
+
+  // Criação do gráfico
+  var myChart = new Chart(ctx, {
+    type: 'line',
+    data: data,
+    options: options
+  });
+
+
+
+  return myChart;
+}
+
+// Função para atualizar o gráfico em tempo real
+function updateChart(chart) {
+  // Exemplo de geração de dados aleatórios
+  var newData = [Math.random() * 50, Math.random() * 50, Math.random() * 50];
+
+  // Atualiza os dados do gráfico
+  chart.data.datasets[0].data = newData;
+
+  // Atualiza o gráfico
+  chart.update();
+
+  // Chama a função novamente após um intervalo de tempo
+  setTimeout(function () {
+    updateChart(chart);
+  }, 1000); // Atualiza a cada 1000 milissegundos (1 segundo)
+}
+
+// Chama a função para criar o gráfico
+var myChart = createChart();
+
+// Chama a função para atualizar o gráfico em tempo real
+updateChart(myChart);
+
+var vetor = [];
+var selectedServer;
+
+function exibirServidoresUsuario() {
+    var server = JSON.parse(sessionStorage.servidor);
+    var selectServidores = document.getElementById("selectServidor");
+
+    // Limpar as opções existentes para evitar duplicatas
+    selectServidores.innerHTML = "";
+
+    // PARA FUNCIONAR PRECISA TER MAIS DE UM SERVIDOR NO BANCO
+
+    selectServidores.addEventListener("change", function (event) {
+        var selectedOption = selectServidores.options[selectServidores.selectedIndex];
+
+        if (selectedOption) {
+            selectedServer = selectedOption.value;
+            vetor.push(selectedServer);
+            console.log("Valor de selectedServer: ", selectedServer);
+        }
+    });
+
+    server.forEach(element => {
+        var optionServidor = document.createElement('option');
+        optionServidor.textContent = `Servidor ${element.idServidor}`;
+        optionServidor.value = element.idServidor;
+
+        // Adiciona a opção ao elemento select
+        selectServidores.appendChild(optionServidor);
+    });
+}
+
+exibirServidoresUsuario();
+
+
+    exibirServidoresUsuario()
+
+</script>

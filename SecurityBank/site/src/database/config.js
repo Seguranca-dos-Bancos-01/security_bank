@@ -23,7 +23,7 @@ var mySqlConfig = {
     host: "localhost",
     database: "SecurityBank",
     user: "root",
-    password: "Juronaty@23",
+    password: "gabs1232004",
 };
 
 function executar(instrucao) {
