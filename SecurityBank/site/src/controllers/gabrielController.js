@@ -3,7 +3,7 @@ var gabrielmodel = require("../models/gabrielModel");
 function kpiIndividual(req, res) {
     var  servidorSelecionado = req.params.servidorSelecionado;
 
-    gabrielmodel.kpiIndividual(selectedServer).then(function (resultado) {
+    gabrielmodel.kpiIndividual(servidorSelecionado).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -19,7 +19,7 @@ function kpiIndividual(req, res) {
 function PorcentagemTotalProcessador(req, res) {
     var  servidorSelecionado = req.params.servidorSelecionado;
 
-    gabrielmodel.PorcentagemTotalProcessador(selectedServer).then(function (resultado) {
+    gabrielmodel.PorcentagemTotalProcessador(servidorSelecionado).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {
@@ -35,7 +35,7 @@ function PorcentagemTotalProcessador(req, res) {
 function PorcentagemThreads(req, res) {
     var  servidorSelecionado = req.params.servidorSelecionado;
 
-    gabrielmodel.PorcentagemThreads(selectedServer).then(function (resultado) {
+    gabrielmodel.PorcentagemThreads(servidorSelecionado).then(function (resultado) {
         if (resultado.length > 0) {
             res.status(200).json(resultado);
         } else {

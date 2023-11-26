@@ -1,25 +1,25 @@
 var database = require("../database/config");
 
 
-function kpiIndividual(selectedServer) {
+function kpiIndividual(servidorSelecionado) {
    
     var instrucao = `
-    select qtdNucleos, qtdThreads, especificacaoCpu from qtdNucleosThreads where fkServidor = ${selectedServer};`
+    select qtdNucleos, qtdThreads, especificacaoCpu from qtdNucleosThreads where fkServidor = ${servidorSelecionado};`
     return database.executar(instrucao);
 }
 
-function PorcentagemTotalProcessador(selectedServer) {
+function PorcentagemTotalProcessador(servidorSelecionado) {
    
     var instrucao = `
-    SELECT dadosCaptados
+    SELECT dadoCaptado
     FROM registros
     WHERE fkServidorReg = ${servidorSelecionado}
     ORDER BY dataHorario DESC 
-    LIMIT 1;`
+    LIMIT 1;`   
     return database.executar(instrucao);
 }
 
-function PorcentagemThreads(selectedServer) {
+function PorcentagemThreads(servidorSelecionado) {
    
     var instrucao = `
     SELECT mt.*

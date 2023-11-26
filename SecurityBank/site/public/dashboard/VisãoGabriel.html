@@ -198,8 +198,8 @@
                 
             <!-- </div> -->
 
-            <select name="" id="selectServidor" class="selectServidor">
-            </select>
+            <!-- <select name="" id="selectServidor" class="selectServidor">
+            </select> -->
 
         
             <div class="Kpi_threads">
@@ -231,7 +231,7 @@
     var servidorSelecionado = sessionStorage.servidorSelecionado;
     alert(servidorSelecionado);
 
-    fetch(`/gabriel/kpiIndividual/${selectedServer}`, { cache: 'no-store' })
+    fetch(`/gabriel/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
         .then(function (resposta) {
             if (resposta.ok) {
                 console.log("ENTREII no atualizar feed");
@@ -257,7 +257,7 @@
             // finalizarAguardar();
         });
 
-        fetch(`/gabriel/PorcentagemTotalProcessador/${selectedServer}`, { cache: 'no-store' })
+        fetch(`/gabriel/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
         .then(function (resposta) {
             if (resposta.ok) {
                 console.log("ENTREII no atualizar feed");
@@ -322,7 +322,7 @@ function atualizarDadosEmTempoReal() {
                     for (let i = 0; i < respostaJson.length; i++) {
                         var publicacao = respostaJson[i];
 
-                        textousoprocessador.innerHTML = `${publicacao.dadosCaptados}%`
+                        textousoprocessador.innerHTML = `${publicacao.dadoCaptado}%`
                     }
                 });
             } else {
@@ -411,41 +411,41 @@ var myChart = createChart();
 // Chama a função para atualizar o gráfico em tempo real
 updateChart(myChart);
 
-var vetor = [];
-var selectedServer;
+// var vetor = [];
+// var selectedServer;
 
-function exibirServidoresUsuario() {
-    var server = JSON.parse(sessionStorage.servidor);
-    var selectServidores = document.getElementById("selectServidor");
+// function exibirServidoresUsuario() {
+//     var server = JSON.parse(sessionStorage.servidor);
+//     var selectServidores = document.getElementById("selectServidor");
 
-    // Limpar as opções existentes para evitar duplicatas
-    selectServidores.innerHTML = "";
+//     // Limpar as opções existentes para evitar duplicatas
+//     selectServidores.innerHTML = "";
 
-    // PARA FUNCIONAR PRECISA TER MAIS DE UM SERVIDOR NO BANCO
+//     // PARA FUNCIONAR PRECISA TER MAIS DE UM SERVIDOR NO BANCO
 
-    selectServidores.addEventListener("change", function (event) {
-        var selectedOption = selectServidores.options[selectServidores.selectedIndex];
+//     selectServidores.addEventListener("change", function (event) {
+//         var selectedOption = selectServidores.options[selectServidores.selectedIndex];
 
-        if (selectedOption) {
-            selectedServer = selectedOption.value;
-            vetor.push(selectedServer);
-            console.log("Valor de selectedServer: ", selectedServer);
-        }
-    });
+//         if (selectedOption) {
+//             selectedServer = selectedOption.value;
+//             vetor.push(selectedServer);
+//             console.log("Valor de selectedServer: ", selectedServer);
+//         }
+//     });
 
-    server.forEach(element => {
-        var optionServidor = document.createElement('option');
-        optionServidor.textContent = `Servidor ${element.idServidor}`;
-        optionServidor.value = element.idServidor;
+//     server.forEach(element => {
+//         var optionServidor = document.createElement('option');
+//         optionServidor.textContent = `Servidor ${element.idServidor}`;
+//         optionServidor.value = element.idServidor;
 
-        // Adiciona a opção ao elemento select
-        selectServidores.appendChild(optionServidor);
-    });
-}
+//         // Adiciona a opção ao elemento select
+//         selectServidores.appendChild(optionServidor);
+//     });
+// }
 
-exibirServidoresUsuario();
+// exibirServidoresUsuario();
 
 
-    exibirServidoresUsuario()
+//     exibirServidoresUsuario()
 
 </script>
