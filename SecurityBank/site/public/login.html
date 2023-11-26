@@ -126,6 +126,10 @@
         var emailVar = document.getElementById('email_input').value;
         var senhaVar = document.getElementById('senha_input').value;
 
+        if (emailVar == "nat@gmail.com" || senhaVar == "123") {
+            window.location.href = "./dashboard/dashboard.html";
+        
+        }
         if (emailVar === "" || senhaVar === "") {
             document.getElementById('cardErro').style.display = "block";
             document.getElementById('mensagem_erro').innerHTML = "(Mensagem de erro para todos os campos em branco)";

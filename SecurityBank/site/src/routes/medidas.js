@@ -281,5 +281,20 @@ router.get("/tempo-realAlertasConsumo2/:selectedServer", function (req, res) {
     medidaController.buscarMedidasEmTempoRealAlertasConsumo2(req, res);
 })
 
+router.get("/ultimasAlertasConsumoCPU/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumoCPU(req, res);
+});
+
+router.get("/tempo-realAlertasConsumoCPU/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumoCPU(req, res);
+})
+
+router.get("/ultimasAlertasConsumoRAM/:selectedServer", function (req, res) {
+    medidaController.buscarUltimasMedidasAlertasConsumoRAM(req, res);
+});
+
+router.get("/tempo-realAlertasConsumoRAM/:selectedServer", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealAlertasConsumoRAM(req, res);
+})
 
 module.exports = router;

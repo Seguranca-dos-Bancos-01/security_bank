@@ -2165,6 +2165,194 @@ function buscarMedidasEmTempoRealAlertasConsumo2(idSelect) {
     return database.executar(instrucaoSql);
 }
 
+function buscarUltimasMedidasAlertasConsumoCPU(idSelect) {
+
+    instrucaoSql = ''
+//COLOCAR O ID DO USUARIO
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "cpu"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "cpu"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealAlertasConsumoCPU(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "cpu"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "cpu"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasAlertasConsumoRAM(idSelect) {
+
+    instrucaoSql = ''
+//COLOCAR O ID DO USUARIO
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "ram"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "ram"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealAlertasConsumoRAM(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "ram"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "ram"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarUltimasMedidasAlertasConsumoDISCO(idSelect) {
+
+    instrucaoSql = ''
+//COLOCAR O ID DO USUARIO
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "disco"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "disco"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function buscarMedidasEmTempoRealAlertasConsumoDISCO(idSelect) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "disco"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ; `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
+        date_format(dataHorario, '%m') as mes 
+        FROM registro 
+        JOIN componente ON fkComponentes = idComponentes
+        WHERE componente.modelo = "disco"
+        AND fkServidor = ${idSelect}
+        group by date_format(dataHorario, '%m')
+        ;`;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
 
 module.exports = {
     buscarUltimasMedidas,
@@ -2233,5 +2421,11 @@ module.exports = {
     buscarUltimasMedidasAlertasConsumo1,
     buscarMedidasEmTempoRealAlertasConsumo1,
     buscarUltimasMedidasAlertasConsumo2,
-    buscarMedidasEmTempoRealAlertasConsumo2,
+    buscarMedidasEmTempoRealAlertasConsumo2,    
+    buscarUltimasMedidasAlertasConsumoCPU,
+    buscarMedidasEmTempoRealAlertasConsumoCPU,
+    buscarUltimasMedidasAlertasConsumoRAM,
+    buscarMedidasEmTempoRealAlertasConsumoRAM,
+    buscarUltimasMedidasAlertasConsumoDISCO,
+    buscarMedidasEmTempoRealAlertasConsumoDISCO,
 }
