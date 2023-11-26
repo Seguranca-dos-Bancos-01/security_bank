@@ -42,17 +42,35 @@ def monitorar_recursos(intervalo):
 
         time.sleep(intervalo)
 
-        webhook = "https://hooks.slack.com/services/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"
+        webhook = "https://hooks.slack.com/services/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"
 
-
-        # atenção 
+        
         if uso_cpu  >= 18 and uso_cpu < 23 :
             
             alerta = {"text": f"Atenção! CPU com {uso_cpu}% de uso"}
             
 
             requests.post(webhook, data=json.dumps(alerta))
+
+
+        elif uso_cpu  >= 23 and uso_cpu < 50 :
             
+            alerta = {"text": f"Emergência! CPU com {uso_cpu}% de uso"}
+            
+
+            requests.post(webhook, data=json.dumps(alerta))
+
+
+        elif uso_cpu  >= 50:
+            
+            alerta = {"text": f"Urgência! CPU com {uso_cpu}% de uso"}
+            
+
+            requests.post(webhook, data=json.dumps(alerta))    
+            
+            
+
+
         if uso_disco >= 50 and uso_disco < 70 :
            
             alerta = {"text": f"Atenção! Disco com {uso_disco}% de uso "}
@@ -60,30 +78,33 @@ def monitorar_recursos(intervalo):
 
             requests.post(webhook, data=json.dumps(alerta))
 
-        if uso_memoria >= 45 and uso_memoria < 55:
-           
-            alerta = {"text": f"Atenção! Memória RAM com {uso_memoria}% de uso"}
-          
-
-            requests.post(webhook, data=json.dumps(alerta))
 
 
-            #emergência
-        if uso_cpu  >= 23 and uso_cpu < 50 :
-            
-            alerta = {"text": f"Emergência! CPU com {uso_cpu}% de uso"}
-            
-
-            requests.post(webhook, data=json.dumps(alerta))
-            
-        if uso_disco >= 70 and uso_disco < 80 :
+        elif uso_disco >= 70 and uso_disco < 80 :
            
             alerta = {"text": f"Emergência! Disco com {uso_disco}% de uso "}
            
 
             requests.post(webhook, data=json.dumps(alerta))
 
-        if uso_memoria >= 55 and uso_memoria < 65:
+                    
+        elif uso_disco >= 80 :
+           
+            alerta = {"text": f"Urgência! Disco com {uso_disco}% de uso "}
+           
+
+            requests.post(webhook, data=json.dumps(alerta))
+
+
+        if uso_memoria >= 45 and uso_memoria < 55:
+           
+            alerta = {"text": f"Atenção! Memória RAM com {uso_memoria}% de uso"}
+          
+
+            requests.post(webhook, data=json.dumps(alerta))
+       
+
+        elif uso_memoria >= 55 and uso_memoria < 65:
            
             alerta = {"text": f"Emergência! Memória RAM com {uso_memoria}% de uso"}
           
@@ -91,22 +112,7 @@ def monitorar_recursos(intervalo):
             requests.post(webhook, data=json.dumps(alerta))
 
 
-            #urgência
-        if uso_cpu  >= 50:
-            
-            alerta = {"text": f"Urgência! CPU com {uso_cpu}% de uso"}
-            
-
-            requests.post(webhook, data=json.dumps(alerta))
-            
-        if uso_disco >= 80 :
-           
-            alerta = {"text": f"Urgência! Disco com {uso_disco}% de uso "}
-           
-
-            requests.post(webhook, data=json.dumps(alerta))
-
-        if uso_memoria >= 65:
+        elif uso_memoria >= 65:
            
             alerta = {"text": f"Urgência! Memória RAM com {uso_memoria}% de uso"}
           
