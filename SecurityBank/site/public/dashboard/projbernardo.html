@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Visão Bernardo</title>
+
+
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <link rel="stylesheet" href="../css/projbernardo.css">
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+</head>
+
+<body>
+
+    <body>
+
+        <div class="janela">
+            <div class="header-left">
+                <div class="logo">
+                    <img src="../assets/logoBranca.png" alt="">
+                </div>
+
+                <div class="opcao">
+                    <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+                </div>
+
+                <div id="nivelACesso" class="TipoAcesso">
+                    <span>Administrador</span>
+                </div>
+
+                <div class="opcoes">
+                    <a href="dashboard.html">
+                        <img src="../assets/home.png" alt="">
+                        <span>Home</span>
+                    </a>
+                </div>
+                <div class="opcoesServidores">
+                    <a href="servidoresDash.html">
+                        <img src="../assets/servidor.png" alt="">
+                        <span>Servidores</span>
+                    </a>
+                    <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
+                    </div>
+                </div>
+
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/servidor.png    " alt="">
+                        <span>Visões</span>
+                    </a>
+                    <!-- <div class="opcoesServidores-content">
+                        <a href="alertas.html">Visão 1</a>
+                        <a href="alertas.html">Visão 2</a>
+                    </div> -->
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Bernardo</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Gabriel</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Gustavo</span>
+                    </a>
+                </div>
+                <!-- <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Marcela</span>
+                    </a>
+                </div> -->
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Natália</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Pedro</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="alertas.html">
+                        <img src="../assets/alerta.png" alt="">
+                        <span>Alertas</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="perfil.html">
+                        <img src="../assets/perfil.png" alt="">
+                        <span>Perfil</span>
+                    </a>
+                </div>
+                <div id="gerenciarAcesso  localizacao" class="opcoes">
+                    <a href="GerenciarAcesso.html">
+                        <img src="../assets/controle.png" alt="">
+                        <span>Controle de acesso</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="suporteDash.html">
+                        <img src="../assets/ajuda.png" alt="">
+                        <span>Ajuda</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="metricasDash.html">
+                        <img src="../assets/metricas.png" alt="">
+                        <span>Métricas</span>
+                    </a>
+                </div>
+                <!-- <div class="opcoes">
+                    <a href="recFacial.html">
+                        <img src="../assets/imgs/recFacial.png" alt="">
+                        <span>Reconhecimento Facial</span>
+                    </a>
+                </div> -->
+
+                <div class="opcoes">
+                    <a href="../index.html">
+                        <img src="../assets/logout.png" alt="">
+                        <span onclick="limparSessonStorage()">Logout</span>
+                    </a>
+                </div>
+            </div>
+
+
+            <div class="kpi">
+                <div class="blocoKpi">
+                  
+                <div class="blocoKpi">
+                    <div class="img">
+                        <img src="../assets/imgs/kpi.png" alt="">
+                    </div>
+                    <div class="info">
+                        <span>Quantidade de Partições:</span>
+                        <span class="Situacao" id="qtd"></span>
+                    </div>
+                </div>
+                
+                <div class="blocoKpi">
+                    <div class="img">
+                        <img src="../assets/imgs/kpi.png" alt="">
+                    </div>
+                    <div class="info">
+                        <span>Partição em monitoramento: </span>
+                        <span class="Situacao" id="monitoramento"></span>
+                    </div>
+                </div>
+                   
+                </div>
+            </div>
+
+
+         <div class="percent">Porcentagem de uso</div>
+
+         <div class="Partições">
+            <span class="tituloParticoes">Partições</span>
+            <div id="graficos">
+                <div class="graph">
+                    <canvas id=""></canvas>
+                </div>
+            </div>
+        </div>
+        
+
+
+
+        </div>
+    </body>
+
+</html>
+<script>
+
+
+
+
+    
+
+
+function percentPRT(idUsuarioPRT) {
+        if (sessionStorage.FKBANCO) {
+
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
+
+
+        fetch(`/medidas/ultimasPercentPRT/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosPRT(response);
+                        });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function exibirDadosPRT(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var dado = registro.asd;
+            var limitesprt = {
+                estavel: 59,
+                atencao: 69,
+                emergencia: 79
+            };
+            if (dado > limitesprt.estavel && dado <= limitesprt.atencao) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'PARTIÇÃO EM ATENÇÃO',
+                    text: `Partição {partition.device} com ${dado}% de uso!`,
+                });
+                cadastrarAlertaPRTAtencao()
+
+            } else if (dado > limitesprt.atencao && dado <= limitesprt.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'PARTIÇÃO EM EMERGÊNCIA',
+                    text: `Partição {partition.device} com ${dado}% de uso!`,
+                });
+                cadastrarAlertaPRTEmergencia()
+
+
+
+            } else if (dado > limitesprt.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'PARTIÇÃO EM URGÊNCIA',
+                    text: `Partição {partition.device} com ${dado}% de uso!`,
+                });
+                cadastrarAlertaPRTUrgencia()
+
+            }
+        }
+
+        console.log(dado)
+        console.log(response[0])
+
+        var prtServidores = document.getElementById('prtServidores');
+        prtServidores.innerHTML = `${dado}%`;
+
+        var proximaAtualizacao = setTimeout(() => percentPRT(), 5000)
+    }
+
+    function cadastrarAlertaCPUAtencao() {
+
+// Enviando o valor da nova input
+fetch("/medidas/cadastrarAlertaPRTAtencao", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+        // crie um atributo que recebe o valor recuperado aqui
+        // Agora vá para o arquivo routes/usuario.js
+        servidorFKServer: servidorFK,
+        planoFKServer: planoFK,
+        bancoFKServer: bancoFK,
+    })
+})
+
+
+
+return false;
+}
+
+
+
+
+</script>
