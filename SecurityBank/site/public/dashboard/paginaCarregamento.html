@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Barra de Carregamento</title>
+  <style>
+    body {
+      margin: 0;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      height: 100vh;
+      font-family: Arial, sans-serif;
+      background-color: #e695d2;
+    }
+
+    .progress-bar {
+      width: 300px;
+      height: 20px;
+      border: 1px solid #ccc;
+      position: relative;
+      border-radius: 20px; /* Corrigido */
+    }
+
+    .progress {
+      width: 0;
+      height: 100%;
+      background-color: #6953D3;
+      position: absolute;
+      top: 0;
+      left: 0;
+      border-radius: 20px; /* Adicionado */
+      transition: width 0.3s ease-in-out;
+    }
+
+    .content {
+      text-align: center;
+      display: none;
+    }
+  </style>
+</head>
+<body>
+  <div class="progress-bar">
+    <div class="progress"></div>
+  </div>
+  <div class="content">
+    <p>Criação de servidor Concluida</p>
+  </div>
+
+  <script>
+    window.addEventListener('load', function() {
+      let progressBar = document.querySelector('.progress');
+      let width = 1;
+      let interval = setInterval(function() {
+        if (width >= 100) {
+          clearInterval(interval);
+          document.querySelector('.content').style.display = 'block';
+window.location = "GerenciarAcesso.html"
+        } else {
+          width++;
+          progressBar.style.width = width + '%';
+        }
+      }, 20);
+    });
+  </script>
+</body>
+</html>
