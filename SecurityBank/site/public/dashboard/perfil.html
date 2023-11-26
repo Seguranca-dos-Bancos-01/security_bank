@@ -393,4 +393,56 @@ exibirServidoresUsuario();
     function limparSessonStorage() {
         sessionStorage.clear() 
     }
+
+
+window.onload = ContasAdministradas(sessionStorage.ID_USUARIO)
+
+    function ContasAdministradas(idUsuarioServer) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
+        fetch(`/medidas/SelectContaPerfil/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                    .then(function (response) {
+                        console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                        response.reverse(); MostrarUltimosAlertas(response);
+                    });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+    var VetorNivel = []
+    var VetorEmpresa =[]
+    function MostrarUltimosAlertas(response) {
+    console.log('Exibindo dados retornados:');
+    var dadosMostrarNivel = document.getElementById('nivelAcesso');
+    var dadosMostrarEmpresa = document.getElementById('empresaNome');
+
+    dadosMostrarNivel.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+    dadosMostrarEmpresa.innerHTML = ''; // Limpa o conteúdo anterior antes de adicionar novos dados
+
+    for (var i = 0; i < response.length; i++) {
+        var registro = response[i];
+        var empresa = registro.empresa;
+        var nivel = registro.Esca;
+
+        console.log(nivel);
+        console.log(empresa);
+
+        dadosMostrarNivel.innerHTML += `${nivel}<br>`; // Adiciona o nível ao elemento HTML
+        dadosMostrarEmpresa.innerHTML += `${empresa}<br>`; // Adiciona o nome da empresa ao elemento HTML
+    }
+}
+
+
+
+
+
 </script>

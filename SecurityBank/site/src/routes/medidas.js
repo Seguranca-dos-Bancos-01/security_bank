@@ -105,6 +105,10 @@ router.get("/SelectContas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidasSelectContas(req, res);
 });
 
+router.get("/SelectContaPerfil/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasSelectContaPerfil(req, res);
+});
+
 router.get("/HistoricoAlertas/:idUsuario", function (req, res) {
     medidaController.buscarHistoricoAlertas(req, res);});
 

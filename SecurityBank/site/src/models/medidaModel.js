@@ -686,6 +686,32 @@ function buscarUltimasMedidasSelectContas(idUsuario, limite_linhas) {
 }
 
 
+function buscarUltimasMedidasSelectContaPerfil(idUsuario, limite_linhas) {
+
+    let instrucaoSql = '';
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT f.fkEscalonamento as Esca, b.nomeFantasia as empresa
+        FROM funcionarios f
+        INNER JOIN banco b ON f.fkBanco = b.idBanco
+        WHERE f.idFuncionarios = ${idUsuario}; `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT f.fkEscalonamento as Esca, b.nomeFantasia as empresa
+        FROM funcionarios f
+        INNER JOIN banco b ON f.fkBanco = b.idBanco
+        WHERE f.idFuncionarios = ${idUsuario}; `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return null; // Retornando nulo se nenhuma condição for satisfeita
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 function buscarUltimosAlertas1(idUsuario, limite_linhas) {
 
     let instrucaoSql = '';
@@ -1233,4 +1259,5 @@ module.exports = {
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2,
     buscarUltimasMedidasBola,
+    buscarUltimasMedidasSelectContaPerfil,
 }
