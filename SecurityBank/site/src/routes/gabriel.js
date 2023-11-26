@@ -11,8 +11,16 @@ router.get("/PorcentagemTotalProcessador/:servidorSelecionado", function (req, r
     gabrielController.PorcentagemTotalProcessador(req, res);
 })
 
-router.get("/PorcentagemThreads/:servidorSelecionado", function (req, res) {
-    gabrielController.PorcentagemThreads(req, res);
+// router.get("/PorcentagemThreads/:servidorSelecionado", function (req, res) {
+//     gabrielController.PorcentagemThreads(req, res);
+// })
+
+router.get("/obterDadosGraficoThreads/:servidorSelecionado", function (req, res) {
+    gabrielController.obterDadosGraficoThreads(req, res);
+});
+
+router.get("/atualizarGraficoThreads/:servidorSelecionado", function (req, res) {
+    gabrielController.atualizarGraficoThreads(req, res);
 })
 
 
