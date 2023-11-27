@@ -5,8 +5,20 @@
   font-family: Poppins, sans-serif;
 }
 
-
-
+.mostrarIssoConectado{
+  
+  font-weight: bold;
+}
+.DetalhesTittle{
+  font-size: 20px;
+}
+.tituloConectado{
+width: 90%;
+display: flex;
+justify-content: space-between;
+align-items: flex-start;
+margin: 0 auto;
+}
 .bola {
   width: 20px;
   height: 20px;
@@ -15,12 +27,14 @@
 }
 
 
-#Servidores{display: flex;}
+#Servidores{display: flex;
+justify-content: center;
+  }
 
 .Historico {
   width: 93%;
   margin: 20px ;
-  display: flex;
+  
   justify-content: space-around;
   align-items: center;
   
@@ -33,9 +47,14 @@
 
 .tituloHistorico {
   align-self: flex-start;
-  margin: 10px 20px;
+  margin: 10px 20px !important;
+  font-size: 20px;
   color: #5c6bc0;
+  height: 30px;
+  
 }
+
+
 .botoesServidoresDash {
   width: 200px;
   background-color: #fff;
@@ -60,13 +79,13 @@ justify-content: space-evenly;
 
 /* Estilo básico para o círculo */
 .conexao {
-  width: 160px;
-  height: 160px;
+  width: 140px;
+  height: 140px;
   border-radius: 50%;
   border: 2px solid #333;
   animation: pulse 2s infinite;
   /* Adicionando animação */
-  margin-left: 18vh;
+  margin:auto;
 }
 
 /* Estilo para indicar conexão ativa */
@@ -635,7 +654,7 @@ canvas {
   margin-top: 10px;
   margin-left: 20px;
   box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
-  width: 23.5vh;
+  width: 35vh;
 }
 
 .ultimosAlertas span {
@@ -643,8 +662,9 @@ canvas {
 }
 
 .ultimosAlertas h3 {
-  font-size: 13px;
+  font-size: 16px;
   font-weight: 400;
+  margin: 0;
 }
 
 .cardAlertas {
@@ -691,7 +711,7 @@ canvas {
 
 }
 
-#speedCanvasUpload{
+#speedCanvasUpload, #speedCanvas{
 width: 70vh;
 height: 40vh;
 }
@@ -701,7 +721,10 @@ width: 100vh;
 
 }
 
-
+.graph3{
+  width: 100vh;
+  
+  }
 
 .parte2 h2 {
   font-size: 16px;
@@ -715,8 +738,15 @@ width: 100vh;
   width: 30vh;
 
 }
+.ipMostrar{
+  display: flex;
+  align-items: flex-end;
+  height: 100px;
+}
 
 .MostrarIP {
+  height: 50px;
+  margin-top: 30px !important;
   font-size: 3vh;
   margin-left: 3vh;
   color: #000;

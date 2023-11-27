@@ -48,7 +48,8 @@
 <body onload="exibirServidoresUsuario()">
 
 
-    <body onload="percentCPU(),percentRAM(),percentDISK(), percentRede(),ReceberUltimosAlertas2(),exibirServidoresUsuarioReede()">
+    <body
+        onload="percentCPU(),percentRAM(),percentDISK(), percentRede(),ReceberUltimosAlertas2(),exibirServidoresUsuarioReede()">
 
         <div class="janela">
             <div class="header-left">
@@ -172,65 +173,68 @@
                 <div id="nomeEspec" class="Nome">
                     <h2>Dados de Rede</h2>
                 </div>
-                
-                    <div class="Historico">
-                        <span class="tituloHistorico">Servidores</span>
-                        <div id="Servidores" >
 
-                        </div>
-                   
+                <div class="Historico">
+                    <span class="tituloHistorico">Servidores</span>
+                    <div id="Servidores">
+
+                    </div>
+
 
 
                 </div>
                 <div class="blocosPai">
                     <div class="parte1">
                         <div class="visaoGeral">
-                            <h2>Detalhes de Rede</h2>
-                            <h1 id="Conectado?"></h1>
-
-                            <span class="MostrarIP" id="IPselecionado">IP:</span>
+                            <div class="tituloConectado">
+                                <h2 class="DetalhesTittle">Detalhes de Rede</h2>
+                                <h2 id="MostrarConect??"></h2>
+                            </div>
+                            <h1 id="Conectado?">
+                            </h1>
+                            <div class="ipMostrar">
+                                <span class="MostrarIP" id="IPselecionado">IP:</span>
+                            </div>
                         </div>
                         <div class="visaoGeral">
-                            <h2>Ping da rede</h2>
+                            <h2>Ping da Rede</h2>
                             <div class="graph">
                                 <canvas id="myChartPing"></canvas>
                             </div>
                         </div>
-                       
-                            <div id="colocar" class="ultimosAlertas">
-                                <h3>Ultimos Alertas</h3>
-        
-        
-                            </div>
-                       
+
+                        <div id="colocar" class="ultimosAlertas">
+                            <h3 class="DetalhesTittle">Últimos Alertas</h3>
+                            <div class="cardAlertas" id="cardAlertas"></div>
+
+                        </div>
+
 
 
                     </div>
                     <div class="parte2">
-                        
-                            <div class="graph1">
-                                <span>Potencia de rede de Download</span>
-                                <div class="graph">
-                                    <canvas id="speedCanvas" width="600" height="310"
-                                       ></canvas>
-                                </div>
+
+                        <div class="graph1">
+                            <h2>Potência de Rede de Download</h2>
+                            <div class="graph">
+                                <canvas id="speedCanvas" width="600" height="310"></canvas>
                             </div>
-                        
-                  <div class="graph1">
-                            <h2>Historico de Rede</h2>
+                        </div>
+                        <div class="graph1">
+                            <h2>Potência de Rede de Upload</h2>
+
+                            <div class="graph">
+                                <canvas id="speedCanvasUpload" width="600" height="310"></canvas>
+                            </div>
+
+                        </div>
+                        <div class="graph1">
+                            <h2>Histórico de Rede</h2>
                             <div class="graph">
                                 <canvas id="myChart"></canvas>
                             </div>
                         </div>
-                        <div class="graph3">
-                            <h2>Potencia de rede de Upload</h2>
-                            <div class="graph">
-                                <div class="graph">
-                                    <canvas id="speedCanvasUpload" width="750" height="450"
-                                        ></canvas>
-                                </div>
-                            </div>
-                        </div>
+
                     </div>
                 </div>
             </div>
@@ -255,7 +259,7 @@
             </div>
             <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
         </div>
-        
+
 
 
 
@@ -271,13 +275,14 @@
 
     var vetor = [];
     var selectedServer;// Declarar idUsuario fora do escopo da função
-
+    var i = 0
     function exibirServidoresUsuario() {
         var server = JSON.parse(sessionStorage.servidor);
         console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
         var selectServidores = document.getElementById("opcoesServidores-content");
         selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
         server.forEach(element => {
+            i++
             var button = document.createElement('button');
             button.textContent = element.apelido;
             button.addEventListener("click", function (event) {
@@ -289,6 +294,9 @@
                 console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
                 inserir(selectedServer); // Chamar a função inserir com o ID do servidor
                 window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+                if (i % 5 == 0) {
+                    Servidores.innerHTML += `<br>`
+                }
             });
             selectServidores.appendChild(button);
         });
@@ -330,32 +338,32 @@
                 `<span>${element.apelido}</span>
             <div id = "boola"class= "bola"></div>
             `;
- 
-          //  while ( i <= element.idServidor) {
-                // Encontrou o ID do servidor no sessionStorage
-              //  var fkStatusKey = sessionStorage.getItem(`BolafkStatus${element.fkStatus}_fkStatus`);
-                if (element.fkStatus == 3) { // Por exemplo, alterando a cor se fkStatus for igual a 1
-                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
-                    bolaDiv.style.backgroundColor = '#FF0000';
-                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
-                } else if (element.fkStatus == 2) {
-                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
-                    bolaDiv.style.backgroundColor = '#F79042';
-                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
 
-                } else if (element.fkStatus == 4) {
-                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
-                    bolaDiv.style.backgroundColor = '#6953D3';
-                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+            //  while ( i <= element.idServidor) {
+            // Encontrou o ID do servidor no sessionStorage
+            //  var fkStatusKey = sessionStorage.getItem(`BolafkStatus${element.fkStatus}_fkStatus`);
+            if (element.fkStatus == 3) { // Por exemplo, alterando a cor se fkStatus for igual a 1
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#FF0000';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+            } else if (element.fkStatus == 2) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#F79042';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
 
-                }else if (element.fkStatus == 1) {
-                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
-                    bolaDiv.style.backgroundColor = '#36D000';
-                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+            } else if (element.fkStatus == 4) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#6953D3';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
 
-                }else{i++}
+            } else if (element.fkStatus == 1) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#36D000';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
 
-            
+            } else { i++ }
+
+
 
 
 
@@ -396,33 +404,33 @@
                 `<span>${element.apelido}</span>
             <div id = "boola"class= "bola"></div>
             `;
- 
-          //  while ( i <= element.idServidor) {
-                // Encontrou o ID do servidor no sessionStorage
-              //  var fkStatusKey = sessionStorage.getItem(`BolafkStatus${element.fkStatus}_fkStatus`);
-                if (element.fkStatus == 3) { // Por exemplo, alterando a cor se fkStatus for igual a 1
-                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
-                    bolaDiv.style.backgroundColor = '#FF0000';
-                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
-                } else if (element.fkStatus == 2) {
-                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
-                    bolaDiv.style.backgroundColor = '#F79042';
-                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
 
-                } else if (element.fkStatus == 4) {
-                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
-                    bolaDiv.style.backgroundColor = '#6953D3';
-                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+            //  while ( i <= element.idServidor) {
+            // Encontrou o ID do servidor no sessionStorage
+            //  var fkStatusKey = sessionStorage.getItem(`BolafkStatus${element.fkStatus}_fkStatus`);
+            if (element.fkStatus == 3) { // Por exemplo, alterando a cor se fkStatus for igual a 1
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#FF0000';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+            } else if (element.fkStatus == 2) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#F79042';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
 
-                }else if (element.fkStatus == 1) {
-                    var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
-                    bolaDiv.style.backgroundColor = '#36D000';
-                    i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+            } else if (element.fkStatus == 4) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#6953D3';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
 
-                }else{i++}
+            } else if (element.fkStatus == 1) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#36D000';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
 
-            
-                button.addEventListener("click", function (event) {
+            } else { i++ }
+
+
+            button.addEventListener("click", function (event) {
                 event.preventDefault();
                 selectedServer = element.idServidor;
                 vetor.push(selectedServer);
@@ -540,39 +548,47 @@
 
 
     function exibirConnect(response) {
-    console.log('Exibindo dados retornados:');
-    var conectadoEncontrado = false; // Adicionando uma variável para controlar se foi encontrado um elemento conectado
+        console.log('Exibindo dados retornados:');
+        var conectadoEncontrado = false; // Adicionando uma variável para controlar se foi encontrado um elemento conectado
 
-    for (var i = 0; i < response.length; i++) {
-        var registro = response[i];
-        var dado = registro.connectOrN;
+        for (var i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var dado = registro.connectOrN;
 
-        if (dado === 1) {
-            var percentage = document.getElementById('Conectado?');
-            percentage.innerHTML = '<h2>Conectado</h2><div class="conexao conectado"></div>';
-            conectadoEncontrado = true; // Definindo como verdadeiro se um elemento conectado for encontrado
-            break; // Parando o loop assim que encontrar um elemento conectado
-        } else{
-            var percentage = document.getElementById('Conectado?');
-            percentage.innerHTML = '<h2>Desconectado</h2><div class="conexao desconectado"></div>';
-            conectadoEncontrado = false; // Definindo como verdadeiro se um elemento conectado for encontrado
-            break; // Parando o loop assim que encontrar um elemento conectado
+            if (dado === 1) {
+                var percentage = document.getElementById('Conectado?');
+                percentage.innerHTML = '<div class="conexao conectado"></div>';
+                var percentage2 = document.getElementById('MostrarConect??');
+                percentage2.innerHTML = '<span style="color:green"class="mostrarIssoConectado">Conectado</span>';
 
+                conectadoEncontrado = true; // Definindo como verdadeiro se um elemento conectado for encontrado
+                break; // Parando o loop assim que encontrar um elemento conectado
+            } else {
+                var percentage = document.getElementById('Conectado?');
+                percentage.innerHTML = '<div class="conexao desconectado"></div>';
+                var percentage2 = document.getElementById('MostrarConect??');
+                percentage2.innerHTML = '<span style="color:red"class="mostrarIssoConectado">Conectado</span>';
+                conectadoEncontrado = false; // Definindo como verdadeiro se um elemento conectado for encontrado
+                break; // Parando o loop assim que encontrar um elemento conectado
+
+            }
         }
+
+        if (!conectadoEncontrado) {
+            console.log('Nenhum elemento conectado encontrado');
+        }
+
+        console.log(dado);
+        console.log(response[0]);
+
+        // var ramServidores = document.getElementById('ramServidores');
+        // ramServidores.innerHTML = `${dado}%`;
+
+        var proximaAtualizacaoIP = setTimeout(() => {
+            BuscarIP();
+            BuscarConnect();
+        }, 20000);
     }
-
-    if (!conectadoEncontrado) {
-        console.log('Nenhum elemento conectado encontrado');
-    }
-
-    console.log(dado);
-    console.log(response[0]);
-
-    // var ramServidores = document.getElementById('ramServidores');
-    // ramServidores.innerHTML = `${dado}%`;
-
-    var proximaAtualizacaoIP = setTimeout(() => BuscarIP(), 20000);
-}
 
 
 
@@ -668,63 +684,63 @@
         setTimeout(() => atualizarGrafico4(idUsuario, dados, ChartPing), 2000);
     }
     function atualizarGrafico4(idUsuario, dados, myChart) {
-    fetch(`/medidas/tempo-realPing/${idUsuario}`, { cache: 'no-store' })
-        .then(function (response) {
-            if (response.ok) {
-                return response.json();
-            } else {
-                throw new Error('Erro na requisição da API');
-            }
-        })
-        .then(function (novoRegistro) {
-            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
-            console.log('Dados atuais do gráfico:');
-            console.log(dados);
+        fetch(`/medidas/tempo-realPing/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro na requisição da API');
+                }
+            })
+            .then(function (novoRegistro) {
+                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                console.log('Dados atuais do gráfico:');
+                console.log(dados);
 
-            if (novoRegistro.length > 0) {
-                const ultimoDadoNoGrafico = dados.labels[dados.labels.length - 1];
-                const novoDado = novoRegistro[0];
+                if (novoRegistro.length > 0) {
+                    const ultimoDadoNoGrafico = dados.labels[dados.labels.length - 1];
+                    const novoDado = novoRegistro[0];
 
-                if (novoDado.DataHora !== ultimoDadoNoGrafico) {
-                    dados.labels.push(novoDado.DataHora);
-                    dados.datasets[0].data.push(novoDado.Ping);
+                    if (novoDado.DataHora !== ultimoDadoNoGrafico) {
+                        dados.labels.push(novoDado.DataHora);
+                        dados.datasets[0].data.push(novoDado.Ping);
 
-                    if (dados.labels.length > MAX_LABELS) {
-                        dados.labels.shift();
-                        dados.datasets[0].data.shift();
+                        if (dados.labels.length > MAX_LABELS) {
+                            dados.labels.shift();
+                            dados.datasets[0].data.shift();
+                        }
+
+                        myChart.data.labels = dados.labels.slice();
+                        myChart.data.datasets[0].data = dados.datasets[0].data.slice();
+
+                        myChart.update();
+                    } else {
+                        console.log('---------------------------------------------------------------');
+                        console.log('Não há novos dados para capturar, o gráfico não será atualizado.');
+
+                        console.log('Horário do novo dado capturado:');
+                        console.log(novoDado.DataHora);
+                        console.log('Horário do último dado capturado:');
+                        console.log(ultimoDadoNoGrafico);
+                        console.log('---------------------------------------------------------------');
                     }
-
-                    myChart.data.labels = dados.labels.slice();
-                    myChart.data.datasets[0].data = dados.datasets[0].data.slice();
-
-                    myChart.update();
                 } else {
                     console.log('---------------------------------------------------------------');
-                    console.log('Não há novos dados para capturar, o gráfico não será atualizado.');
-
-                    console.log('Horário do novo dado capturado:');
-                    console.log(novoDado.DataHora);
-                    console.log('Horário do último dado capturado:');
-                    console.log(ultimoDadoNoGrafico);
+                    console.log('Nenhum novo dado recebido.');
                     console.log('---------------------------------------------------------------');
                 }
-            } else {
-                console.log('---------------------------------------------------------------');
-                console.log('Nenhum novo dado recebido.');
-                console.log('---------------------------------------------------------------');
-            }
 
-            proximaAtualizacao4 = setTimeout(() => {
-                atualizarGrafico4(idUsuario, dados, myChart);
-            }, 20000);
-        })
-        .catch(function (error) {
-            console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
-            proximaAtualizacao4 = setTimeout(() => {
-                atualizarGrafico4(idUsuario, dados, myChart);
-            }, 20000);
-        });
-}
+                proximaAtualizacao4 = setTimeout(() => {
+                    atualizarGrafico4(idUsuario, dados, myChart);
+                }, 20000);
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+                proximaAtualizacao4 = setTimeout(() => {
+                    atualizarGrafico4(idUsuario, dados, myChart);
+                }, 20000);
+            });
+    }
 
 
 
@@ -737,7 +753,7 @@
 
 
 
-window.onload = UltimosAlertasSelectedServer(sessionStorage.servidorSelecionado)
+    window.onload = UltimosAlertasSelectedServer(sessionStorage.servidorSelecionado)
 
     function UltimosAlertasSelectedServer(idUsuario) {
         let currentPercentage;
@@ -771,49 +787,32 @@ window.onload = UltimosAlertasSelectedServer(sessionStorage.servidorSelecionado)
 
 
     function exibirUltimosAlertasSelected(response) {
+    var proximaAtualizacaoAlerta = setTimeout(() => UltimosAlertasSelectedServer(sessionStorage.servidorSelecionado), 10000);
+    var ultimosAlertasContainer = document.getElementById('colocar');
+    ultimosAlertasContainer.innerHTML = ''; // Limpa o conteúdo anterior para atualizar com os últimos 4 alertas
 
-        var ultimosAlertas = document.getElementById('colocar');
-            ultimosAlertas.innerHTML = '';
-        console.log('Exibindo dados retornados:');
-        for (let i = 0; i < response.length; i++) {
-            let registro = response[i];
-            let dado = registro.situ;
-            let dado3 = registro.dataAlerta;
-            let dado4 = registro.horaAlerta;
+    console.log('Exibindo dados retornados:');
+    // Ajuste para exibir apenas os últimos 4 alertas
+    var startIndex = Math.max(response.length - 4, 0); // Garante que não ultrapasse o limite de 4 alertas
+    for (let i = startIndex; i < response.length; i++) {
+        let registro = response[i];
+        let dado = registro.situ;
+        let dado3 = registro.dataAlerta;
+        let dado4 = registro.horaAlerta;
 
-           // const fill = document.getElementById('situacaoTittle');
-           // const percentage = document.getElementById('situacaoTittle');
-           // percentage.innerText += `${dado} no ${dado2}.`;
-
-
-          //  const fill2 = document.getElementById('horariosAlertas');
-          //  const percentage2 = document.getElementById('horariosAlertas');
-          //  percentage2.innerText += `${dado3} as ${dado4}.`;
-
-        
-// Criação do elemento div
-var elemento = document.createElement('div');
+        var elemento = document.createElement('div');
         elemento.classList.add('cardAlertas');
-
+        
         var conteudo = `
             <h4 id="situacaoTittle">${dado}.</h4>
             <span id="horariosAlertas">${dado3} às ${dado4}.</span>
         `;
-
         elemento.innerHTML = conteudo;
 
-        // Adicionando o novo alerta à seção "Ultimos Alertas"
-        var ultimosAlertas = document.getElementById('colocar');
-        ultimosAlertas.appendChild(elemento);
-
-            console.log(dado)
-
-
-            console.log(dado);
-            console.log(response[0]);
-        }
-        var proximaAtualizacaoAlerta = setTimeout(() => UltimosAlertasSelectedServer(), 20000);
+        // Adiciona os novos alertas ao contêiner
+        ultimosAlertasContainer.appendChild(elemento);
     }
+}
 
 
 
@@ -838,7 +837,7 @@ var elemento = document.createElement('div');
 
 
 
-    
+
 
 
 
@@ -1110,7 +1109,7 @@ var elemento = document.createElement('div');
 
         ctx.beginPath();// Inicia um novo caminho no canvas para desenhar o medidor
 
-        ctx.arc(centerX, centerY, radius, Math.PI * 0.75, Math.PI * (0.75 + (speed / 300) * 1.5), false); // Desenha um arco para representar a velocidade no gráfico
+        ctx.arc(centerX, centerY, radius, Math.PI * 0.75, Math.PI * (0.75 + (speed / 1000) * 1.5), false); // Desenha um arco para representar a velocidade no gráfico
 
         ctx.lineWidth = 20;// Define a largura da linha do arco
 
@@ -1217,7 +1216,7 @@ var elemento = document.createElement('div');
     const ctx2 = canvas2.getContext('2d');
     const centerX2 = canvas2.width / 2;
     const centerY2 = canvas2.height / 2;
-    const radius2 = 320;
+    const radius2 = 140;
 
     function plotarGrafico1(resposta) {
 
@@ -1242,14 +1241,14 @@ var elemento = document.createElement('div');
 
     function drawSpeedometer1(label, speed, color) {
         ctx2.beginPath();
-        ctx2.arc(centerX2, centerY2, radius2, Math.PI * 0.75, Math.PI * (0.75 + (speed / 300) * 1.5), false);
-        ctx2.lineWidth = 30;
+        ctx2.arc(centerX2, centerY2, radius2, Math.PI * 0.75, Math.PI * (0.75 + (speed / 1000) * 1.5), false);
+        ctx2.lineWidth = 20;
         ctx2.strokeStyle = color;
         ctx2.stroke();
 
-        ctx2.font = '40px Arial';
+        ctx2.font = '20px Arial';
         ctx2.fillStyle = 'black';
-        ctx2.fillText(`${label}: ${speed} Mbps`, centerX2 - 150, centerY2);
+        ctx2.fillText(`${label}: ${speed} Mbps`, centerX2 - 100, centerY2);
 
         proximaAtualizacao = setTimeout(() => {
             let idUsuario = sessionStorage.servidorSelecionado
