@@ -515,7 +515,7 @@
         // var ramServidores = document.getElementById('ramServidores');
         // ramServidores.innerHTML = `${dado}%`;
 
-        var proximaAtualizacaoIP = setTimeout(() => BuscarIP(), 20000)
+        var proximaAtualizacaoIP = setTimeout(() => BuscarIP(), 10000)
     }
 
 
@@ -587,7 +587,7 @@
         var proximaAtualizacaoIP = setTimeout(() => {
             BuscarIP();
             BuscarConnect();
-        }, 20000);
+        }, 10000);
     }
 
 
@@ -681,7 +681,7 @@
 
         var ChartPing = new Chart(document.getElementById('myChartPing'), config);
 
-        setTimeout(() => atualizarGrafico4(idUsuario, dados, ChartPing), 2000);
+        setTimeout(() => atualizarGrafico4(idUsuario, dados, ChartPing), 10000);
     }
     function atualizarGrafico4(idUsuario, dados, myChart) {
         fetch(`/medidas/tempo-realPing/${idUsuario}`, { cache: 'no-store' })
@@ -738,7 +738,7 @@
                 console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
                 proximaAtualizacao4 = setTimeout(() => {
                     atualizarGrafico4(idUsuario, dados, myChart);
-                }, 20000);
+                }, 10000);
             });
     }
 
@@ -949,7 +949,7 @@
         proximaAtualizacao3 = setTimeout(() => {
             let idUsuario = sessionStorage.servidorSelecionado
             obterDadosGrafico3(idUsuario);
-        }, 20000);
+        }, 10000);
     }
 
     function atualizarGrafico3(idUsuario, dados, myChart3) {
@@ -994,7 +994,7 @@
                 // Agendando a próxima atualização em caso de erro
                 proximaAtualizacao3 = setTimeout(() => {
                     obterDadosGrafico3(idUsuario);
-                }, 20000);
+                }, 10000);
             }
         }).catch(function (error) {
             console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
@@ -1166,7 +1166,7 @@
             }).catch(function (error) {
                 console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
             });
-        }, 20000);
+        }, 10000);
     }
 
 
@@ -1253,7 +1253,7 @@
         proximaAtualizacao = setTimeout(() => {
             let idUsuario = sessionStorage.servidorSelecionado
             obterDadosGrafico1(idUsuario);
-        }, 20000);
+        }, 10000);
 
     }
 
@@ -1291,7 +1291,7 @@
             }).catch(function (error) {
                 console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
             });
-        }, 20000);
+        }, 10000);
     }
 
 
