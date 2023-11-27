@@ -230,7 +230,6 @@
     
   function UltimasMedidasIndividual() {
     
-    alert(servidorSelecionado);
 
     fetch(`/medidas/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
         .then(function (resposta) {
@@ -430,7 +429,10 @@ let myChart = new Chart(
     config
 );
 
-setTimeout(() => atualizarGraficoThreads(servidorSelecionado, dados, myChart), 2000);
+setTimeout(() => {
+    myChart.destroy();
+    obterDadosGraficoThreads();
+}, 20000 );
 }
 
 
