@@ -1221,12 +1221,9 @@ function obterDadosGraficoThreads(servidorSelecionado) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads group by numeroThreads where = ${servidorSelecionado};`;
+        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads limit 8;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads group by numeroThreads where = ${servidorSelecionado};`;
-
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
+        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads limit 8;`;
     }
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
@@ -1244,8 +1241,6 @@ function atualizarGraficoThreads(servidorSelecionado) {
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads group by numeroThreads where =${servidorSelecionado};`;
 
-        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
-        return
     }
 
     console.log("Executando a instrução SQL: \n" + instrucaoSql);
