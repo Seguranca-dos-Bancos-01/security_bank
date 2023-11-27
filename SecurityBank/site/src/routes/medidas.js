@@ -187,4 +187,9 @@ router.get("/tempo-real2/:idUsuario2", function (req, res) {
     medidaController.buscarMedidasEmTempoReal2(req, res);
 });
 
+
+router.get("/ultimasPje/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasPRT(req, res);
+})
+
 module.exports = router;

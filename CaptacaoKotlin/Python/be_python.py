@@ -4,11 +4,13 @@ import json
 import requests
 import time
 from datetime import datetime
+import pymysql
+
 
 webhook = "https://hooks.slack.com/services/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"
 
 config = {"user": "root", "password": "Brol2005", "host": "localhost", "database": "SecurityBank"}
-connection = mysql.connector.connect(**config)
+connection = pymysql.connect(**config)
 cursor = connection.cursor()
 
 mycursor1 = connection.cursor()
@@ -20,7 +22,7 @@ mycursor6 = connection.cursor()
 mycursor7 = connection.cursor()
 
 
-# Select para ver se já existem participações no banco
+
 partitions_info = []
 servidorId = 1
 
@@ -45,21 +47,19 @@ for partition_info in partitions_info:
         INSERT IGNORE INTO particao (nomeParticao, espacoTotal, fkComponentes, fkMetrica, fkServidor, fkBanco, fkEspecificacoes, fkPlano)
         VALUES (%s, %s, 3, 1, 1, 1, 1, 1)
     """
-    print(result[0])
+ 
     if result[0] == 0:
         values_particao = (partition_info["nomeParticao"], partition_info["espacoTotal"])
         cursor.execute(query_particao, values_particao)
         connection.commit()
 
-# Se não existirem as partições, ele registra
+
 while True:
     partitions = psutil.disk_partitions()
-    print(partitions)
-    print("aaaa")
+ 
     for partition in partitions:
-        print(partition)
-
-        valores_id = []  # Reset valores_id for each partition
+       
+        valores_id = [] 
 
         mycursor1.execute("SELECT idComponentes FROM componentes WHERE modelo = 'cpu'")
         result1 = mycursor1.fetchall()
@@ -97,15 +97,14 @@ while True:
         valores_id.extend(id_plano_vetor6)
         fkPlano = valores_id[-1]
 
-        # Buscar idParticao correspondente à partição atual
+    
         mycursor7.execute("SELECT idParticao FROM particao WHERE nomeParticao = %s", (partition.mountpoint,))
         result7 = mycursor7.fetchone()
         if result7:
             fkParticao = result7[0]
 
             usage = psutil.disk_usage(partition.mountpoint)
-            print(usage)
-            print()
+          
             query_registros = """
                 INSERT INTO registros (dataHorario, dadoCaptado, fkServidorReg, fkBanco, fkEspecificacoes, 
                                        fkComponentesReg, fkMetrica, fkPlano, fkParticao)
@@ -124,7 +123,8 @@ while True:
             )
             cursor.execute(query_registros, values_registros)
             connection.commit()
-
+             
+            print(f"Mountpoint: {partition.mountpoint}")  
             print(f"Espaço total: {usage.total / (1024 ** 3):.2f} GB")
             print(f"Espaço usado: {usage.used / (1024 ** 3):.2f} GB")
             print(f"Espaço livre: {usage.free / (1024 ** 3):.2f} GB")
@@ -132,17 +132,17 @@ while True:
             print()
 
             # Atenção
-            if usage.percent >= 60 and usage.percent < 70:
+            if usage.percent >= 50 and usage.percent < 60:
                 alerta = {"text": f"Atenção! Partição {partition.mountpoint} com {usage.percent}% de uso"}
                 requests.post(webhook, data=json.dumps(alerta))
 
             # Emergência
-            elif usage.percent >= 70 and usage.percent < 80:
+            elif usage.percent >= 60 and usage.percent < 70:
                 alerta = {"text": f"Emergência! Partição {partition.mountpoint} com {usage.percent}% de uso"}
                 requests.post(webhook, data=json.dumps(alerta))
 
             # Urgência
-            elif usage.percent >= 80:
+            elif usage.percent >= 70:
                 alerta = {"text": f"Urgência! Partição {partition.mountpoint} com {usage.percent}% de uso"}
                 requests.post(webhook, data=json.dumps(alerta))
 
