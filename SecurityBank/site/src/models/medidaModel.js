@@ -1478,18 +1478,20 @@ function buscarUltimasMedidasPing(idUsuario, limite_linhas) {
     //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `SELECT Ping as Ping, dtHora as DataHora
+        instrucaoSql2 = `SELECT Ping AS Ping, DATE_FORMAT(dtHora, '%d/%m/%Y') AS DataHora
         FROM Rede
         WHERE fkServidor = ${idUsuario}
-        ORDER BY DataHora DESC
-        LIMIT 6;`;
+        ORDER BY dtHora DESC
+        LIMIT 6;
+        `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql2 = `SELECT Ping as Ping, dtHora as DataHora
+        instrucaoSql2 = `SELECT Ping AS Ping, DATE_FORMAT(dtHora, '%d/%m/%Y') AS DataHora
         FROM Rede
         WHERE fkServidor = ${idUsuario}
-        ORDER BY DataHora DESC
-        LIMIT 6;`;
+        ORDER BY dtHora DESC
+        LIMIT 6;
+        `;
 
 
     } else {
