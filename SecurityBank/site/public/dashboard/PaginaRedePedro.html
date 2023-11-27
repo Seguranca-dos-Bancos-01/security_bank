@@ -1,0 +1,1328 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Painel Geral</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/RedePedro.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <script src="../js/sessao.js"></script>
+    <script src="./../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+
+    <script src="DashBarra.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+
+
+    <style>
+
+
+
+
+    </style>
+
+
+
+
+</head>
+
+<!-- <body onload=" atualizarFeed()"> -->
+
+<body onload="exibirServidoresUsuario()">
+
+
+    <body
+        onload="percentCPU(),percentRAM(),percentDISK(), percentRede(),ReceberUltimosAlertas2(),exibirServidoresUsuarioReede()">
+
+        <div class="janela">
+            <div class="header-left">
+                <div class="logo">
+                    <img src="../assets/logoBranca.png" alt="">
+                </div>
+
+                <div class="opcao">
+                    <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+                </div>
+
+                <div id="nivelACesso" class="TipoAcesso">
+                    <span>Administrador</span>
+                </div>
+
+                <div class="opcoes">
+                    <a href="dashboard.html">
+                        <img src="../assets/home.png" alt="">
+                        <span>Home</span>
+                    </a>
+                </div>
+                <div class="opcoesServidores  localizacao">
+                    <a href="servidoresDash.html">
+                        <img src="../assets/servidor.png" alt="">
+                        <span>Servidores</span>
+                    </a>
+                    <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
+                    </div>
+                </div>
+
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/servidor.png    " alt="">
+                        <span>Visões</span>
+                    </a>
+                    <!-- <div class="opcoesServidores-content">
+                        <a href="alertas.html">Visão 1</a>
+                        <a href="alertas.html">Visão 2</a>
+                    </div> -->
+                </div>
+                <!-- <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Gabriel</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Gustavo</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Marcela</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Natália</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Pedro</span>
+                    </a>
+                </div> -->
+                <div class="opcoes">
+                    <a href="alertas.html">
+                        <img src="../assets/alerta.png" alt="">
+                        <span>Alertas</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="perfil.html">
+                        <img src="../assets/perfil.png" alt="">
+                        <span>Perfil</span>
+                    </a>
+                </div>
+                <div id="gerenciarAcesso" class="opcoes">
+                    <a href="GerenciarAcesso.html">
+                        <img src="../assets/controle.png" alt="">
+                        <span>Controle de acesso</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="suporteDash.html">
+                        <img src="../assets/ajuda.png" alt="">
+                        <span>Ajuda</span>
+                    </a>
+                </div>
+                <div class="opcoes">
+                    <a href="metricasDash.html">
+                        <img src="../assets/metricas.png" alt="">
+                        <span>Métricas</span>
+                    </a>
+                </div>
+                <!-- <div class="opcoes">
+                    <a href="recFacial.html">
+                        <img src="../assets/imgs/recFacial.png" alt="">
+                        <span>Reconhecimento Facial</span>
+                    </a>
+                </div> -->
+                <div class="linha">
+                    <span></span>
+                </div>
+                <div class="opcoes">
+                    <a href="../index.html">
+                        <img src="../assets/logout.png" alt="">
+                        <span onclick="limparSessonStorage()">Logout</span>
+                    </a>
+                </div>
+            </div>
+
+            <div class="dash">
+                <div id="nomeEspec" class="Nome">
+                    <h2>Dados de Rede</h2>
+                </div>
+
+                <div class="Historico">
+                    <span class="tituloHistorico">Servidores</span>
+                    <div id="Servidores">
+
+                    </div>
+
+
+
+                </div>
+                <div class="blocosPai">
+                    <div class="parte1">
+                        <div class="visaoGeral">
+                            <div class="tituloConectado">
+                                <h2 class="DetalhesTittle">Detalhes de Rede</h2>
+                                <h2 id="MostrarConect??"></h2>
+                            </div>
+                            <h1 id="Conectado?">
+                            </h1>
+                            <div class="ipMostrar">
+                                <span class="MostrarIP" id="IPselecionado">IP:</span>
+                            </div>
+                        </div>
+                        <div class="visaoGeral">
+                            <h2>Ping da Rede</h2>
+                            <div class="graph">
+                                <canvas id="myChartPing"></canvas>
+                            </div>
+                        </div>
+
+                        <div id="colocar" class="ultimosAlertas">
+                            <h3 class="DetalhesTittle">Últimos Alertas</h3>
+                            <div class="cardAlertas" id="cardAlertas"></div>
+
+                        </div>
+
+
+
+                    </div>
+                    <div class="parte2">
+
+                        <div class="graph1">
+                            <h2>Potência de Rede de Download</h2>
+                            <div class="graph">
+                                <canvas id="speedCanvas" width="600" height="310"></canvas>
+                            </div>
+                        </div>
+                        <div class="graph1">
+                            <h2>Potência de Rede de Upload</h2>
+
+                            <div class="graph">
+                                <canvas id="speedCanvasUpload" width="600" height="310"></canvas>
+                            </div>
+
+                        </div>
+                        <div class="graph1">
+                            <h2>Histórico de Rede</h2>
+                            <div class="graph">
+                                <canvas id="myChart"></canvas>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+
+        <div class="rodapeDash">
+            <div class="itens">
+                <div class="blocos">
+                    <h1>Security Bank</h1>
+                    <h4>TECH & SOLUTIONS</h4>
+                </div>
+                <div class="blocos">
+                    <span><b>Telefone:</b>(11)40028922</span>
+                    <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+                </div>
+                <div class="blocos">
+                    <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                        Cerqueira César, São Paulo - SP,<br>
+                        01414-001</span>
+                </div>
+            </div>
+            <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
+        </div>
+
+
+
+
+    </body>
+
+</html>
+<footer>
+
+</footer>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+
+<script>
+
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+    var i = 0
+    function exibirServidoresUsuario() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("opcoesServidores-content");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            i++
+            var button = document.createElement('button');
+            button.textContent = element.apelido;
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+                window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+                if (i % 5 == 0) {
+                    Servidores.innerHTML += `<br>`
+                }
+            });
+            selectServidores.appendChild(button);
+        });
+    }
+
+    function inserir(id) {
+        vetor.push(id);
+        console.log(vetor);
+        sessionStorage.servidorSelecionado = selectedServer
+    }
+
+    function MostrarResto() { }
+
+
+    // Chamar a função exibirServidoresUsuario
+    exibirServidoresUsuario();
+
+
+
+
+
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+
+
+
+
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+    var i = 0
+    function exibirServidoresUsuarioReede() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("Servidores");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            var button = document.createElement('div');
+            button.innerHTML =
+                `<span>${element.apelido}</span>
+            <div id = "boola"class= "bola"></div>
+            `;
+
+            //  while ( i <= element.idServidor) {
+            // Encontrou o ID do servidor no sessionStorage
+            //  var fkStatusKey = sessionStorage.getItem(`BolafkStatus${element.fkStatus}_fkStatus`);
+            if (element.fkStatus == 3) { // Por exemplo, alterando a cor se fkStatus for igual a 1
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#FF0000';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+            } else if (element.fkStatus == 2) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#F79042';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+            } else if (element.fkStatus == 4) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#6953D3';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+            } else if (element.fkStatus == 1) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#36D000';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+            } else { i++ }
+
+
+
+
+
+
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserirRede(selectedServer); // Chamar a função inserir com o ID do servidor
+                window.location.href = "PaginaRedePedro.html"; // Redirecionar para a página desejada
+
+            });
+            button.classList.add('botoesServidoresDash');
+            selectServidores.appendChild(button);
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+    function exibirServidoresUsuarioRede() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("Servidorees");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            var button = document.createElement('div');
+            button.innerHTML =
+                `<span>${element.apelido}</span>
+            <div id = "boola"class= "bola"></div>
+            `;
+
+            //  while ( i <= element.idServidor) {
+            // Encontrou o ID do servidor no sessionStorage
+            //  var fkStatusKey = sessionStorage.getItem(`BolafkStatus${element.fkStatus}_fkStatus`);
+            if (element.fkStatus == 3) { // Por exemplo, alterando a cor se fkStatus for igual a 1
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#FF0000';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+            } else if (element.fkStatus == 2) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#F79042';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+            } else if (element.fkStatus == 4) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#6953D3';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+            } else if (element.fkStatus == 1) {
+                var bolaDiv = button.querySelector('.bola'); // Seleciona a div com a classe 'bola'
+                bolaDiv.style.backgroundColor = '#36D000';
+                i++ // Altera a cor de fundo para vermelho (ou qualquer cor desejada)
+
+            } else { i++ }
+
+
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserirRede(selectedServer); // Chamar a função inserir com o ID do servidor
+                window.location.href = "PaginaRedePedro.html"; // Redirecionar para a página desejada
+            });
+            selectServidores.appendChild(button);
+        });
+    }
+
+    function inserirRede(id) {
+        vetor.push(id);
+        console.log(vetor);
+        sessionStorage.servidorSelecionado = selectedServer
+    }
+    console.log(selectedServer)
+    // Chamar a função exibirServidoresUsuario
+    exibirServidoresUsuarioReede();
+
+
+
+
+
+
+    //document.addEventListener("DOMContentLoaded", function () {
+    //    percentIpRede(sessionStorage.servidorSelecionado);
+    // });
+    // window.onload = percentIpRede(sessionStorage.servidorSelecionado);
+
+
+
+
+
+
+
+
+    window.onload = BuscarIP(sessionStorage.servidorSelecionado)
+
+    function BuscarIP(idUsuario) {
+        if (sessionStorage.ID_USUARIO) {
+            idUsuario = sessionStorage.servidorSelecionado
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
+        fetch(`/medidas/ultimasIpREDE/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirip(response);
+                        });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+
+
+    function exibirip(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var dado = registro.redeIP;
+
+            const percentage = document.getElementById('IPselecionado');
+
+
+            percentage.innerText = `IP: ${dado}`;
+
+        }
+
+        console.log(dado)
+        console.log(response[0])
+
+        // var ramServidores = document.getElementById('ramServidores');
+        // ramServidores.innerHTML = `${dado}%`;
+
+        var proximaAtualizacaoIP = setTimeout(() => BuscarIP(), 10000)
+    }
+
+
+
+
+
+    window.onload = BuscarConnect(sessionStorage.servidorSelecionado)
+
+    function BuscarConnect(idUsuario) {
+        if (sessionStorage.ID_USUARIO) {
+            idUsuario = sessionStorage.servidorSelecionado
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
+        fetch(`/medidas/ultimasConnect/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirConnect(response);
+                        });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+
+    }
+
+
+    function exibirConnect(response) {
+        console.log('Exibindo dados retornados:');
+        var conectadoEncontrado = false; // Adicionando uma variável para controlar se foi encontrado um elemento conectado
+
+        for (var i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var dado = registro.connectOrN;
+
+            if (dado === 1) {
+                var percentage = document.getElementById('Conectado?');
+                percentage.innerHTML = '<div class="conexao conectado"></div>';
+                var percentage2 = document.getElementById('MostrarConect??');
+                percentage2.innerHTML = '<span style="color:green"class="mostrarIssoConectado">Conectado</span>';
+
+                conectadoEncontrado = true; // Definindo como verdadeiro se um elemento conectado for encontrado
+                break; // Parando o loop assim que encontrar um elemento conectado
+            } else {
+                var percentage = document.getElementById('Conectado?');
+                percentage.innerHTML = '<div class="conexao desconectado"></div>';
+                var percentage2 = document.getElementById('MostrarConect??');
+                percentage2.innerHTML = '<span style="color:red"class="mostrarIssoConectado">Conectado</span>';
+                conectadoEncontrado = false; // Definindo como verdadeiro se um elemento conectado for encontrado
+                break; // Parando o loop assim que encontrar um elemento conectado
+
+            }
+        }
+
+        if (!conectadoEncontrado) {
+            console.log('Nenhum elemento conectado encontrado');
+        }
+
+        console.log(dado);
+        console.log(response[0]);
+
+        // var ramServidores = document.getElementById('ramServidores');
+        // ramServidores.innerHTML = `${dado}%`;
+
+        var proximaAtualizacaoIP = setTimeout(() => {
+            BuscarIP();
+            BuscarConnect();
+        }, 10000);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    window.onload = obterDadosGrafico4(sessionStorage.servidorSelecionado)
+
+    function obterDadosGrafico4(idUsuario) {
+        if (idUsuario) {
+            idUsuario = sessionStorage.servidorSelecionado
+            console.log(idUsuario);
+
+            document.addEventListener("DOMContentLoaded", function () {
+                obterDadosGrafico4(idUsuario);
+            });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/ultimasPing/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico4(resposta, idUsuario);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    }
+
+    function plotarGrafico4(resposta, idUsuario) {
+        console.log('iniciando plotagem do gráfico...');
+        let labels = [];
+        let dados = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Ping',
+                    data: [],
+                    fill: false,
+                    borderColor: '#36D000',
+                    tension: 0.1
+                }
+            ]
+        };
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.DataHora);
+            dados.datasets[0].data.push(registro.Ping);
+
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        const config = {
+            type: 'line',
+            data: dados
+        };
+
+        var ChartPing = new Chart(document.getElementById('myChartPing'), config);
+
+        setTimeout(() => atualizarGrafico4(idUsuario, dados, ChartPing), 10000);
+    }
+    function atualizarGrafico4(idUsuario, dados, myChart) {
+        fetch(`/medidas/tempo-realPing/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    return response.json();
+                } else {
+                    throw new Error('Erro na requisição da API');
+                }
+            })
+            .then(function (novoRegistro) {
+                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                console.log('Dados atuais do gráfico:');
+                console.log(dados);
+
+                if (novoRegistro.length > 0) {
+                    const ultimoDadoNoGrafico = dados.labels[dados.labels.length - 1];
+                    const novoDado = novoRegistro[0];
+
+                    if (novoDado.DataHora !== ultimoDadoNoGrafico) {
+                        dados.labels.push(novoDado.DataHora);
+                        dados.datasets[0].data.push(novoDado.Ping);
+
+                        if (dados.labels.length > MAX_LABELS) {
+                            dados.labels.shift();
+                            dados.datasets[0].data.shift();
+                        }
+
+                        myChart.data.labels = dados.labels.slice();
+                        myChart.data.datasets[0].data = dados.datasets[0].data.slice();
+
+                        myChart.update();
+                    } else {
+                        console.log('---------------------------------------------------------------');
+                        console.log('Não há novos dados para capturar, o gráfico não será atualizado.');
+
+                        console.log('Horário do novo dado capturado:');
+                        console.log(novoDado.DataHora);
+                        console.log('Horário do último dado capturado:');
+                        console.log(ultimoDadoNoGrafico);
+                        console.log('---------------------------------------------------------------');
+                    }
+                } else {
+                    console.log('---------------------------------------------------------------');
+                    console.log('Nenhum novo dado recebido.');
+                    console.log('---------------------------------------------------------------');
+                }
+
+                proximaAtualizacao4 = setTimeout(() => {
+                    atualizarGrafico4(idUsuario, dados, myChart);
+                }, 20000);
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+                proximaAtualizacao4 = setTimeout(() => {
+                    atualizarGrafico4(idUsuario, dados, myChart);
+                }, 10000);
+            });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    window.onload = UltimosAlertasSelectedServer(sessionStorage.servidorSelecionado)
+
+    function UltimosAlertasSelectedServer(idUsuario) {
+        let currentPercentage;
+
+        if (sessionStorage.ID_USUARIO) {
+            idUsuario = sessionStorage.servidorSelecionado;
+            console.log(idUsuario);
+            document.addEventListener("DOMContentLoaded", function () { });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/ultimasUltAlertasRede/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (responseData) {
+                            console.log(`Dados recebidos: ${JSON.stringify(responseData)}`);
+                            responseData.reverse();
+                            exibirUltimosAlertasSelected(responseData);
+                        });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+
+    function exibirUltimosAlertasSelected(response) {
+    var proximaAtualizacaoAlerta = setTimeout(() => UltimosAlertasSelectedServer(sessionStorage.servidorSelecionado), 10000);
+    var ultimosAlertasContainer = document.getElementById('colocar');
+    ultimosAlertasContainer.innerHTML = ''; // Limpa o conteúdo anterior para atualizar com os últimos 4 alertas
+
+    console.log('Exibindo dados retornados:');
+    // Ajuste para exibir apenas os últimos 4 alertas
+    var startIndex = Math.max(response.length - 4, 0); // Garante que não ultrapasse o limite de 4 alertas
+    for (let i = startIndex; i < response.length; i++) {
+        let registro = response[i];
+        let dado = registro.situ;
+        let dado3 = registro.dataAlerta;
+        let dado4 = registro.horaAlerta;
+
+        var elemento = document.createElement('div');
+        elemento.classList.add('cardAlertas');
+        
+        var conteudo = `
+            <h4 id="situacaoTittle">${dado}.</h4>
+            <span id="horariosAlertas">${dado3} às ${dado4}.</span>
+        `;
+        elemento.innerHTML = conteudo;
+
+        // Adiciona os novos alertas ao contêiner
+        ultimosAlertasContainer.appendChild(elemento);
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    window.onload = obterDadosGrafico3(sessionStorage.servidorSelecionado)
+
+    function obterDadosGrafico3(idUsuario) {
+        if (idUsuario) {
+            idUsuario = sessionStorage.servidorSelecionado
+            console.log(idUsuario);
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/ultimasRedeConnect/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico3(resposta, idUsuario);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    }
+
+    function plotarGrafico3(resposta, idUsuario) {
+        console.log('iniciando plotagem do gráfico...');
+
+        const labels = []
+        let dados = {
+            labels: ['Ligado', 'Desligado'],
+            datasets: [
+
+                {
+                    label: 'Ligado',
+                    data: [],
+                    fill: false,
+                    borderColor: ['#36D000', '#FF847F'], // Adicione a cor desejada
+                    tension: 0.1,
+                    backgroundColor: ['#36D000', '#FF847F']
+                },
+                {
+                    label: 'Desligado',
+                    data: [],
+                    fill: false,
+                    borderColor: ['#FF847F'], // Adicione a cor desejada
+                    tension: 0.1,
+                    backgroundColor: ['#FF847F']
+                }
+
+            ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico3" e passados para "plotarGrafico3":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+
+            dados.datasets[0].data.push(registro.Ligado);
+            dados.datasets[0].data.push(registro.Desligado);
+
+        }
+
+
+
+        const config = {
+            type: 'bar',
+            data: dados
+        };
+
+        let myChart3 = new Chart(document.getElementById('myChart'), config);
+
+
+        proximaAtualizacao3 = setTimeout(() => {
+            let idUsuario = sessionStorage.servidorSelecionado
+            obterDadosGrafico3(idUsuario);
+        }, 10000);
+    }
+
+    function atualizarGrafico3(idUsuario, dados, myChart3) {
+        fetch(`/medidas/tempo-realRedeConnect/${idUsuario}`, {
+            cache: 'no-store'
+        }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log('Dados atuais do gráfico:');
+                    console.log(dados);
+
+                    // Obtendo o último horário do gráfico
+                    const ultimoHorario = dados.labels[dados.labels.length - 1];
+
+                    if (novoRegistro[0].horario === ultimoHorario) {
+                        console.log('Não há novos dados para atualização do gráfico.');
+                    } else {
+                        // Adicionando novos dados ao gráfico
+
+                        dados.datasets[0].data.push(novoRegistro[0].Ligado);
+                        dados.datasets[0].data.push(novoRegistro[0].Desligado);
+
+                        // Removendo os primeiros elementos para manter um número fixo de pontos no gráfico
+                        if (dados.labels.length > MAX_DATA_POINTS) {
+                            dados.labels.shift();
+                            dados.datasets[0].data.shift();
+
+                        }
+
+                        // Atualizando o gráfico
+                        myChart3.update();
+                    }
+
+                    // Agendando a próxima atualização
+                    proximaAtualizacao3 = setTimeout(() => {
+                        obterDadosGrafico3(idUsuario);
+                    }, 20000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                // Agendando a próxima atualização em caso de erro
+                proximaAtualizacao3 = setTimeout(() => {
+                    obterDadosGrafico3(idUsuario);
+                }, 10000);
+            }
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    window.onload = obterDadosGrafico2(sessionStorage.servidorSelecionado)
+
+
+
+
+
+    function obterDadosGrafico2(idUsuario) {
+        if (!idUsuario) {
+            console.error("ID do usuário não encontrada.");
+            return;
+        }
+
+        fetch(`/medidas/ultimasDownload/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico2(resposta);
+                    //atualizarGrafico2(resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+        });
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+    const canvas = document.getElementById('speedCanvas');
+    const ctx = canvas.getContext('2d');
+    const centerX = canvas.width / 2;
+    const centerY = canvas.height / 2;
+    const radius = 140;
+
+
+
+
+
+
+    function plotarGrafico2(resposta) {
+
+        ctx.clearRect(0, 0, canvas.width, canvas.height); // Limpa o canvas para preparar o desenho do gráfico
+
+
+
+
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+
+            downloadSpeed = registro.Down;
+
+
+        }
+        drawSpeedometer('Download', downloadSpeed, '#A07FFF');  // Chama a função para desenhar o medidor com a velocidade atual
+
+
+
+        // Desenha o medidor
+
+
+    }
+
+
+    function drawSpeedometer(label, speed, color) {
+
+        ctx.beginPath();// Inicia um novo caminho no canvas para desenhar o medidor
+
+        ctx.arc(centerX, centerY, radius, Math.PI * 0.75, Math.PI * (0.75 + (speed / 1000) * 1.5), false); // Desenha um arco para representar a velocidade no gráfico
+
+        ctx.lineWidth = 20;// Define a largura da linha do arco
+
+        ctx.strokeStyle = color;// Define a cor da linha do arco
+
+        ctx.stroke();// Desenha o arco no canvas
+
+
+        ctx.font = '20px Arial'; // Define o estilo do texto para exibir a velocidade
+        ctx.fillStyle = 'black';
+
+
+        ctx.fillText(`${label}: ${speed} Mbps`, centerX - 100, centerY); // Exibe o texto com o rótulo e a velocidade no gráfico
+
+        // Define um temporizador para atualizar os dados a cada 10 segundos
+        proximaAtualizacao2 = setTimeout(() => {
+            let idUsuario = sessionStorage.servidorSelecionado;
+            obterDadosGrafico2(idUsuario);
+        }, 10000);
+
+    }
+
+
+
+    function atualizarGrafico2(resposta) {
+        var idUsuario = sessionStorage.servidorSelecionado
+        setInterval(() => {
+            fetch(`/medidas/tempo-real-Download/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (novoRegistro) {
+                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+
+                        const ultimoHorario = resposta[0].Down;
+                        const novoHorario = novoRegistro[0].Down;
+
+                        if (novoHorario !== ultimoHorario) {
+                            resposta.unshift(novoRegistro[0]);
+                            resposta.pop();
+
+                            for (i = 0; i < novoRegistro.length; i++) {
+                                var registro = novoRegistro[i];
+
+                                downloadSpeed = registro.Down;
+
+
+                            }
+                            drawSpeedometer('Download', downloadSpeed, 'blue');
+
+                        }
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            }).catch(function (error) {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+            });
+        }, 10000);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    window.onload = obterDadosGrafico1(sessionStorage.servidorSelecionado)
+
+    function obterDadosGrafico1(idUsuario) {
+        if (!idUsuario) {
+            console.error("ID do usuário não encontrada.");
+            return;
+        }
+
+        fetch(`/medidas/ultimasUpload/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico1(resposta);
+                    //atualizarGrafico1(resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+        });
+    }
+
+    const canvas2 = document.getElementById('speedCanvasUpload');
+    const ctx2 = canvas2.getContext('2d');
+    const centerX2 = canvas2.width / 2;
+    const centerY2 = canvas2.height / 2;
+    const radius2 = 140;
+
+    function plotarGrafico1(resposta) {
+
+        ctx2.clearRect(0, 0, canvas2.width, canvas2.height);  // Limpa o canvas para preparar o desenho do gráfico
+
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+
+            downloadSpeed2 = registro.Upl;
+
+
+        }
+        drawSpeedometer1('Upload', downloadSpeed2, '#F79042');
+
+
+
+        // Desenha o medidor
+
+
+    }
+
+
+    function drawSpeedometer1(label, speed, color) {
+        ctx2.beginPath();
+        ctx2.arc(centerX2, centerY2, radius2, Math.PI * 0.75, Math.PI * (0.75 + (speed / 1000) * 1.5), false);
+        ctx2.lineWidth = 20;
+        ctx2.strokeStyle = color;
+        ctx2.stroke();
+
+        ctx2.font = '20px Arial';
+        ctx2.fillStyle = 'black';
+        ctx2.fillText(`${label}: ${speed} Mbps`, centerX2 - 100, centerY2);
+
+        proximaAtualizacao = setTimeout(() => {
+            let idUsuario = sessionStorage.servidorSelecionado
+            obterDadosGrafico1(idUsuario);
+        }, 10000);
+
+    }
+
+
+
+    function atualizarGrafico1(resposta) {
+        var idUsuario = sessionStorage.servidorSelecionado
+        setInterval(() => {
+            fetch(`/medidas/tempo-real-Upload/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+                if (response.ok) {
+                    response.json().then(function (novoRegistro) {
+                        console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+
+                        const ultimoHorario = resposta[0].Upl;
+                        const novoHorario = novoRegistro[0].Upl;
+
+                        if (novoHorario !== ultimoHorario) {
+                            resposta.unshift(novoRegistro[0]);
+                            resposta.pop();
+
+                            for (i = 0; i < novoRegistro.length; i++) {
+                                var registro = novoRegistro[i];
+
+                                downloadSpeed2 = registro.Upl;
+
+
+                            }
+                            drawSpeedometer1('Download', downloadSpeed2, 'blue');
+
+                        }
+                    });
+                } else {
+                    console.error('Nenhum dado encontrado ou erro na API');
+                }
+            }).catch(function (error) {
+                console.error(`Erro na obtenção dos dados para o gráfico: ${error.message}`);
+            });
+        }, 10000);
+    }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+    function limparSessonStorage() {
+        sessionStorage.clear()
+    }
+
+
+
+</script>

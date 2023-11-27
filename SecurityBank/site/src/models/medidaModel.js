@@ -396,6 +396,51 @@ function buscarUltimasUsbConectadas(idUsuario) {
 
 
 
+function ultimoUpload(idUsuario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select PotenciaUpload as Upload from Rede where fkServidorRede = ${idUsuario}  order by idRede desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select PotenciaUpload as Upload from Rede where fkServidorRede = ${idUsuario}  order by idRede desc limit 1;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+function BuscarIpServidor(idUsuario, limite_linhas) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select ip as redeIP from Rede where fkServidor =${idUsuario} order by idRede desc limit 1;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select ip as redeIP from Rede where fkServidor =${idUsuario} order by idRede desc limit 1;
+
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
 function buscarUltimasMedidasRAM(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
@@ -2402,6 +2447,330 @@ function buscarMedidasEmTempoRealAlertasConsumoDISCO(idSelect) {
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+function buscarUltimasUltAlertasRede(idUsuario) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `
+        SELECT
+                alertaRede.situacao AS situ,
+               
+                DATE_FORMAT(alertaRede.dataAlerta, '%d/%m/%Y') AS dataAlerta,
+                alertaRede.horaAlerta AS horaAlerta
+            FROM
+                alertaRede
+            JOIN
+                Rede ON alertaRede.fkRede = Rede.idRede
+            WHERE
+                Rede.fkServidorRede = ${idUsuario}
+            ORDER BY
+                alertaRede.idAlertas desc
+            LIMIT 4;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `
+        SELECT
+                alertaRede.status AS situ,
+               
+                DATE_FORMAT(alertaRede.data, '%d/%m/%Y') AS dataAlerta,
+                alertaRede.hora AS horaAlerta
+            FROM
+                alertaRede
+            JOIN
+                Rede ON alertaRede.fkRede = Rede.idRede
+            WHERE
+                Rede.fkServidor = ${idUsuario}
+            ORDER BY
+                alertaRede.idAlertas desc
+            LIMIT 4;`
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+function UltimasRedeUpload(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+function TempoRealRedeUpload(idUsuario) {
+
+    instrucaoSql2 = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+
+
+
+function BuscarConnect(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `select status as connectOrN from rede where fkServidor = ${idUsuario} order by idRede desc limit 1;;`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `select status as connectOrN from rede where fkServidor = ${idUsuario} order by idRede desc limit 1;;`;
+
+
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+
+
+function UltimasRedeDownload(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+
+
+
+
+
+function TempoRealRedeDownload(idUsuario) {
+
+    instrucaoSql2 = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+function UltimasRedeConnect(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidor = ${idUsuario};`;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidor = ${idUsuario};`;
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+function TempoRealRedeConnect(idUsuario) {
+
+    instrucaoSql2 = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN statusRede = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidor = ${idUsuario};`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN statusRede = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidor = ${idUsuario};`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+function buscarUltimasMedidasPing(idUsuario, limite_linhas) {
+
+    instrucaoSql2 = ''
+    //COLOCAR O ID DO USUARIO
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT Ping AS Ping, DATE_FORMAT(dtHora, '%d/%m/%Y') AS DataHora
+        FROM Rede
+        WHERE fkServidor = ${idUsuario}
+        ORDER BY dtHora DESC
+        LIMIT 6;
+        `;
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = `SELECT Ping AS Ping, DATE_FORMAT(dtHora, '%d/%m/%Y') AS DataHora
+        FROM Rede
+        WHERE fkServidor = ${idUsuario}
+        ORDER BY dtHora DESC
+        LIMIT 6;
+        `;
+
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+function buscarMedidasEmTempoRealPing(idUsuario) {
+
+    instrucaoSql2 = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql2 = `SELECT Ping as Ping, dtHora as DataHora
+        FROM Rede
+        WHERE fkServidor = ${idUsuario}
+        ORDER BY DataHora DESC;`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql2 = ` SELECT Ping as Ping, dtHora as DataHora
+        FROM Rede
+        WHERE fkServidor = ${idUsuario}
+        ORDER BY DataHora DESC;`;
+
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql2);
+    return database.executar(instrucaoSql2);
+}
+
+
+
+
+
+
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoRealAlerta,
@@ -2478,4 +2847,17 @@ module.exports = {
     buscarMedidasEmTempoRealAlertasConsumoRAM,
     buscarUltimasMedidasAlertasConsumoDISCO,
     buscarMedidasEmTempoRealAlertasConsumoDISCO,
+    buscarUltimasUltAlertasSelected2, 
+    ultimoUpload,
+    BuscarIpServidor,
+    TempoRealRedeConnect,
+    UltimasRedeConnect,
+    UltimasRedeDownload,
+    TempoRealRedeDownload,
+    UltimasRedeUpload,
+    TempoRealRedeUpload,
+    BuscarConnect,
+    buscarUltimasMedidasPing,
+    buscarMedidasEmTempoRealPing,
+    buscarUltimasUltAlertasRede
 }

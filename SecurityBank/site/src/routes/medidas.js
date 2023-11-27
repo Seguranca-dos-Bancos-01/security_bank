@@ -16,6 +16,57 @@ router.post("/cadastrarAlertaCPUEmergencia", function (req, res) {
 router.post("/cadastrarAlertaCPUUrgencia", function (req, res) {
     medidaController.cadastrarAlertaCPUUrgencia(req, res);
 })
+router.post("/ultimasUploadREDE/:idUsuario", function (req, res) {
+    medidaController.ultimoUpload(req, res);
+})
+
+router.get("/ultimasIpREDE/:idUsuario", function (req, res) {
+    medidaController.BuscarIpServidor(req, res);
+})
+
+router.get("/ultimasConnect/:idUsuario", function (req, res) {
+    medidaController.BuscarConnect(req, res);
+})
+
+
+router.get("/ultimasRedeConnect/:idUsuario", function (req, res) {
+    medidaController.UltimasRedeConnect(req, res);
+})
+router.get("/tempo-realRedeConnect/:idUsuario", function (req, res) {
+    medidaController.TempoRealRedeConnect(req, res);
+})
+
+
+router.get("/ultimasDownload/:idUsuario", function (req, res) {
+    medidaController.UltimasRedeDownload(req, res);
+})
+router.get("/tempo-real-Download/:idUsuario", function (req, res) {
+    medidaController.TempoRealRedeDownload(req, res);
+})
+
+router.get("/ultimasUpload/:idUsuario", function (req, res) {
+    medidaController.UltimasRedeUpload(req, res);
+})
+router.get("/tempo-real-Upload/:idUsuario", function (req, res) {
+    medidaController.TempoRealRedeUpload(req, res);
+})
+
+router.get("/ultimasPing/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasPing(req, res);
+});
+
+router.get("/tempo-realPing/:idUsuario", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealPing(req, res);
+})
+
+router.get("/ultimasUltAlertasRede/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasUltAlertasRede(req, res);})
+   
+
+
+
+
+
 
 
 

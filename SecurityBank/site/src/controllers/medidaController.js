@@ -391,6 +391,46 @@ function buscarUltimasMedidasSituSelected(req, res) {
 
 
 
+function ultimoUpload(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.ultimoUpload(idUsuario, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+function BuscarIpServidor(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.BuscarIpServidor(idUsuario, limite_linhas).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
 
 function buscarUltimasMedidasRAM(req, res) {
     const limite_linhas = 50;
@@ -1612,6 +1652,249 @@ function buscarMedidasEmTempoRealAlertasConsumoDISCO(req, res) {
 }
 
 
+
+
+
+
+
+
+
+
+
+
+
+function buscarUltimasUltAlertasRede(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasUltAlertasRede(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+function buscarUltimasMedidasPing(req, res) {
+    
+    var idUsuario = req.params.idUsuario;
+
+    
+
+    medidaModel.buscarUltimasMedidasPing(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+function buscarMedidasEmTempoRealPing(req, res) {
+    var idUsuario = req.params.idUsuario;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.buscarMedidasEmTempoRealPing(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+function UltimasRedeUpload(req, res) {
+    
+    var idUsuario = req.params.idUsuario;
+
+    
+
+    medidaModel.UltimasRedeUpload(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+function TempoRealRedeUpload(req, res) {
+    var idUsuario = req.params.idUsuario;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.TempoRealRedeUpload(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+function UltimasRedeDownload(req, res) {
+    
+    var idUsuario = req.params.idUsuario;
+
+    
+
+    medidaModel.UltimasRedeDownload(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+function TempoRealRedeDownload(req, res) {
+    var idUsuario = req.params.idUsuario;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.TempoRealRedeDownload(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+function UltimasRedeConnect(req, res) {
+    
+    var idUsuario = req.params.idUsuario;
+
+    
+
+    medidaModel.UltimasRedeConnect(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+function BuscarConnect(req, res) {
+    
+    var idUsuario = req.params.idUsuario;
+
+    
+
+    medidaModel.BuscarConnect(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
+
+
+function TempoRealRedeConnect(req, res) {
+    var idUsuario = req.params.idUsuario;
+    console.log(`Recuperando medidas em tempo real`);
+    medidaModel.TempoRealRedeConnect(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as medidas em tempo real.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoRealAlerta,
@@ -1688,4 +1971,16 @@ module.exports = {
     buscarMedidasEmTempoRealAlertasConsumoRAM,
     buscarUltimasMedidasAlertasConsumoDISCO,
     buscarMedidasEmTempoRealAlertasConsumoDISCO,
+    ultimoUpload,
+    BuscarIpServidor,
+    UltimasRedeConnect,
+    TempoRealRedeConnect,
+    TempoRealRedeDownload,
+    UltimasRedeDownload,
+    UltimasRedeUpload,
+    TempoRealRedeUpload,
+    BuscarConnect,
+    buscarUltimasMedidasPing,
+    buscarMedidasEmTempoRealPing,
+    buscarUltimasUltAlertasRede,
 };
