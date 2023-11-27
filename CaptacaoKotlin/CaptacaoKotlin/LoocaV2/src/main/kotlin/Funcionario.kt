@@ -5,6 +5,6 @@ class Funcionario {
     val cpf:String = ""
     val telefone:String = ""
     val senha:String = ""
-    val fkBanco:Int = 0
-    val fkEscalonamento:Int = 0
+    var fkBanco:Int = 0
+    var fkEscalonamento:Int = 0
 }
