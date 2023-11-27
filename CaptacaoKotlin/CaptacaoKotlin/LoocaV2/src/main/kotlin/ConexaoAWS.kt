@@ -9,7 +9,7 @@ object ConexaoAWS {
                 dataSource.driverClassName = "com.microsoft.sqlserver.jdbc.SQLServerDriver"
                 val serverName = "34.206.192.7"
                 val dataBase = "SecurityBank"
-                dataSource.url = "jdbc:sqlserver://$serverName/$dataBase;encrypt=true"
+                dataSource.url = "jdbc:sqlserver://$serverName;database=$dataBase;encrypt=true;trustServerCertificate=true"
                 dataSource.username = "sa"
                 dataSource.password = "UrubuDoGit123"
                 val jdbcTemplate = JdbcTemplate(dataSource)

@@ -1,13 +1,14 @@
 import java.util.Scanner
 import com.github.britooo.looca.api.core.Looca
-import com.sun.jna.platform.linux.Fcntl
 import java.text.DecimalFormat
 import java.text.DecimalFormatSymbols
+import java.time.LocalDateTime
+import java.time.format.DateTimeFormatter
 
 fun main() {
-    val repositorio = Repositorio()
+    //val repositorio = Repositorio()
     val repositorioAWS = RepositorioAWS()
-    repositorio.iniciar()
+    //repositorio.iniciar()
     repositorioAWS.iniciar()
 
     val scanner = Scanner(System.`in`)
@@ -15,11 +16,11 @@ fun main() {
     val email = scanner.nextLine()
     println("Insira sua senha")
     val senha = scanner.nextLine()
-    val validar = repositorio.validarFunc(email,senha)
+    //val validar = repositorio.validarFunc(email,senha)
     val validar2 = repositorioAWS.validarFunc(email, senha)
 
-    if (validar && validar2) {
-        repositorio.logar(email, senha)
+    if (validar2) {
+        //repositorio.logar(email, senha)
         repositorioAWS.logar(email,senha)
         println("Login realizado com sucesso!")
         println()
@@ -34,6 +35,13 @@ fun main() {
 
             val ConexaoUSB = Dispositivo()
             ConexaoUSB.dado = looca.dispositivosUsbGrupo.totalDispositvosUsb
+
+            val dataHoraAtual = LocalDateTime.now()
+            val formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm:ss")
+            val dataHoraFormatada = dataHoraAtual.format(formatter)
+
+            InterfaceUSB.dataTime = dataHoraFormatada
+            ConexaoUSB.dataTime = dataHoraFormatada
 
             val fkBancoAWS = repositorioAWS.getIdBanco(func.fkBanco)
             val fkescalonamentoAWS = repositorioAWS.getIdEscalonamento(func.fkEscalonamento)
@@ -52,17 +60,17 @@ fun main() {
 
 
 
-            val fkServidor = repositorio.servidor()
-            val fkBanco = repositorio.banco()
-            val fkEspec = repositorio.especificacoes()
-            val fkPlano = repositorio.plano()
-            val fkLocacao = repositorio.locacao()
-            val fkMetrica = repositorio.metrica()
+            //val fkServidor = repositorio.servidor()
+            //val fkBanco = repositorio.banco()
+            //val fkEspec = repositorio.especificacoes()
+            //val fkPlano = repositorio.plano()
+            //val fkLocacao = repositorio.locacao()
+            //val fkMetrica = repositorio.metrica()
 
-            repositorio.cadastrarComp(fkServidor, fkBanco, fkEspec, fkPlano,fkLocacao,fkMetrica)
-            val fkInterface = repositorio.getIdInterface()
-            val fkConexoes = repositorio.getIdConexoes()
-            repositorio.cadastrarRegistro(InterfaceUSB, ConexaoUSB, fkServidor, fkBanco, fkEspec, fkPlano,fkInterface,fkConexoes, fkLocacao, fkMetrica)
+            //repositorio.cadastrarComp(fkServidor, fkBanco, fkEspec, fkPlano,fkLocacao,fkMetrica)
+            //val fkInterface = repositorio.getIdInterface()
+            //val fkConexoes = repositorio.getIdConexoes()
+            //repositorio.cadastrarRegistro(InterfaceUSB, ConexaoUSB, fkServidor, fkBanco, fkEspec, fkPlano,fkInterface,fkConexoes, fkLocacao, fkMetrica)
 
             val formato = DecimalFormat("#.##")
             val simbolo = DecimalFormatSymbols()
@@ -79,7 +87,7 @@ fun main() {
             val totalDisco = formato.format(discos[0].tamanho.toDouble() / 1024 / 1024 / 1024).toDouble()
 
             repositorioAWS.cadastrarEspec(totalProcessador,totalMemoria,totalDisco)
-            repositorio.cadastrarEspec(totalProcessador, totalMemoria, totalDisco)
+            //repositorio.cadastrarEspec(totalProcessador, totalMemoria, totalDisco)
 
             Thread.sleep(10000)
         }

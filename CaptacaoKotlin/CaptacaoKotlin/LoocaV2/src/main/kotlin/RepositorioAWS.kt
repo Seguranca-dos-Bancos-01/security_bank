@@ -97,14 +97,14 @@ class RepositorioAWS {
     }
     fun insertReg(InterfacesUSB:Dispositivo,ConexaoUSB:Dispositivo,fkServidor:Int,fkBanco:Int,fkEspecificacoes:Int,fkComponenteInterface:Int,fkComponenteConexao:Int,fkMetrica:Int,fkPlano:Int,fkPaticao:Int){
         jdbcTemplate.execute("""
-            insert into registros (dataHorario,dadoCaptado,fkServidorReg,fkBanco,fkEspecificacoes,fkComponenteReg,fkMetrica,fkPlano,fkParticao) values
+            insert into registros (dataHorario,dadoCaptado,fkServidorReg,fkBanco,fkEspecificacoes,fkComponentesReg,fkMetrica,fkPlano,fkParticao) values
             ('${InterfacesUSB.dataTime}','${InterfacesUSB.dado}',$fkServidor,$fkBanco,$fkEspecificacoes,$fkComponenteInterface,$fkMetrica,$fkPlano,$fkPaticao),
             ('${ConexaoUSB.dataTime}','${ConexaoUSB.dado}',$fkServidor,$fkBanco,$fkEspecificacoes,$fkComponenteConexao,$fkMetrica,$fkPlano,$fkPaticao)
         """.trimIndent())
     }
     fun cadastrarEspec(totalProcessador: Double, totalMemoria:Double, totalDisco:Double){
         jdbcTemplate.execute("""
-           insert into especificacoes (potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco) values
+           insert into especificacao (potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco) values
             ($totalProcessador,$totalMemoria,$totalDisco)
         """)
     }
