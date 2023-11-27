@@ -1,0 +1,256 @@
+.divEscolhaServidor {
+    width: 90%;
+    background-color: #fff;
+  filter: drop-shadow(0px 10px 60px rgba(226, 236, 249, 0.50));
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-around;
+    margin: auto;
+    border-radius: 12px;
+}
+
+.dash {
+    height: 750px;
+}
+
+.textoIndividual {
+    color: #000F53;
+    font-size: 16px;
+}
+
+.selectServidor {
+    background-color: #d9d9d93d;
+    border: none;
+    width: 200px;
+    font-size: 15px;
+    border-radius: 4px;
+}
+
+.divConteudoPagina {
+    width: 90%;
+    background-color: #fff;
+  filter: drop-shadow(0px 10px 30px rgba(226, 236, 249, 0.50));
+  height: 500px;
+  margin: 20px auto;
+  border-radius: 12px;
+}
+
+#nomeServidorSelecionado {
+    color: #000F53;
+    font-size: 20px;
+}
+
+.linhaConteudo {
+    height: 60px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin: 20px 40px ;
+}
+
+.linhaGraficos {
+    height: fit-content;
+    display: flex;
+    justify-content: space-between;
+    margin: 0 40px;
+    align-items: center;
+}
+
+.divAlertas {
+    height: 400px;
+    width: 25%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.KPIAlerta {
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.132);
+    border-radius: 10px;
+    width: 220px;
+    height: 80px;
+    display: flex;
+    
+}
+
+.corAlertaKPI {
+    width: 15px;
+    height: 100%;
+    border-radius: 10px 0 0 10px;
+}
+
+.verde {
+    background-color: #36D000;
+}
+
+.laranja {
+background-color: #F79042;
+}
+
+.rosa {
+    background-color: #FF847F;
+}
+
+.roxo {
+    background-color: #6953D3;
+}
+
+.conteudoKPI {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: center;
+    width: 70%;
+    color: #000F53;
+    margin: 0 10px;
+}
+
+.informacaoKPI {
+    color: #000F53;
+    font-size: 30px;
+    font-weight: 500;
+}
+
+.informacaoKPIComp {
+    color: #000F53;
+    font-size: 25px;
+    font-weight: 500;
+}
+
+.legendaKPI {
+    color: #000F53;
+    font-size: 12px;
+}
+
+.ajudaHINT {
+    width: 25px;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: flex-start;
+    margin: 10px;
+    cursor: pointer;
+}
+
+.ajudaHINT:hover {
+    cursor: pointer;
+}
+
+.ajudaHINT img {
+    width: 20px;
+}
+
+.graficosServidorGeral {
+    display: flex;
+align-items: center;
+    justify-content: space-between;
+    width: 75%;
+}
+
+.divKPIComp {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+        justify-content: space-between;
+        height: 400px;
+}
+
+.graficoConsumoComponentes {
+    background-color: #fff;
+    width: 48%;
+    height: 400px;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.132);
+    border-radius: 20px;
+}
+
+.graficoAlertasComponentes {
+    background-color: #fff;
+    width: 48%;
+    height: 400px;
+    box-shadow: 0px 2px 8px 0px rgba(0, 0, 0, 0.132);
+    border-radius: 20px;
+    display: flex;
+    flex-direction: column;
+    align-items:center;
+
+}
+
+
+.modal {
+    background-color: #fff;
+    border: none;
+    border-radius: 20px;
+    width: 450px;
+    height: 250px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.modal  p {
+    font-size: 15px;
+    margin: 10px 20px;
+}
+
+.alertaCPU {
+    color: #F79042;
+    font-weight: 500;
+}
+
+.alertaEmergencia {
+    color: #FF847F;
+    font-weight: 500;
+}
+
+.alertaUrgencia {
+    color: #6953D3;
+    font-weight: 500;
+}
+
+.button-close {
+    border: none;
+    border-radius: 10px;
+    color: #fff;
+    font-size: 15px;
+align-self: flex-end;
+padding: 5px 20px;
+}
+
+.button-close::focus-visible {
+    border:none
+}
+
+.tituloGraficos {
+    font-size: 15px;
+    color: #000F53;
+    padding: 30px;
+}
+
+/* #myChart {
+    width: 80% !important;
+    height: fit-content;
+} */
+
+/* canvas {
+    width: 100px;
+} */
+
+#myChart2, #myChart, #myChart3 {
+    width: 373px !important;
+    height: 318px !important;
+}
+
+.conteudoKIPComp {
+    background-color: #fff;
+    width: 100%;
+    height: 190px;
+    filter: drop-shadow(0px 10px 10px rgba(226, 236, 249, 0.50));
+    border-radius: 20px;
+}
+
+.conteudoKIPComp {
+    text-align: center;
+
+}
