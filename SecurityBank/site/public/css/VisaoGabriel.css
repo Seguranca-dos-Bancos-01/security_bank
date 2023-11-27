@@ -538,7 +538,7 @@ input {
 }
 
 .grafico {
-    background-color: rgb(83, 83, 116);
+    /* background-color: #8874ec; */
     margin-left: 50vh;
     margin-top: 1vh;
     width: 140vh;
