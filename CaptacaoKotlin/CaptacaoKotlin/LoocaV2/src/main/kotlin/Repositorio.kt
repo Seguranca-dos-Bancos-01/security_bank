@@ -1,5 +1,6 @@
 import org.springframework.jdbc.core.BeanPropertyRowMapper
 import org.springframework.jdbc.core.JdbcTemplate
+import org.springframework.jdbc.core.queryForObject
 
 class Repositorio {
     lateinit var jdbcTemplate: JdbcTemplate
@@ -58,11 +59,18 @@ class Repositorio {
         return metrica
     }
 
-    fun cadastrarComp(fkServidor:Int,fkBanco:Int,fkEspec:Int,fkPlano:Int,fkLocacao:Int,fkMetrica:Int){
+    fun particao():Int{
+        val particao = jdbcTemplate.queryForObject("""
+        select min(idParticao) from particao join banco on fkBanco = idBanco where fkBanco = 1 group by fkBanco;
+        """,Int::class.java)
+        return particao
+    }
+
+    fun cadastrarComp(fkServidor:Int,fkBanco:Int,fkEspec:Int,fkPlano:Int,fkMetrica:Int){
         jdbcTemplate.execute("""
            insert into componentes values
-            (null,'Interfaces USB','Interfaces',$fkServidor,$fkBanco,$fkEspec,$fkPlano,$fkLocacao,$fkMetrica),
-            (null,'Conexoes USB','Conexoes',$fkServidor,$fkBanco,$fkEspec,$fkPlano,$fkLocacao,$fkMetrica)
+            (null,'Interfaces USB','Interfaces',$fkMetrica,$fkServidor,$fkBanco,$fkEspec,$fkPlano),
+            (null,'Conexoes USB','Conexoes',$fkMetrica,$fkServidor,$fkBanco,$fkEspec,$fkPlano)
         """)
     }
      fun getIdInterface():Int{
@@ -78,11 +86,11 @@ class Repositorio {
         return idConexoes
     }
 
-    fun cadastrarRegistro(InterfaceUSB:Dispositivo,ConexaoUSB:Dispositivo,fkServidor:Int,fkBanco:Int,fkEspec:Int,fkPlano:Int,fkInterface:Int, fkConexoes:Int, fkLocacao:Int,fkMetrica: Int){
+    fun cadastrarRegistro(InterfaceUSB:Dispositivo,ConexaoUSB:Dispositivo,fkServidor:Int,fkBanco:Int,fkEspec:Int,fkPlano:Int,fkInterface:Int, fkConexoes:Int, fkMetrica:Int,fkParticao:Int){
         jdbcTemplate.execute("""
            insert into registros values
-            (null,'${InterfaceUSB.dataTime}',${InterfaceUSB.dado},$fkServidor,$fkBanco,$fkEspec,$fkPlano,3,$fkLocacao,$fkMetrica),
-            (null,'${ConexaoUSB.dataTime}',${ConexaoUSB.dado}, $fkServidor,$fkBanco,$fkEspec,$fkPlano,4,$fkLocacao,$fkMetrica)
+            (null,'${InterfaceUSB.dataTime}',${InterfaceUSB.dado},$fkServidor,$fkBanco,$fkEspec,$fkInterface,$fkMetrica,$fkPlano,$fkParticao),
+            (null,'${ConexaoUSB.dataTime}',${ConexaoUSB.dado}, $fkServidor,$fkBanco,$fkEspec,$fkConexoes,$fkMetrica,$fkPlano,$fkParticao)
         """)
     }
 
