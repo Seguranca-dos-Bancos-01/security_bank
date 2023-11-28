@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Bank - Verificação de Duas Etapas</title>
+    <link rel="stylesheet" href="./css/duasEtapas.css">
+    <script src="enviaSMS.js"></script>
+
+</head>
+
+<body>
+    <div class="contaier">
+        <div class="icone">
+            <img src="./assets/protect.png" alt="">
+        </div>
+        <h4>Codigo de Verificação</h4>
+        <form>
+            <div class="grupoInputs">
+                <input type="number">
+                <input type="number" disabled>
+                <input type="number" disabled>
+                <input type="number" disabled>
+            </div>
+            <button >Verificar</button>
+        </form>
+    </div>
+</body>
+
+</html>
+<script>
+
+    const botao = document.querySelector('button');
+    const inputs = document.querySelectorAll('input');
+
+    window.addEventListener('load', () => inputs[0].focus)
+
+
+
+    inputs.forEach(input => {
+
+        input.addEventListener('input', () => {
+            const InputAtual = input;
+            const ProxInput = input.nextElementSibling;
+            if (InputAtual.value.length > 1) {
+                InputAtual.value = InputAtual.value.slice(1)
+            }
+            if (ProxInput !== null && ProxInput.hasAttribute('disabled') && InputAtual.value !== '') {
+                ProxInput.removeAttribute('disabled');
+                ProxInput.focus();
+            }
+            if (!inputs[inputs.length - 1].disabled && inputs[inputs.length - 1].value !== '') {
+                botao.classList.add('ativo')
+            } else {
+                botao.classList.remove('ativo')
+            }
+        });
+
+        input.addEventListener('keyup', evento => {
+            if (evento.key === 'Backspace') {
+                if (input.previousElementSibling !== null) {
+                    evento.target.value = '';
+                    evento.target.setAttribute('disabled', true);
+                    input.previousElementSibling.focus()
+
+                }
+
+            }
+
+        })
+
+    })
+
+
+
+
+
+
+</script>

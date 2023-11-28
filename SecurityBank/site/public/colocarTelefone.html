@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<!-- index.html - HTML/CSS/JavaScript (cliente) -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verificação de Duas Etapas</title>
+    <link rel="stylesheet" href="./css/duasEtapas.css">
+</head>
+<body>
+    <div class="container">
+        <h4>Código de Verificação</h4>
+        <form id="verificationForm">
+            <input type="tel" id="phoneNumber" placeholder="Número de Telefone">
+            <button type="submit" onclick="redirecionarParaPagina()">Enviar Código</button>
+        </form>
+    </div>
+
+    <script>
+
+function redirecionarParaPagina() {
+   
+        document.getElementById('verificationForm').addEventListener('submit', function(event) {
+            event.preventDefault();
+            const numeroDestino = document.getElementById('phoneNumber').value;
+            enviarCodigo(numeroDestino);
+        });
+    }
+
+     
+
+    function enviarCodigo(numeroDestino) {
+    fetch('/enviaSMS/enviarNumero', {
+        method: 'POST',
+        cache: 'no-store',
+        body: JSON.stringify({ numeroDestino: numeroDestino })
+    })
+    .then(response => response.text())
+    .then(data => console.log(data))
+    .catch(error => console.error(error));
+}
+    </script>
+</body>
+</html>
