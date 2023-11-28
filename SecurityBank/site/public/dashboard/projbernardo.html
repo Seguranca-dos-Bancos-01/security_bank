@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Partições </title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/projbernardo.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+</head>
+
+
+
+<body
+    onload="percentPRT(), obterDadosGrafico(), obterDadosGrafico2()">
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div id="nivelACesso" class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="opcoesServidores">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
+                </div>
+            </div>
+
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+            
+            </div>
+
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div id="gerenciarAcesso" class="opcoes">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessonStorage()">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dash">
+            <div id="alerta">
+            </div>
+
+
+            <div class="Nome">
+                <h2>Monitoramento de Partições do Disco</h2>
+            </div>
+
+
+            <div class="containerArmazen">
+
+                
+                <div id="colocar" class="armazenamento">
+                      <span class="percent">  Total de armazenamento das partições  </span>
+                    
+            </div>
+
+            <div class="graph2">
+                <canvas id="myChart2"></canvas>
+            </div>
+
+           
+
+            </div>
+
+            <div class="containerPercent">
+                <span class="percent">Percentual de uso das partições </span>
+
+                <div class="graph">
+                    <canvas id="myChart"></canvas>
+                </div>
+
+            </div>
+
+            
+
+
+        </div>
+    </div>
+
+
+    </div>
+    </div>
+ 
+
+
+</body>
+
+
+
+</html>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
+<script>
+  
+
+
+
+ window.onload = obterDadosGrafico(1)
+
+    function obterDadosGrafico(idUsuario) {
+        idUsuario
+        fetch(`/medidas/ultimasPje/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGrafico(resposta);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function plotarGrafico(resposta, idUsuario) {
+
+        console.log('iniciando plotagem do gráfico...');
+
+
+        let labels = ["Partições"];
+
+        let dados = {
+            labels: labels,
+            datasets: [
+            {
+                    label: 'particao1',
+                    data: [],
+                    fill: false,
+                    borderColor: ['#5E1A8D', '##5E1A8D'], 
+                    tension: 0.1,
+                    backgroundColor: ['#5E1A8D', '##5E1A8D']
+                },
+                {
+                    label: 'particao2',
+                    data: [],
+                    fill: false,
+                    borderColor: ['#000F53','#000F53'], 
+                    tension: 0.1,
+                    backgroundColor: ['#000F53','#000F53']
+                }
+            ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            dados.datasets[0].data.push(registro.particao1);
+            dados.datasets[1].data.push(registro.particao2);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        const config = {
+            type: 'bar',
+            data: dados,
+        };
+
+        let myChart = new Chart(document.getElementById('myChart'), config);
+
+        atualizarGrafico(idUsuario, dados, myChart);
+
+    }
+
+    function atualizarGrafico(idUsuario, dados, myChart) {
+        fetch(`/medidas/tempo-realPje/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log('Dados atuais do gráfico:');
+                    console.log(dados);
+
+
+                    if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
+                        console.log('---------------------------------------------------------------');
+                        console.log('Como não há dados novos para captura, o gráfico não atualizará.');
+
+                        console.log('Horário do novo dado capturado:');
+                        console.log(novoRegistro[0].horario);
+                        console.log('Horário do último dado capturado:');
+                        console.log(dados.labels[dados.labels.length - 1]);
+                        console.log('---------------------------------------------------------------');
+                    } else {
+                        dados.labels.shift();
+                        dados.labels.push(novoRegistro[0].momento_grafico);
+
+                        dados.datasets[0].data.shift();
+                        dados.datasets[0].data.push(novoRegistro[0].proc);
+
+
+                        myChart.update();
+                    }
+
+                    proximaAtualizacao = setTimeout(() => {
+                        obterDadosGrafico(idUsuario);
+                    }, 20000);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                proximaAtualizacao = setTimeout(() => {
+                    obterDadosGrafico(idUsuario);
+                }, 20000);
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    var dadoServer;
+
+    document.addEventListener("DOMContentLoaded", function () {
+        obterDadosGrafico();
+    });
+
+
+   
+
+ window.onload = obterDadosGrafico(1)
+
+function obterDadosGrafico2(idUsuario) {
+    idUsuario
+    fetch(`/medidas/ultimasPje2/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico2(resposta);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+var myChart2;
+
+function plotarGrafico2(resposta, idUsuario) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    if (myChart2) {
+        myChart2.destroy();
+    }
+
+
+    let labels = ["Partições"];
+
+    let dados = {
+        labels: labels,
+        datasets: [
+        {
+                label: 'particao1',
+                data: [],
+                fill: false,
+                borderColor: ['#5E1A8D', '##5E1A8D'], 
+                tension: 0.1,
+                backgroundColor: ['#5E1A8D', '##5E1A8D']
+            },
+            {
+                label: 'particao2',
+                data: [],
+                fill: false,
+                borderColor: ['#000F53','#000F53'], 
+                tension: 0.1,
+                backgroundColor: ['#000F53','#000F53']
+            }
+        ]
+    };
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+
+
+    for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.datasets[0].data.push(registro.espacoTotal1);
+        dados.datasets[1].data.push(registro.espacoTotal2);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    const config = {
+        type: 'bar',
+        data: dados,
+    };
+
+    myChart2 = new Chart(document.getElementById('myChart2'), config);
+
+    atualizarGrafico2(idUsuario, dados, myChart2);
+}
+
+
+
+function atualizarGrafico2(idUsuario, dados, myChart2) {
+    fetch(`/medidas/tempo-realPje2/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (novoRegistro) {
+                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                console.log('Dados atuais do gráfico:');
+                console.log(dados);
+
+
+                if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
+                    console.log('---------------------------------------------------------------');
+                    console.log('Como não há dados novos para captura, o gráfico não atualizará.');
+
+                    console.log('Horário do novo dado capturado:');
+                    console.log(novoRegistro[0].horario);
+                    console.log('Horário do último dado capturado:');
+                    console.log(dados.labels[dados.labels.length - 1]);
+                    console.log('---------------------------------------------------------------');
+                } else {
+                    dados.labels.shift();
+                    dados.labels.push(novoRegistro[0].momento_grafico);
+
+                    dados.datasets[0].data.shift();
+                    dados.datasets[0].data.push(novoRegistro[0].proc);
+
+
+                    myChart.update();
+                }
+
+                proximaAtualizacao = setTimeout(() => {
+                    obterDadosGrafico2(idUsuario);
+                }, 20000);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+            proximaAtualizacao = setTimeout(() => {
+                obterDadosGrafico2(idUsuario);
+            }, 20000);
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+
+var dadoServer;
+
+document.addEventListener("DOMContentLoaded", function () {
+    obterDadosGrafico2();
+});
+
+
+
+
+
+    function percentPRT(idUsuario) {
+        if (sessionStorage.FKBANCO) {
+
+            console.log(idUsuario); document.addEventListener("DOMContentLoaded", function () { });
+        }
+        else { console.error("ID do usuário não encontrada no sessionStorage."); }
+
+
+        fetch(`/medidas/ultimasPercentPRT/${idUsuario}`, { cache: 'no-store' })
+            .then(function (response) {
+                if (response.ok) {
+                    response.json()
+                        .then(function (response) {
+                            console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(response)}`);
+                            response.reverse(); exibirDadosPRT(response);
+                        });
+                } else { console.error('Nenhum dado encontrado ou erro na API'); }
+            })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+
+
+    function exibirDadosPRT(response) {
+        console.log('Exibindo dados retornados:')
+        for (i = 0; i < response.length; i++) {
+            var registro = response[i];
+            var dado = registro.asd;
+            var limitesprt = {
+                estavel: 59,
+                atencao: 69,
+                emergencia: 79
+            };
+            if (dado > limitesprt.estavel && dado <= limitesprt.atencao) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'PARTIÇÃO EM ATENÇÃO',
+                    text: `Partição {partition.device} com ${dado}% de uso!`,
+                });
+                cadastrarAlertaPRTAtencao()
+
+            } else if (dado > limitesprt.atencao && dado <= limitesprt.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'PARTIÇÃO EM EMERGÊNCIA',
+                    text: `Partição {partition.device} com ${dado}% de uso!`,
+                });
+                cadastrarAlertaPRTEmergencia()
+
+
+
+            } else if (dado > limitesprt.emergencia) {
+                Swal.fire({
+                    icon: 'warning',
+                    title: 'PARTIÇÃO EM URGÊNCIA',
+                    text: `Partição {partition.device} com ${dado}% de uso!`,
+                });
+                cadastrarAlertaPRTUrgencia()
+
+            }
+        }
+
+        console.log(dado)
+        console.log(response[0])
+
+        var prtServidores = document.getElementById('prtServidores');
+        prtServidores.innerHTML = `${dado}%`;
+
+        var proximaAtualizacao = setTimeout(() => percentPRT(), 5000)
+    }
+
+    function cadastrarAlertaPRTAtencao() {
+
+    
+        fetch("/medidas/cadastrarAlertaPRTAtencao", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                servidorFKServer: servidorFK,
+                planoFKServer: planoFK,
+                bancoFKServer: bancoFK,
+            })
+        })
+
+
+
+        return false;
+    }
+
+
+    
+    function cadastrarAlertaPRTEmergencia() {
+
+
+fetch("/medidas/cadastrarAlertaPRTEmergencia", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+    
+        servidorFKServer: servidorFK,
+        planoFKServer: planoFK,
+        bancoFKServer: bancoFK,
+    })
+})
+
+return false;
+}
+
+
+
+
+function cadastrarAlertaPRTUrgencia() {
+
+
+fetch("/medidas/cadastrarAlertaPRTUrgencia", {
+    method: "POST",
+    headers: {
+        "Content-Type": "application/json",
+    },
+    body: JSON.stringify({
+    
+        servidorFKServer: servidorFK,
+        planoFKServer: planoFK,
+        bancoFKServer: bancoFK,
+    })
+})
+
+return false;
+}
+
+
+
+</script>

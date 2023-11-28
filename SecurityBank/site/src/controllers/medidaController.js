@@ -2044,6 +2044,53 @@ function atualizarGraficoThreads(req, res) {
 
 
 
+function buscarUltimasMedidasPRT(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasPRT(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+function buscarUltimasMedidasTOT(req, res) {
+    const limite_linhas = 50;
+    var idUsuario = req.params.idUsuario;
+
+    console.log(`Recuperando as últimas ${limite_linhas} medidas`);
+
+    medidaModel.buscarUltimasMedidasTOT(idUsuario).then(function (resultado) {
+        if (resultado.length > 0) {
+            res.status(200).json(resultado);
+        } else {
+            res.status(204).send("Nenhum resultado encontrado!");
+        }
+    }).catch(function (erro) {
+        console.error(erro);
+        console.error("Houve um erro ao buscar as últimas medidas.", erro.sqlMessage);
+        res.status(500).json(erro.sqlMessage);
+    });
+}
+
+
+
+
+
+
+
 module.exports = {
     buscarUltimasMedidas,
     buscarMedidasEmTempoRealAlerta,
@@ -2140,4 +2187,6 @@ module.exports = {
     PorcentagemTotalProcessador,
     atualizarGraficoThreads,
     obterDadosGraficoThreads,
+    buscarUltimasMedidasPRT,
+    buscarUltimasMedidasTOT
 };

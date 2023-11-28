@@ -408,4 +408,13 @@ router.get("/atualizarGraficoThreads/:servidorSelecionado", function (req, res) 
 
 
 
+
+router.get("/ultimasPje/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasPRT(req, res);
+})
+
+router.get("/ultimasPje2/:idUsuario", function (req, res) {
+    medidaController.buscarUltimasMedidasTOT(req, res);
+})
+
 module.exports = router;
