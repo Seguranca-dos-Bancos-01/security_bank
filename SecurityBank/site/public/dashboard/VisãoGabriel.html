@@ -1,0 +1,537 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Security Bank | Controle Acesso</title>
+
+    <link rel="stylesheet" href="../css/VisaoGabriel.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <link rel="stylesheet" href="../css/dashboards.css">
+    <link rel="stylesheet" href="../css/GerenciarAcesso.css">
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+    <script src="alertasDash.js"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body onload="UltimasMedidasIndividual(), obterDadosGraficoThreads()">
+
+
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div id="nivelACesso" class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="opcoesServidores">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
+                </div>
+            </div>
+
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+                <!-- <div class="opcoesServidores-content">
+                        <a href="alertas.html">Visão 1</a>
+                        <a href="alertas.html">Visão 2</a>
+                    </div> -->
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Bernardo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span><a href="VisãoGabriel.html">Visão Gabriel</a></span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                    <a href="">
+                        <img src="../assets/imgs/servdores.png" alt="">
+                        <span>Visão Marcela</span>
+                    </a>
+                </div> -->
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div id="gerenciarAcesso  localizacao" class="opcoes">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                    <a href="recFacial.html">
+                        <img src="../assets/imgs/recFacial.png" alt="">
+                        <span>Reconhecimento Facial</span>
+                    </a>
+                </div> -->
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="">
+                    <span onclick="limparSessonStorage()">Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="divUsoGeraleTipoProcessador">
+            <div class="usoProcessador">
+                <div class="texto_titulo_usoProcessador">
+                    <span>Uso Geral do Processador:</span>
+                </div>
+                <div id="textousoprocessador" class="texto_info_usoProcessador_porcentagem">
+                    <span>70%</span>
+                </div>
+            </div>
+
+            <div class="linha-vertical"></div>
+
+            <div class="tipoProcessador">
+                <div class="texto_titulo_tipoProcessador">
+                    <span>Tipo de Processador:</span>
+                </div>
+                <div id = "texto_tipo_do_cpu" class="texto_info_tipoProcessador">
+                    <span>Intel core i5</span>
+                </div>
+            </div>
+        </div>
+
+        <div class="div_bloco_kpis">
+            <div class="Kpi_núcleos">
+                <div class="div_nucleos_titulo">
+                    <h3>Núcleos:</h3>
+                </div>
+
+
+                <div id= "div_quant_nucleos" class="div_nucleos_informacao">
+                    <span>NUM</span>
+                </div>
+
+            </div>
+
+            <!-- <div class="div_input_pergunta_servidor">
+
+                <div class="Servidor_input_texto">
+                  Qual servidor quer ver:
+                </div>
+                <div class="Servidor_input_numero">
+                    <input type="number">
+                </div>
+                <div>
+                    <button class="botao_input">Acept</button>
+                </div> -->
+                
+                
+            <!-- </div> -->
+
+            <!-- <select name="" id="selectServidor" class="selectServidor">
+            </select> -->
+
+        
+            <div class="Kpi_threads">
+
+                <div class="div_threads_titulo2">
+                    <h3>Threads:</h3>
+                </div>
+
+                <div id= "div_quant_threads" class="div_theads_informacao">
+                    <span>NUM</span>
+                </div>
+
+            </div>
+        </div>
+
+        <div class="grafico">
+            <canvas id="myChart" width="400" height="200"></canvas>
+        </div>
+
+
+        
+</body>
+
+</html>
+
+<script>
+    var servidorSelecionado = sessionStorage.servidorSelecionado;
+    
+  function UltimasMedidasIndividual() {
+    
+
+    fetch(`/medidas/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        div_quant_threads.innerHTML = `${publicacao.qtdThreads}`
+                        div_quant_nucleos.innerHTML = `${publicacao.qtdNucleos}`
+                        texto_tipo_do_cpu.innerHTML = `${publicacao.especificacaoCpu}`
+                        
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+
+        fetch(`/medidas/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        textousoprocessador.innerHTML = `${publicacao.dadosCaptados}%`
+                        
+                        
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+}
+
+function atualizarDadosEmTempoReal() {
+    var servidorSelecionado = sessionStorage.servidorSelecionado;
+    
+    fetch(`/medidas/kpiIndividual/${servidorSelecionado}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        div_quant_threads.innerHTML = `${publicacao.qtdThreads}`
+                        div_quant_nucleos.innerHTML = `${publicacao.qtdNucleos}`
+                        texto_tipo_do_cpu.innerHTML = `${publicacao.especificacaoCpu}`
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+
+    fetch(`/medidas/PorcentagemTotalProcessador/${servidorSelecionado}`, { cache: 'no-store' })
+        .then(function (resposta) {
+            if (resposta.ok) {
+                console.log("ENTREII no atualizar feed");
+
+                resposta.json().then(function (respostaJson) {
+                    console.log("Dados recebidos quadrado setor: ", JSON.stringify(respostaJson));
+
+                    for (let i = 0; i < respostaJson.length; i++) {
+                        var publicacao = respostaJson[i];
+
+                        textousoprocessador.innerHTML = `${publicacao.dadoCaptado}%`
+                    }
+                });
+            } else {
+                throw new Error('Houve um erro na API!');
+            }
+        })
+        .catch(function (erro) {
+            console.error(erro);
+            // finalizarAguardar();
+        });
+}
+
+// Função para chamar a atualização em tempo real a cada 5 segundos
+function iniciarAtualizacaoEmTempoReal() {
+    // Atualizar os dados a cada 5 segundos (5000 milissegundos)
+    setInterval(atualizarDadosEmTempoReal, 2000);
+}
+
+// Chamar a função de inicialização
+iniciarAtualizacaoEmTempoReal();
+
+console.log("Servidor Selecionado:", servidorSelecionado);
+
+function obterDadosGraficoThreads(servidorSelecionado) {
+    var servidorSelecionado = sessionStorage.servidorSelecionado;
+
+// alterarTitulo(idAquario)
+
+// if (proximaAtualizacao != undefined) {
+//     clearTimeout(proximaAtualizacao);
+// }
+
+fetch(`/medidas/obterDadosGraficoThreads/${servidorSelecionado}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (resposta) {
+            console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+            resposta.reverse();
+
+            plotarGraficoThreads(resposta, servidorSelecionado);
+
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+}
+
+// Esta função *plotarGrafico* usa os dados capturados na função anterior para criar o gráfico
+// Configura o gráfico (cores, tipo, etc), materializa-o na página e, 
+// A função *plotarGrafico* também invoca a função *atualizarGrafico*
+function plotarGraficoThreads(resposta, servidorSelecionado) {
+
+console.log('iniciando plotagem do gráfico...');
+
+// Criando estrutura para plotar gráfico - labels
+let labels = [];
+
+// Criando estrutura para plotar gráfico - dados
+let dados = {
+    labels: labels,
+    datasets: [{
+        label: 'Threads',
+        data: [],
+        fill: false,
+        borderColor: 'black',
+        borderWidth: 1,
+        backgroundColor: ' #8874ec',
+        tension: 0.1
+    }
+   ]
+};
+
+console.log('----------------------------------------------')
+console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+console.log(resposta)
+
+// Inserindo valores recebidos em estrutura para plotar o gráfico
+for (i = 0; i < resposta.length; i++) {
+    var registro = resposta[i];
+    labels.push(registro.numeroThreads);
+    dados.datasets[0].data.push(registro.media);
+}
+
+console.log('----------------------------------------------')
+console.log('O gráfico será plotado com os respectivos valores:')
+console.log('Labels:')
+console.log(labels)
+console.log('Dados:')
+console.log(dados.datasets)
+console.log('----------------------------------------------')
+
+// Criando estrutura para plotar gráfico - config
+const config = {
+    type: 'bar',
+    data: dados,
+};
+
+// Adicionando gráfico criado em div na tela
+let myChart = new Chart(
+    document.getElementById(`myChart`),
+    config
+);
+
+setTimeout(() => {
+    myChart.destroy();
+    obterDadosGraficoThreads();
+}, 20000 );
+}
+
+
+// Esta função *atualizarGrafico* atualiza o gráfico que foi renderizado na página,
+// buscando a última medida inserida em tabela contendo as capturas, 
+
+//     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+//     Para ajustar o "select", ajuste o comando sql em src/models
+function atualizarGraficoThreads(servidorSelecionado, dados, myChart) {
+    var servidorSelecionado = sessionStorage.servidorSelecionado;
+
+
+
+fetch(`/medidas/atualizarGraficoThreads/${servidorSelecionado}`, { cache: 'no-store' }).then(function (response) {
+    if (response.ok) {
+        response.json().then(function (novoRegistro) {
+
+            obterDadosGraficoThreads(servidorSelecionado);
+            // alertar(novoRegistro, idAquario);
+            console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+            console.log(`Dados atuais do gráfico:`);
+            console.log(dados);
+
+            // let avisoCaptura = document.getElementById(`avisoCaptura${idAquario}`)
+            // avisoCaptura.innerHTML = ""
+
+
+            if (novoRegistro[0].numeroThreads == dados.labels[dados.labels.length - 1]) {
+                console.log("---------------------------------------------------------------")
+                console.log("Como não há dados novos para captura, o gráfico não atualizará.")
+                avisoCaptura.innerHTML = "<i class='fa-solid fa-triangle-exclamation'></i> Foi trazido o dado mais atual capturado pelo sensor. <br> Como não há dados novos a exibir, o gráfico não atualizará."
+                console.log("Horário do novo dado capturado:")
+                console.log(novoRegistro[0].numeroThreads)
+                console.log("Horário do último dado capturado:")
+                console.log(dados.labels[dados.labels.length - 1])
+                console.log("---------------------------------------------------------------")
+            } else {
+                // tirando e colocando valores no gráfico
+                dados.labels.shift(); // apagar o primeiro
+                dados.labels.push(novoRegistro[0].numeroThreads); // incluir um novo momento
+
+                dados.datasets[0].data.shift();  // apagar o primeiro de umidade
+                dados.datasets[0].data.push(novoRegistro[0].media); // incluir uma nova medida de umidade
+
+                // dados.datasets[1].data.shift();  // apagar o primeiro de temperatura
+                // dados.datasets[1].data.push(novoRegistro[0].temperatura); // incluir uma nova medida de temperatura
+
+                myChart.update();
+            }
+
+            // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+            proximaAtualizacao = setTimeout(() => atualizarGraficoThreads(servidorSelecionado, dados, myChart), 2000);
+        });
+    } else {
+        console.error('Nenhum dado encontrado ou erro na API');
+        // Altere aqui o valor em ms se quiser que o gráfico atualize mais rápido ou mais devagar
+        proximaAtualizacao = setTimeout(() => atualizarGraficoThreads(servidorSelecionado, dados, myChart), 2000);
+    }
+})
+    .catch(function (error) {
+        console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+    });
+
+}
+// var vetor = [];
+// var selectedServer;
+
+// function exibirServidoresUsuario() {
+//     var server = JSON.parse(sessionStorage.servidor);
+//     var selectServidores = document.getElementById("selectServidor");
+
+//     // Limpar as opções existentes para evitar duplicatas
+//     selectServidores.innerHTML = "";
+
+//     // PARA FUNCIONAR PRECISA TER MAIS DE UM SERVIDOR NO BANCO
+
+//     selectServidores.addEventListener("change", function (event) {
+//         var selectedOption = selectServidores.options[selectServidores.selectedIndex];
+
+//         if (selectedOption) {
+//             selectedServer = selectedOption.value;
+//             vetor.push(selectedServer);
+//             console.log("Valor de selectedServer: ", selectedServer);
+//         }
+//     });
+
+//     server.forEach(element => {
+//         var optionServidor = document.createElement('option');
+//         optionServidor.textContent = `Servidor ${element.idServidor}`;
+//         optionServidor.value = element.idServidor;
+
+//         // Adiciona a opção ao elemento select
+//         selectServidores.appendChild(optionServidor);
+//     });
+// }
+
+// exibirServidoresUsuario();
+
+
+//     exibirServidoresUsuario()
+
+</script>

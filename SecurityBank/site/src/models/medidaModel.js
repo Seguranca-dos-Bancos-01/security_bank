@@ -2862,6 +2862,72 @@ function buscarMedidasEmTempoRealPing(idUsuario) {
 
 
 
+function kpiIndividual(servidorSelecionado) {
+   
+    var instrucao = `
+    select qtdNucleos, qtdThreads, especificacaoCpu from qtdNucleosThreads where fkServidor = ${servidorSelecionado};`
+    return database.executar(instrucao);
+}
+
+function PorcentagemTotalProcessador(servidorSelecionado) {
+   
+    var instrucao = `
+    SELECT dadoCaptado
+    FROM registros
+    WHERE fkServidorReg = ${servidorSelecionado}
+    ORDER BY dataHorario DESC 
+    LIMIT 1;`   
+    return database.executar(instrucao);
+}
+
+
+
+
+
+
+function obterDadosGraficoThreads(servidorSelecionado) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads limit 8;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads limit 8;`;
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+function atualizarGraficoThreads(servidorSelecionado) {
+
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads group by numeroThreads where =${servidorSelecionado};`;
+
+
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads group by numeroThreads where =${servidorSelecionado};`;
+
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 module.exports = {
     buscarUltimasMedidas,
@@ -2956,4 +3022,8 @@ module.exports = {
     buscarMedidasEmTempoRealTemperatura,
     buscarUltimasMedidasCPU2,
     buscarMedidasEmTempoRealCPU2,
+    kpiIndividual,
+    PorcentagemTotalProcessador,
+    obterDadosGraficoThreads,
+    atualizarGraficoThreads,
 }

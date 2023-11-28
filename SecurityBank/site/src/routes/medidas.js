@@ -384,4 +384,28 @@ router.get("/tempo-realAlertasConsumoDISCO/:selectedServer", function (req, res)
     medidaController.buscarMedidasEmTempoRealAlertasConsumoDISCO(req, res);
 })
 
+
+
+
+
+
+router.get("/kpiIndividual/:servidorSelecionado", function (req, res) {
+    medidaController.kpiIndividual(req, res);
+})
+
+router.get("/PorcentagemTotalProcessador/:servidorSelecionado", function (req, res) {
+    medidaController.PorcentagemTotalProcessador(req, res);
+})
+
+
+router.get("/obterDadosGraficoThreads/:servidorSelecionado", function (req, res) {
+    medidaController.obterDadosGraficoThreads(req, res);
+});
+
+router.get("/atualizarGraficoThreads/:servidorSelecionado", function (req, res) {
+    medidaController.atualizarGraficoThreads(req, res);
+})
+
+
+
 module.exports = router;
