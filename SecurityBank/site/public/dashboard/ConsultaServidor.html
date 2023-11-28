@@ -61,15 +61,18 @@
                 </div>
             </div>
 
-            <div class="opcoes">
+            <div class="opcoesVisoes opcoes">
                 <a href="">
                     <img src="../assets/servidor.png    " alt="">
-                    <span>Visões</span>
+                    <span>Análises</span>
                 </a>
-                <!-- <div class="opcoesServidores-content">
-                    <a href="alertas.html">Visão 1</a>
-                    <a href="alertas.html">Visão 2</a>
-                </div> -->
+                
+            </div>
+            <div class="opcoesVisoes-content">
+                <button onclick="window.location.href='PaginaRedePedro.html'" class="botaodropdown">Desempenho Rede</button><br>
+
+                <button onclick="window.location.href='alertasConsumo.html'" class="botaodropdown">Fluxo de Alertas</button><br>
+                <button onclick="window.location.href='projbernardo.html'" class="botaodropdown">Analise de Partições</button><br>
             </div>
             <!-- <div class="opcoes">
                 <a href="">
@@ -225,6 +228,37 @@
 </html>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 <script>
+
+
+
+
+const content = document.querySelector(".opcoesVisoes-content");
+    content.style.display = "none";
+
+document.querySelector(".opcoesVisoes").addEventListener("mouseenter", function() {
+    const content = document.querySelector(".opcoesVisoes-content");
+    content.style.display = "block";
+});
+
+document.querySelector(".opcoesVisoes").addEventListener("mouseleave", function(e) {
+    const content = document.querySelector(".opcoesVisoes-content");
+    if (!e.relatedTarget || !content.contains(e.relatedTarget)) {
+        content.style.display = "none";
+    }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
     var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
     if (escalonamentoFunc != 1) {

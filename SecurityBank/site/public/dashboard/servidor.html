@@ -68,15 +68,18 @@
                     </div>
                 </div>
 
-                <div class="opcoes">
+                <div class="opcoesVisoes opcoes">
                     <a href="">
                         <img src="../assets/servidor.png    " alt="">
-                        <span>Visões</span>
+                        <span>Análises</span>
                     </a>
-                    <!-- <div class="opcoesServidores-content">
-                    <a href="alertas.html">Visão 1</a>
-                    <a href="alertas.html">Visão 2</a>
-                </div> -->
+                    
+                </div>
+                <div class="opcoesVisoes-content">
+                    <button onclick="window.location.href='PaginaRedePedro.html'" class="botaodropdown">Desempenho Rede</button><br>
+
+                    <button onclick="window.location.href='alertasConsumo.html'" class="botaodropdown">Fluxo de Alertas</button><br>
+                    <button onclick="window.location.href='projbernardo.html'" class="botaodropdown">Analise de Partições</button><br>
                 </div>
                 <!-- <div class="opcoes">
                 <a href="">
@@ -183,7 +186,7 @@
                     <input id="ipServidor" class="inputServidor" type="text"><br>
 
                     <span class="camposServidor">Plano Server</span><br>
-                    <select  id="opPlano"  class="selectServidor">
+                    <select id="opPlano" class="selectServidor">
                         <option value="2">Plano Basico</option>
                         <option value="1">Plano Premium</option>
                     </select>
@@ -251,6 +254,26 @@
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.7.5/dist/sweetalert2.all.min.js"></script>
 
 <script>
+
+
+
+const content = document.querySelector(".opcoesVisoes-content");
+    content.style.display = "none";
+
+document.querySelector(".opcoesVisoes").addEventListener("mouseenter", function() {
+    const content = document.querySelector(".opcoesVisoes-content");
+    content.style.display = "block";
+});
+
+document.querySelector(".opcoesVisoes").addEventListener("mouseleave", function(e) {
+    const content = document.querySelector(".opcoesVisoes-content");
+    if (!e.relatedTarget || !content.contains(e.relatedTarget)) {
+        content.style.display = "none";
+    }
+});
+
+
+
 
     var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
 
@@ -357,7 +380,7 @@
     }
 
     var fkBanco = sessionStorage.FKBANCO
-   
+
 
 
 
@@ -403,126 +426,126 @@
 
 
 
-        console.log(fkBanco, fkPlano)
+    console.log(fkBanco, fkPlano)
 
+    document.getElementById("dataServidorDiv").style.display = 'none'
+    document.getElementById("blocoServidor").style.display = 'block'
+
+    function cadastrarServidor() {
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        var apelidoServidorVar = apelidoServidor.value;
+        var soServidorVar = soServidor.value;
+        var cpfRespServidorVar = cpfRespServidor.value;
+        var ipServidorVar = ipServidor.value;
+        var fkBancoS = fkBanco
+        var fkPlanoS = opPlano.value;
+        if (
+            apelidoServidorVar == "" || soServidorVar == "" ||
+            cpfRespServidorVar == "" ||
+            ipServidorVar == ""
+
+        ) {
+
+            console.log("Mensagem de erro para todos os campos em branco")
+
+            return false;
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrarServidor", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+                apelidoServidorServer: apelidoServidorVar,
+                soServidorServer: soServidorVar,
+                cpfRespServidorServer: cpfRespServidorVar,
+                fkBancoServer: fkBancoS,
+                fkPlanoServer: fkPlanoS,
+                ipServidorServer: ipServidorVar,
+
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+                sessionStorage.CrudApelidoServer = apelidoServidor.value;
+                window.location = "qualTipoServerCRUD.html"
+
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+
+        document.getElementById("dataServidorDiv").style.display = 'flex'
+    }
+
+
+
+    function cadastrarServidorNuvem() {
+        //Recupere o valor da nova input pelo nome do id
+        // Agora vá para o método fetch logo abaixo
+        // var apelidoServidorVar = apelidoServidor.value;
+        // var soServidorVar = soServidor.value;
+        // var cpfRespServidorVar = cpfRespServidor.value;
+        // var ipServidorVar = ipServidor.value;
+        // var fkBancoS = fkBanco
+        // var fkPlanoS = fkPlano
+
+        var compraServidorVar = compraServidor.value;
+        console.log(compraServidorVar)
+        var validadeServidorVar = validadeServidor.value;
+        console.log(validadeServidorVar)
+        if (
+            idServidorVar == "" ||
+            validadeServidorVar == ""
+        ) {
+
+            console.log("Mensagem de erro para todos os campos em branco")
+
+            return false;
+        }
+
+        // Enviando o valor da nova input
+        fetch("/usuarios/cadastrarServidorNuvem", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json",
+            },
+            body: JSON.stringify({
+                // crie um atributo que recebe o valor recuperado aqui
+                // Agora vá para o arquivo routes/usuario.js
+
+                CompraServer: compraServidorVar,
+                ValidadeServer: validadeServidorVar,
+            }),
+        })
+            .then(function (resposta) {
+                console.log("resposta: ", resposta);
+
+            })
+            .catch(function (resposta) {
+                console.log(`#ERRO: ${resposta}`);
+
+            });
+
+        return false;
+    }
+
+    function limparSessonStorage() {
+        sessionStorage.clear()
+    }
+
+    function semNuvem() {
         document.getElementById("dataServidorDiv").style.display = 'none'
-        document.getElementById("blocoServidor").style.display = 'block'
-
-        function cadastrarServidor() {
-            //Recupere o valor da nova input pelo nome do id
-            // Agora vá para o método fetch logo abaixo
-            var apelidoServidorVar = apelidoServidor.value;
-            var soServidorVar = soServidor.value;
-            var cpfRespServidorVar = cpfRespServidor.value;
-            var ipServidorVar = ipServidor.value;
-            var fkBancoS = fkBanco
-            var fkPlanoS = opPlano.value;
-            if (
-                apelidoServidorVar == "" || soServidorVar == "" ||
-                cpfRespServidorVar == "" ||
-                ipServidorVar == ""
-
-            ) {
-
-                console.log("Mensagem de erro para todos os campos em branco")
-
-                return false;
-            }
-
-            // Enviando o valor da nova input
-            fetch("/usuarios/cadastrarServidor", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
-                    apelidoServidorServer: apelidoServidorVar,
-                    soServidorServer: soServidorVar,
-                    cpfRespServidorServer: cpfRespServidorVar,
-                    fkBancoServer: fkBancoS,
-                    fkPlanoServer: fkPlanoS,
-                    ipServidorServer: ipServidorVar,
-
-                }),
-            })
-                .then(function (resposta) {
-                    console.log("resposta: ", resposta);
-                    sessionStorage.CrudApelidoServer = apelidoServidor.value;
-                    window.location = "qualTipoServerCRUD.html"
-
-                })
-                .catch(function (resposta) {
-                    console.log(`#ERRO: ${resposta}`);
-
-                });
-
-            return false;
-
-            document.getElementById("dataServidorDiv").style.display = 'flex'
-        }
-
-
-
-        function cadastrarServidorNuvem() {
-            //Recupere o valor da nova input pelo nome do id
-            // Agora vá para o método fetch logo abaixo
-            // var apelidoServidorVar = apelidoServidor.value;
-            // var soServidorVar = soServidor.value;
-            // var cpfRespServidorVar = cpfRespServidor.value;
-            // var ipServidorVar = ipServidor.value;
-            // var fkBancoS = fkBanco
-            // var fkPlanoS = fkPlano
-
-            var compraServidorVar = compraServidor.value;
-            console.log(compraServidorVar)
-            var validadeServidorVar = validadeServidor.value;
-            console.log(validadeServidorVar)
-            if (
-                idServidorVar == ""  ||
-                validadeServidorVar == ""
-            ) {
-
-                console.log("Mensagem de erro para todos os campos em branco")
-
-                return false;
-            }
-
-            // Enviando o valor da nova input
-            fetch("/usuarios/cadastrarServidorNuvem", {
-                method: "POST",
-                headers: {
-                    "Content-Type": "application/json",
-                },
-                body: JSON.stringify({
-                    // crie um atributo que recebe o valor recuperado aqui
-                    // Agora vá para o arquivo routes/usuario.js
-                   
-                    CompraServer: compraServidorVar,
-                    ValidadeServer: validadeServidorVar,
-                }),
-            })
-                .then(function (resposta) {
-                    console.log("resposta: ", resposta);
-
-                })
-                .catch(function (resposta) {
-                    console.log(`#ERRO: ${resposta}`);
-
-                });
-
-            return false;
-        }
-
-        function limparSessonStorage() {
-            sessionStorage.clear()
-        }
-
-        function semNuvem() {
-            document.getElementById("dataServidorDiv").style.display = 'none'
-            limparForm()
-        }
+        limparForm()
+    }
 
 
 </script>
