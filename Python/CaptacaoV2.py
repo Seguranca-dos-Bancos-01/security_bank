@@ -8,6 +8,8 @@ import re
 import pymysql
 import wmi
 import pyodbc
+import requests
+import json
 
 server = '34.206.192.7'
 database = 'SecurityBank'
@@ -330,21 +332,103 @@ while True:
         dado = ins[i]
 
         query = "INSERT INTO registros (dataHorario, dadoCaptado, fkServidorReg, fkBanco, fkEspecificacoes, fkComponentesReg, fkMetrica,fkPlano,fkParticao) VALUES (%s, %s, %s, %s, %s, %s, %s,%s,%s)"
-        queryAWS = "INSERT INTO registros (dataHorario, dadoCaptado, fkServidorReg, fkBanco, fkEspecificacoes, fkComponentesReg, fkMetrica,fkPlano,fkParticao) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)"
         cursor.execute(query, (horarioFormatado, dado, fkServidor, fkBanco, fkEspec, componentes[i],fkMetrica,fkPlano,fkParticao))
-        cursorAWS.execute(queryAWS,(horarioFormatado, dado, fkServidorAWS, fkBancoAWS, fkEspecAWS, componentes[i],fkMetricaAWS,fkPlanoAWS,fkParticaoAWS))
-
         connection.commit()
+        
         query2 = "insert into rede (status,dtHora,fkServidor,fkBanco,fkEspecificacoes,fkPlano) values (%s,%s,%s,%s,%s,%s)"
-        query2AWS = "insert into rede (status,dtHora,fkServidor,fkBanco,fkEspecificacoes,fkPlano) values (?,?,?,?,?,?)"
         cursor.execute(query2, (statusRede,horarioFormatado,fkServidor,fkBanco,fkEspec,fkPlano))
+        connection.commit()
+        
+        queryAWS = "INSERT INTO registros (dataHorario, dadoCaptado, fkServidorReg, fkBanco, fkEspecificacoes, fkComponentesReg, fkMetrica,fkPlano,fkParticao) VALUES (?, ?, ?, ?, ?, ?, ?,?,?)"
+        cursorAWS.execute(queryAWS,(horarioFormatado, dado, fkServidorAWS, fkBancoAWS, fkEspecAWS, componentes[i],fkMetricaAWS,fkPlanoAWS,fkParticaoAWS))
+        conn.commit()
+        
+        query2AWS = "insert into rede (status,dtHora,fkServidor,fkBanco,fkEspecificacoes,fkPlano) values (?,?,?,?,?,?)"
         cursorAWS.execute(query2AWS,(statusRede,horarioFormatado,fkServidorAWS,fkBancoAWS,fkEspecAWS,fkPlanoAWS))
-
+        conn.commit()
+        
+        
     print("\nINFORMAÇÕES SOBRE PROCESSAMENTO: ")
     print('Porcentagem utilizada do Processador: ', cpu, '\nPorcentagem utilizada de memoria: ', memoria,
           '\nPorcentagem do disco sendo utilizada:', disco, '\nStatus da rede: ', statusRede)
 
     time.sleep(10)
+    webhook = "https://hooks.slack.com/services/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"
+
+        
+    if cpu  >= 18 and cpu < 23 :
+            
+            alerta = {"text": f"Atenção! CPU com {cpu}% de uso"}
+            
+
+            requests.post(webhook, data=json.dumps(alerta))
+
+
+    elif cpu  >= 23 and cpu < 50 :
+            
+            alerta = {"text": f"Emergência! CPU com {cpu}% de uso"}
+            
+
+            requests.post(webhook, data=json.dumps(alerta))
+
+
+    elif cpu  >= 50:
+            
+            alerta = {"text": f"Urgência! CPU com {cpu}% de uso"}
+            
+
+            requests.post(webhook, data=json.dumps(alerta))    
+            
+            
+
+
+    if disco >= 50 and disco < 70 :
+           
+            alerta = {"text": f"Atenção! Disco com {disco}% de uso "}
+           
+
+            requests.post(webhook, data=json.dumps(alerta))
+
+
+
+    elif disco >= 70 and disco < 80 :
+           
+            alerta = {"text": f"Emergência! Disco com {disco}% de uso "}
+           
+
+            requests.post(webhook, data=json.dumps(alerta))
+
+                    
+    elif disco >= 80 :
+           
+            alerta = {"text": f"Urgência! Disco com {disco}% de uso "}
+           
+
+            requests.post(webhook, data=json.dumps(alerta))
+
+
+    if memoria >= 45 and memoria < 55:
+           
+            alerta = {"text": f"Atenção! Memória RAM com {memoria}% de uso"}
+          
+
+            requests.post(webhook, data=json.dumps(alerta))
+       
+
+    elif memoria >= 55 and memoria < 65:
+           
+            alerta = {"text": f"Emergência! Memória RAM com {memoria}% de uso"}
+          
+
+            requests.post(webhook, data=json.dumps(alerta))
+
+
+    elif memoria >= 65:
+           
+            alerta = {"text": f"Urgência! Memória RAM com {memoria}% de uso"}
+          
+
+            requests.post(webhook, data=json.dumps(alerta))    
 
 cursor.close()
 connection.close()
