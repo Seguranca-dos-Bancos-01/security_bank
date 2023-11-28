@@ -170,7 +170,11 @@
 
             <div class="dash">
                 <div id="nomeEspec" class="Nome">
-                    <h2></h2>
+                    <h2 id="NomeServer">Servidor XX1</h2>
+                    <button onclick="window.location=''">Monitoramento de Threads</button>
+
+                    <button onclick="window.location=''">Monitoramento de Temperatura</button>
+
                 </div>
                 <div class="kpi">
                     <div class="blocoKpi">
@@ -205,12 +209,12 @@
                     <div class="ultimosAlertas">
                         <h3>Ultimos Alertas</h3>
                         <div id="colocar">
-                            
-    
-    
+
+
+
                         </div>
                     </div>
-                    
+
                     <!-- <div class="cardAlertas">
                             <h4>CPU em Emergência</h4>
                             <span>29/09/2023 as 13h45</span>
@@ -327,7 +331,7 @@
                 </div>
             </div>
 
-            
+
         </div>
 
 
@@ -558,6 +562,11 @@
 
 
 
+
+
+
+
+
     function SituacaoSelected(idUsuario) {
         let currentPercentage;
 
@@ -599,6 +608,10 @@
             percentage.innerText = `${dado}`;
 
             console.log(dado)
+
+            let servidorApelido = sessionStorage[`servidor_Apelido${sessionStorage.servidorSelecionado}`];
+            NomeServer.innerHTML = servidorApelido.replace(/^"|"$/g, '');
+
 
 
             console.log(dado);
@@ -924,7 +937,7 @@
 
 
 
-window.onload = percentCPU()
+    window.onload = percentCPU()
     function percentCPU(idUsuario) {
         let currentPercentage;
 
@@ -1168,7 +1181,7 @@ window.onload = percentCPU()
 
 
 
-
+    servidor_Apelido4
 
 
 
