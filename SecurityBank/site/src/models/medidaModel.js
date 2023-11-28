@@ -5,83 +5,105 @@ function cadastrarAlertaCPUAtencao(servidorFK, planoFK, bancoFK) {
 
     // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
     //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 1, 1, 1, ${bancoFK}, ${planoFK});
-`;
+    instrucaoSql = ``
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 1, 1, 1, ${bancoFK}, ${planoFK});`;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME), 'Atenção', 1, 1, 1, 1, ${bancoFK}, ${planoFK});`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 
 function cadastrarAlertaCPUEmergencia(servidorFK, planoFK, bancoFK) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    instrucaoSql = ``
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 1, 2, 1, ${bancoFK}, ${planoFK});`;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME), 'Emergência', 1, 1, 2, 1, ${bancoFK}, ${planoFK});`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 1, 2, 1, ${bancoFK}, ${planoFK});
-`;
-
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 function cadastrarAlertaCPUUrgencia(servidorFK, planoFK, bancoFK) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    instrucaoSql = ``
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 1, 3, ${servidorFK}, ${bancoFK}, ${planoFK});`;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME), 'Urgência', 1, 1, 3, ${servidorFK}, ${bancoFK}, ${planoFK});`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 1, 3, ${servidorFK}, ${bancoFK},${planoFK});
-`;
-
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 
-
-
-
 function cadastrarAlertaRAMAtencao(servidorFK, planoFK, bancoFK) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    instrucaoSql = ''
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(),"Atenção", 1, 2, 1, 1, ${bancoFK}, ${planoFK});
-`;
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(),"Atenção", 1, 2, 1, 1, ${bancoFK}, ${planoFK});
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME,'Atenção', 1, 2, 1, 1, ${bancoFK}, ${planoFK});
+        `
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 
 function cadastrarAlertaRAMEmergencia(servidorFK, planoFK, bancoFK) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    instrucaoSql = ''
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 2, 2, 1, ${bancoFK}, ${planoFK});
-`;
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(),"Emergência", 1, 2, 2, 1, ${bancoFK}, ${planoFK});
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME,'Emergência', 1, 2, 2, 1, ${bancoFK}, ${planoFK});
+        `
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 function cadastrarAlertaRAMUrgencia(servidorFK, planoFK, bancoFK) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    instrucaoSql = ''
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 2, 3, 1, ${bancoFK},${planoFK});
-`;
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME() ,"Urgência", 1, 2, 3, 1, ${bancoFK}, ${planoFK});
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME,'Urgência', 1, 2, 3, 1, ${bancoFK}, ${planoFK});
+        `
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 
@@ -90,43 +112,55 @@ function cadastrarAlertaRAMUrgencia(servidorFK, planoFK, bancoFK) {
 
 
 function cadastrarAlertaDISCOAtencao(servidorFK, planoFK, bancoFK) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    instrucaoSql = ''
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 3, 1, 1, ${bancoFK}, ${planoFK});
-`;
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Atenção", 1, 3, 1, 1, ${bancoFK}, ${planoFK});
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME, "Atenção", 1, 3, 1, 1, ${bancoFK}, ${planoFK});`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 
 function cadastrarAlertaDISCOEmergencia(servidorFK, planoFK, bancoFK) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    instrucaoSql = ''
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco,fkPlano) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 3, 2, 1, ${bancoFK}, ${planoFK});
-`;
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Emergência", 1, 3, 1, 1, ${bancoFK}, ${planoFK});
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME, "Emergência", 1, 3, 1, 1, ${bancoFK}, ${planoFK});`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 function cadastrarAlertaDISCOUrgencia(servidorFK, planoFK, bancoFK) {
-    // console.log("ACESSEI O USUARIO MODEL \n \n\t\t >> Se aqui der erro de 'Error: connect ECONNREFUSED',\n \t\t >> verifique suas credenciais de acesso ao banco\n \t\t >> e se o servidor de seu BD está rodando corretamente. \n\n function cadastrar():", nome, email, senha);
+    instrucaoSql = ''
 
-    // Insira exatamente a query do banco aqui, lembrando da nomenclatura exata nos valores
-    //  e na ordem de inserção dos dados.
-    var instrucao = `
-    INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 3, 3, 3, 1, ${bancoFK},${planoFK});
-`;
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CURDATE(), CURTIME(), "Urgência", 1, 3, 1, 1, ${bancoFK}, ${planoFK});
+        `;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `INSERT INTO alerta (dataAlerta, horaAlerta, situacao, fkRegistro, fkComponente, fkMetrica, fkServidor, fkBanco, fkPlano) VALUES (CAST(GETDATE() AS DATE), CAST(GETDATE() AS TIME, "Urgência", 1, 3, 1, 1, ${bancoFK}, ${planoFK});`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
 
-    console.log("Executando a instrução SQL: \n" + instrucao);
-    return database.executar(instrucao);
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 
@@ -135,7 +169,7 @@ function buscarMedidasEmTempoRealAlerta(idAlerta) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT 
         (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 order by idRegistros desc limit 1) AS PROC,
         (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 order by idRegistros desc limit 1) AS RAM,
@@ -145,14 +179,14 @@ function buscarMedidasEmTempoRealAlerta(idAlerta) {
     JOIN componentes ON fkComponentesReg = idComponentes
     ;`;
 
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT 
-        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 order by idRegistros desc limit 1) AS PROC,
-        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 order by idRegistros desc limit 1) AS RAM,
-        (SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 order by idRegistros desc limit 1) AS disco,
-        dataHorario AS horario
-    FROM registros
-    JOIN componentes ON fkComponentesReg = idComponentes
+        (SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 1 ORDER BY idRegistros DESC) AS 'PROC',
+        (SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 2 ORDER BY idRegistros DESC) AS 'RAM',
+        (SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 3 ORDER BY idRegistros DESC) AS 'disco',
+        r.dataHorario AS horario
+    FROM registros r
+    JOIN componentes c ON r.fkComponentesReg = c.idComponentes
     ;`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js NOS ALERTASSSSSSSSSSSSSSSs\n");
@@ -167,12 +201,12 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
     var instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select dadoCaptado as asd from registros where fkComponentesReg =${idUsuario} and fkServidorReg = 1 order by idRegistros desc limit 1;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadoCaptado as asd from registros where fkComponentesReg =${idUsuario} and fkServidorReg = 1 order by idRegistros desc limit 1;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top 1 dadoCaptado as asd from registros where fkComponentesReg =${idUsuario} and fkServidorReg = 1 order by idRegistros desc;
 
 
     
@@ -190,11 +224,11 @@ function buscarUltimasMedidasCPU(idUsuario, limite_linhas) {
 
 function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
     var instrucaoSql = ''
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select status as cnc from Rede where fkServidor = ${idUsuario} order by idRede desc limit 1;;
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select status as cnc from Rede where fkServidor = ${idUsuario} order by idRede desc limit 1;
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select status as cnc from Rede where fkServidor = ${idUsuario} order by idRede desc limit 1;;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top 1 status as cnc from Rede where fkServidor = ${idUsuario} order by idRede desc;
 
     
     
@@ -210,10 +244,10 @@ function buscarUltimasMedidasREDE(idUsuario, limite_linhas) {
 
 function buscarUltimasMedidasSituSelected(idUsuario, limite_linhas) {
     var instrucaoSql = ''
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select nome as UltimasSituSelected from servidor join status_maquina on fkStatus = idStatus where idServidor = ${idUsuario};
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select nome as UltimasSituSelected from servidor join status_maquina on fkStatus = idStatus where idServidor = ${idUsuario};
     
     
@@ -233,7 +267,7 @@ function buscarUltimasMedidasPRT(idUsuario, limite_linhas) {
 
     var instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
         particao1.dadoCaptado as particao1,
         particao2.dadoCaptado as particao2
@@ -251,23 +285,22 @@ function buscarUltimasMedidasPRT(idUsuario, limite_linhas) {
          LIMIT 1) as particao2;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT
-        particao1.dadoCaptado as particao1,
-        particao2.dadoCaptado as particao2
+        particao1.dadoCaptado as 'particao1',
+        particao2.dadoCaptado as 'particao2'
     FROM
-        (SELECT dadoCaptado
+        (SELECT TOP 1 dadoCaptado
          FROM registros
          WHERE fkParticao = 1
          ORDER BY idRegistros DESC
-         LIMIT 1) as particao1
+        ) as particao1
     JOIN
-        (SELECT dadoCaptado
+        (SELECT TOP 1 dadoCaptado
          FROM registros
          WHERE fkParticao = 2
          ORDER BY idRegistros DESC
-         LIMIT 1) as particao2;
-    
+        ) as particao2 ON 1 = 1
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -284,7 +317,7 @@ function buscarUltimasMedidasTOT(idUsuario, limite_linhas) {
 
     var instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
         espacoTotal1.espacoTotal as espacoTotal1,
         espacoTotal2.espacoTotal as espacoTotal2
@@ -302,22 +335,22 @@ function buscarUltimasMedidasTOT(idUsuario, limite_linhas) {
         LIMIT 1) as espacoTotal2;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = ` SELECT
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT
         espacoTotal1.espacoTotal as espacoTotal1,
         espacoTotal2.espacoTotal as espacoTotal2
-        FROM 
-        ( SELECT espacoTotal
-        FROM particao 
-        WHERE idParticao = 1 
+    FROM 
+        (SELECT TOP 1 espacoTotal
+         FROM particao 
+         WHERE idParticao = 1 
          ORDER BY idParticao DESC
-        LIMIT 1) as espacoTotal1
-        JOIN
-       (SELECT espacoTotal
-        FROM particao
-        WHERE idParticao = 2
-        ORDER BY idParticao DESC
-        LIMIT 1) as espacoTotal2;
+        ) as espacoTotal1
+    JOIN
+        (SELECT TOP 1 espacoTotal
+         FROM particao
+         WHERE idParticao = 2
+         ORDER BY idParticao DESC
+        ) as espacoTotal2 ON 1 = 1;    
     
     `;
     } else {
@@ -336,14 +369,20 @@ function buscarDiasFaltando(idUsuario) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         select  DATEDIFF(dataValidade, CURDATE()) AS diasRestantes, dataCompraLocacao as DtC, dataValidade as DtV from locacao where fkServidor = ${idUsuario};
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        select  DATEDIFF(dataValidade, CURDATE()) AS diasRestantes, dataCompraLocacao as DtC, dataValidade as DtV from locacao where fkServidor = ${idUsuario};
+        SELECT
+    DATEDIFF(day, GETDATE(), dataValidade) AS diasRestantes,
+    dataCompraLocacao as DtC,
+    dataValidade as DtV
+FROM locacao
+WHERE fkServidor = ${idUsuario};
+
 
         `;
 
@@ -361,7 +400,7 @@ function buscarUltimasUltAlertasSelected(idUsuario) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
         situacao as situ,
         componentes.modelo AS nomeComponente,
@@ -381,24 +420,24 @@ function buscarUltimasUltAlertasSelected(idUsuario) {
       LIMIT 3;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT
-        situacao as situ,
+        alerta.situacao AS situ,
         componentes.modelo AS nomeComponente,
-        DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
-        alerta.horaAlerta AS horaAlerta
-        
-      FROM
+        CONVERT(VARCHAR(10), alerta.dataAlerta, 103) AS dataAlerta, -- Formatando a data no padrão dd/mm/yyyy
+        CONVERT(TIME, alerta.horaAlerta) AS horaAlerta -- Convertendo o campo hora para o tipo TIME
+    FROM
         alerta
-      JOIN
+    JOIN
         servidor ON alerta.fkServidor = servidor.idServidor
-      JOIN
+    JOIN
         componentes ON alerta.fkComponente = componentes.idComponentes
-      WHERE
+    WHERE
         alerta.fkServidor = ${idUsuario}
-      ORDER BY
+    ORDER BY
         alerta.idAlertas DESC
-      LIMIT 3;`
+    OFFSET 0 ROWS FETCH NEXT 3 ROWS ONLY; -- Usando OFFSET e FETCH para limitar os resultados
+    `
 
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -414,7 +453,7 @@ function buscarUltimasUltAlertasSelected2(idUsuario) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT
         situacao as situ,
         componentes.modelo AS nomeComponente,
@@ -434,24 +473,23 @@ function buscarUltimasUltAlertasSelected2(idUsuario) {
       LIMIT 1;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `SELECT
-        situacao as situ,
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT TOP 1
+        alerta.situacao AS situ,
         componentes.modelo AS nomeComponente,
-        DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') AS dataAlerta,
-        alerta.horaAlerta AS horaAlerta
-        
-      FROM
+        CONVERT(VARCHAR(10), alerta.dataAlerta, 103) AS dataAlerta, -- Formatando a data no padrão dd/mm/yyyy
+        CONVERT(TIME, alerta.horaAlerta) AS horaAlerta -- Convertendo o campo hora para o tipo TIME
+    FROM
         alerta
-      JOIN
+    JOIN
         servidor ON alerta.fkServidor = servidor.idServidor
-      JOIN
+    JOIN
         componentes ON alerta.fkComponente = componentes.idComponentes
-      WHERE
+    WHERE
         alerta.fkServidor = ${idUsuario}
-      ORDER BY
-        alerta.idAlertas DESC
-      LIMIT 1;`
+    ORDER BY
+        alerta.idAlertas DESC;
+    `
 
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -468,13 +506,13 @@ function buscarUltimasUsbConectadas(idUsuario) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select nomeDispositivo as nome,
         qtddPorta as qtdPortasTotal,
         qtddConectada as qtdConnect from usb where fkServidor = ${idUsuario};
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select nomeDispositivo as nome,
         qtddPorta as qtdPortasTotal,
         qtddConectada as qtdConnect from usb where fkServidor = ${idUsuario};
@@ -501,12 +539,12 @@ function ultimoUpload(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select PotenciaUpload as Upload from Rede where fkServidorRede = ${idUsuario}  order by idRede desc limit 1;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select PotenciaUpload as Upload from Rede where fkServidorRede = ${idUsuario}  order by idRede desc limit 1;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top 1 PotenciaUpload as Upload from Rede where fkServidor = ${idUsuario} order by idRede desc;
     
     `;
     } else {
@@ -523,12 +561,12 @@ function BuscarIpServidor(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select ip as redeIP from Rede where fkServidor =${idUsuario} order by idRede desc limit 1;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select ip as redeIP from Rede where fkServidor =${idUsuario} order by idRede desc limit 1;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top 1 ip as redeIP from Rede where fkServidor =${idUsuario} order by idRede desc ;
 
     
     `;
@@ -546,12 +584,12 @@ function buscarUltimasMedidasRAM(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select dadoCaptado as ads from registros where fkComponentesReg = 2 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadoCaptado as ads from registros where fkComponentesReg = 2 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top 1 dadoCaptado as ads from registros where fkComponentesReg = 2 and fkServidorReg = ${idUsuario} order by idRegistros desc ;
     
     `;
     } else {
@@ -567,12 +605,12 @@ function buscarUltimasMedidasDISK(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select dadoCaptado as sda from registros where fkComponentesReg =3 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadoCaptado as sda from registros where fkComponentesReg =3 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select top 1 dadoCaptado as sda from registros where fkComponentesReg =3 and fkServidorReg = ${idUsuario} order by idRegistros desc;
     
     `;
     } else {
@@ -589,12 +627,12 @@ function buscarUltimasMedidasValidade(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select dataCompraLocacao as val from servidor where  fkBanco = 1;
 
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `select dataCompraLocacao as val from servidor where  fkBanco = 1;
     
     `;
@@ -611,14 +649,14 @@ function buscarUltimasMedidasQTD(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT  COUNT(*) AS NumeroDeServidores
         FROM servidor
         WHERE fkBanco = ${idUsuario}
         GROUP BY fkBanco;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT  COUNT(*) AS NumeroDeServidores
         FROM servidor
         WHERE fkBanco = ${idUsuario}
@@ -638,9 +676,9 @@ function buscarUltimasMedidasBola(idUsuario) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `  select idServidor as idS, fkStatus as fkStatus from servidor where fkBanco =${idUsuario};`;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `  select idServidor as idS, fkStatus as fkStatus from servidor where fkBanco =${idUsuario};`;
 
     } else {
@@ -658,7 +696,7 @@ function buscarUltimasMedidas24h(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         SELECT IFNULL((SELECT idAlertas 
                        FROM alerta 
@@ -668,14 +706,14 @@ function buscarUltimasMedidas24h(idUsuario, limite_linhas) {
                        LIMIT 1), 0) AS Al;
     
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT IFNULL((SELECT idAlertas 
-                       FROM alerta 
-                       WHERE dataAlerta >= CURDATE() - INTERVAL 1 DAY
-                         AND fkBanco = 1 
-                       ORDER BY idAlertas DESC 
-                       LIMIT 1), 0) AS Al;
+        SELECT COALESCE((SELECT TOP 1 idAlertas 
+            FROM alerta 
+            WHERE dataAlerta >= DATEADD(DAY, -1, GETDATE()) 
+              AND fkBanco = 1 
+            ORDER BY idAlertas DESC), 0) AS Al;
+
     
     `;
     } else {
@@ -696,7 +734,7 @@ function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `          SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
         FROM servidor
         WHERE fkStatus IN (SELECT idStatus FROM status_maquina WHERE nome != 'Estável')
@@ -704,7 +742,7 @@ function buscarUltimasMedidasInstaveis(idUsuario, limite_linhas) {
         
         
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `          SELECT COUNT(*) AS QuantidadeDeMaquinasInstaveis
         FROM servidor
         WHERE fkStatus IN (SELECT idStatus FROM status_maquina WHERE nome != 'Estável')
@@ -725,7 +763,7 @@ function buscarUltimasMedidasUltimoAlerta(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT IFNULL(fkServidor, 0) AS numBanco, 
         IFNULL(descricaoAlerta, 'Nenhum') AS descr, 
         IFNULL(CONCAT(dataAlerta, ' ', horaAlerta), 'Sem Alertas') AS hr 
@@ -744,7 +782,7 @@ function buscarUltimasMedidasUltimoAlerta(idUsuario, limite_linhas) {
  );
  
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT IFNULL(fkServidor, 0) AS numBanco, 
         IFNULL(descricaoAlerta, 'Nenhum') AS descr, 
         IFNULL(CONCAT(dataAlerta, ' ', horaAlerta), 'Sem Alertas') AS hr 
@@ -775,7 +813,7 @@ function buscarUltimasMedidasServidorEmergencia(idUsuario, limite_linhas) {
 
     instrucaoSql = ''
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         SELECT IFNULL(
             (SELECT COUNT(*) 
@@ -788,18 +826,23 @@ function buscarUltimasMedidasServidorEmergencia(idUsuario, limite_linhas) {
         JOIN status_maquina ON servidor.fkStatus = status_maquina.idStatus
         WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario};
     `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT IFNULL(
-            (SELECT COUNT(*) 
-             FROM servidor 
-             JOIN status_maquina ON fkStatus = idStatus 
-             WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario}
+        SELECT COALESCE(
+            (
+                SELECT COUNT(*) 
+                FROM servidor 
+                JOIN status_maquina ON fkStatus = idStatus 
+                WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario}
             ), 0) AS qtdE,
-            GROUP_CONCAT(servidor.apelido) AS nomesServidores
-        FROM servidor
-        JOIN status_maquina ON servidor.fkStatus = status_maquina.idStatus
-        WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario};
+           COALESCE(
+                (
+                    SELECT STRING_AGG(servidor.apelido, ', ') 
+                    FROM servidor 
+                    JOIN status_maquina ON servidor.fkStatus = status_maquina.idStatus 
+                    WHERE nome = 'Emergencia' AND fkBanco = ${idUsuario}
+                ), 'Nenhum') AS nomesServidores;
+    
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -816,10 +859,10 @@ function buscarUltimasMedidasSelectContas(idUsuario, limite_linhas) {
 
     let instrucaoSql = '';
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT email AS mail, 
         cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamento_funcionario on fkEscalonamento = idEscalonamento WHERE fkBanco = ${idUsuario};`;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `SELECT email AS mail, 
         cargo AS Cargo, nivelAcesso as Esca FROM funcionarios join escalonamento_funcionario on fkEscalonamento = idEscalonamento WHERE fkBanco = ${idUsuario};`;
     } else {
@@ -836,13 +879,13 @@ function buscarUltimasMedidasSelectContaPerfil(idUsuario, limite_linhas) {
 
     let instrucaoSql = '';
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
         SELECT f.fkEscalonamento as Esca, b.nomeFantasia as empresa
         FROM funcionarios f
         INNER JOIN banco b ON f.fkBanco = b.idBanco
         WHERE f.idFuncionarios = ${idUsuario}; `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
         SELECT f.fkEscalonamento as Esca, b.nomeFantasia as empresa
         FROM funcionarios f
@@ -862,16 +905,28 @@ function buscarUltimosAlertas1(idUsuario, limite_linhas) {
 
     let instrucaoSql = '';
 
-    if (process.env.AMBIENTE_PROCESSO == "producao") {
+    if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `-- nome servidor, nome componente, data, hora e status
         select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
 from alerta join servidor on fkServidor = idServidor
 join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT  1;`;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+    } else if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `-- nome servidor, nome componente, data, hora e status
-        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
-from alerta join servidor on fkServidor = idServidor
-join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT 1;`;
+        SELECT TOP 1
+    servidor.apelido as nomeServidor,
+    componentes.modelo as nomeComponente,
+    CONVERT(VARCHAR(10), alerta.dataAlerta, 103) as dataAlerta, -- Formatação da data no padrão dd/mm/yyyy (formato 103)
+    CONVERT(TIME, alerta.horaAlerta) as horaAlerta,
+    alerta.situacao as situacaoAlerta
+FROM 
+    alerta
+JOIN 
+    servidor ON alerta.fkServidor = servidor.idServidor
+JOIN 
+    componentes ON alerta.fkComponente = componentes.idComponentes
+ORDER BY 
+    idAlertas DESC;
+`;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
         return null; // Retornando nulo se nenhuma condição for satisfeita
@@ -881,15 +936,28 @@ join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT 1
     return database.executar(instrucaoSql);
 }
 
+
 function buscarUltimosAlertas2(idUsuarioServer, limite_linhas) {
 
     let instrucaoSql = '';
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `-- nome servidor, nome componente, data, hora e status
-        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
-from alerta join servidor on fkServidor = idServidor
-join componentes on fkComponente = idComponentes order by idAlertas desc LIMIT  3;`;
+        SELECT TOP 3
+    servidor.apelido as nomeServidor,
+    componentes.modelo as nomeComponente,
+    CONVERT(VARCHAR(10), alerta.dataAlerta, 103) as dataAlerta, -- Formatação da data no padrão dd/mm/yyyy (formato 103)
+    CONVERT(TIME, alerta.horaAlerta) as horaAlerta,
+    alerta.situacao as situacaoAlerta
+FROM 
+    alerta
+JOIN 
+    servidor ON alerta.fkServidor = servidor.idServidor
+JOIN 
+    componentes ON alerta.fkComponente = componentes.idComponentes
+ORDER BY 
+    idAlertas DESC;
+`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `-- nome servidor, nome componente, data, hora e status
         select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
@@ -912,9 +980,23 @@ function buscarHistoricoAlertas(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `-- nome servidor, nome componente, data, hora e status
-        select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
-from alerta join servidor on fkServidor = idServidor
-join componentes on fkComponente = idComponentes where servidor.fkBanco = ${idUsuario} order by idAlertas desc LIMIT  ${limite_linhas};`;
+        SELECT
+    servidor.apelido as nomeServidor,
+    componentes.modelo as nomeComponente,
+    CONVERT(VARCHAR(10), alerta.dataAlerta, 103) as dataAlerta, -- Formatação da data no padrão dd/mm/yyyy (formato 103)
+    CONVERT(TIME, alerta.horaAlerta) as horaAlerta,
+    alerta.situacao as situacaoAlerta
+FROM 
+    alerta
+JOIN 
+    servidor ON alerta.fkServidor = servidor.idServidor
+JOIN 
+    componentes ON alerta.fkComponente = componentes.idComponentes
+WHERE
+    servidor.fkBanco = ${idUsuario}
+ORDER BY 
+    idAlertas DESC
+OFFSET 0 ROWS FETCH NEXT ${limite_linhas} ROWS ONLY;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `-- nome servidor, nome componente, data, hora e status
         select servidor.apelido as nomeServidor, componentes.modelo as nomeComponente, DATE_FORMAT(alerta.dataAlerta, '%d/%m/%Y') as dataAlerta, alerta.horaAlerta as horaAlerta, alerta.situacao as situacaoAlerta
@@ -941,15 +1023,16 @@ function buscarUltimasMedidas(idUsuario, limite_linhas) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
         SELECT 
-        (CASE WHEN fkComponentesReg = 1 THEN dadosCaptados END) AS proc,
-        (CASE WHEN fkComponentesReg = 2 THEN dadosCaptados END) AS RAM,
-        (CASE WHEN fkComponentesReg = 3 THEN dadosCaptados END) AS disco,
-        DATE_FORMAT(dataHorario, '%d/%m/%Y') AS horario
-    FROM registros
-    WHERE fkBancoReg = 1
-    LIMIT 90;
-    
-    
+    MAX(CASE WHEN fkComponentesReg = 1 THEN dadoCaptado END) AS 'proc',
+    MAX(CASE WHEN fkComponentesReg = 2 THEN dadoCaptado END) AS 'RAM',
+    MAX(CASE WHEN fkComponentesReg = 3 THEN dadoCaptado END) AS 'disco',
+    CONVERT(VARCHAR(10), dataHorario, 103) AS horario
+FROM registros
+WHERE fkBanco = 1
+GROUP BY dataHorario
+ORDER BY dataHorario DESC
+OFFSET 0 ROWS FETCH NEXT 90 ROWS ONLY;
+
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `
@@ -977,7 +1060,14 @@ function buscarUltimasMedidasTemperatura(servidor, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        select registros.dadoCaptado as Temperatura, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where modelo = 'Temperatura' and fkServidor = ${servidor} order by idRegistros desc limit 8;
+        SELECT TOP 8
+    registros.dadoCaptado as Temperatura,
+    componentes.nome
+FROM registros
+JOIN componentes ON fkComponentesReg = idComponentes
+WHERE modelo = 'Temperatura' AND fkServidor = 1
+ORDER BY idRegistros DESC;
+
 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -999,7 +1089,14 @@ function buscarMedidasEmTempoRealTemperatura(servidor) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        select registros.dadoCaptado as Temperatura, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where modelo = 'Temperatura' and fkServidor = ${servidor} order by idRegistros desc limit 8;
+        SELECT TOP 8
+    registros.dadoCaptado as Temperatura,
+    componentes.nome
+FROM registros
+JOIN componentes ON fkComponentesReg = idComponentes
+WHERE modelo = 'Temperatura' AND fkServidor = ${servidor}
+ORDER BY idRegistros DESC;
+
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -1023,7 +1120,14 @@ function buscarUltimasMedidasCPU2(servidor, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor} order by  registros.idRegistros desc limit 8;
+        SELECT TOP 8
+    registros.dadoCaptado as CPU,
+    componentes.nome
+FROM registros
+JOIN componentes ON fkComponentesReg = idComponentes
+WHERE componentes.nome = 'CPU' AND fkServidor =1
+ORDER BY registros.idRegistros DESC;
+
 
    
     `;
@@ -1046,7 +1150,14 @@ function buscarMedidasEmTempoRealCPU2(servidor) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        select registros.dadoCaptado as CPU, componentes.nome from registros join componentes on fkComponentesReg = idComponentes where nome = 'CPU' and fkServidor = ${servidor} order by  registros.idRegistros desc limit 8;
+        SELECT TOP 8
+    registros.dadoCaptado as CPU,
+    componentes.nome
+FROM registros
+JOIN componentes ON fkComponentesReg = idComponentes
+WHERE componentes.nome = 'CPU' AND fkServidor =1
+ORDER BY registros.idRegistros DESC;
+
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -1070,14 +1181,15 @@ function buscarMedidasEmTempoReal(idUsuario) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
         SELECT 
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 1 and fkBancoReg = 1) AS proc,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 2 and fkBancoReg = 1) AS RAM,
-        (SELECT MAX(dadosCaptados) FROM registros WHERE fkComponentesReg = 3 and fkBancoReg = 1) AS disco,
-        dataHorario AS horario
-    FROM registros
-    JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE fkBancoReg = ${idUsuario}
-    LIMIT 0, 50;
+    (SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 1 AND fkBanco = 1 ORDER BY dadoCaptado DESC) AS 'proc',
+    (SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 2 AND fkBanco = 1 ORDER BY dadoCaptado DESC) AS 'RAM',
+    (SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 3 AND fkBanco = 1 ORDER BY dadoCaptado DESC) AS 'disco',
+    dataHorario AS horario
+FROM registros
+JOIN Componentes ON fkComponentesReg = idComponentes
+WHERE registros.fkBanco = ${idUsuario}
+
+
     `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -1115,7 +1227,12 @@ function buscarUltimasMedidas2(idUsuario2, limite_linhas) {
     //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
+        instrucaoSql2 = `SELECT status_maquina.nome as statuss, COUNT(servidor.fkStatus) as num 
+        FROM Servidor 
+        JOIN status_maquina ON servidor.fkStatus = status_maquina.idStatus 
+        WHERE servidor.fkBanco = ${idUsuario2}  
+        GROUP BY status_maquina.nome;
+        `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
     } else {
@@ -1132,7 +1249,12 @@ function buscarMedidasEmTempoReal2(idUsuario2) {
     instrucaoSql2 = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
+        instrucaoSql2 = `SELECT status_maquina.nome as statuss, COUNT(servidor.fkStatus) as num 
+        FROM Servidor 
+        JOIN status_maquina ON servidor.fkStatus = status_maquina.idStatus 
+        WHERE servidor.fkBanco = ${idUsuario2}  
+        GROUP BY status_maquina.nome;
+        `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql2 = `select nome as statuss, count(fkStatus) as num from Servidor join status_maquina on fkStatus = idStatus where fkBanco = ${idUsuario2} group by fkStatus;`;
@@ -1155,14 +1277,13 @@ function buscarUltimasMedidasServidores(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadoCaptado AS proc, 
-       dataHorario AS horario 
+        SELECT top 10 dadoCaptado AS 'proc', 
+       dataHorario AS 'horario' 
 FROM registros 
 JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
 WHERE registros.fkComponentesReg = 1 
   AND registros.fkServidorReg = ${idUsuario}
-ORDER BY registros.idRegistros DESC 
-LIMIT 10;
+ORDER BY registros.idRegistros DESC ;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -1192,14 +1313,13 @@ function buscarMedidasEmTempoRealServidores(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadoCaptado AS proc, 
-        dataHorario AS horario 
+        SELECT top 10 dadoCaptado AS 'proc', 
+        dataHorario AS 'horario' 
  FROM registros 
  JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
  WHERE registros.fkComponentesReg = 1 
    AND registros.fkServidorReg = ${idUsuario}
- ORDER BY registros.idRegistros DESC 
- LIMIT 10;
+ ORDER BY registros.idRegistros DESC ;
     
     `;
 
@@ -1233,14 +1353,13 @@ function buscarUltimasMedidasServidores2(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadoCaptado AS ram, 
-        dataHorario AS horario 
+        SELECT top 10 dadoCaptado AS 'ram', 
+        dataHorario AS 'horario' 
  FROM registros 
  JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
  WHERE registros.fkComponentesReg = 2 
    AND registros.fkServidorReg = ${idUsuario} 
- ORDER BY registros.idRegistros DESC 
- LIMIT 10;
+ ORDER BY registros.idRegistros DESC ;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -1271,14 +1390,13 @@ function buscarMedidasEmTempoRealServidores2(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadoCaptado AS ram, 
-        dataHorario AS horario 
+        SELECT top 10 dadoCaptado AS 'ram', 
+        dataHorario AS 'horario' 
  FROM registros 
  JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
  WHERE registros.fkComponentesReg = 2 
    AND registros.fkServidorReg = ${idUsuario} 
- ORDER BY registros.idRegistros DESC 
- LIMIT 10;
+ ORDER BY registros.idRegistros DESC ;
     
     `;
 
@@ -1311,14 +1429,13 @@ function buscarUltimasMedidasServidores3(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadoCaptado AS DISK, 
-        dataHorario AS horario 
+        SELECT top 10 dadoCaptado AS 'DISK', 
+        dataHorario AS 'horario' 
  FROM registros 
  JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
  WHERE registros.fkComponentesReg = 3 
-   AND registros.fkServidorReg = ${idUsuario} 
- ORDER BY registros.idRegistros DESC 
- LIMIT 10;
+   AND registros.fkServidorReg = ${idUsuario}
+ ORDER BY registros.idRegistros DESC ;
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -1348,14 +1465,13 @@ function buscarMedidasEmTempoRealServidores3(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT dadoCaptado AS DISK, 
-        dataHorario AS horario 
+        SELECT top 10 dadoCaptado AS 'DISK', 
+        dataHorario AS 'horario' 
  FROM registros 
  JOIN componentes ON registros.fkComponentesReg = componentes.idComponentes
  WHERE registros.fkComponentesReg = 3 
-   AND registros.fkServidorReg = ${idUsuario} 
- ORDER BY registros.idRegistros DESC 
- LIMIT 10;
+   AND registros.fkServidorReg = ${idUsuario}
+ ORDER BY registros.idRegistros DESC ;
     
     `;
 
@@ -1389,14 +1505,16 @@ function buscarUltimasMedidasServidores4(idUsuario, limite_linhas) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,
-        COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,
-    FROM registros
-    JOIN Componentes ON fkComponentesReg = idComponentes
-    WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+        SELECT 
+    COALESCE((SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC), 0) AS 'proc',
+    COALESCE((SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC), 0) AS 'RAM',
+    COALESCE((SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC), 0) AS 'disco',
+    COALESCE((SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC), 0) AS 'rede',
+    COALESCE((SELECT TOP 1 dadoCaptado FROM registros WHERE fkComponentesReg = 5 ORDER BY dataHorario DESC), 0) AS 'porta'
+FROM registros
+JOIN Componentes ON fkComponentesReg = idComponentes
+WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+
     
     
     `;
@@ -1429,7 +1547,14 @@ function buscarMedidasEmTempoRealServidores4(idUsuario) {
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
-        SELECT         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC LIMIT 1), 0) AS proc,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC LIMIT 1), 0) AS RAM,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC LIMIT 1), 0) AS disco,         COALESCE((SELECT dadosCaptados FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC LIMIT 1), 0) AS rede,     FROM registros     JOIN Componentes ON fkComponentesReg = idComponentes     WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
+        SELECT
+COALESCE((SELECT top 1 dadoCaptado FROM registros WHERE fkComponentesReg = 1 ORDER BY dataHorario DESC), 0) AS 'proc',
+COALESCE((SELECT top 1 dadoCaptado FROM registros WHERE fkComponentesReg = 2 ORDER BY dataHorario DESC), 0) AS 'RAM',
+COALESCE((SELECT top 1 dadoCaptado FROM registros WHERE fkComponentesReg = 3 ORDER BY dataHorario DESC), 0) AS 'disco',
+COALESCE((SELECT top 1 dadoCaptado FROM registros WHERE fkComponentesReg = 4 ORDER BY dataHorario DESC), 0) AS 'rede'
+FROM registros     
+JOIN Componentes ON fkComponentesReg = idComponentes     
+WHERE registros.idRegistros = (SELECT MAX(idRegistros) FROM registros);
     
     
     `;
@@ -1457,11 +1582,11 @@ function componenteMetricaCPU(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadoCaptado 
+        instrucaoSql = `select top 1 dadoCaptado 
         from registros join componentes on fkComponentesReg = idComponentes
-        where componentes.modelo = "cpu"
+        where componentes.modelo = 'cpu'
         and fkServidor = ${idSelect}
-        order by idRegistros desc limit 1;
+        order by idRegistros desc;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
@@ -1471,13 +1596,6 @@ function componenteMetricaCPU(idSelect) {
         and fkServidor = ${idSelect}
         order by idRegistros desc limit 1;;
     
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadoCaptado 
-        from registros join componentes on fkComponentesReg = idComponentes
-        where componentes.modelo = "cpu"
-        and fkServidor = ${idSelect}
-        order by idRegistros desc limit 1;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1493,11 +1611,11 @@ function componenteMetricaRAM(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadoCaptado 
+        instrucaoSql = `select top 1 dadoCaptado 
         from registros join componentes on fkComponentesReg = idComponentes
-        where componentes.modelo = "ram"
+        where componentes.modelo = 'ram'
         and fkServidor = ${idSelect}
-        order by idRegistros desc limit 1;
+        order by idRegistros desc;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
@@ -1507,13 +1625,6 @@ function componenteMetricaRAM(idSelect) {
         and fkServidor = ${idSelect}
         order by idRegistros desc limit 1;
     
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadoCaptado 
-        from registros join componentes on fkComponentesReg = idComponentes
-        where componentes.modelo = "ram"
-        and fkServidor = ${idSelect}
-        order by idRegistros desc limit 1;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1529,11 +1640,11 @@ function componenteMetricaDISCO(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select dadoCaptado 
+        instrucaoSql = `select top 1 dadoCaptado 
         from registros join componentes on fkComponentesReg = idComponentes
-        where componentes.modelo = "disco"
+        where componentes.modelo = 'disco'
         and fkServidor = ${idSelect}
-        order by idRegistros desc limit 1;
+        order by idRegistros desc;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
@@ -1543,13 +1654,6 @@ function componenteMetricaDISCO(idSelect) {
         and fkServidor = ${idSelect}
         order by idRegistros desc limit 1;
     
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select dadoCaptado 
-        from registros join componentes on fkComponentesReg = idComponentes
-        where componentes.modelo = "disco"
-        and fkServidor = ${idSelect}
-        order by idRegistros desc limit 1;
     `;
     } else {
         console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
@@ -1570,22 +1674,13 @@ function estadoFrequenteCPU(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where componentes.fkServidor = ${idSelect}
-        and componentes.modelo = "cpu"
+        and componentes.modelo = 'cpu'
         group by alerta.situacao
+        ;
         ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where componentes.fkServidor = ${idSelect}
-        and componentes.modelo = "cpu"
-        group by alerta.situacao
-        ;
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -1614,22 +1709,12 @@ function estadoFrequenteDISCO(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where componentes.fkServidor = ${idSelect}
-        and componentes.modelo = "disco"
+        and componentes.modelo = 'disco'
         group by alerta.situacao
         ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where componentes.fkServidor = ${idSelect}
-        and componentes.modelo = "disco"
-        group by alerta.situacao
-        ;
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -1658,22 +1743,12 @@ function estadoFrequenteRAM(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where componentes.fkServidor = ${idSelect}
-        and componentes.modelo = "ram"
+        and componentes.modelo = 'ram'
         group by alerta.situacao
         ;
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where componentes.fkServidor = ${idSelect}
-        and componentes.modelo = "ram"
-        group by alerta.situacao
-        ;
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -1705,13 +1780,6 @@ function totalAlertas(idSelect) {
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select count(*) as totalAlertas 
-        from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select count(*) as totalAlertas 
         from alerta join servidor
         on fkServidor = idServidor
@@ -1830,19 +1898,12 @@ function totalAlertasAtencao(idSelect) {
         from alerta join servidor
         on fkServidor = idServidor
         where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
+        and alerta.situacao = 'Atenção'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on fkServidor = idServidor
@@ -1869,22 +1930,13 @@ function totalAlertasAtencaoCPU(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "cpu"
+        and alerta.situacao = 'Atenção'
+        and componentes.modelo = 'cpu'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "cpu"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -1913,22 +1965,13 @@ function totalAlertasAtencaoRAM(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "ram"
+        and alerta.situacao = 'Atenção'
+        and componentes.modelo = 'ram'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "ram"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -1957,22 +2000,13 @@ function totalAlertasAtencaoDISCO(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "disco"
+        and alerta.situacao = 'Atenção'
+        and componentes.modelo = 'disco'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Atenção"
-        and componentes.modelo = "disco"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -2001,19 +2035,11 @@ function totalAlertasEmergencia(idSelect) {
         from alerta join servidor
         on fkServidor = idServidor
         where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        ; 
+        and alerta.situacao = 'Emergência'
+		group by alerta.situacao; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on fkServidor = idServidor
@@ -2040,22 +2066,13 @@ function totalAlertasEmergenciaCPU(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "cpu"
+        and alerta.situacao = 'Emergência'
+        and componentes.modelo = 'cpu'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "cpu"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -2084,22 +2101,13 @@ function totalAlertasEmergenciaRAM(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "ram"
+        and alerta.situacao = 'Emergência'
+        and componentes.modelo = 'ram'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "ram"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -2129,22 +2137,13 @@ function totalAlertasEmergenciaDISCO(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "disco"
+        and alerta.situacao = 'Emergência'
+        and componentes.modelo = 'disco'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Emergência"
-        and componentes.modelo = "disco"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -2172,19 +2171,11 @@ function totalAlertasUrgencia(idSelect) {
         from alerta join servidor
         on fkServidor = idServidor
         where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        ; 
+        and alerta.situacao = 'Urgência'
+		group by alerta.situacao; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on fkServidor = idServidor
@@ -2211,22 +2202,13 @@ function totalAlertasUrgenciaCPU(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "cpu"
+        and alerta.situacao = 'Urgência'
+        and componentes.modelo = 'cpu'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "cpu"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -2255,22 +2237,13 @@ function totalAlertasUrgenciaRAM(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "ram"
+        and alerta.situacao = 'Urgência'
+        and componentes.modelo = 'ram'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "ram"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -2299,22 +2272,13 @@ function totalAlertasUrgenciaDISCO(idSelect) {
         on alerta.fkServidor = idServidor
         join componentes on fkComponente = idComponentes
         where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "disco"
+        and alerta.situacao = 'Urgência'
+        and componentes.modelo = 'disco'
+		group by alerta.situacao
         ; 
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         // instrucaoSql = `select dadosCaptados as cnc from registros where fkComponentesReg =4 and fkServidorReg = ${idUsuario} order by idRegistros desc limit 1;`
-        instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
-        from alerta join servidor
-        on alerta.fkServidor = idServidor
-        join componentes on fkComponente = idComponentes
-        where alerta.fkServidor = ${idSelect}
-        and alerta.situacao = "Urgência"
-        and componentes.modelo = "disco"
-        ; 
-    `;
-    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select alerta.situacao, count(alerta.situacao) as totalAlertas 
         from alerta join servidor
         on alerta.fkServidor = idServidor
@@ -2453,14 +2417,15 @@ function buscarUltimasMedidasAlertasConsumoCPU(idSelect) {
     instrucaoSql = ''
 //COLOCAR O ID DO USUARIO
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
-        date_format(dataHorario, '%m') as mes 
-        FROM registros 
-        JOIN componentes ON fkComponentesReg = idComponentes
-        WHERE componentes.modelo = "cpu"
-        AND fkServidor = ${idSelect}
-        group by date_format(dataHorario, '%m')
-        ; `;
+        instrucaoSql = `SELECT 
+        AVG(dadoCaptado) AS consumo, 
+        FORMAT(dataHorario, 'MM') as mes 
+    FROM registros 
+    JOIN componentes ON fkComponentesReg = idComponentes
+    WHERE componentes.modelo = 'cpu'
+    AND fkServidor = ${idSelect}
+    GROUP BY FORMAT(dataHorario, 'MM');
+     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
         date_format(dataHorario, '%m') as mes 
@@ -2484,13 +2449,15 @@ function buscarMedidasEmTempoRealAlertasConsumoCPU(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
-        date_format(dataHorario, '%m') as mes 
-        FROM registros 
-        JOIN componentes ON fkComponentesReg = idComponentes
-        WHERE componentes.modelo = "cpu"
-        AND fkServidor = ${idSelect}
-        group by date_format(dataHorario, '%m')
+        instrucaoSql = `SELECT 
+        AVG(dadoCaptado) AS consumo, 
+        FORMAT(dataHorario, 'MM') AS mes 
+    FROM registros 
+    JOIN componentes ON fkComponentesReg = idComponentes
+    WHERE componentes.modelo = 'cpu'
+    AND fkServidor = ${idSelect}
+    GROUP BY FORMAT(dataHorario, 'MM');
+    
         ; `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -2516,13 +2483,14 @@ function buscarUltimasMedidasAlertasConsumoRAM(idSelect) {
     instrucaoSql = ''
 //COLOCAR O ID DO USUARIO
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
-        date_format(dataHorario, '%m') as mes 
-        FROM registros 
-        JOIN componentes ON fkComponentesReg = idComponentes
-        WHERE componentes.modelo = "ram"
-        AND fkServidor = ${idSelect}
-        group by date_format(dataHorario, '%m')
+        instrucaoSql = `SELECT 
+        AVG(dadoCaptado) AS consumo, 
+        FORMAT(dataHorario, 'MM') AS mes 
+    FROM registros 
+    JOIN componentes ON fkComponentesReg = idComponentes
+    WHERE componentes.modelo = 'ram'
+    AND fkServidor = ${idSelect}
+    GROUP BY FORMAT(dataHorario, 'MM');
         ; `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
@@ -2547,13 +2515,14 @@ function buscarMedidasEmTempoRealAlertasConsumoRAM(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
-        date_format(dataHorario, '%m') as mes 
-        FROM registros 
-        JOIN componentes ON fkComponentesReg = idComponentes
-        WHERE componentes.modelo = "ram"
-        AND fkServidor = ${idSelect}
-        group by date_format(dataHorario, '%m')
+        instrucaoSql = `SELECT 
+        AVG(dadoCaptado) AS consumo, 
+        FORMAT(dataHorario, 'MM') AS mes 
+    FROM registros 
+    JOIN componentes ON fkComponentesReg = idComponentes
+    WHERE componentes.modelo = 'ram'
+    AND fkServidor = ${idSelect}
+    GROUP BY FORMAT(dataHorario, 'MM');
         ; `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -2579,13 +2548,14 @@ function buscarUltimasMedidasAlertasConsumoDISCO(idSelect) {
     instrucaoSql = ''
 //COLOCAR O ID DO USUARIO
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
-        date_format(dataHorario, '%m') as mes 
-        FROM registros 
-        JOIN componentes ON fkComponentesReg = idComponentes
-        WHERE componentes.modelo = "disco"
-        AND fkServidor = ${idSelect}
-        group by date_format(dataHorario, '%m')
+        instrucaoSql = `SELECT 
+        AVG(dadoCaptado) AS consumo, 
+        FORMAT(dataHorario, 'MM') AS mes 
+    FROM registros 
+    JOIN componentes ON fkComponentesReg = idComponentes
+    WHERE componentes.modelo = 'disco'
+    AND fkServidor = ${idSelect}
+    GROUP BY FORMAT(dataHorario, 'MM');
         ; `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
@@ -2610,13 +2580,14 @@ function buscarMedidasEmTempoRealAlertasConsumoDISCO(idSelect) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT avg(dadoCaptado) AS consumo, 
-        date_format(dataHorario, '%m') as mes 
-        FROM registros 
-        JOIN componentes ON fkComponentesReg = idComponentes
-        WHERE componentes.modelo = "disco"
-        AND fkServidor = ${idSelect}
-        group by date_format(dataHorario, '%m')
+        instrucaoSql = `SELECT 
+        AVG(dadoCaptado) AS consumo, 
+        FORMAT(dataHorario, 'MM') AS mes 
+    FROM registros 
+    JOIN componentes ON fkComponentesReg = idComponentes
+    WHERE componentes.modelo = 'disco'
+    AND fkServidor = ${idSelect}
+    GROUP BY FORMAT(dataHorario, 'MM');
         ; `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -2665,19 +2636,19 @@ function buscarUltimasUltAlertasRede(idUsuario) {
     if (process.env.AMBIENTE_PROCESSO == "producao") {
         instrucaoSql = `
         SELECT
-                alertaRede.situacao AS situ,
-               
-                DATE_FORMAT(alertaRede.dataAlerta, '%d/%m/%Y') AS dataAlerta,
-                alertaRede.horaAlerta AS horaAlerta
-            FROM
-                alertaRede
-            JOIN
-                Rede ON alertaRede.fkRede = Rede.idRede
-            WHERE
-                Rede.fkServidorRede = ${idUsuario}
-            ORDER BY
-                alertaRede.idAlertas desc
-            LIMIT 4;
+    alertaRede.componente AS situ,
+    FORMAT(alertaRede.data, 'dd/MM/yyyy') AS dataAlerta,
+    alertaRede.hora AS horaAlerta
+FROM
+    alertaRede
+JOIN
+    Rede ON alertaRede.fkRede = Rede.idRede
+WHERE
+    Rede.fkServidor= ${idUsuario}
+ORDER BY
+    alertaRede.idAlertas DESC
+OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY;
+
     
     `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -2714,7 +2685,7 @@ function UltimasRedeUpload(idUsuario, limite_linhas) {
     //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+        instrucaoSql2 = `SELECT top 1 PotenciaUpload AS Upl  FROM rede  WHERE fkServidor = ${idUsuario} ORDER BY idRede DESC;`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -2741,7 +2712,7 @@ function TempoRealRedeUpload(idUsuario) {
     instrucaoSql2 = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `SELECT PotenciaUpload AS Upl  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+        instrucaoSql2 = `SELECT top 1 PotenciaUpload AS Upl  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC;`;
 
 
 
@@ -2773,7 +2744,7 @@ function BuscarConnect(idUsuario, limite_linhas) {
     //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `select status as connectOrN from rede where fkServidor = ${idUsuario} order by idRede desc limit 1;;`;
+        instrucaoSql2 = `select top 1 status as connectOrN from rede where fkServidor = ${idUsuario} order by idRede desc`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -2803,7 +2774,7 @@ function UltimasRedeDownload(idUsuario, limite_linhas) {
     //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+        instrucaoSql2 = `SELECT top 1 PotenciaDownload AS Down  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -2834,7 +2805,7 @@ function TempoRealRedeDownload(idUsuario) {
     instrucaoSql2 = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `SELECT PotenciaDownload AS Down  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC LIMIT 1;`;
+        instrucaoSql2 = `SELECT top 1 PotenciaDownload AS Down  FROM rede  WHERE fkServidor = ${idUsuario}  ORDER BY idRede DESC;`;
 
 
 
@@ -2861,7 +2832,7 @@ function UltimasRedeConnect(idUsuario, limite_linhas) {
     //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `    SELECT SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidor = ${idUsuario};`;
+        instrucaoSql2 = `    SELECT SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidor =${idUsuario};`;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql2 = `    SELECT SUM(CASE WHEN status = 1 THEN 1 ELSE 0 END) AS Ligado, SUM(CASE WHEN status = 0 THEN 1 ELSE 0 END) AS Desligado,COUNT(*) AS Total FROM rede WHERE fkServidor = ${idUsuario};`;
@@ -2904,11 +2875,17 @@ function buscarUltimasMedidasPing(idUsuario, limite_linhas) {
     //COLOCAR O ID DO USUARIO
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql2 = `SELECT Ping AS Ping, DATE_FORMAT(dtHora, '%d/%m/%Y') AS DataHora
-        FROM Rede
-        WHERE fkServidor = ${idUsuario}
-        ORDER BY dtHora DESC
-        LIMIT 6;
+        instrucaoSql2 = `SELECT 
+        Ping AS Ping, 
+        FORMAT(dtHora, 'dd/MM/yyyy') AS DataHora
+    FROM 
+        Rede
+    WHERE 
+        fkServidor = ${idUsuario}
+    ORDER BY 
+        dtHora DESC
+    OFFSET 0 ROWS FETCH NEXT 6 ROWS ONLY;
+    
         `;
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
@@ -2964,21 +2941,43 @@ function buscarMedidasEmTempoRealPing(idUsuario) {
 
 
 function kpiIndividual(servidorSelecionado) {
-   
-    var instrucao = `
-    select qtdNucleos, qtdThreads, especificacaoCpu from qtdNucleosThreads where fkServidor = ${servidorSelecionado};`
-    return database.executar(instrucao);
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `select qtdNucleos, qtdThreads, especificacaoCpu from qtdNucleosThreads where fkServidor = ${servidorSelecionado};`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `select qtdNucleos, qtdThreads, especificacaoCpu from qtdNucleosThreads where fkServidor = ${servidorSelecionado};`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 function PorcentagemTotalProcessador(servidorSelecionado) {
-   
-    var instrucao = `
-    SELECT dadoCaptado
-    FROM registros
-    WHERE fkServidorReg = ${servidorSelecionado}
-    ORDER BY dataHorario DESC 
-    LIMIT 1;`   
-    return database.executar(instrucao);
+    instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT top 1 dadoCaptado
+        FROM registros
+        WHERE fkServidorReg = ${servidorSelecionado}
+        ORDER BY dataHorario DESC 
+    ;`;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = `SELECT dadoCaptado
+        FROM registros
+        WHERE fkServidorReg = ${servidorSelecionado}
+        ORDER BY dataHorario DESC 
+        LIMIT 1;`
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 
@@ -2991,7 +2990,7 @@ function obterDadosGraficoThreads(servidorSelecionado) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads limit 8;`;
+        instrucaoSql = `select top 8 round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds =${servidorSelecionado} group by numeroThreads;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads limit 8;`;
     }
@@ -3005,11 +3004,11 @@ function atualizarGraficoThreads(servidorSelecionado) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads group by numeroThreads where =${servidorSelecionado};`;
+        instrucaoSql = `select top 8 round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds =${servidorSelecionado} group by numeroThreads;`;
 
 
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
-        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads group by numeroThreads where =${servidorSelecionado};`;
+        instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads limit 8;`;
 
     }
 
