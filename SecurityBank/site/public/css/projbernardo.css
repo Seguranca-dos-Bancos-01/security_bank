@@ -4,13 +4,25 @@
 * {
   font-family: Poppins, sans-serif;
 }
+
+body {
+  margin: 0;
+  padding: 0;
+  font-family: 'Barlow', "Segoe UI", Tahoma, Geneva, Verdana, sans-serif;
+  
+}
+body::-webkit-scrollbar {
+  width:0px;   
+        
+}
+
 .label-captura {
   display: flex;
   justify-content: center;
 }
 
 .dash {
-  width: 84.85%;
+  width: 84.77%;
   background-color: #FAFBFF;
   height: fit-content;
   overflow: auto;
@@ -19,13 +31,35 @@
 
 
 .Nome h2 {
-  margin-left: 80px;
+  margin-left: 50vh;
   color: #000F53;
   font-family: Poppins, sans-serif;
+  background-color: #6953D3;
+  border-radius: 20px;
+  width: 70vh;
+  text-align: center;
 }
 
 
+.graph {
+width: 560px;
+height: 400px;
+margin-top: 23%;
+margin-left: -48%;
+}
 
+.graph canvas{
+  width: 750px;
+  height: 750px;
+  
+}
+
+.graph2 canvas{
+
+margin-top: 5vh;
+width: 550px;
+height: 550px;
+}
 
 .containerArmazen {
   width: 45%;
@@ -35,26 +69,33 @@
   flex-direction: column;
   align-items: center;
   justify-content: space-between;
+ position: relative;
+ top: 20vh;
+
 }
 
 .armazenamento {
-  width: 68%;
-  height: 20vh;
-  background-color: #6953D3;
-  border-radius: 20px;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
-  box-shadow: 5px 10px 20px 0px rgba(0, 0, 0, 0.25);
-  margin-top: 5vh;
+  align-self: flex-start;
+  margin: 10px 20px;
+  font-weight: 500;
+  font-size: 3vh;
+  margin-left: 10vh;
+  width: 60vh;
+position: inherit;
+right: 20vh;
+width: 100vh;
+bottom: 5vh;
+width: 80vh;
 }
 
-.txtArmazenamento {
-  align-self: flex-start;
-  margin: 0 20px;
- 
+
+.containerArmazen span{
+  text-align: center;
+  background-color: #6953D3;
+  border-radius: 20px;
+
 }
+
 
 .containerPercent{
     width: 50%;
@@ -63,18 +104,28 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
+    position: relative;
+    left: 75vh;
+    bottom: 17vh;
+    
 }
 
 .percent {
   align-self: flex-start;
   margin: 10px 20px;
-  color: #5c6bc0;
   font-weight: 500;
   font-size: 3vh;
-  margin-left: 55vh;
+  position: relative;
+  left: 25vh;
+  top: 4vh
+}
+.containerPercent span{
+  margin-top: -20%;
+  text-align: center;
+  background-color: #6953D3;
+  border-radius: 20px;
   
 }
-
 
 .ServidorEmergencia {
   width: 100%;
@@ -152,10 +203,3 @@ justify-content: space-evenly;
 }
 
 
-
-.bola {
-  width: 20px;
-  height: 20px;
-  background-color: #36D000;
-  border-radius: 20px;
-}

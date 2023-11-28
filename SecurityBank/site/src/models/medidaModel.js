@@ -277,6 +277,57 @@ function buscarUltimasMedidasPRT(idUsuario, limite_linhas) {
 
 
 
+function buscarUltimasMedidasTOT(idUsuario, limite_linhas) {
+
+    var instrucaoSql = ''
+
+    if (process.env.AMBIENTE_PROCESSO == "producao") {
+        instrucaoSql = `SELECT
+        espacoTotal1.espacoTotal as espacoTotal1,
+        espacoTotal2.espacoTotal as espacoTotal2
+        FROM 
+        ( SELECT espacoTotal
+        FROM particao 
+        WHERE idParticao = 1 
+         ORDER BY idParticao DESC
+        LIMIT 1) as espacoTotal1
+        JOIN
+       (SELECT espacoTotal
+        FROM particao
+        WHERE idParticao = 2
+        ORDER BY idParticao DESC
+        LIMIT 1) as espacoTotal2;
+    
+    `;
+    } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
+        instrucaoSql = ` SELECT
+        espacoTotal1.espacoTotal as espacoTotal1,
+        espacoTotal2.espacoTotal as espacoTotal2
+        FROM 
+        ( SELECT espacoTotal
+        FROM particao 
+        WHERE idParticao = 1 
+         ORDER BY idParticao DESC
+        LIMIT 1) as espacoTotal1
+        JOIN
+       (SELECT espacoTotal
+        FROM particao
+        WHERE idParticao = 2
+        ORDER BY idParticao DESC
+        LIMIT 1) as espacoTotal2;
+    
+    `;
+    } else {
+        console.log("\nO AMBIENTE (produção OU desenvolvimento) NÃO FOI DEFINIDO EM app.js\n");
+        return
+    }
+
+    console.log("Executando a instrução SQL: \n" + instrucaoSql);
+    return database.executar(instrucaoSql);
+}
+
+
+
 
 function buscarDiasFaltando(idUsuario) {
 
@@ -1287,5 +1338,6 @@ module.exports = {
     buscarUltimasUsbConectadas,
     buscarUltimasUltAlertasSelected2,
     buscarUltimasMedidasBola,
-    buscarUltimasMedidasPRT
+    buscarUltimasMedidasPRT,
+    buscarUltimasMedidasTOT
 }

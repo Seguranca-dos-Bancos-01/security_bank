@@ -34,7 +34,7 @@
 
 
 <body
-    onload="percentPRT(), obterDadosGrafico()">
+    onload="percentPRT(), obterDadosGrafico(), obterDadosGrafico2()">
 
     <div class="janela">
         <div class="header-left">
@@ -72,10 +72,7 @@
                     <img src="../assets/servidor.png    " alt="">
                     <span>Visões</span>
                 </a>
-                <!-- <div class="opcoesServidores-content">
-                    <a href="alertas.html">Visão 1</a>
-                    <a href="alertas.html">Visão 2</a>
-                </div> -->
+            
             </div>
 
             <div class="opcoes">
@@ -108,12 +105,7 @@
                     <span>Métricas</span>
                 </a>
             </div>
-            <!-- <div class="opcoes">
-                <a href="recFacial.html">
-                    <img src="../assets/imgs/recFacial.png" alt="">
-                    <span>Reconhecimento Facial</span>
-                </a>
-            </div> -->
+            
             <div class="linha">
                 <span></span>
             </div>
@@ -136,15 +128,23 @@
 
 
             <div class="containerArmazen">
-                <div id="colocar" class="armazenamento">
-                    <span class="txtArmazenamento"> Total de armazenamento das partições </span>
 
-                </div>
+                
+                <div id="colocar" class="armazenamento">
+                      <span class="percent">  Total de armazenamento das partições  </span>
+                    
+            </div>
+
+            <div class="graph2">
+                <canvas id="myChart2"></canvas>
+            </div>
+
+           
 
             </div>
 
             <div class="containerPercent">
-                <span class="percent">Percentual de uso</span>
+                <span class="percent">Percentual de uso das partições </span>
 
                 <div class="graph">
                     <canvas id="myChart"></canvas>
@@ -173,7 +173,7 @@
 <script>
   
 
-  var particaoSelecionada = 
+
 
  window.onload = obterDadosGrafico(1)
 
@@ -202,7 +202,7 @@
         console.log('iniciando plotagem do gráfico...');
 
 
-        let labels = ["particao1","particao2"];
+        let labels = ["Partições"];
 
         let dados = {
             labels: labels,
@@ -211,17 +211,17 @@
                     label: 'particao1',
                     data: [],
                     fill: false,
-                    borderColor: ['⁠36D000', '#FF847F'], // Adicione a cor desejada
+                    borderColor: ['#5E1A8D', '##5E1A8D'], 
                     tension: 0.1,
-                    backgroundColor: ['⁠36D000', '#FF847F']
+                    backgroundColor: ['#5E1A8D', '##5E1A8D']
                 },
                 {
                     label: 'particao2',
                     data: [],
                     fill: false,
-                    borderColor: ['#FF847F'], // Adicione a cor desejada
+                    borderColor: ['#000F53','#000F53'], 
                     tension: 0.1,
-                    backgroundColor: ['#FF847F']
+                    backgroundColor: ['#000F53','#000F53']
                 }
             ]
         };
@@ -234,7 +234,7 @@
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
             dados.datasets[0].data.push(registro.particao1);
-            dados.datasets[0].data.push(registro.particao2);
+            dados.datasets[1].data.push(registro.particao2);
         }
 
         console.log('----------------------------------------------')
@@ -307,6 +307,149 @@
     document.addEventListener("DOMContentLoaded", function () {
         obterDadosGrafico();
     });
+
+
+   
+
+ window.onload = obterDadosGrafico(1)
+
+function obterDadosGrafico2(idUsuario) {
+    idUsuario
+    fetch(`/medidas/ultimasPje2/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (resposta) {
+                console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+                resposta.reverse();
+
+                plotarGrafico2(resposta);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+var myChart2;
+
+function plotarGrafico2(resposta, idUsuario) {
+
+    console.log('iniciando plotagem do gráfico...');
+
+    if (myChart2) {
+        myChart2.destroy();
+    }
+
+
+    let labels = ["Partições"];
+
+    let dados = {
+        labels: labels,
+        datasets: [
+        {
+                label: 'particao1',
+                data: [],
+                fill: false,
+                borderColor: ['#5E1A8D', '##5E1A8D'], 
+                tension: 0.1,
+                backgroundColor: ['#5E1A8D', '##5E1A8D']
+            },
+            {
+                label: 'particao2',
+                data: [],
+                fill: false,
+                borderColor: ['#000F53','#000F53'], 
+                tension: 0.1,
+                backgroundColor: ['#000F53','#000F53']
+            }
+        ]
+    };
+
+    console.log('----------------------------------------------')
+    console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+    console.log(resposta)
+
+
+    for (i = 0; i < resposta.length; i++) {
+        var registro = resposta[i];
+        dados.datasets[0].data.push(registro.espacoTotal1);
+        dados.datasets[1].data.push(registro.espacoTotal2);
+    }
+
+    console.log('----------------------------------------------')
+    console.log('O gráfico será plotado com os respectivos valores:')
+    console.log('Labels:')
+    console.log(labels)
+    console.log('Dados:')
+    console.log(dados.datasets)
+    console.log('----------------------------------------------')
+
+    const config = {
+        type: 'bar',
+        data: dados,
+    };
+
+    myChart2 = new Chart(document.getElementById('myChart2'), config);
+
+    atualizarGrafico2(idUsuario, dados, myChart2);
+}
+
+
+
+function atualizarGrafico2(idUsuario, dados, myChart2) {
+    fetch(`/medidas/tempo-realPje2/${idUsuario}`, { cache: 'no-store' }).then(function (response) {
+        if (response.ok) {
+            response.json().then(function (novoRegistro) {
+                console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                console.log('Dados atuais do gráfico:');
+                console.log(dados);
+
+
+                if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
+                    console.log('---------------------------------------------------------------');
+                    console.log('Como não há dados novos para captura, o gráfico não atualizará.');
+
+                    console.log('Horário do novo dado capturado:');
+                    console.log(novoRegistro[0].horario);
+                    console.log('Horário do último dado capturado:');
+                    console.log(dados.labels[dados.labels.length - 1]);
+                    console.log('---------------------------------------------------------------');
+                } else {
+                    dados.labels.shift();
+                    dados.labels.push(novoRegistro[0].momento_grafico);
+
+                    dados.datasets[0].data.shift();
+                    dados.datasets[0].data.push(novoRegistro[0].proc);
+
+
+                    myChart.update();
+                }
+
+                proximaAtualizacao = setTimeout(() => {
+                    obterDadosGrafico2(idUsuario);
+                }, 20000);
+            });
+        } else {
+            console.error('Nenhum dado encontrado ou erro na API');
+            proximaAtualizacao = setTimeout(() => {
+                obterDadosGrafico2(idUsuario);
+            }, 20000);
+        }
+    })
+        .catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+}
+
+
+var dadoServer;
+
+document.addEventListener("DOMContentLoaded", function () {
+    obterDadosGrafico2();
+});
+
 
 
 
