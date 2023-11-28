@@ -16,7 +16,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="../js/sessao.js"></script>
     <script src="../js/alerta.js"></script>
-
+    <script src="alertasDash.js"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link
         href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
@@ -32,8 +32,7 @@
 
 <!-- <body onload=" atualizarFeed()"> -->
 
-<body
-    onload="obterDadosGraficoTemperatura(),obterDadosGraficoCPU()">
+<body onload="obterDadosGraficoTemperatura(),obterDadosGraficoCPU(),exibirServidoresUsuario()">
 
     <div class="janela">
         <div class="header-left">
@@ -55,11 +54,15 @@
                     <span>Home</span>
                 </a>
             </div>
-            <div class="opcoes">
+            <div class="opcoesServidores">
                 <a href="servidoresDash.html">
                     <img src="../assets/servidor.png" alt="">
                     <span>Servidores</span>
                 </a>
+                <div id="opcoesServidores-content" class="opcoesServidores-content">
+
+
+                </div>
             </div>
             <div class="opcoes">
                 <a href="">
@@ -155,7 +158,8 @@
                     </div>
                     <div class="info">
                         <span class="infotitulo">Temperatura Ideal</span>
-                        <span class="Situacao" id="cpuServidores"><45°C</span>
+                        <span class="Situacao" id="cpuServidores">
+                            <45°C< /span>
                     </div>
                 </div>
                 <div class="blocoKpi">
@@ -201,15 +205,15 @@
                     </div>
                 </div>
             </div>
-                <div class="Historico">
-                    <span class="tituloHistorico">Histórico dos Servidores</span>
-                    <div class="graph">
-                        <canvas id="myChartsegundo"></canvas>
-                        <canvas id="myChartterceiro"></canvas>
-                    </div>
+            <div class="Historico">
+                <span class="tituloHistorico">Histórico dos Servidores</span>
+                <div class="graph">
+                    <canvas id="myChartsegundo"></canvas>
+                    <canvas id="myChartterceiro"></canvas>
                 </div>
+            </div>
 
-        
+
         </div>
     </div>
     </div>
@@ -325,7 +329,7 @@
 
 
 
-
+   var servidor = sessionStorage.servidorSelecionado
 
     idUsuario = sessionStorage.ID_USUARIO;
 
@@ -338,11 +342,12 @@
         obterDadosGraficoCPU2(servidor);
     });
 
-    var servidor = 1
+    
     function obterDadosGraficoTemperatura(servidor) {
         if (sessionStorage.ID_USUARIO) {
             let idUsuario = sessionStorage.ID_USUARIO;
             console.log(idUsuario);
+            servidor = sessionStorage.servidorSelecionado
 
             document.addEventListener("DOMContentLoaded", function () {
                 obterDadosGrafico(idUsuario);
@@ -405,12 +410,12 @@
             labels.push(registro.nome);
             dados.datasets[0].data.push(registro.Temperatura);
             graph2.innerHTML = `${registro.Temperatura} °C`
-            if(registro.Temperatura > 45){
+            if (registro.Temperatura > 45) {
                 indicacao.innerHTML = `A temperatura deveria estar ${(registro.Temperatura - 45).toFixed(0)}°C a menos`
-            }else if (registro.Temperatura == 45){
+            } else if (registro.Temperatura == 45) {
                 indicacao.innerHTML = `A temperatura está no limite do considerado ideial`
             }
-            else{
+            else {
                 indicacao.innerHTML = `A temperatura está em uma boa condição`
             }
         }
@@ -487,12 +492,12 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
-    var servidor = 1
+    
     function obterDadosGraficoCPU2(servidor) {
         if (sessionStorage.ID_USUARIO) {
             let idUsuario = sessionStorage.ID_USUARIO;
             console.log(idUsuario);
-
+            servidor = sessionStorage.servidorSelecionado
             document.addEventListener("DOMContentLoaded", function () {
                 obterDadosGraficoCPU2(idUsuario);
             });
@@ -628,4 +633,86 @@
                 console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
             });
     }
+
+
+
+
+
+
+
+
+
+
+    var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+
+    if (escalonamentoFunc != 1) {
+        nivelACesso.innerHTML = `<span>Funcionário</span>`
+        var divAcesso = document.getElementById("gerenciarAcesso")
+        divAcesso.style.display = 'none';
+    }
+
+    var vetor = [];
+    var selectedServer;// Declarar idUsuario fora do escopo da função
+
+    function exibirServidoresUsuario() {
+        var server = JSON.parse(sessionStorage.servidor);
+        console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+        var selectServidores = document.getElementById("opcoesServidores-content");
+        selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+        server.forEach(element => {
+            var button = document.createElement('button');
+            button.textContent = element.apelido;
+            button.addEventListener("click", function (event) {
+                event.preventDefault();
+                selectedServer = element.idServidor;
+                vetor.push(selectedServer);
+                console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+
+                console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+                inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+                window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+            });
+            button.classList.add('botaodropdown');
+            selectServidores.appendChild(button);
+        });
+    }
+
+    function inserir(id) {
+        vetor.push(id);
+        console.log(vetor);
+        sessionStorage.servidorSelecionado = selectedServer
+    }
+
+    function limparSessonStorage() {
+        sessionStorage.clear()
+    }
+
+    // Chamar a função exibirServidoresUsuario
+    exibirServidoresUsuario();
+
+
+
+    nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+
+
+    var idUsuario = sessionStorage.banco1
+    var idUsuarioCPU = sessionStorage.servidor_id1
+    var idUsuarioRAM = sessionStorage.servidor_id1
+    var idUsuarioDISK = sessionStorage.servidor_id1
+
+    window.onload = percentCPU(idUsuarioCPU),
+        percentRAM(idUsuarioRAM),
+        percentDISK(idUsuarioDISK);
+
+    percentCPU(idUsuarioCPU)
+    percentRAM(idUsuarioRAM)
+    percentDISK(idUsuarioDISK)
+
+
+
+
+
+
+
 </script>

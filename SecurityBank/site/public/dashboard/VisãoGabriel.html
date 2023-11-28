@@ -20,7 +20,7 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
 </head>
 
-<body onload="UltimasMedidasIndividual(), obterDadosGraficoThreads()">
+<body onload="UltimasMedidasIndividual(), obterDadosGraficoThreads(),exibirServidoresUsuario()">
 
 
 
@@ -65,7 +65,7 @@
                         <a href="alertas.html">Visão 2</a>
                     </div> -->
             </div>
-            <div class="opcoes">
+            <!-- <div class="opcoes">
                 <a href="">
                     <img src="../assets/imgs/servdores.png" alt="">
                     <span>Visão Bernardo</span>
@@ -89,7 +89,7 @@
                         <span>Visão Marcela</span>
                     </a>
                 </div> -->
-            <div class="opcoes">
+            <!-- <div class="opcoes">
                 <a href="">
                     <img src="../assets/imgs/servdores.png" alt="">
                     <span>Visão Natália</span>
@@ -100,7 +100,7 @@
                     <img src="../assets/imgs/servdores.png" alt="">
                     <span>Visão Pedro</span>
                 </a>
-            </div>
+            </div>  -->
             <div class="opcoes">
                 <a href="alertas.html">
                     <img src="../assets/alerta.png" alt="">
@@ -533,5 +533,87 @@ fetch(`/medidas/atualizarGraficoThreads/${servidorSelecionado}`, { cache: 'no-st
 
 
 //     exibirServidoresUsuario()
+
+
+
+
+  
+var escalonamentoFunc = sessionStorage.FKESCALONAMENTO
+
+if (escalonamentoFunc != 1) {
+    nivelACesso.innerHTML = `<span>Funcionário</span>`
+    var divAcesso = document.getElementById("gerenciarAcesso")
+    divAcesso.style.display = 'none';
+}
+
+var vetor = [];
+var selectedServer;// Declarar idUsuario fora do escopo da função
+
+function exibirServidoresUsuario() {
+    var server = JSON.parse(sessionStorage.servidor);
+    console.log("Conteúdo da sessionStorage.servidor: ", server); // Verificar o conteúdo de sessionStorage.servidor
+    var selectServidores = document.getElementById("opcoesServidores-content");
+    selectServidores.innerHTML = ""; // Limpar as opções existentes para evitar duplicatas
+    server.forEach(element => {
+        var button = document.createElement('button');
+        button.textContent = element.apelido;
+        button.addEventListener("click", function (event) {
+            event.preventDefault();
+            selectedServer = element.idServidor; 
+            vetor.push(selectedServer);
+            console.log("Valor de selectedServer: ", selectedServer); // Mostra o valor atualizado de selectedServer
+            
+            console.log("Valor de idUsuario: ", idUsuario); // Mostra o valor de idUsuario atualizado
+            inserir(selectedServer); // Chamar a função inserir com o ID do servidor
+            window.location.href = "servidoresDash.html"; // Redirecionar para a página desejada
+        });
+        button.classList.add('botaodropdown');
+        selectServidores.appendChild(button);
+    });
+}
+
+function inserir(id) {
+    vetor.push(id);
+    console.log(vetor);
+    sessionStorage.servidorSelecionado = selectedServer
+}
+
+function limparSessonStorage() {
+    sessionStorage.clear()
+}
+
+// Chamar a função exibirServidoresUsuario
+exibirServidoresUsuario();
+
+
+
+    nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+ 
+
+    var idUsuario = sessionStorage.banco1
+    var idUsuarioCPU = sessionStorage.servidor_id1
+    var idUsuarioRAM = sessionStorage.servidor_id1
+    var idUsuarioDISK = sessionStorage.servidor_id1
+
+    window.onload = percentCPU(idUsuarioCPU),
+        percentRAM(idUsuarioRAM),
+        percentDISK(idUsuarioDISK);
+
+    percentCPU(idUsuarioCPU)
+    percentRAM(idUsuarioRAM)
+    percentDISK(idUsuarioDISK)
+
+    
+
+    
+
+
+
+
+
+
+
+
 
 </script>
