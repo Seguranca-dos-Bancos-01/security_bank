@@ -1,0 +1,631 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <link rel="shortcut icon" href="../assets/icon/favicon2.ico" type="image/x-icon">
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="../assets/logoEscudo.png" type="image/x-icon">
+
+    <title>Temperatura e CPU</title>
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/temp-cpu.css">
+    <link rel="stylesheet" href="../css/navbarDash.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script src="../js/sessao.js"></script>
+    <script src="../js/alerta.js"></script>
+
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Exo+2:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!-- scripts do Chart.js - 2022-1 -->
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+
+    <!--FONT AWESOME-->
+    <script src="https://kit.fontawesome.com/9f7414eb10.js" crossorigin="anonymous"></script>
+</head>
+
+<!-- <body onload=" atualizarFeed()"> -->
+
+<body
+    onload="obterDadosGraficoTemperatura(),obterDadosGraficoCPU()">
+
+    <div class="janela">
+        <div class="header-left">
+            <div class="logo">
+                <img src="../assets/logoBranca.png" alt="">
+            </div>
+
+            <div class="opcao">
+                <span>Olá, <b id="nomeAdm">Nome ADM</b></span>
+            </div>
+
+            <div class="TipoAcesso">
+                <span>Administrador</span>
+            </div>
+
+            <div class="opcoes localizacao">
+                <a href="dashboard.html">
+                    <img src="../assets/home.png" alt="">
+                    <span>Home</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="servidoresDash.html">
+                    <img src="../assets/servidor.png" alt="">
+                    <span>Servidores</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/servidor.png    " alt="">
+                    <span>Visões</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gabriel</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Gustavo</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Marcela</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Natália</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="">
+                    <img src="../assets/imgs/servdores.png" alt="">
+                    <span>Visão Pedro</span>
+                </a>
+            </div> -->
+            <div class="opcoes">
+                <a href="alertas.html">
+                    <img src="../assets/alerta.png" alt="">
+                    <span>Alertas</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="perfil.html">
+                    <img src="../assets/perfil.png" alt="">
+                    <span>Perfil</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="GerenciarAcesso.html">
+                    <img src="../assets/controle.png" alt="">
+                    <span>Controle de acesso</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="suporteDash.html">
+                    <img src="../assets/ajuda.png" alt="">
+                    <span>Ajuda</span>
+                </a>
+            </div>
+            <div class="opcoes">
+                <a href="metricasDash.html">
+                    <img src="../assets/metricas.png" alt="">
+                    <span>Métricas</span>
+                </a>
+            </div>
+            <!-- <div class="opcoes">
+                <a href="recFacial.html">
+                    <img src="../assets/imgs/recFacial.png" alt="">
+                    <span>Reconhecimento Facial</span>
+                </a>
+            </div> -->
+            <div class="linha">
+                <span></span>
+            </div>
+            <div class="opcoes">
+                <a href="../index.html">
+                    <img src="../assets/logout.png" alt="" onclick="limparSessao()">
+                    <span>Logout</span>
+                </a>
+            </div>
+        </div>
+
+        <div class="dash">
+            <div class="Nome">
+                <h2>Temperatura e uso de CPU</h2>
+            </div>
+            <div class="kpi">
+                <div class="blocoKpi">
+                    <div class="img">
+                        <div class="bolinhaIdeal"></div>
+                    </div>
+                    <div class="info">
+                        <span class="infotitulo">Temperatura Ideal</span>
+                        <span class="Situacao" id="cpuServidores"><45°C</span>
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+                        <div class="bolinhaAlerta"></div>
+                    </div>
+                    <div class="info">
+                        <span class="infotitulo">Temperatura Alerta</span>
+                        <span class="Situacao" id="ramServidores">>48°C e <49°C </span>
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+                        <div class="bolinhaEmergencia"></div>
+                    </div>
+                    <div class="info">
+                        <span class="infotitulo">Temperatura Emergência</span>
+                        <span class="Situacao" id="discoServidores">>49°C e <53°C </span>
+                    </div>
+                </div>
+                <div class="blocoKpi">
+                    <div class="img">
+                        <div class="bolinhaCritica"></div>
+                    </div>
+                    <div class="info">
+                        <span class="infotitulo">Temperatura Crítica</span>
+                        <span class="Situacao" id="discoServidores">>53°C</span>
+                    </div>
+                </div>
+            </div>
+            <div class="dadosGraficos">
+                <div class="blocoalertasLateralDash">
+                    <div class="UltimoAlerta">
+                        <span class="tituloUltimoAlerta">Recomendação</span>
+                        <span class="indicacao" id="indicacao"></span>
+                    </div>
+                </div>
+                <div class="VisaoGeralServidores">
+                    <span class="tituloVisaoGeral">Temperatura atual</span>
+                    <div id="graficos2">
+                        <div class="graph2" id="graph2">
+                        </div>
+                    </div>
+                </div>
+            </div>
+                <div class="Historico">
+                    <span class="tituloHistorico">Histórico dos Servidores</span>
+                    <div class="graph">
+                        <canvas id="myChartsegundo"></canvas>
+                        <canvas id="myChartterceiro"></canvas>
+                    </div>
+                </div>
+
+        
+        </div>
+    </div>
+    </div>
+    <div class="rodapeDash">
+        <div class="itens">
+            <div class="blocos">
+                <h1>Security Bank</h1>
+                <h4>TECH & SOLUTIONS</h4>
+            </div>
+            <div class="blocos">
+                <span><b>Telefone:</b>(11)40028922</span>
+                <br>
+                <span><b>Email:</b>SC.contato.2023@gmail.com</span>
+            </div>
+            <div class="blocos">
+                <span><b>Endereço:</b>Rua Haddock Lobo, 595 -<br>
+                    Cerqueira César, São Paulo - SP,<br>
+                    01414-001</span>
+            </div>
+        </div>
+        <div class="direitos">&copy; 2023 copyrights by SecurityBank. All Rights Reserved</div>
+    </div>
+
+
+</body>
+
+</html>
+
+<script>
+    nomeAdm.innerHTML = sessionStorage.NOME_USUARIO;
+
+    let proximaAtualizacao;
+
+
+    // function exibirAquariosDoUsuario() {
+    //     var aquarios = JSON.parse(sessionStorage.fkBanco);
+    //     aquarios.forEach(item => {
+    //         document.getElementById("btnAquario").innerHTML += `
+    //         <button class="btn-chart" onclick="exibirAquario(${item.id})" id="btnAquario${item.id}">${item.descricao}</button>
+    //         `
+
+    //         document.getElementById("graficos").innerHTML += `
+    //             <div id="grafico${item.id}" class="display-none">
+    //                 <h3 class="tituloGraficos">
+    //                     <span id="tituloAquario${item.id}">${item.descricao}</span>
+    //                 </h3>
+    //                 <div class="graph">
+    //                     <canvas id="myChartCanvas${item.id}"></canvas>
+    //                 </div>
+    //                 <div class="label-captura">
+    //                     <p id="avisoCaptura${item.id}" style="color: black"></p>
+    //                 </div>
+    //             </div>
+    //         `
+
+    //         obterDadosGrafico(item.id)
+    //     });
+
+    //     if (aquarios.length > 0) {
+    //         exibirAquario(aquarios[0].id)
+    //     }
+    // }
+
+    // function alterarTitulo(idUsuario) {
+    //     var tituloAquario = document.getElementById(`tituloAquario${idUsuario}`)
+    //     var descricao = JSON.parse(sessionStorage.AQUARIOS).find(item => item.id == idUsuario).descricao;
+    //     tituloAquario.innerHTML = "Últimas medidas de Temperatura e Umidade do <span style='color: #e6005a'>" + descricao + "</span>"
+    // }
+
+    // function exibirAquario(idUsuario) {
+    //     let todosOsGraficos = JSON.parse(sessionStorage.AQUARIOS);
+
+    //     for (i = 0; i < todosOsGraficos.length; i++) {
+    //         // exibindo - ou não - o gráfico
+    //         if (todosOsGraficos[i].id != idUsuario) {
+    //             let elementoAtual = document.getElementById(`grafico${todosOsGraficos[i].id}`)
+    //             if (elementoAtual.classList.contains("display-block")) {
+    //                 elementoAtual.classList.remove("display-block")
+    //             }
+    //             elementoAtual.classList.add("display-none")
+
+    //             // alterando estilo do botão
+    //             let btnAtual = document.getElementById(`btnAquario${todosOsGraficos[i].id}`)
+    //             if (btnAtual.classList.contains("btn-pink")) {
+    //                 btnAtual.classList.remove("btn-pink")
+    //             }
+    //             btnAtual.classList.add("btn-white")
+    //         }
+    //     }
+
+    //     // exibindo - ou não - o gráfico
+    //     let graficoExibir = document.getElementById(`grafico${idUsuario}`)
+    //     graficoExibir.classList.remove("display-none")
+    //     graficoExibir.classList.add("display-block")
+
+    //     // alterando estilo do botão
+    //     let btnExibir = document.getElementById(`btnAquario${idUsuario}`)
+    //     btnExibir.classList.remove("btn-white")
+    //     btnExibir.classList.add("btn-pink")
+    // }
+
+    // O gráfico é construído com três funções:
+    // 1. obterDadosGrafico -> Traz dados do Banco de Dados para montar o gráfico da primeira vez
+    // 2. plotarGrafico -> Monta o gráfico com os dados trazidos e exibe em tela
+    // 3. atualizarGrafico -> Atualiza o gráfico, trazendo novamente dados do Banco
+
+    // Esta função *obterDadosGrafico* busca os últimos dados inseridos em tabela de medidas.
+    // para, quando carregar o gráfico da primeira vez, já trazer com vários dados.
+    // A função *obterDadosGrafico* também invoca a função *plotarGrafico*
+
+    //     Se quiser alterar a busca, ajuste as regras de negócio em src/controllers
+    //     Para ajustar o "select", ajuste o comando sql em src/models
+
+
+
+
+
+    idUsuario = sessionStorage.ID_USUARIO;
+
+    console.log(idUsuario);
+
+    document.addEventListener("DOMContentLoaded", function () {
+        obterDadosGraficoTemperatura(servidor);
+    });
+    document.addEventListener("DOMContentLoaded", function () {
+        obterDadosGraficoCPU2(servidor);
+    });
+
+    var servidor = 1
+    function obterDadosGraficoTemperatura(servidor) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+
+            document.addEventListener("DOMContentLoaded", function () {
+                obterDadosGrafico(idUsuario);
+            });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/Temperatura/${servidor}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGraficoTemperatura(resposta, servidor);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    }
+
+    function plotarGraficoTemperatura(resposta, servidor) {
+        console.log('iniciando plotagem do gráfico...');
+
+        const cores = ['#FF847F', '#A6E22E', '#66D9EF', '#AE81FF', '#F92672'];
+
+        // Mapear os valores únicos de statuss
+        const statussUnicos = [...new Set(resposta.map(item => item.statuss))];
+
+        // Atribuir cores para cada valor de statuss
+        const coresPorStatuss = {};
+        statussUnicos.forEach((status, index) => {
+            coresPorStatuss[status] = cores[index % cores.length];
+        });
+        let labels = [];
+
+        let dados = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'Temperatura',
+                    data: [],
+                    fill: false,
+                    borderColor: '#FF847F',
+                    tension: 0.5
+                }
+            ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.nome);
+            dados.datasets[0].data.push(registro.Temperatura);
+            graph2.innerHTML = `${registro.Temperatura} °C`
+            if(registro.Temperatura > 45){
+                indicacao.innerHTML = `A temperatura deveria estar ${(registro.Temperatura - 45).toFixed(0)}°C a menos`
+            }else if (registro.Temperatura == 45){
+                indicacao.innerHTML = `A temperatura está no limite do considerado ideial`
+            }
+            else{
+                indicacao.innerHTML = `A temperatura está em uma boa condição`
+            }
+        }
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        const config = {
+            type: 'line',
+            data: dados
+        };
+
+        let myChart = new Chart(document.getElementById('myChartsegundo'), config);
+
+        atualizarGraficoTemperatura(servidor, dados, myChart);
+    }
+
+    function atualizarGraficoTemperatura(servidor, dados, myChart) {
+        fetch(`/medidas/tempo-realTemperatura/${servidor}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log('Dados atuais do gráfico:');
+                    console.log(dados);
+
+
+
+                    if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
+                        console.log('---------------------------------------------------------------');
+                        console.log('Como não há dados novos para captura, o gráfico não atualizará.');
+
+                        console.log('Horário do novo dado capturado:');
+                        console.log(novoRegistro[0].horario);
+                        console.log('Horário do último dado capturado:');
+                        console.log(dados.labels[dados.labels.length - 1]);
+                        console.log('---------------------------------------------------------------');
+                    } else {
+                        dados.labels.shift();
+                        dados.labels.push(novoRegistro[0].momento_grafico);
+
+                        dados.datasets[0].data.shift();
+                        dados.datasets[0].data.push(novoRegistro[0].proc);
+
+                        dados.datasets[1].data.shift();
+                        dados.datasets[1].data.push(novoRegistro[1].RAM);
+
+                        dados.datasets[2].data.shift();
+                        dados.datasets[2].data.push(novoRegistro[2].disco);
+
+                        myChart.update();
+                    }
+
+                    proximaAtualizacao = setTimeout(() => {
+                        obterDadosGrafico4(idUsuario);
+                    }, 20000);
+
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                proximaAtualizacao = setTimeout(
+                    function () {
+                        obterDadosGraficoTemperatura(servidor);
+                    },
+                    2000
+                );
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+    var servidor = 1
+    function obterDadosGraficoCPU2(servidor) {
+        if (sessionStorage.ID_USUARIO) {
+            let idUsuario = sessionStorage.ID_USUARIO;
+            console.log(idUsuario);
+
+            document.addEventListener("DOMContentLoaded", function () {
+                obterDadosGraficoCPU2(idUsuario);
+            });
+        } else {
+            console.error("ID do usuário não encontrada no sessionStorage.");
+        }
+
+        fetch(`/medidas/CPU2/${servidor}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (resposta) {
+                    console.log(`Dados recebidos: GRaIFCO ${JSON.stringify(resposta)}`);
+                    resposta.reverse();
+
+                    plotarGraficoCPU2(resposta, servidor);
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+            }
+        }).catch(function (error) {
+            console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+        });
+    }
+
+    function plotarGraficoCPU2(resposta, servidor) {
+        console.log('iniciando plotagem do gráfico...');
+
+        const cores = ['#FF847F', '#A6E22E', '#66D9EF', '#AE81FF', '#F92672'];
+
+        // Mapear os valores únicos de statuss
+        const statussUnicos = [...new Set(resposta.map(item => item.statuss))];
+
+        // Atribuir cores para cada valor de statuss
+        const coresPorStatuss = {};
+        statussUnicos.forEach((status, index) => {
+            coresPorStatuss[status] = cores[index % cores.length];
+        });
+        let labels = [];
+
+        let dados = {
+            labels: labels,
+            datasets: [
+                {
+                    label: 'CPU',
+                    data: [],
+                    fill: false,
+                    borderColor: '#333333',
+                    tension: 0.5
+                }
+            ]
+        };
+
+        console.log('----------------------------------------------')
+        console.log('Estes dados foram recebidos pela funcao "obterDadosGrafico" e passados para "plotarGrafico":')
+        console.log(resposta)
+
+        // Inserindo valores recebidos em estrutura para plotar o gráfico
+        for (i = 0; i < resposta.length; i++) {
+            var registro = resposta[i];
+            labels.push(registro.nome);
+            dados.datasets[0].data.push(registro.CPU);
+        }
+
+        console.log('----------------------------------------------')
+        console.log('O gráfico será plotado com os respectivos valores:')
+        console.log('Labels:')
+        console.log(labels)
+        console.log('Dados:')
+        console.log(dados.datasets)
+        console.log('----------------------------------------------')
+
+        const config = {
+            type: 'line',
+            data: dados
+        };
+
+        let myChart = new Chart(document.getElementById('myChartterceiro'), config);
+
+        atualizarGraficoCPU2(servidor, dados, myChart);
+    }
+
+    function atualizarGraficoCPU2(servidor, dados, myChart) {
+        fetch(`/medidas/tempo-realCPU2/${servidor}`, { cache: 'no-store' }).then(function (response) {
+            if (response.ok) {
+                response.json().then(function (novoRegistro) {
+                    console.log(`Dados recebidos: ${JSON.stringify(novoRegistro)}`);
+                    console.log('Dados atuais do gráfico:');
+                    console.log(dados);
+
+
+
+                    if (novoRegistro[0].horario == dados.labels[dados.labels.length - 1]) {
+                        console.log('---------------------------------------------------------------');
+                        console.log('Como não há dados novos para captura, o gráfico não atualizará.');
+
+                        console.log('Horário do novo dado capturado:');
+                        console.log(novoRegistro[0].horario);
+                        console.log('Horário do último dado capturado:');
+                        console.log(dados.labels[dados.labels.length - 1]);
+                        console.log('---------------------------------------------------------------');
+                    } else {
+                        dados.labels.shift();
+                        dados.labels.push(novoRegistro[0].momento_grafico);
+
+                        dados.datasets[0].data.shift();
+                        dados.datasets[0].data.push(novoRegistro[0].proc);
+
+                        dados.datasets[1].data.shift();
+                        dados.datasets[1].data.push(novoRegistro[1].RAM);
+
+                        dados.datasets[2].data.shift();
+                        dados.datasets[2].data.push(novoRegistro[2].disco);
+
+                        myChart.update();
+                    }
+
+                    proximaAtualizacao = setTimeout(() => {
+                        obterDadosGrafico4(idUsuario);
+                    }, 20000);
+
+
+                });
+            } else {
+                console.error('Nenhum dado encontrado ou erro na API');
+                proximaAtualizacao = setTimeout(
+                    function () {
+                        obterDadosGraficoCPU2(Servidor);
+                    },
+                    2000
+                );
+            }
+        })
+            .catch(function (error) {
+                console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+            });
+    }
+</script>

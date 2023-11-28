@@ -229,6 +229,19 @@ router.get("/ultimas/:idUsuario", function (req, res) {
     medidaController.buscarUltimasMedidas(req, res);
 });
 
+router.get("/Temperatura/:servidor", function (req, res) {
+    medidaController.buscarUltimasMedidasTemperatura(req, res);
+});
+router.get("/tempo-realTemperatura/:servidor", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealTemperatura(req, res);
+})
+
+router.get("/CPU2/:servidor", function (req, res) {
+    medidaController.buscarUltimasMedidasCPU2(req, res);
+});
+router.get("/tempo-realCPU2/:servidor", function (req, res) {
+    medidaController.buscarMedidasEmTempoRealCPU2(req, res);
+})
 
 
 router.get("/tempo-real/:idUsuario", function (req, res) {
