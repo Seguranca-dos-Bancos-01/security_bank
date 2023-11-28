@@ -627,3 +627,16 @@ canvas {
 .cardAlertasDash h4 {
   margin: 5px 0;
 }
+
+.botaoIndividual {
+  border: none;
+  background-color: #4E1C99;
+  color: white;
+  font-weight: 500;
+  font-size: 16px;
+  padding: 0 30px;
+  border-radius: 10px;
+  height: 50px;
+  margin-right: 20px;
+  margin-top: 10px;
+}
