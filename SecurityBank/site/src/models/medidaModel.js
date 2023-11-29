@@ -3000,7 +3000,7 @@ function obterDadosGraficoThreads(servidorSelecionado) {
     instrucaoSql = ''
 
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `select top 8 round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds =${servidorSelecionado} group by numeroThreads;`;
+        instrucaoSql = `select top 8 round(avg(porcentagem), 2) as media, numeroThreads as numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads order by numeroThreads;`;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `select round(avg(porcentagem), 2) as media, numeroThreads from monitoramentoThreads where fkNucleosThreds = ${servidorSelecionado} group by numeroThreads limit 8;`;
     }
