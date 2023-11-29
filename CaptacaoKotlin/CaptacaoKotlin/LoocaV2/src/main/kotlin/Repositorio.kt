@@ -22,25 +22,25 @@ class Repositorio {
     }
     fun servidor():Int{
         val servidor = jdbcTemplate.queryForObject("""
-           SELECT idServidor FROM servidor WHERE apelido = 'Servidor1'
+           SELECT idServidor FROM servidor WHERE apelido = 'Server C'
         """,Int::class.java)
         return servidor
     }
     fun banco():Int{
         val banco = jdbcTemplate.queryForObject("""
-            SELECT idBanco FROM banco WHERE nomeFantasia = 'Banco A'
+            SELECT idBanco FROM banco WHERE nomeFantasia = 'Bank C'
         """,Int::class.java)
         return banco
     }
     fun especificacoes():Int{
         val espec = jdbcTemplate.queryForObject("""
-            SELECT idEspecificacoes FROM especificacoes WHERE idEspecificacoes = 1
+            SELECT idEspecificacoes FROM especificacao WHERE idEspecificacoes = 1
         """,Int::class.java)
         return espec
     }
     fun plano():Int{
         val plano = jdbcTemplate.queryForObject("""
-           SELECT idPlano FROM planoContratado WHERE tipo = 1 
+           SELECT idPlano FROM plano_contratado WHERE tipo = 1 
         """,Int::class.java)
         return plano
     }
@@ -96,7 +96,7 @@ class Repositorio {
 
     fun cadastrarEspec(totalProcessador: Double, totalMemoria:Double, totalDisco:Double){
         jdbcTemplate.execute("""
-           insert into especificacoes (idEspecificacoes, potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco) values
+           insert into especificacao (idEspecificacoes, potenciaMaxCPU, potenciaMaxRAM, potenciaMaxDisco) values
             (null, $totalProcessador,$totalMemoria,$totalDisco)
         """)
     }

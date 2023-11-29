@@ -11,7 +11,7 @@ object Conexao {
                 val dataBase = "SecurityBank"
                 dataSource.url = "jdbc:mysql://$serverName/$dataBase"
                 dataSource.username = "root"
-                dataSource.password = "rootpassword"
+                dataSource.password = "urubu100"
                 val jdbcTemplate = JdbcTemplate(dataSource)
                 field = jdbcTemplate
             }
