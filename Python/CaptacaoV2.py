@@ -353,7 +353,7 @@ while True:
           '\nPorcentagem do disco sendo utilizada:', disco, '\nStatus da rede: ', statusRede)
 
     time.sleep(10)
-    webhook = "https://hooks.slack.com/services/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"
+    webhook = "https://hooks.slack.com/services/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"
 
         
     if cpu  >= 18 and cpu < 23 :
