@@ -1594,7 +1594,7 @@ function componenteMetricaCPU(idSelect) {
         from registros join componentes on fkComponentesReg = idComponentes
         where componentes.modelo = "cpu"
         and fkServidor = ${idSelect}
-        order by idRegistros desc limit 1;;
+        order by idRegistros desc limit 1;
     
     `;
     } else {

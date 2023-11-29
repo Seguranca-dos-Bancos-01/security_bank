@@ -86,13 +86,16 @@
                         <img src="../assets/servidor.png    " alt="">
                         <span>Análises</span>
                     </a>
-                    
+
                 </div>
                 <div class="opcoesVisoes-content">
-                    <button onclick="window.location.href='PaginaRedePedro.html'" class="botaodropdown">Desempenho Rede</button><br>
+                    <button onclick="window.location.href='PaginaRedePedro.html'" class="botaodropdown">Desempenho
+                        Rede</button><br>
 
-                    <button onclick="window.location.href='alertasConsumo.html'" class="botaodropdown">Fluxo de Alertas</button><br>
-                    <button onclick="window.location.href='projbernardo.html'" class="botaodropdown">Analise de Partições</button><br>
+                    <button onclick="window.location.href='alertasConsumo.html'" class="botaodropdown">Fluxo de
+                        Alertas</button><br>
+                    <button onclick="window.location.href='projbernardo.html'" class="botaodropdown">Analise de
+                        Partições</button><br>
                 </div>
                 <!-- <div class="opcoes">
                     <a href="">
@@ -302,7 +305,7 @@
                             </div>
                         </div>
                         <div class="grafico">
-                            <h5>Histórico de uso da Memoria RAM</h5>
+                            <h5>Histórico de uso da Memória RAM</h5>
                             <div class="graph">
                                 <canvas id="myChartTerceiro"></canvas>
                             </div>
@@ -351,20 +354,20 @@
 <script>
 
 
-const content = document.querySelector(".opcoesVisoes-content");
+    const content = document.querySelector(".opcoesVisoes-content");
     content.style.display = "none";
 
-document.querySelector(".opcoesVisoes").addEventListener("mouseenter", function() {
-    const content = document.querySelector(".opcoesVisoes-content");
-    content.style.display = "block";
-});
+    document.querySelector(".opcoesVisoes").addEventListener("mouseenter", function () {
+        const content = document.querySelector(".opcoesVisoes-content");
+        content.style.display = "block";
+    });
 
-document.querySelector(".opcoesVisoes").addEventListener("mouseleave", function(e) {
-    const content = document.querySelector(".opcoesVisoes-content");
-    if (!e.relatedTarget || !content.contains(e.relatedTarget)) {
-        content.style.display = "none";
-    }
-});
+    document.querySelector(".opcoesVisoes").addEventListener("mouseleave", function (e) {
+        const content = document.querySelector(".opcoesVisoes-content");
+        if (!e.relatedTarget || !content.contains(e.relatedTarget)) {
+            content.style.display = "none";
+        }
+    });
 
 
 
@@ -441,8 +444,11 @@ document.querySelector(".opcoesVisoes").addEventListener("mouseleave", function(
             var nomeServidor = registro.nomeServidor;
             var nomeComponente = registro.nomeComponente;
             var dataAlerta = registro.dataAlerta;
+            registro.horaAlerta = registro.horario.split("T")[1]
+            registro.horaAlerta = registro.horario.slice(0, 8)
             var horaAlerta = registro.horaAlerta;
             var statusAlerta = registro.situacaoAlerta;
+            console.log("567890-=-09876543567890-=", horaAlerta)
 
             var elemento = document.createElement('AlertaUltimoMostrar');
 
@@ -1301,8 +1307,11 @@ document.querySelector(".opcoesVisoes").addEventListener("mouseleave", function(
         console.log(resposta)
 
         // Inserindo valores recebidos em estrutura para plotar o gráfico
+
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
+            registro.horario = registro.horario.split("T")[1]
+            registro.horario = registro.horario.slice(0, 8)
             labels.push(registro.horario);
             dados.datasets[0].data.push(registro.proc);
 
@@ -1441,6 +1450,8 @@ document.querySelector(".opcoesVisoes").addEventListener("mouseleave", function(
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
+            registro.horario = registro.horario.split("T")[1]
+            registro.horario = registro.horario.slice(0, 8)
             labels.push(registro.horario);
             dados.datasets[0].data.push(registro.ram);
 
@@ -1578,6 +1589,8 @@ document.querySelector(".opcoesVisoes").addEventListener("mouseleave", function(
         // Inserindo valores recebidos em estrutura para plotar o gráfico
         for (i = 0; i < resposta.length; i++) {
             var registro = resposta[i];
+            registro.horario = registro.horario.split("T")[1]
+            registro.horario = registro.horario.slice(0, 8)
             labels.push(registro.horario);
             dados.datasets[0].data.push(registro.DISK);
 

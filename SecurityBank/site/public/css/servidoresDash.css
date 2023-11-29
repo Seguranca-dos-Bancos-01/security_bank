@@ -589,7 +589,8 @@ canvas {
 }
 
 #myChartsegundo, #myChartTerceiro, #myChart {
-  width: 250px;
+  width: 250px !important;
+  height: 150px !important;
 }
 
 
@@ -639,4 +640,8 @@ canvas {
   height: 50px;
   margin-right: 20px;
   margin-top: 10px;
+}
+
+#dataAlerta {
+  text-align: center;
 }
