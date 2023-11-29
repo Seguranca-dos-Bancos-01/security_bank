@@ -2657,7 +2657,7 @@ WHERE
     Rede.fkServidor= ${idUsuario}
 ORDER BY
     alertaRede.idAlertas DESC
-OFFSET 0 ROWS FETCH NEXT 4 ROWS ONLY;
+OFFSET 0 ROWS FETCH NEXT 2 ROWS ONLY;
 
     
     `;

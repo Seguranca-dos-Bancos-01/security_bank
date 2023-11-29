@@ -444,9 +444,9 @@
             var nomeServidor = registro.nomeServidor;
             var nomeComponente = registro.nomeComponente;
             var dataAlerta = registro.dataAlerta;
-            registro.horaAlerta = registro.horario.split("T")[1]
-            registro.horaAlerta = registro.horario.slice(0, 8)
-            var horaAlerta = registro.horaAlerta;
+            // registro.horaAlerta = registro.horario.split("T")[1]
+            // registro.horaAlerta = registro.horario.slice(0, 8)
+            var horaAlerta = registro.horaAlerta
             var statusAlerta = registro.situacaoAlerta;
             console.log("567890-=-09876543567890-=", horaAlerta)
 
@@ -456,7 +456,7 @@
             <span class="tituloUltimoAlerta">Último Alerta</span>
             <div class="AlertaUltimoMostrar">
                 <span id="TituloAlerta">${nomeComponente} em ${statusAlerta}.</span> <br>
-                <span id="dataAlerta">${dataAlerta} às ${horaAlerta}.</span>
+                <span id="dataAlerta">${dataAlerta}</span>
             </div>
         `;
 
