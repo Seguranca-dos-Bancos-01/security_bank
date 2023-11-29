@@ -8,7 +8,7 @@ import wmi
 import pymssql
 import pymysql
 
-webhook = "https://hooks.slack.com/services/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"
+
 
 partitions_info = []
 
@@ -175,20 +175,6 @@ while True:
             print()
 
             
-            
-            if usage.percent >= 50 and usage.percent < 60:
-                alerta = {"text": f"Atenção! Partição {partition.mountpoint} com {usage.percent}% de uso"}
-                requests.post(webhook, data=json.dumps(alerta))
-
-            
-            elif usage.percent >= 60 and usage.percent < 70:
-                alerta = {"text": f"Emergência! Partição {partition.mountpoint} com {usage.percent}% de uso"}
-                requests.post(webhook, data=json.dumps(alerta))
-
-            
-            elif usage.percent >= 70:
-                alerta = {"text": f"Urgência! Partição {partition.mountpoint} com {usage.percent}% de uso"}
-                requests.post(webhook, data=json.dumps(alerta))
 
         time.sleep(10)         
 
@@ -288,20 +274,6 @@ while True:
             print(f"Percentual de uso: {usage.percent}%")
             print()
             
-
-            if usage.percent >= 50 and usage.percent < 60:
-                alerta = {"text": f"Atenção! Partição {partition.mountpoint} com {usage.percent}% de uso"}
-                requests.post(webhook, data=json.dumps(alerta))
-
-            
-            elif usage.percent >= 60 and usage.percent < 70:
-                alerta = {"text": f"Emergência! Partição {partition.mountpoint} com {usage.percent}% de uso"}
-                requests.post(webhook, data=json.dumps(alerta))
-
-            
-            elif usage.percent >= 70:
-                alerta = {"text": f"Urgência! Partição {partition.mountpoint} com {usage.percent}% de uso"}
-                requests.post(webhook, data=json.dumps(alerta))
            
 
         time.sleep(10)
