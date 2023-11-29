@@ -28,6 +28,10 @@ router.post("/atualizarSession", function (req, res) {
     usuarioController.AtualizarSessionUsuario(req, res);
 });
 
+router.post("/atualizarSessionS", function (req, res) {
+    usuarioController.AtualizarSessionUsuarioS(req, res);
+});
+
 router.post("/atualizarPerfil", function (req, res) {
     usuarioController.atualizarPerfil(req, res);
 });

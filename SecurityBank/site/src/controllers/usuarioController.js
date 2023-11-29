@@ -1,10 +1,14 @@
 var usuarioModel = require("../models/usuarioModel");
 var bancoModel = require("../models/bancoModel")
 
+var emailLogin;
+var senhaLogin;
+
 function autenticar(req, res) {
     var email = req.body.emailServer;
     var senha = req.body.senhaServer;
-
+    emailLogin = req.body.emailServer;
+    senhaLogin= req.body.senhaServer;
     if (email == undefined) {
         res.status(400).send("Seu email está undefined!");
     } else if (senha == undefined) {
@@ -59,7 +63,7 @@ function autenticar(req, res) {
 function AtualizarSessionUsuario(req, res) {
     
     var id = req.body.idUserServer;
-
+    console.log(emailLogin)
     if (id == undefined) {
         res.status(400).send("Seu ID está undefined!");
     }  else {
@@ -69,13 +73,11 @@ function AtualizarSessionUsuario(req, res) {
             function (resultadoAutenticar) {
                 console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
                 console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
-
-                if (resultadoAutenticar.length == 1) {
                     console.log(resultadoAutenticar);
-                    bancoModel.buscarAquariosPorEmpresa(resultadoAutenticar[0])
+                    bancoModel.buscarAquariosPorEmpresa(emailLogin, senhaLogin)
                         .then((resultadoBanco) => {
                             if (resultadoBanco.length > 0) {
-                                bancoModel.buscarAquariosPorEmpresa(resultadoBanco[0])
+                                bancoModel.buscarAquariosPorEmpresa(emailLogin, senhaLogin)
                                     .then((resultadoServidor) => {
                                         if (resultadoServidor.length > 0) {
                                             res.json({
@@ -102,11 +104,63 @@ function AtualizarSessionUsuario(req, res) {
                                 res.status(500).json(erro.sqlMessage);
                             }
                         );
-                }
+                
             }
         );
     }
 }
+
+
+function AtualizarSessionUsuarioS(req, res) {
+    
+    var id = req.body.idUserServer;
+    console.log(emailLogin)
+    if (id == undefined) {
+        res.status(400).send("Seu ID está undefined!");
+    }  else {
+
+        usuarioModel.AtualizarSessionUsuarioS(id)
+        .then(
+            function (resultadoAutenticar) {
+                console.log(`\nResultados encontrados: ${resultadoAutenticar.length}`);
+                console.log(`Resultados: ${JSON.stringify(resultadoAutenticar)}`); // transforma JSON em String
+                    console.log(resultadoAutenticar);
+                    bancoModel.buscarAquariosPorEmpresa(emailLogin, senhaLogin)
+                        .then((resultadoBanco) => {
+                            if (resultadoBanco.length > 0) {
+                                bancoModel.buscarAquariosPorEmpresa(emailLogin, senhaLogin)
+                                    .then((resultadoServidor) => {
+                                        if (resultadoServidor.length > 0) {
+                                            res.json({
+                                                idFuncionarios: resultadoAutenticar[0].idFuncionarios,
+                                                email: resultadoAutenticar[0].email,
+                                                nome: resultadoAutenticar[0].nome,
+                                                cpf: resultadoAutenticar[0].cpf,
+                                                telefone: resultadoAutenticar[0].telefone,
+                                                senha: resultadoAutenticar[0].senha,
+                                                fkBanco: resultadoAutenticar[0].fkBanco,
+                                                fkEscalonamento: resultadoAutenticar[0].fkEscalonamento,
+                                                server: resultadoBanco,
+                                            });
+                                        } else {
+                                            res.status(204).json({ banco: [] });
+                                        }
+                                    })
+                            }
+                        })
+                        .catch(
+                            function (erro) {
+                                console.log(erro);
+                                console.log("\nHouve um erro ao realizar o login! Erro: ", erro.sqlMessage);
+                                res.status(500).json(erro.sqlMessage);
+                            }
+                        );
+                
+            }
+        );
+    }
+}
+
 
 
 function UpdateValidadeNova(req, res) {
@@ -390,4 +444,5 @@ module.exports = {
     cadastrarServidorNuvem,
     PuxarFkServidor,
     AtualizarSessionUsuario,
+    AtualizarSessionUsuarioS,
 }

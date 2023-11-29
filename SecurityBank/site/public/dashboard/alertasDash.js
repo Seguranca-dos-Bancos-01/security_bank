@@ -74,7 +74,7 @@ function exibirDadosCPU(response) {
     // var cpuServidores = document.getElementById('cpuServidores');
     // cpuServidores.innerHTML = `${dado}%`;
 
-    var proximaAtualizacao = setTimeout(() => percentCPU(), 2000)
+    var proximaAtualizacao = setTimeout(() => percentCPU(), 20000)
 }
 
 // proximaAtualizacao = setTimeout(() => {
@@ -162,7 +162,7 @@ function exibirDadosRAM(response) {
     // var ramServidores = document.getElementById('ramServidores');
     // ramServidores.innerHTML = `${dado}%`;
 
-    var proximaAtualizacao = setTimeout(() => percentRAM(), 7000)
+    var proximaAtualizacao = setTimeout(() => percentRAM(), 70000)
 }
 
 // function exibirDadosRAM(response) {
@@ -252,7 +252,7 @@ function exibirDadosDISCO(response) {
         // var discoServidores = document.getElementById('discoServidores');
         // discoServidores.innerHTML = `${dado}%`;
 
-        var proximaAtualizacao = setTimeout(() => percentDISK(), 15000)
+        var proximaAtualizacao = setTimeout(() => percentDISK(), 20000)
     }
 
     var servidorFK = sessionStorage.servidor_id1
@@ -277,7 +277,7 @@ function exibirDadosDISCO(response) {
         })
       
           
-        var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUAtencao(), 15000)
+        var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUAtencao(), 20000)
         return false;
         }
     
@@ -300,7 +300,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
-    var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUEmergencia(), 15000)
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUEmergencia(), 20000)
         }
     
     
@@ -322,7 +322,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
-    var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUUrgencia(), 15000)
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaCPUUrgencia(), 20000)
         }
     
     
@@ -348,7 +348,7 @@ function exibirDadosDISCO(response) {
       
     
     return false;
-    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMAtencao(), 15000)
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMAtencao(), 20000)
     }
     
     
@@ -370,7 +370,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
-    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMEmergencia(), 15000)
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMEmergencia(), 20000)
     }
     
     
@@ -392,7 +392,7 @@ function exibirDadosDISCO(response) {
     })
     
     return false;
-    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMUrgencia(), 15000)
+    var proximaAtualizacao = setTimeout(() => cadastrarAlertaRAMUrgencia(), 20000)
     }
     
     

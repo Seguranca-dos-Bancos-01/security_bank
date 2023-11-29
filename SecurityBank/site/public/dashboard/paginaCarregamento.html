@@ -65,3 +65,76 @@ window.location = "GerenciarAcesso.html"
   </script>
 </body>
 </html>
+<script>
+
+window.onload= atualiarSessionStorage(sessionStorage.FKBANCO)
+
+function atualiarSessionStorage(idUsuario){
+  idUsuario = sessionStorage.FKBANCO
+        fetch("/usuarios/atualizarSessionS", {
+            method: "POST",
+            headers: {
+                "Content-Type": "application/json"
+            },
+            body: JSON.stringify({
+                idUserServer: idUsuario
+            })
+        })
+
+            .then(function (resposta) {
+                console.log("ESTOU NO THEN DO entrar()!")
+                if (resposta.ok) {
+                    resposta.json().then(data => {
+                        console.log("Resposta JSON:", data);
+                        sessionStorage.CPF_USUARIO = data.cpf;
+                        sessionStorage.EMAIL_USUARIO = data.email;
+                        sessionStorage.NOME_USUARIO = data.nome;
+                        sessionStorage.TELEFONE_USUARIO = data.telefone;
+                        sessionStorage.SENHA_USUARIO = data.senha;
+                        for (var i = 0; i < data.server.length; i++) {
+                            sessionStorage[`bancoTUDO${i + 1}`] = JSON.stringify(data.server[i])
+                            sessionStorage[`servidor_Apelido${i + 1}`] = JSON.stringify(data.server[i].apelido)
+                            sessionStorage[`servidor_id${i + 1}`] = JSON.stringify(data.server[i].idServidor)
+                            sessionStorage[`servidor_SO${i + 1}`] = JSON.stringify(data.server[i].sistemaOperacional)
+                            sessionStorage[`servidor_Responsavel${i + 1}`] = JSON.stringify(data.server[i].cpfResponsavelLegal)
+                            sessionStorage[`servidor_IP${i + 1}`] = JSON.stringify(data.server[i].enderecoIP)
+                            sessionStorage[`servidor_dataCompra${i + 1}`] = JSON.stringify(data.server[i].dataCompraLocacao)
+                            sessionStorage[`servidor_ValidadeServer${i + 1}`] = JSON.stringify(data.server[i].dateValidade)
+                            sessionStorage[`banco${i + 1}`] = JSON.stringify(data.server[i].fkBanco)
+                            sessionStorage[`fkStatus_Servidor${i + 1}`] = JSON.stringify(data.server[i].fkStatus)
+
+                            sessionStorage[`fkPlano${i + 1}`] = JSON.stringify(data.server[i].fkPlano)
+                        }
+                        Swal.fire({
+                            icon: 'Correction',
+                            title: 'Dados Atualizados com Sucesso!',
+                            
+                        });
+                        window.location.href = "dashboard.html";
+                    }).catch(error => {
+                        console.error("Erro ao processar JSON:", error);
+                    });
+                } else {
+                    console.error("Houve um erro ao tentar realizar o login!");
+                    resposta.text().then(texto => {
+                        console.error(texto);
+                       
+                    }).catch(error => {
+                        console.error("Erro ao obter texto da resposta:", error);
+                    });
+                }
+            })
+            .catch(error => {
+                console.error("Error:", error);
+                finalizarAguardar(error);
+            });
+
+        return false;
+    
+
+
+}
+
+
+
+</script>

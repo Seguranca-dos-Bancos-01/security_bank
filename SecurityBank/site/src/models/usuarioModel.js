@@ -18,32 +18,30 @@ function autenticar(email, senha) {
 
 
 
-
-
 function AtualizarSessionUsuario(id) {
-    instrucaoSql = ``
+    let instrucaoSql = ''; // Initialize the variable to hold the SQL query
 
-    if(process.env.AMBIENTE_PROCESSO == "producao"){
-        instrucaoSql ` select* from funcionarios WHERE 
-        idFuncionarios = ${id};`
-    }else if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
-        instrucaoSql ` select* from funcionarios WHERE 
-        idFuncionarios = ${id};`
+    if (process.env.AMBIENTE_PROCESSO === "producao") {
+        instrucaoSql = `SELECT * FROM funcionarios WHERE idFuncionarios = ${id};`;
+    } else if (process.env.AMBIENTE_PROCESSO === "desenvolvimento") {
+        instrucaoSql = `SELECT * FROM funcionarios WHERE idFuncionarios = ${id};`;
     }
 
-    console.log("Executando a instrução SQL: \n" + instrucaoSql);
-    return database.executar(instrucaoSql)
+    console.log("Executando a instrução SQL:\n", instrucaoSql);
+    return database.executar(instrucaoSql);
 }
 
 
-function AtualizarSessionBanco(id) {
+
+
+function AtualizarSessionUsuarioS(id) {
     instrucaoSql = ``
 
     if(process.env.AMBIENTE_PROCESSO == "producao"){
-        instrucaoSql `select* from banco WHERE 
+        instrucaoSql= `select* from banco WHERE 
         idBanco = ${id};`
     }else if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
-        instrucaoSql `select* from banco WHERE 
+        instrucaoSql= `select* from banco WHERE 
         idBanco = ${id};`
     }
 
@@ -68,10 +66,10 @@ function cadastrarServidor(apelidoServidor, soServidor, cpfRespServidor, ipServi
     instrucaoSql = ``
 
     if(process.env.AMBIENTE_PROCESSO == "producao"){
-        instrucaoSql `INSERT INTO servidor (apelido, sistemaOperacional, cpfResponsavelLegal, enderecoIP, fkbanco, fkstatus, fkEspecificacoes, fkPlano) VALUES 
+        instrucaoSql= `INSERT INTO servidor (apelido, sistemaOperacional, cpfResponsavelLegal, enderecoIP, fkbanco, fkstatus, fkEspecificacoes, fkPlano) VALUES 
         ('${apelidoServidor}','${soServidor}','${cpfRespServidor}','${ipServidor}',${fkBanco},1 ,1 ,${fkPlano})`
     }else if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
-        instrucaoSql `INSERT INTO servidor (apelido, sistemaOperacional, cpfResponsavelLegal, enderecoIP, fkbanco, fkstatus, fkEspecificacoes, fkPlano) VALUES 
+        instrucaoSql= `INSERT INTO servidor (apelido, sistemaOperacional, cpfResponsavelLegal, enderecoIP, fkbanco, fkstatus, fkEspecificacoes, fkPlano) VALUES 
         ('${apelidoServidor}','${soServidor}','${cpfRespServidor}','${ipServidor}',${fkBanco},1 ,1 ,${fkPlano})`
     }
 
@@ -179,15 +177,14 @@ function PuxarFkServidor(idUsuario, apelido) {
 
 
 
-    function atualizarNivelAcesso(NovoNivel, Email) {
+    function atualizarNivelAcesso(nivelAcesso, emailPerfil) {
         instrucaoSql = ``
 
         if (process.env.AMBIENTE_PROCESSO == "producao") {
             instrucaoSql = `
-            UPDATE funcionarios AS f1
-    JOIN (SELECT idFuncionarios FROM funcionarios WHERE email = '${Email}') AS f2
-    ON f1.idFuncionarios = f2.idFuncionarios
-    SET f1.fkEscalonamento = ${NovoNivel};
+            UPDATE funcionarios
+SET fkEscalonamento = ${nivelAcesso}
+WHERE email = '${emailPerfil}';
         `;
         } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
             instrucaoSql = `
@@ -240,5 +237,5 @@ function PuxarFkServidor(idUsuario, apelido) {
         cadastrarServidorNuvem,
         PuxarFkServidor,
         AtualizarSessionUsuario,
-        AtualizarSessionBanco,
+        AtualizarSessionUsuarioS,
     };
