@@ -2362,11 +2362,21 @@ function buscarUltimasMedidasAlertasConsumo2(idSelect) {
     instrucaoSql = ''
 //COLOCAR O ID DO USUARIO
     if (process.env.AMBIENTE_PROCESSO == "producao") {
-        instrucaoSql = `SELECT componentes.modelo as modelo, AVG(registros.dadoCaptado) as media
-        FROM componentes join registros on idComponentes = fkComponentesReg
-        join servidor on fkServidor = idServidor
-        where fkServidor = ${idSelect}
-        GROUP BY modelo
+        instrucaoSql = `SELECT 
+        componentes.modelo as modelo, 
+        AVG(registros.dadoCaptado) as media
+    FROM 
+        componentes 
+    JOIN 
+        registros ON idComponentes = fkComponentesReg
+    JOIN 
+        servidor ON fkServidor = idServidor
+    WHERE 
+        fkServidor = ${idSelect} 
+        AND componentes.modelo IN ('disco', 'cpu', 'ram')
+    GROUP BY 
+        modelo;
+    
         ; `;
     } else if (process.env.AMBIENTE_PROCESSO == "desenvolvimento") {
         instrucaoSql = `SELECT componentes.modelo as modelo, AVG(registros.dadoCaptado) as media

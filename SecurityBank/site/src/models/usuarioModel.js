@@ -3,11 +3,11 @@
 function autenticar(email, senha) {
     instrucaoSql = ``
     if(process.env.AMBIENTE_PROCESSO == "producao"){
-        instrucaoSql `select* from funcionarios WHERE 
+        instrucaoSql = `select* from funcionarios WHERE 
         email = '${email}' AND 
         senha = '${senha}';`
     }else if(process.env.AMBIENTE_PROCESSO == "desenvolvimento"){
-        instrucaoSql `select* from funcionarios WHERE 
+        instrucaoSql = `select* from funcionarios WHERE 
         email = '${email}' AND 
         senha = '${senha}';`
     }
